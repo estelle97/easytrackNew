@@ -16,7 +16,8 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code')->nullable();
-            $table->enum('status', array('1', '2'))->default('1');
+            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('status', array('0', '1'))->default('0');
             $table->timestamps();
         });
     }

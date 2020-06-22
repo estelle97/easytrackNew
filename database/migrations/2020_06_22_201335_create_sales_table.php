@@ -19,6 +19,7 @@ class CreateSalesTable extends Migration
             $table->bigInteger('invoice_id')->unsigned();
             $table->bigInteger('site_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
+            $table->enum('is_active', array('0', '1'))->default('1');
             $table->timestamps();
 
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade')->onUpdate('cascade');

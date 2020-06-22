@@ -19,6 +19,7 @@ class CreateSubscriptionsTable extends Migration
             $table->bigInteger('type_id')->unsigned();
             $table->timestamp('end_date');
             $table->enum('status', array('0', '1'))->default('1');
+            $table->enum('is_active', array('0', '1'))->default('1');
 
             $table->foreign('snack_id')->references('id')->on('snacks')->onDelete('cascade')->onUpdate('cascade');
 
