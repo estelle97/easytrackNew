@@ -15,21 +15,21 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('snack_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->bigInteger('role_id')->unsigned();
-            $table->bigInteger('site_id')->unsigned();
+            $table->bigInteger('site_id')->nullable();
             $table->string('address');
             $table->string('username');
+            $table->enum('is_active', array('0', '1'))->default('1');
             $table->enum('is_admin', array('1', '2','3'))->default('1');
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsSnacksTable extends Migration
+class CreateProductsSitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateProductsSnacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('products_snacks', function (Blueprint $table) {
+        Schema::create('product_site', function (Blueprint $table) {
         
-            $table->bigInteger('snack_id')->unsigned();
+            $table->bigInteger('site_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
             $table->integer('min');
             $table->integer('purchase_price');
@@ -27,7 +27,7 @@ class CreateProductsSnacksTable extends Migration
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->foreign('snack_id')->references('id')->on('snacks')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade')->onUpdate('cascade');
 
             
         });
@@ -40,6 +40,6 @@ class CreateProductsSnacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products_snacks');
+        Schema::dropIfExists('product_site');
     }
 }

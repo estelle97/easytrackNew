@@ -15,8 +15,8 @@ class CreateAgendasTable extends Migration
     {
         Schema::create('agendas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('role_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('site_id')->nullable();
+            $table->bigInteger('user_id')->nullable();
             $table->timestamp('start');
             
             $table->enum('status', array('1', '0'))->default('1');

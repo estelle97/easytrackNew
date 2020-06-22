@@ -15,15 +15,15 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigInteger('supplier_id')->unsigned();
-            $table->bigInteger('site_id')->unsigned();
+            $table->bigInteger('site_id')->nullable();
             $table->bigInteger('product_id')->unsigned();
+            $table->bigInteger('bill_id')->unsigned();
             $table->integer('quantiy');
-            $table->enum('status', array('0', '1'))->default('0');
+            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('status', array('0', '1'))->default('1');
             $table->timestamps();
-
+            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
 
         });

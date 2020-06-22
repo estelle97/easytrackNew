@@ -18,6 +18,7 @@ class CreateTypesTable extends Migration
             $table->string('title');
             $table->integer('duration');
             $table->integer('price');
+            $table->enum('is_active', array('0', '1'))->default('1');
             $table->timestamps();
         });
     }
