@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -34,6 +37,88 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        notify()->success('Vous êtes déconnecté', 'Déconnexion');
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+    * Get the login username to be used by the controller.
+    *
+    * @return string
+    */
+    public function username()
+    {
+        $login = request()->input('identity');
+
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        request()->merge([$field => $login]);
+
+        return $field;
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateLogin(Request $request)
+    {
+        $messages = [
+            'identity.required' => 'L\'e-mail ou le nom d\'utilisateur doit être renseigné',
+            'email.exists' => 'Email ou nom d\'utilisateur déjà enregistré',
+            'name.exists' => 'Ce nom d\'utilisateur est déjà enregistré',
+            'password.required' => 'Veuillez entrer un mot de passe',
+        ];
+
+        $request->validate([
+            'identity' => 'required|string',
+            'password' => 'required|string',
+            'email' => 'string|exists:users',
+            'name' => 'string|exists:users',
+        ], $messages);
+    }
+
+    public function login(\Illuminate\Http\Request $request) {
+        $this->validateLogin($request);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+            return $this->sendLockoutResponse($request);
+        }
+
+        // This section is the only change
+        if ($this->guard()->validate($this->credentials($request))) {
+            $user = $this->guard()->getLastAttempted();
+
+            // Make sure the user is active
+            if ($user->is_active && !$user->is_deleted && $this->attemptLogin($request)) {
+                // Send the normal successful login response
+                $name = Auth::user()->name;
+                notify()->success('Bon retour '.$name, 'Connexion');
+                return $this->sendLoginResponse($request);
+            } else {
+                // Increment the failed login attempts and redirect back to the
+                // login form with an error message.
+                notify()->success('Ce compte est inexistant', 'Tentative de connexion');
+                $this->incrementLoginAttempts($request);
+                return redirect()
+                    ->back()
+                    ->withInput($request->only($this->username(), 'remember'))
+                    ->withErrors(['active' => 'Ce compte a été supprimé. C\'est tout ce que nous savons. Contactez l\'assistance']);
+            }
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
     }
 }
