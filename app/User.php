@@ -3,12 +3,14 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use App\Permissions\HasPermissionsTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -34,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function site(){
+        return $this->belongsTo('App\Site');
+    }
+
+    public function agendas(){
+        return $this->belongsToMany('App\Site','agendas')->withPivot('status','start','end');
+    }
 }

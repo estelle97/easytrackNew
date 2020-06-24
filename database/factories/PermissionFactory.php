@@ -6,7 +6,10 @@ use App\Permission;
 use Faker\Generator as Faker;
 
 $factory->define(Permission::class, function (Faker $faker) {
+    $permission = $faker->unique()->randomElement(['create_user','read_user','delete_user']);
+    $slug = $permission;
     return [
-        'permission' => $faker->unique()->randomElement(['lire','modifier','supprimer','ecrire']),
+        'name' => $permission,
+        'slug' => $slug,
     ];
 });
