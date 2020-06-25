@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agenda extends Model
 {
-    //
+    protected $guraded = ['id'];
+
+    
 }

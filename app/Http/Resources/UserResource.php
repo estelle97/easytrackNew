@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'address' => $this->address,
             'username' => $this->username,
+            'is_admin' => $this->is_admin,
             'site' => new SiteResource($this->whenLoaded('site')),
             'agendas' => SiteResource::collection($this->whenLoaded('agendas')),
             'start' => $this->whenPivotLoaded('agendas', function(){

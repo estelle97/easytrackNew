@@ -69,6 +69,12 @@ class UserController extends Controller
             return response()->json(['message' => 'username/password incorrect'], 401);
         
         $user = $request->user();
+        if($user->is_active == '0'){
+            return response()->json([
+                'message' => 'User Deleted',
+            ],
+            403);
+        }
 
         $tokenResult = $user->createToken('Personal_Access_Token');
         $token = $tokenResult->token;
@@ -83,7 +89,8 @@ class UserController extends Controller
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
-            )->toDateTimeString()
+            )->toDateTimeString(),
+            'user' => new UserResource($user->loadMissing('site','roles'))
         ]);
     }
 
@@ -156,14 +163,71 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * @param [String] name
+     * @param [String] username
+     * @param [String] email
+     * @param [String] address
+     * @param [String] password_confirmation
+     * @param [char] is_admin (1, 2, 3) default 1
+     * 
+     * @return [string] message
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'email|required|string',
+            'username' => 'required|string',
+            'address' => 'required|string',
+            'is_admin' => 'required',
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->username = $request->username;
+        $user->is_admin = $request->is_admin;
+        
+        $user->save();
+
+        return response()->json([
+            'message' => 'success',
+            'user' => new UserResource($user->loadMissing('site','roles'))
+        ],200);
+    }
+
+    /**
+     * Activate User
+     * @param \App\User $user
+     * @return \Illuminate\http\Response
+     */
+    public function activateUser(User $user){
+        $user->is_active = '1';
+        $user->save();
+
+        return response()->json([
+            'message' => 'user activated successfully',
+        ],200);
+    }
+
+    /**
+     * Change Admin Level
+     * @param \App\User $user
+     * @return \Illuminate\http\Response
+     */
+    public function changeAdminLevel(Request $request, User $user){
+        $request->validate([
+            'is_admin' => 'required|in:1,2,3'
+        ]);
+        $user->is_admin = $request->is_admin;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Admin level updated succesfully'
+        ], 200);
     }
 
     /**
@@ -174,6 +238,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if($user->is_admin == '2'){     // Check if it's a manager
+            $otherManager = User::where('is_admin','2')->where('id','!=',$user->id)->where('site_id',$user->site_id)->first();   // retreive the others managers
+            if(!$otherManager){     // if there are not another manager
+               $site = \App\Site::find($user->site_id);
+               $site->is_active = '0';
+               $site->save();
+            }
+        }
+        $user->is_active = '0';
+        $user->save();
+
+        return response()->json([
+            'message' => 'deleted successfully'
+        ],
+        204);
     }
 }
