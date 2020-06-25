@@ -8,18 +8,58 @@ use App\User;
 
 class DashboardController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('admin.dashboard.home');
+    }
+
     public function profile($id)
     {
         $lims_user_data = User::find($id);
+<<<<<<< HEAD
         return view('admin.user-profile', compact('lims_user_data'));
+=======
+        return view('admin.dashboard.user-profile', compact('lims_user_data'));
+>>>>>>> 45a19c063b811b3a7ddc8bc1ed921baeabb1df60
     }
 
     public function profileUpdate(Request $request, $id)
     {
-        $input = $request->all();
+        /*$this->validate($request,[
+            'name' => 'required',
+            'email' => 'required|email',
+            'username' => 'required',
+            'address' => 'required',
+        ]);
+
+        $user = User::findOrFail(Auth::id());
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->address = $request->address;
+        $user->save();*/
+        
+        /*$input = $request->all();
         $lims_user_data = User::find($id);
-        $lims_user_data->update($input);
+        $lims_user_data->update($input);*/
         notify()->success('Mise à jour du profil effectuée avec succès', 'Mise à jour du profil');
-        return redirect()->back();
+        //return redirect('login');
+        view('user-profile', compact('lims_user_data'));
     }
 }

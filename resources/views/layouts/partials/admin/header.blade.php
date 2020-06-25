@@ -4,7 +4,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a href="." class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
-                    <img src="../../assets/static/logo-white.svg" alt="easytrak" class="navbar-brand-image" />
+                    <img src="{{ asset('dashboard/static/logo-white.svg') }}" alt="easytrak" class="navbar-brand-image" />
                 </a>
                 <div class="navbar-nav flex-row order-md-last">
                     <div class="nav-item dropdown">
@@ -14,14 +14,20 @@
                                 <span class="badge bg-red"></span>
                             </span>
                             <div class="d-none d-xl-block pl-2">
-                                <div>Astride</div>
+                                <div>{{Auth::user()->name}}</div>
                                 <div class="mt-1 small text-muted">
+                                @if(Auth::user()->is_admin == 3)
+                                    Super Admin
+                                @elseif(Auth::user()->is_admin == 2)
                                     Admin
+                                @else
+                                    Utilisateur
+                                @endif
                                 </div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="./profile.html">
+                            <a class="dropdown-item" href="{{route('superadmin.user.profile', ['id' => Auth::id()])}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                     class="icon dropdown-item-icon">
                                     <path fill="none" d="M0 0h24v24H0z" />
