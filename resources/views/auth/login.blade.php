@@ -1,5 +1,5 @@
 
-@extends('layouts.mainlayoutAdmin')
+@extends('layouts.loginlayout')
 
 @section('content')
 <body class="antialiased">
@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <h2 class="mb-2 text-center text-black">Connexion</h2>
                     <h4 class="mb-5 text-center text-muted">
-                        Authentifier pour accéder à la plate-forme
+                        Authentifiez vous pour accéder à la plate-forme
                     </h4>
                     <div class="mb-4">
                         <div class="input-icon">

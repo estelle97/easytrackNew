@@ -6,7 +6,7 @@
      </head>
 
      <body>
-    @include('layouts.partials.admin.header')
+    
     
     @yield('content')
     @include('layouts.partials.footer')

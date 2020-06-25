@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function profile($id)
     {
         $lims_user_data = User::find($id);
-        return view('user-profile', compact('lims_user_data'));
+        return view('admin.user-profile', compact('lims_user_data'));
     }
 
     public function profileUpdate(Request $request, $id)
