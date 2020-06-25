@@ -21,14 +21,16 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers {
+        logout as logout;
+    }
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -37,7 +39,15 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        notify()->success('Vous êtes déconnecté', 'Déconnexion');
+        if (Auth::check() && Auth::user()->is_admin == 3)
+        {
+            $this->redirectTo = route('superadmin.dashboard');
+        } elseif (Auth::check() && Auth::user()->is_admin == 2)
+        {
+            $this->redirectTo = route('admin.dashboard');
+        } else{
+            $this->redirectTo = route('user.dashboard');
+        }
         $this->middleware('guest')->except('logout');
     }
 
@@ -97,7 +107,7 @@ class LoginController extends Controller
             $user = $this->guard()->getLastAttempted();
 
             // Make sure the user is active
-            if ($user->is_active && !$user->is_deleted && $this->attemptLogin($request)) {
+            if ($user->is_active && $this->attemptLogin($request)) {
                 // Send the normal successful login response
                 $name = Auth::user()->name;
                 notify()->success('Bon retour '.$name, 'Connexion');
@@ -105,7 +115,7 @@ class LoginController extends Controller
             } else {
                 // Increment the failed login attempts and redirect back to the
                 // login form with an error message.
-                notify()->success('Ce compte est inexistant', 'Tentative de connexion');
+                notify()->warning('Veuillez activer votre compte', 'Compte inactif');
                 $this->incrementLoginAttempts($request);
                 return redirect()
                     ->back()
@@ -120,5 +130,16 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    protected function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/login');
     }
 }

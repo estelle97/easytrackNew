@@ -63,7 +63,7 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{{route('user.profile', ['id' => Auth::id()])}}">
+                            <a class="dropdown-item" href="{{route('superadmin.user.profile', ['id' => Auth::id()])}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                     class="icon dropdown-item-icon">
                                     <path fill="none" d="M0 0h24v24H0z" />
@@ -112,7 +112,7 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
+                            <li class="nav-item {{ Request::is('superadmin/dashboard') ? 'active' : '' || Request::is('admin/dashboard') ? 'active' : '' || Request::is('user/dashboard') ? 'active' : '' }}">
                                 <a class="nav-link" href="./index.html">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block"><svg
                                             xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"

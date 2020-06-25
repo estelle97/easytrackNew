@@ -18,10 +18,32 @@ Route::group(['middleware' => 'auth'], function() {
     
 });
 
-Route::group(['middleware' => ['auth', 'active']], function() {
+Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth', 'active', 'superadmin']], function() {
 
-    Route::get('/', 'HomeController@index');
-    Route::get('/home', 'HomeController@index')->name('home');
+    //Route::get('/', 'HomeController@index');
+    Route::get('dashboard', 'HomeController@index')->name('dashboard');
+
+    Route::get('user/profile/{id}', 'Admin\DashboardController@profile')->name('user.profile');
+	Route::put('user/update_profile/{id}', 'UserController@profileUpdate')->name('user.profileUpdate');
+	Route::put('user/changepass/{id}', 'UserController@changePassword')->name('user.password');
+	Route::get('user/genpass', 'UserController@generatePassword');
+});
+
+Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {
+
+    //Route::get('/', 'HomeController@index');
+    Route::get('dashboard', 'HomeController@index')->name('dashboard');
+
+    Route::get('user/profile/{id}', 'Admin\DashboardController@profile')->name('user.profile');
+	Route::put('user/update_profile/{id}', 'Admin\DashboardController@profileUpdate')->name('user.profileUpdate');
+	Route::put('user/changepass/{id}', 'UserController@changePassword')->name('user.password');
+	Route::get('user/genpass', 'UserController@generatePassword');
+});
+
+Route::group(['as'=>'user.','prefix'=>'user','middleware' => ['auth', 'active', 'user']], function() {
+
+    //Route::get('/', 'HomeController@index');
+    Route::get('dashboard', 'HomeController@index')->name('dashboard');
 
     Route::get('user/profile/{id}', 'Admin\DashboardController@profile')->name('user.profile');
 	Route::put('user/update_profile/{id}', 'UserController@profileUpdate')->name('user.profileUpdate');

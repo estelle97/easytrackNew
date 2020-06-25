@@ -21,6 +21,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="card col-lg-3 px-3 py-0"
                         style="max-height: 200px; border:none; box-shadow: none; background-color: transparent;">
@@ -64,41 +65,66 @@
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active show" id="tabs-home-ex6">
-                                        <form class="row">
+                                    {!! Form::open(['route' => ['admin.user.profileUpdate', Auth::id()], 'method' => 'put']) !!}
+                                        <div class="row">
                                             <div class="col-md-5">
                                                 <div class="mb-2">
                                                     <label class="form-label">Company</label>
-                                                    <input type="text" class="form-control form-control-rounded"
-                                                        disabled="" placeholder="Company" value="Black & White">
+                                                    <input type="text" name="name" value="{{$lims_user_data->name}}" class="form-control form-control-rounded"
+                                                        disabled="" placeholder="Company">
+                                                    @if($errors->has('name'))
+                                                        <span>
+                                                            <strong>{{ $errors->first('name') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-md-3">
                                                 <div class="mb-2">
                                                     <label class="form-label">Nom d'utilisateur</label>
-                                                    <input type="text" class="form-control form-control-rounded"
-                                                        placeholder="Saisisez votre nom d'utilisateu" value="pawelkuna">
+                                                    <input type="text" name="username" value="{{$lims_user_data->username}}" class="form-control form-control-rounded"
+                                                        placeholder="Saisisez votre nom d'utilisateur">
+                                                    @if($errors->has('username'))
+                                                        <span>
+                                                            <strong>{{ $errors->first('username') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="mb-2">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control form-control-rounded"
+                                                    <input type="email" name="email" value="{{$lims_user_data->email}}" class="form-control form-control-rounded"
                                                         placeholder="Email">
+                                                    @if($errors->has('email'))
+                                                        <span>
+                                                            <strong>{{ $errors->first('email') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-12">
                                                 <div class="mb-2">
                                                     <label class="form-label">Nom complet</label>
-                                                    <input type="text" class="form-control form-control-rounded"
-                                                        placeholder="Saisissez votre nom" value="Paweł Kuna">
+                                                    <input type="text" name="name" value="{{$lims_user_data->name}}" class="form-control form-control-rounded"
+                                                        placeholder="Saisissez votre nom">
+                                                    @if($errors->has('name'))
+                                                        <span>
+                                                            <strong>{{ $errors->first('name') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="mb-2">
                                                     <label class="form-label">Addresse</label>
-                                                    <input type="text" class="form-control form-control-rounded"
-                                                        placeholder="Saisisez votre adresse"
-                                                        value="Melbourne, Australia">
+                                                    <input type="text" name="address" value="{{$lims_user_data->address}}" class="form-control form-control-rounded"
+                                                        placeholder="Saisisez votre adresse">
+                                                    @if($errors->has('address'))
+                                                        <span>
+                                                            <strong>{{ $errors->first('address') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -109,20 +135,22 @@
                                                     </textarea>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                         <div class="text-right">
-                                            <button type="submit" class="btn btn-primary btn-pill">Sauve garder</button>
+                                            <button type="submit" class="btn btn-primary btn-pill">Mettre à jour</button>
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="tabs-settings-ex6">
                                         <div>Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet,
                                             facilisi sit mauris accumsan nibh habitant senectus</div>
                                     </div>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
             <footer class="footer footer-transparent">
                 <div class="container">

@@ -13,4 +13,13 @@ class DashboardController extends Controller
         $lims_user_data = User::find($id);
         return view('user-profile', compact('lims_user_data'));
     }
+
+    public function profileUpdate(Request $request, $id)
+    {
+        $input = $request->all();
+        $lims_user_data = User::find($id);
+        $lims_user_data->update($input);
+        notify()->success('Mise à jour du profil effectuée avec succès', 'Mise à jour du profil');
+        return redirect()->back();
+    }
 }
