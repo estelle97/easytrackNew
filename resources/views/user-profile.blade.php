@@ -65,18 +65,15 @@
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active show" id="tabs-home-ex6">
-                                    {!! Form::open(['route' => ['admin.user.profileUpdate', Auth::id()], 'method' => 'put']) !!}
-                                        <div class="row">
+                                    
+                                        <form class="row" method="POST" action="{{ route('admin.user.profileUpdate', ['id'=>Auth::id()]) }}">
+                                        @csrf
+                                        @method('PUT')
                                             <div class="col-md-5">
                                                 <div class="mb-2">
                                                     <label class="form-label">Company</label>
-                                                    <input type="text" name="name" value="{{$lims_user_data->name}}" class="form-control form-control-rounded"
-                                                        disabled="" placeholder="Company">
-                                                    @if($errors->has('name'))
-                                                        <span>
-                                                            <strong>{{ $errors->first('name') }}</strong>
-                                                        </span>
-                                                    @endif
+                                                    <input type="text" value="{{$lims_user_data->name}}" class="form-control form-control-rounded"
+                                                         placeholder="Company">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-md-3">
@@ -135,16 +132,15 @@
                                                     </textarea>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <button type="submit" class="btn btn-primary btn-pill">Mettre à jour</button>
-                                        </div>
+                                            <div class="text-right">
+                                                <button type="submit" class="btn btn-primary btn-pill">Mettre à jour</button>
+                                            </div>
+                                        </form>
                                     </div>
                                     <div class="tab-pane" id="tabs-settings-ex6">
                                         <div>Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet,
                                             facilisi sit mauris accumsan nibh habitant senectus</div>
                                     </div>
-                                    {!! Form::close() !!}
                                 </div>
                             </div>
                         </div>
