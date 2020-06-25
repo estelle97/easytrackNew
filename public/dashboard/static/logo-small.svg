@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Shape" d="M250,39.35q-52,0-97.5-19.5A251.137,251.137,0,0,1,73-33.65a251.138,251.138,0,0,1-53.5-79.5Q0-158.65,0-210.65a242.388,242.388,0,0,1,19.5-96.5A251.137,251.137,0,0,1,73-386.65a258.193,258.193,0,0,1,79.5-54q45.5-20,97.5-20a237.173,237.173,0,0,1,96.5,20,258.193,258.193,0,0,1,79.5,54,258.192,258.192,0,0,1,54,79.5,237.172,237.172,0,0,1,20,96.5v48H250v-75H425a125.8,125.8,0,0,0-13.5-57,145.325,145.325,0,0,0-37.5-47q-24-20-56-32a192.059,192.059,0,0,0-68-12q-37,0-69,13.5a168.344,168.344,0,0,0-55.5,37.5,178.2,178.2,0,0,0-37,56,173.139,173.139,0,0,0-13.5,68q0,37,13.5,69a172.268,172.268,0,0,0,37,55.5,172.267,172.267,0,0,0,55.5,37q32,13.5,69,13.5Z" transform="translate(5.886 466.863)" fill="#fff"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#268cc6"/>
+      <stop offset="1" stop-color="#26a6c5"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#2697c5"/>
+      <stop offset="1" stop-color="#269bc5"/>
+    </linearGradient>
+    <clipPath id="clip-Logo">
+      <rect width="512" height="512"/>
+    </clipPath>
+  </defs>
+  <g id="Logo" clip-path="url(#clip-Logo)">
+    <g id="Mask_Group_1" data-name="Mask Group 1" clip-path="url(#clip-path)">
+      <rect id="Form" width="512" height="512" fill="url(#linear-gradient)"/>
+    </g>
+    <path id="Shape-2" d="M0,0H75V75H0Z" transform="translate(149 230)" fill="url(#linear-gradient-2)"/>
+  </g>
+</svg>

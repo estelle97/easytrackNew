@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SiteResource;
 use App\Site;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+        return SiteResource::collection(Site::where('is_active', '1')->get()->load('snack','products','suppliers'));
     }
 
     /**
@@ -36,7 +37,28 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'email|required|string|unique:sites',
+            'tel1' => 'required|unique:sites',
+            'town' => 'required',
+            'street' => 'required',
+        ]);
+
+        $site = new Site([
+            'email' => $request->email,
+            'tel1' => $request->tel1,
+            'tel2' => $request->tel2,
+            'town' => $request->town,
+            'street' => $request->street,
+            'snack_id' => 1
+        ]);
+
+        $site->save();
+
+        return response()->json([
+            'message' => 'Site created successfully!',
+            'site' => new SiteResource($site->loadMissing('snack')),
+        ], 201);
     }
 
     /**
@@ -47,7 +69,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        //
+        return new SiteResource($site->loadMissing('snack','products','suppliers'));
     }
 
     /**
@@ -70,7 +92,25 @@ class SiteController extends Controller
      */
     public function update(Request $request, Site $site)
     {
-        //
+        $request->validate([
+            'email' => 'email|required|string',
+            'tel1' => 'required',
+            'town' => 'required',
+            'street' => 'required',
+        ]);
+
+        $site->update([
+            'email' => $request->email,
+            'tel1' => $request->tel1,
+            'tel2' => $request->tel2,
+            'town' => $request->town,
+            'street' => $request->street,
+        ]);
+
+        return response()->json([
+            'message' => 'Site updated successfully!',
+            'site' => new SiteResource($site->loadMissing('snack')),
+        ], 200);
     }
 
     /**

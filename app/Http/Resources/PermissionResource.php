@@ -18,8 +18,8 @@ class PermissionResource extends JsonResource
             'permission_id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+            'roles' => RoleResource::collection($this->whenLoaded('roles')),
             'users' => UserResource::collection($this->whenLoaded('users')),
-            'roles' => RoleResource::collection($this->whenLoaded('roles'))
         ];
     }
 }

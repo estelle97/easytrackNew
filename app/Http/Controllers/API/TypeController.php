@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TypeResource;
 use App\Type;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        return TypeResource::collection(Type::all()->load('snacks'));
     }
 
     /**
@@ -36,7 +37,23 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|unique:types',
+            'duration' => 'required',
+            'price' => 'required',
+        ]);
+
+        $type = new Type([
+            'title' => $request->title,
+            'duration' => $request->duration,
+            'price' => $request->price
+        ]);
+        $type->save();
+
+        return response()->json([
+            'message' => 'Type added successfully!',
+            'type' => new TypeResource($type)
+        ]);
     }
 
     /**
@@ -47,7 +64,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        return new TypeResource($type->loadMissing('snacks'));
     }
 
     /**
@@ -70,7 +87,22 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'duration' => 'required',
+            'price' => 'required',
+        ]);
+
+        $type->update([
+            'title' => $request->title,
+            'duration' => $request->duration,
+            'price' => $request->price
+        ]);
+
+        return response()->json([
+            'message' => 'Type updated successfully!',
+            'type' => new TypeResource($type)
+        ]);
     }
 
     /**

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Agenda;
 use App\Http\Controllers\Controller;
-use App\Role;
 use Illuminate\Http\Request;
 
-class RolePermission extends Controller
+class AgendaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class RolePermission extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Agenda $agenda)
     {
         //
     }
@@ -53,10 +53,10 @@ class RolePermission extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Agenda $agenda)
     {
         //
     }
@@ -65,10 +65,10 @@ class RolePermission extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
+     * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Agenda $agenda)
     {
         //
     }
@@ -76,10 +76,10 @@ class RolePermission extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Agenda $agenda)
     {
         //
     }

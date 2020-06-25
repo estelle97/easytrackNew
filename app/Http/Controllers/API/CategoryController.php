@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return CategoryResource::collection(Category::all()->load('products'));
     }
 
     /**
@@ -31,12 +32,25 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param [string] name
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:categories',
+        ]);
+
+        $category = new Category([
+            'name' => $request->name
+        ]);
+        $category->save();
+        
+        return response()->json([
+            'message' => 'Category added successfully!',
+            'category' => new CategoryResource($category),
+        ],201);
     }
 
     /**
@@ -47,7 +61,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return new CategoryResource($category->loadMissing('products'));
     }
 
     /**
@@ -70,7 +84,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        $category->update([
+            'name' => $request->name
+        ]);
+        
+        return response()->json([
+            'message' => 'Category updated successfully!',
+            'category' => new CategoryResource($category),
+        ],200);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Bill;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BillResource;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
@@ -15,7 +16,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        //
+        return BillResource::collection(Bill::where('is_active','1')->get()->load('products'));
     }
 
     /**
@@ -36,7 +37,21 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            do {
+                $code = mt_rand(1000000000, 9999999999);
+            } while(Bill::whereCode($code)->exists());
+
+            $bill = Bill::create([
+                'code' => $code,
+                'status' => '0',
+                'site_id' => 1
+            ]);
+            $bill->save();
+
+            return response()->json([
+                'message' => 'Bill created susscessfully',
+                'bill' => new BillResource($bill),
+            ],201);
     }
 
     /**
@@ -47,7 +62,7 @@ class BillController extends Controller
      */
     public function show(Bill $bill)
     {
-        //
+        return new BillResource($bill->loadMissing('products'));
     }
 
     /**
@@ -70,7 +85,14 @@ class BillController extends Controller
      */
     public function update(Request $request, Bill $bill)
     {
-        //
+        $bill->update([
+            'status' => '1',
+        ]);
+
+        return response()->json([
+            'message' => 'Bill updated susscessfully',
+            'bill' => new BillResource($bill),
+        ],200);
     }
 
     /**

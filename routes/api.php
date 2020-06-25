@@ -36,3 +36,8 @@ Route::apiResource('sites', 'API\SiteController');
 Route::apiResource('bills', 'API\BillController');
 Route::apiResource('invoices', 'API\InvoiceController');
 Route::apiResource('products', 'API\ProductController');
+Route::apiResource('roles', 'API\RoleController');
+Route::apiResource('permissions','API\PermissionController');
+Route::apiResource('categories', 'API\CategoryController');
+Route::apiResource('types', 'API\TypeController');
+Route::apiResource('suppliers' ,'API\SupplierController');
