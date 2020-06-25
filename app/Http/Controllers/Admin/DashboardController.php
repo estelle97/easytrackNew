@@ -8,10 +8,30 @@ use App\User;
 
 class DashboardController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('admin.dashboard.home');
+    }
+
     public function profile($id)
     {
         $lims_user_data = User::find($id);
-        return view('user-profile', compact('lims_user_data'));
+        return view('admin.dashboard.user-profile', compact('lims_user_data'));
     }
 
     public function profileUpdate(Request $request, $id)
