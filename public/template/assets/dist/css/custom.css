@@ -1,0 +1,70 @@
+
+/* NAVBAR */
+.navbar-bg-gradient {
+    background: rgb(38,127,201) !important;
+    background: -moz-linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
+    background: -webkit-linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
+    background: linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#267fc9",endColorstr="#26b1c3",GradientType=1);
+}
+
+/* HEADER */
+.page-header .dropdown-toggle {
+
+}
+
+/* BUTTONS */
+.btn-gradient:hover {
+    color: #fff;
+    opacity: 0.7;
+}
+
+.btn-no-border {
+    border: none !important;
+}
+
+.btn-gradient {
+    color: #fff;
+    background: rgb(38,127,201) !important;
+    background: -moz-linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
+    background: -webkit-linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
+    background: linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#267fc9",endColorstr="#26b1c3",GradientType=1) !important;
+    transition: all 0.3s;
+}
+
+.btn-e-icon {
+    transition: all 0.3s;
+}
+.btn-e-icon:hover {
+    opacity: 0.5;
+}
+
+
+/* LISTS */
+.category-list .list-item {
+    padding: 0.5rem 0rem !important;
+}
+
+
+/* PAGE */
+.centered-page {
+    height: 100vh;
+}
+
+
+/* FORM */
+.auth-card {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.auth-input {
+    border: none !important;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.auth-input::placeholder {
+    color: rgba(0,0,0,0.3) !important;
+}
+
