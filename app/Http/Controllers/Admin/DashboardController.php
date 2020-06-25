@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -36,7 +37,7 @@ class DashboardController extends Controller
 
     public function profileUpdate(Request $request, $id)
     {
-        /*$this->validate($request,[
+        $this->validate($request,[
             'name' => 'required',
             'email' => 'required|email',
             'username' => 'required',
@@ -49,13 +50,12 @@ class DashboardController extends Controller
         $user->email = $request->email;
         $user->username = $request->username;
         $user->address = $request->address;
-        $user->save();*/
+        $user->save();
         
         /*$input = $request->all();
         $lims_user_data = User::find($id);
         $lims_user_data->update($input);*/
         notify()->success('Mise à jour du profil effectuée avec succès', 'Mise à jour du profil');
-        //return redirect('login');
-        view('user-profile', compact('lims_user_data'));
+        return redirect()->back();
     }
 }
