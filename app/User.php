@@ -19,6 +19,10 @@ class User extends Authenticatable
      */
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'name', 'email', 'password','address', 'username'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -43,5 +47,9 @@ class User extends Authenticatable
 
     public function agendas(){
         return $this->belongsToMany('App\Site','agendas')->withPivot('status','start','end');
+    }
+    public function isActive()
+    {
+        return $this->is_active;
     }
 }
