@@ -15,9 +15,10 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('site_id')->nullable();
             $table->enum('is_active', array('0', '1'))->default('1');
-            $table->string('role');
+            $table->string('name');
+            $table->string('slug');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

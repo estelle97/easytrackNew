@@ -33,8 +33,5 @@ $factory->define(User::class, function (Faker $faker) {
         'snack_id' => ($is_admin == '2') ? function(){
             return App\Snack::all()->random()->id;
         } : null,
-        'role_id' => function(){
-            return App\Role::all()->random()->id;
-        }
     ];
 });

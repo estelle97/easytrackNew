@@ -16,3 +16,23 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', 'API\UserController@login');
+Route::post('/register', 'API\UserController@register');
+
+Route::group(['middleware' => 'auth:api'], function(){
+
+});
+
+Route::get('logout', 'API\UserController@logout');
+Route::put('users/{user}/activate', 'API\UserController@activateUser');
+Route::put('users/{user}/changeAdminLevel', 'API\UserController@changeAdminLevel');
+Route::apiResource('users', 'API\UserController');
+
+Route::apiResource('Categories', 'API\CategoryController');
+Route::apiResource('Types', 'API\TypeController');
+Route::apiResource('snacks', 'API\SnackController');
+Route::apiResource('sites', 'API\SiteController');
+Route::apiResource('bills', 'API\BillController');
+Route::apiResource('invoices', 'API\InvoiceController');
+Route::apiResource('products', 'API\ProductController');

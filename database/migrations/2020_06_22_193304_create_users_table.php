@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->bigInteger('role_id')->unsigned();
             $table->bigInteger('site_id')->nullable();
             $table->string('address');
             $table->string('username');
@@ -28,9 +27,6 @@ class CreateUsersTable extends Migration
             $table->enum('is_admin', array('1', '2','3'))->default('1');
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
-
         });
     }
  
