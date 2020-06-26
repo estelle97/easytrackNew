@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -23,20 +25,32 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.dashboard.home');
+        //$user = User::findOrFail(Auth::id());
+        //dd($user->can('permission-slug'));
+        $user = Auth::user();
+        $users = $request->user();
+        //dd($users->hasRole('gerant'));
+        //dd($users->can('create_user'));
+        return view('admin.dashboard.home', compact('user'));
     }
+
+    
 
     public function profile($id)
     {
+        $snack = DB::table('users')
+            ->join('snacks', 'users.snack_id', '=', 'snacks.id')
+            ->select('users.*', 'snacks.*')
+            ->get();
         $lims_user_data = User::find($id);
-        return view('admin.dashboard.user-profile', compact('lims_user_data'));
+        return view('admin.dashboard.user-profile', compact('lims_user_data','snack'));
     }
 
     public function profileUpdate(Request $request, $id)
     {
-        /*$this->validate($request,[
+        $this->validate($request,[
             'name' => 'required',
             'email' => 'required|email',
             'username' => 'required',
@@ -49,13 +63,12 @@ class DashboardController extends Controller
         $user->email = $request->email;
         $user->username = $request->username;
         $user->address = $request->address;
-        $user->save();*/
+        $user->save();
         
         /*$input = $request->all();
         $lims_user_data = User::find($id);
         $lims_user_data->update($input);*/
         notify()->success('Mise à jour du profil effectuée avec succès', 'Mise à jour du profil');
-        //return redirect('login');
-        view('user-profile', compact('lims_user_data'));
+        return redirect()->back();
     }
 }

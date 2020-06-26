@@ -25,4 +25,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    //Term of services
+    public function termOfService()
+    {
+        return view('terms-of-services');
+    }
 }
