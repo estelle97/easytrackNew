@@ -4,7 +4,7 @@
                         <div class="col-lg-auto ml-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item"><a href="" class="link-secondary">Aide</a></li>
-                                <a href="./terms-of-service.html" class="link-secondary">Conditions d'utilisation</a>
+                                <a href="{{ route('admin.terms') }}" class="link-secondary">Conditions d'utilisation</a>
                                 <li class="list-inline-item"><a href="" class="link-secondary">Licence</a></li>
                             </ul>
                         </div>

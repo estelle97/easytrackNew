@@ -3,7 +3,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a href="." class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
+                <a href="{{ route('admin.dashboard') }}" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
                     <img src="{{ asset('dashboard/static/logo-white.svg') }}" alt="easytrak" class="navbar-brand-image" />
                 </a>
                 <div class="navbar-nav flex-row order-md-last">
@@ -11,7 +11,11 @@
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
                             <span class="avatar"
                                 style="background-image: url('https://ui-avatars.com/api/?name=Estelle+Belinga&background=FFFFFF&color=267FC9&font-size=0.30');">
-                                <span class="badge bg-red"></span>
+                                @if($user->isOnline())
+                                    <span class="badge bg-green"></span>
+                                @else
+                                    <span class="badge bg-red"></span>
+                                @endif
                             </span>
                             <div class="d-none d-xl-block pl-2">
                                 <div>{{Auth::user()->name}}</div>
@@ -35,6 +39,15 @@
                                         d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
                                 </svg>
                                 Mon profile
+                            </a>
+                            <a class="dropdown-item" href="{{route('admin.role.index')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    class="icon dropdown-item-icon">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8z" />
+                                </svg>
+                                Rôles & Permissions
                             </a>
                             <a class="dropdown-item" href="./agenda.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
@@ -91,8 +104,8 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="./index.html">
+                            <li class="nav-item {{ Request::is('admin/dashboard') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                             height="24" class="icon">
@@ -185,8 +198,8 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./users.html">
+                            <li class="nav-item {{ Request::is('admin/user') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{route('admin.user.index')}}">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                             height="24" class="icon">

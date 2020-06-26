@@ -15,4 +15,8 @@ class Snack extends Model
     public function types(){
         return $this->belongsToMany('App\Type','subscriptions')->withPivot('end_date','status');
     }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

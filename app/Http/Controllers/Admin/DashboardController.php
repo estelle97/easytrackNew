@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -24,15 +25,27 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.dashboard.home');
+        //$user = User::findOrFail(Auth::id());
+        //dd($user->can('permission-slug'));
+        $user = Auth::user();
+        $users = $request->user();
+        //dd($users->hasRole('gerant'));
+        //dd($users->can('create_user'));
+        return view('admin.dashboard.home', compact('user'));
     }
+
+    
 
     public function profile($id)
     {
+        $snack = DB::table('users')
+            ->join('snacks', 'users.snack_id', '=', 'snacks.id')
+            ->select('users.*', 'snacks.*')
+            ->get();
         $lims_user_data = User::find($id);
-        return view('admin.dashboard.user-profile', compact('lims_user_data'));
+        return view('admin.dashboard.user-profile', compact('lims_user_data','snack'));
     }
 
     public function profileUpdate(Request $request, $id)
