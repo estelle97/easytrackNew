@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -17,7 +18,8 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-    
+   
+
     /**
      * Show the application dashboard.
      *
@@ -58,4 +60,13 @@ class DashboardController extends Controller
         //return redirect('login');
         view('user-profile', compact('lims_user_data'));
     }
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        notify()->success('Déconnexion réussie', 'A bientot');
+        return redirect('/login');
+        
+      }
+
+
 }
