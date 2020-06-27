@@ -1,45 +1,7 @@
-<!DOCTYPE html>
-<!--
-* easytrak - Application pour la gestion de stock
-* @version 1.0.0
-* @link https://github.com/estelle97/Easytrak
-* Copyright 2020 easytech
-* Licensed under MIT (https://easytrak.com/license)
--->
-<html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Easytrak - Connexion</title>
-    @notifyCss
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <meta name="msapplication-TileColor" content="#206bc4" />
-    <meta name="theme-color" content="#206bc4" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="robots" content="noindex,nofollow,noarchive" />
-    <link rel="icon" href="{{ asset('dashboard/favicon.png') }}" type="image/png" />
-    <link rel="shortcut icon" href="{{ asset('dashboard/favicon.png') }}" type="image/png" />
-    <!-- CSS files -->
-    <link href="{{ asset('dashboard/dist/css/easytrak.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('dashboard/dist/css/demo.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('dashboard/dist/css/custom.css') }}" rel="stylesheet" />
-    <style>
-        body {
-            display: none;
-            background: #fff !important;
-        }
+@extends('layouts.loginlayout')
 
-    </style>
-</head>
-
+@section('content')
 <body class="antialiased">
     <div class="flex-fill d-flex flex-column justify-content-center">
         <div class="container-tight py-6">
@@ -51,7 +13,7 @@
                 <div class="card-body">
                     <h2 class="mb-2 text-center text-black">Connexion</h2>
                     <h4 class="mb-5 text-center text-muted">
-                        Authentifier pour accéder à la plate-forme
+                        Authentifiez vous pour accéder à la plate-forme
                     </h4>
                     <div class="mb-4">
                         <div class="input-icon">
@@ -104,16 +66,7 @@
             </div>
         </div>
     </div>
-    <!-- Libs JS -->
-    <script src="{{ asset('dashboard/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- easytrak Core -->
-    <script src="{{ asset('dashboard/dist/js/easytrak.min.js') }}"></script>
-    <script>
-        document.body.style.display = "block";
-
-    </script>
+  
     @include('notify::messages')
     @notifyJs
-</body>
-
-</html>
+@endsection
