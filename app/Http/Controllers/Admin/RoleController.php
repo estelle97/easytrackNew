@@ -69,4 +69,23 @@ class RoleController extends Controller
         return redirect()->back();
     }
 
+    public function permission($id)
+    {
+        $lims_role_data = Role::find($id);
+        $permissions = Permission::findByName($lims_role_data->name)->permissions;
+        foreach ($permissions as $permission)
+            $all_permission[] = $permission->name;
+        if(empty($all_permission))
+            $all_permission[] = 'dummy text';
+        return view('admin.role.permission', compact('lims_role_data', 'all_permission'));
+    }
+
+    public function destroy($id)
+    {
+        $lims_role_data = Role::find($id);
+        $lims_role_data->delete();
+        notify()->success('Rôle supprimé avec succès', 'Suppression de rôle');
+        return redirect()->back();
+    }
+
 }
