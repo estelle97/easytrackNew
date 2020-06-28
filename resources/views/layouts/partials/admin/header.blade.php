@@ -10,7 +10,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
                             <span class="avatar"
-                                style="background-image: url('https://ui-avatars.com/api/?name=Estelle+Belinga&background=FFFFFF&color=267FC9&font-size=0.30');">
+                                style="background-image: url('https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=FFFFFF&color=267FC9&font-size=0.30');">
                                 <span class="badge bg-red"></span>
                             </span>
                             <div class="d-none d-xl-block pl-2">
@@ -73,7 +73,7 @@
                                 Aide
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{route('logout')}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                     class="icon dropdown-item-icon">
                                     <path fill="none" d="M0 0h24v24H0z" />
