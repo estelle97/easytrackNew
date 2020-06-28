@@ -3,43 +3,44 @@
 <br><br><br><br><br><br><br><br><br><br><br>
 <section>
     <div class="container-fluid">
-        <a href="#" data-toggle="modal" data-target="#createModal" class="btn btn-info"><i class="dripicons-plus"></i> {{trans('file.Add Role')}} </a>
+        <a href="#" data-toggle="modal" data-target="#createModal" class="btn btn-info"><i class="dripicons-plus"></i> Ajouter un rôle </a>
     </div>
     <div class="table-responsive">
         <table id="role-table" class="table table-hover">
             <thead>
                 <tr>
                     <th class="not-exported"></th>
-                    <th>{{trans('file.name')}}</th>
-                    <th>{{trans('file.Description')}}</th>
-                    <th class="not-exported">{{trans('file.action')}}</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th class="not-exported">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($lims_role_all as $key=>$role)
+                @if($role->is_active)
                 <tr>
                     <td>{{$key}}</td>
                     <td>{{ $role->name }}</td>
-                    <td>{{ $role->slug }}</td>
+                    <td>{{ $role->description }}</td>
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{trans('file.action')}}
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                                 <li>
-                                    <button type="button" data-id="{{$role->id}}" class="open-EditroleDialog btn btn-link" data-toggle="modal" data-target="#editModal"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}
+                                    <button type="button" data-id="{{$role->id}}" class="open-EditroleDialog btn btn-link" data-toggle="modal" data-target="#editModal"><i class="dripicons-document-edit"></i> Modifier
                                 </button>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="{{ route('role.permission', ['id' => $role->id]) }}" class="btn btn-link"><i class="dripicons-lock-open"></i> {{trans('file.Change Permission')}}</a>
+                                    <a href="{{ route('admin.role.permission', ['id' => $role->id]) }}" class="btn btn-link"><i class="dripicons-lock-open"></i> Modifier les permissions</a>
                                 </li>
-                                @if($role->id > 2)
+                                @if(Auth::user()->is_admin == 2)
                                 {{ Form::open(['route' => ['admin.role.destroy', $role->id], 'method' => 'DELETE'] ) }}
                                 <li>
-                                    <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>
+                                    <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> Supprimer</button>
                                 </li>
                                 {{ Form::close() }}
                                 @endif
@@ -47,6 +48,9 @@
                         </div>
                     </td>
                 </tr>
+                @else
+      
+                @endif
                 @endforeach
             </tbody>
         </table>
@@ -56,25 +60,29 @@
 <div id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
     <div role="document" class="modal-dialog">
         <div class="modal-content">
-            {!! Form::open(['route' => 'admin.role.store', 'method' => 'post']) !!}
+        {!! Form::open(['route' => 'admin.role.store', 'method' => 'post']) !!}
             <div class="modal-header">
-                <h5 id="exampleModalLabel" class="modal-title">{{trans('file.Add Role')}}</h5>
+                <h5 id="exampleModalLabel" class="modal-title">Ajouter un rôle</h5>
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true"><i class="dripicons-cross"></i></span></button>
             </div>
             <div class="modal-body">
-                <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
+                <p class="italic"><small>Les champs marqués par * sont obligatoires.</small></p>
                 <form>
                     <div class="form-group">
-                    <label>{{trans('file.name')}} *</label>
+                    <label>Nom *</label>
                     {{Form::text('name',null,array('required' => 'required', 'class' => 'form-control'))}}
                     </div>
                     <div class="form-group">
-                        <label>{{trans('file.Description')}}</label>
+                    <label>Slug *</label>
+                    {{Form::text('slug',null,array('required' => 'required', 'class' => 'form-control'))}}
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
                         {{Form::textarea('description',null,array('rows'=> 5, 'class' => 'form-control'))}}
                     </div>
                     <input type="hidden" name="is_active" value="1">
                     <input type="hidden" name="guard_name" value="web">
-                    <input type="submit" value="{{trans('file.submit')}}" class="btn btn-primary">
+                    <input type="submit" value="Ajouter" class="btn btn-primary">
             	</form>
         	</div>
         {{ Form::close() }}
@@ -87,22 +95,26 @@
 		  <div class="modal-content">
 		    {!! Form::open(['route' => ['admin.role.update',1], 'method' => 'put']) !!}
 		    <div class="modal-header">
-		      <h5 id="exampleModalLabel" class="modal-title">{{trans('file.Update Role')}}</h5>
+		      <h5 id="exampleModalLabel" class="modal-title">Modifier un rôle</h5>
 		      <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true"><i class="dripicons-cross"></i></span></button>
 		    </div>
 		    <div class="modal-body">
-		      <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
+		      <p class="italic"><small>Les champs marqués par * sont obligatoires.</small></p>
 		        <form>
 		            <input type="hidden" name="role_id">
 		            <div class="form-group">
-		                <label>{{trans('file.name')}} *</label>
+		                <label>Nom *</label>
 		                {{Form::text('name',null,array('required' => 'required', 'class' => 'form-control'))}}
 		            </div>
+                    <div class="form-group">
+		                <label>Slug *</label>
+		                {{Form::text('slug',null,array('required' => 'required', 'class' => 'form-control'))}}
+		            </div>
 		            <div class="form-group">
-		                <label>{{trans('file.Description')}}</label>
+		                <label>Description</label>
 		                {{Form::textarea('description',null,array('rows'=> 5, 'class' => 'form-control'))}}
 		            </div>
-		            <input type="submit" value="{{trans('file.submit')}}" class="btn btn-primary">
+		            <input type="submit" value="Modifier" class="btn btn-primary">
 		        </form>
 		    </div>
 		    {{ Form::close() }}
@@ -112,12 +124,8 @@
 
 <script type="text/javascript">
 
-    $("ul#setting").siblings('a').attr('aria-expanded','true');
-    $("ul#setting").addClass("show");
-    $("ul#setting #role-menu").addClass("active");
-
 	 function confirmDelete() {
-        if (confirm("Are you sure want to delete?")) {
+        if (confirm("Etes-vous sûr de vouloir supprimer?")) {
             return true;
         }
         return false;
@@ -125,12 +133,13 @@
 
     $(document).ready(function() {
     $('.open-EditroleDialog').on('click', function() {
-        var url = "role/"
+        var url = "admin/role/"
         var id = $(this).data('id').toString();
         url = url.concat(id).concat("/edit");
 
         $.get(url, function(data) {
             $("input[name='name']").val(data['name']);
+            $("input[name='slug']").val(data['slug']);
             $("textarea[name='description']").val(data['description']);
             $("input[name='role_id']").val(data['id']);
         });
