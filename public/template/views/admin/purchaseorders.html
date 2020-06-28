@@ -154,7 +154,7 @@
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="active">
+                                    <li>
                                         <a class="dropdown-item" href="./products.html">
                                             Produits
                                         </a>
@@ -166,7 +166,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown active">
                                 <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
                                     role="button" aria-expanded="false">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -195,7 +195,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <a class="nav-link" href="./invoices.html">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
@@ -257,7 +257,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <h2 class="page-title">
-                                Vos factures
+                                Bon de commandes
                             </h2>
                         </div>
                         <div class="col-auto">
@@ -276,7 +276,7 @@
                                         <line x1="12" y1="5" x2="12" y2="19" />
                                         <line x1="5" y1="12" x2="19" y2="12" />
                                     </svg>
-                                    Créer
+                                    Nouveau
                                 </a>
                                 <span class="dropdown ml-3">
                                     <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
@@ -306,7 +306,7 @@
                                                 <path
                                                     d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
                                             </svg>
-                                            Quantité
+                                            Forunisseur
                                         </a>
                                         <a class="dropdown-item" href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
@@ -315,7 +315,7 @@
                                                 <path
                                                     d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
                                             </svg>
-                                            Prix
+                                            Quantité
                                         </a>
                                         <a class="dropdown-item" href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
@@ -354,11 +354,10 @@
                                                     type="checkbox"></th>
                                             <th class="w-1">No.
                                             </th>
-                                            <th>Commande</th>
-                                            <th>Produit</th>
-                                            <th>Mode de paiement</th>
-                                            <th>Date d'enregistrement</th>
-                                            <th>Date de paiement</th>
+                                            <th>Date</th>
+                                            <th>Forunisseur</th>
+                                            <th>Description</th>
+                                            <th>Quantité</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -367,19 +366,16 @@
                                             <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                     aria-label="Select invoice"></td>
                                             <td><span class="text-muted">001401</span></td>
-                                            <td><a href="invoice.html" class="text-reset" tabindex="-1">S0-1001</a>
+                                            <td><a href="invoice.html" class="text-reset" tabindex="-1">20-06-2020</a>
                                             </td>
                                             <td>
-                                                Guiness Smooth
+                                                Mbarga Zoua
                                             </td>
                                             <td>
-                                                Cash
+                                                Casiers de Guinness Smooth
                                             </td>
                                             <td>
-                                                20-06-2020
-                                            </td>
-                                            <td>
-                                                20-06-2020
+                                                50
                                             </td>
                                             <td class="text-right">
                                                 <a href="#" class="btn btn-white btn-sm mt-1">
@@ -390,10 +386,7 @@
                                                         data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item" href="#">
-                                                            Voir la facture
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme Payé
+                                                            Dupiquer
                                                         </a>
                                                         <a class="dropdown-item" href="#">
                                                             Marquer comme inactif
@@ -478,6 +471,7 @@
     </div>
     <!-- Libs JS -->
     <script src="../../assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/dist/libs/jquery/dist/jquery.slim.min.js"></script>
     <!-- easytrak Core -->
     <script src="../../assets/dist/js/easytrak.min.js"></script>
 
