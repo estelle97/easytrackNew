@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
    protected $fillable =[
-         "name", "description", "is_active"
+      "is_active", "name", "slug", "description"
    ];
     protected $guarded = ['id'];
 
@@ -15,7 +15,7 @@ class Role extends Model
         return $this->belongsToMany(Permission::class);  
      }
      
-     public function users() {
+     /*public function users() {
         return $this->belongsToMany('App\User');
-     }
+     }*/
 }

@@ -11,6 +11,12 @@
 |
 */
 
+Route::redirect('/', 'login');
+
+//Route::redirect('/register', 'login');
+
+//Auth::routes(['register' => false]);
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
@@ -31,7 +37,7 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
 
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {
 
-    //Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
     Route::get('user/profile/{id}', 'Admin\DashboardController@profile')->name('user.profile');
