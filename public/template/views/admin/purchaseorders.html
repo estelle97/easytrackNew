@@ -29,11 +29,6 @@
     <link href="../../assets/dist/css/easytrak.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/demo.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/custom.css" rel="stylesheet" />
-    <!-- Full calendar - CSS files -->
-    <link href="../../dist/libs/fullcalendar/core/main.min.css" rel="stylesheet" />
-    <link href="../../dist/libs/fullcalendar/daygrid/main.min.css" rel="stylesheet" />
-    <link href="../../dist/libs/fullcalendar/timegrid/main.min.css" rel="stylesheet" />
-    <link href="../../dist/libs/fullcalendar/list/main.min.css" rel="stylesheet" />
     <style>
         body {
             display: none;
@@ -159,9 +154,14 @@
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="active">
+                                    <li>
                                         <a class="dropdown-item" href="./products.html">
                                             Produits
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="./services.html">
+                                            Services
                                         </a>
                                     </li>
                                     <li>
@@ -171,7 +171,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown active">
                                 <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
                                     role="button" aria-expanded="false">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -262,8 +262,13 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <h2 class="page-title">
-                                Agenda (Équipe de la caisse)
+                                Bon de commandes
                             </h2>
+                        </div>
+                        <div class="col-auto">
+                            <div class="text-white text-h5 mt-2">
+                                1-10 of 30
+                            </div>
                         </div>
                         <!-- Page title actions -->
                         <div class="col-auto ml-auto d-print-none">
@@ -276,102 +281,167 @@
                                         <line x1="12" y1="5" x2="12" y2="19" />
                                         <line x1="5" y1="12" x2="19" y2="12" />
                                     </svg>
-                                    Ajouter un évènement
+                                    Nouveau
                                 </a>
+                                <span class="dropdown ml-3">
+                                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                            height="24">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path
+                                                d="M2 18h7v2H2v-2zm0-7h9v2H2v-2zm0-7h20v2H2V4zm18.674 9.025l1.156-.391 1 1.732-.916.805a4.017 4.017 0 0 1 0 1.658l.916.805-1 1.732-1.156-.391c-.41.37-.898.655-1.435.83L19 21h-2l-.24-1.196a3.996 3.996 0 0 1-1.434-.83l-1.156.392-1-1.732.916-.805a4.017 4.017 0 0 1 0-1.658l-.916-.805 1-1.732 1.156.391c.41-.37.898-.655 1.435-.83L17 11h2l.24 1.196c.536.174 1.024.46 1.434.83zM18 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+                                                fill="rgba(255,255,255,1)" /></svg>
+                                    </div>
+
+                                    <div class="dropdown-menu dropdown-menu-right mt-3">
+                                        <span class="dropdown-header">Trier par</span>
+                                        <a class="dropdown-item" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                                height="18" class="mr-2">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
+                                            </svg>
+                                            Nom
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                                height="18" class="mr-2">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
+                                            </svg>
+                                            Forunisseur
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                                height="18" class="mr-2">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
+                                            </svg>
+                                            Quantité
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                                height="18" class="mr-2">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
+                                            </svg>
+                                            Date
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                                height="18" class="mr-2">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M5.463 4.433A9.961 9.961 0 0 1 12 2c5.523 0 10 4.477 10 10 0 2.136-.67 4.116-1.81 5.74L17 12h3A8 8 0 0 0 6.46 6.228l-.997-1.795zm13.074 15.134A9.961 9.961 0 0 1 12 22C6.477 22 2 17.523 2 12c0-2.136.67-4.116 1.81-5.74L7 12H4a8 8 0 0 0 13.54 5.772l.997 1.795z" />
+                                            </svg>
+                                            Actualiser
+                                        </a>
+                                    </div>
+                                </span>
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="card col-lg-3 p-3" style="max-height: 400px;">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h2 class="">
-                                    Équpes
-                                </h2>
-                            </div>
-                            <!-- Page title actions -->
-                            <div class="col-lg-6 ">
-                                <div class="d-flex flex-row-reverse">
-
-                                    <a href="#" class="btn-e-icon text-black ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                            height="20">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="btn-e-icon text-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                            height="24">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" /></svg>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="category-list list list-row">
-                                <div class="list-item">
-                                    <div><input type="checkbox" class="form-check-input"></div>
-                                    <div class="text-truncate">
-                                        <div class="avatar-list avatar-list-stacked">
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/300/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/301/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/302/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/308/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/304/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/305/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/306/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/307/200')"></span>
-                                            <span class="avatar">+4</span>
-                                        </div>
-                                        <a href="#" class="text-body d-block">Équipe de serveurs</a>
-                                        <small class="d-block text-muted text-truncate mt-n1">Black and White</small>
-                                    </div>
-                                </div>
-                                <div class="list-item">
-                                    <div><input type="checkbox" class="form-check-input"></div>
-                                    <div class="text-truncate">
-                                        <div class="avatar-list avatar-list-stacked">
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/400/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/401/200')"></span>
-                                            <span class="avatar">VO</span>
-                                        </div>
-                                        <a href="#" class="text-body d-block">Équipe en charge du magazin</a>
-                                        <small class="d-block text-muted text-truncate mt-n1">Black and White</small>
-                                    </div>
-                                </div>
-                                <div class="list-item">
-                                    <div><input type="checkbox" class="form-check-input"></div>
-                                    <div class="text-truncate">
-                                        <div class="avatar-list avatar-list-stacked">
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/501/200')"></span>
-                                            <span class="avatar"
-                                                style="background-image: url('https://picsum.photos/id/502/200')"></span>
-                                        </div>
-                                        <a href="#" class="text-body text-primary d-block">Équipe en charge de la
-                                            caisse</a>
-                                        <small class="d-block text-muted text-truncate mt-n1">Black and White</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-body">
-                                <div id="calendar-main" class="card-calendar"></div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter card-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="w-1"><input class="form-check-input m-0 align-middle"
+                                                    type="checkbox"></th>
+                                            <th class="w-1">No.
+                                            </th>
+                                            <th>Date</th>
+                                            <th>Forunisseur</th>
+                                            <th>Description</th>
+                                            <th>Quantité</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input class="form-check-input m-0 align-middle" type="checkbox"
+                                                    aria-label="Select invoice"></td>
+                                            <td><span class="text-muted">001401</span></td>
+                                            <td><a href="invoice.html" class="text-reset" tabindex="-1">20-06-2020</a>
+                                            </td>
+                                            <td>
+                                                Mbarga Zoua
+                                            </td>
+                                            <td>
+                                                Casiers de Guinness Smooth
+                                            </td>
+                                            <td>
+                                                50
+                                            </td>
+                                            <td class="text-right">
+                                                <a href="#" class="btn btn-white btn-sm mt-1">
+                                                    Modifier
+                                                </a>
+                                                <span class="dropdown">
+                                                    <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                                        data-boundary="viewport" data-toggle="dropdown">Actions</button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="#">
+                                                            Dupiquer
+                                                        </a>
+                                                        <a class="dropdown-item" href="#">
+                                                            Marquer comme inactif
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                width="18" height="18" class="mr-2">
+                                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                                <path
+                                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                            </svg>
+                                                            Supprimer
+                                                        </a>
+                                                    </div>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer d-flex align-items-center">
+                                <p class="m-0 text-muted">Affichage <span>1</span> à <span>10</span> de <span>30</span>
+                                    élements</p>
+                                <ul class="pagination m-0 ml-auto">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <polyline points="15 6 9 12 15 18" /></svg>
+                                            précédent
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">
+                                            suivant <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <polyline points="9 6 15 12 9 18" /></svg>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -406,95 +476,9 @@
     </div>
     <!-- Libs JS -->
     <script src="../../assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/dist/libs/fullcalendar/core/main.min.js"></script>
-    <script src="../../assets/dist/libs/fullcalendar/daygrid/main.min.js"></script>
-    <script src="../../assets/dist/libs/fullcalendar/interaction/main.min.js"></script>
-    <script src="../../assets/dist/libs/fullcalendar/timegrid/main.min.js"></script>
-    <script src="../../assets/dist/libs/fullcalendar/list/main.min.js"></script>
+    <script src="../../assets/dist/libs/jquery/dist/jquery.slim.min.js"></script>
     <!-- easytrak Core -->
     <script src="../../assets/dist/js/easytrak.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar-main'),
-                today = new Date(),
-                y = today.getFullYear(),
-                m = today.getMonth(),
-                d = today.getDate();
-            window.FullCalendar && (new FullCalendar.Calendar(calendarEl, {
-                plugins: ['interaction', 'dayGrid'],
-                themeSystem: 'standard',
-                header: {
-                    left: 'title',
-                    center: '',
-                    right: 'prev,next'
-                },
-                selectable: true,
-                selectHelper: true,
-                nowIndicator: true,
-                views: {
-                    dayGridMonth: {
-                        buttonText: 'month'
-                    },
-                    timeGridWeek: {
-                        buttonText: 'week'
-                    },
-                    timeGridDay: {
-                        buttonText: 'day'
-                    }
-                },
-                defaultView: 'dayGridMonth',
-                timeFormat: 'H(:mm)',
-                events: [{
-                        title: 'BVS Experience',
-                        start: new Date(y, m, 1),
-                        className: 'bg-blue-lt'
-                    },
-                    {
-                        id: 999,
-                        title: 'Match de Galla',
-                        start: new Date(y, m, 7, 6, 0),
-                        allDay: false,
-                        className: 'bg-blue-lt'
-                    },
-                    {
-                        id: 999,
-                        title: 'Yolo',
-                        start: new Date(y, m, 14, 6, 0),
-                        allDay: false,
-                        className: 'bg-lime-lt'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: new Date(y, m, 4, 10, 30),
-                        allDay: false,
-                        className: 'bg-green-lt'
-                    },
-                    {
-                        title: 'Lunch',
-                        start: new Date(y, m, 5, 12, 0),
-                        end: new Date(y, m, 5, 14, 0),
-                        allDay: false,
-                        className: 'bg-red-lt'
-                    },
-                    {
-                        title: 'LBD Launch',
-                        start: new Date(y, m, 19, 12, 0),
-                        allDay: true,
-                        className: 'bg-azure-lt'
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: new Date(y, m, 16, 19, 0),
-                        end: new Date(y, m, 16, 22, 30),
-                        allDay: false,
-                        className: 'bg-orange-lt'
-                    }
-                ]
-            })).render();
-        });
-
-    </script>
 
     <script>
         document.body.style.display = "block";
