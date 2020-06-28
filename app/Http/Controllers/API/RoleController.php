@@ -30,9 +30,12 @@ class RoleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new Role in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param String name
+     * @param String description
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +44,7 @@ class RoleController extends Controller
             'name'=> 'required[string',
             'description' => 'required|string',
         ]);
-        $slug = trim($request->name);
+        $slug = str_replace(' ','-', $request->name);
 
         $role = new Role();
         $role->name = $request->name;
@@ -78,10 +81,12 @@ class RoleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Role in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Role  $role
+     * @param String name
+     * @param String description
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Role $role)
@@ -90,7 +95,7 @@ class RoleController extends Controller
             'name'=> 'required[string',
             'description' => 'required|string',
         ]);
-        $slug = trim($request->name);
+        $slug = str_replace(' ','-', $request->name);
 
         $role->name = $request->name;
         $role->description = $request->description;

@@ -15,14 +15,15 @@ class UserController extends Controller
 
     /**
      * Create User
-     * @param [String] name
-     * @param [String] username
-     * @param [String] email
-     * @param [String] address
-     * @param [String] password_confirmation
-     * @param [char] is_admin (1, 2, 3) default 1
+     * @param String name
+     * @param String username
+     * @param String email
+     * @param String address
+     * @param String password_confirmation
+     * @param Integer snack_id [optional]
+     * @param Char is_admin (1, 2, 3) default 1
      * 
-     * @return [string] message
+     * @return String message
      */
     public function register(Request $request){
         $request->validate([
@@ -39,22 +40,26 @@ class UserController extends Controller
             'address' => $request->address,
             'username' => $request->username,
             'is_admin' => $request->is_admin,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'site_id' => 1
         ]);
         $user->save();
 
-        return response()->json(['message' => 'success'],201);
+        return response()->json([
+            'message' => 'User Created successfully!',
+            'user' => new UserResource($user)
+        ],201);
     }
 
     /**
      * Create User
-     * @param [String] email
-     * @param [String] password
+     * @param String email
+     * @param String password
      * @param [boolean] remember_me
      * 
-     * @return [String] access_token
-     * @return [String] token_type
-     * @return [string] expires_at
+     * @return String access_token
+     * @return String token_type
+     * @return String expires_at
      */
     public function login(Request $request){
         $request->validate([
@@ -97,7 +102,7 @@ class UserController extends Controller
     /**
      * Logout user (Revoke the token)
      * 
-     * @return [string] message
+     * @return String message
      */
     public function logout(Request $request){
         $request->user()->token()->revoke();
@@ -163,14 +168,14 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param [String] name
-     * @param [String] username
-     * @param [String] email
-     * @param [String] address
-     * @param [String] password_confirmation
-     * @param [char] is_admin (1, 2, 3) default 1
+     * @param String name
+     * @param String username
+     * @param String email
+     * @param String address
+     * @param String password_confirmation
+     * @param Char is_admin (1, 2, 3) default 1
      * 
-     * @return [string] message
+     * @return String message
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response

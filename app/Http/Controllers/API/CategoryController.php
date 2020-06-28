@@ -34,6 +34,8 @@ class CategoryController extends Controller
      *
      * @param [string] name
      * @param  \Illuminate\Http\Request  $request
+     * @param String name
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -80,6 +82,7 @@ class CategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Category  $category
+     * @param String name
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)

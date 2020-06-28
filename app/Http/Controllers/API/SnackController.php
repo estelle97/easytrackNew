@@ -30,9 +30,17 @@ class SnackController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Snack in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param String name
+     * @param String email
+     * @param String tel1
+     * @param String tel2 [optional]
+     * @param String town
+     * @param String steet
+     * @param File logo [optional]
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -86,10 +94,17 @@ class SnackController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Snack in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Snack  $snack
+     * @param String name
+     * @param String email
+     * @param String tel1
+     * @param String tel2 [optional]
+     * @param String town
+     * @param String steet
+     * @param File logo [optional]
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Snack $snack)
@@ -115,7 +130,7 @@ class SnackController extends Controller
         return response()->json([
             'message' => 'Snack updated successfully',
             'snack' => new SnackResource($snack),
-        ], 201);
+        ], 200);
     }
 
     /**

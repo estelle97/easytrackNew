@@ -30,9 +30,13 @@ class TypeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Type in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param String title
+     * @param Integer duration
+     * @param Integer price
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -83,6 +87,10 @@ class TypeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Type  $type
+     * @param String title
+     * @param Integer duration
+     * @param Integer price
+     * 
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Type $type)
