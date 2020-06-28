@@ -8,21 +8,16 @@ use App\Role;
 use App\Permission;
 use App\User;
 use Auth;
+use DB;
 
 class RoleController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
+        //$lims_role_all = DB::table('roles')->where('is_active', 1)->first();
         $lims_role_all = Role::where('is_active', true)->get();
-        if($lims_role_all == null)
-        {
-            return view('terms-of-services');
-        }
-        else{
-            return view('admin.dashboard.home', compact('user'));
-            //return view('admin.users.roles.create', compact('lims_role_all','user'));
-        }
+        return view('admin.users.roles.create', ['users' => $users]);
         
     }
 

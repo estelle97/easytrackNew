@@ -18,6 +18,7 @@ class BillResource extends JsonResource
             'bill_id' => $this->id,
             'code' => $this->code,
             'status' => $this->status,
+            'site_id' => $this->site_id,
             'products' => ProductResource::collection($this->whenLoaded('products')),
             'quantity' => $this->whenPivotLoaded('orders', function(){
                 return $this->pivot->quantity;

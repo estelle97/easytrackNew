@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bill extends Model
 {
-    protected $grarded = ['id'];
+    protected $guarded = ['id'];
 
 
     public function products(){

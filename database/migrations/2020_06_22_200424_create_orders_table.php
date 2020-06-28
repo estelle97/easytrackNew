@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('site_id')->nullable();
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('bill_id')->unsigned();
-            $table->integer('quantiy');
+            $table->integer('quantity');
             $table->enum('is_active', array('0', '1'))->default('1');
             $table->enum('status', array('0', '1'))->default('1');
             $table->timestamps();
