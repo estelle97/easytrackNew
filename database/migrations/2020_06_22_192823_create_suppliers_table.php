@@ -17,7 +17,7 @@ class CreateSuppliersTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('site_id')->unsigned();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('tel1');
             $table->string('tel2')->nullable();
             $table->enum('is_active', array('0', '1'))->default('1');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\InvoiceResource;
 use App\Invoice;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        return InvoiceResource::collection(Invoice::where('is_active','1')->get()->load('products'));
     }
 
     /**
@@ -36,7 +37,21 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        do {
+            $code = mt_rand(1000000000, 9999999999);
+        } while(Invoice::whereCode($code)->exists());
+
+        $bill = Invoice::create([
+            'code' => $code,
+            'status' => '0',
+            'site_id' => 1
+        ]);
+        $bill->save();
+
+        return response()->json([
+            'message' => 'Bill created susscessfully',
+            'bill' => new InvoiceResource($bill),
+        ],201);
     }
 
     /**
@@ -47,7 +62,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        return new InvoiceResource($invoice->loadMissing('products'));
     }
 
     /**
@@ -70,7 +85,14 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        $invoice->update([
+            'status' => '1',
+        ]);
+
+        return response()->json([
+            'message' => 'Invoice updated susscessfully',
+            'invoice' => new InvoiceResource($invoice),
+        ],200);
     }
 
     /**

@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboard', 'HomeController@dashboard');
+    Route::get('logout', 'Admin\DashboardController@logout');
+   
     
 });
 
@@ -32,7 +34,8 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
     Route::get('user/profile/{id}', 'SuperAdmin\DashboardController@profile')->name('user.profile');
 	Route::put('user/update_profile/{id}', 'SuperAdmin\DashboardController@profileUpdate')->name('user.profileUpdate');
 	Route::put('user/changepass/{id}', 'SuperAdmin\DashboardController@changePassword')->name('user.password');
-	Route::get('user/genpass', 'SuperAdmin\DashboardController@generatePassword');
+    Route::get('user/genpass', 'SuperAdmin\DashboardController@generatePassword');
+    
 });
 
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {

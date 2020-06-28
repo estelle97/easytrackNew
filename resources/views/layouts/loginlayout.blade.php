@@ -6,8 +6,6 @@
      </head>
 
      <body>
-    
-    
     @yield('content')
     @include('layouts.partials.footer')
     @include('layouts.partials.admin.footer-scripts')

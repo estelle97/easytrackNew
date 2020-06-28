@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RoleResource;
-use App\Role;
+use App\Http\Resources\PermissionResource;
+use App\Permission;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return RoleResource::collection(Role::all()->load('permissions','users'));
+        return PermissionResource::collection(Permission::all()->load('roles','users'));
     }
 
     /**
@@ -33,46 +33,48 @@ class RoleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param [string] name
+     * @param [string] slug
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'name'=> 'required[string',
-            'description' => 'required|string',
+            'name' => $request->name,
+            'slug' => $request->slug,
         ]);
-        $slug = trim($request->name);
+        
+        $permission = new Permission([
+            'name' => $request->name,
+            'slug' => $request->slug
+        ]);
 
-        $role = new Role();
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->slug = $slug;
-        $role->save();
+        $permission->save();
 
         return response()->json([
-            'message' => 'Role added successfully!',
-            'role' => new RoleResource($role)
+            'message' => 'Permission added successfully!',
         ],201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Permission $permission)
     {
-        return new RoleResource($role->loadMissing('permissions','users'));
+        return new PermissionResource($permission->loadMissing('roles','users'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Permission $permission)
     {
         //
     }
@@ -81,41 +83,38 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Permission $permission)
     {
         $request->validate([
-            'name'=> 'required[string',
-            'description' => 'required|string',
+            'name' => $request->name,
+            'slug' => $request->slug,
         ]);
-        $slug = trim($request->name);
-
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->slug = $slug;
-        $role->save();
-
+        
+        $permission->update([
+            'name' => $request->name,
+            'slug' => $request->slug
+        ]);
+        
         return response()->json([
-            'message' => 'Role updated successfully!',
-            'role' => new RoleResource($role)
+            'message' => 'Permission added successfully!',
         ],200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Permission $permission)
     {
-        $role->is_active = '0';
-        $role->save();
+        $$permission->destroy($permission->id);
 
         return response()->json([
-            'message' => 'Role deleted successfully!'
+            'message' => 'Permission deleted successfully!',
         ],204);
     }
 }

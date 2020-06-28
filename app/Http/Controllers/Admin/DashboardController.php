@@ -19,7 +19,8 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-    
+   
+
     /**
      * Show the application dashboard.
      *
@@ -71,4 +72,13 @@ class DashboardController extends Controller
         notify()->success('Mise à jour du profil effectuée avec succès', 'Mise à jour du profil');
         return redirect()->back();
     }
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        notify()->success('Déconnexion réussie', 'A bientot');
+        return redirect('/login');
+        
+      }
+
+
 }
