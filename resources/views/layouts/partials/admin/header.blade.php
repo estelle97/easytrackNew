@@ -10,7 +10,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
                             <span class="avatar"
-                                style="background-image: url('https://ui-avatars.com/api/?name=Estelle+Belinga&background=FFFFFF&color=267FC9&font-size=0.30');">
+                                style="background-image: url('https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=FFFFFF&color=267FC9&font-size=0.30');">
                                 @if($user->isOnline())
                                     <span class="badge bg-green"></span>
                                 @else
