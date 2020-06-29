@@ -33,21 +33,20 @@ class PermissionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param [string] name
-     * @param [string] slug
+     * @param String name
      * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'name' => $request->name,
-            'slug' => $request->slug,
+            'name' => 'required|string|unique:permissions',
         ]);
         
+        $slug = str_replace(' ', '-' ,$request->name);
         $permission = new Permission([
             'name' => $request->name,
-            'slug' => $request->slug
+            'slug' => $slug
         ]);
 
         $permission->save();
@@ -84,18 +83,19 @@ class PermissionController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Permission  $permission
+     * @param String name
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Permission $permission)
     {
         $request->validate([
             'name' => $request->name,
-            'slug' => $request->slug,
         ]);
         
+        $slug = str_replace(' ', '-' ,$request->name);
         $permission->update([
             'name' => $request->name,
-            'slug' => $request->slug
+            'slug' => $slug
         ]);
         
         return response()->json([
@@ -111,10 +111,6 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        $$permission->destroy($permission->id);
-
-        return response()->json([
-            'message' => 'Permission deleted successfully!',
-        ],204);
+       //
     }
 }

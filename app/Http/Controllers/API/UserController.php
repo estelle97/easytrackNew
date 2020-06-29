@@ -8,6 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule as ValidationRule;
 
 class UserController extends Controller
 {
@@ -15,19 +16,23 @@ class UserController extends Controller
 
     /**
      * Create User
-     * @param [String] name
-     * @param [String] username
-     * @param [String] email
-     * @param [String] address
-     * @param [String] password_confirmation
-     * @param [char] is_admin (1, 2, 3) default 1
+     * @param String name
+     * @param String username
+     * @param String email
+     * @param String tel
+     * @param String address
+     * @param String password_confirmation
+     * @param Integer snack_id [optional]
+     * @param Char is_admin (1, 2, 3) default 1
      * 
-     * @return [string] message
+     * @return String message
      */
     public function register(Request $request){
+
         $request->validate([
             'name' => 'required|string',
-            'email' => 'email|required|string|unique:users',
+            'email' => ValidationRule::unique('users')->whereNotNull('email'),
+            'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
             'username' => 'required|string|unique:users',
             'address' => 'required|string',
             'password' => 'required|string|confirmed'
@@ -39,39 +44,50 @@ class UserController extends Controller
             'address' => $request->address,
             'username' => $request->username,
             'is_admin' => $request->is_admin,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'site_id' => 1
         ]);
         $user->save();
 
-        return response()->json(['message' => 'success'],201);
+        return response()->json([
+            'message' => 'User Created successfully!',
+            'user' => new UserResource($user)
+        ],201);
     }
 
     /**
      * Create User
-     * @param [String] email
-     * @param [String] password
+     * @param String login
+     * @param String password
      * @param [boolean] remember_me
      * 
-     * @return [String] access_token
-     * @return [String] token_type
-     * @return [string] expires_at
+     * @return String access_token
+     * @return String token_type
+     * @return String expires_at
      */
     public function login(Request $request){
         $request->validate([
-            'email' => 'email|required',
+            'login' => 'required',
             'password' => 'required',
             'remember_me' => 'boolean'
         ]);
 
-        $credentials = request(['email', 'password']);
+        $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))){
+            return response()->json([
+                'message' => 'Username/Email or Password incorrect'
+            ], 401);
+        }
 
-        if(!Auth::attempt($credentials)) 
-            return response()->json(['message' => 'username/password incorrect'], 401);
+        // $credentials = request(['email', 'password']);
+
+        // if(!Auth::attempt($credentials)) 
+        //     return response()->json(['message' => 'username/password incorrect'], 401);
         
         $user = $request->user();
         if($user->is_active == '0'){
             return response()->json([
-                'message' => 'User Deleted',
+                'message' => 'User was deleted',
             ],
             403);
         }
@@ -97,7 +113,7 @@ class UserController extends Controller
     /**
      * Logout user (Revoke the token)
      * 
-     * @return [string] message
+     * @return String message
      */
     public function logout(Request $request){
         $request->user()->token()->revoke();
@@ -163,14 +179,15 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param [String] name
-     * @param [String] username
-     * @param [String] email
-     * @param [String] address
-     * @param [String] password_confirmation
-     * @param [char] is_admin (1, 2, 3) default 1
+     * @param String name
+     * @param String username
+     * @param String email
+     * @param String tel
+     * @param String address
+     * @param String password_confirmation
+     * @param Char is_admin (1, 2, 3) default 1
      * 
-     * @return [string] message
+     * @return String message
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -179,7 +196,8 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'email' => 'email|required|string',
+            'email' =>  ValidationRule::unique('users')->whereNotNull('email'),
+            'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
             'username' => 'required|string',
             'address' => 'required|string',
             'is_admin' => 'required',
