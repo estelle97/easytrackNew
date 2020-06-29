@@ -60,7 +60,7 @@ class LoginController extends Controller
     {
         $login = request()->input('identity');
 
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         request()->merge([$field => $login]);
 
         return $field;
@@ -79,7 +79,7 @@ class LoginController extends Controller
         $messages = [
             'identity.required' => 'L\'e-mail ou le nom d\'utilisateur doit être renseigné',
             'email.exists' => 'Email ou nom d\'utilisateur déjà enregistré',
-            'name.exists' => 'Ce nom d\'utilisateur est déjà enregistré',
+            'username.exists' => 'Ce nom d\'utilisateur est déjà enregistré',
             'password.required' => 'Veuillez entrer un mot de passe',
         ];
 
@@ -87,7 +87,7 @@ class LoginController extends Controller
             'identity' => 'required|string',
             'password' => 'required|string',
             'email' => 'string|exists:users',
-            'name' => 'string|exists:users',
+            'username' => 'string|exists:users',
         ], $messages);
     }
 
@@ -110,7 +110,7 @@ class LoginController extends Controller
             if ($user->is_active && $this->attemptLogin($request)) {
                 // Send the normal successful login response
                 $name = Auth::user()->name;
-                notify()->success('Bon retour '.$name, 'Connexion');
+                notify()->success('Hello '.$name, 'Connexion');
                 return $this->sendLoginResponse($request);
             } else {
                 // Increment the failed login attempts and redirect back to the

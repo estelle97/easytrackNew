@@ -148,7 +148,8 @@
                                             <a href="{{ route('admin.user.show', $users->id) }}" class="btn btn-white btn-sm">
                                                 Gérer
                                             </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
+                                            @if(Auth::user()->is_admin == 2)
+                                            <a class="btn btn-white btn-sm" onclick="deleteData({{$users->id}})" data-toggle="modal"
                                                 data-target="#modal-delete-user">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
                                                     height="15">
@@ -158,6 +159,7 @@
                                                         fill="rgba(0,0,0,1)" />
                                                 </svg>
                                             </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -217,59 +219,119 @@
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Tel</label>
-                                <input type="text" class="form-control" name="" placeholder="Saisissez le numéro de téléphone...">
+                                <input type="text" class="form-control" name="tel" placeholder="Saisissez le numéro de téléphone...">
+                                @if($errors->has('tel'))
+                                    <span>
+                                        <strong>{{ $errors->first('tel') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Nom d'utilisateur</label>
-                                <input type="text" class="form-control"
-                                    placeholder="Saisissez le nom d'utilisateur...">
+                                <input type="text" class="form-control" name="username" placeholder="Saisissez le nom d'utilisateur...">
+                                @if($errors->has('username'))
+                                    <span>
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Mot de passe</label>
-                                <input type="password" class="form-control"
-                                    placeholder="Saisissez le mot de passe...">
+                                <input type="password" class="form-control" name="password" placeholder="Saisissez le mot de passe...">
+                                <div class="input-group-append">
+                                    <button id="genbutton" type="button" class="btn btn-default">Générer</button>
+                                </div>
+                                @if($errors->has('password'))
+                                <span>
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="col-lg-12 ">
                                 <label class="form-label">Rôle de l'utilisateur</label>
-                                <select name="role" id="select-role" class="form-select">
-                                    <option value="1">Caissier</option>
-                                    <option value="2">Magasinier</option>
-                                    <option value="3" selected>Gérant</option>
-                                    <option value="4">Serveur</option>
+                                <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
+                                    @foreach($lims_role_list as $role)
+                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Ajouter</button>
+                    </div>
                     {!! Form::close() !!}
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" style="width: 100%;"
-                            data-dismiss="modal">Ajouter</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>
         <div class="modal modal-blur fade" id="modal-delete-user" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sure ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de cette utilisateurs.</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto"
-                            data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
-                    </div>
-                </div>
+                    <form action="" id="deleteForm" method="post">
+                        <div class="modal-content">
+                            
+                            <div class="modal-body">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <div class="modal-title">Êtes vous sure ?</div>
+                                <div>Si vous continuez, vous perdrez toutes les données lié à cet utilisateur.</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link link-secondary mr-auto"
+                                    data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-danger" name="" onclick="formSubmit()" data-dismiss="modal">Oui, supprimer</button>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
         </div>
 @endsection
 @push('js')
 <script type="text/javascript">
+    function deleteData(id)
+     {
+         var id = id;
+         var url = '{{ route("admin.user.destroy", ":id") }}';
+         url = url.replace(':id', id);
+         $("#deleteForm").attr('action', url);
+     }
+
+     function formSubmit()
+     {
+         $("#deleteForm").submit();
+     }
+
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.selectpicker').selectpicker({
+      style: 'btn-link',
+    });
+    
+    $('#genbutton').on("click", function(){
+      $.get('genpass', function(data){
+        $("input[name='password']").val(data);
+      });
+    });
+
+    $('select[name="role_id"]').on('change', function() {
+        if($(this).val() > 2){
+            $('select[name="warehouse_id"]').prop('required',true);
+            $('select[name="biller_id"]').prop('required',true);
+            $('#biller-id').show();
+            $('#warehouseId').show();
+        }
+        else{
+            $('select[name="warehouse_id"]').prop('required',false);
+            $('select[name="biller_id"]').prop('required',false);
+            $('#biller-id').hide();
+            $('#warehouseId').hide();
         }
     });
 </script>

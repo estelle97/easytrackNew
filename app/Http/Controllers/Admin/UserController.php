@@ -23,14 +23,28 @@ class UserController extends Controller
        ->join('sites', 'sites.id', '=', 'users.site_id')
        ->select('users.*', 'sites.*')
        ->get();*/
+        $lims_role_list = Role::get();
         $lims_user_list = User::All();
-        return view('admin.users.users.users', compact('lims_user_list','user'));
+        return view('admin.users.users.users', compact('lims_user_list','user','lims_role_list'));
     }
 
     public function generatePassword()
     {
         $id = Keygen::numeric(6)->generate();
         return $id;
+    }
+
+    public function store(Request $request)
+    {
+
+        $data = $request->all();
+        
+        if(!isset($data['is_active']))
+            $data['is_active'] = false;
+        $data['password'] = bcrypt($data['password']);
+        User::create($data);
+        notify()->success('Utilisateur créé avec succès', 'Création utilisateur');
+        return redirect()->back();
     }
 
     /**
@@ -77,5 +91,13 @@ class UserController extends Controller
         $lims_user_data->update($input);*/
         notify()->success('Mise à jour de l\'utilisateur effectuée avec succès', 'Mise à jour utilisateur');
         return redirect()->route('admin.user.index');
+    }
+
+    public function destroy($id)
+    {
+        $lims_user_data = User::find($id);
+        $lims_user_data->delete();
+        notify()->success('Utilisateur supprimé avec succès', 'Suppression d\'utilisateur');
+        return redirect()->back();
     }
 }
