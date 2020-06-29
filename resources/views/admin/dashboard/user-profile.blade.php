@@ -72,8 +72,8 @@
                                             <div class="col-md-5">
                                                 <div class="mb-2">
                                                     <label class="form-label">Company</label>
-                                                    <input type="text" value="{{$lims_user_data->name}}" class="form-control form-control-rounded"
-                                                         placeholder="Company">
+                                                    <input type="text" value="" class="form-control form-control-rounded"
+                                                         disabled="" placeholder="Company">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-md-3">

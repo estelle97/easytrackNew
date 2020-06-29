@@ -5,12 +5,16 @@
        @include('layouts.partials.head')
      </head>
 
-     <body>
-    @include('layouts.partials.admin.header')
+     <body class="antialiased">
+        <div class="page">
+          @include('layouts.partials.admin.header')
     
-    @yield('content')
-    @include('layouts.partials.footer')
-    @include('layouts.partials.admin.footer-scripts')
+          @yield('content')
+        
+          @include('layouts.partials.footer')
+        </div>
+        
+          @include('layouts.partials.admin.footer-scripts')
      </body>
 
     </html>

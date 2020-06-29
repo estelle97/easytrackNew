@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Cache;
 
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -53,5 +54,14 @@ class User extends Authenticatable
     public function isActive()
     {
         return $this->is_active;
+    }
+
+    public function snack(){
+        return $this->hasOne('App\Snack','snack_id');
+    }
+
+    //Check if user is online
+    public function isOnline(){
+        return Cache::has('user-is-online-'. $this->id);
     }
 }
