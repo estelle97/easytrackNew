@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'API\UserController@login');
 Route::post('/register', 'API\UserController@register');
 
-Route::group(['middleware' => 'auth:api','isActive'], function(){
+Route::group(['middleware' => 'auth:api'], function(){
     
     Route::get('logout', 'API\UserController@logout');
     Route::put('users/{user}/activate', 'API\UserController@activateUser');

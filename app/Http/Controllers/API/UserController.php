@@ -8,6 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule as ValidationRule;
 
 class UserController extends Controller
 {
@@ -18,6 +19,7 @@ class UserController extends Controller
      * @param String name
      * @param String username
      * @param String email
+     * @param String tel
      * @param String address
      * @param String password_confirmation
      * @param Integer snack_id [optional]
@@ -26,9 +28,11 @@ class UserController extends Controller
      * @return String message
      */
     public function register(Request $request){
+
         $request->validate([
             'name' => 'required|string',
-            'email' => 'email|required|string|unique:users',
+            'email' => ValidationRule::unique('users')->whereNotNull('email'),
+            'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
             'username' => 'required|string|unique:users',
             'address' => 'required|string',
             'password' => 'required|string|confirmed'
@@ -53,7 +57,7 @@ class UserController extends Controller
 
     /**
      * Create User
-     * @param String email
+     * @param String login
      * @param String password
      * @param [boolean] remember_me
      * 
@@ -63,20 +67,27 @@ class UserController extends Controller
      */
     public function login(Request $request){
         $request->validate([
-            'email' => 'email|required',
+            'login' => 'required',
             'password' => 'required',
             'remember_me' => 'boolean'
         ]);
 
-        $credentials = request(['email', 'password']);
+        $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))){
+            return response()->json([
+                'message' => 'Username/Email or Password incorrect'
+            ], 401);
+        }
 
-        if(!Auth::attempt($credentials)) 
-            return response()->json(['message' => 'username/password incorrect'], 401);
+        // $credentials = request(['email', 'password']);
+
+        // if(!Auth::attempt($credentials)) 
+        //     return response()->json(['message' => 'username/password incorrect'], 401);
         
         $user = $request->user();
         if($user->is_active == '0'){
             return response()->json([
-                'message' => 'User Deleted',
+                'message' => 'User was deleted',
             ],
             403);
         }
@@ -171,6 +182,7 @@ class UserController extends Controller
      * @param String name
      * @param String username
      * @param String email
+     * @param String tel
      * @param String address
      * @param String password_confirmation
      * @param Char is_admin (1, 2, 3) default 1
@@ -184,7 +196,8 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'email' => 'email|required|string',
+            'email' =>  ValidationRule::unique('users')->whereNotNull('email'),
+            'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
             'username' => 'required|string',
             'address' => 'required|string',
             'is_admin' => 'required',

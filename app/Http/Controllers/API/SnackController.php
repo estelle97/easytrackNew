@@ -79,7 +79,7 @@ class SnackController extends Controller
      */
     public function show(Snack $snack)
     {
-        return new SnackResource($snack->loadMissing('sites','types'));
+        return new SnackResource($snack->loadMissing('sites.users','sites.suppliers','types'));
     }
 
     /**

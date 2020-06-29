@@ -16,7 +16,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return SiteResource::collection(Site::where('is_active', '1')->get()->load('snack','products','suppliers'));
+        return SiteResource::collection(Site::where('is_active', '1')->get()->load('users','snack','products','suppliers'));
     }
 
     /**
@@ -75,7 +75,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        return new SiteResource($site->loadMissing('snack','products','suppliers'));
+        return new SiteResource($site->loadMissing('users','snack','products','suppliers'));
     }
 
     /**
