@@ -30,9 +30,14 @@ class SupplierController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Supplier in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param String name
+     * @param String email 
+     * @param String tel1
+     * @param String tel2 [optional]
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -81,7 +86,7 @@ class SupplierController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Supplier in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Supplier  $supplier

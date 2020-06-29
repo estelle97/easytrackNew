@@ -21,6 +21,7 @@ class SiteResource extends JsonResource
             'tel2' => $this->tel2,
             'town' => $this->town,
             'street' => $this->street,
+            'users' => UserResource::collection($this->whenLoaded('users')),
             'snack' => new SnackResource($this->whenLoaded('snack')),
             'suppliers' => SupplierResource::collection($this->whenLoaded('suppliers')),
             'produits' => ProductResource::collection($this->whenLoaded('products'))

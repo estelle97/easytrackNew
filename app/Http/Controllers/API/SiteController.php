@@ -16,7 +16,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return SiteResource::collection(Site::where('is_active', '1')->get()->load('snack','products','suppliers'));
+        return SiteResource::collection(Site::where('is_active', '1')->get()->load('users','snack','products','suppliers'));
     }
 
     /**
@@ -30,9 +30,15 @@ class SiteController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Store in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param String email
+     * @param String tel1
+     * @param String tel2 [optional]
+     * @param String town
+     * @param String street
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -69,7 +75,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        return new SiteResource($site->loadMissing('snack','products','suppliers'));
+        return new SiteResource($site->loadMissing('users','snack','products','suppliers'));
     }
 
     /**
@@ -88,6 +94,12 @@ class SiteController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Site  $site
+     * @param String email
+     * @param String tel1
+     * @param String tel2 [optional]
+     * @param String town
+     * @param String street
+     * 
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Site $site)

@@ -411,5 +411,13 @@
         document.body.style.display = "block"
 
     </script>
+    <!-- Select Role -  Modal create use-->
+    <script>
+        $(document).ready(function () {
+            $('#select-role').selectize({});
+        });
+
+    </script>
+    @stack('js')
     @include('notify::messages')
     @notifyJs

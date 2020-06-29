@@ -16,7 +16,6 @@ class RoleController extends Controller
     public function index()
     {
         $user = Auth::user();
-        //$lims_role_all = DB::table('roles')->where('is_active', 1)->first();
         $lims_role_all = Role::get();
         return view('admin.users.roles.create', ['lims_role_all' => $lims_role_all, 'user'=>$user]);
         
@@ -66,6 +65,25 @@ class RoleController extends Controller
         $lims_role_data = Role::where('id', $input['role_id'])->first();
         $lims_role_data->update($input);
         notify()->success('Rôle '.$name.' modifié avec succès', 'Modification de rôle');
+        return redirect()->back();
+    }
+
+    public function permission($id)
+    {
+        $lims_role_data = Role::find($id);
+        $permissions = Permission::findByName($lims_role_data->name)->permissions;
+        foreach ($permissions as $permission)
+            $all_permission[] = $permission->name;
+        if(empty($all_permission))
+            $all_permission[] = 'dummy text';
+        return view('admin.role.permission', compact('lims_role_data', 'all_permission'));
+    }
+
+    public function destroy($id)
+    {
+        $lims_role_data = Role::find($id);
+        $lims_role_data->delete();
+        notify()->success('Rôle supprimé avec succès', 'Suppression de rôle');
         return redirect()->back();
     }
 

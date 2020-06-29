@@ -46,6 +46,13 @@
     padding: 0.5rem 0rem !important;
 }
 
+
+/* PAGE */
+.centered-page {
+    height: 100vh;
+}
+
+
 /* FORM */
 .auth-card {
     box-shadow: none !important;

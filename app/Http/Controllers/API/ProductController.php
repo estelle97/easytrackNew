@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
+use League\CommonMark\Extension\HeadingPermalink\Slug\DefaultSlugGenerator;
+use League\CommonMark\Normalizer\SlugNormalizer;
 
 class ProductController extends Controller
 {
@@ -30,9 +32,13 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new product.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param String name
+     * @param String brand
+     * @param String description [Optional]
+     * @param Integer category_id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +48,7 @@ class ProductController extends Controller
             'brand' => 'required',
         ]);
 
-        $code = trim($request->name);
+        $code = str_replace(' ','-',$request->name);
         $product = Product::create([
             'name' => $request->name,
             'code' => $code,
@@ -82,10 +88,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified product in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Product  $product
+     * @param String name
+     * @param String brand
+     * @param String description [Optional]
+     * @param Integer category_id
+     * 
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -93,9 +104,10 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string',
             'brand' => 'required',
+            'category_id' => 'required',
         ]);
 
-        $code = trim($request->name);
+        $code = str_replace(' ','-',$request->name);
         $product->update([
             'name' => $request->name,
             'code' => $code,
