@@ -24,7 +24,7 @@
                                         d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
                                 </svg>
                             </span>
-                            <input type="text" class="auth-input form-control form-control-rounded py-2 px-5"
+                            <input type="text" name="identity" class="auth-input form-control form-control-rounded py-2 px-5"
                                 placeholder="Nom d'utilisateur ou Email" autocomplete="off" />
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                                         d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
                                 </svg>
                             </span>
-                            <input type="password" class="auth-input form-control form-control-rounded py-2 px-5"
+                            <input type="password" name="password"class="auth-input form-control form-control-rounded py-2 px-5"
                                 placeholder="Mot de passe" />
                             <span class="input-icon-addon mr-2">
                                 <a href="#" class="link-secondary" title="Show password" data-toggle="tooltip"><svg
