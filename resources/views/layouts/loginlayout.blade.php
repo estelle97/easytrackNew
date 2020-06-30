@@ -2,13 +2,13 @@
     <html lang="fr">
 
      <head>
-       @include('layouts.partials.head')
+       @include('layouts.partials.auth.head_login')
      </head>
 
      <body>
     @yield('content')
-    @include('layouts.partials.footer')
-    @include('layouts.partials.admin.footer-scripts')
+    
+    @include('layouts.partials.auth.footer_login')
      </body>
 
     </html>
