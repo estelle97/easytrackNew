@@ -70,13 +70,59 @@ class RoleController extends Controller
 
     public function permission($id)
     {
+        $user = Auth::user();
         $lims_role_data = Role::find($id);
-        $permissions = Permission::findByName($lims_role_data->name)->permissions;
+        $permissions = Permission::All();
         foreach ($permissions as $permission)
             $all_permission[] = $permission->name;
         if(empty($all_permission))
             $all_permission[] = 'dummy text';
-        return view('admin.role.permission', compact('lims_role_data', 'all_permission'));
+        return view('admin.users.roles.permission', compact('lims_role_data', 'all_permission','user'));
+    }
+
+    public function setPermission(Request $request)
+    {
+        $role = Role::firstOrCreate(['id' => $request['role_id']]);
+
+        if($request->has('read_user')){
+            $permission = Permission::firstOrCreate(['name' => 'read_user']);
+            if(!$role->hasPermissionTo('read_user')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('read_user');
+
+
+        if($request->has('create_user')){
+            $permission = Permission::firstOrCreate(['name' => 'create_user']);
+            if(!$role->hasPermissionTo('create_user')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('create_user');
+
+        if($request->has('update_user')){
+            $permission = Permission::firstOrCreate(['name' => 'update_user']);
+            if(!$role->hasPermissionTo('update_user')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('update_user');
+        
+        if($request->has('delete_user')){
+            $permission = Permission::firstOrCreate(['name' => 'delete_user']);
+            if(!$role->hasPermissionTo('delete_user')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('delete_user');
+            
+        notify()->success('Permissions modifiées avec succès', 'Modification de permissions');
+
     }
 
     public function destroy($id)

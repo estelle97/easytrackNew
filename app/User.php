@@ -14,6 +14,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasApiTokens,HasPermissionsTrait;
+    use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
     /**
      * The attributes that are mass assignable.
