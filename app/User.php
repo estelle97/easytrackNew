@@ -58,7 +58,7 @@ class User extends Authenticatable
     }
 
     public function snack(){
-        return $this->hasOne('App\Snack','snack_id');
+        return $this->belongsTo('App\Snack');
     }
 
     //Check if user is online
