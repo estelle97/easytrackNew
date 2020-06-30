@@ -3,7 +3,7 @@
 
 @section('content')
 <body class="antialiased">
-    <div class="flex-fill d-flex flex-column justify-content-center">
+    <div class="centered-page flex-fill d-flex flex-column justify-content-center">
         <div class="container-tight py-6">
             <div class="text-center mb-4">
                 <img src="{{ asset('dashboard/static/logo.svg') }}" height="36" alt="" />
@@ -17,7 +17,7 @@
                     </h4>
                     <div class="mb-4">
                         <div class="input-icon">
-                            <span class="input-icon-addon ml-2">
+                        <span class="input-icon-addon ml-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
                                     <path fill="none" d="M0 0h24v24H0z" />
                                     <path
@@ -25,7 +25,7 @@
                                 </svg>
                             </span>
                             <input type="text" name="identity" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Email ou Nom d'utilisateur" autocomplete="off" />
+                                placeholder="Nom d'utilisateur ou Email" autocomplete="off" />
                         </div>
                     </div>
                     <div class="mb-3">
@@ -37,7 +37,7 @@
                                         d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
                                 </svg>
                             </span>
-                            <input type="password" name="password" class="auth-input form-control form-control-rounded py-2 px-5"
+                            <input type="password" name="password"class="auth-input form-control form-control-rounded py-2 px-5"
                                 placeholder="Mot de passe" />
                             <span class="input-icon-addon mr-2">
                                 <a href="#" class="link-secondary" title="Show password" data-toggle="tooltip"><svg
