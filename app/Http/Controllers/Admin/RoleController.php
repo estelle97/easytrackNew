@@ -91,7 +91,7 @@ class RoleController extends Controller
             }
         }
         else
-            $role->revokePermissionTo('read_user');
+            $role->deletePermissions('read_user');
 
 
         if($request->has('create_user')){
@@ -101,7 +101,7 @@ class RoleController extends Controller
             }
         }
         else
-            $role->revokePermissionTo('create_user');
+            $role->deletePermissions('create_user');
 
         if($request->has('update_user')){
             $permission = Permission::firstOrCreate(['name' => 'update_user']);
@@ -110,7 +110,7 @@ class RoleController extends Controller
             }
         }
         else
-            $role->revokePermissionTo('update_user');
+            $role->deletePermissions('update_user');
         
         if($request->has('delete_user')){
             $permission = Permission::firstOrCreate(['name' => 'delete_user']);
@@ -119,7 +119,7 @@ class RoleController extends Controller
             }
         }
         else
-            $role->revokePermissionTo('delete_user');
+            $role->deletePermissions('delete_user');
             
         notify()->success('Permissions modifiées avec succès', 'Modification de permissions');
 

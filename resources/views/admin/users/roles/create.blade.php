@@ -13,7 +13,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <h2 class="page-title">
-                                <a href="{{ route('admin.user.index') }}" class="mr-2">
+                                <a href="{{route('admin.user.profile')}}" class="mr-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                         <path fill="none" d="M0 0h24v24H0z" />
                                         <path
