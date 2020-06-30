@@ -3,7 +3,7 @@
 
 @section('content')
 <body class="antialiased">
-    <div class="flex-fill d-flex flex-column justify-content-center">
+    <div class="centered-page flex-fill d-flex flex-column justify-content-center">
         <div class="container-tight py-6">
             <div class="text-center mb-4">
                 <img src="{{ asset('dashboard/static/logo.svg') }}" height="36" alt="" />
@@ -25,7 +25,7 @@
                                 </svg>
                             </span>
                             <input type="text" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Nom d'utilisateur" autocomplete="off" />
+                                placeholder="Nom d'utilisateur ou Email" autocomplete="off" />
                         </div>
                     </div>
                     <div class="mb-3">
