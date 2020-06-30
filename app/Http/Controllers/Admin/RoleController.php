@@ -80,6 +80,19 @@ class RoleController extends Controller
         return view('admin.users.roles.permission', compact('lims_role_data', 'all_permission','user'));
     }
 
+    /**
+     * Detach Roles to a User
+     * @param Integer[] roles 
+     */
+    public function detachPermissionsToUser(Request $request, User $user){
+        foreach($request->permissions as $perm){
+            if($user->permissions->contains($perm)){
+               $user->permissions()->detach($perm);
+            }
+        }
+        return $this->show($user);
+    }
+
     public function setPermission(Request $request)
     {
         $role = Role::firstOrCreate(['id' => $request['role_id']]);
@@ -91,7 +104,7 @@ class RoleController extends Controller
             }
         }
         else
-            $role->deletePermissions('read_user');
+            $role->detachPermissionsToUser('read_user');
 
 
         if($request->has('create_user')){
@@ -101,7 +114,7 @@ class RoleController extends Controller
             }
         }
         else
-            $role->deletePermissions('create_user');
+            $role->detachPermissionsToUser('create_user');
 
         if($request->has('update_user')){
             $permission = Permission::firstOrCreate(['name' => 'update_user']);
@@ -110,7 +123,7 @@ class RoleController extends Controller
             }
         }
         else
-            $role->deletePermissions('update_user');
+            $role->detachPermissionsToUser('update_user');
         
         if($request->has('delete_user')){
             $permission = Permission::firstOrCreate(['name' => 'delete_user']);
@@ -119,7 +132,7 @@ class RoleController extends Controller
             }
         }
         else
-            $role->deletePermissions('delete_user');
+            $role->detachPermissionsToUser('delete_user');
             
         notify()->success('Permissions modifiées avec succès', 'Modification de permissions');
 
