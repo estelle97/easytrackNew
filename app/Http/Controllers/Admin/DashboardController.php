@@ -41,12 +41,13 @@ class DashboardController extends Controller
 
     public function profile($id)
     {
+        $user = Auth::user();
         $snack = DB::table('users')
             ->join('snacks', 'users.snack_id', '=', 'snacks.id')
             ->select('users.*', 'snacks.*')
             ->get();
         $lims_user_data = User::find($id);
-        return view('admin.dashboard.user-profile', compact('lims_user_data','snack'));
+        return view('admin.dashboard.user-profile', compact('lims_user_data','snack','user'));
     }
 
     public function profileUpdate(Request $request, $id)

@@ -1,5 +1,7 @@
 @extends('layouts.mainlayoutAdmin')
-
+@push('css')
+    
+@endpush
 @section('content')
 
         <div class="content">
@@ -96,25 +98,32 @@
                     </div>
                 </div>
                 <div class="row row-deck row-cards">
+                @foreach($lims_user_list as $users)
                     <div class="col-md-6 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row row-sm align-items-center">
                                     <div class="col-auto">
-                                        <span class="avatar avatar-md">PK</span>
+                                        <span class="avatar avatar-md"style="background-image: url('https://ui-avatars.com/api/?name={{ $users->name }}&background=FFFFFF&color=267FC9&font-size=0.30');"></span>
                                     </div>
                                     <div class="col">
                                         <h3 class="mb-0">
-                                            <a href="./user-profile.html">Paweł Kuna</a>
+                                            <a href="./user-profile.html">{{ $users->name }}</a>
                                         </h3>
                                         <div class="text-muted text-h5">
-                                            UI Designer
+                                        {{ $users->name }}
                                         </div>
                                     </div>
                                     <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-gray-lt">
-                                            offline
-                                        </span>
+                                        @if($users->is_active)
+                                            <span class="badge bg-green-lt">
+                                                Actif
+                                            </span>
+                                        @else
+                                            <span class="badge bg-gray-lt">
+                                                Inactif
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row align-items-center mt-4">
@@ -136,10 +145,11 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
+                                            <a href="{{ route('admin.user.show', $users->id) }}" class="btn btn-white btn-sm">
                                                 Gérer
                                             </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
+                                            @if(Auth::user()->is_admin == 2)
+                                            <a class="btn btn-white btn-sm" onclick="deleteData({{$users->id}})" data-toggle="modal"
                                                 data-target="#modal-delete-user">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
                                                     height="15">
@@ -149,897 +159,14 @@
                                                         fill="rgba(0,0,0,1)" />
                                                 </svg>
                                             </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">JL</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Jeffie Lewzey</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Chemical Engineer
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">42%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 42%;" role="progressbar"
-                                                    aria-valuenow="42" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">42% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">MH</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Mallory Hulme</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Geologist IV
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">57%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 57%;" role="progressbar"
-                                                    aria-valuenow="57" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">57% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">DS</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Dunn Slane</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Research Nurse
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">65%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 65%;" role="progressbar"
-                                                    aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">65% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">PK</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Paweł Kuna</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            UI Designer
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-gray-lt">
-                                            offline
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">84%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 84%;" role="progressbar"
-                                                    aria-valuenow="84" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">84% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">JL</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Jeffie Lewzey</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Chemical Engineer
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">42%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 42%;" role="progressbar"
-                                                    aria-valuenow="42" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">42% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">MH</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Mallory Hulme</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Geologist IV
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">57%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 57%;" role="progressbar"
-                                                    aria-valuenow="57" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">57% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">DS</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Dunn Slane</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Research Nurse
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">65%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 65%;" role="progressbar"
-                                                    aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">65% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">PK</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Paweł Kuna</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            UI Designer
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-gray-lt">
-                                            offline
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">84%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 84%;" role="progressbar"
-                                                    aria-valuenow="84" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">84% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">JL</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Jeffie Lewzey</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Chemical Engineer
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">42%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 42%;" role="progressbar"
-                                                    aria-valuenow="42" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">42% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">MH</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Mallory Hulme</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Geologist IV
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">57%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 57%;" role="progressbar"
-                                                    aria-valuenow="57" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">57% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">DS</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Dunn Slane</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Research Nurse
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">65%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 65%;" role="progressbar"
-                                                    aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">65% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">PK</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Paweł Kuna</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            UI Designer
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-gray-lt">
-                                            offline
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">84%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 84%;" role="progressbar"
-                                                    aria-valuenow="84" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">84% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">JL</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Jeffie Lewzey</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Chemical Engineer
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">42%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 42%;" role="progressbar"
-                                                    aria-valuenow="42" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">42% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">MH</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Mallory Hulme</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Geologist IV
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">57%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 57%;" role="progressbar"
-                                                    aria-valuenow="57" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">57% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-sm align-items-center">
-                                    <div class="col-auto">
-                                        <span class="avatar avatar-md">DS</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="mb-0">
-                                            <a href="./user-profile.html">Dunn Slane</a>
-                                        </h3>
-                                        <div class="text-muted text-h5">
-                                            Research Nurse
-                                        </div>
-                                    </div>
-                                    <div class="col-auto lh-1 align-self-start">
-                                        <span class="badge bg-green-lt">
-                                            online
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <div>
-                                            <div class="d-flex mb-1 align-items-center lh-1">
-                                                <div class="text-h5 font-weight-bolder m-0">
-                                                    Temps de travail
-                                                </div>
-                                                <span class="ml-auto text-h6 strong">65%</span>
-                                            </div>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-blue" style="width: 65%;" role="progressbar"
-                                                    aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">65% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn-list">
-                                            <a href="./user-profile.html" class="btn btn-white btn-sm">
-                                                Gérer
-                                            </a>
-                                            <a class="btn btn-white btn-sm" data-toggle="modal"
-                                                data-target="#modal-delete-user">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                                    height="15">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                        fill="rgba(0,0,0,1)" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @endforeach
                 </div>
             </div>
         </div>
@@ -1059,6 +186,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                    {!! Form::open(['route' => 'admin.user.store', 'method' => 'post', 'files' => true]) !!}
                         <div class="row mb-3 align-items-end">
                             <div class="col-lg-3">
                                 <a href="#" class="avatar avatar-upload rounded">
@@ -1073,61 +201,138 @@
                             </div>
                             <div class="col-lg-9">
                                 <label class="form-label">Nom</label>
-                                <input type="text" class="form-control"
-                                    placeholder="Saisissez le nom complet...">
+                                <input type="text" class="form-control" name="name" required  placeholder="Saisissez le nom complet...">
+                                @if($errors->has('name'))
+                                    <span>
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="col-lg-12 mt-4">
                                 <label class="form-label">Adresse</label>
-                                <input type="text" class="form-control"
-                                    placeholder="Saisissez l'adresse...">
+                                <input type="text" class="form-control" name="address" placeholder="Saisissez l'adresse...">
+                                @if($errors->has('address'))
+                                    <span>
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Tel</label>
-                                <input type="text" class="form-control"
-                                    placeholder="Saisissez le numéro de téléphone...">
+                                <input type="text" class="form-control" name="tel" placeholder="Saisissez le numéro de téléphone...">
+                                @if($errors->has('tel'))
+                                    <span>
+                                        <strong>{{ $errors->first('tel') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Nom d'utilisateur</label>
-                                <input type="text" class="form-control"
-                                    placeholder="Saisissez le nom d'utilisateur...">
+                                <input type="text" class="form-control" name="username" placeholder="Saisissez le nom d'utilisateur...">
+                                @if($errors->has('username'))
+                                    <span>
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Mot de passe</label>
-                                <input type="password" class="form-control"
-                                    placeholder="Saisissez le mot de passe...">
+                                <input type="password" class="form-control" name="password" placeholder="Saisissez le mot de passe...">
+                                <div class="input-group-append">
+                                    <button id="genbutton" type="button" class="btn btn-default">Générer</button>
+                                </div>
+                                @if($errors->has('password'))
+                                <span>
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="col-lg-12 ">
                                 <label class="form-label">Rôle de l'utilisateur</label>
-                                <select name="role" id="select-role" class="form-select">
-                                    <option value="1">Caissier</option>
-                                    <option value="2">Magasinier</option>
-                                    <option value="3" selected>Gérant</option>
-                                    <option value="4">Serveur</option>
+                                <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
+                                    @foreach($lims_role_list as $role)
+                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Ajouter</button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" style="width: 100%;"
-                            data-dismiss="modal">Ajouter</button>
+                    {!! Form::close() !!}
                     </div>
+                    
                 </div>
             </div>
         </div>
         <div class="modal modal-blur fade" id="modal-delete-user" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sure ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de cette utilisateurs.</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto"
-                            data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
-                    </div>
-                </div>
+                    <form action="" id="deleteForm" method="post">
+                        <div class="modal-content">
+                            
+                            <div class="modal-body">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <div class="modal-title">Êtes vous sure ?</div>
+                                <div>Si vous continuez, vous perdrez toutes les données lié à cet utilisateur.</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link link-secondary mr-auto"
+                                    data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-danger" name="" onclick="formSubmit()" data-dismiss="modal">Oui, supprimer</button>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
         </div>
 @endsection
+@push('js')
+<script type="text/javascript">
+    function deleteData(id)
+     {
+         var id = id;
+         var url = '{{ route("admin.user.destroy", ":id") }}';
+         url = url.replace(':id', id);
+         $("#deleteForm").attr('action', url);
+     }
+
+     function formSubmit()
+     {
+         $("#deleteForm").submit();
+     }
+
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.selectpicker').selectpicker({
+      style: 'btn-link',
+    });
+    
+    $('#genbutton').on("click", function(){
+      $.get('genpass', function(data){
+        $("input[name='password']").val(data);
+      });
+    });
+
+    $('select[name="role_id"]').on('change', function() {
+        if($(this).val() > 2){
+            $('select[name="warehouse_id"]').prop('required',true);
+            $('select[name="biller_id"]').prop('required',true);
+            $('#biller-id').show();
+            $('#warehouseId').show();
+        }
+        else{
+            $('select[name="warehouse_id"]').prop('required',false);
+            $('select[name="biller_id"]').prop('required',false);
+            $('#biller-id').hide();
+            $('#warehouseId').hide();
+        }
+    });
+</script>
+@endpush
