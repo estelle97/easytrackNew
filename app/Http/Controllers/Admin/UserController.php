@@ -18,13 +18,14 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        /*$lims_user_list = DB::table('users')
+        //$lims_user_list = User::find(Auth::user()->id)->load('site','snack');
+        /*$lims_user_list = User
        ->join('sites', 'sites.id', '=', 'users.site_id')
        ->join('sites', 'sites.id', '=', 'users.site_id')
        ->select('users.*', 'sites.*')
        ->get();*/
         $lims_role_list = Role::get();
-        $lims_user_list = User::All();
+        $lims_user_list = User::orderBy('name', 'asc')->get();
         return view('admin.users.users.users', compact('lims_user_list','user','lims_role_list'));
     }
 

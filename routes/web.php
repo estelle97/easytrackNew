@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth', 'active', 'superadmin']], function() {
 
     //Route::get('/', 'HomeController@index');
-    Route::get('dashboard', 'HomeController@index')->name('dashboard');
+    Route::get('dashboard', 'SuperAdmin\DashboardController@index')->name('dashboard');
 
     Route::get('user/profile/{id}', 'SuperAdmin\DashboardController@profile')->name('user.profile');
 	Route::put('user/update_profile/{id}', 'SuperAdmin\DashboardController@profileUpdate')->name('user.profileUpdate');

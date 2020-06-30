@@ -13,7 +13,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <h2 class="page-title">
-                                <a href="./users.html" class="mr-2">
+                                <a href="{{ route('admin.user.index') }}" class="mr-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                         <path fill="none" d="M0 0h24v24H0z" />
                                         <path
@@ -209,17 +209,14 @@
                                     <div class="col-lg-12 mb-4">
                                         <label class="form-label ml-4">Nom</label>
                                         <input type="text" id="name_edit" class="form-control">
-                                        <p class="errorName text-center alert alert-danger hidden"></p>
                                     </div>
                                     <div class="col-lg-12 mb-4">
                                         <label class="form-label ml-4">Slug</label>
                                         <input type="text" class="form-control" id="slug_edit">
-                                        <p class="errorSlug text-center alert alert-danger hidden"></p>
                                     </div>
                                     <div class="col-lg-12 mb-1">
                                         <label class="form-label ml-4">Description</label>
                                         <input type="text" class="form-control" id="description_edit">
-                                        <p class="errorDescription text-center alert alert-danger hidden"></p>
                                     </div>
                                 </div>
                                 </form>
