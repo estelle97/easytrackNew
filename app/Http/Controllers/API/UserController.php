@@ -272,4 +272,77 @@ class UserController extends Controller
         ],
         204);
     }
+
+    /**
+     * Attach Roles to a User
+     * @param Integer[] roles 
+     */
+    public function attachRolesToUser(Request $request, User $user){
+        foreach($request->roles as $role){
+            if(!$user->roles->contains($role)){
+               $user->roles()->attach($role);
+            }
+        }
+        return $this->show($user);
+    }
+
+    /**
+     * Detach Roles to a User
+     * @param Integer[] roles 
+     */
+    public function detachRolesToUser(Request $request, User $user){
+        foreach($request->roles as $role){
+            if($user->roles->contains($role)){
+               $user->roles()->detach($role);
+            }
+        }
+        return $this->show($user);
+    }
+
+    /**
+     * Attach Roles to a User
+     * @param Integer[] roles 
+     */
+    public function attachPermissionsToUser(Request $request, User $user){
+        foreach($request->permissions as $perm){
+            if(!$user->permissions->contains($perm)){
+               $user->permissions()->attach($perm);
+            }
+        }
+        return $this->show($user);
+    }
+
+    /**
+     * Detach Roles to a User
+     * @param Integer[] roles 
+     */
+    public function detachPermissionsToUser(Request $request, User $user){
+        foreach($request->permissions as $perm){
+            if($user->permissions->contains($perm)){
+               $user->permissions()->detach($perm);
+            }
+        }
+        return $this->show($user);
+    }
+
+    /**
+     * Detach Roles to a User
+     * @param String login
+     */
+    public function passwordRequest(Request $request){
+        $user = User::whereEmail($request->login)->orWhere('username', $request->login)->first();
+        if($user){
+            $user->password = bcrypt('passwordRecovered');
+            $user->save();
+
+            return response()->json([
+                'message' => 'Password recovered to passwordRecovered',
+                'user' => $this->show($user)
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'User not foud'
+        ], 401);
+
+    }
 }
