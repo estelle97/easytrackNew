@@ -123,4 +123,30 @@ class RoleController extends Controller
             'message' => 'Role deleted successfully!'
         ],204);
     }
+
+    /**
+     * Attach permissions to a role
+     * @param Integer[] permissions 
+     */
+    public function attachPermissionsToRole(Request $request, Role $role){
+        foreach($request->permissions as $perm){
+            if(!$role->permissions->contains($perm)){
+               $role->permissions()->attach($perm);
+            }
+        }
+        return $this->show($role);
+    }
+
+     /**
+     * Detach permissions to a role
+     * @param Integer[] permissions 
+     */
+    public function detachPermissionsToRole(Request $request, Role $role){
+        foreach($request->permissions as $perm){
+            if($role->permissions->contains($perm)){
+               $role->permissions()->detach($perm);
+            }
+        }
+        return $this->show($role);
+    }
 }

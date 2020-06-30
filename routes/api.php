@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/login', 'API\UserController@login');
 Route::post('/register', 'API\UserController@register');
+Route::post('passwordRequest', 'API\UserController@passwordRequest');
 
 Route::group(['middleware' => 'auth:api'], function(){
     
@@ -39,5 +40,14 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('categories', 'API\CategoryController');
     Route::apiResource('types', 'API\TypeController');
     Route::apiResource('suppliers' ,'API\SupplierController');
+
+    Route::post('attachPermissionsToRole/{role}', 'API\RoleController@attachPermissionstoRole');
+    Route::post('detachPermissionsToRole/{role}', 'API\RoleController@detachPermissionstoRole');
+
+    Route::post('attachRolesToUser/{user}', 'API\UserController@attachRolesToUser');
+    Route::post('detachRolesToUser/{user}', 'API\UserController@detachRolesToUser');
+
+    Route::post('attachPermissionsToUser/{user}', 'API\UserController@attachPermissionsToUser');
+    Route::post('detachPermissionsToUser/{user}', 'API\UserController@detachPermissionsToUser');
 
 });
