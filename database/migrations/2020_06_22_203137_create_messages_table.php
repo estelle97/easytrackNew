@@ -17,11 +17,10 @@ class CreateMessagesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('sender');
             $table->integer('receiver');
+            $table->enum('status',['0','1'])->default('0');
             $table->text('message');
             $table->string('file');
-            
-            
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
         });
     }
    

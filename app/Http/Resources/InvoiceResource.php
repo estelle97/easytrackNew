@@ -22,6 +22,9 @@ class InvoiceResource extends JsonResource
             'products' => ProductResource::collection($this->whenLoaded('products')),
             'quantity' => $this->whenPivotLoaded('sales', function(){
                 return $this->quantity;
+            }),
+            'selling_price' => $this->whenPivotLoaded('sales', function(){
+                return $this->selling_price;
             }) 
         ];
     }

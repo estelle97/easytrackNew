@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Bill extends Model
 {
     protected $guarded = ['id'];
+    public $timestamps = null;
+    protected $dates = ['created_at'];
 
 
     public function products(){

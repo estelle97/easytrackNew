@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $guarded = ['id'];
+    public $timestamps = null;
+    protected $dates = ['created_at'];
 
     public function sites(){
         return $this->belongsToMany('App\Site')->withPivot('min','purchase_price','selling_price','initial_stock');
@@ -17,10 +19,10 @@ class Product extends Model
     }
 
     public function bills(){
-        return $this->belongsToMany('App\Bill','orders')->withPivot('site_id','supplier_id','quantity','status');
+        return $this->belongsToMany('App\Bill','orders')->withPivot('site_id','supplier_id','quantity','purchase_price','status');
     }
 
     public function invoices(){
-        return $this->belongsToMany('App\Invoice','sales')->withPivot('site_id','quantity');
+        return $this->belongsToMany('App\Invoice','sales')->withPivot('site_id','quantity','selling_price','status');
     }
 }

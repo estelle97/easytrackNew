@@ -15,11 +15,12 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('site_id')->nullable();
+            $table->bigInteger('site_id');
+            $table->bigInteger('user_id');
             $table->string('code')->nullable();
             $table->enum('is_active', array('0', '1'))->default('1');
             $table->enum('status', array('0', '1'))->default('0');
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
         });
     }
    

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Snack extends Model
 {
     protected $guarded = ['id'];
+    public $timestamps = null;
+    protected $dates = ['created_at'];
 
     public function sites(){
         return $this->hasMany('App\Site');

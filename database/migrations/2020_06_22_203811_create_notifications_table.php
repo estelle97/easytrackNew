@@ -15,12 +15,14 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('site_id')->unsigned();
+            $table->bigInteger('site_id')->nullable();
+            $table->bigInteger('snack_id')->nullable();
+            $table->bigInteger('user_id')->nullable();
             $table->string('type');
             $table->text('text');
-            $table->timestamps();
-
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('status', ['0','1'])->default('1');
+            $table->string('action');
+            $table->dateTime('created_at')->useCurrent();
         });
     }
  

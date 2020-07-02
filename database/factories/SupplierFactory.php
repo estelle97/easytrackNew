@@ -11,6 +11,8 @@ $factory->define(Supplier::class, function (Faker $faker) {
         'email' => $faker->companyEmail,
         'tel1' => $faker->unique()->phoneNumber,
         'tel2' => $faker->unique()->phoneNumber,
+        'town' => $faker->state,
+        'street' => $faker->city,
         'site_id' => function(){
             return App\Site::all()->random()->id;
         }

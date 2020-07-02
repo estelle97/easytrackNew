@@ -17,15 +17,20 @@ class CreateSubscriptionsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('snack_id')->unsigned();
             $table->bigInteger('type_id')->unsigned();
-            $table->timestamp('end_date');
+            $table->dateTime('end_date');
             $table->enum('status', array('0', '1'))->default('1');
             $table->enum('is_active', array('0', '1'))->default('1');
-
-            $table->foreign('snack_id')->references('id')->on('snacks')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->foreign('snack_id')
+                ->references('id')
+                ->on('snacks')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('types')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
    

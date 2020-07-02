@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->enum('is_active', array('0', '1'))->default('1');
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
         });
     }
   

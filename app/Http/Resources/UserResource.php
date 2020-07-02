@@ -20,7 +20,11 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'address' => $this->address,
             'username' => $this->username,
-            'is_admin' => $this->is_admin,
+            'contact_name' => $this->contact_name,
+            'cni_number' => $this->cni_number,
+            'contact_tel' => $this->when(!is_null($this->contact_tel), $this->contact_tel),
+            'is_admin' => $this->when(!is_null($this->contact_name), $this->contact_name),
+            'snack' => SnackResource::collection($this->whenLoaded('snacks')),
             'site' => new SiteResource($this->whenLoaded('site')),
             'agendas' => SiteResource::collection($this->whenLoaded('agendas')),
             'start' => $this->whenPivotLoaded('agendas', function(){

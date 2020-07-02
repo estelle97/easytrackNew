@@ -15,19 +15,22 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('snack_id')->nullable();
+            $table->bigInteger('site_id')->nullable();
             $table->string('name');
+            $table->string('username');
             $table->string('email')->nullable();
             $table->string('tel')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->bigInteger('site_id')->nullable();
+            $table->string('cni_number')->nullable();
+            $table->string('contact_name')->nullable();
+            $table->string('contact_tel')->nullable();
+            $table->string('photo')->nullable();
             $table->string('address');
-            $table->string('username');
+            $table->string('password');
             $table->enum('is_active', array('0', '1'))->default('1');
             $table->enum('is_admin', array('1', '2','3'))->default('1');
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
         });
     }
  

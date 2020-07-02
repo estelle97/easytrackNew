@@ -15,13 +15,16 @@ class CreateBudgetsTable extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->bigInteger('site_id')->unsigned();
             $table->string('name');
             $table->integer('amount');
-            $table->bigInteger('site_id')->unsigned();
-            $table->timestamps();
-
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('type', array('fixed', 'variable'))->default('fixed');
+            $table->dateTime('created_at')->useCurrent();
+            $table->foreign('site_id')
+                ->references('id')
+                ->on('sites')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

@@ -24,7 +24,19 @@ class SiteResource extends JsonResource
             'users' => UserResource::collection($this->whenLoaded('users')),
             'snack' => new SnackResource($this->whenLoaded('snack')),
             'suppliers' => SupplierResource::collection($this->whenLoaded('suppliers')),
-            'produits' => ProductResource::collection($this->whenLoaded('products'))
+            'produits' => ProductResource::collection($this->whenLoaded('products')),
+            'min' => $this->whenPivotLoaded('product_site', function(){
+                return $this->min;
+            }),
+            'purchase_price' => $this->whenPivotLoaded('product_site', function(){
+                return $this->purchase_price;
+            }),
+            'selling_price' => $this->whenPivotLoaded('product_site', function(){
+                return $this->selling_price;
+            }),
+            'initial_stock' => $this->whenPivotLoaded('product_site', function(){
+                return $this->initial_stock;
+            })
         ];
     }
 }

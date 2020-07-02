@@ -19,7 +19,7 @@ class CreateRolesTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
         });
     }
 

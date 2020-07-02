@@ -17,17 +17,22 @@ class CreateProductsSitesTable extends Migration
         
             $table->bigInteger('site_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
-            $table->integer('min');
             $table->integer('purchase_price');
-            $table->enum('is_active', array('0', '1'))->default('1');
             $table->integer('selling_price');
             $table->integer('initial_stock');
-            
-            $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('min');
+            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->dateTime('created_at')->useCurrent();
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('site_id')
+                ->references('id')
+                ->on('sites')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             
         });
