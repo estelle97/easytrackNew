@@ -39,7 +39,7 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
 });
 
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {
-
+    
     Route::get('/', 'HomeController@index');
     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
 

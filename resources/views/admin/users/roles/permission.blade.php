@@ -101,7 +101,7 @@
                                                 </td>
                                                 <td>
 													@if(in_array("delete_user", $all_permission))
-													<input class="form-check-input m-0 align-middle" value="1" checked type="checkbox">
+													<input class="form-check-input m-0 align-middle" name="read_user" value="1" checked type="checkbox">
 													@else
 													<input class="form-check-input m-0 align-middle" type="checkbox">
 													@endif
