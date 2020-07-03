@@ -8,6 +8,8 @@ class Category extends Model
 {
     protected $guarded = ['id'];
     protected $table = 'categories';
+    public $timestamps = null;
+    protected $dates = ['created_at'];
 
     public function products(){
         return $this->hasMany('App\Product');

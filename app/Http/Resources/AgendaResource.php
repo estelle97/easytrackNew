@@ -16,7 +16,6 @@ class AgendaResource extends JsonResource
     {
         return [
             'agenda_id' => $this->id,
-            '
         ];
     }
 }

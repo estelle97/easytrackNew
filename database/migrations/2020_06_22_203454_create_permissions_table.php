@@ -15,10 +15,9 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('site_id')->nullable();
             $table->string('name');
             $table->string('slug');
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
         });
     }
 

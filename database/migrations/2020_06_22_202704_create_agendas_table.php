@@ -14,15 +14,12 @@ class CreateAgendasTable extends Migration
     public function up()
     {
         Schema::create('agendas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('site_id')->nullable();
-            $table->bigInteger('user_id')->nullable();
-            $table->timestamp('start');
-            
+            $table->bigInteger('site_id');
+            $table->bigInteger('user_id');
+            $table->dateTime('start');
             $table->enum('status', array('1', '0'))->default('1');
             $table->dateTime('end');
-            $table->timestamps();
-
+            $table->dateTime('created_at')->useCurrent();
         });
     }
 

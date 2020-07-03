@@ -22,5 +22,7 @@ $factory->define(Type::class, function (Faker $faker) {
         'title' => $title,
         'duration' => $duration,
         'price' => $price,
+        'number_of_site' => 10,
+        'number_of_employee' => 20,
     ];
 });

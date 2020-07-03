@@ -22,8 +22,12 @@ class CreateSitesTable extends Migration
             $table->string('town')->nullable();
             $table->string('street')->nullable();
             $table->enum('is_active', array('0', '1'))->default('1');
-            $table->timestamps();
-            $table->foreign('snack_id')->references('id')->on('snacks')->onDelete('cascade')->onUpdate('cascade');
+            $table->dateTime('created_at')->useCurrent();
+            $table->foreign('snack_id')
+                ->references('id')
+                ->on('snacks')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
    

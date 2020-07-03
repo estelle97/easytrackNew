@@ -21,8 +21,12 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->string('brand')->nullable();
             $table->enum('is_active', array('0', '1'))->default('1');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
    

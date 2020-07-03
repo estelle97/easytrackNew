@@ -15,6 +15,7 @@ class CreateSnacksTable extends Migration
     {
         Schema::create('snacks', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('tel1');
@@ -23,7 +24,12 @@ class CreateSnacksTable extends Migration
             $table->string('town')->nullable();
             $table->string('street')->nullable();
             $table->string('logo')->nullable();
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
    

@@ -24,10 +24,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = ['id'];
-
-    protected $fillable = [
-        'name', 'email', 'tel', 'password','address', 'username'
-    ];
+    public $timestamps = null;
+    protected $dates = ['created_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -59,8 +57,8 @@ class User extends Authenticatable
         return $this->is_active;
     }
 
-    public function snack(){
-        return $this->belongsTo('App\Snack');
+    public function snacks(){
+        return $this->hasMany('App\Snack');
     }
 
     //Check if user is online

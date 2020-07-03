@@ -15,17 +15,29 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigInteger('supplier_id')->unsigned();
-            $table->bigInteger('site_id')->nullable();
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('bill_id')->unsigned();
+            $table->bigInteger('site_id')->nullable();
             $table->integer('quantity');
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->integer('purchase_price');
             $table->enum('status', array('0', '1'))->default('1');
-            $table->timestamps();
-            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-
+            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->dateTime('created_at')->useCurrent();
+            $table->foreign('bill_id')
+                ->references('id')
+                ->on('bills')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('supplier_id')
+                ->references('id')
+                ->on('suppliers')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
   

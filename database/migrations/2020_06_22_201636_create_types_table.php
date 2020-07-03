@@ -17,9 +17,11 @@ class CreateTypesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->integer('duration');
+            $table->integer('number_of_site');
+            $table->integer('number_of_employee');
             $table->integer('price');
             $table->enum('is_active', array('0', '1'))->default('1');
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
         });
     }
 
