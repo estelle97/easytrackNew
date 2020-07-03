@@ -30,20 +30,22 @@
                     </div>
                     <div class="mb-3">
                         <div class="input-icon">
-                            <span class="input-icon-addon ml-2">
+                            <span class="input-icon-addon ml-2" >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
                                     <path fill="none" d="M0 0h24v24H0z" />
                                     <path
                                         d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
                                 </svg>
                             </span>
-                            <input type="password" name="password"class="auth-input form-control form-control-rounded py-2 px-5"
+                            
+                            <input type="password" name="password" id= "pwd" class="auth-input form-control form-control-rounded py-2 px-5"
                                 placeholder="Mot de passe" />
-                            <span class="input-icon-addon mr-2">
-                                <a href="#" class="link-secondary" title="Show password" data-toggle="tooltip"><svg
+                                <span class="input-icon-addon mr-30" >
+                                <a href="#" class="unmask" id="unmask" data-toggle="tooltip">
+                                    <svg 
                                         xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
+                                        stroke-linecap="round" stroke-linejoin="round" >
                                         <path stroke="none" d="M0 0h24v24H0z" />
                                         <circle cx="12" cy="12" r="2" />
                                         <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
@@ -51,10 +53,12 @@
                                     </svg>
                                 </a>
                             </span>
+                         
                         </div>
+                       
                     </div>
                     <div class="form-footer">
-                        <button type="submit" class="btn btn-gradient btn-block btn-pill btn-no-border">
+                        <button type="submit" class="btn btn-gradient btn-block btn-pill btn-no-border" >
                             Se connecter
                         </button>
                     </div>
@@ -66,7 +70,19 @@
             </div>
         </div>
     </div>
-  
+   <script>
+            document.querySelector("#unmask").addEventListener("click", function(){
+            let input = document.getElementById('pwd');
+            if (input.type == "password"){
+            input.type = 'text';
+            }
+            else{
+            input.type = 'password';
+            }
+            });
+   </script>
     @include('notify::messages')
+
     @notifyJs
+            
 @endsection
