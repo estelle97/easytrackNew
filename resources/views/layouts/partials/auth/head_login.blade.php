@@ -35,11 +35,12 @@
             display: none;
             background: #fff !important;
         }
-
+        .unmask-password {
+            pointer-events: all !important;
+        }
     </style>
     @stack('css')
 </head>
 
-    
+
     <!-- CSS files -->
-  
