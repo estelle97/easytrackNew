@@ -15,14 +15,19 @@ class RoleMiddleware
      * @param  \Permission $permission
      * @return mixed
      */
-    public function handle($request, Closure $next, $role, $permission = null)
+    public function handle($request, Closure $next, $roles, $permission = null)
     {
-        if(!$request->user()->hasRole($role)) {
-             abort(403, "Access denied");
-        }
 
-        if($permission !== null && !$request->user()->can($permission)) {
-             abort(403, "Permission denied")
+        dd($request->route());
+        if($request->user()->is_admin == '1'){
+            $roles = explode('|',$roles);
+            if(!$request->user()->hasRoles($roles)) {
+                 abort(403, "Access denied");
+            }
+    
+            if($permission !== null && !$request->user()->can($permission)) {
+                 abort(403, "Permission denied");
+            }
         }
 
         return $next($request);
