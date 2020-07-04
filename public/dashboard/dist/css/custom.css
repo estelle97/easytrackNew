@@ -55,9 +55,10 @@
 .auth-page {
     height: 100vh;
     background-color: rgba(0,0,0,0.6) !important;
+  
 }
 .auth-background {
-    background-image: url('../../static/backgrounds/sea-by-markus-spiske.jpg') !important;
+    background-image: url("../../static/backgrounds/sea-by-markus-spiske.jpg") !important;
     background-size: cover !important;
     background-position: bottom !important;
     background-repeat: no-repeat;
