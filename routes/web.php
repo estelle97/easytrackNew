@@ -19,6 +19,12 @@ Route::redirect('/', 'login');
 
 Auth::routes();
 
+/*
+* Password
+*/
+Route::get('password', 'Auth\ForgotPasswordController@index')->name('password.index');
+Route::post('password', 'Auth\ForgotPasswordController@store')->name('password.store');
+
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('logout', 'Admin\DashboardController@logout');
