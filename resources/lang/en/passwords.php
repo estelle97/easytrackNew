@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
+    'reset' => 'votre mot de passe a été réinitialisé!',
+    'sent' => 'Un mail de réinitialisation de mot de passe vous a été envoyé. Veuillez le consulter pour continuer',
+    'token' => 'Ce jeton de réinitialisation de mot de passe n\'est pas valide.',
+    'user' => "Nous n'avons pas trouvé d\'utilisateur avec cet email.",
 
 ];

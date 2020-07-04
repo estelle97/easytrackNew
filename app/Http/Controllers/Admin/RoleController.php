@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;    
 use App\Role;
 use App\Permission;
 use App\User;
@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $lims_role_all = Role::get();
@@ -72,25 +72,17 @@ class RoleController extends Controller
     {
         $user = Auth::user();
         $lims_role_data = Role::find($id);
-        $permissions = Permission::All();
+        //$permissions = DB::table('permissions_roles')->where([['role_id', $id]])->get();
+        $permissions = Role::find($lims_role_data)->load('permissions');
+        //dd($permissions);
         foreach ($permissions as $permission)
             $all_permission[] = $permission->name;
+            //dd($all_permission[]);
+
+        
         if(empty($all_permission))
             $all_permission[] = 'dummy text';
         return view('admin.users.roles.permission', compact('lims_role_data', 'all_permission','user'));
-    }
-
-    /**
-     * Detach Roles to a User
-     * @param Integer[] roles 
-     */
-    public function detachPermissionsToUser(Request $request, User $user){
-        foreach($request->permissions as $perm){
-            if($user->permissions->contains($perm)){
-               $user->permissions()->detach($perm);
-            }
-        }
-        return $this->show($user);
     }
 
     public function setPermission(Request $request)
@@ -100,41 +92,42 @@ class RoleController extends Controller
         if($request->has('read_user')){
             $permission = Permission::firstOrCreate(['name' => 'read_user']);
             if(!$role->hasPermissionTo('read_user')){
-                $role->givePermissionTo($permission);
+                $role->givePermission($permission);
             }
         }
         else
-            $role->detachPermissionsToUser('read_user');
+            $role->removePermission('read_user');
 
 
         if($request->has('create_user')){
             $permission = Permission::firstOrCreate(['name' => 'create_user']);
             if(!$role->hasPermissionTo('create_user')){
-                $role->givePermissionTo($permission);
+                $role->givePermission($permission);
             }
         }
         else
-            $role->detachPermissionsToUser('create_user');
+            $role->removePermission('create_user');
 
         if($request->has('update_user')){
             $permission = Permission::firstOrCreate(['name' => 'update_user']);
             if(!$role->hasPermissionTo('update_user')){
-                $role->givePermissionTo($permission);
+                $role->givePermission($permission);
             }
         }
         else
-            $role->detachPermissionsToUser('update_user');
+            $role->removePermission('update_user');
         
         if($request->has('delete_user')){
             $permission = Permission::firstOrCreate(['name' => 'delete_user']);
             if(!$role->hasPermissionTo('delete_user')){
-                $role->givePermissionTo($permission);
+                $role->givePermission($permission);
             }
         }
         else
-            $role->detachPermissionsToUser('delete_user');
+            $role->removePermission('delete_user');
             
         notify()->success('Permissions modifiées avec succès', 'Modification de permissions');
+        return redirect()->route('admin.role.index');
 
     }
 
