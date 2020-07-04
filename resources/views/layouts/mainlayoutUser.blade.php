@@ -7,7 +7,7 @@
 
      <body class="antialiased">
         <div class="page">
-          @include('layouts.partials.admin.header')
+          @include('layouts.partials.user.header')
     
           @yield('content')
         
