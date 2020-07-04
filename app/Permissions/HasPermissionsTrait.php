@@ -57,6 +57,16 @@ trait HasPermissionsTrait {
     return false;
   }
 
+  public function hasRoles($roles) {
+
+    foreach ($roles as $role) {
+      if ($this->roles->contains('slug', $role)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public function roles() {
 
     return $this->belongsToMany(Role::class);
