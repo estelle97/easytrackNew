@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Twilio\Jwt\ClientToken;
 use Keygen;
+use Auth;
 
 class ForgotPasswordController extends Controller
 {
@@ -47,7 +48,7 @@ class ForgotPasswordController extends Controller
      * @param String $message Body of sms
      * @param Number $recipients string or array of phone number of recepient
      */
-    private function sendMessage($message, $recipients)
+    /*private function sendMessage($message, $recipients)
     {
         $account_sid = getenv("TWILIO_ACCOUNT_ID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
@@ -55,7 +56,7 @@ class ForgotPasswordController extends Controller
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($recipients, 
                 ['from' => $twilio_number, 'body' => $message] );
-    }
+    }*/
 
     /*public function generatePassword()
     {
@@ -74,9 +75,14 @@ class ForgotPasswordController extends Controller
         $token  = '2317ef060ac5ea9f8706d35512228dfb';
         $client = new Client( $sid, $token );
         $code = Keygen::alphanum(10)->generate();
+        $input = bcrypt($code);
+        
         $message = "Bonjour vous avez demandé une réinitialisation de mot de passe de votre compte EASYTRACK. Votre code de vérification est : ".$code;
         if ($user != null) {
-            $test = $user->tel;
+            $data = $user->id;
+            $data = User::find($data);
+            $data->password = bcrypt($code);
+            $data->save();
             dd($message);
             /*$client->messages->create(
                 $test,
@@ -89,7 +95,10 @@ class ForgotPasswordController extends Controller
             return view('auth.passwords.email');
         }
         elseif($user1 != null){
-            $test = $user1->tel;
+            $data = $user1->id;
+            $data = User::find($data);
+            $data->password = bcrypt($code);
+            $data->save();
             dd($message);
             /*$client->messages->create(
                 $test,
@@ -102,7 +111,10 @@ class ForgotPasswordController extends Controller
             return view('auth.login');
         }
         elseif($user2 != null){
-            $test = $user2->tel;
+            $data = $user2->id;
+            $data = User::find($data);
+            $data->password = bcrypt($code);
+            $data->save();
             dd($message);
             /*$client->messages->create(
                 $test,
