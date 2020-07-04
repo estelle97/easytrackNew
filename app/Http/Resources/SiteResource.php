@@ -16,6 +16,8 @@ class SiteResource extends JsonResource
     {
         return [
             'site_id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
             'email' => $this->email,
             'tel1' => $this->tel1,
             'tel2' => $this->tel2,

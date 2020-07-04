@@ -7,8 +7,11 @@ use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Snack::class, function (Faker $faker) {
+    $name = $faker->unique()->company;
+    $slug = preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($name)));
     return [
-        'name' => $faker->company,
+        'name' => $name,
+        'slug' => $slug,
         'email' => $faker->companyEmail,
         'tel1' => $faker->unique()->phoneNumber,
         'tel2' => $faker->unique()->phoneNumber,

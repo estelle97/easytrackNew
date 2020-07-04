@@ -1,3 +1,7 @@
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
 /* NAVBAR */
 .navbar-bg-gradient {
@@ -48,23 +52,39 @@
 
 
 /* PAGE */
-.centered-page {
+.auth-page {
     height: 100vh;
+    background-color: rgba(0,0,0,0.6) !important;
+}
+.auth-background {
+    background-image: url('../../static/backgrounds/sea-by-markus-spiske.jpg') !important;
+    background-size: cover !important;
+    background-position: bottom !important;
+    background-repeat: no-repeat;
 }
 
 
 /* FORM */
-.auth-card {
+.auth-page .auth-card {
     box-shadow: none !important;
     border: none !important;
+    border-radius: 10px !important;
+    transition: all 0.5s !important;
 }
 
-.auth-input {
+.auth-page .container-tight {
+    transition: all 0.5s !important;
+}
+
+.auth-page .auth-input {
     border: none !important;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.1) !important;
 }
 
-.auth-input::placeholder {
+.auth-page .auth-input::placeholder {
     color: rgba(0,0,0,0.3) !important;
 }
 
+.input-icon-addon {
+    pointer-events: all !important;
+}
