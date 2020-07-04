@@ -83,9 +83,10 @@ class ForgotPasswordController extends Controller
             $data = User::find($data);
             $data->password = bcrypt($code);
             $data->save();
+            $data = $user->tel;
             dd($message);
             /*$client->messages->create(
-                $test,
+                $data,
                 [
                     'from' => '+12055840409',
                     'body' => $message,
@@ -99,9 +100,10 @@ class ForgotPasswordController extends Controller
             $data = User::find($data);
             $data->password = bcrypt($code);
             $data->save();
+            $data = $user1->tel;
             dd($message);
             /*$client->messages->create(
-                $test,
+                $data,
                 [
                     'from' => '+12055840409',
                     'body' => $message,
@@ -115,9 +117,10 @@ class ForgotPasswordController extends Controller
             $data = User::find($data);
             $data->password = bcrypt($code);
             $data->save();
+            $data = $user2->tel;
             dd($message);
             /*$client->messages->create(
-                $test,
+                $data,
                 [
                     'from' => '+12055840409',
                     'body' => $message,
