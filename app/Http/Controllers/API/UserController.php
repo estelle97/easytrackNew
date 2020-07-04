@@ -40,6 +40,7 @@ class UserController extends Controller
 
         $user = new User([
             'name' => $request->name,
+            'tel' => $request->tel,
             'email' => $request->email,
             'address' => $request->address,
             'username' => $request->username,
@@ -200,10 +201,10 @@ class UserController extends Controller
             'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
             'username' => 'required|string',
             'address' => 'required|string',
-            'is_admin' => 'required',
         ]);
 
         $user->name = $request->name;
+        $user->tel = $request->tel;
         $user->email = $request->email;
         $user->address = $request->address;
         $user->username = $request->username;
@@ -330,13 +331,19 @@ class UserController extends Controller
      * @param String login
      */
     public function passwordRequest(Request $request){
-        $user = User::whereEmail($request->login)->orWhere('username', $request->login)->first();
+        $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('tel', $request->login)->first();
         if($user){
-            $user->password = bcrypt('passwordRecovered');
+            $password = "newPassword";
+            $this->sendMessage(
+                "Votre nouveau mot de passe est le suivant: $password",
+                $user->tel
+            );
+
+            $user->password = bcrypt($password);
             $user->save();
 
             return response()->json([
-                'message' => 'Password recovered to passwordRecovered',
+                'message' => 'Password recovered!',
                 'user' => $this->show($user)
             ], 200);
         }

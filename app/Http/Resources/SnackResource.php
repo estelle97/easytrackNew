@@ -17,6 +17,7 @@ class SnackResource extends JsonResource
         return [
             'snack_id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'email' => $this->email,
             'tel1' => $this->tel1,
             'tel2' => $this->tel2,
