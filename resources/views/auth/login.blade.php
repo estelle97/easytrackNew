@@ -66,7 +66,7 @@
             </form>
             <div class="text-center text-muted">
                 Mot de passe oublié ?
-                <a href="{{ route('password.request') }}" tabindex="-1">Cliquez ici</a>
+                <a href="{{ route('password.index') }}" tabindex="-1">Cliquez ici</a>
             </div>
         </div>
     </div>
