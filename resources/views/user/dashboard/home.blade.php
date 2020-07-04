@@ -1,4 +1,4 @@
-@extends('layouts.mainlayoutAdminUser')
+@extends('layouts.mainlayoutUser')
 
 @section('content')
         <div class="content">

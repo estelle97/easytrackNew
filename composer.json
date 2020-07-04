@@ -18,7 +18,8 @@
         "laravel/passport": "^9.2",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.1",
-        "mckenziearts/laravel-notify": "^1.1"
+        "mckenziearts/laravel-notify": "^1.1",
+        "twilio/sdk": "^6.8"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
