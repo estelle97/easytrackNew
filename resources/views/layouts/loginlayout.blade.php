@@ -5,7 +5,7 @@
        @include('layouts.partials.auth.head_login')
      </head>
 
-     <body>
+     <body class="antialiased auth-background">
     @yield('content')
     
     @include('layouts.partials.auth.footer_login')
