@@ -68,6 +68,7 @@
                 Mot de passe oublié ?
                 <a href="{{ route('password.index') }}" tabindex="-1">Cliquez ici</a>
             </div>
+            <a href="{{ route('register.index') }}" tabindex="-1">inscript</a>
         </div>
     </div>
     <script>

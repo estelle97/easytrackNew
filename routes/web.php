@@ -20,6 +20,12 @@ Route::redirect('/', 'login');
 Auth::routes();
 
 /*
+* Register
+*/
+Route::get('register', 'Auth\RegisterController@index')->name('register.index');
+Route::post('register', 'Auth\RegisterController@store')->name('register.store');
+
+/*
 * Password
 */
 Route::get('password', 'Auth\ForgotPasswordController@index')->name('password.index');
