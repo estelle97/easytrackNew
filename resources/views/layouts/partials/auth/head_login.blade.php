@@ -35,6 +35,10 @@
             display: none;
             background: #fff !important;
         }
+        h1 {
+            font-size: 3.5rem !important;
+            font-weight: 300 !important;
+        }
         .unmask-password {
             pointer-events: all !important;
         }
