@@ -10,6 +10,10 @@ class Snack extends Model
     public $timestamps = null;
     protected $dates = ['created_at'];
 
+    protected $fillable = [
+        'name', 'town', 'tel1',"tel2"
+    ];
+
     public function sites(){
         return $this->hasMany('App\Site');
     }
