@@ -1,56 +1,21 @@
-<!DOCTYPE html>
-<!--
-* easytrak - Application pour la gestion de stock
-* @version 1.0.0
-* @link https://github.com/estelle97/Easytrak
-* Copyright 2020 easytech
-* Licensed under MIT (https://easytrak.com/license)
--->
-<html lang="en">
+@extends('layouts.settingslayout')
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Easytrak - Application pour la gestion de stock</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <meta name="msapplication-TileColor" content="#206bc4" />
-    <meta name="theme-color" content="#206bc4" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="robots" content="noindex,nofollow,noarchive" />
-    <link rel="icon" href="../../assets/static/favicon.png" type="image/png" />
-    <link rel="shortcut icon" href="../../assets/static/favicon.png" type="image/png" />
-    <!-- CSS files -->
-    <link href="../../assets/dist/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
-    <link href="../../assets/dist/css/easytrak.min.css" rel="stylesheet" />
-    <link href="../../assets/dist/css/demo.min.css" rel="stylesheet" />
-    <link href="../../assets/dist/css/custom.css" rel="stylesheet" />
-    <style>
-        body {
-            display: none;
-        }
-    </style>
-</head>
+@section('content')
 
-<body class="antialiased">
-    <div class="page">
+<div class="page">
         <header class="navbar navbar-expand-md navbar-dark navbar-bg-gradient navbar-overlap">
             <div class="container-xl">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a href="." class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
-                    <img src="../../assets/static/logo-white.svg" alt="easytrak" class="navbar-brand-image" />
+                    <img src="" alt="easytrak" class="navbar-brand-image" />
                 </a>
                 <div class="navbar-nav flex-row order-md-last">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
                             <span class="avatar"
-                                style="background-image: url('https://ui-avatars.com/api/?name=Estelle+Belinga&background=FFFFFF&color=267FC9&font-size=0.30');">
+                                style="background-image: url('https://ui-avatars.com/api/?name={{ $users->name }}&background=FFFFFF&color=267FC9&font-size=0.30');">
                                 <span class="badge bg-red"></span>
                             </span>
                             <div class="d-none d-xl-block pl-2">
@@ -61,7 +26,7 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="./profile.html">
+                            <a class="dropdown-item" href="{{ route('admin.user.profile', $users->id) }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                     class="icon dropdown-item-icon">
                                     <path fill="none" d="M0 0h24v24H0z" />
@@ -507,16 +472,6 @@
             </div>
         </div>
     </div>
-    <!-- Libs JS -->
-    <script src="../../assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/dist/libs/jquery/dist/jquery.slim.min.js"></script>
-    <!-- easytrak Core -->
-    <script src="../../assets/dist/js/easytrak.min.js"></script>
 
-    <script>
-        document.body.style.display = "block";
 
-    </script>
-</body>
-
-</html>
+@endsection
