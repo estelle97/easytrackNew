@@ -225,6 +225,20 @@
                             <div class="mb-4">
                                 <div class="input-icon">
                                     <span class="input-icon-addon ml-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 21H2v-2h1V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v5h2v10h1v2zm-5-2h2v-8h-6v8h2v-6h2v6zm0-10V5H5v14h6V9h6zM7 11h2v2H7v-2zm0 4h2v2H7v-2zm0-8h2v2H7V7z"/></svg>
+                                    </span>
+                                    <input type="text" name="name_site"  value=""class="auth-input form-control @error('name_site') is-invalid @enderror form-control-rounded py-2 px-5"
+                                    placeholder="Nom du site">
+                                    @if($errors->has('name_site'))
+                                        <span>
+                                            <strong>{{ $errors->first('name_site') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon ml-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
                                     </span>
                                     <input type="text" class="auth-input form-control @error('email_site') is-invalid @enderror form-control-rounded py-2 px-5"
