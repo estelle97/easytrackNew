@@ -11,7 +11,7 @@ class Site extends Model
     protected $dates = ['created_at'];
 
     protected $fillable = [
-        'email', 'town', 'tel1',"tel2", "street"
+        "snack_id", 'email', 'town', 'tel1',"tel2", "street", "is_active"
     ];
 
     public function products(){
