@@ -14,9 +14,9 @@ class UserTableSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Administrator',
-                'username' => 'admin',
-                'email' => 'admin@easytrack.com',
+                'name' => 'Super Administrator',
+                'username' => 'superAdmin',
+                'email' => 'superadmin@easytrack.com',
                 'tel' => '123456789',
                 'password' => bcrypt('password'),
                 'is_admin' => '3',
@@ -30,6 +30,24 @@ class UserTableSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'is_admin' => '3',
                 'address' => 'Santa Barbara - Yaoundé',
+            ],
+            [
+                'name' => 'Estelle Belinga',
+                'username' => 'estelle',
+                'email' => 'estelle@easytrack.com',
+                'tel' => '659401381',
+                'password' => bcrypt('password'),
+                'is_admin' => '2',
+                'address' => 'Awaie Escalier - Yaoundé',
+            ],
+            [
+                'name' => 'Administrateur Directeur',
+                'username' => 'admin',
+                'email' => 'admin@easytrack.com',
+                'tel' => '687601381',
+                'password' => bcrypt('password'),
+                'is_admin' => '2',
+                'address' => 'Akwa  - Douala',
             ]
         ];
 

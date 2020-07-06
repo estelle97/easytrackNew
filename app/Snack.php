@@ -11,7 +11,7 @@ class Snack extends Model
     protected $dates = ['created_at'];
 
     protected $fillable = [
-        'name', "email", 'town', 'tel1',"tel2", "is_active"
+        'name', "email", 'town', 'tel1',"tel2", "is_active",'user_id'
     ];
 
     public function sites(){

@@ -21,6 +21,7 @@ class CreateProductsSitesTable extends Migration
             $table->integer('selling_price');
             $table->integer('initial_stock');
             $table->integer('min');
+            $table->enum('status', ['0','1'])->default('1');
             $table->enum('is_active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
             $table->foreign('product_id')

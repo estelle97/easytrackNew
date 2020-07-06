@@ -15,7 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->enum('is_active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
         });

@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="col">
                                         <h3 class="mb-0">
-                                            <a href="./user-profile.html">{{ $users->name }}</a>
+                                            <a href="#">{{ $users->name }}</a>
                                         </h3>
                                         <div class="text-muted text-h5">
                                         {{ $users->name }}
