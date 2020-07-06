@@ -24,7 +24,7 @@ class UserResource extends JsonResource
             'cni_number' => $this->cni_number,
             'contact_tel' => $this->when($this->contact_tel != null, $this->contact_tel),
             'contact_name' => $this->when($this->contact_name != null, $this->contact_name),
-            'snack' => SnackResource::collection($this->whenLoaded('snacks')),
+            'snacks' => SnackResource::collection($this->whenLoaded('snacks')),
             'site' => new SiteResource($this->whenLoaded('site')),
             'agendas' => SiteResource::collection($this->whenLoaded('agendas')),
             'start' => $this->whenPivotLoaded('agendas', function(){

@@ -14,9 +14,9 @@ class UserTableSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Administrator',
-                'username' => 'admin',
-                'email' => 'admin@easytrack.com',
+                'name' => 'Super Administrator',
+                'username' => 'superAdmin',
+                'email' => 'superadmin@easytrack.com',
                 'tel' => '123456789',
                 'password' => bcrypt('password'),
                 'is_admin' => '3',
