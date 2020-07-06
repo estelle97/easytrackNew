@@ -139,7 +139,7 @@ class UserController extends Controller
         if(!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))){
             return response()->json([
                 'message' => 'Username/Email or Password incorrect'
-            ], 401);
+            ], 404);
         }
 
         // $credentials = request(['email', 'password']);
@@ -252,7 +252,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('site','roles','permissions','agendas');
+        $user->load('site.snack','roles','permissions','agendas');
         return new UserResource($user);
     }
 
