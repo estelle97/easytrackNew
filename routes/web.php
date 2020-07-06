@@ -56,6 +56,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active'
     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
     Route::get('user/profile/{id}', 'Admin\DashboardController@profile')->name('user.profile');
+    Route::get('user/profile_settings/{id}', 'Admin\DashboardController@profileSettings')->name('user.profileSettings');
 	Route::put('user/update_profile/{id}', 'Admin\DashboardController@profileUpdate')->name('user.profileUpdate');
 	Route::put('user/changepass/{id}', 'Admin\DashboardController@changePassword')->name('user.password');
     Route::get('user/genpass', 'Admin\UserController@generatePassword');
