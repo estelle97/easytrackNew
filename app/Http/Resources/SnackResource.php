@@ -24,7 +24,7 @@ class SnackResource extends JsonResource
             'town' => $this->town,
             'street' => $this->street,
             'logo' => $this->logo,
-            'user' => new UserResource($this->whenLoaded('user')),
+            'director' => new UserResource($this->whenLoaded('user')),
             'sites' => SiteResource::collection($this->whenLoaded('sites')),
             'types' => TypeResource::collection($this->whenLoaded('types')),
         ];
