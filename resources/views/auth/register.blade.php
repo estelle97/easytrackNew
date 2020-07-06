@@ -1,7 +1,18 @@
 @extends('layouts.registerLayout')
 
 @section('content')
-<div class="auth-page row flex-fill d-flex flex-row justify-content-center">
+<script>
+       function showData()
+       {
+           document.getElementById('nom').innerHTML = document.getElementById('name').value;
+           document.getElementById('login').innerHTML = document.getElementById('user').value;
+           document.getElementById('nom_snack').innerHTML = document.getElementById('snack').value;
+           document.getElementById('adresse_site').innerHTML = document.getElementById('site').value;
+           document.getElementById('type_license').innerHTML = document.getElementById('license').value;
+       }
+
+</script>
+<div class="auth-page row flex-fill d-flex flex-row justify-content-center" >
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -16,7 +27,7 @@
         </div>
         <div class="col-lg-4 d-flex flex-row align-items-center">
             <div class="container-tight">
-                <div class="card card-md auth-card pt-3 pb-5 px-3">
+                <div class="card card-md auth-card pt-3 pb-5 px-3" name="test">
                 {!! Form::open(['route' => 'register.store', 'method' => 'post', 'files' => true], 'novalidate') !!}
                     <div class="card-body mb-3">
                         <div class="text-center mb-5">
@@ -33,7 +44,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-4.987-3.744A7.966 7.966 0 0 0 12 20c1.97 0 3.773-.712 5.167-1.892A6.979 6.979 0 0 0 12.16 16a6.981 6.981 0 0 0-5.147 2.256zM5.616 16.82A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634 8 8 0 1 0-12.906.187zM12 13a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
                                     </span>
                                     <input type="text" class="auth-input form-control @error('name') is-invalid @enderror form-control-rounded py-2 px-5"
-                                        placeholder="Nom complet" name="name" autocomplete="off" />
+                                        placeholder="Nom complet" name="name" id="name" value="" autocomplete="off" />
                                     @if($errors->has('name'))
                                         <span>
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -93,7 +104,7 @@
                                         </svg>
                                     </span>
                                     <input type="text" class="auth-input form-control @error('username') is-invalid @enderror form-control-rounded py-2 px-5"
-                                        placeholder="Nom d'utilisateur" name="username" autocomplete="off" />
+                                        placeholder="Nom d'utilisateur" name="username" id="user" value="" autocomplete="off" />
                                     @if($errors->has('username'))
                                         <span>
                                             <strong>{{ $errors->first('username') }}</strong>
@@ -147,7 +158,7 @@
                                     <span class="input-icon-addon ml-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 21H2v-2h1V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v5h2v10h1v2zm-5-2h2v-8h-6v8h2v-6h2v6zm0-10V5H5v14h6V9h6zM7 11h2v2H7v-2zm0 4h2v2H7v-2zm0-8h2v2H7V7z"/></svg>
                                     </span>
-                                    <input type="text" name="name_snack" class="auth-input form-control @error('name_snack') is-invalid @enderror form-control-rounded py-2 px-5"
+                                    <input type="text" name="name_snack" id="snack" value=""class="auth-input form-control @error('name_snack') is-invalid @enderror form-control-rounded py-2 px-5"
                                     placeholder="Nom du snack">
                                     @if($errors->has('name_snack'))
                                         <span>
@@ -245,7 +256,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
                                     </span>
                                     <input type="text" class="auth-input form-control @error('street') is-invalid @enderror form-control-rounded py-2 px-5"
-                                        placeholder="Quartier" name="street_site" autocomplete="off" />
+                                        placeholder="Quartier" name="street_site" id="site" value=""autocomplete="off" />
                                     @if($errors->has('street_site'))
                                         <span>
                                             <strong>{{ $errors->first('street_site') }}</strong>
@@ -299,7 +310,7 @@
                                     <span class="input-icon-addon ml-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 9V4H5v16h6.056c.328.417.724.785 1.18 1.085l1.39.915H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8v1h-7zm-2 2h9v5.949c0 .99-.501 1.916-1.336 2.465L16.5 21.498l-3.164-2.084A2.953 2.953 0 0 1 12 16.95V11zm2 5.949c0 .316.162.614.436.795l2.064 1.36 2.064-1.36a.954.954 0 0 0 .436-.795V13h-5v3.949z"/></svg>
                                     </span>
-                                    <select name="license" class="auth-input form-select @error('license') is-invalid @enderror form-control-rounded py-2 px-5">
+                                    <select name="license" id="license" value=""class="auth-input form-select @error('license') is-invalid @enderror form-control-rounded py-2 px-5">
                                         <option value="1 mois">1 Mois</option>
                                         <option value="2 mois">2 Mois</option>
                                         <option value="3 mois">3 Mois</option>
@@ -312,7 +323,7 @@
                                 </div>
                             </div>
                             <div class="form-footer mb-3">
-                                <button type="button" class="btn btn-gradient btn-block btn-pill btn-submit-step-4 btn-no-border">
+                                <button type="button" onclick='showData(); return false' class="btn btn-gradient btn-block btn-pill btn-submit-step-4 btn-no-border">
                                     Continuer
                                 </button>
                                 <button type="button" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-3 mt-3">
@@ -324,23 +335,23 @@
                             <h1 class=" mb-4">Récapitulatif</h1>
                             <div class=" mb-4">
                                 <h4 class="text-muted">Nom</h4>
-                                <h2>Estelle Belinga</h2>
+                                <h2 id="nom"></h2>
                             </div>
                             <div class=" mb-4">
                                 <h4 class="text-muted">Nom d'utilisateur</h4>
-                                <h2>estelle97</h2>
+                                <h2 id="login"></h2>
                             </div>
                             <div class=" mb-4">
                                 <h4 class="text-muted">Snack</h4>
-                                <h2>Black & White</h2>
+                                <h2 id="nom_snack"></h2>
                             </div>
                             <div class=" mb-4">
                                 <h4 class="text-muted">Site</h4>
-                                <h2>Yaoundé, Bastos</h2>
+                                <h2 id="adresse_site"></h2>
                             </div>
                             <div class=" mb-4">
                                 <h4 class="text-muted">Licence</h4>
-                                <h2>1 Mois</h2>
+                                <h2 id="type_license"></h2>
                             </div>
                             <div class="form-footer mb-3">
                                 <button type="submit" class="btn btn-gradient btn-block btn-pill btn-submit-step-5 btn-no-border">
