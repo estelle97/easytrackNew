@@ -59,12 +59,12 @@ class RegisterController extends Controller
     }
 
     public function store(RegisterStoreRequest $request){
-        $tel_code = "+237";
+        
 
         $user = new User();
         $user->name = $request->name;
         $user->address = $request->address;
-        $user->tel = $tel_code.$request->tel;
+        $user->tel = $request->tel;
         $user->email = $request->email;
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
@@ -77,7 +77,7 @@ class RegisterController extends Controller
         $snack = new Snack();
         $snack->name = $request->name_snack;
         $snack->email = "test@gmail.com";
-        $snack->tel1 = $tel_code.$request->tel1_snack;
+        $snack->tel1 = $request->tel1_snack;
         $snack->is_active;
         $snack->tel2 = $tel_code.$request->tel2_snack;
         $snack->town = $request->town_snack;
