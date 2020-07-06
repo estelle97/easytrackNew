@@ -56,6 +56,7 @@ class SnackController extends Controller
 
         $snack = new Snack([
             'name' => $request->name,
+            'slug' => $this->makeSlug($request->name),
             'email' => $request->email,
             'tel1' => $request->tel1,
             'tel2' => $request->tel2,
@@ -79,7 +80,7 @@ class SnackController extends Controller
      */
     public function show(Snack $snack)
     {
-        return new SnackResource($snack->loadMissing('sites.users','sites.suppliers','types'));
+        return new SnackResource($snack->loadMissing('user','sites.users','sites.suppliers','types'));
     }
 
     /**
@@ -120,6 +121,7 @@ class SnackController extends Controller
 
         $snack->update([
             'name' => $request->name,
+            'slug' => $this->makeSlug($request->name),
             'email' => $request->email,
             'tel1' => $request->tel1,
             'tel2' => $request->tel2,
