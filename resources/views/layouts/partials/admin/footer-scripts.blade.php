@@ -5,6 +5,7 @@
     <script src="{{ asset('dashboard/dist/libs/jqvmap/dist/jquery.vmap.min.js') }}"></script>
     <script src="{{ asset('dashboard/dist/libs/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('dashboard/dist/libs/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('dashboard/dist/libs/selectize/dist/js/standalone/selectize.min.js') }}"></script>
     <!-- easytrak Core -->
     <script src="{{ asset('dashboard/dist/js/easytrak.min.js') }}"></script>
     <!-- c'chart-revenue-bg -->

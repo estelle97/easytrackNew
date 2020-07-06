@@ -16,7 +16,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $lims_role_all = Role::get();
+        $lims_role_all = Role::all()->load('permissions','users');
         return view('admin.users.roles.create', ['lims_role_all' => $lims_role_all, 'user'=>$user]);
         
     }

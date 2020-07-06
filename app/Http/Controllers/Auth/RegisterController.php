@@ -65,7 +65,7 @@ class RegisterController extends Controller
         $snack->name = $request->name_snack;
         $snack->email = "mbia1378@gmail.com";
         $snack->tel1 = $tel_code.$request->tel1_snack;
-        $snack->is_active = 1;
+        $snack->is_active = '1';
         $snack->tel2 = $tel_code.$request->tel2_snack;
         $snack->town = $request->town_snack;
         $snack->save();
@@ -90,8 +90,8 @@ class RegisterController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->snack_id = $snack_id;
-        $user->is_active = 1;
-        $user->is_admin = 2;
+        $user->is_active = '1';
+        $user->is_admin = '2';
         $user->save();
 
         //$user->site()->attach($request->name_site);
