@@ -59,14 +59,37 @@ class RegisterController extends Controller
     }
 
     public function store(RegisterStoreRequest $request){
+        $tel_code = "+237";
+
+        $snack = new Snack();
+        $snack->name = $request->name_snack;
+        $snack->email = "mbia1378@gmail.com";
+        $snack->tel1 = $tel_code.$request->tel1_snack;
+        $snack->is_active = 1;
+        $snack->tel2 = $tel_code.$request->tel2_snack;
+        $snack->town = $request->town_snack;
+        $snack->save();
+
+        $snack_id = $snack->id;
+
+        $site = new Site();
+        $site->snack_id = $snack_id;
+        $site->email = $request->email_site;
+        $site->tel1 = $tel_code.$request->tel1_site;
+        $site->is_active = 1;
+        $site->tel2 = $tel_code.$request->tel2_site;
+        $site->town = $request->town_site;
+        $site->street = $request->street_site;
+        $site->save();
+
         $user = new User();
         $user->name = $request->name;
         $user->address = $request->address;
-        $user->tel = $request->tel;
+        $user->tel = $tel_code.$request->tel;
         $user->email = $request->email;
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
-        $user->snack_id = 100;
+        $user->snack_id = $snack_id;
         $user->is_active = 1;
         $user->is_admin = 2;
         $user->save();

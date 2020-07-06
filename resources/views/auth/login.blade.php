@@ -63,7 +63,11 @@
                         </div>
                         <div class="text-center text-muted mb-3">
                             Mot de passe oublié ?
-                            <a href="./forgot-password.html" tabindex="-1">Cliquez ici</a>
+                            <a href="{{ route('password.request') }}" tabindex="-1">Cliquez ici</a>
+                        </div>
+                        <div class="text-center text-muted mb-3">
+                            Pas de compte ?
+                            <a href="{{ route('register.index') }}" tabindex="-1">S'inscrire ici</a>
                         </div>
                     </div>
                     <div class="px-5 text-center mt-5">
@@ -71,7 +75,6 @@
                     </div>
                 </form>
             </div>
-            <a href="{{ route('register.index') }}" tabindex="-1">inscript</a>
         </div>
     </div>
     <script>
