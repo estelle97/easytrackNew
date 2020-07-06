@@ -91,7 +91,7 @@ class RegisterController extends Controller
         $site->snack_id = $snack_id;
         $site->email = $request->email_site;
         $site->tel1 = $tel_code.$request->tel1_site;
-        $site->is_active = 1;
+        $site->is_active;
         $site->tel2 = $tel_code.$request->tel2_site;
         $site->town = $request->town_site;
         $site->name = $request->name_site;
