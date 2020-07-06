@@ -4,10 +4,14 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Site;
+use App\Snack;
+use App\Type;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule as ValidationRule;
 
 class UserController extends Controller
@@ -28,32 +32,90 @@ class UserController extends Controller
      * @return String message
      */
     public function register(Request $request){
+        $infos = (object)$request->all();
 
-        $request->validate([
-            'name' => 'required|string',
-            'email' => ValidationRule::unique('users')->whereNotNull('email'),
-            'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
-            'username' => 'required|string|unique:users',
-            'address' => 'required|string',
-            'password' => 'required|string|confirmed'
-        ]);
+        // Validate and create admin
+        $userRules = [
+            'name' => 'required|unique:users',
+            'address' => 'required',
+            'tel' => 'required|min:9|max:9',
+            'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
+            'password' => 'required|min:8|confirmed'
+        ];
+        $validator = Validator::make($infos->user, $userRules);
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
 
-        $user = new User([
-            'name' => $request->name,
-            'tel' => $request->tel,
-            'email' => $request->email,
-            'address' => $request->address,
-            'username' => $request->username,
-            'is_admin' => $request->is_admin,
-            'password' => bcrypt($request->password),
-            'site_id' => 1
-        ]);
+        // Remove password_confirmation field to user array
+        $user = array_pop($infos->user);
+        $user = User::create($infos->user);
+        $user->is_admin = 2;
         $user->save();
 
+         // Validate and create Snack
+         $snackRule = [
+            'name' => 'required|unique:snacks',
+            'tel1' => 'required|min:9|max:9',
+            'email' => 'required|email|unique:snacks',
+        ];
+        $validator = Validator::make($infos->snack, $snackRule);
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $snack = (object) $infos->snack;
+        $snack = new Snack([
+            'name' => $snack->name,
+            'slug' => preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($snack->name))),
+            'email' => $snack->email,
+            'tel1' => $snack->tel1,
+            'tel2' => $snack->tel2,
+            'town' => $snack->town,
+            'street' =>$snack->street,
+            'user_id' => $user->id
+        ]);
+        $snack->save();
+
+
+        // Validate and create Site
+        $siteRules = [
+            'name' => 'required|unique:sites',
+            'tel1' => 'required|min:9|max:9',
+            'email' => 'required|email|unique:sites',
+            'street' => 'required',
+            'town' => 'required'
+        ];
+        $validator = Validator::make($infos->snack, $siteRules);
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $site = (object) $infos->site;
+        $site = new Site([
+            'name' => $site->name,
+            'slug' => preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($site->name))),
+            'email' => $site->email,
+            'tel1' => $site->tel1,
+            'tel2' => $site->tel2,
+            'town' => $site->town,
+            'street' =>$site->street,
+            'snack_id' => $snack->id
+        ]);
+        $site->save();
+
+        // Attach snack with his type of subscription
+        $type = Type::findOrFail($infos->type);
+        $snack->types()->attach($type->id,[
+            'end_date' => Carbon::now()->addMonth($type->duration),
+        ]);
+
         return response()->json([
-            'message' => 'User Created successfully!',
-            'user' => new UserResource($user)
-        ],201);
+            "message" => "Operation success!",
+            "snack" => $snack->load('user','sites','types')
+        ], 201); 
+
     }
 
     /**
@@ -152,7 +214,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => ValidationRule::unique('users')->whereNotNull('email'),
+            'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
+            'username' => 'required|string|unique:users',
+            'address' => 'required|string',
+            'password' => 'required|string|confirmed'
+        ]);
+
+        $user = new User([
+            'name' => $request->name,
+            'tel' => $request->tel,
+            'email' => $request->email,
+            'address' => $request->address,
+            'username' => $request->username,
+            'cni_number' => $request->cni_number,
+            'contact_name' => $request->contact_name,
+            'contact_tel' => $request->contact_tel,
+            'is_admin' => $request->is_admin,
+            'password' => bcrypt($request->password),
+            'site_id' => 1
+        ]);
+        $user->save();
+
+        return response()->json([
+            'message' => 'User Created successfully!',
+            'user' => new UserResource($user)
+        ],201);
     }
 
     /**
@@ -209,6 +298,9 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->username = $request->username;
         $user->is_admin = $request->is_admin;
+        $user->cni_number = $request->cni_number;
+        $user->contact_name = $request->contact_name;
+        $user->contact_tel = $request->contact_tel;
         
         $user->save();
 

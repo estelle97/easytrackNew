@@ -45,17 +45,21 @@
             <div class="text-center mb-4">
                 <img src="{{ asset('dashboard/static/logo.svg') }}" height="36" alt="" />
             </div>
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-            <form class="card card-md auth-card" method="POST" action="{{ route('password.email') }}">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form class="card card-md auth-card" method="POST" action="{{ route('password.store') }}">
             @csrf
                 <div class="card-body">
                     <h2 class="mb-2 text-center text-black">Mot de passe oublié</h2>
                     <h4 class="mb-5 text-center text-muted">
-                        Saisissez votre adresse électronique et un nous vous enverrons un lien pour le rénitialiser.
+                        Saisissez votre adresse électronique, nom d'utilisateur ou téléphone et un nous vous enverrons un code par SMS pour le rénitialiser.
                     </h4>
                     <div class="mb-3">
                         <div class="input-icon">
@@ -66,14 +70,9 @@
                                         d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
                                     </svg>
                             </span>
-                            <input type="text" class="auth-input form-control @error('email') is-invalid @enderror form-control-rounded py-2 px-5"
-                                placeholder="Votre email" autocomplete="off" id="email" name="email" value="{{ old('email') }}" required autofocus />
+                            <input type="text" class="auth-input form-control @error('identity') is-invalid @enderror form-control-rounded py-2 px-5"
+                                placeholder="Entrez votre mail ou nom d'utilisateur ou numéro de téléphone" autocomplete="off" id="identity" name="identity" required autofocus />
 
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                     </div>
                     <div class="form-footer">

@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $lims_user_list = User::All()->load('site.snack');
+        $lims_user_list = User::orderBy('name', 'asc')->get()->load('site.snack');
         /*$lims_user_list = User
        ->join('sites', 'sites.id', '=', 'users.site_id')
        ->join('sites', 'sites.id', '=', 'users.site_id')
