@@ -16,9 +16,9 @@ class CreateSnacksTable extends Migration
         Schema::create('snacks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('tel1');
+            $table->string('name')->unique();
+            $table->string('email')->nullable();
+            $table->string('tel1')->nullable();
             $table->enum('is_active', array('0', '1'))->default('1');
             $table->string('tel2')->nullable();
             $table->string('town')->nullable();

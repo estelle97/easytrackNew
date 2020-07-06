@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('bill_id')->unsigned();
             $table->bigInteger('site_id')->nullable();
             $table->integer('quantity');
+            $table->integer('damages')->default(0);
             $table->integer('purchase_price');
             $table->enum('status', array('0', '1'))->default('1');
             $table->enum('is_active', array('0', '1'))->default('1');

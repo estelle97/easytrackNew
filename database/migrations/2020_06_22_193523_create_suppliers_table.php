@@ -17,10 +17,10 @@ class CreateSuppliersTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('site_id')->unsigned();
             $table->string('name');
-            $table->string('email');
-            $table->string('tel1');
-            $table->string('town');
-            $table->string('street');
+            $table->string('email')->nullable();
+            $table->string('tel1')->nullable();
+            $table->string('town')->nullable();
+            $table->string('street')->nullable();
             $table->string('tel2')->nullable();
             $table->enum('is_active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
