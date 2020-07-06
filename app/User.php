@@ -27,6 +27,10 @@ class User extends Authenticatable
     public $timestamps = null;
     protected $dates = ['created_at'];
 
+    protected $fillable = [
+        'name', 'address', 'tel',"email", "username", "password", "is_active", "is_admin", "snack_id"
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

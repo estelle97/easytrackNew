@@ -12,8 +12,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Easytrak - Connexion</title>
-    @notifyCss
+    <title>Easytrak - Inscription</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <meta name="msapplication-TileColor" content="#206bc4" />
     <meta name="theme-color" content="#206bc4" />
@@ -25,7 +24,7 @@
     <meta name="robots" content="noindex,nofollow,noarchive" />
     <link rel="icon" href="{{ asset('dashboard/favicon.png') }}" type="image/png" />
     <link rel="shortcut icon" href="{{ asset('dashboard/favicon.png') }}" type="image/png" />
-    <!-- CSS files -->
+  <!-- CSS files -->
     <link href="{{ asset('dashboard/dist/libs/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/dist/css/easytrak.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/dist/css/demo.min.css') }}" rel="stylesheet" />
@@ -43,8 +42,7 @@
             pointer-events: all !important;
         }
     </style>
-    @stack('css')
 </head>
 
 
-    <!-- CSS files -->
+    

@@ -19,6 +19,18 @@ Route::redirect('/', 'login');
 
 Auth::routes();
 
+/*
+* Register
+*/
+Route::get('register', 'Auth\RegisterController@index')->name('register.index');
+Route::post('register', 'Auth\RegisterController@store')->name('register.store');
+
+/*
+* Password
+*/
+Route::get('password', 'Auth\ForgotPasswordController@index')->name('password.index');
+Route::post('password', 'Auth\ForgotPasswordController@store')->name('password.store');
+
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('logout', 'Admin\DashboardController@logout');
