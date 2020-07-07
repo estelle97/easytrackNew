@@ -20,6 +20,7 @@
     <link rel="icon" href="{{ asset('dashboard/favicon.png') }}" type="image/png" />
     <link rel="shortcut icon" href="{{ asset('dashboard/favicon.png') }}" type="image/png" />
     <!-- CSS files -->
+    <link href="{{ asset('dashboard/dist/libs/selectize/dist/css/selectize.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/dist/libs/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/dist/css/easytrak.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/dist/css/demo.min.css') }}" rel="stylesheet" />

@@ -71,8 +71,11 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active'
     
     //Roles & Permissions Routes
     Route::get('role/permission/{id}', 'Admin\RoleController@permission')->name('role.permission');
-    Route::post('role/set_permission', 'Admin\RoleController@setPermission')->name('role.setPermission');
-	Route::resource('role', 'Admin\RoleController');
+	Route::post('role/set_permission', 'Admin\RoleController@setPermission')->name('role.setPermission');
+    Route::resource('role', 'Admin\RoleController');
+    
+    //Sites Routes
+	Route::resource('site', 'Admin\SiteController');
     
     //Term of sercice route
     Route::get('terms', 'HomeController@termOfService')->name('terms');

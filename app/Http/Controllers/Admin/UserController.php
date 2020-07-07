@@ -40,8 +40,7 @@ class UserController extends Controller
 
         $data = $request->all();
         
-        if(!isset($data['is_active']))
-            $data['is_active'] = false;
+        
         $data['password'] = bcrypt($data['password']);
         User::create($data);
         notify()->success('Utilisateur créé avec succès', 'Création utilisateur');
