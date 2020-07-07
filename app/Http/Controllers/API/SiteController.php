@@ -109,6 +109,7 @@ class SiteController extends Controller
     public function update(Request $request, Site $site)
     {
         $request->validate([
+            'name' => 'required',
             'email' => 'email|required|string',
             'tel1' => 'required',
             'town' => 'required',
@@ -116,6 +117,7 @@ class SiteController extends Controller
         ]);
 
         $site->update([
+            'name' => $request->name,
             'email' => $request->email,
             'tel1' => $request->tel1,
             'tel2' => $request->tel2,

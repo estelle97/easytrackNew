@@ -65,15 +65,16 @@ class UserController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $snack = (object) $infos->snack;
+        $snackVal = (object) $infos->snack;
+
         $snack = new Snack([
-            'name' => $snack->name,
-            'slug' => preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($snack->name))),
-            'email' => $snack->email,
-            'tel1' => $snack->tel1,
-            'tel2' => $snack->tel2,
-            'town' => $snack->town,
-            'street' =>$snack->street,
+            'name' => $snackVal->name,
+            'slug' => $this->makeSlug($snackVal->name),
+            'email' => $snackVal->email,
+            'tel1' => $snackVal->tel1,
+            'tel2' => $snackVal->tel2,
+            'town' => $snackVal->town,
+            'street' =>$snackVal->street,
             'user_id' => $user->id
         ]);
         $snack->save();
@@ -92,15 +93,15 @@ class UserController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $site = (object) $infos->site;
+        $siteVal = (object) $infos->site;
         $site = new Site([
-            'name' => $site->name,
-            'slug' => preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($site->name))),
-            'email' => $site->email,
-            'tel1' => $site->tel1,
-            'tel2' => $site->tel2,
-            'town' => $site->town,
-            'street' =>$site->street,
+            'name' => $siteVal->name,
+            'slug' => $this->makeSlug($siteVal->name),
+            'email' => $siteVal->email,
+            'tel1' => $siteVal->tel1,
+            'tel2' => $siteVal->tel2,
+            'town' => $siteVal->town,
+            'street' =>$siteVal->street,
             'snack_id' => $snack->id
         ]);
         $site->save();

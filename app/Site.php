@@ -10,10 +10,6 @@ class Site extends Model
     public $timestamps = null;
     protected $dates = ['created_at'];
 
-    protected $fillable = [
-        "snack_id", 'email', 'town', 'tel1',"tel2", "street", "is_active"
-    ];
-
     public function products(){
         return $this->belongsToMany('App\Product')->withPivot('min','purchase_price','selling_price','initial_stock');
     }
