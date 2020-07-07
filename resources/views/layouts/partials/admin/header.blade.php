@@ -123,7 +123,7 @@
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
-                                        Magasin
+                                        Mes Sites
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -133,13 +133,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./services.html">
-                                            Services
+                                        <a class="dropdown-item" href="./vendors.html">
+                                            Fournisseurs
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="./vendors.html">
-                                            Fournisseurs
+                                            Gérer les sites
                                         </a>
                                     </li>
                                 </ul>
