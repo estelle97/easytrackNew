@@ -11,7 +11,7 @@ class Role extends Model
     protected $dates = ['created_at'];
 
     public function permissions() {
-        return $this->belongsToMany(Permission::class,'permissions_roles');  
+        return $this->belongsToMany(Permission::class);  
      }
      
      public function users() {
