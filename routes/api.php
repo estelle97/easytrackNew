@@ -23,7 +23,7 @@ Route::post('passwordRequest', 'API\UserController@passwordRequest');
 
 Route::group(['middleware' => 'auth:api'], function(){
     
-    Route::get('logout', 'API\UserController@logout');
+    Route::post('logout', 'API\UserController@logout');
     Route::put('users/{user}/activate', 'API\UserController@activateUser');
     Route::put('users/{user}/changeAdminLevel', 'API\UserController@changeAdminLevel');
     Route::apiResource('users', 'API\UserController');
