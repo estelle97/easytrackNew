@@ -88,7 +88,7 @@ class UserController extends Controller
             'street' => 'required',
             'town' => 'required'
         ];
-        $validator = Validator::make($infos->snack, $siteRules);
+        $validator = Validator::make($infos->site, $siteRules);
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
