@@ -48,7 +48,7 @@ class ForgotPasswordController extends Controller
      * @param String $message Body of sms
      * @param Number $recipients string or array of phone number of recepient
      */
-    private function sendMessage($message, $recipients)
+    public function sendMessage($message, $recipients)
     {
         $account_sid = getenv("TWILIO_ACCOUNT_ID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
