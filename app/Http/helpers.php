@@ -1,7 +1,7 @@
 <?php
 
-    if(function_exists('makeSlug')){
-        function makeSlug($text){
+    if(function_exists('oldFunction')){
+        function oldFunction($text){
             // Replace non letter or digits by -
             $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 

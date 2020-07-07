@@ -50,12 +50,19 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
     
 });
 
+Route::post('roles/add', 'Admin\RoleController@store');
+Route::post('roles/detachPermissionToRole', 'Admin\RoleController@detachPermissionToRole');
+Route::post('roles/attachPermissionToRole', 'Admin\RoleController@attachPermissionToRole');
+
+
+
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {
     
     Route::get('/', 'HomeController@index');
     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
     Route::get('user/profile/{id}', 'Admin\DashboardController@profile')->name('user.profile');
+    Route::get('user/profile_settings/{id}', 'Admin\DashboardController@profileSettings')->name('user.profileSettings');
 	Route::put('user/update_profile/{id}', 'Admin\DashboardController@profileUpdate')->name('user.profileUpdate');
 	Route::put('user/changepass/{id}', 'Admin\DashboardController@changePassword')->name('user.password');
     Route::get('user/genpass', 'Admin\UserController@generatePassword');
@@ -65,7 +72,10 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active'
     //Roles & Permissions Routes
     Route::get('role/permission/{id}', 'Admin\RoleController@permission')->name('role.permission');
 	Route::post('role/set_permission', 'Admin\RoleController@setPermission')->name('role.setPermission');
-	Route::resource('role', 'Admin\RoleController');
+    Route::resource('role', 'Admin\RoleController');
+    
+    //Sites Routes
+	Route::resource('site', 'Admin\SiteController');
     
     //Term of sercice route
     Route::get('terms', 'HomeController@termOfService')->name('terms');

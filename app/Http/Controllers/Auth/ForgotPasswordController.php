@@ -48,7 +48,7 @@ class ForgotPasswordController extends Controller
      * @param String $message Body of sms
      * @param Number $recipients string or array of phone number of recepient
      */
-    /*private function sendMessage($message, $recipients)
+    public function sendMessage($message, $recipients)
     {
         $account_sid = getenv("TWILIO_ACCOUNT_ID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
@@ -56,13 +56,13 @@ class ForgotPasswordController extends Controller
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($recipients, 
                 ['from' => $twilio_number, 'body' => $message] );
-    }*/
+    }
 
-    /*public function generatePassword()
+    public function generatePassword()
     {
         $id = Keygen::numeric(6)->generate();
-        return $id;
-    }*/
+         return $id;
+    }
 
     public function store(PasswordStoreRequest $request)
     {

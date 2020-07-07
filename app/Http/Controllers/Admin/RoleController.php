@@ -17,7 +17,7 @@ class RoleController extends Controller
     {
         $user = Auth::user();
         $lims_role_all = Role::get();
-        return view('admin.users.roles.create', ['lims_role_all' => $lims_role_all, 'user'=>$user]);
+        return view('admin.users.users.user-rolesPermissions', ['lims_role_all' => $lims_role_all, 'user'=>$user]);
         
     }
 
@@ -28,21 +28,59 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => [
-                'max:255',
-                    Rule::unique('roles')->where(function ($query) {
-                    return $query->where('is_active', 1);
-                }),
-            ],
+        $request->validate([
+            'name' => 'required|string|unique:roles'
         ]);
-
-        $data = $request->all();
-        Role::create($data);
-        $name = $request->name;
-        notify()->success('Rôle '.$name.' ajouté avec succès', 'Ajout de rôle');
+        $role = Role::create([
+            'name' => $request->name,
+            'slug' => $this->makeSlug($request->name),
+            'description' => $request->description
+        ]);
+        $this->attachPermissionsToRole($role, $request->permissions);
+        notify()->success('Rôle '.$role->name.' ajouté avec succès', 'Ajout de rôle');
         return redirect()->back();
     }
+
+    /**
+     * Attach permissions to a role
+     * @param Integer[] permissions 
+     */
+    public function attachPermissionsToRole(Role $role, $permissions){
+        foreach($permissions as $perm){
+            if(!$role->permissions->contains($perm)){
+               $role->permissions()->attach($perm);
+            }
+        }
+        return 'success';
+    }
+
+    public function attachPermissionToRole(Request $request){
+        $role = Role::find($request->role_id);
+        if(!$role->permissions->contains($request->permission_id)){
+            $role->permissions()->attach($request->permission_id);
+            
+            return 'success';
+        }   
+
+        return 'error';
+    }
+
+     /**
+     * Detach permissions to a role
+     * @param Integer[] permissions 
+     */
+    public function detachPermissionToRole(Request $request){
+        $role = Role::find($request->role_id);
+        if($role->permissions->contains($request->permission_id)){
+            $role->permissions()->detach($request->permission_id);
+            return 'success';
+        }
+
+        return 'error';
+    }
+
+
+
 
     public function edit($id)
     {
