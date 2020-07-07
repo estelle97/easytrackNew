@@ -10,7 +10,7 @@
     @include('layouts.partials.admin.header')
     @yield('content')
     
-    @include('layouts.partials.admin.footer-scriptsPermissions')
+    @include('layouts.partials.footer-scriptsPermissions')
      </body>
 
 </html>
