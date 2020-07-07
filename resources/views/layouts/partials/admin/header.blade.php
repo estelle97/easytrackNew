@@ -110,7 +110,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown {{ Request::is('admin/user') ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
                                     role="button" aria-expanded="false">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -123,7 +123,7 @@
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
-                                        Magasin
+                                        Mes Sites
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -133,18 +133,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./services.html">
-                                            Services
-                                        </a>
-                                    </li>
-                                    <li>
                                         <a class="dropdown-item" href="./vendors.html">
                                             Fournisseurs
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{route('admin.site.index')}}">
-                                            Sites
+                                            Gérer les sites
                                         </a>
                                     </li>
                                 </ul>
