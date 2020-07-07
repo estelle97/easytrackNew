@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'API\UserController@login');
 Route::post('/register', 'API\UserController@register');
 Route::post('passwordRequest', 'API\UserController@passwordRequest');
+Route::apiResource('types', 'API\TypeController');
 
 Route::group(['middleware' => 'auth:api'], function(){
     
@@ -38,7 +39,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('roles', 'API\RoleController');
     Route::apiResource('permissions','API\PermissionController');
     Route::apiResource('categories', 'API\CategoryController');
-    Route::apiResource('types', 'API\TypeController');
     Route::apiResource('suppliers' ,'API\SupplierController');
 
     Route::post('attachPermissionsToRole/{role}', 'API\RoleController@attachPermissionstoRole');
