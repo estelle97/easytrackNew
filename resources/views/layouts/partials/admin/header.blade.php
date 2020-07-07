@@ -110,7 +110,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown {{ Request::is('admin/user') ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
                                     role="button" aria-expanded="false">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -138,13 +138,8 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./vendors.html">
-                                            Gérer les sites
-                                        </a>
-                                    </li>
-                                    <li>
                                         <a class="dropdown-item" href="{{route('admin.site.index')}}">
-                                            Sites
+                                            Gérer les sites
                                         </a>
                                     </li>
                                 </ul>
