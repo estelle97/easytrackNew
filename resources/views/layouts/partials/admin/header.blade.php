@@ -142,6 +142,11 @@
                                             Fournisseurs
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{route('admin.site.index')}}">
+                                            Sites
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
