@@ -50,6 +50,12 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
     
 });
 
+Route::post('roles/add', 'Admin\RoleController@store');
+Route::post('roles/detachPermissionToRole', 'Admin\RoleController@detachPermissionToRole');
+Route::post('roles/attachPermissionToRole', 'Admin\RoleController@attachPermissionToRole');
+
+
+
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {
     
     Route::get('/', 'HomeController@index');
