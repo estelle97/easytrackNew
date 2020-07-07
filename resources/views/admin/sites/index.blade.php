@@ -203,7 +203,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Ajouter un nouvel utilisateur</h5>
+                        <h5 class="modal-title">Ajouter un nouveau site</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -319,7 +319,7 @@
                     {{ method_field('DELETE') }}
                         <input type="hidden" name="_method" value="DELETE">
                         <div class="modal-title">Êtes vous sure ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données lié à ce rôle.</div>
+                        <div>Si vous continuez, vous perdrez toutes les données lié à ce site.</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link link-secondary mr-auto"
@@ -377,6 +377,10 @@ function deleteData(id)
                 success: function(data) {
                     $('.errorName').addClass('hidden');
                     $('.errorEmail').addClass('hidden');
+                    $('.errorTel1').addClass('hidden');
+                    $('.errorTel2').addClass('hidden');
+                    $('.errorTown').addClass('hidden');
+                    $('.errorStreet').addClass('hidden');
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#modal-create-site').modal('show');
@@ -385,6 +389,26 @@ function deleteData(id)
                         if (data.errors.name) {
                             $('.errorName').removeClass('hidden');
                             $('.errorName').text(data.errors.name);
+                        }
+                        if (data.errors.email) {
+                            $('.errorEmail').removeClass('hidden');
+                            $('.errorEmail').text(data.errors.email);
+                        }
+                        if (data.errors.tel1) {
+                            $('.errorTel1').removeClass('hidden');
+                            $('.errorTel1').text(data.errors.tel1);
+                        }
+                        if (data.errors.tel2) {
+                            $('.errorTel2').removeClass('hidden');
+                            $('.errorTel2').text(data.errors.tel2);
+                        }
+                        if (data.errors.town) {
+                            $('.errorTown').removeClass('hidden');
+                            $('.errorTown').text(data.errors.town);
+                        }
+                        if (data.errors.street) {
+                            $('.errorStreet').removeClass('hidden');
+                            $('.errorStreet').text(data.errors.street);
                         }
                     } else {
                         toastr.success('Successfully updated Post!', 'Success Alert', {timeOut: 5000});
