@@ -7,6 +7,7 @@ use App\Role;
 
 trait HasPermissionsTrait {
 
+
    public function givePermissionsTo(... $permissions) {
 
     $permissions = $this->getAllPermissions($permissions);
@@ -80,6 +81,10 @@ trait HasPermissionsTrait {
   protected function hasPermission($permission) {
 
     return (bool) $this->permissions->where('slug', $permission->slug)->count();
+  }
+
+  protected function getAllRoles(array $roles){
+    return Role::whereIn('slug', $roles)->get();
   }
 
   protected function getAllPermissions(array $permissions) {

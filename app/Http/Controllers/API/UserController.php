@@ -53,6 +53,7 @@ class UserController extends Controller
         $user = User::create($infos->user);
         $user->is_admin = 2;
         $user->save();
+        $user->roles()->attach(5);
 
          // Validate and create Snack
          $snackRule = [
@@ -65,15 +66,16 @@ class UserController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $snack = (object) $infos->snack;
+        $snackVal = (object) $infos->snack;
+
         $snack = new Snack([
-            'name' => $snack->name,
-            'slug' => preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($snack->name))),
-            'email' => $snack->email,
-            'tel1' => $snack->tel1,
-            'tel2' => $snack->tel2,
-            'town' => $snack->town,
-            'street' =>$snack->street,
+            'name' => $snackVal->name,
+            'slug' => $this->makeSlug($snackVal->name),
+            'email' => $snackVal->email,
+            'tel1' => $snackVal->tel1,
+            'tel2' => $snackVal->tel2,
+            'town' => $snackVal->town,
+            'street' =>$snackVal->street,
             'user_id' => $user->id
         ]);
         $snack->save();
@@ -87,23 +89,26 @@ class UserController extends Controller
             'street' => 'required',
             'town' => 'required'
         ];
-        $validator = Validator::make($infos->snack, $siteRules);
+        $validator = Validator::make($infos->site, $siteRules);
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
 
-        $site = (object) $infos->site;
+        $siteVal = (object) $infos->site;
         $site = new Site([
-            'name' => $site->name,
-            'slug' => preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($site->name))),
-            'email' => $site->email,
-            'tel1' => $site->tel1,
-            'tel2' => $site->tel2,
-            'town' => $site->town,
-            'street' =>$site->street,
+            'name' => $siteVal->name,
+            'slug' => $this->makeSlug($siteVal->name),
+            'email' => $siteVal->email,
+            'tel1' => $siteVal->tel1,
+            'tel2' => $siteVal->tel2,
+            'town' => $siteVal->town,
+            'street' =>$siteVal->street,
             'snack_id' => $snack->id
         ]);
         $site->save();
+
+        $user->site_id = $site->id;
+        $user->save();
 
         // Attach snack with his type of subscription
         $type = Type::findOrFail($infos->type);
@@ -169,7 +174,7 @@ class UserController extends Controller
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString(),
-            'user' => new UserResource($user->loadMissing('site','roles'))
+            'user' => new UserResource($user->loadMissing('site','roles.permissions'))
         ]);
     }
 
@@ -192,7 +197,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->load('site','roles','permissions','agendas');
+        $users = User::all()->load('site','roles.permissions','permissions','agendas');
         return UserResource::collection($users);
     }
 
@@ -252,7 +257,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('site.snack','roles','permissions','agendas');
+        $user->load('site.snack','roles.permissions','permissions','agendas');
         return new UserResource($user);
     }
 
@@ -306,7 +311,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'user' => new UserResource($user->loadMissing('site','roles'))
+            'user' => new UserResource($user->loadMissing('site','roles.permissions'))
         ],200);
     }
 

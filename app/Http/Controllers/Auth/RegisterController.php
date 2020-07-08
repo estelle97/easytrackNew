@@ -79,7 +79,7 @@ class RegisterController extends Controller
         $snack->email = "test@gmail.com";
         $snack->tel1 = $request->tel1_snack;
         $snack->is_active;
-        $snack->tel2 = $tel_code.$request->tel2_snack;
+        $snack->tel2 = $request->tel2_snack;
         $snack->town = $request->town_snack;
         $snack->user_id = $user_id;
         $snack->slug= preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($snack->name)));

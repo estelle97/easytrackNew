@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SiteResource;
 use App\Site;
-use Illuminate\Validation\Rule as ValidationRule;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -45,11 +44,12 @@ class SiteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ValidationRule::unique('sites')->whereNotNull('name'),
-            'email' =>  ValidationRule::unique('sites')->whereNotNull('email'),
-            'tel1' =>  ValidationRule::unique('sites')->whereNotNull('tel1'),
+            'name' => 'required',
+            'email' => 'email|required|string',
+            'tel1' => 'required',
             'town' => 'required',
             'street' => 'required',
+            'snack_id' => 'required'
         ]);
 
         $site = new Site([
@@ -60,7 +60,7 @@ class SiteController extends Controller
             'tel2' => $request->tel2,
             'town' => $request->town,
             'street' => $request->street,
-            'snack_id' => 1
+            'snack_id' => $request->snack_id,
         ]);
 
         $site->save();
@@ -109,6 +109,7 @@ class SiteController extends Controller
     public function update(Request $request, Site $site)
     {
         $request->validate([
+            'name' => 'required',
             'email' => 'email|required|string',
             'tel1' => 'required',
             'town' => 'required',
@@ -116,6 +117,7 @@ class SiteController extends Controller
         ]);
 
         $site->update([
+            'name' => $request->name,
             'email' => $request->email,
             'tel1' => $request->tel1,
             'tel2' => $request->tel2,

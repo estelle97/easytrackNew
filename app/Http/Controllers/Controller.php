@@ -23,6 +23,11 @@ class Controller extends BaseController
         $account_sid = getenv("TWILIO_SID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
         $twilio_number = getenv("TWILIO_NUMBER");
+
+        $account_sid = "AC10531d636e939b0ee4c01cb7b4c0ec2a";
+        $auth_token = "b4308a2c326ff9876edd117a1a5fb2d1";
+        $twilio_number = "+12055840409";
+
         $client = new Client($account_sid, $auth_token);
         $client->messages->create('+237'.$recipients, 
                 ['from' => $twilio_number, 
