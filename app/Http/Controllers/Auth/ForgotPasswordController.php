@@ -40,7 +40,7 @@ class ForgotPasswordController extends Controller
 
     public function index()
     {
-        return view('auth.passwords.email');
+        return view('forgotPassword');
     }
 
     /**

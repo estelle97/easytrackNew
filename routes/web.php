@@ -20,10 +20,34 @@ Route::redirect('/', 'login');
 Auth::routes();
 
 /*
-* Register
+* Authentification
 */
-Route::get('register', 'Auth\RegisterController@index')->name('register.index');
-Route::post('register', 'Auth\RegisterController@store')->name('register.store');
+
+Route::get('login', [
+    'as' => 'login',
+    'uses' => 'Auth\LoginController@login'
+]);
+
+Route::post('login', [
+    'as' => 'login.post',
+    'uses' => 'Auth\LoginController@loginPost'
+]);
+
+Route::get('register', [
+    'as' => 'register',
+    'uses' => 'Auth\RegisterController@index',
+]);
+
+Route::post('register', [
+    'uses' => 'Auth\RegisterController@store',
+    'as' => 'register.post'
+]);
+
+Route::get('password-forgot', [
+    'as' => 'password-forgot',
+    'uses' => 'Auth\ForgotPasswordController@index'
+]);
+
 
 /*
 * Password
@@ -37,6 +61,16 @@ Route::group(['middleware' => 'auth'], function() {
    
     
 });
+
+Route::get('dashboardTest', [
+    'as'=> 'admin.dashboard',
+    'uses' => 'Admin\DashboardController@index'
+]);
+
+Route::get('userTest', [
+    'as' => 'admin.users',
+    'uses' => 'Admin\UserController@index'
+]);
 
 Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth', 'active', 'superadmin']], function() {
 

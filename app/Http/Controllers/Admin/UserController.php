@@ -17,16 +17,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        $lims_user_list = User::orderBy('name', 'asc')->get()->load('site.snack');
-        /*$lims_user_list = User
-       ->join('sites', 'sites.id', '=', 'users.site_id')
-       ->join('sites', 'sites.id', '=', 'users.site_id')
-       ->select('users.*', 'sites.*')
-       ->get();*/
-        $lims_role_list = Role::get();
-        //$lims_user_list = User::orderBy('name', 'asc')->get();
-        return view('admin.users.users.users', compact('lims_user_list','user','lims_role_list'));
+        
+        return view('admin.users');
     }
 
     public function generatePassword()

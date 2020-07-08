@@ -42,20 +42,20 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        if (Auth::check() && Auth::user()->is_admin == 3)
-        {
-            $this->redirectTo = route('superadmin.dashboard');
-        } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        {
-            $this->redirectTo = route('admin.dashboard');
-        } else{
-            $this->redirectTo = route('user.dashboard');
-        }
-        $this->middleware('guest');
+        // if (Auth::check() && Auth::user()->is_admin == 3)
+        // {
+        //     $this->redirectTo = route('superadmin.dashboard');
+        // } elseif (Auth::check() && Auth::user()->is_admin == 2)
+        // {
+        //     $this->redirectTo = route('admin.dashboard');
+        // } else{
+        //     $this->redirectTo = route('user.dashboard');
+        // }
+        // $this->middleware('guest');
     }
 
     public function index(Request $request){
-        return view('auth.register');
+        return view('register');
     }
 
     public function store(RegisterStoreRequest $request){

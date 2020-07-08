@@ -17,7 +17,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
    
 
@@ -28,13 +28,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        //$user = User::findOrFail(Auth::id());
-        //dd($user->can('permission-slug'));
-        $user = Auth::user();
-        $users = $request->user();
-        //dd($users->hasRole('gerant'));
-        //dd($users->can('create_user'));
-        return view('admin.dashboard.home', compact('user'));
+        return view('admin.dashboard');
     }
 
     

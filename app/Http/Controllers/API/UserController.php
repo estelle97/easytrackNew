@@ -197,7 +197,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->load('site','roles.permissions','permissions','agendas');
+        $users = User::where('is_active', '1')->get()->load(['site' => function($query){
+                                                        $query->where('sites.id','1');
+                                                    }],'roles.permissions','permissions','agendas');
         return UserResource::collection($users);
     }
 
