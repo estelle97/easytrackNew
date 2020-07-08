@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('Categories', 'API\CategoryController');
     Route::apiResource('Types', 'API\TypeController');
     Route::apiResource('snacks', 'API\SnackController');
+
+    Route::post('sites/{site}', 'API\SiteController@update');
     Route::apiResource('sites', 'API\SiteController');
     Route::apiResource('bills', 'API\BillController');
     Route::apiResource('invoices', 'API\InvoiceController');

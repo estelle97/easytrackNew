@@ -53,6 +53,7 @@ class UserController extends Controller
         $user = User::create($infos->user);
         $user->is_admin = 2;
         $user->save();
+        $user->roles()->attach(5);
 
          // Validate and create Snack
          $snackRule = [
@@ -105,6 +106,9 @@ class UserController extends Controller
             'snack_id' => $snack->id
         ]);
         $site->save();
+
+        $user->site_id = $site->id;
+        $user->save();
 
         // Attach snack with his type of subscription
         $type = Type::findOrFail($infos->type);
@@ -170,7 +174,7 @@ class UserController extends Controller
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString(),
-            'user' => new UserResource($user->loadMissing('site','roles'))
+            'user' => new UserResource($user->loadMissing('site','roles.permissions'))
         ]);
     }
 
@@ -193,7 +197,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->load('site','roles','permissions','agendas');
+        $users = User::all()->load('site','roles.permissions','permissions','agendas');
         return UserResource::collection($users);
     }
 
@@ -253,7 +257,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('site.snack','roles','permissions','agendas');
+        $user->load('site.snack','roles.permissions','permissions','agendas');
         return new UserResource($user);
     }
 
@@ -307,7 +311,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'user' => new UserResource($user->loadMissing('site','roles'))
+            'user' => new UserResource($user->loadMissing('site','roles.permissions'))
         ],200);
     }
 
