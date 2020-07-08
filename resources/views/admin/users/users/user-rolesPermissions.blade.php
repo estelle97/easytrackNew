@@ -224,13 +224,13 @@
                                                         {{$role_perm->name}}
                                                     </td>
                                                     <td class="text-right">
-                                                        <a class="mt-1" onclick="detachPermissionToRole({{$role->id}},{{$role_perm->id}})">
+                                                        <a class="mt-1 text-blue" onclick="detachPermissionToRole({{$role->id}},{{$role_perm->id}})">
                                                             Supprimer
                                                         </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -246,8 +246,8 @@
             </div>
         @endforeach
     </div>
-    
-    
+
+
     <div class="modal modal-blur fade" id="modal-delete-role" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -322,7 +322,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="permissions-add">
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -380,7 +380,7 @@
                 },
                 method : 'post',
                 success:function (data) {
-                    
+
                 }
             });
         }
