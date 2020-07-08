@@ -32,77 +32,65 @@ class UserController extends Controller
      * @return String message
      */
     public function register(Request $request){
-        $infos = (object)$request->all();
-
+        
         // Validate and create admin
-        $userRules = [
-            'name' => 'required|unique:users',
-            'address' => 'required',
-            'tel' => 'required|min:9|max:9',
-            'email' => 'required|email|unique:users',
+        $rules = [
             'username' => 'required|unique:users',
-            'password' => 'required|min:8|confirmed'
+            'useraddress' => 'required',
+            'usertel' => 'required|min:9|max:9',
+            'useremail' => 'required|email|unique:users',
+            'userusername' => 'required|unique:users',
+            'userpassword' => 'required|min:8',
+
+            'snackname' => 'required|unique:snacks',
+            'snacktel1' => 'required|min:9|max:9',
+            'snackemail' => 'required|email|unique:snacks',
+
+            'sitename' => 'required|unique:sites',
+            'sitetel1' => 'required|min:9|max:9',
+            'siteemail' => 'required|email|unique:sites',
+            'sitestreet' => 'required',
+            'sitetown' => 'required'
         ];
-        $validator = Validator::make($infos->user, $userRules);
+
+        $validator = Validator::make($request, $rules);
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
 
         // Remove password_confirmation field to user array
-        $user = array_pop($infos->user);
-        $user = User::create($infos->user);
-        $user->is_admin = 2;
-        $user->save();
+
+        $user = User::create([
+            'name' => $request->username,
+            'email' => $request->useremail,
+            'username' => $request->userusername,
+            'address' => $request->useraddress,
+            'tel' => $request->usertel,
+            'password' => bcrypt($request->userpasswordpassword),
+            'is_admin' => 2
+        ]);
         $user->roles()->attach(5);
 
-         // Validate and create Snack
-         $snackRule = [
-            'name' => 'required|unique:snacks',
-            'tel1' => 'required|min:9|max:9',
-            'email' => 'required|email|unique:snacks',
-        ];
-        $validator = Validator::make($infos->snack, $snackRule);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
-        }
-
-        $snackVal = (object) $infos->snack;
-
         $snack = new Snack([
-            'name' => $snackVal->name,
-            'slug' => $this->makeSlug($snackVal->name),
-            'email' => $snackVal->email,
-            'tel1' => $snackVal->tel1,
-            'tel2' => $snackVal->tel2,
-            'town' => $snackVal->town,
-            'street' =>$snackVal->street,
+            'name' => $request->snackname,
+            'slug' => $this->makeSlug($request->snackname),
+            'email' => $request->snackemail,
+            'tel1' => $request->snacktel1,
+            'tel2' => $request->snacktel2,
+            'town' => $request->snacktown,
+            'street' =>$request->snackstreet,
             'user_id' => $user->id
         ]);
         $snack->save();
 
-
-        // Validate and create Site
-        $siteRules = [
-            'name' => 'required|unique:sites',
-            'tel1' => 'required|min:9|max:9',
-            'email' => 'required|email|unique:sites',
-            'street' => 'required',
-            'town' => 'required'
-        ];
-        $validator = Validator::make($infos->site, $siteRules);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
-        }
-
-        $siteVal = (object) $infos->site;
         $site = new Site([
-            'name' => $siteVal->name,
-            'slug' => $this->makeSlug($siteVal->name),
-            'email' => $siteVal->email,
-            'tel1' => $siteVal->tel1,
-            'tel2' => $siteVal->tel2,
-            'town' => $siteVal->town,
-            'street' =>$siteVal->street,
+            'name' => $request->sitename,
+            'slug' => $this->makeSlug($request->sitename),
+            'email' => $request->siteemail,
+            'tel1' => $request->sitetel1,
+            'tel2' => $request->sitetel2,
+            'town' => $request->sitetown,
+            'street' =>$request->sitestreet,
             'snack_id' => $snack->id
         ]);
         $site->save();
@@ -118,7 +106,6 @@ class UserController extends Controller
 
         return response()->json([
             "message" => "Operation success!",
-            "snack" => $snack->load('user','sites','types')
         ], 201); 
 
     }
