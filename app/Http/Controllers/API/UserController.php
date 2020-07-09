@@ -35,19 +35,19 @@ class UserController extends Controller
         
         // Validate and create admin
         $request->validate([
-            'username' => 'required|unique:users',
+            'username' => 'required',
             'useraddress' => 'required',
-            'usertel' => 'required|min:9|max:9',
+            'usertel' => 'required|min:9|max:9|unique:users,tel',
             'useremail' => 'required|email|unique:users,email',
             'userusername' => 'required|unique:users,username',
             'userpassword' => 'required|min:8',
 
             'snackname' => 'required|unique:snacks,name',
-            'snacktel1' => 'required|min:9|max:9',
+            'snacktel1' => 'required|min:9|max:9|unique:snacks,tel1',
             'snackemail' => 'required|email|unique:snacks,email',
 
             'sitename' => 'required|unique:sites,name',
-            'sitetel1' => 'required|min:9|max:9',
+            'sitetel1' => 'required|min:9|max:9|unique:sites,tel1',
             'siteemail' => 'required|email|unique:sites,email',
             'sitestreet' => 'required',
             'sitetown' => 'required'
@@ -61,7 +61,7 @@ class UserController extends Controller
             'username' => $request->userusername,
             'address' => $request->useraddress,
             'tel' => $request->usertel,
-            'password' => bcrypt($request->userpasswordpassword),
+            'password' => bcrypt($request->userpassword),
             'is_admin' => 2
         ]);
         $user->roles()->attach(5);
@@ -241,7 +241,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('site.snack','roles.permissions','permissions','agendas');
+        // $user->load('site.snack','roles.permissions','permissions','agendas');
+        return $user->load('site.snack','agendas')->with('roles');
         return new UserResource($user);
     }
 
