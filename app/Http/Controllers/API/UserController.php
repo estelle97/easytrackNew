@@ -34,29 +34,24 @@ class UserController extends Controller
     public function register(Request $request){
         
         // Validate and create admin
-        $rules = [
+        $request->validate([
             'username' => 'required|unique:users',
             'useraddress' => 'required',
             'usertel' => 'required|min:9|max:9',
-            'useremail' => 'required|email|unique:users',
-            'userusername' => 'required|unique:users',
+            'useremail' => 'required|email|unique:users,email',
+            'userusername' => 'required|unique:users,username',
             'userpassword' => 'required|min:8',
 
-            'snackname' => 'required|unique:snacks',
+            'snackname' => 'required|unique:snacks,name',
             'snacktel1' => 'required|min:9|max:9',
-            'snackemail' => 'required|email|unique:snacks',
+            'snackemail' => 'required|email|unique:snacks,email',
 
-            'sitename' => 'required|unique:sites',
+            'sitename' => 'required|unique:sites,name',
             'sitetel1' => 'required|min:9|max:9',
-            'siteemail' => 'required|email|unique:sites',
+            'siteemail' => 'required|email|unique:sites,email',
             'sitestreet' => 'required',
             'sitetown' => 'required'
-        ];
-
-        $validator = Validator::make($request, $rules);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
-        }
+        ]);
 
         // Remove password_confirmation field to user array
 
@@ -99,7 +94,7 @@ class UserController extends Controller
         $user->save();
 
         // Attach snack with his type of subscription
-        $type = Type::findOrFail($infos->type);
+        $type = Type::findOrFail($request->type);
         $snack->types()->attach($type->id,[
             'end_date' => Carbon::now()->addMonth($type->duration),
         ]);
