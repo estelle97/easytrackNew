@@ -241,8 +241,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        // $user->load('site.snack','roles.permissions','permissions','agendas');
-        return $user->load('site.snack','agendas')->with('roles');
+        $user->load('site.snack','roles.permissions','permissions','agendas');
         return new UserResource($user);
     }
 
