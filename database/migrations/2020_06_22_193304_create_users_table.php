@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('contact_tel')->nullable();
             $table->string('photo')->nullable();
             $table->string('address');
+            $table->string('bio')->nullable();
             $table->string('password');
             $table->enum('is_active', array('0', '1'))->default('1');
             $table->enum('is_admin', array('1', '2','3'))->default('1');

@@ -25,7 +25,7 @@ class Controller extends BaseController
         $twilio_number = getenv("TWILIO_NUMBER");
 
         $account_sid = "AC10531d636e939b0ee4c01cb7b4c0ec2a";
-        $auth_token = "b4308a2c326ff9876edd117a1a5fb2d1";
+        $auth_token = "18336d99571f306bcc0ff1d8c791e987";
         $twilio_number = "+12055840409";
 
         $client = new Client($account_sid, $auth_token);

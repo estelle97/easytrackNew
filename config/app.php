@@ -178,6 +178,8 @@ return [
         // Permission service provider
         App\Providers\PermissionsServiceProvider::class,
 
+        // Notify Service Provicer
+        Helmesvs\Notify\NotifyServiceProvider::class,
     ],
 
     /*
@@ -229,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Keygen' => Keygen\Keygen::class,
+        'Notify' => Helmesvs\Notify\Facades\Notify::class,
 
     ],
 

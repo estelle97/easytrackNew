@@ -32,7 +32,6 @@ class UserController extends Controller
 
         $data = $request->all();
         
-        
         $data['password'] = bcrypt($data['password']);
         User::create($data);
         notify()->success('Utilisateur créé avec succès', 'Création utilisateur');

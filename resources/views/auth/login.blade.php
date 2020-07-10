@@ -86,7 +86,6 @@
                 input.type = 'password';
             }
         });
-
     </script>
     @include('notify::messages')
 

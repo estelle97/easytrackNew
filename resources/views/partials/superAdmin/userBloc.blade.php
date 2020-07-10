@@ -2,18 +2,18 @@
     <div class="nav-item dropdown">
         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
             <span class="avatar"
-                style="background-image: url('https://ui-avatars.com/api/?name=Estelle+Belinga&background=FFFFFF&color=267FC9&font-size=0.30');">
+        style="background-image: url('https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=FFFFFF&color=267FC9&font-size=0.30');">
                 <span class="badge bg-red"></span>
             </span>
             <div class="d-none d-xl-block pl-2">
-                <div>Astride</div>
+            <div> {{Auth::user()->name}} </div>
                 <div class="mt-1 small text-muted">
                     Admin
                 </div>
             </div>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="./profile.html">
+            <a class="dropdown-item" href={{route('easytrack.profile')}}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                     class="icon dropdown-item-icon">
                     <path fill="none" d="M0 0h24v24H0z" />
@@ -22,7 +22,7 @@
                 </svg>
                 Mon profile
             </a>
-            <a class="dropdown-item" href="./agenda.html">
+            {{-- <a class="dropdown-item" href="./agenda.html">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                     class="icon dropdown-item-icon">
                     <path fill="none" d="M0 0h24v24H0z" />
@@ -30,7 +30,7 @@
                         d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8z" />
                 </svg>
                 Agenda
-            </a>
+            </a> --}}
             <a class="dropdown-item" href="./notifications.html">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                     class="icon dropdown-item-icon">
@@ -38,7 +38,7 @@
                     <path
                         d="M5 18h14v-6.969C19 7.148 15.866 4 12 4s-7 3.148-7 7.031V18zm7-16c4.97 0 9 4.043 9 9.031V20H3v-8.969C3 6.043 7.03 2 12 2zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
                 </svg>
-                Notifications
+                Notifications &nbsp;<span class="badge text-info"> 5 </span>
             </a>
             <a class="dropdown-item" href="./chat.html">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
@@ -47,7 +47,7 @@
                     <path
                         d="M10 3h4a8 8 0 1 1 0 16v3.5c-5-2-12-5-12-11.5a8 8 0 0 1 8-8zm2 14h2a6 6 0 1 0 0-12h-4a6 6 0 0 0-6 6c0 3.61 2.462 5.966 8 8.48V17z" />
                 </svg>
-                Chat
+                Chat  &nbsp;<span class="badge text-info"> 5 </span>
             </a>
             <a class="dropdown-item" href="./help.html">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
@@ -59,7 +59,7 @@
                 Aide
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href={{route('logout')}}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                     class="icon dropdown-item-icon">
                     <path fill="none" d="M0 0h24v24H0z" />

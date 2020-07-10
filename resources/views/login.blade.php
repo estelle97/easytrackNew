@@ -13,7 +13,7 @@
                         Authentifiez vous pour accéder à la plateforme
                     </h4>
                     <div class="mb-4">
-                        <div class="input-icon">
+                        <div class="input-icon {{$errors->has('login') ? 'bg-danger' : ''}}">
                             <span class="input-icon-addon ml-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
                                     <path fill="none" d="M0 0h24v24H0z" />
@@ -23,8 +23,9 @@
                             </span>
                             @csrf
                             <input type="text" name="login" id="login" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Email ou Nom d'utilisateur" autocomplete="off" />
+                                placeholder="Email ou Nom d'utilisateur" autocomplete="off" value="{{old('login')}}"/>
                         </div>
+                        {!! $errors->first('login','<span class="help-block"> :message </span>') !!}
                     </div>
                     <div class="mb-3">
                         <div class="input-icon">
@@ -38,7 +39,7 @@
                             <input type="password" name="password" id="password" class="auth-input form-control form-control-rounded py-2 px-5"
                                 placeholder="Mot de passe" />
                             <span class="input-icon-addon mr-2">
-                                <a href="#" class="link-secondary" title="Show password" data-toggle="tooltip"><svg
+                                <a id="show-password" class="link-secondary" title="Show password" data-toggle="tooltip"><svg
                                         xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                         stroke-linecap="round" stroke-linejoin="round">

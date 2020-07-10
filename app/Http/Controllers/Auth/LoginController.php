@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Helmesvs\Notify\Facades\Notify;
 
 class LoginController extends Controller
 {
@@ -40,16 +41,16 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        // if (Auth::check() && Auth::user()->is_admin == 3)
-        // {
-        //     $this->redirectTo = route('superadmin.dashboard');
-        // } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        // {
-        //     $this->redirectTo = route('admin.dashboard');
-        // } else{
-        //     $this->redirectTo = route('user.dashboard');
-        // }
-        // $this->middleware('guest')->except('logout');
+        if (Auth::check() && Auth::user()->is_admin == 3)
+        {
+            $this->redirectTo = route('easytrack.dashboard');
+        } elseif (Auth::check() && Auth::user()->is_admin == 2)
+        {
+            $this->redirectTo = route('admin.dashboard');
+        } else{
+            $this->redirectTo = route('user.dashboard');
+        }
+        $this->middleware('guest')->except('logout');
     }
 
     /**
@@ -78,9 +79,7 @@ class LoginController extends Controller
     protected function validateLogin(Request $request)
     {
         $messages = [
-            'identity.required' => 'L\'e-mail ou le nom d\'utilisateur doit être renseigné',
-            'email.exists' => 'Email ou nom d\'utilisateur déjà enregistré',
-            'username.exists' => 'Ce nom d\'utilisateur est déjà enregistré',
+            'login.required' => "L'adresse email ou le nom d'utilisateur doit être renseigné",
             'password.required' => 'Veuillez entrer un mot de passe',
         ];
 
@@ -91,28 +90,29 @@ class LoginController extends Controller
     }
 
     public function login(){
-
+        
         return view('login');
     }
 
     public function loginPost(Request $request) {
         $this->validateLogin($request);
 
+        
         $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))){
-            return redirect()->back()
-                        ->withErrors(['active' => "Login et/ou mot de passe incorrect"]);
+            Notify::warning('Login et/ou mot de passe incorrect', 'Informations incorrects');
+            return redirect()->back();
         }
 
         $user = $request->user();
 
         if($user->is_active == '0'){
-            notify()->warning("Ce copte a été suprimé, Veuillez contacter l'administrateur", 'Compte Supprimé');
-            return redirect()
-                    ->back()
-                    ->withErrors(['active' => "Ce compte a été supprimé. C'est tout ce que nous savons. Contactez l'assistance"]);
+            Auth::logout();
+            
+            Notify::warning("Ce copte a été suprimé, Veuillez contacter l'administrateur", "Compte Supprimé");
+            return redirect()->back();
         }
-        return redirect()->back();
+        return redirect()->route('admin.dashboard');
     }
 
     protected function logout(Request $request)

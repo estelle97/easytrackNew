@@ -36,6 +36,7 @@
         }
 
     </style>
+    @yield('styles')
 </head>
 {{-- End Head Section --}} 
 
@@ -54,12 +55,26 @@
                 </a>
         
                 {{-- User Bloc--}} 
-                    @include("partials.userBloc")
+                    @if (Auth::user()->is_admin == 1)
+                        
+                    @elseif(Auth::user()->is_admin == 2)
+                        @include("partials.admin.userBloc")
+                    @else
+                        @include("partials.superAdmin.userBloc")
+                    @endif
+
                 {{-- End User Bloc--}}
         
         
                 {{-- Menu de navigation--}}
-                    @include("partials.navigation")
+                    @if (Auth::user()->is_admin == 1)
+                        
+                    @elseif(Auth::user()->is_admin == 2)
+                        @include("partials.admin.navigation")
+                    @else
+                    @include("partials.superAdmin.navigation")
+                    @endif
+                    
                 {{-- End Menu de navigation--}}
         
             </div>
@@ -71,11 +86,11 @@
             <div class="container-xl">
 
                 @yield('content')
-                
+
             </div>
 
             {{-- Footer --}}
-                @include('partials.footer')
+                @include("partials.admin.navigation")
             {{-- End Footer--}}
             
         </div>
@@ -496,6 +511,8 @@
         document.body.style.display = "block"
 
     </script>
+    @yield('scripts')
+    {!! Notify::render() !!}
 </body>
 
 </html>
