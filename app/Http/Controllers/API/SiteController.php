@@ -16,7 +16,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return SiteResource::collection(Site::where('is_active', '1')->get()->load('users','snack','products','suppliers'));
+        return SiteResource::collection(Site::where('active', '1')->get()->load('users','snack','products','suppliers'));
     }
 
     /**

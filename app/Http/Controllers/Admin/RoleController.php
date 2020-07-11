@@ -94,7 +94,7 @@ class RoleController extends Controller
             'name' => [
                 'max:255',
                 Rule::unique('roles')->ignore($request->role_id)->where(function ($query) {
-                    return $query->where('is_active', 1);
+                    return $query->where('active', 1);
                 }),
             ],
         ]);

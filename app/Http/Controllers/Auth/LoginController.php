@@ -106,7 +106,7 @@ class LoginController extends Controller
 
         $user = $request->user();
 
-        if($user->is_active == '0'){
+        if($user->active == '0'){
             Auth::logout();
             
             Notify::warning("Ce copte a été suprimé, Veuillez contacter l'administrateur", "Compte Supprimé");

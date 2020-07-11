@@ -135,7 +135,7 @@ class UserController extends Controller
         //     return response()->json(['message' => 'username/password incorrect'], 401);
         
         $user = $request->user();
-        if($user->is_active == '0'){
+        if($user->active == '0'){
             return response()->json([
                 'message' => 'User was deleted',
             ],
@@ -179,7 +179,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('is_active', '1')->get()->load(['site' => function($query){
+        $users = User::where('active', '1')->get()->load(['site' => function($query){
                                                         $query->where('sites.id','1');
                                                     }],'roles.permissions','permissions','agendas');
         return UserResource::collection($users);
@@ -305,7 +305,7 @@ class UserController extends Controller
      * @return \Illuminate\http\Response
      */
     public function activateUser(User $user){
-        $user->is_active = '1';
+        $user->active = '1';
         $user->save();
 
         return response()->json([
@@ -342,11 +342,11 @@ class UserController extends Controller
             $otherManager = User::where('is_admin','2')->where('id','!=',$user->id)->where('site_id',$user->site_id)->first();   // retreive the others managers
             if(!$otherManager){     // if there are not another manager
                $site = \App\Site::find($user->site_id);
-               $site->is_active = '0';
+               $site->active = '0';
                $site->save();
             }
         }
-        $user->is_active = '0';
+        $user->active = '0';
         $user->save();
 
         return response()->json([

@@ -20,9 +20,9 @@ class CreateSalesTable extends Migration
             $table->bigInteger('site_id')->nullable();
             $table->integer('quantity');
             $table->integer('selling_price');
-            $table->enum('is_active', array('0', '1'))->default('1');
-            $table->enum('status', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
             $table->foreign('invoice_id')
                 ->references('id')
                 ->on('invoices')

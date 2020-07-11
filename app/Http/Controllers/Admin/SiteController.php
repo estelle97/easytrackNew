@@ -20,7 +20,7 @@ class SiteController extends Controller
         ->join('users', 'snacks.user_id', '=', 'users.id')
         ->select('sites.id','sites.name','sites.email','sites.slug','snacks.name','users.name', 'snacks.email')
         ->get();*/
-        $lims_site_all = Site::where('is_active', '1')->get()->load('users','snack','products','suppliers');
+        $lims_site_all = Site::where('active', '1')->get()->load('users','snack','products','suppliers');
         return view('admin.sites.index', compact('user', 'lims_site_all'));
     }
 
@@ -32,7 +32,7 @@ class SiteController extends Controller
         $site->snack_id = 100;
         $site->email = $request->email;
         $site->tel1 = $tel_code.$request->tel1;
-        $site->is_active = 1;
+        $site->active = 1;
         $site->tel2 = $tel_code.$request->tel2;
         $site->town = $request->town;
         $site->name = $request->name;

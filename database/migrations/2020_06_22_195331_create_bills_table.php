@@ -16,11 +16,13 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('site_id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('initiator')->nullagle();
+            $table->bigInteger('validator')->nullable();
             $table->string('code')->unique();
             $table->enum('status', array('0', '1'))->default('0');
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
         });
     }
    

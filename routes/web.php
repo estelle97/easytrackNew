@@ -74,7 +74,16 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileEdit' , 'as' => 'easytrack.profile.edit']);
     Route::post('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileUpdate' , 'as' => 'easytrack.profile.update']);
     Route::get('easytrack/profile/settings', ['uses' => 'SuperAdmin\DashboardController@profileSettings' , 'as' => 'easytrack.profile.settings']);
+    Route::get('easytrack/roles', 'SuperAdmin\RoleController@index')->name('easytrack.roles');
+
+    Route::post('easytrack/roles/add', 'SuperAdmin\RoleController@store');
+    Route::post('easytrack/roles/update', 'SuperAdmin\RoleController@update');
+    Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
+    Route::post('easytrack/roles/attachPermissionToRole', 'SuperAdmin\RoleController@attachPermissionToRole');
+    
 });
+
+
 
 
 Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth', 'active', 'superadmin']], function() {
@@ -88,10 +97,6 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
     Route::get('user/genpass', 'SuperAdmin\DashboardController@generatePassword');
     
 });
-
-Route::post('roles/add', 'Admin\RoleController@store');
-Route::post('roles/detachPermissionToRole', 'Admin\RoleController@detachPermissionToRole');
-Route::post('roles/attachPermissionToRole', 'Admin\RoleController@attachPermissionToRole');
 
 
 

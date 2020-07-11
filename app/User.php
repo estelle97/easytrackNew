@@ -9,13 +9,14 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Permissions\HasPermissionsTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use HasApiTokens,HasPermissionsTrait;
+    use HasApiTokens,HasPermissionsTrait, SoftDeletes;
     use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
     /**
@@ -28,7 +29,7 @@ class User extends Authenticatable
     protected $dates = ['created_at'];
 
     protected $fillable = [
-        'name', 'address', 'tel',"email", "username", "password", "is_active", "is_admin"
+        'name', 'address', 'tel',"email", "username", "password", "active", "is_admin"
     ];
 
     /**
@@ -58,7 +59,7 @@ class User extends Authenticatable
     }
     public function isActive()
     {
-        return $this->is_active;
+        return $this->active;
     }
 
     public function snacks(){

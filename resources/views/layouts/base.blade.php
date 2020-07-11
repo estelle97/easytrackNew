@@ -100,7 +100,7 @@
 
     {{-- Libs JS --}}
     <script src={{asset("template/assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/jquery/dist/jquery.slim.min.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/jquery/dist/jquery.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/apexcharts/dist/apexcharts.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/jqvmap/dist/jquery.vmap.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/jqvmap/dist/maps/jquery.vmap.world.js")}}></script>
@@ -511,8 +511,8 @@
         document.body.style.display = "block"
 
     </script>
-    @yield('scripts')
     {!! Notify::render() !!}
+    @yield('scripts')
 </body>
 
 </html>

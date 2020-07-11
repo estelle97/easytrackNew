@@ -20,6 +20,7 @@ class CreateAgendasTable extends Migration
             $table->enum('status', array('1', '0'))->default('1');
             $table->dateTime('end');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

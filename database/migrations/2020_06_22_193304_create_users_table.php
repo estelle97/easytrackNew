@@ -25,13 +25,14 @@ class CreateUsersTable extends Migration
             $table->string('contact_tel')->nullable();
             $table->string('photo')->nullable();
             $table->string('address');
-            $table->string('bio')->nullable();
+            $table->text('bio')->nullable();
             $table->string('password');
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->enum('is_admin', array('1', '2','3'))->default('1');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
         });
     }
  

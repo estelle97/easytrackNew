@@ -15,11 +15,12 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

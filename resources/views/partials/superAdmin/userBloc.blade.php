@@ -8,7 +8,7 @@
             <div class="d-none d-xl-block pl-2">
             <div> {{Auth::user()->name}} </div>
                 <div class="mt-1 small text-muted">
-                    Admin
+                    Super Admin
                 </div>
             </div>
         </a>

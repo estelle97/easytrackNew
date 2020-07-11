@@ -115,7 +115,7 @@
                                         </div>
                                     </div>
                                     <div class="col-auto lh-1 align-self-start">
-                                        @if($users->is_active)
+                                        @if($users->active)
                                             <span class="badge bg-green-lt">
                                                 Actif
                                             </span>

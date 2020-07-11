@@ -19,12 +19,13 @@ class CreateSnacksTable extends Migration
             $table->string('name')->unique();
             $table->string('email')->nullable();
             $table->string('tel1')->nullable();
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->string('tel2')->nullable();
             $table->string('town')->nullable();
             $table->string('street')->nullable();
             $table->string('logo')->nullable();
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

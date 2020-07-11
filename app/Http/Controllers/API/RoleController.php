@@ -116,7 +116,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $role->is_active = '0';
+        $role->active = '0';
         $role->save();
 
         return response()->json([
