@@ -25,6 +25,8 @@
     <link rel="icon" href="../../assets/static/favicon.png" type="image/png" />
     <link rel="shortcut icon" href="../../assets/static/favicon.png" type="image/png" />
     <!-- CSS files -->
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-material.css">
     <link href="../../assets/dist/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/easytrak.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/demo.min.css" rel="stylesheet" />
@@ -35,6 +37,8 @@
         }
 
     </style>
+    <!-- JS files -->
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
 </head>
 
 <body class="antialiased">
@@ -283,121 +287,7 @@
                     </div>
                 </div>
                 <div class="row row-deck row-cards">
-                    <div class="card">
-                        <div class="table-responsive">
-                            <table class="table card-table table-vcenter text-nowrap datatable">
-                                <thead>
-                                    <tr>
-                                        <th class="w-1"><input class="form-check-input m-0 align-middle"
-                                                type="checkbox"></th>
-                                        <th>Logo</th>
-                                        <th>Nom</th>
-                                        <th>Ville</th>
-                                        <th>Email</th>
-                                        <th>Tel</th>
-                                        <th>Tel</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                aria-label="Select invoice"></td>
-                                        <td>
-                                            <span class="avatar avatar-md" style="background-image: url(https://ui-avatars.com/api/?name=Black+White)"></span>
-                                        </td>
-                                        <td><a href="./user-profile.html" class="text-reset" tabindex="-1">Black & white</a>
-                                        </td>
-                                        <td>
-                                            Yaoundé
-                                        </td>
-                                        <td>
-                                            service@blackandwhite.com
-                                        </td>
-                                        <td>
-                                            +237 691234567
-                                        </td>
-                                        <td>
-                                            +237 678214588
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div class="d-flex mb-1 align-items-center lh-1">
-                                                    <div class="text-h5 font-weight-bolder m-0">
-                                                        1 an
-                                                    </div>
-                                                    <span class="ml-auto text-h6 strong">60%</span>
-                                                </div>
-                                                <div class="progress progress-sm">
-                                                    <div class="progress-bar bg-blue" style="width: 60%;" role="progressbar"
-                                                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">60% d'utilisation</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <a href="#" class="btn btn-white btn-sm mt-1">
-                                                Modifier
-                                            </a>
-                                            <span class="dropdown">
-                                                <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                                    data-boundary="viewport" data-toggle="dropdown">Actions</button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#">
-                                                        Dupiquer
-                                                    </a>
-                                                    <a class="dropdown-item" href="#">
-                                                        Marquer comme inactif
-                                                    </a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                            width="18" height="18" class="mr-2">
-                                                            <path fill="none" d="M0 0h24v24H0z" />
-                                                            <path
-                                                                d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                        </svg>
-                                                        Supprimer
-                                                    </a>
-                                                </div>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="card-footer d-flex align-items-center">
-                            <p class="m-0 text-muted">Affichage <span>1</span> à <span>10</span> de <span>30</span>
-                                élements</p>
-                            <ul class="pagination m-0 ml-auto">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <polyline points="15 6 9 12 15 18" /></svg>
-                                        précédent
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        suivant <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <polyline points="9 6 15 12 9 18" /></svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div id="easyTable" class="card ag-theme-material" style="height: 700px;"></div>
                 </div>
             </div>
             <footer class="footer footer-transparent">
@@ -489,7 +379,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal modal-blur fade" id="modal-delete-user" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal modal-blur fade" id="modal-delete-snack" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-body">
@@ -513,6 +403,428 @@
 
     <script>
         document.body.style.display = "block";
+        self.actionsCellRender = function () { };
+        self.actionsCellRender.prototype = {
+            init: function (params) {
+                this.actionsButtons = document.createElement('div');
+                /* this.actionsButtons.innerHTML = `
+                    <div>
+                        <a href="#" class="btn btn-white btn-sm mt-1">
+                            Modifier
+                        </a>
+                        <span class="dropdown">
+                            <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                data-boundary="viewport" data-toggle="dropdown">Actions</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">
+                                    Dupiquer
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    Marquer comme inactif
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    Ajouter à une categorie
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        width="18" height="18" class="mr-2">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                    </svg>
+                                    Supprimer
+                                </a>
+                            </div>
+                        </span>
+                    </div>
+                `; */
+                this.actionsButtons.innerHTML = `
+                    <div>
+                        <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-snack">
+                            Modifier
+                        </a>
+                        <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-delete-snack">
+                            Supprimer
+                        </a>
+                    </div>
+                `;
+            },
+            getGui: function () {
+                return this.actionsButtons;
+            },
+            refresh: function () {
+                return true;
+            },
+            destroy: function () {
+                $(this.actionsButtons).remove();
+            },
+            isPopup(){
+                return true;
+            }
+        };
+
+        self.logoCellRender = function () { };
+        self.logoCellRender.prototype = {
+            init: function (params) {
+                this.companyLogo = document.createElement('div');
+                this.companyLogo.innerHTML = `
+                    <span class="avatar avatar-md" style="background-image: url('${params.data.logo}')"></span>
+                `;
+            },
+            getGui: function () {
+                return this.companyLogo;
+            },
+            refresh: function () {
+                return true;
+            },
+            destroy: function () {
+                $(this.companyLogo).remove();
+            },
+            isPopup(){
+                return true;
+            }
+        };
+
+        self.licenceCellRender = function () { };
+        self.licenceCellRender.prototype = {
+            init: function (params) {
+                this.snackLicence = document.createElement('div');
+                this.snackLicence.innerHTML = `
+                    <div class="d-flex mt-3 mb-1 align-items-center lh-1">
+                        <div class="text-h5 font-weight-bolder m-0">
+                            1 an
+                        </div>
+                        <span class="ml-auto text-h6 strong">60%</span>
+                    </div>
+                    <div class="progress progress-sm">
+                        <div class="progress-bar bg-blue" style="width: 60%;" role="progressbar"
+                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">60% d'utilisation</span>
+                        </div>
+                    </div>
+                `;
+            },
+            getGui: function () {
+                return this.snackLicence;
+            },
+            refresh: function () {
+                return true;
+            },
+            destroy: function () {
+                $(this.snackLicence).remove();
+            },
+            isPopup(){
+                return true;
+            }
+        };
+
+        var columnDefs = [
+            {
+                headerName: "Name",
+                field: "name",
+                sortable: true,
+                minWidth: 200,
+                checkboxSelection: function(params) {
+                    // we put checkbox on the name if we are not doing grouping
+                    return params.columnApi.getRowGroupColumns().length === 0;
+                },
+                headerCheckboxSelection: function(params) {
+                    // we put checkbox on the name if we are not doing grouping
+                    return params.columnApi.getRowGroupColumns().length === 0;
+                },
+            },
+            {headerName: "Logo", field: "logo", sortable: true, cellRenderer: logoCellRender, suppressSorting: true},
+            {headerName: "Nom", field: "name", sortable: true},
+            {headerName: "Ville", field: "town", sortable: true},
+            {headerName: "Email", field: "email", sortable: true},
+            {headerName: "Telphone N°1", field: "tel1"},
+            {headerName: "Telphone N°2", field: "tel2"},
+            {headerName: "Licence", field: "licence", cellRenderer: licenceCellRender},
+            {headerName: "Actions", field: "actions", cellRenderer: actionsCellRender, suppressSorting: true},
+        ];
+
+        // specify the data
+        var rowData = [
+            {
+                "id": "5f09f7e12085c3c944654fbc",
+                "logo": "https://ui-avatars.com/api/?name=Supportal&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Zytrex",
+                "email": "zytrex@undefined.biz",
+                "tel1": "(862) 446-3377",
+                "tel2": "(904) 548-3977",
+                "town": "Kenwood",
+                "street": "Bouck Court",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e115a1ddd741be1d0f",
+                "logo": "https://ui-avatars.com/api/?name=Tingles&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Volax",
+                "email": "volax@undefined.biz",
+                "tel1": "(804) 511-3853",
+                "tel2": "(826) 417-3968",
+                "town": "Oley",
+                "street": "Barlow Drive",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e111dbc30ae3d4315b",
+                "logo": "https://ui-avatars.com/api/?name=Steeltab&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Andryx",
+                "email": "andryx@undefined.me",
+                "tel1": "(887) 429-2292",
+                "tel2": "(863) 469-2119",
+                "town": "Nadine",
+                "street": "Little Street",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e1f68b054fe242cb6d",
+                "logo": "https://ui-avatars.com/api/?name=Apexia&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Remold",
+                "email": "remold@undefined.net",
+                "tel1": "(879) 474-2366",
+                "tel2": "(935) 458-3955",
+                "town": "Brookfield",
+                "street": "Homecrest Court",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e1025f120725c068ea",
+                "logo": "https://ui-avatars.com/api/?name=Sustenza&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Futurity",
+                "email": "futurity@undefined.io",
+                "tel1": "(901) 413-2929",
+                "tel2": "(817) 599-3695",
+                "town": "Temperanceville",
+                "street": "Decatur Street",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e181db4a0ba81700f9",
+                "logo": "https://ui-avatars.com/api/?name=Vertide&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Medicroix",
+                "email": "medicroix@undefined.org",
+                "tel1": "(879) 486-2104",
+                "tel2": "(824) 433-2677",
+                "town": "Stevens",
+                "street": "Elliott Walk",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e1d1b991223d586e63",
+                "logo": "https://ui-avatars.com/api/?name=Pigzart&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Enquility",
+                "email": "enquility@undefined.info",
+                "tel1": "(848) 472-2113",
+                "tel2": "(916) 471-3240",
+                "town": "Hoagland",
+                "street": "Suydam Street",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e135de08626fde1fe6",
+                "logo": "https://ui-avatars.com/api/?name=Cogentry&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Kyaguru",
+                "email": "kyaguru@undefined.com",
+                "tel1": "(881) 448-2464",
+                "tel2": "(852) 496-3079",
+                "town": "Oasis",
+                "street": "Cypress Avenue",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e192c46cb5cce614a8",
+                "logo": "https://ui-avatars.com/api/?name=Hydrocom&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Geoforma",
+                "email": "geoforma@undefined.us",
+                "tel1": "(875) 516-3450",
+                "tel2": "(939) 428-3405",
+                "town": "Coultervillle",
+                "street": "Vanderbilt Street",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e1b931d57673ed777b",
+                "logo": "https://ui-avatars.com/api/?name=Dadabase&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Aquamate",
+                "email": "aquamate@undefined.ca",
+                "tel1": "(901) 592-2533",
+                "tel2": "(828) 555-3966",
+                "town": "Geyserville",
+                "street": "Vandam Street",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e1802351c4c274f0ff",
+                "logo": "https://ui-avatars.com/api/?name=Pivitol&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Eclipto",
+                "email": "eclipto@undefined.tv",
+                "tel1": "(906) 527-3471",
+                "tel2": "(948) 408-3353",
+                "town": "Coinjock",
+                "street": "Humboldt Street",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e1018c78b6640fe71d",
+                "logo": "https://ui-avatars.com/api/?name=Paragonia&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Recritube",
+                "email": "recritube@undefined.name",
+                "tel1": "(849) 523-3214",
+                "tel2": "(965) 587-3683",
+                "town": "Breinigsville",
+                "street": "Portland Avenue",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e18320dd665ae4f64d",
+                "logo": "https://ui-avatars.com/api/?name=Centrexin&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Golistic",
+                "email": "golistic@undefined.biz",
+                "tel1": "(992) 551-2784",
+                "tel2": "(818) 486-3419",
+                "town": "Hessville",
+                "street": "Croton Loop",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e1c7ac5e7614ada8ca",
+                "logo": "https://ui-avatars.com/api/?name=Cormoran&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Spacewax",
+                "email": "spacewax@undefined.biz",
+                "tel1": "(824) 431-2501",
+                "tel2": "(906) 403-3674",
+                "town": "Vernon",
+                "street": "Kensington Walk",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e169043eca07ecff4c",
+                "logo": "https://ui-avatars.com/api/?name=Codact&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Artiq",
+                "email": "artiq@undefined.me",
+                "tel1": "(913) 515-3234",
+                "tel2": "(925) 541-2818",
+                "town": "Keyport",
+                "street": "Graham Avenue",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e1f0e881c2d6f34ab2",
+                "logo": "https://ui-avatars.com/api/?name=Architax&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Eclipsent",
+                "email": "eclipsent@undefined.net",
+                "tel1": "(855) 415-2374",
+                "tel2": "(943) 451-2564",
+                "town": "Centerville",
+                "street": "Bank Street",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e16282ea102e0dbf67",
+                "logo": "https://ui-avatars.com/api/?name=Exotechno&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Fiberox",
+                "email": "fiberox@undefined.io",
+                "tel1": "(903) 505-2979",
+                "tel2": "(998) 456-3704",
+                "town": "Chesterfield",
+                "street": "Boardwalk ",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e15ce8d37062e9a5ce",
+                "logo": "https://ui-avatars.com/api/?name=Microluxe&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Zentia",
+                "email": "zentia@undefined.org",
+                "tel1": "(869) 548-2422",
+                "tel2": "(972) 402-2414",
+                "town": "Ebro",
+                "street": "Just Court",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e1c97207e1d0f177b0",
+                "logo": "https://ui-avatars.com/api/?name=Paprikut&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Honotron",
+                "email": "honotron@undefined.info",
+                "tel1": "(978) 400-2923",
+                "tel2": "(981) 429-3460",
+                "town": "Dante",
+                "street": "Kansas Place",
+                "active": 0
+            },
+            {
+                "id": "5f09f7e1a3038c1b1a94291b",
+                "logo": "https://ui-avatars.com/api/?name=Frosnex&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Newcube",
+                "email": "newcube@undefined.com",
+                "tel1": "(841) 433-2873",
+                "tel2": "(853) 428-2850",
+                "town": "Bellfountain",
+                "street": "Merit Court",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e1b6316a7f50a84a28",
+                "logo": "https://ui-avatars.com/api/?name=Housedown&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Toyletry",
+                "email": "toyletry@undefined.us",
+                "tel1": "(865) 450-3444",
+                "tel2": "(846) 468-2644",
+                "town": "Broadlands",
+                "street": "Bowery Street",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e1d0918c36d98273c7",
+                "logo": "https://ui-avatars.com/api/?name=Sunclipse&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Zialactic",
+                "email": "zialactic@undefined.ca",
+                "tel1": "(926) 583-2610",
+                "tel2": "(842) 552-3868",
+                "town": "Bagtown",
+                "street": "Degraw Street",
+                "active": 1
+            },
+            {
+                "id": "5f09f7e1cb5e5db14b2c8965",
+                "logo": "https://ui-avatars.com/api/?name=Techmania&background=267FC9&color=FFFFFF&font-size=0.30",
+                "name": "Retrotex",
+                "email": "retrotex@undefined.tv",
+                "tel1": "(865) 577-2712",
+                "tel2": "(828) 484-2483",
+                "town": "Columbus",
+                "street": "Kathleen Court",
+                "active": 0
+            }
+            ];
+
+        // let the grid know which columns and what data to use
+        var gridOptions = {
+            columnDefs: columnDefs,
+            rowData: rowData,
+            defaultColDef: {
+                flex: 1,
+                minWidth: 200,
+                resizable: true,
+            },
+            rowSelection: 'multiple',
+            rowMultiSelectWithClick: true,
+            checkboxSelection: true,
+            enableRangeSelection: true,
+            enableColResize: true,
+            enableFilter: true,
+            enableSorting: true,
+            pagination: true
+        };
+
+        // setup the grid after the page has finished loading
+        document.addEventListener('DOMContentLoaded', function() {
+            var gridDiv = document.querySelector('#easyTable');
+            new agGrid.Grid(gridDiv, gridOptions);
+        });
 
     </script>
 </body>
