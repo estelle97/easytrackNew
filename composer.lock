@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aec05a1dc14f56d764b8a588e1b26c12",
+    "content-hash": "d8a582a476948e6567c5c4e044058e66",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1000,6 +1000,53 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "helmesvs/laravel-notify",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Helmesvs/laravel-notify.git",
+                "reference": "fe6a4556927d3c08f7cf9623bfb9c633d79cc351"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Helmesvs/laravel-notify/zipball/fe6a4556927d3c08f7cf9623bfb9c633d79cc351",
+                "reference": "fe6a4556927d3c08f7cf9623bfb9c633d79cc351",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": ">=5.0.0",
+                "illuminate/support": ">=5.0.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Helmesvs\\Notify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Helmes V. Santos",
+                    "email": "helmesvs@hotmail.com"
+                }
+            ],
+            "description": "Elegant notifications to laravel with Toastr or PNotify",
+            "homepage": "https://github.com/Helmesvs/laravel-notify",
+            "keywords": [
+                "laravel",
+                "notification",
+                "notify",
+                "php",
+                "pnotify",
+                "toastr"
+            ],
+            "time": "2017-10-17T18:45:21+00:00"
         },
         {
             "name": "highideas/laravel-users-online",

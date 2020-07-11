@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Twilio\Jwt\ClientToken;
 use Keygen;
 use Auth;
+use Helmesvs\Notify\Facades\Notify;
 
 class ForgotPasswordController extends Controller
 {
@@ -43,25 +44,35 @@ class ForgotPasswordController extends Controller
         return view('forgotPassword');
     }
 
-    /**
-     * Sends sms to user using Twilio's programmable sms client
-     * @param String $message Body of sms
-     * @param Number $recipients string or array of phone number of recepient
-     */
-    public function sendMessage($message, $recipients)
-    {
-        $account_sid = getenv("TWILIO_ACCOUNT_ID");
-        $auth_token = getenv("TWILIO_AUTH_TOKEN");
-        $twilio_number = getenv("TWILIO_NUMBER");
-        $client = new Client($account_sid, $auth_token);
-        $client->messages->create($recipients, 
-                ['from' => $twilio_number, 'body' => $message] );
-    }
 
     public function generatePassword()
     {
         $id = Keygen::numeric(6)->generate();
          return $id;
+    }
+
+    /**
+     * Detach Roles to a User
+     * @param String login
+     */
+    public function passwordRequest(Request $request){
+        $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('tel', $request->login)->first();
+        if($user){
+            $password = "newPassword";
+            $this->sendMessage(
+                "Votre nouveau mot de passe est le suivant: $password",
+                $user->tel
+            );
+
+            $user->password = bcrypt($password);
+            $user->save();
+
+            Notify::success("Votre nouveau mot de passe vous a été par SMS");
+            return redirect()->route('login');
+        }
+        
+        Notify::error("Aucun utilisateur ne corresond à ces informations");
+        return redirect()->back();
     }
 
     public function store(PasswordStoreRequest $request)

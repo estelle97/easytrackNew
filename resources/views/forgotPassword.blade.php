@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-lg-4 d-flex flex-row align-items-center">
     <div class="container-tight">
-        <form class="card card-md auth-card pt-6 pb-5 px-3" action="." method="get">
+        <form class="card card-md auth-card pt-6 pb-5 px-3" action="" method="post">
             <div class="card-body mb-5">
                 <div class="text-center mb-5">
                     <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
@@ -21,9 +21,11 @@
                                     d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
                             </svg>
                         </span>
+                        @csrf 
                         <input type="text" name="login" class="auth-input form-control form-control-rounded py-2 px-5"
-                            placeholder="Entrez votre login" autocomplete="off" />
+                            placeholder="Entrez votre login" autocomplete="off" value="{{old('login')}}" />
                     </div>
+                    {!! $errors->first('login','<span class="help-block"> :message </span>') !!}
                 </div>
                 <div class="form-footer">
                     <button type="submit" class="btn btn-gradient btn-block btn-pill btn-no-border">

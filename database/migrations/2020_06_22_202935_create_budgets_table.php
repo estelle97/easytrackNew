@@ -20,6 +20,7 @@ class CreateBudgetsTable extends Migration
             $table->integer('amount');
             $table->enum('type', array('fixed', 'variable'))->default('fixed');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
             $table->foreign('site_id')
                 ->references('id')
                 ->on('sites')

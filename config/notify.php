@@ -86,4 +86,24 @@ return [
         ],
     ],
 
+    'options' => [
+        'lib' => 'toastr',
+        'style' => 'default',
+        'include:Animate' => false,
+    ],
+
+    'ToastrOptions' => [
+        "closeButton" => false,
+        "closeHtml" => '',
+        "newestOnTop" => true,
+        "progressBar" => false,
+    ],
+
+    'PNotifyOptions' => [
+        'title_escape' => false,
+        'text_escape' => false,
+        'styling' => 'brighttheme',
+        'addclass' => '',
+    ]
+
 ];

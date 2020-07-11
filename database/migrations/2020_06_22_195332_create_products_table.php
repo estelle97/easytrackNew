@@ -20,8 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('code')->nullable();
             $table->text('description')->nullable();
             $table->string('brand')->nullable();
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')

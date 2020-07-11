@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection(Product::where('is_active','1')->get()->load('category','sites'));
+        return ProductResource::collection(Product::where('active','1')->get()->load('category','sites'));
     }
 
     /**

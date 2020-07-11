@@ -17,7 +17,6 @@ Route::redirect('/', 'login');
 
 //Auth::routes(['register' => false]);
 
-Auth::routes();
 
 /*
 * Authentification
@@ -42,39 +41,54 @@ Route::post('register', [
     'uses' => 'Auth\RegisterController@store',
     'as' => 'register.post'
 ]);
-
+    
+/*
+* Password
+*/
 Route::get('password-forgot', [
     'as' => 'password-forgot',
     'uses' => 'Auth\ForgotPasswordController@index'
 ]);
 
+Route::post('password-forgot', [
+    'as' => 'password-forgot.post',
+    'uses' => 'Auth\ForgotPasswordController@passwordRequest'
+]);
 
-/*
-* Password
-*/
-Route::get('password', 'Auth\ForgotPasswordController@index')->name('password.index');
-Route::post('password', 'Auth\ForgotPasswordController@store')->name('password.store');
+
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboard', 'HomeController@dashboard');
-    Route::get('logout', 'Admin\DashboardController@logout');
+    Route::get('logout', 'Admin\DashboardController@logout')->name('logout');
    
+    Route::get('admin/dashboard', ['as'=> 'admin.dashboard','uses' => 'Admin\DashboardController@index']);
+    Route::get('admin/profil',[ 'uses' => 'Admin\DashboardController@profile','as' => 'admin.profile']);
+    Route::get('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileEdit' , 'as' => 'admin.profile.edit']);
+    Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
+    Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
+
+
+
+    Route::get('easytrack/dashboard', ['as'=> 'easytrack.dashboard','uses' => 'SuperAdmin\DashboardController@index']);
+    Route::get('easytrack/profil',[ 'uses' => 'SuperAdmin\DashboardController@profile','as' => 'easytrack.profile']);
+    Route::get('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileEdit' , 'as' => 'easytrack.profile.edit']);
+    Route::post('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileUpdate' , 'as' => 'easytrack.profile.update']);
+    Route::get('easytrack/profile/settings', ['uses' => 'SuperAdmin\DashboardController@profileSettings' , 'as' => 'easytrack.profile.settings']);
+    Route::get('easytrack/roles', 'SuperAdmin\RoleController@index')->name('easytrack.roles');
+
+    Route::post('easytrack/roles/add', 'SuperAdmin\RoleController@store');
+    Route::post('easytrack/roles/update', 'SuperAdmin\RoleController@update');
+    Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
+    Route::post('easytrack/roles/attachPermissionToRole', 'SuperAdmin\RoleController@attachPermissionToRole');
     
 });
 
-Route::get('dashboardTest', [
-    'as'=> 'admin.dashboard',
-    'uses' => 'Admin\DashboardController@index'
-]);
 
-Route::get('userTest', [
-    'as' => 'admin.users',
-    'uses' => 'Admin\UserController@index'
-]);
+
 
 Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth', 'active', 'superadmin']], function() {
 
-    //Route::get('/', 'HomeController@index');
+
     Route::get('dashboard', 'SuperAdmin\DashboardController@index')->name('dashboard');
 
     Route::get('user/profile/{id}', 'SuperAdmin\DashboardController@profile')->name('user.profile');
@@ -83,10 +97,6 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
     Route::get('user/genpass', 'SuperAdmin\DashboardController@generatePassword');
     
 });
-
-Route::post('roles/add', 'Admin\RoleController@store');
-Route::post('roles/detachPermissionToRole', 'Admin\RoleController@detachPermissionToRole');
-Route::post('roles/attachPermissionToRole', 'Admin\RoleController@attachPermissionToRole');
 
 
 

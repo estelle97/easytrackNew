@@ -21,9 +21,9 @@ class CreateOrdersTable extends Migration
             $table->integer('quantity');
             $table->integer('damages')->default(0);
             $table->integer('purchase_price');
-            $table->enum('status', array('0', '1'))->default('1');
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
             $table->foreign('bill_id')
                 ->references('id')
                 ->on('bills')

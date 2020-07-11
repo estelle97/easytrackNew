@@ -61,15 +61,26 @@
 
     </div>
     <!-- Libs JS -->
-
-    <script src={{asset("template/assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js")}}> </script>
+    <script src={{asset("template/assets/dist/libs/jquery/dist/jquery.slim.min.js")}}> </script>
+    <script src={{asset("template/assets/dist/libs/jquery/dist/jquery.min.js")}}> </script>
     <!-- easytrak Core -->
     <script src={{asset("template/assets/dist/js/easytrak.min.js")}}> </script>
     <script>
         document.body.style.display = "block";
 
+        // Show and hide password
+        $("#show-password").click(function(){
+            let input = document.getElementById('password');
+            if (input.type == "password") {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
+        });
     </script>
     @yield('scripts')
+
+    {!! Notify::render() !!}
 </body>
 
 </html>

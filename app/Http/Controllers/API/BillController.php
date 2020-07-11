@@ -16,7 +16,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        return BillResource::collection(Bill::where('is_active','1')->get()->load('products'));
+        return BillResource::collection(Bill::where('active','1')->get()->load('products'));
     }
 
     /**

@@ -23,6 +23,7 @@ class CreateNotificationsTable extends Migration
             $table->enum('status', ['0','1'])->default('1');
             $table->string('action');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
         });
     }
  

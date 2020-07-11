@@ -19,7 +19,7 @@ class CreateSubscriptionsTable extends Migration
             $table->bigInteger('type_id')->unsigned();
             $table->dateTime('end_date');
             $table->enum('status', array('0', '1'))->default('1');
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
             $table->foreign('snack_id')
                 ->references('id')

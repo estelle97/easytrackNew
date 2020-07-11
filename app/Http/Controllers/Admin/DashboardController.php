@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Helmesvs\Notify\Facades\Notify;
 
 class DashboardController extends Controller
 {
@@ -17,7 +18,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
    
 
@@ -33,44 +34,47 @@ class DashboardController extends Controller
 
     
 
-    public function profile($id)
+    public function profile()
     {
-        $user = Auth::user();
-        $snack = DB::table('users')
-            ->join('snacks', 'users.snack_id', '=', 'snacks.id')
-            ->select('users.*', 'snacks.*')
-            ->get();
-        $lims_user_data = User::find($id);
-        return view('admin.dashboard.user-profile', compact('lims_user_data','snack','user'));
+        return view('admin.profile');
     }
 
-    public function profileUpdate(Request $request, $id)
+    public function profileEdit(){
+        return view('admin.profileEdit');
+    }
+
+    public function profileUpdate(Request $request)
     {
         $this->validate($request,[
             'name' => 'required',
             'email' => 'required|email',
             'username' => 'required',
             'address' => 'required',
+            'tel' => 'required|min:9|max:9'
         ]);
-
-        $user = User::findOrFail(Auth::id());
+        
+        $user = Auth::user();
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->username = $request->username;
         $user->address = $request->address;
+        $user->tel = $request->tel;
         $user->save();
         
-        /*$input = $request->all();
-        $lims_user_data = User::find($id);
-        $lims_user_data->update($input);*/
-        notify()->success('Mise à jour du profil effectuée avec succès', 'Mise à jour du profil');
+        Notify::info("Profil mis à jour avec succès!");
         return redirect()->back();
     }
+
+    public function profileSettings(){
+        return view('admin.profileSetting');
+    }
+
+    
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
-        notify()->success('Déconnexion réussie', 'A bientot');
+        Notify::info("Nous espérons vous revoir bientôt!", 'Au revoir');
         return redirect('/login');
         
       }

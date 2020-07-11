@@ -21,8 +21,9 @@ class CreateSitesTable extends Migration
             $table->string('tel2')->nullable();
             $table->string('town')->nullable();
             $table->string('street')->nullable();
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
             $table->foreign('snack_id')
                 ->references('id')
                 ->on('snacks')

@@ -163,7 +163,7 @@
     </div>
     <div class="modal-section">
         @foreach ($lims_role_all as $role)
-    <div class="modal modal-blur fade" id="modal-edit-role{{$role->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal modal-blur fade" id="modal-edit-role{{$role->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -245,99 +245,98 @@
                 </div>
             </div>
         @endforeach
-    </div>
 
-
-    <div class="modal modal-blur fade" id="modal-delete-role" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-title">Êtes vous sure ?</div>
-                    <div>
-                        Si vous continuez, vous perdrez toutes les
-                        données lié à ce rôle.
+        <div class="modal modal-blur fade" id="modal-delete-role" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="modal-title">Êtes vous sure ?</div>
+                        <div>
+                            Si vous continuez, vous perdrez toutes les
+                            données lié à ce rôle.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link link-secondary mr-auto" data-dismiss="modal">
+                            Annuler
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            Oui, supprimer
+                        </button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link link-secondary mr-auto" data-dismiss="modal">
-                        Annuler
-                    </button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">
-                        Oui, supprimer
-                    </button>
+            </div>
+        </div>
+
+        <div class="modal modal-blur fade" id="modal-create-role" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ajouter un nouveau role</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label ml-4">Nom</label>
+                                <input id="name-add" type="text" class="form-control" placeholder="Saisissez le nom..." />
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label ml-4">Description</label>
+                                <input id="description-add" type="text" class="form-control" placeholder="Saisissez la description..." />
+                            </div>
+                            <div class="col-lg-9">
+                                <label class="form-label">Permission</label>
+                                <select name="role" id="select-permission" class="form-select">
+                                    @foreach (App\Permission::orderBy('slug')->get() as $perm)
+                                         <option value="{{$perm->id}}"> {{$perm->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-3 py-0">
+                                <a class="btn btn-light btn-block" onclick="addPermissionToRole()">
+                                    Ajouter
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card border-0 shadow-none">
+                            <div class="card-header">
+                                <h3 class="card-title">Permissions</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter card-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th> action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="permissions-add">
+    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal" onclick="roleAdd()">
+                            Enregistrer
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal modal-blur fade" id="modal-create-role" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ajouter un nouveau role</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="18" y1="6" x2="6" y2="18" />
-                            <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="modal-body bg-white">
-                    <div class="row mb-3 align-items-end">
-                        <div class="col-lg-12 mb-4">
-                            <label class="form-label ml-4">Nom</label>
-                            <input id="name-add" type="text" class="form-control" placeholder="Saisissez le nom..." />
-                        </div>
-                        <div class="col-lg-12 mb-4">
-                            <label class="form-label ml-4">Description</label>
-                            <input id="description-add" type="text" class="form-control" placeholder="Saisissez la description..." />
-                        </div>
-                        <div class="col-lg-9">
-                            <label class="form-label">Permission</label>
-                            <select name="role" id="select-permission" class="form-select">
-                                @foreach (App\Permission::orderBy('slug')->get() as $perm)
-                                     <option value="{{$perm->id}}"> {{$perm->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-lg-3 py-0">
-                            <a class="btn btn-light btn-block" onclick="addPermissionToRole()">
-                                Ajouter
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card border-0 shadow-none">
-                        <div class="card-header">
-                            <h3 class="card-title">Permissions</h3>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-vcenter card-table">
-                                <thead>
-                                    <tr>
-                                        <th>Description</th>
-                                        <th> action </th>
-                                    </tr>
-                                </thead>
-                                <tbody id="permissions-add">
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal" onclick="roleAdd()">
-                        Enregistrer
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         var permissions = [];
 

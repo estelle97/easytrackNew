@@ -16,7 +16,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        return InvoiceResource::collection(Invoice::where('is_active','1')->get()->load('products'));
+        return InvoiceResource::collection(Invoice::where('active','1')->get()->load('products'));
     }
 
     /**

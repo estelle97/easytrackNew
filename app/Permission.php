@@ -3,18 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Permission extends Model
 {
-    protected $guarded = ['id'];
-    public $timestamps = null;
-    protected $dates = ['created_at'];
+   use SoftDeletes;
 
-    public function roles() {
-        return $this->belongsToMany('App\Role');  
-     }
-     
-     public function users() {
-        return $this->belongsToMany(User::class);
-     }
+   protected $guarded = ['id'];
+   public $timestamps = null;
+   protected $dates = ['created_at'];
+
+   public function roles() {
+      return $this->belongsToMany('App\Role');  
+   }
+   
+   public function users() {
+      return $this->belongsToMany(User::class);
+   }
 }

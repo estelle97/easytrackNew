@@ -16,7 +16,7 @@ class SnackController extends Controller
      */
     public function index()
     {
-        return SnackResource::collection(Snack::where('is_active', '1')->get()->load('sites','types'));
+        return SnackResource::collection(Snack::where('active', '1')->get()->load('sites','types'));
     }
 
     /**

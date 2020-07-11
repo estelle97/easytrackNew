@@ -20,8 +20,9 @@ class CreateTypesTable extends Migration
             $table->integer('number_of_site');
             $table->integer('number_of_employee');
             $table->integer('price');
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

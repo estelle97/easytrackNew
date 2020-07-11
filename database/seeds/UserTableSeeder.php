@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -52,6 +53,29 @@ class UserTableSeeder extends Seeder
         ];
 
         DB::table('users')->insert($users);
+
+        $snacks= [
+            [
+                'user_id' => User::whereUsername('estelle')->first()->id,
+                'name' => 'Famous',
+                'slug' => 'slug1',
+                'email' => 'famous@gmail.com',
+                'tel1' => '223344556',
+                'town' => 'Yaoundé',
+                'street' => 'Miniprix Bastos',
+            ],
+            [
+                'user_id' => User::whereUsername('admin')->first()->id,
+                'name' => 'Le Relais de la Citée',
+                'slug' => 'slug2',
+                'email' => 'lerelais@gmail.com',
+                'tel1' => '223984456',
+                'town' => 'Yaoundé',
+                'street' => 'Elig-edzoa Pharmacie',
+            ]
+        ];
+
+        DB::table('snacks')->insert($snacks);
     }
 
 }

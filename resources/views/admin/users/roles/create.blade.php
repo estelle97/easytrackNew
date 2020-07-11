@@ -97,7 +97,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($lims_role_all as $key=>$role)
-                                    @if($role->is_active)
+                                    @if($role->active)
                                     <tr>
                                         <td class="w-1">
                                             <span>{{ $role->name }}</span>
@@ -174,7 +174,7 @@
                                     </div>
                                 
                                 </div>
-                                <input type="hidden" name="is_active" value="1">
+                                <input type="hidden" name="active" value="1">
                                 <input type="hidden" name="guard_name" value="web">
                                 <input type="submit" value="Ajouter" class="col-lg-12 mb-4 btn btn-primary">
                                 

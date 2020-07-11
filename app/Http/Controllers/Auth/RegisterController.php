@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterStoreRequest;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -55,61 +56,77 @@ class RegisterController extends Controller
     }
 
     public function index(Request $request){
-        return view('register');
+        $types = \App\Type::all();
+        return view('register', compact('types'));
     }
 
-    public function store(RegisterStoreRequest $request){
+    public function store(Request $request){
+        // Validate and create admin
         
+        $request->validate([
+            'username' => 'required',
+            'useraddress' => 'required',
+            'usertel' => 'required|min:9|max:9|unique:users,tel',
+            'useremail' => 'required|email|unique:users,email',
+            'userusername' => 'required|unique:users,username',
+            'userpassword' => 'required|min:8',
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->address = $request->address;
-        $user->tel = $request->tel;
-        $user->email = $request->email;
-        $user->username = $request->username;
-        $user->password = bcrypt($request->password);
-        $user->is_active;
-        $user->is_admin = 2;
-        $user->save();
+            'snackname' => 'required|unique:snacks,name',
+            'snacktel1' => 'required|min:9|max:9|unique:snacks,tel1',
+            'snackemail' => 'required|email|unique:snacks,email',
 
-        $user_id = $user->id;
+            'sitename' => 'required|unique:sites,name',
+            'sitetel1' => 'required|min:9|max:9|unique:sites,tel1',
+            'siteemail' => 'required|email|unique:sites,email',
+            'sitestreet' => 'required',
+            'sitetown' => 'required'
+        ]);
+        // Remove password_confirmation field to user array
 
-        $snack = new Snack();
-        $snack->name = $request->name_snack;
-        $snack->email = "test@gmail.com";
-        $snack->tel1 = $request->tel1_snack;
-        $snack->is_active;
-        $snack->tel2 = $request->tel2_snack;
-        $snack->town = $request->town_snack;
-        $snack->user_id = $user_id;
-        $snack->slug= preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($snack->name)));
+        $user = User::create([
+            'name' => $request->username,
+            'email' => $request->useremail,
+            'username' => $request->userusername,
+            'address' => $request->useraddress,
+            'tel' => $request->usertel,
+            'password' => bcrypt($request->userpassword),
+            'is_admin' => 2
+        ]);
+        $user->roles()->attach(5);
+
+        $snack = new Snack([
+            'name' => $request->snackname,
+            'slug' => $this->makeSlug($request->snackname),
+            'email' => $request->snackemail,
+            'tel1' => $request->snacktel1,
+            'tel2' => $request->snacktel2,
+            'town' => $request->snacktown,
+            'street' =>$request->snackstreet,
+            'user_id' => $user->id
+        ]);
         $snack->save();
 
-        $snack_id = $snack->id;
-
-        $site = new Site();
-        $site->snack_id = $snack_id;
-        $site->email = $request->email_site;
-        $site->tel1 = $request->tel1_site;
-        $site->is_active;
-        $site->tel2 = $request->tel2_site;
-        $site->town = $request->town_site;
-        $site->name = $request->name_site;
-        $site->slug= preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($site->name)));
-        $site->street = $request->street_site;
+        $site = new Site([
+            'name' => $request->sitename,
+            'slug' => $this->makeSlug($request->sitename),
+            'email' => $request->siteemail,
+            'tel1' => $request->sitetel1,
+            'tel2' => $request->sitetel2,
+            'town' => $request->sitetown,
+            'street' =>$request->sitestreet,
+            'snack_id' => $snack->id
+        ]);
         $site->save();
 
-       
+        // Attach snack with his type of subscription
+        $type = \App\Type::findOrFail($request->type);
+        $snack->types()->attach($type->id,[
+            'end_date' => Carbon::now()->addMonth($type->duration),
+        ]);
 
-        //$user->site()->attach($request->name_site);
-        //$user->snacks()->attach($request->name_snack);
-
-
-        /*$data = $request->all();
-        $data['password'] = bcrypt($data['password']);
-        User::create($data);*/
-        notify()->success('Votre requete a été prise en compte ', 'Inscription');
-        return view('auth.login');
+        return response()->json([
+            "message" => "Operation success!",
+        ], 201); 
     }
 
     /**

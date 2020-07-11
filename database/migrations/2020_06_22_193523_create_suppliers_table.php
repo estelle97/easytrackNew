@@ -22,8 +22,9 @@ class CreateSuppliersTable extends Migration
             $table->string('town')->nullable();
             $table->string('street')->nullable();
             $table->string('tel2')->nullable();
-            $table->enum('is_active', array('0', '1'))->default('1');
+            $table->enum('active', array('0', '1'))->default('1');
             $table->dateTime('created_at')->useCurrent();
+            $table->softDeletes();
             $table->foreign('site_id')
                 ->references('id')
                 ->on('sites')
