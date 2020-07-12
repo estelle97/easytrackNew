@@ -433,4 +433,23 @@ class UserController extends Controller
         ], 401);
 
     }
+
+    public function getUniqueElements(){
+        $data = [
+            'userusername' => User::all('username'),
+            'useremail' => User::all('email'),
+            'usertel' => User::all('tel'),
+            'snackname' => Snack::all('name'),
+            'snackemail' => Snack::all('email'),
+            'snacktel1' => Snack::all('tel1'),
+            'sitename' => Site::all('name'),
+            'siteemail' => Site::all('email'),
+            'sitetel1' => Site::all('tel1')
+        ];
+
+        return response()->json([
+            'data' => $data
+        ], 200);
+        
+    }
 }

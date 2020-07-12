@@ -29,7 +29,7 @@
                         </svg>
                     </span>
                     <span class="nav-link-title">
-                        Magasin
+                        Sites
                     </span>
                 </a>
                 <ul class="dropdown-menu">
@@ -41,6 +41,11 @@
                     <li>
                         <a class="dropdown-item" href="./vendors.html">
                             Fournisseurs
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href={{route('admin.sites')}}>
+                            Gérer Sites
                         </a>
                     </li>
                 </ul>
@@ -91,7 +96,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./users.html">
+                <a class="nav-link" href={{route('admin.snack.users')}}>
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                             height="24" class="icon">
