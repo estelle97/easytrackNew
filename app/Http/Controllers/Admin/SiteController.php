@@ -14,35 +14,63 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        /*$lims_site_all = DB::table('sites')
-        ->join('snacks','sites.snack_id', '=', 'snacks.id')
-        ->join('users', 'snacks.user_id', '=', 'users.id')
-        ->select('sites.id','sites.name','sites.email','sites.slug','snacks.name','users.name', 'snacks.email')
-        ->get();*/
-        $lims_site_all = Site::where('active', '1')->get()->load('users','snack','products','suppliers');
-        return view('admin.sites.index', compact('user', 'lims_site_all'));
+        return view('admin.sites');
     }
 
     public function store(Request $request)
     {
-        $tel_code = "+237";
+        $this->validate($request, [
+            'name' => 'required|unique:sites',
+            'email' => 'email|required',
+            'tel1' => 'required|min:9|max:9|numeric|unique:sites',
+            'town' => 'required',
+            'street' => 'required'
+        ]);
 
         $site = new Site();
-        $site->snack_id = 100;
-        $site->email = $request->email;
-        $site->tel1 = $tel_code.$request->tel1;
-        $site->active = 1;
-        $site->tel2 = $tel_code.$request->tel2;
-        $site->town = $request->town;
+        $site->snack_id = Auth::user()->snacks()->first()->id;
         $site->name = $request->name;
-        $site->slug= preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($site->name)));
+        $site->slug= $this->makeSlug($request->name);
+        $site->email = $request->email;
+        $site->tel1 = $request->tel1;
+        $site->tel2 = $request->tel2;
+        $site->town = $request->town;
         $site->street = $request->street;
-        $site->save();
-        $name = $request->name;
-        notify()->success('Site '.$name.' ajouté avec succès', 'Ajout de site');
-        return redirect()->back();
+
+        if($site->save()){
+            return 'success';
+        } else {
+            return 'error';
+        }
     }
+
+
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'email|required',
+            'tel1' => 'required|min:9|max:9|numeric',
+            'town' => 'required',
+            'street' => 'required'
+        ]);
+
+        $site = Site::find($request->site_id);
+        
+        $site->name = $request->name;
+        $site->email = $request->email;
+        $site->tel1 = $request->tel1;
+        $site->tel2 = $request->tel2;
+        $site->town = $request->town;
+        $site->street = $request->street;
+
+        if($site->save()){
+            return 'success';
+        } else {
+            return 'error';
+        }
+    }
+
 
     public function edit($id)
     {

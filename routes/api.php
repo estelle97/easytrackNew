@@ -22,6 +22,8 @@ Route::post('/register', 'API\UserController@register');
 Route::post('passwordRequest', 'API\UserController@passwordRequest');
 Route::apiResource('types', 'API\TypeController');
 
+Route::get('/uniques', 'API\UserController@getUniqueElements');
+
 Route::group(['middleware' => 'auth:api'], function(){
     
     Route::post('logout', 'API\UserController@logout');

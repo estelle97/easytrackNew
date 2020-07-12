@@ -90,6 +90,7 @@ return [
         'lib' => 'toastr',
         'style' => 'default',
         'include:Animate' => false,
+        'include:Jquery' => false,
     ],
 
     'ToastrOptions' => [

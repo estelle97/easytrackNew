@@ -17,8 +17,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        
-        return view('admin.users');
+        return view('admin.users.users');
     }
 
     public function generatePassword()
@@ -29,13 +28,29 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'address' => 'required',
+            'tel' => 'required|min:9|max:9|unique:users',
+            'password' => 'required|min:8',
+        ]);   
+       
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'username' => $request->username,
+            'address' => $request->address,
+            'tel' => $request->tel,
+            'bio' => $request->bio,
+            'password' => bcrypt($request->password),
+            'site_id' => $request->site_id,
+        ]);
 
-        $data = $request->all();
-        
-        $data['password'] = bcrypt($data['password']);
-        User::create($data);
-        notify()->success('Utilisateur créé avec succès', 'Création utilisateur');
-        return redirect()->back();
+        $user->roles()->attach($request->role_id);
+
+        return 'success';
     }
 
     /**
@@ -44,23 +59,19 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user)
     {
-        $user = User::find($id);
-        return view('admin.users.users.user-profile',compact('user'));
+        $user = User::whereUsername($user)->first();
+        return view('admin.users.user-profile', compact('user'));
     }
 
-    public function edit($id)
+    public function edit($user)
     {
-        
-        $user = Auth::user();
-        $lims_user_data = User::find($id);
-            
-        return view('admin.users.users.user-profile-edit', compact('lims_user_data', 'user'));
-        
+        $user = User::whereUsername($user)->first();
+        return view('admin.users.user-profile-edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
         $this->validate($request,[
             'name' => 'required',
@@ -69,19 +80,20 @@ class UserController extends Controller
             'address' => 'required',
         ]);
 
-        $user = User::findOrFail($id);
+        $user = User::whereUsername($user)->first();
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->username = $request->username;
         $user->address = $request->address;
+        $user->bio = $request->bio;
         $user->save();
         
         /*$input = $request->all();
         $lims_user_data = User::find($id);
         $lims_user_data->update($input);*/
         notify()->success('Mise à jour de l\'utilisateur effectuée avec succès', 'Mise à jour utilisateur');
-        return redirect()->route('admin.user.index');
+        return redirect()->back();
     }
 
     public function destroy($id)

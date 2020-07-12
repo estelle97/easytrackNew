@@ -67,6 +67,21 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
 
+    Route::get('admin/sites', 'Admin\SiteController@index')->name('admin.sites');
+    Route::post('admin/sites/add', 'Admin\SiteController@store');
+    Route::post('admin/sites/update', 'Admin\SiteController@update');
+    Route::post('admin/sites/destroy', 'Admin\SiteController@destroy');
+
+    Route::get('admin/users', 'Admin\UserController@index')->name('admin.snack.users');
+    Route::get('admin/users/{user}/show', 'Admin\UserController@show')->name('admin.user.show');
+    Route::get('admin/users/{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit');
+    Route::post('admin/users/{user}/edit', 'Admin\UserController@update');
+    Route::post('admin/users/store', 'Admin\UserController@store');
+
+    Route::post('admin/roles/detachPermissionToUser', 'Admin\RoleController@detachPermissionToUser');
+    Route::post('admin/roles/attachPermissionToUser', 'Admin\RoleController@attachPermissionToUser');
+
+
 
 
     Route::get('easytrack/dashboard', ['as'=> 'easytrack.dashboard','uses' => 'SuperAdmin\DashboardController@index']);
@@ -102,24 +117,7 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
 
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {
     
-    Route::get('/', 'HomeController@index');
-    Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
-    Route::get('user/profile/{id}', 'Admin\DashboardController@profile')->name('user.profile');
-    Route::get('user/profile_settings/{id}', 'Admin\DashboardController@profileSettings')->name('user.profileSettings');
-	Route::put('user/update_profile/{id}', 'Admin\DashboardController@profileUpdate')->name('user.profileUpdate');
-	Route::put('user/changepass/{id}', 'Admin\DashboardController@changePassword')->name('user.password');
-    Route::get('user/genpass', 'Admin\UserController@generatePassword');
-    Route::post('user/deletebyselection', 'Admin\UserController@deleteBySelection');
-    Route::resource('user','Admin\UserController');
-    
-    //Roles & Permissions Routes
-    Route::get('role/permission/{id}', 'Admin\RoleController@permission')->name('role.permission');
-	Route::post('role/set_permission', 'Admin\RoleController@setPermission')->name('role.setPermission');
-    Route::resource('role', 'Admin\RoleController');
-    
-    //Sites Routes
-	Route::resource('site', 'Admin\SiteController');
     
     //Term of sercice route
     Route::get('terms', 'HomeController@termOfService')->name('terms');
