@@ -50,9 +50,18 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a href="." class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
-                    <img src={{asset("template/assets/static/logo-white.svg")}} alt="easytrak" class="navbar-brand-image" />
-                </a>
+                @if (Auth::user()->is_admin == 1)
+                    
+                @elseif(Auth::user()->is_admin == 2)
+                    <a href={{route('admin.dashboard')}} class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
+                        <img src={{asset("template/assets/static/logo-white.svg")}} alt="easytrak" class="navbar-brand-image" />
+                    </a>
+                @else
+                    <a href={{route('easytrack.dashboard')}} class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
+                        <img src={{asset("template/assets/static/logo-white.svg")}} alt="easytrak" class="navbar-brand-image" />
+                    </a>
+                @endif
+                
         
                 {{-- User Bloc--}} 
                     @if (Auth::user()->is_admin == 1)

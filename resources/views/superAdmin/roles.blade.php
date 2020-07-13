@@ -352,7 +352,7 @@
                 },
                 method : 'post',
                 success:function (data) {
-
+                    document.location.reload(true);
                 }
             });
         }
