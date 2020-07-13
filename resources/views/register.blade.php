@@ -315,9 +315,9 @@
                     </div>
                 </div>
             </div>
-            <div class="px-5 text-center mt-1">
+            {{-- <div class="px-5 text-center mt-1">
                 Protected by reCAPTCHA and subject to the <span class="text-primary">Privacy Policy</span> and <span class="text-primary">Terms of Service</span>.
-            </div>
+            </div> --}}
         </form>
     </div>
 </div>
@@ -326,7 +326,7 @@
 @section('scripts')
     <script>
         document.body.style.display = "block";
-        
+
         $(".register-step-2, .register-step-3, .register-step-4, .register-step-5, .register-step-6").toggle();
         $(".btn-submit-step-1, .btn-back-step-1").click(function() {
             $(".register-step-1").toggle();
@@ -352,7 +352,7 @@
             $("#snack-recap-type").html($('#type').text());
         });
         $(".btn-submit-step-5").click(function() {
-            
+
         });
     </script>
 
