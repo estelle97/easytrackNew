@@ -436,15 +436,15 @@ class UserController extends Controller
 
     public function getUniqueElements(){
         $data = [
-            'userusername' => User::all('username'),
-            'useremail' => User::all('email'),
-            'usertel' => User::all('tel'),
-            'snackname' => Snack::all('name'),
-            'snackemail' => Snack::all('email'),
-            'snacktel1' => Snack::all('tel1'),
-            'sitename' => Site::all('name'),
-            'siteemail' => Site::all('email'),
-            'sitetel1' => Site::all('tel1')
+            User::all('username'),
+            User::all('email'),
+            User::all('tel'),
+            Snack::all('name'),
+            Snack::all('email'),
+            Snack::all('tel1'),
+            Site::all('name'),
+            Site::all('email'),
+            Site::all('tel1')
         ];
 
         return response()->json([

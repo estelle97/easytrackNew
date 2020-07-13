@@ -22,7 +22,7 @@ class SiteController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:sites',
             'email' => 'email|required',
-            'tel1' => 'required|min:9|max:9|numeric|unique:sites',
+            'tel1' => 'required|min:200000000|max:999999999|numeric|unique:sites',
             'town' => 'required',
             'street' => 'required'
         ]);
@@ -50,7 +50,7 @@ class SiteController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'email|required',
-            'tel1' => 'required|min:9|max:9|numeric',
+            'tel1' => 'required|min:200000000|max:999999999|numeric',
             'town' => 'required',
             'street' => 'required'
         ]);
