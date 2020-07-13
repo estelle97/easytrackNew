@@ -321,6 +321,7 @@
                 },
                 success: function(data){
                     $("#modal-create-site").modal('hide');
+                    document.location.reload(true);
                 },
                 error: function (err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue

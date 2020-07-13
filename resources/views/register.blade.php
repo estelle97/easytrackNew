@@ -280,7 +280,7 @@
                     </div>
                     <div class=" mb-4">
                         <h4 class="text-muted">Nom d'utilisateur</h4>
-                        <h2 id="user-recap-username"></h2>
+                        <h2 id="username-recap-name"></h2>
                     </div>
                     <div class=" mb-4">
                         <h4 class="text-muted">Snack</h4>
@@ -349,7 +349,7 @@
             $("#username-recap-name").html($('#userusername').val());
             $("#snack-recap-name").html($('#snackname').val());
             $("#site-recap-name").html($('#sitename').val());
-            $("#snack-recap-type").html($('#type').text());
+            $("#snack-recap-type").html($('#type option:selected').text());
         });
         $(".btn-submit-step-5").click(function() {
             

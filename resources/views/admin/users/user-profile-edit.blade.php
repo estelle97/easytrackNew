@@ -21,7 +21,7 @@
                         <!-- Page title actions -->
                         <div class="col-auto ml-auto d-print-none">
                             <div class="d-flex align-items-center">
-                                <a href="./user-profile.html" class="d-flex align-items-center text-white mr-5">
+                                <a href={{route('admin.snack.users')}} class="d-flex align-items-center text-white mr-5">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                         class="mr-2">
                                         <path fill="none" d="M0 0h24v24H0z" />
@@ -203,7 +203,7 @@
                             <div class="row mb-3 align-items-end">
                                 <div class="col-lg-9">
                                     <label class="form-label">Permission</label>
-                                    <select name="role" id=" option:selected" class="form-select">
+                                    <select name="role" id="select-permission" class="form-select">
                                         @foreach (App\Permission::orderBy('slug')->get() as $perm)
                                             <option value="{{$perm->id}}"> {{$perm->name}}</option>
                                         @endforeach
@@ -228,7 +228,16 @@
                                             </tr>
                                         </thead>
                                         <tbody id="permissions-add">
-        
+                                            @foreach ($user->permissions()->get() as $perm)
+                                                <tr id="perm-user-list{{$perm->id}}">
+                                                    <td> {{$perm->name}} </td> 
+                                                    <td class="text-right">
+                                                        <a class="mt-1 text-blue" onclick="detachPermissionToUser({{$user->id}},{{$perm->id}})">
+                                                            Supprimer
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -248,6 +257,7 @@
 
 @section('scripts')
     <script> 
+
         function attachPermissionToUser(user_id){
             var token = '{{csrf_token()}}';
             var permission_id = $('#select-permission').val();
@@ -267,7 +277,7 @@
                                                 permission+
                                             "</td>"+
                                             "<td class='text-right'>"+
-                                                "<a class='mt-1' onclick='detachPermissionToUser("+user_id+","+permission_id+")'>"+
+                                                "<a class='mt-1 text-blue' onclick='detachPermissionToUser("+user_id+","+permission_id+")'>"+
                                                     "Supprimer"+
                                                 "</a>"+
                                             "</td></tr>"
@@ -277,7 +287,7 @@
             });
         }
 
-        function detachPermissionTouser(user_id, permission_id){
+        function detachPermissionToUser(user_id, permission_id){
             var token = '{{csrf_token()}}';
 
             $.ajax({
@@ -296,5 +306,6 @@
             });
 
         }
+
     </script>
 @endsection
