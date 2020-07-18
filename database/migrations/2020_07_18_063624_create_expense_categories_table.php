@@ -13,7 +13,7 @@ class CreateExpenseCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('expense_categories', function (Blueprint $table) {
+        Schema::create('expense_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
             $table->tinyInteger('is_active')->default(1);
@@ -29,8 +29,6 @@ class CreateExpenseCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('expense_categories', function (Blueprint $table) {
-            Schema::dropIfExists('expense_categories');
-        });
+        Schema::dropIfExists('expense_categories');
     }
 }

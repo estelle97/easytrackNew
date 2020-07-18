@@ -17,7 +17,7 @@ class CreateSitesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('company_id')->unsigned();
             $table->string('name')->nullable();
-            $table->sting('slug')->nullable();
+            $table->string('slug')->nullable();
             $table->string('email')->nullagle();
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();

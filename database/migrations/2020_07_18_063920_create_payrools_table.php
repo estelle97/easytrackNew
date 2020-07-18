@@ -13,7 +13,7 @@ class CreatePayroolsTable extends Migration
      */
     public function up()
     {
-        Schema::table('payrools', function (Blueprint $table) {
+        Schema::create('payrools', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id')->nullable();
             $table->integer('user_id')->nullable();
@@ -32,8 +32,6 @@ class CreatePayroolsTable extends Migration
      */
     public function down()
     {
-        Schema::table('payrools', function (Blueprint $table) {
-            Schema::dropIfExists('payrools');
-        });
+        Schema::dropIfExists('payrools');
     }
 }

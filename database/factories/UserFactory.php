@@ -17,19 +17,14 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $role = $faker->unique()->randomElement(['1','2','3','4','5']);
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'username' => $faker->unique()->userName,
-        'tel' => $faker->unique()->phoneNumber,
-        'cni_number' => $faker->unique()->ean8,
-        'contact_name' => $faker->randomElement([
-            $faker->name, ''
-        ]),
-        'contact_tel' => $faker->randomElement([
-            $faker->phoneNumber, ''
-        ]),
+        'phone' => $faker->unique()->phoneNumber,
         'bio' => $faker->text,
+        'role_id' => $role,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),

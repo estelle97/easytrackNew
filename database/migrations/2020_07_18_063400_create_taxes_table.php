@@ -13,7 +13,7 @@ class CreateTaxesTable extends Migration
      */
     public function up()
     {
-        Schema::table('taxes', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
             $table->double('rate')->nullable();
@@ -30,8 +30,6 @@ class CreateTaxesTable extends Migration
      */
     public function down()
     {
-        Schema::table('taxes', function (Blueprint $table) {
-            Schema::dropIfExists('taxes');
-        });
+        Schema::dropIfExists('taxes');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoicesTable extends Migration
+class CreateSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('site_id')->nullable();
             $table->integer('initiator')->nullable();
             $table->integer('validator')->nullable();
+            $table->integer('customer_id')->nullable();
             $table->string('code')->nullable();
             $table->tinyInteger('is_active')->default(1);
             $table->tinyInteger('status')->default(0);

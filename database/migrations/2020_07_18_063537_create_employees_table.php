@@ -13,7 +13,7 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::table('employees', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->nullable();
             $table->integer('site_id')->nullable();
@@ -33,8 +33,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::table('employees', function (Blueprint $table) {
-            Schema::dropIfExists('employees');
-        });
+        Schema::dropIfExists('employees');
     }
 }

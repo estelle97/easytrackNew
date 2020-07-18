@@ -13,7 +13,7 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::table('customers', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('company_name')->nullable();
@@ -34,8 +34,6 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            Schema::dropIfExists('customers');
-        });
+        Schema::dropIfExists('customers');
     }
 }

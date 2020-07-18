@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class Expense_category extends Model
 {
     protected $guarded = ['id'];
     public $timestamps = null;
+    protected $table = "expense_categories";
     protected $dates = ['created_at'];
 
-    public function types(){
-        return $this->belongsToMany('App\Type')
-                        ->using('App\Subscription');
+    public function expenses(){
+        return $this->hasMany('App\Expenses');
     }
 }

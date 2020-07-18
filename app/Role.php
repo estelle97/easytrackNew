@@ -18,7 +18,7 @@ class Role extends Model
      }
      
      public function users() {
-        return $this->belongsToMany('App\User');
+        return $this->hasMany('App\User');
      }
 
      // Check that if a user has a particular role
