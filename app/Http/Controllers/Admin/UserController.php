@@ -33,7 +33,7 @@ class UserController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'address' => 'required',
-            'tel' => 'required|min:9|max:9|unique:users',
+            'tel' => 'required|min:200000000|max:999999999|numeric|unique:users',
             'password' => 'required|min:8',
         ]);   
        

@@ -1,10 +1,10 @@
 @extends('layouts.auth')
 
 @section('content')
-    <div class="col-lg-4 d-flex flex-row align-items-center">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 d-flex flex-row align-items-center">
         <div class="container-tight">
             <form class="card card-md auth-card pt-6 pb-5 px-3" action="" method="post">
-                <div class="card-body mb-5">
+                <div class="card-body">
                     <div class="text-center mb-5">
                         <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
                     </div>
@@ -56,14 +56,16 @@
                         <button type="submit" class="btn btn-gradient btn-block btn-pill btn-no-border">
                             Se connecter
                         </button>
+                        <div class="row justify-content-center align-items-center px-3 mt-3">
+                            <div class="col text-center p-0"><h4>ou</h4></div>
+                        </div>
+                        <a href={{route('register')}} tabindex="-1" class="btn btn-dark btn-block btn-pill btn-no-border mt-3">
+                            Créer votre snack
+                        </a>
                     </div>
                     <div class="text-center text-muted mb-3">
                         Mot de passe oublié ?
                         <a href={{route('password-forgot')}} tabindex="-1">Cliquez ici</a>
-                    </div>
-                    <div class="text-center text-muted mb-3">
-                       Creez votre snack 
-                        <a href={{route('register')}} tabindex="-1">Cliquez ici</a>
                     </div>
                 </div>
                 <div class="px-5 text-center mt-5">
