@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        factory(\App\User::class, 5)->create();
-        factory(\App\Snack::class, 5)->create();
+        factory(\App\User::class, 4)->create();
+        factory(\App\Company::class, 4)->create();
         factory(\App\Site::class, 30)->create();
         factory(\App\Supplier::class, 40)->create();
         factory(\App\Category::class, 5)->create();
@@ -26,19 +26,11 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
         ]);
 
-        // recuperation des roles
-        $roles = App\Role::all();
 
         // Remplissement de la table role_user
-        App\User::all()->each(function($user) use ($roles){
-            $user->roles()->attach(
-                $roles->random()->pluck('id')->toArray()
-            );
-
-            if($user->is_admin != '3'){
-                $user->site_id = App\Site::all()->random()->id;
-                $user->save();
-            }
+        App\User::all()->each(function($user){
+            $user->role_id = App\Role::all()->random()->id; 
+            $user->save();
         });
 
         

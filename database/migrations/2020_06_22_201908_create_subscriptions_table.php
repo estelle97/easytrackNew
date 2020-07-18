@@ -14,23 +14,14 @@ class CreateSubscriptionsTable extends Migration
     public function up()
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('snack_id')->unsigned();
-            $table->bigInteger('type_id')->unsigned();
+            $table->increments('id');
+            $table->integer('snack_id')->nullable();
+            $table->integer('type_id')->nullable();
             $table->dateTime('end_date');
-            $table->enum('status', array('0', '1'))->default('1');
-            $table->enum('active', array('0', '1'))->default('1');
+            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('is_active')->default(1);
             $table->dateTime('created_at')->useCurrent();
-            $table->foreign('snack_id')
-                ->references('id')
-                ->on('snacks')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->foreign('type_id')
-                ->references('id')
-                ->on('types')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->softDeletes();
         });
     }
    

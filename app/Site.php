@@ -14,7 +14,7 @@ class Site extends Model
     protected $dates = ['created_at'];
 
     public function products(){
-        return $this->belongsToMany('App\Product')->withPivot('min','purchase_price','selling_price','initial_stock');
+        return $this->belongsToMany('App\Product')->withPivot('cost','price','cost','qty','qty_alert', 'promotion', 'promotion_price','promotion_start','promotion_end','tax_method');
     }
 
     public function suppliers(){
@@ -25,8 +25,12 @@ class Site extends Model
         return $this->hasMany('App\User');
     }
 
-    public function snack(){
-        return $this->belongsTo('App\Snack');
+    public function company(){
+        return $this->belongsTo('App\Copany');
+    }
+
+    public function employees(){
+        return $this->hasOne('App\Employee');
     }
 
     public function agendas(){

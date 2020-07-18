@@ -12,12 +12,12 @@ $factory->define(Site::class, function (Faker $faker) {
         'name' => $name,
         'slug' => $slug,
         'email' => $faker->companyEmail,
-        'tel1' => $faker->unique()->phoneNumber,
-        'tel2' => $faker->unique()->phoneNumber,
+        'phone1' => $faker->unique()->phoneNumber,
+        'phone2' => $faker->unique()->phoneNumber,
         'town' => $faker->state,
         'street' => $faker->city,
-        'snack_id' => function(){
-            return App\Snack::all()->random()->id;
+        'company_id' => function(){
+            return App\Company::all()->random()->id;
         }
     ];
 });

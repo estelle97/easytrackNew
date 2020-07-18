@@ -11,8 +11,11 @@ $factory->define(Product::class, function (Faker $faker) {
         'code' => $faker->unique()->ean13,
         'description' => $faker->text,
         'brand' => $faker->company,
+        'company_id' => function(){
+            return App\Company::all()->random()->id;
+        },
         'category_id' => function(){
             return App\Category::all()->random()->id;
-        }
+        },
     ];
 });

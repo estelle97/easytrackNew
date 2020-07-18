@@ -18,7 +18,7 @@ class UserTableSeeder extends Seeder
                 'name' => 'Super Administrator',
                 'username' => 'superAdmin',
                 'email' => 'superadmin@easytrack.com',
-                'tel' => '123456789',
+                'phone' => '123456789',
                 'password' => bcrypt('password'),
                 'is_admin' => '3',
                 'address' => 'Bastos - Yaoundé',
@@ -27,7 +27,7 @@ class UserTableSeeder extends Seeder
                 'name' => 'Steve Wiltek',
                 'username' => 'wiltek',
                 'email' => 'wiltek@easytrack.com',
-                'tel' => '698154430',
+                'phone' => '698154430',
                 'password' => bcrypt('password'),
                 'is_admin' => '3',
                 'address' => 'Santa Barbara - Yaoundé',
@@ -36,7 +36,7 @@ class UserTableSeeder extends Seeder
                 'name' => 'Estelle Belinga',
                 'username' => 'estelle',
                 'email' => 'estelle@easytrack.com',
-                'tel' => '659401381',
+                'phone' => '659401381',
                 'password' => bcrypt('password'),
                 'is_admin' => '2',
                 'address' => 'Awaie Escalier - Yaoundé',
@@ -45,7 +45,7 @@ class UserTableSeeder extends Seeder
                 'name' => 'Administrateur Directeur',
                 'username' => 'admin',
                 'email' => 'admin@easytrack.com',
-                'tel' => '687601381',
+                'phone' => '687601381',
                 'password' => bcrypt('password'),
                 'is_admin' => '2',
                 'address' => 'Akwa  - Douala',
@@ -54,13 +54,13 @@ class UserTableSeeder extends Seeder
 
         DB::table('users')->insert($users);
 
-        $snacks= [
+        $companies= [
             [
                 'user_id' => User::whereUsername('estelle')->first()->id,
                 'name' => 'Famous',
                 'slug' => 'slug1',
                 'email' => 'famous@gmail.com',
-                'tel1' => '223344556',
+                'phone1' => '223344556',
                 'town' => 'Yaoundé',
                 'street' => 'Miniprix Bastos',
             ],
@@ -69,13 +69,13 @@ class UserTableSeeder extends Seeder
                 'name' => 'Le Relais de la Citée',
                 'slug' => 'slug2',
                 'email' => 'lerelais@gmail.com',
-                'tel1' => '223984456',
+                'phone1' => '223984456',
                 'town' => 'Yaoundé',
                 'street' => 'Elig-edzoa Pharmacie',
             ]
         ];
 
-        DB::table('snacks')->insert($snacks);
+        DB::table('companies')->insert($companies);
     }
 
 }

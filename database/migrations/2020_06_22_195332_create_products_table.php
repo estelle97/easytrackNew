@@ -14,20 +14,21 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('category_id')->unsigned();
+            $table->increments('id');
+            $table->integer('company_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('unit_id')->nullable();
+            $table->integer('taxe_id')->nullable();
             $table->string('name');
-            $table->string('code')->nullable();
+            $table->string('code')->unique()->nullable();
             $table->text('description')->nullable();
             $table->string('brand')->nullable();
-            $table->enum('active', array('0', '1'))->default('1');
+            $table->string('type')->nullable();
+            $table->string('barcode_symbology')->nullable();
+            $table->string('photo')->nullable();
+            $table->tinyInteger('is_active')->default(1);
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
    

@@ -14,18 +14,30 @@ class Product extends Model
     protected $dates = ['created_at'];
 
     public function sites(){
-        return $this->belongsToMany('App\Site')->withPivot('min','purchase_price','selling_price','initial_stock');
+        return $this->belongsToMany('App\Site')->withPivot('cost','price','cost','qty','qty_alert', 'promotion', 'promotion_price','promotion_start','promotion_end','tax_method');
+    }
+
+    public function company(){
+        return $this->belongsTo('App\Company');
     }
 
     public function category(){
         return $this->belongsTo('App\Category');
     }
 
-    public function bills(){
-        return $this->belongsToMany('App\Bill','orders')->withPivot('site_id','supplier_id','quantity','purchase_price','status');
+    public function purchases(){
+        return $this->belongsToMany('App\Purchase')->withPivot('site_id','supplier_id','qty','cost','damages');
     }
 
-    public function invoices(){
-        return $this->belongsToMany('App\Invoice','sales')->withPivot('site_id','quantity','selling_price','status');
+    public function sales(){
+        return $this->belongsToMany('App\Sale',)->withPivot('site_id','qty','price');
+    }
+
+    public function taxe(){
+        return $this->belongsTo('App\Taxe');
+    }
+
+    public function unit(){
+        return $this->belongsTo('App\Unit');
     }
 }
