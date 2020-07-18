@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermissionsTable extends Migration
+class CreateUnitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::table('units', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code');
             $table->string('name');
+            $table->string('base_unit')->nullable();
+            $table->string('operator')->nullable();
+            $table->double('operator_value')->nullable();
             $table->tinyInteger('is_active')->default(1);
-            $table->string('slug');
-            $table->text('description')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
+
         });
     }
 
@@ -31,6 +34,8 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::table('units', function (Blueprint $table) {
+            Schema::dropIfExists('units');
+        });
     }
 }

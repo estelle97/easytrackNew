@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriptionsTable extends Migration
+class CreateBillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('snack_id')->nullable();
-            $table->integer('type_id')->nullable();
-            $table->dateTime('end_date');
+            $table->integer('site_id');
+            $table->integer('initiator')->nullagle();
+            $table->integer('validator')->nullable();
+            $table->string('code')->unique();
             $table->tinyInteger('status')->default(0);
+            $table->double('shipping_cost')->nullable();
+            $table->text('purchase_text')->nullable();
+            $table->string('paying_method')->nullable();
             $table->tinyInteger('is_active')->default(1);
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
@@ -32,6 +36,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('purchase');
     }
 }

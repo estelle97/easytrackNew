@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermissionsTable extends Migration
+class CreatePayroolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::table('payrools', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->tinyInteger('is_active')->default(1);
-            $table->string('slug');
+            $table->integer('employee_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->double('amount');
+            $table->string('paying_method')->nullable();
             $table->text('description')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
@@ -31,6 +32,8 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::table('payrools', function (Blueprint $table) {
+            Schema::dropIfExists('payrools');
+        });
     }
 }

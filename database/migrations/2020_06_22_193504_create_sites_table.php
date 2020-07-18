@@ -15,20 +15,17 @@ class CreateSitesTable extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('snack_id')->unsigned();
+            $table->bigInteger('company_id')->unsigned();
+            $table->string('name')->nullable();
+            $table->sting('slug')->nullable();
             $table->string('email')->nullagle();
-            $table->string('tel1')->nullable();
-            $table->string('tel2')->nullable();
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
             $table->string('town')->nullable();
             $table->string('street')->nullable();
-            $table->enum('active', array('0', '1'))->default('1');
+            $table->tinyInteger('is_active')->default(1);
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
-            $table->foreign('snack_id')
-                ->references('id')
-                ->on('snacks')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
    

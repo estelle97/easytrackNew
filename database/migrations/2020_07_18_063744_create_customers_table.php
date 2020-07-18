@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermissionsTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::table('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('town')->nullable();
+            $table->string('street')->nullable();
             $table->tinyInteger('is_active')->default(1);
-            $table->string('slug');
-            $table->text('description')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
         });
@@ -31,6 +34,8 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::table('customers', function (Blueprint $table) {
+            Schema::dropIfExists('customers');
+        });
     }
 }

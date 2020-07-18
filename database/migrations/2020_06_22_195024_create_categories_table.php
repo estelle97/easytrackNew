@@ -16,7 +16,8 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->enum('active', array('0', '1'))->default('1');
+            $table->integer('parent_id')->nullable();
+            $table->tinyInteger('is_active')->default(1);
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
         });

@@ -14,22 +14,19 @@ class CreateSuppliersTable extends Migration
     public function up()
     {
         Schema::create('suppliers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('site_id')->unsigned();
+            $table->increments('id');
+            $table->integer('site_id')->nullable();
             $table->string('name');
+            $table->string('company_name')->nullable();
             $table->string('email')->nullable();
-            $table->string('tel1')->nullable();
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
             $table->string('town')->nullable();
+            $table->string('postal_code')->nullable();
             $table->string('street')->nullable();
-            $table->string('tel2')->nullable();
-            $table->enum('active', array('0', '1'))->default('1');
+            $table->tinyInteger('is_active')->default(1);
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
-            $table->foreign('site_id')
-                ->references('id')
-                ->on('sites')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
     

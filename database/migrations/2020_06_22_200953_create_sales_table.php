@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,23 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('site_id')->nullable();
+            $table->integer('initiator')->nullable();
+            $table->integer('validator')->nullable();
+            $table->string('code')->nullable();
             $table->tinyInteger('is_active')->default(1);
-            $table->string('name');
-            $table->string('slug');
-            $table->text('description')->nullable();
+            $table->tinyInteger('status')->default(0);
+            $table->double('shipping_cost')->nullable();
+            $table->text('sale_note')->nullable();
+            $table->text('seller_note')->nullable();
+            $table->string('paying_method')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
         });
     }
-
+   
     /**
      * Reverse the migrations.
      *
@@ -32,6 +37,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('sales');
     }
 }

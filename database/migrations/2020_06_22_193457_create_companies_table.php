@@ -13,24 +13,20 @@ class CreateSnacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('snacks', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('name')->unique();
+        Schema::create('companies', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable();
             $table->string('email')->nullable();
-            $table->string('tel1')->nullable();
-            $table->enum('active', array('0', '1'))->default('1');
-            $table->string('tel2')->nullable();
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
+            $table->tinyInteger('is_active')->default(1);
             $table->string('town')->nullable();
             $table->string('street')->nullable();
             $table->string('logo')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
    
@@ -41,6 +37,6 @@ class CreateSnacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('snacks');
+        Schema::dropIfExists('companies');
     }
 }

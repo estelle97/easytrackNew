@@ -13,19 +13,16 @@ class CreateBudgetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('budgets', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('site_id')->unsigned();
+        Schema::create('expenses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('site_id')->nullable();
+            $table->integer('expense_category_id')->nullable();
             $table->string('name');
-            $table->integer('amount');
-            $table->enum('type', array('fixed', 'variable'))->default('fixed');
+            $table->double('amount');
+            $table->text('description')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
-            $table->foreign('site_id')
-                ->references('id')
-                ->on('sites')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            
         });
     }
 
@@ -36,6 +33,6 @@ class CreateBudgetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budgets');
+        Schema::dropIfExists('expenses');
     }
 }
