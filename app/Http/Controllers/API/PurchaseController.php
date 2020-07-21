@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Bill;
+use App\Purchase;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BillResource;
+use App\Http\Resources\PurchaseResource;
 use Illuminate\Http\Request;
 
-class BillController extends Controller
+class PurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        return BillResource::collection(Bill::where('active','1')->get()->load('products'));
+        return PurchaseResource::collection(Purchase::where('active','1')->get()->load('products'));
     }
 
     /**
@@ -39,39 +39,39 @@ class BillController extends Controller
     {
             do {
                 $code = mt_rand(1000000000, 9999999999);
-            } while(Bill::whereCode($code)->exists());
+            } while(Purchase::whereCode($code)->exists());
 
-            $bill = Bill::create([
+            $purchase = Purchase::create([
                 'code' => $code,
                 'status' => '0',
                 'site_id' => 1
             ]);
-            $bill->save();
+            $purchase->save();
 
             return response()->json([
-                'message' => 'Bill created susscessfully',
-                'bill' => new BillResource($bill),
+                'message' => 'purchase created susscessfully',
+                'purchase' => new PurchaseResource($purchase),
             ],201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Bill  $bill
+     * @param  \App\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function show(Bill $bill)
+    public function show(Purchase $purchase)
     {
-        return new BillResource($bill->loadMissing('products'));
+        return new PurchaseResource($purchase->loadMissing('products'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Bill  $bill
+     * @param  \App\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bill $bill)
+    public function edit(Purchase $purchase)
     {
         //
     }
@@ -80,28 +80,28 @@ class BillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Bill  $bill
+     * @param  \App\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bill $bill)
+    public function update(Request $request, Purchase $purchase)
     {
-        $bill->update([
+        $purchase->update([
             'status' => '1',
         ]);
 
         return response()->json([
-            'message' => 'Bill updated susscessfully',
-            'bill' => new BillResource($bill),
+            'message' => 'purchase updated susscessfully',
+            'purchase' => new PurchaseResource($purchase),
         ],200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Bill  $bill
+     * @param  \App\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bill $bill)
+    public function destroy(Purchase $purchase)
     {
         //
     }

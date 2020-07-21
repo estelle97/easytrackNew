@@ -21,7 +21,7 @@
                         <!-- Page title actions -->
                         <div class="col-auto ml-auto d-print-none">
                             <div class="d-flex align-items-center">
-                                <a href={{route('admin.snack.users')}} class="d-flex align-items-center text-white mr-5">
+                                <a href={{route('admin.company.users')}} class="d-flex align-items-center text-white mr-5">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                         class="mr-2">
                                         <path fill="none" d="M0 0h24v24H0z" />
@@ -79,18 +79,30 @@
                                     
                                         <form class="row" method="POST">
                                         @csrf
-                                            <div class="col-md-5">
+                                            <div class="col-sm-12 col-md-5">
                                                 <div class="mb-2">
                                                     <label class="form-label">Company</label>
-                                                    <input type="text" value="{{$user->site->snack()->first()->name}}" class="form-control form-control-rounded"
+                                                    <input type="text" value="{{$user->employee->site->company()->first()->name}}" class="form-control form-control-rounded"
                                                          disabled>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-3">
+                                            <div class="col-sm-12 col-md-7">
+                                                <div class="mb-2">
+                                                    <label class="form-label">Nom complet</label>
+                                                    <input type="text" name="name" value="{{$user->name}}" class="form-control form-control-rounded"
+                                                        placeholder="Saisissez votre nom" required>
+                                                    @if($errors->has('name'))
+                                                        <span>
+                                                            <strong class="text-danger">{{ $errors->first('name') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
                                                 <div class="mb-2">
                                                     <label class="form-label">Nom d'utilisateur</label>
                                                     <input type="text" name="username" value="{{$user->username}}" class="form-control form-control-rounded"
-                                                        placeholder="Saisisez votre nom d'utilisateur">
+                                                        placeholder="Saisisez votre nom d'utilisateur" required>
                                                     @if($errors->has('username'))
                                                         <span>
                                                             <strong class="text-danger">{{ $errors->first('username') }}</strong>
@@ -102,7 +114,7 @@
                                                 <div class="mb-2">
                                                     <label class="form-label">Email</label>
                                                     <input type="email" name="email" value="{{$user->email}}" class="form-control form-control-rounded"
-                                                        placeholder="Email">
+                                                        placeholder="Email" required>
                                                     @if($errors->has('email'))
                                                         <span>
                                                             <strong class="text-danger">{{ $errors->first('email') }}</strong>
@@ -110,23 +122,24 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-12">
+                                            <div class="col-sm-6 col-md-4">
                                                 <div class="mb-2">
-                                                    <label class="form-label">Nom complet</label>
-                                                    <input type="text" name="name" value="{{$user->name}}" class="form-control form-control-rounded"
-                                                        placeholder="Saisissez votre nom">
-                                                    @if($errors->has('name'))
+                                                    <label class="form-label">Téléphone</label>
+                                                    <input type="tel" name="phone" value="{{$user->phone}}" class="form-control form-control-rounded"
+                                                        placeholder="N° de Téléphone" required pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
+                                                    @if($errors->has('phone'))
                                                         <span>
-                                                            <strong class="text-danger">{{ $errors->first('name') }}</strong>
+                                                            <strong class="text-danger">{{ $errors->first('phone') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
+                                            
+                                            <div class="col-sm-12 col-md-6">
                                                 <div class="mb-2">
                                                     <label class="form-label">Addresse</label>
                                                     <input type="text" name="address" value="{{$user->address}}" class="form-control form-control-rounded"
-                                                        placeholder="Saisisez votre adresse">
+                                                        placeholder="Saisisez votre adresse" required>
                                                     @if($errors->has('address'))
                                                         <span>
                                                             <strong class="text-danger">{{ $errors->first('address') }}</strong>
@@ -134,9 +147,60 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="mb-4">
+                                                    <label class="form-label">Rôle</label>
+                                                    <select name="role_id" class="form-select">
+                                                        @foreach (App\Role::all() as $role)
+                                                            <option {{($user->role_id == $role->id) ? 'selected' : ''}} value="{{$role->id}}"> {{$role->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+                                            
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="mb-2">
+                                                    <label class="form-label">N° CNI</label>
+                                                    <input type="text" name="cni_number" value="{{$user->employee->cni_number}}" class="form-control form-control-rounded"
+                                                        placeholder="Numéro de CNI">
+                                                    @if($errors->has('cni_number'))
+                                                        <span>
+                                                            <strong class="text-danger">{{ $errors->first('cni_number') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="mb-2">
+                                                    <label class="form-label">Nom d'un responsable</label>
+                                                    <input type="text" name="contact_name" value="{{$user->employee->contact_name}}" class="form-control form-control-rounded"
+                                                        placeholder="Nom du responsable" required>
+                                                    @if($errors->has('contact_name'))
+                                                        <span>
+                                                            <strong class="text-danger">{{ $errors->first('contact_name') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="mb-2">
+                                                    <label class="form-label">Téléphone du responsable</label>
+                                                    <input type="text" name="contact_phone" value="{{$user->employee->contact_phone}}" class="form-control form-control-rounded"
+                                                        placeholder="Téléphone du responsable">
+                                                    @if($errors->has('contact_phone'))
+                                                        <span>
+                                                            <strong class="text-danger">{{ $errors->first('contact_phone') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            
+
                                             <div class="col-md-12">
                                                 <div class="mb-2 mb-0">
-                                                    <label class="form-label">A Propos</label>
+                                                    <label class="form-label"> Bio </label>
                                                     <textarea name="bio" rows="5" class="form-control" placeholder="Here can be your description">{{$user->bio}}</textarea>
                                                 </div>
                                             </div>

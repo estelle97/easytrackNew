@@ -15,7 +15,7 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('snack_id')->nullable();
+            $table->integer('company_id')->nullable();
             $table->integer('type_id')->nullable();
             $table->dateTime('end_date');
             $table->tinyInteger('status')->default(0);

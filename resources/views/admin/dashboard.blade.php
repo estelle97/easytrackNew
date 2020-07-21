@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base', ['title' => 'Tableau de bord'])
 
 @section('content')
     {{-- Page Header --}}

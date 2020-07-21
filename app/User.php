@@ -58,13 +58,17 @@ class User extends Authenticatable
         return $this->active;
     }
 
-    public function snacks(){
-        return $this->hasMany('App\Snack');
+    public function companies(){
+        return $this->hasMany('App\Company');
     }
 
     //Check if user is online
     public function isOnline(){
         return Cache::has('user-is-online-'. $this->id);
+    }
+
+    public function employee(){
+        return $this->hasOne('App\Employee');
     }
 
     public function roles()

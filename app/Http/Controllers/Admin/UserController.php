@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Employee;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -33,7 +34,7 @@ class UserController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'address' => 'required',
-            'tel' => 'required|min:200000000|max:999999999|numeric|unique:users',
+            'phone' => 'required|min:200000000|max:999999999|numeric|unique:users',
             'password' => 'required|min:8',
         ]);   
        
@@ -42,13 +43,16 @@ class UserController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'address' => $request->address,
-            'tel' => $request->tel,
+            'phone' => $request->phone,
             'bio' => $request->bio,
             'password' => bcrypt($request->password),
-            'site_id' => $request->site_id,
+            'role_id' => $request->role_id,
         ]);
 
-        $user->roles()->attach($request->role_id);
+        $employee = Employee::create([
+            'user_id' => $user->id,
+            'site_id' => $request->site_id
+        ]);
 
         return 'success';
     }
@@ -75,9 +79,11 @@ class UserController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
+            'phone' => 'required|min:200000000|max:999999999|numeric',
             'email' => 'required|email',
             'username' => 'required',
             'address' => 'required',
+            'role_id' => 'required',
         ]);
 
         $user = User::whereUsername($user)->first();
@@ -87,13 +93,24 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->address = $request->address;
         $user->bio = $request->bio;
+        $user->phone = $request->phone;
+        $user->role_id = $request->role_id;
+
+        $user->employee->cni_number = $request->cni_number;
+        $user->employee->contact_name = $request->contact_name;
+        $user->employee->contact_phone = $request->contact_phone;
         $user->save();
+        $user->employee->save();
         
-        /*$input = $request->all();
-        $lims_user_data = User::find($id);
-        $lims_user_data->update($input);*/
+        
+        
         notify()->success('Mise à jour de l\'utilisateur effectuée avec succès', 'Mise à jour utilisateur');
         return redirect()->back();
+    }
+
+    public function search(Request $request){
+        $text = $request->text;
+        return view('ajax.admin.employees_search', compact('text'));
     }
 
     public function destroy($id)

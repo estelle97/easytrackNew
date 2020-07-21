@@ -50,7 +50,7 @@ class DashboardController extends Controller
             'email' => 'required|email',
             'username' => 'required',
             'address' => 'required',
-            'tel' => 'required|min:9|max:9'
+            'phone' => 'required|min:200000000|max:999999999|numeric'
         ]);
         
         $user = Auth::user();
@@ -59,7 +59,8 @@ class DashboardController extends Controller
         $user->email = $request->email;
         $user->username = $request->username;
         $user->address = $request->address;
-        $user->tel = $request->tel;
+        $user->phone = $request->phone;
+        $user->bio = $request->bio;
         $user->save();
         
         Notify::info("Profil mis à jour avec succès!");

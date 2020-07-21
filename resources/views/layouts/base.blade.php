@@ -13,7 +13,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Easytrak - Application pour la gestion de stock</title>
+<title>Easytrak | {{ ($title ?? 'Application de gestion de stock') }}</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <meta name="msapplication-TileColor" content="#206bc4" />
     <meta name="theme-color" content="#206bc4" />
@@ -110,10 +110,10 @@
     {{-- Libs JS --}}
     <script src={{asset("template/assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/jquery/dist/jquery.min.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/apexcharts/dist/apexcharts.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/jqvmap/dist/jquery.vmap.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/jqvmap/dist/maps/jquery.vmap.world.js")}}></script>
     <script src={{asset("template/assets/dist/libs/peity/jquery.peity.min.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/apexcharts/dist/apexcharts.min.js")}}></script>
     {{-- easytrak Core --}}
     <script src={{asset("template/assets/dist/js/easytrak.min.js")}}></script>
     {{-- c'chart-revenue-bg --}}
@@ -520,8 +520,8 @@
         document.body.style.display = "block"
 
     </script>
-    {!! Notify::render() !!}
     @yield('scripts')
+    
 </body>
 
 </html>

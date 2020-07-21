@@ -72,7 +72,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('admin/sites/update', 'Admin\SiteController@update');
     Route::post('admin/sites/destroy', 'Admin\SiteController@destroy');
 
-    Route::get('admin/users', 'Admin\UserController@index')->name('admin.snack.users');
+    Route::get('admin/users', 'Admin\UserController@index')->name('admin.company.users');
+    Route::post('admin/users', 'Admin\UserController@search')->name('admin.company.users.search');
     Route::get('admin/users/{user}/show', 'Admin\UserController@show')->name('admin.user.show');
     Route::get('admin/users/{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit');
     Route::post('admin/users/{user}/edit', 'Admin\UserController@update');

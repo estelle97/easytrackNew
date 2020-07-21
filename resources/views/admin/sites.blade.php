@@ -50,7 +50,7 @@
                         </tr>
                     </thead>
                     <tbody class="sites">
-                        @foreach (Auth::user()->snacks->first()->sites()->get() as $site)
+                        @foreach (Auth::user()->companies->first()->sites()->get() as $site)
                             <tr id="site{{$site->id}}">
                                 <td>
                                     <input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select invoice">
@@ -71,17 +71,17 @@
                                     </span> 
                                 </td>
                                 <td>
-                                    <span id="site-tel1{{$site->id}}">
-                                        {{$site->tel1}} 
+                                    <span id="site-phone1{{$site->id}}">
+                                        {{$site->phone1}} 
                                     </span> 
-                                    @if($site->tel2 != null)
-                                        <span id="site-tel2{{$site->id}}">
-                                            - {{$site->tel2}}
+                                    @if($site->phone2 != null)
+                                        <span id="site-phone2{{$site->id}}">
+                                            - {{$site->phone2}}
                                         </span>
                                     @endif
                                 </td>
                                 <td>
-                                    {{$site->users()->count()}}
+                                    {{$site->employees()->count()}}
                                 </td>
                                 <td class="text-right">
                                     <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-site{{$site->id}}">
@@ -169,32 +169,32 @@
                         <div class="row mb-3 align-items-end">
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Nom</label>
-                                <input type="text" id="site-name-add" class="form-control" placeholder="Saisissez le nom du site...">
+                                <input type="text" id="site-name-add" class="form-control" placeholder="Saisissez le nom du site..." required>
                                 <span class="text-danger" id="name-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Email</label>
-                                <input type="email" id="site-email-add" class="form-control"  placeholder="Saisissez l'adresse email du site...">
+                                <input type="email" id="site-email-add" class="form-control"  placeholder="Saisissez l'adresse email du site..." required>
                                 <span class="text-danger" id="email-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Téléphone N°1</label>
-                                <input type="tel" id="site-tel1-add" class="form-control" placeholder="Saisissez le numéro de téléphone principal...">
-                                <span class="text-danger" id="tel1-error"></span>
+                                <input type="tel" id="site-phone1-add" class="form-control" placeholder="Saisissez le numéro de téléphone principal..." required  pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
+                                <span class="text-danger" id="phone1-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Téléphone N°2</label>
-                                <input type="tel" id="site-tel2-add" class="form-control" placeholder="Saisissez le numéro de téléphone...">
-                                <span class="text-danger" id="tel2-error"></span>
+                                <input type="tel" id="site-phone2-add" class="form-control" placeholder="Saisissez le numéro de téléphone...">
+                                <span class="text-danger" id="phone2-error"></span>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Ville</label>
-                                <input type="text" id="site-town-add" class="form-control"  placeholder="Saisissez la ville...">
+                                <input type="text" id="site-town-add" class="form-control"  placeholder="Saisissez la ville..." required>
                                 <span class="text-danger" id="town-error"></span>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Quartier</label>
-                                <input type="text" id="site-street-add" class="form-control" placeholder="Saisissez le quartier...">
+                                <input type="text" id="site-street-add" class="form-control" placeholder="Saisissez le quartier..." required>
                                 <span class="text-danger" id="street-error"></span>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
         </div>
 
         {{-- Modal Update site--}}
-        @foreach (Auth::user()->snacks()->first()->sites()->get() as $site)
+        @foreach (Auth::user()->companies()->first()->sites()->get() as $site)
             <div class="modal modal-blur fade" id="modal-edit-site{{$site->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -227,44 +227,43 @@
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Nom</label>
                                     <input type="text" id="site-name-update{{$site->id}}" value="{{$site->name}}" class="form-control"
-                                        placeholder="Saisissez le nom complet...">
+                                        placeholder="Saisissez le nom complet..." required>
                                         <span class="text-danger" id="name-error{{$site->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Email</label>
                                     <input type="email" id="site-email-update{{$site->id}}" value="{{$site->email}}" class="form-control"
-                                        placeholder="Saisissez l'adresse...">
+                                        placeholder="Saisissez l'adresse..." required>
                                         <span class="text-danger" id="email-error{{$site->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Téléphone N°1</label>
-                                    <input type="tel" id="site-tel1-update{{$site->id}}" value="{{$site->tel1}}" class="form-control"
-                                        placeholder="Saisissez le numéro de téléphone...">
-                                        <span class="text-danger" id="tel1-error{{$site->id}}"></span>
+                                    <input type="tel" id="site-phone1-update{{$site->id}}" value="{{$site->phone1}}" class="form-control"
+                                        placeholder="Saisissez le numéro de téléphone..."  pattern="[0-9]{3}[0-9]{3}[0-9]{3}" required>
+                                        <span class="text-danger" id="phone1-error{{$site->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Téléphone N°2</label>
-                                    <input type="tel" id="site-tel2-update{{$site->id}}" value="{{$site->tel2}}" class="form-control"
+                                    <input type="tel" id="site-phone2-update{{$site->id}}" value="{{$site->phone2}}" class="form-control"
                                         placeholder="Saisissez le numéro de téléphone...">
-                                        <span class="text-danger" id="tel2-error{{$site->id}}"></span>
+                                        <span class="text-danger" id="phone2-error{{$site->id}}"></span>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label">Ville</label>
                                     <input type="text" id="site-town-update{{$site->id}}" value="{{$site->town}}" class="form-control"
-                                        placeholder="Saisissez la ville...">
+                                        placeholder="Saisissez la ville..." required>
                                         <span class="text-danger" id="town-error{{$site->id}}"></span>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label">Quartier</label>
                                     <input type="text" id="site-street-update{{$site->id}}" value="{{$site->street}}" class="form-control"
-                                        placeholder="Saisissez le quartier...">
+                                        placeholder="Saisissez le quartier..." required>
                                         <span class="text-danger" id="street-error{{$site->id}}"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button onclick="updateSite({{$site->id}})" type="button" class="btn btn-primary" style="width: 100%;"
-                                data-dismiss="modal"> Mettre à jour </button>
+                            <button onclick="updateSite({{$site->id}})" type="button" class="btn btn-primary" style="width: 100%;"> Mettre à jour </button>
                         </div>
                     </div>
                 </div>
@@ -302,8 +301,8 @@
             var token = '{{csrf_token()}}';
             var name = $("#site-name-add").val();
             var email = $("#site-email-add").val();
-            var tel1 = $("#site-tel1-add").val();
-            var tel2 = $("#site-tel2-add").val();
+            var phone1 = $("#site-phone1-add").val();
+            var phone2 = $("#site-phone2-add").val();
             var town = $("#site-town-add").val();
             var street = $("#site-street-add").val();
 
@@ -314,14 +313,14 @@
                     _token : token,
                     name : name,
                     email : email,
-                    tel1 : tel1,
-                    tel2 : tel2,
+                    phone1 : phone1,
+                    phone2 : phone2,
                     town : town,
                     street : street
                 },
                 success: function(data){
                     $("#modal-create-site").modal('hide');
-                    document.location.reload(true);
+                    location.reload();
                 },
                 error: function (err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
@@ -346,8 +345,8 @@
             var token = '{{csrf_token()}}';
             var name = $("#site-name-update"+id).val();
             var email = $("#site-email-update"+id).val();
-            var tel1 = $("#site-tel1-update"+id).val();
-            var tel2 = $("#site-tel2-update"+id).val();
+            var phone1 = $("#site-phone1-update"+id).val();
+            var phone2 = $("#site-phone2-update"+id).val();
             var town = $("#site-town-update"+id).val();
             var street = $("#site-street-update"+id).val();
 
@@ -358,20 +357,23 @@
                     _token : token,
                     name : name,
                     email : email,
-                    tel1 : tel1,
-                    tel2 : tel2,
+                    phone1 : phone1,
+                    phone2 : phone2,
                     town : town,
                     street : street,
                     site_id: id
                 },
                 success: function(data){
                     if(data == 'success'){
-                        $("#site-name"+id).fadeOut().html(name).fadeIn();
-                        $("#site-email"+id).fadeOut().html(email).fadeIn();
-                        $("#site-tel1"+id).fadeOut().html(tel1).fadeIn();
-                        $("#site-tel2"+id).fadeOut().html(tel2).fadeIn();
-                        $("#site-town"+id).fadeOut().html(town).fadeIn();
-                        $("#site-street"+id).fadeOut().html(street).fadeIn();
+                        $(".text-danger").fadeOut().html('');
+                        $("#modal-edit-site"+id).modal().hide();
+
+                        $("#site-name"+id).html(name).fadeIn();
+                        $("#site-email"+id).html(email).fadeIn();
+                        $("#site-phone1"+id).html(phone1).fadeIn();
+                        $("#site-phone2"+id).html(phone2).fadeIn();
+                        $("#site-town"+id).html(town).fadeIn();
+                        $("#site-street"+id).html(street).fadeIn();
                     }
                 },
                 error: function (err) {
@@ -386,7 +388,7 @@
 
                         $.each(err.responseJSON.errors, function (i, error) {
                             var el = $('#'+i+'-error'+id);
-                            el.html(error).fadeIn();
+                            el.html(error[0]).fadeIn();
                         });
                     }
                 }

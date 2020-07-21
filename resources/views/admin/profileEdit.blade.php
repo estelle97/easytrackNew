@@ -1,5 +1,6 @@
 @extends('layouts.base')
 
+
 @section('content')
     
     <!-- Page title -->
@@ -77,51 +78,48 @@
                     <div class="col-md-5">
                         <div class="mb-2">
                             <label class="form-label">Company</label>
-                            <input type="text" class="form-control" disabled
-                                placeholder="Company" value="{{Auth::user()->snacks->first()->name}}">
+                            <input type="text" class="form-control" disabled  placeholder="Company" value="{{Auth::user()->companies->first()->name}}">
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">
                         <div class="mb-2">
                             <label class="form-label">Nom d'utilisateur</label>
-                            <input type="text" name="username" class="form-control"
-                                placeholder="Saisisez votre nom d'utilisateur" value="{{Auth::user()->username}}">
+                            <input type="text" name="username" class="form-control"  placeholder="Saisisez votre nom d'utilisateur" value="{{Auth::user()->username}}" required>
+                            {!! $errors->first('username','<span class="text-danger"> :message </span>') !!}
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-4">
                         <div class="mb-2">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control"
-                                placeholder="Votre adresse email" value="{{Auth::user()->email}}">
+                            <input type="email" name="email" class="form-control" placeholder="Votre adresse email" value="{{Auth::user()->email}}" required>
+                            {!! $errors->first('email','<span class="text-danger"> :message </span>') !!}
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="mb-2">
-                            <label class="form-label">Nom complet</label>
-                            <input type="text" name="name" class="form-control"
-                                placeholder="Saisissez votre nom" value="{{Auth::user()->name}}">
+                            <label class="form-label">Nom complet</label>  
+                            <input type="text" name="name" class="form-control" placeholder="Saisissez votre nom" value="{{Auth::user()->name}}" required>
+                            {!! $errors->first('name','<span class="text-danger"> :message </span>') !!}
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                             <div class="mb-2">
                                 <label class="form-label">Numéro de téléphone</label>
-                                <input type="tel" name="tel" class="form-control"
-                                    placeholder="Saisissez Numéro de téléphone" value="{{Auth::user()->tel}}">
+                                <input type="tel" name="phone" class="form-control" placeholder="Saisissez Numéro de téléphone" value="{{Auth::user()->phone}}"  pattern="[0-9]{3}[0-9]{3}[0-9]{3}" required>
+                                {!! $errors->first('phone','<span class="text-danger"> :message </span>') !!}
                             </div>
                         </div>
                     <div class="col-md-12">
                         <div class="mb-2">
                             <label class="form-label">Addresse</label>
-                            <input type="text" name="address" class="form-control"
-                                placeholder="Saisisez votre adresse" value="{{Auth::user()->address}}">
+                            <input type="text" name="address" class="form-control"  placeholder="Saisisez votre adresse" value="{{Auth::user()->address}}" required>
+                            {!! $errors->first('address','<span class="text-danger"> :message </span>') !!}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="mb-2 mb-0">
                             <label class="form-label">A Propos</label>
-                            <textarea rows="5" class="form-control" placeholder="Here can be your description">
-                                    {{Auth::user()->bio}}
-                            </textarea>
+                            <textarea rows="5" name="bio" class="form-control" placeholder="Here can be your description"> {{Auth::user()->bio}} </textarea>
                         </div>
                     </div>
                     <div class="text-right">
