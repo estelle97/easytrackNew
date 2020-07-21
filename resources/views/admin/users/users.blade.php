@@ -1,4 +1,23 @@
-@extends('layouts.base')
+@extends('layouts.base', ['title' => 'Liste ees employées']);
+
+@section('search-form')
+    <div class="ml-md-auto pl-md-4 py-2 py-md-0 mr-md-4 order-first order-md-last flex-grow-1 flex-md-grow-0">
+        <form>
+            <div class="input-icon">
+                <span class="input-icon-addon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <circle cx="10" cy="10" r="7" />
+                        <line x1="21" y1="21" x2="15" y2="15" />
+                    </svg>
+                </span>
+                <input type="text" onkeyup="search(this.value)" class="form-control form-control-rounded form-control-dark" placeholder="Rechercher" />
+            </div>
+        </form>
+    </div>
+@endsection
 
 @section('content')
     {{-- Page Header --}}
@@ -86,27 +105,27 @@
     {{-- end Page Header--}}
 
     {{-- Content Body--}}
-    <div class="row row-deck row-cards">
-        @foreach (Auth::user()->snacks()->first()->sites()->get() as $site)
-            @foreach ($site->users()->get() as $user)
+    <div class="row row-deck row-cards" id="employees">
+        @foreach (Auth::user()->companies()->first()->sites()->get() as $site)
+            @foreach ($site->employees()->get()->reverse() as $emp)
                 <div class="col-md-6 col-lg-3">
             <div class="card">
                 <div class="card-body">
                     <div class="row row-sm align-items-center">
                         <div class="col-auto">
-                            <span class="avatar avatar-md">PK</span>
+                                <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?name={{$emp->user->name}}')"> </span>
                         </div>
                         <div class="col">
                             <h3 class="mb-0">
-                                <a href={{route('admin.user.show', $user->username)}}> {{$user->name}} </a>
+                                <a href={{route('admin.user.show', $emp->user->username)}}> {{$emp->user->name}} </a>
                             </h3>
                             <div class="text-muted text-h5">
-                               {{$user->roles()->first()->name}}
+                               {{$emp->user->role->name}}
                             </div>
                         </div>
                         <div class="col-auto lh-1 align-self-start">
-                            <span class="badge bg-gray-lt">
-                                offline
+                            <span class="badge bg-info">
+                                {{$emp->site->name}}
                             </span>
                         </div>
                     </div>
@@ -129,7 +148,7 @@
                         </div>
                         <div class="col-auto">
                             <div class="btn-list">
-                                <a href={{route('admin.user.show', $user->username)}} class="btn btn-white btn-sm">
+                                <a href={{route('admin.user.show', $emp->user->username)}} class="btn btn-white btn-sm">
                                     Gérer
                                 </a>
                                 <a class="btn btn-white btn-sm" data-toggle="modal"
@@ -186,37 +205,38 @@
                             <div class="col-lg-9 mb-4">
                                 <label class="form-label">Nom complet</label>
                                 <input type="text" id="user-name-add" class="form-control"
-                                    placeholder="Saisissez le nom complet...">
+                                    placeholder="Saisissez le nom complet..." required>
                                     <span class="text-danger" id="name-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Adresse email</label>
                                 <input type="email" id="user-email-add" class="form-control"
-                                    placeholder="Saisissez l'adresse email d'utilisateur...">
+                                    placeholder="Saisissez l'adresse email d'utilisateur..." required>
                                     <span class="text-danger" id="email-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Nom d'utilisateur</label>
                                 <input type="text" id="user-username-add" class="form-control"
-                                    placeholder="Saisissez le pseudo...">
+                                    placeholder="Saisissez le pseudo..." required>
                                     <span class="text-danger" id="username-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Adresse</label>
                                 <input type="text" id="user-address-add" class="form-control"
-                                    placeholder="Saisissez l'adresse...">
+                                    placeholder="Saisissez l'adresse..." required>
                                     <span class="text-danger" id="address-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
-                                <label class="form-label">Tel</label>
-                                <input type="tel" id="user-tel-add" class="form-control"
-                                    placeholder="Saisissez le numéro de téléphone...">
-                                    <span class="text-danger" id="tel-error"></span>
+                                <label class="form-label"> Téléphone </label>
+                                <input type="tel" id="user-phone-add" class="form-control"
+                                    placeholder="Saisissez le numéro de téléphone..." required
+                                    pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
+                                    <span class="text-danger" id="phone-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Mot de passe</label>
                                 <input type="password" id="user-password-add" class="form-control"
-                                    placeholder="Saisissez le mot de passe...">
+                                    placeholder="Saisissez le mot de passe..." required minlength="8">
                                     <span class="text-danger" id="password-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
@@ -230,7 +250,7 @@
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label"> Site de l'utilisateur </label>
                                 <select name="role" id="user-site-add" class="form-select">
-                                    @foreach (Auth::user()->snacks()->first()->sites()->get() as $site)
+                                    @foreach (Auth::user()->companies()->first()->sites()->get() as $site)
                                         <option value="{{$site->id}}"> {{$site->name}} </option>
                                     @endforeach
                                 </select>
@@ -274,7 +294,7 @@
             var name = $("#user-name-add").val();
             var email = $("#user-email-add").val();
             var username = $("#user-username-add").val();
-            var tel = $("#user-tel-add").val();
+            var phone = $("#user-phone-add").val();
             var address = $("#user-address-add").val();
             var bio = $("#user-bio-add").val();
             var password = $("#user-password-add").val();
@@ -289,7 +309,7 @@
                     name : name,
                     email : email,
                     username : username,
-                    tel : tel,
+                    phone : phone,
                     address : address,
                     bio : bio,
                     site_id : site,
@@ -297,7 +317,7 @@
                     password : password
                 },
                 success : function(){
-                    document.location.reload(true);
+                    location.reload();
                 },
                 error: function (err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
@@ -316,6 +336,22 @@
                     }
                 }
 
+            });
+        }
+
+        function search(text){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/admin/users',
+                method : 'post',
+                data: {
+                    _token: token,
+                    text: text
+                },
+                success: function(data){
+                    $("#employees").html(data);
+                }
             });
         }
     </script>

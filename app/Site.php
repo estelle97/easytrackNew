@@ -21,12 +21,8 @@ class Site extends Model
         return $this->hasMany('App\Supplier');
     }
 
-    public function users(){
-        return $this->hasMany('App\User');
-    }
-
     public function company(){
-        return $this->belongsTo('App\Copany');
+        return $this->belongsTo('App\Company');
     }
 
     public function employees(){

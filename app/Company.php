@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends Model
 {
+    use SoftDeletes;
+    
     protected $guarded = ['id'];
     protected $table = 'companies';
     public $timestamps = null;
@@ -21,8 +24,7 @@ class Company extends Model
     }
 
     public function types(){
-        return $this->belongsToMany('App\Type')
-                        ->using('App\Subscription')
+        return $this->belongsToMany('App\Type','subscriptions')
                         ->withPivot('end_date','status');
     }
 

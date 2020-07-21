@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SnackResource extends JsonResource
+class CompanyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,14 +19,15 @@ class SnackResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'email' => $this->email,
-            'tel1' => $this->tel1,
-            'tel2' => $this->tel2,
+            'phone1' => $this->phone1,
+            'phone2' => $this->phone2,
             'town' => $this->town,
             'street' => $this->street,
             'logo' => $this->logo,
-            'director' => new UserResource($this->whenLoaded('user')),
+            'owner' => new UserResource($this->whenLoaded('owner')),
             'sites' => SiteResource::collection($this->whenLoaded('sites')),
             'types' => TypeResource::collection($this->whenLoaded('types')),
+            'products' => ProductResource::collection($this->whenLoaded('products')),
         ];
     }
 }

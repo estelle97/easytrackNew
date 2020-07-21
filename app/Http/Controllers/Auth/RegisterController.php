@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Company;
 use App\User;
 use App\Site;
-use App\Snack;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -66,17 +66,17 @@ class RegisterController extends Controller
         $request->validate([
             'username' => 'required',
             'useraddress' => 'required',
-            'usertel' => 'required|min:9|max:9|unique:users,tel',
+            'userphone' => 'required|min:9|max:9|unique:users,phone',
             'useremail' => 'required|email|unique:users,email',
             'userusername' => 'required|unique:users,username',
             'userpassword' => 'required|min:8',
 
-            'snackname' => 'required|unique:snacks,name',
-            'snacktel1' => 'required|min:9|max:9|unique:snacks,tel1',
-            'snackemail' => 'required|email|unique:snacks,email',
+            'companyname' => 'required|unique:companies,name',
+            'companyphone1' => 'required|min:9|max:9|unique:companies,phone1',
+            'companyemail' => 'required|email|unique:companies,email',
 
             'sitename' => 'required|unique:sites,name',
-            'sitetel1' => 'required|min:9|max:9|unique:sites,tel1',
+            'sitephone1' => 'required|min:9|max:9|unique:sites,phone1',
             'siteemail' => 'required|email|unique:sites,email',
             'sitestreet' => 'required',
             'sitetown' => 'required'
@@ -88,39 +88,39 @@ class RegisterController extends Controller
             'email' => $request->useremail,
             'username' => $request->userusername,
             'address' => $request->useraddress,
-            'tel' => $request->usertel,
+            'phone' => $request->userphone,
             'password' => bcrypt($request->userpassword),
-            'is_admin' => 2
+            'is_admin' => 2,
+            'role_id' => 5,
         ]);
-        $user->roles()->attach(5);
 
-        $snack = new Snack([
-            'name' => $request->snackname,
-            'slug' => $this->makeSlug($request->snackname),
-            'email' => $request->snackemail,
-            'tel1' => $request->snacktel1,
-            'tel2' => $request->snacktel2,
-            'town' => $request->snacktown,
-            'street' =>$request->snackstreet,
+        $company = new Company([
+            'name' => $request->companyname,
+            'slug' => $this->makeSlug($request->companyname),
+            'email' => $request->companyemail,
+            'phone1' => $request->companyphone1,
+            'phone2' => $request->companyphone2,
+            'town' => $request->companytown,
+            'street' =>$request->companystreet,
             'user_id' => $user->id
         ]);
-        $snack->save();
+        $company->save();
 
         $site = new Site([
             'name' => $request->sitename,
             'slug' => $this->makeSlug($request->sitename),
             'email' => $request->siteemail,
-            'tel1' => $request->sitetel1,
-            'tel2' => $request->sitetel2,
+            'phone1' => $request->sitephone1,
+            'phone2' => $request->sitephone2,
             'town' => $request->sitetown,
             'street' =>$request->sitestreet,
-            'snack_id' => $snack->id
+            'company_id' => $company->id
         ]);
         $site->save();
 
         // Attach snack with his type of subscription
         $type = \App\Type::findOrFail($request->type);
-        $snack->types()->attach($type->id,[
+        $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addMonth($type->duration),
         ]);
 

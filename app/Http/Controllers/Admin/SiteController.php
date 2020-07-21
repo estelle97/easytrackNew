@@ -22,18 +22,18 @@ class SiteController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:sites',
             'email' => 'email|required',
-            'tel1' => 'required|min:200000000|max:999999999|numeric|unique:sites',
+            'phone1' => 'required|min:200000000|max:999999999|numeric|unique:sites',
             'town' => 'required',
             'street' => 'required'
         ]);
 
         $site = new Site();
-        $site->snack_id = Auth::user()->snacks()->first()->id;
+        $site->company_id = Auth::user()->companies()->first()->id;
         $site->name = $request->name;
         $site->slug= $this->makeSlug($request->name);
         $site->email = $request->email;
-        $site->tel1 = $request->tel1;
-        $site->tel2 = $request->tel2;
+        $site->phone1 = $request->phone1;
+        $site->phone2 = $request->phone2;
         $site->town = $request->town;
         $site->street = $request->street;
 
@@ -50,7 +50,7 @@ class SiteController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'email|required',
-            'tel1' => 'required|min:200000000|max:999999999|numeric',
+            'phone1' => 'required|min:200000000|max:999999999|numeric',
             'town' => 'required',
             'street' => 'required'
         ]);
@@ -59,8 +59,8 @@ class SiteController extends Controller
         
         $site->name = $request->name;
         $site->email = $request->email;
-        $site->tel1 = $request->tel1;
-        $site->tel2 = $request->tel2;
+        $site->phone1 = $request->phone1;
+        $site->phone2 = $request->phone2;
         $site->town = $request->town;
         $site->street = $request->street;
 
