@@ -1,4 +1,4 @@
-@extends('layouts.base', ['title' => 'Liste ees employées']);
+@extends('layouts.base', ['title' => 'Liste ees employées'])
 
 @section('search-form')
     <div class="ml-md-auto pl-md-4 py-2 py-md-0 mr-md-4 order-first order-md-last flex-grow-1 flex-md-grow-0">
@@ -234,9 +234,9 @@
                                     <span class="text-danger" id="phone-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
-                                <label class="form-label">Mot de passe</label>
+                                <label class="form-label">Mot de passe <span class="small">(Au moins 8 caractères)</span></label>
                                 <input type="password" id="user-password-add" class="form-control"
-                                    placeholder="Saisissez le mot de passe..." required minlength="8">
+                                    placeholder="Saisissez le mot de passe... " required minlength="8">
                                     <span class="text-danger" id="password-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">

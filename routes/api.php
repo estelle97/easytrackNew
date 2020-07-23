@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('sites/{site}', 'API\SiteController@update');
     Route::apiResource('sites', 'API\SiteController');
     Route::apiResource('bills', 'API\BillController');
-    Route::apiResource('invoices', 'API\InvoiceController');
+    Route::apiResource('employees', 'API\EmployeeController');
     Route::apiResource('products', 'API\ProductController');
     Route::apiResource('roles', 'API\RoleController');
     Route::apiResource('permissions','API\PermissionController');

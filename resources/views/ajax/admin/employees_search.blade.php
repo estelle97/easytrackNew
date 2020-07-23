@@ -1,7 +1,8 @@
 @foreach (Auth::user()->companies()->first()->sites()->get() as $site)
     
     <?php 
-        $employees = $site->employees::whereHas('user', function($query) use($text){
+        dd($site::whereHas('employees'));
+        $employees = $site->employees->whereHas('user', function($query) use($text){
             $query->where('name','like','%'.$text.'%')
                     ->orWhere('email','like','%'.$text.'%')
                     ->orWhere('username','like','%'.$text.'%');

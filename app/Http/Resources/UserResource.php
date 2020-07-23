@@ -17,28 +17,16 @@ class UserResource extends JsonResource
         return [
             'user_id' => $this->id,
             'name' => $this->name,
-            'tel' => $this->tel,
             'email' => $this->email,
-            'address' => $this->address,
             'username' => $this->username,
+            'address' => $this->address,
+            'phone' => $this->phone,
             'is_admin' => $this->is_admin,
-            'cni_number' => $this->cni_number,
-            'contact_tel' => $this->when($this->contact_tel != null, $this->contact_tel),
-            'contact_name' => $this->when($this->contact_name != null, $this->contact_name),
-            'snacks' => SnackResource::collection($this->whenLoaded('snacks')),
-            'site' => new SiteResource($this->whenLoaded('site')),
+            'employee' => new EmployeeResource($this->whenLoaded('employee')),
+            'companies' => CompanyResource::collection($this->whenLoaded('companies')),
             'agendas' => SiteResource::collection($this->whenLoaded('agendas')),
-            'start' => $this->whenPivotLoaded('agendas', function(){
-                return $this->pivot->start;
-            }),
-            'end' => $this->whenPivotLoaded('agendas', function(){
-                return $this->pivot->end;
-            }),
-            'status' => $this->whenPivotLoaded('agendas', function(){
-                return $this->pivot->status;
-            }),
-            'roles' => RoleResource::collection($this->whenLoaded('roles')),
-            'permission' => PermissionResource::collection($this->whenLoaded('permissions')),
+            'role' => new RoleResource($this->whenLoaded('role')),
+            'permissions' => $this->permissions->merge($this->role->permissions)
         ];
     }
 }

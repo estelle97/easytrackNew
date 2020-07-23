@@ -319,7 +319,7 @@
                     street : street
                 },
                 success: function(data){
-                    $("#modal-create-site").modal('hide');
+                    // $("#modal-create-site").modal('hide');
                     location.reload();
                 },
                 error: function (err) {
@@ -366,7 +366,7 @@
                 success: function(data){
                     if(data == 'success'){
                         $(".text-danger").fadeOut().html('');
-                        $("#modal-edit-site"+id).modal().hide();
+                        // $("#modal-edit-site"+id).toggle().modal();
 
                         $("#site-name"+id).html(name).fadeIn();
                         $("#site-email"+id).html(email).fadeIn();
