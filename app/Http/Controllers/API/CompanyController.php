@@ -16,7 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return CompanyResource::collection(Company::all()->load('owner','sites','types'));
+        return CompanyResource::collection(Company::all()->load('owner','sites.employees.user','types'));
     }
 
     /**
@@ -80,7 +80,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        return new CompanyResource($company->loadMissing('owner','sites','types'));
+        return new CompanyResource($company->loadMissing('owner','sites.employees.user','types'));
     }
     
 
