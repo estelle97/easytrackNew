@@ -16,7 +16,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        return TypeResource::collection(Type::all()->load('snacks'));
+        return TypeResource::collection(Type::all());
     }
 
     /**
@@ -68,7 +68,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        return new TypeResource($type->loadMissing('snacks'));
+        return new TypeResource($type);
     }
 
     /**
