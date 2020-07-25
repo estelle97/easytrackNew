@@ -118,7 +118,8 @@ class EmployeeController extends Controller
             'email' => 'required|email',
             'address' => 'required',
             'phone' => 'required|min:200000000|max:999999999|numeric',
-            'password' => 'required|min:8',
+            'role_id' => 'required',
+
         ]);   
        
         $employee->contact_name = $request->contact_name;
@@ -126,6 +127,7 @@ class EmployeeController extends Controller
         $employee->cni_number = $request->cni_number;
         $employee->user->name = $request->name;
         $employee->user->username = $request->username;
+        $employee->user->role_id = $request->role_id;
         $employee->user->email = $request->name;
         $employee->user->address = $request->address;
         $employee->user->phone = $request->phone;

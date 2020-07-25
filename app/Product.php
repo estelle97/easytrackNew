@@ -30,7 +30,7 @@ class Product extends Model
     }
 
     public function sales(){
-        return $this->belongsToMany('App\Sale',)->withPivot('site_id','qty','price');
+        return $this->belongsToMany('App\Sale')->withPivot('site_id','qty','price');
     }
 
     public function taxe(){
