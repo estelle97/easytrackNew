@@ -41,11 +41,11 @@
                             <th class="w-1">
                                 <input class="form-check-input m-0 align-middle" type="checkbox">
                             </th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            <th> Emplacement </th>
-                            <th>Teléphone</th>
-                            <th> Employés </th>
+                            <th class="exportable">Nom</th>
+                            <th class="exportable">Email</th>
+                            <th class="exportable"> Emplacement </th>
+                            <th class="exportable">Teléphone</th>
+                            <th class="exportable"> Employés </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -290,10 +290,52 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"> </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
+    
     <script>
         $(document).ready(function() {
-            $('#sites').DataTable();
+            $('#sites').DataTable({
+                 dom: 'Blfrtip',
+                buttons: [
+                    'colvis',
+                    {
+                        extend: 'copy', 
+                        text: 'Copier',
+                        title : 'Easytrack',
+                        exportOptions: {
+                            columns: '.exportable',
+                        }
+                    },
+                    {
+                        extend: 'excel', 
+                        text: 'Excel',
+                        title : 'Easytrack',
+                        exportOptions: {
+                            columns: '.exportable',
+                        }
+                    },
+                    {
+                        extend: 'csv', 
+                        text: 'CSV',
+                        title : 'Easytrack',
+                        exportOptions: {
+                            columns: '.exportable',
+                        }
+                    },
+                    {
+                        extend: 'pdf', 
+                        text: 'PDF',
+                        title : 'Easytrack',
+                        exportOptions: {
+                            columns: '.exportable'
+                        }
+                    },
+                ],
+                select: true,
+                colReorder: true,
+            });
         } );
     </script>
     <script>
@@ -398,5 +440,5 @@
 @endsection
 
 @section('styles')
-    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.css"/>
 @endsection

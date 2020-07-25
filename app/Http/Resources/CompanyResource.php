@@ -27,7 +27,7 @@ class CompanyResource extends JsonResource
             'owner' => new UserResource($this->whenLoaded('owner')),
             'sites' => SiteResource::collection($this->whenLoaded('sites')),
             'types' => TypeResource::collection($this->whenLoaded('types')),
-            'products' => ProductResource::collection($this->whenLoaded('products')),
+            'activity' => new ActivityResource($this->whenLoaded('activity')),
         ];
     }
 }

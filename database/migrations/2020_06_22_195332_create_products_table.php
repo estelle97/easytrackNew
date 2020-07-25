@@ -15,7 +15,6 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('unit_id')->nullable();
             $table->integer('taxe_id')->nullable();
@@ -29,6 +28,7 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('is_active')->default(1);
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
+            
         });
     }
    

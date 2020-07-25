@@ -10,6 +10,7 @@ $factory->define(Company::class, function (Faker $faker) {
     $user_id = $faker->randomElement(['1','2','3','4','5']);
     $slug = preg_replace('~[^\pL\d]+~u', '-', preg_replace('~[^-\w]+~', '', strtolower($name)));
     return [
+        'activity_id' => $faker->randomElement([1,2]),
         'name' => $name,
         'slug' => $slug,
         'email' => $faker->companyEmail,

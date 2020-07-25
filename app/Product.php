@@ -17,8 +17,8 @@ class Product extends Model
         return $this->belongsToMany('App\Site')->withPivot('cost','price','cost','qty','qty_alert', 'promotion', 'promotion_price','promotion_start','promotion_end','tax_method');
     }
 
-    public function company(){
-        return $this->belongsTo('App\Company');
+    public function activities(){
+        return $this->belongsToMany('App\Activity');
     }
 
     public function category(){
