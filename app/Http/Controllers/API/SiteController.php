@@ -16,7 +16,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return SiteResource::collection(Site::all()->load('employees','company','products','suppliers'));
+        return SiteResource::collection(Site::all()->load('employees.user','company','products','suppliers'));
     }
 
     /**
@@ -79,7 +79,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        return new SiteResource($site->loadMissing('employees','company','products','suppliers'));
+        return new SiteResource($site->loadMissing('employees.user.role','company','products','suppliers'));
     }
 
     /**

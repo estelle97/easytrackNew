@@ -18,8 +18,8 @@ class SupplierResource extends JsonResource
             'supplier_id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'tel1' => $this->tel1,
-            'tel2' => $this->tel2,
+            'phone1' => $this->phone1,
+            'phone2' => $this->phone2,
             'site' => new SiteResource($this->whenLoaded('site'))
         ];
     }
