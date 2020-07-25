@@ -38,7 +38,7 @@ class UserController extends Controller
             'password' => 'required|min:8',
         ]);   
        
-        $user = User::create([
+        $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
@@ -49,10 +49,18 @@ class UserController extends Controller
             'role_id' => $request->role_id,
         ]);
 
-        $employee = Employee::create([
-            'user_id' => $user->id,
+        $employee = new Employee([
+            'contact_name' => $request->contact_name,
+            'contact_phone' => $request->contact_phone,
+            'cni_number' => $request->cni_number,
             'site_id' => $request->site_id
         ]);
+
+        DB::transaction(function () use($user, $employee) {
+            $user->save();
+                $employee->user_id = $user->id;
+                $employee->save();
+        });
 
         return 'success';
     }

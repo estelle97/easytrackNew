@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterStoreRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -61,8 +62,8 @@ class RegisterController extends Controller
     }
 
     public function store(Request $request){
-        // Validate and create admin
         
+        // Validate and create admin
         $request->validate([
             'username' => 'required',
             'useraddress' => 'required',
@@ -81,9 +82,10 @@ class RegisterController extends Controller
             'sitestreet' => 'required',
             'sitetown' => 'required'
         ]);
+
         // Remove password_confirmation field to user array
 
-        $user = User::create([
+        $user = new User([
             'name' => $request->username,
             'email' => $request->useremail,
             'username' => $request->userusername,
@@ -91,10 +93,10 @@ class RegisterController extends Controller
             'phone' => $request->userphone,
             'password' => bcrypt($request->userpassword),
             'is_admin' => 2,
-            'role_id' => 5,
+            'role_id' => 5
         ]);
 
-        $company = new Company([
+        $company = new company([
             'name' => $request->companyname,
             'slug' => $this->makeSlug($request->companyname),
             'email' => $request->companyemail,
@@ -102,9 +104,8 @@ class RegisterController extends Controller
             'phone2' => $request->companyphone2,
             'town' => $request->companytown,
             'street' =>$request->companystreet,
-            'user_id' => $user->id
         ]);
-        $company->save();
+        
 
         $site = new Site([
             'name' => $request->sitename,
@@ -114,9 +115,16 @@ class RegisterController extends Controller
             'phone2' => $request->sitephone2,
             'town' => $request->sitetown,
             'street' =>$request->sitestreet,
-            'company_id' => $company->id
         ]);
-        $site->save();
+        
+        DB::transaction(function () use($user, $company, $site){
+            $user->save();
+                $company->user_id = $user->id;
+                $company->save();
+                    $site->company_id = $company->id;
+                    $site->save();
+
+        });
 
         // Attach snack with his type of subscription
         $type = \App\Type::findOrFail($request->type);

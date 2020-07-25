@@ -16,7 +16,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return SiteResource::collection(Site::where('active', '1')->get()->load('users','snack','products','suppliers'));
+        return SiteResource::collection(Site::all()->load('employees','company','products','suppliers'));
     }
 
     /**
@@ -34,8 +34,8 @@ class SiteController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param String email
-     * @param String tel1
-     * @param String tel2 [optional]
+     * @param String phone1
+     * @param String phone2 [optional]
      * @param String town
      * @param String street
      * 
@@ -46,28 +46,28 @@ class SiteController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'email|required|string',
-            'tel1' => 'required',
+            'phone1' => 'required',
             'town' => 'required',
             'street' => 'required',
-            'snack_id' => 'required'
+            'company_id' => 'required'
         ]);
 
         $site = new Site([
             'name' => $request->name,
             'slug' => $this->makeSlug($request->name),
             'email' => $request->email,
-            'tel1' => $request->tel1,
-            'tel2' => $request->tel2,
+            'phone1' => $request->phone1,
+            'phone2' => $request->phone2,
             'town' => $request->town,
             'street' => $request->street,
-            'snack_id' => $request->snack_id,
+            'company_id' => $request->company_id,
         ]);
 
         $site->save();
 
         return response()->json([
             'message' => 'Site created successfully!',
-            'site' => new SiteResource($site->loadMissing('snack')),
+            'site' => new SiteResource($site->loadMissing('company')),
         ], 201);
     }
 
@@ -79,7 +79,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        return new SiteResource($site->loadMissing('users','snack','products','suppliers'));
+        return new SiteResource($site->loadMissing('employees','company','products','suppliers'));
     }
 
     /**
@@ -99,8 +99,8 @@ class SiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Site  $site
      * @param String email
-     * @param String tel1
-     * @param String tel2 [optional]
+     * @param String phone1
+     * @param String phone2 [optional]
      * @param String town
      * @param String street
      * 
@@ -111,7 +111,7 @@ class SiteController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'email|required|string',
-            'tel1' => 'required',
+            'phone1' => 'required',
             'town' => 'required',
             'street' => 'required',
         ]);
@@ -119,15 +119,15 @@ class SiteController extends Controller
         $site->update([
             'name' => $request->name,
             'email' => $request->email,
-            'tel1' => $request->tel1,
-            'tel2' => $request->tel2,
+            'phone1' => $request->phone1,
+            'phone2' => $request->phone2,
             'town' => $request->town,
             'street' => $request->street,
         ]);
 
         return response()->json([
             'message' => 'Site updated successfully!',
-            'site' => new SiteResource($site->loadMissing('snack')),
+            'site' => new SiteResource($site->loadMissing('company')),
         ], 200);
     }
 

@@ -26,7 +26,7 @@ class Site extends Model
     }
 
     public function employees(){
-        return $this->hasOne('App\Employee');
+        return $this->hasMany('App\Employee');
     }
 
     public function agendas(){

@@ -33,7 +33,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     
     Route::apiResource('Categories', 'API\CategoryController');
     Route::apiResource('Types', 'API\TypeController');
-    Route::apiResource('snacks', 'API\SnackController');
+    Route::apiResource('companies', 'API\CompanyController');
+    Route::apiResource('employees', 'API\EmployeeController');
 
     Route::post('sites/{site}', 'API\SiteController@update');
     Route::apiResource('sites', 'API\SiteController');

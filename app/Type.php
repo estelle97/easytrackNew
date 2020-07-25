@@ -10,8 +10,7 @@ class Type extends Model
     public $timestamps = null;
     protected $dates = ['created_at'];
 
-    public function types(){
-        return $this->belongsToMany('App\Type')
-                        ->using('App\Subscription');
+    public function companies(){
+        return $this->belongsToMany('App\Company', 'subscriptions')->withPivot('end_date','status');
     }
 }

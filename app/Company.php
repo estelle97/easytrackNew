@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends Model
@@ -20,7 +19,7 @@ class Company extends Model
     }
 
     public function owner(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
 
     public function types(){
