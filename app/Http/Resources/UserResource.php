@@ -25,20 +25,11 @@ class UserResource extends JsonResource
             'cni_number' => $this->cni_number,
             'contact_tel' => $this->when($this->contact_tel != null, $this->contact_tel),
             'contact_name' => $this->when($this->contact_name != null, $this->contact_name),
-            'snacks' => SnackResource::collection($this->whenLoaded('snacks')),
-            'site' => new SiteResource($this->whenLoaded('site')),
+            'companies' => $this->when($this->is_admin == 2, $this->companies),
+            'employee' => $this->when($this->employee != null, $this->whenLoaded('employee')),
             'agendas' => SiteResource::collection($this->whenLoaded('agendas')),
-            'start' => $this->whenPivotLoaded('agendas', function(){
-                return $this->pivot->start;
-            }),
-            'end' => $this->whenPivotLoaded('agendas', function(){
-                return $this->pivot->end;
-            }),
-            'status' => $this->whenPivotLoaded('agendas', function(){
-                return $this->pivot->status;
-            }),
-            'roles' => RoleResource::collection($this->whenLoaded('roles')),
-            'permission' => PermissionResource::collection($this->whenLoaded('permissions')),
+            'role' => new RoleResource($this->whenLoaded('role')),
+            'permissions' => $this->getPermissions(),
         ];
     }
 }

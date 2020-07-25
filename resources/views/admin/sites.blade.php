@@ -319,7 +319,7 @@
                     street : street
                 },
                 success: function(data){
-                    $("#modal-create-site").modal('hide');
+                    // $("#modal-create-site").modal('hide');
                     location.reload();
                 },
                 error: function (err) {
@@ -366,14 +366,14 @@
                 success: function(data){
                     if(data == 'success'){
                         $(".text-danger").fadeOut().html('');
-                        $("#modal-edit-site"+id).modal().hide();
+                        // $("#modal-edit-site"+id).modal().hide();
 
-                        $("#site-name"+id).html(name).fadeIn();
-                        $("#site-email"+id).html(email).fadeIn();
-                        $("#site-phone1"+id).html(phone1).fadeIn();
-                        $("#site-phone2"+id).html(phone2).fadeIn();
-                        $("#site-town"+id).html(town).fadeIn();
-                        $("#site-street"+id).html(street).fadeIn();
+                        $("#site-name"+id).fadeOut().html(name).fadeIn();
+                        $("#site-email"+id).fadeOut().html(email).fadeIn();
+                        $("#site-phone1"+id).fadeOut().html(phone1).fadeIn();
+                        $("#site-phone2"+id).fadeOut().html(phone2).fadeIn();
+                        $("#site-town"+id).fadeOut().html(town).fadeIn();
+                        $("#site-street"+id).fadeOut().html(street).fadeIn();
                     }
                 },
                 error: function (err) {

@@ -5,12 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Site;
-use App\Snack;
+use App\Company;
 use App\Type;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule as ValidationRule;
 
@@ -26,7 +27,7 @@ class UserController extends Controller
      * @param String tel
      * @param String address
      * @param String password_confirmation
-     * @param Integer snack_id [optional]
+     * @param Integer company_id [optional]
      * @param Char is_admin (1, 2, 3) default 1
      * 
      * @return String message
@@ -37,17 +38,17 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required',
             'useraddress' => 'required',
-            'usertel' => 'required|min:9|max:9|unique:users,tel',
+            'userphone' => 'required|min:9|max:9|unique:users,phone',
             'useremail' => 'required|email|unique:users,email',
             'userusername' => 'required|unique:users,username',
             'userpassword' => 'required|min:8',
 
-            'snackname' => 'required|unique:snacks,name',
-            'snacktel1' => 'required|min:9|max:9|unique:snacks,tel1',
-            'snackemail' => 'required|email|unique:snacks,email',
+            'companyname' => 'required|unique:companies,name',
+            'companyphone1' => 'required|min:9|max:9|unique:companies,phone1',
+            'companyemail' => 'required|email|unique:companies,email',
 
             'sitename' => 'required|unique:sites,name',
-            'sitetel1' => 'required|min:9|max:9|unique:sites,tel1',
+            'sitephone1' => 'required|min:9|max:9|unique:sites,phone1',
             'siteemail' => 'required|email|unique:sites,email',
             'sitestreet' => 'required',
             'sitetown' => 'required'
@@ -55,47 +56,50 @@ class UserController extends Controller
 
         // Remove password_confirmation field to user array
 
-        $user = User::create([
+        $user = new User([
             'name' => $request->username,
             'email' => $request->useremail,
             'username' => $request->userusername,
             'address' => $request->useraddress,
-            'tel' => $request->usertel,
+            'phone' => $request->userphone,
             'password' => bcrypt($request->userpassword),
-            'is_admin' => 2
+            'is_admin' => 2,
+            'role_id' => 5
         ]);
-        $user->roles()->attach(5);
 
-        $snack = new Snack([
-            'name' => $request->snackname,
-            'slug' => $this->makeSlug($request->snackname),
-            'email' => $request->snackemail,
-            'tel1' => $request->snacktel1,
-            'tel2' => $request->snacktel2,
-            'town' => $request->snacktown,
-            'street' =>$request->snackstreet,
-            'user_id' => $user->id
+        $company = new company([
+            'name' => $request->companyname,
+            'slug' => $this->makeSlug($request->companyname),
+            'email' => $request->companyemail,
+            'phone1' => $request->companyphone1,
+            'phone2' => $request->companyphone2,
+            'town' => $request->companytown,
+            'street' =>$request->companystreet,
         ]);
-        $snack->save();
+        
 
         $site = new Site([
             'name' => $request->sitename,
             'slug' => $this->makeSlug($request->sitename),
             'email' => $request->siteemail,
-            'tel1' => $request->sitetel1,
-            'tel2' => $request->sitetel2,
+            'phone1' => $request->sitephone1,
+            'phone2' => $request->sitephone2,
             'town' => $request->sitetown,
             'street' =>$request->sitestreet,
-            'snack_id' => $snack->id
         ]);
-        $site->save();
+        
+        DB::transaction(function () use($user, $company, $site){
+            $user->save();
+                $company->user_id = $user->id;
+                $company->save();
+                    $site->company_id = $company->id;
+                    $site->save();
 
-        $user->site_id = $site->id;
-        $user->save();
+        });
 
-        // Attach snack with his type of subscription
+        // Attach company with his type of subscription
         $type = Type::findOrFail($request->type);
-        $snack->types()->attach($type->id,[
+        $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addMonth($type->duration),
         ]);
 
@@ -179,9 +183,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('active', '1')->get()->load(['site' => function($query){
-                                                        $query->where('sites.id','1');
-                                                    }],'roles.permissions','permissions','agendas');
+        $users = User::all()->load('employee','role','permissions');
         return UserResource::collection($users);
     }
 
@@ -206,7 +208,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => ValidationRule::unique('users')->whereNotNull('email'),
-            'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
+            'phone' => ValidationRule::unique('users')->whereNotNull('phone'),
             'username' => 'required|string|unique:users',
             'address' => 'required|string',
             'password' => 'required|string|confirmed'
@@ -214,16 +216,15 @@ class UserController extends Controller
 
         $user = new User([
             'name' => $request->name,
-            'tel' => $request->tel,
+            'phone' => $request->phone,
             'email' => $request->email,
             'address' => $request->address,
             'username' => $request->username,
             'cni_number' => $request->cni_number,
             'contact_name' => $request->contact_name,
-            'contact_tel' => $request->contact_tel,
+            'contact_phone' => $request->contact_phone,
             'is_admin' => $request->is_admin,
             'password' => bcrypt($request->password),
-            'site_id' => 1
         ]);
         $user->save();
 
@@ -241,7 +242,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('site.snack','roles.permissions','permissions','agendas');
+        $user->loadMissing('employee','role','permissions');
         return new UserResource($user);
     }
 
@@ -261,7 +262,7 @@ class UserController extends Controller
      * @param String name
      * @param String username
      * @param String email
-     * @param String tel
+     * @param String phone
      * @param String address
      * @param String password_confirmation
      * @param Char is_admin (1, 2, 3) default 1
@@ -276,7 +277,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' =>  ValidationRule::unique('users')->whereNotNull('email'),
-            'tel' => ValidationRule::unique('users')->whereNotNull('tel'),
+            'phone' => ValidationRule::unique('users')->whereNotNull('phone'),
             'username' => 'required|string',
             'address' => 'required|string',
         ]);
@@ -439,9 +440,9 @@ class UserController extends Controller
             User::all('username'),
             User::all('email'),
             User::all('tel'),
-            Snack::all('name'),
-            Snack::all('email'),
-            Snack::all('tel1'),
+            company::all('name'),
+            company::all('email'),
+            company::all('tel1'),
             Site::all('name'),
             Site::all('email'),
             Site::all('tel1')
