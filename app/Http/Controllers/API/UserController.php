@@ -183,7 +183,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->load('employee','role','permissions');
+        $users = User::all()->load('employee.site','role','permissions');
         return UserResource::collection($users);
     }
 
@@ -242,7 +242,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->loadMissing('employee','role','permissions');
+        $user->loadMissing('employee.site','role','permissions');
         return new UserResource($user);
     }
 
