@@ -27,7 +27,7 @@ class Company extends Model
                         ->withPivot('end_date','status');
     }
 
-    public function products(){
-        return $this->hasMany('App\Product');
+    public function activity(){
+        return $this->belongsTo('App\Activity');
     }
 }

@@ -22,6 +22,7 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'category' => new CategoryResource($this->whenLoaded('category')),
             'sites' => SiteResource::collection($this->whenLoaded('sites')),
+            'activities' => ActivityResource::collection($this->whenLoaded('activities')),
         ];
     }
 }
