@@ -90,14 +90,14 @@ class LoginController extends Controller
     }
 
     public function login(){
-        
+
         return view('login');
     }
 
     public function loginPost(Request $request) {
         $this->validateLogin($request);
 
-        
+
         $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))){
             Notify::warning('Login et/ou mot de passe incorrect', 'Informations incorrects');
@@ -108,11 +108,20 @@ class LoginController extends Controller
 
         if($user->active == '0'){
             Auth::logout();
-            
+
             Notify::warning("Ce copte a été suprimé, Veuillez contacter l'administrateur", "Compte Supprimé");
             return redirect()->back();
         }
-        return redirect()->route('admin.dashboard');
+
+        if (Auth::check() && Auth::user()->is_admin == 3)
+        {
+            return redirect()->route('easytrack.dashboard');
+        } elseif (Auth::check() && Auth::user()->is_admin == 2)
+        {
+            return redirect()->route('admin.dashboard');
+        } else{
+            return redirect()->route('user.dashboard');
+        }
     }
 
     protected function logout(Request $request)

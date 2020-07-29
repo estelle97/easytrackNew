@@ -18,7 +18,7 @@ class CreateActivitiesTable extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->tinyInteger('is_active')->default(1);
-            $table->datetime('created_at')->user_current();
+            $table->datetime('created_at')->useCurrent();
             $table->softDeletes();
         });
     }

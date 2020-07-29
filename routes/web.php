@@ -41,7 +41,7 @@ Route::post('register', [
     'uses' => 'Auth\RegisterController@store',
     'as' => 'register.post'
 ]);
-    
+
 /*
 * Password
 */
@@ -60,7 +60,7 @@ Route::post('password-forgot', [
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('logout', 'Admin\DashboardController@logout')->name('logout');
-   
+
     Route::get('admin/dashboard', ['as'=> 'admin.dashboard','uses' => 'Admin\DashboardController@index']);
     Route::get('admin/profil',[ 'uses' => 'Admin\DashboardController@profile','as' => 'admin.profile']);
     Route::get('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileEdit' , 'as' => 'admin.profile.edit']);
@@ -96,7 +96,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('easytrack/roles/update', 'SuperAdmin\RoleController@update');
     Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
     Route::post('easytrack/roles/attachPermissionToRole', 'SuperAdmin\RoleController@attachPermissionToRole');
-    
+
+    Route::post('admin/products/{product}', 'Admin\ProductController@update');
+    Route::post('admin/products', 'Admin\ProductController@store');
+    Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
+    Route::resource('admin/suppliers', 'Admin\SupplierController');
+    Route::resource('easytrack/products', 'SuperAdmin\ProductController');
+    Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
 });
 
 
@@ -111,15 +117,15 @@ Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth'
 	Route::put('user/update_profile/{id}', 'SuperAdmin\DashboardController@profileUpdate')->name('user.profileUpdate');
 	Route::put('user/changepass/{id}', 'SuperAdmin\DashboardController@changePassword')->name('user.password');
     Route::get('user/genpass', 'SuperAdmin\DashboardController@generatePassword');
-    
+
 });
 
 
 
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {
-    
 
-    
+
+
     //Term of sercice route
     Route::get('terms', 'HomeController@termOfService')->name('terms');
 });

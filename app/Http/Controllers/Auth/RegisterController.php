@@ -62,7 +62,7 @@ class RegisterController extends Controller
     }
 
     public function store(Request $request){
-        
+
         // Validate and create admin
         $request->validate([
             'username' => 'required',
@@ -96,7 +96,7 @@ class RegisterController extends Controller
             'role_id' => 5
         ]);
 
-        $company = new company([
+        $company = new Company([
             'name' => $request->companyname,
             'slug' => $this->makeSlug($request->companyname),
             'email' => $request->companyemail,
@@ -105,7 +105,7 @@ class RegisterController extends Controller
             'town' => $request->companytown,
             'street' =>$request->companystreet,
         ]);
-        
+
 
         $site = new Site([
             'name' => $request->sitename,
@@ -116,7 +116,7 @@ class RegisterController extends Controller
             'town' => $request->sitetown,
             'street' =>$request->sitestreet,
         ]);
-        
+
         DB::transaction(function () use($user, $company, $site){
             $user->save();
                 $company->user_id = $user->id;
@@ -134,7 +134,7 @@ class RegisterController extends Controller
 
         return response()->json([
             "message" => "Operation success!",
-        ], 201); 
+        ], 201);
     }
 
     /**
