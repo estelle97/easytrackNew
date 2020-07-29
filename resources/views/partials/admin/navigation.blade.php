@@ -34,12 +34,12 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="active">
-                        <a class="dropdown-item" href="./products.html">
+                        <a class="dropdown-item" href={{route('admin.products')}}>
                             Produits
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="./vendors.html">
+                        <a class="dropdown-item" href="/admin/suppliers">
                             Fournisseurs
                         </a>
                     </li>
@@ -112,7 +112,7 @@
                 </a>
             </li>
         </ul>
-        
+
         @yield('search-form')
     </div>
 </div>

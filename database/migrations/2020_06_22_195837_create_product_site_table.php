@@ -14,9 +14,10 @@ class CreateProductSiteTable extends Migration
     public function up()
     {
         Schema::create('product_site', function (Blueprint $table) {
-        
+
             $table->integer('site_id')->unsigned();
             $table->integer('product_id')->unsigned();
+            $table->integer('taxe_id')->nullable();
             $table->double('cost');
             $table->double('price');
             $table->integer('qty');
@@ -31,7 +32,7 @@ class CreateProductSiteTable extends Migration
             $table->softDeletes();
         });
     }
-  
+
     /**
      * Reverse the migrations.
      *

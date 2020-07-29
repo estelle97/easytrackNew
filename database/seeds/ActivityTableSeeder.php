@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ActivitySeeder extends Seeder
+class ActivityTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -28,10 +28,6 @@ class ActivitySeeder extends Seeder
             [
                 'code' => 'restaurant',
                 'name' => 'Restaurant'
-            ],
-            [
-                'code' => 'snack',
-                'name' => 'Snack Bar'
             ],
             [
                 'code' => 'restaurant-bar',

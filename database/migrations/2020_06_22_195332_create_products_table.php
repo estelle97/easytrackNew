@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->nullable();
             $table->integer('unit_id')->nullable();
-            $table->integer('taxe_id')->nullable();
             $table->string('name');
             $table->string('code')->unique()->nullable();
             $table->text('description')->nullable();
@@ -28,10 +27,10 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('is_active')->default(1);
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
-            
+
         });
     }
-   
+
     /**
      * Reverse the migrations.
      *

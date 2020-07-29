@@ -63,6 +63,7 @@ class UserTableSeeder extends Seeder
                 'phone1' => '223344556',
                 'town' => 'Yaoundé',
                 'street' => 'Miniprix Bastos',
+                'activity_id' => 1
             ],
             [
                 'user_id' => User::whereUsername('admin')->first()->id,
@@ -72,6 +73,7 @@ class UserTableSeeder extends Seeder
                 'phone1' => '223984456',
                 'town' => 'Yaoundé',
                 'street' => 'Elig-edzoa Pharmacie',
+                'activity_id' => 1
             ]
         ];
 

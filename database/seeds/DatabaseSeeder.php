@@ -24,15 +24,21 @@ class DatabaseSeeder extends Seeder
             PermissionTableSeeder::class,
             RoleTableSedder::class,
             UserTableSeeder::class,
+            ActivityTableSeeder::class
         ]);
 
 
         // Remplissement de la table role_user
         App\User::all()->each(function($user){
-            $user->role_id = App\Role::all()->random()->id; 
+            $user->role_id = App\Role::all()->random()->id;
             $user->save();
         });
 
-        
+        // Remplissemet de la table activity_product
+        App\Product::all()->each(function($product){
+            $product->activities()->attach(1);
+        });
+
+
     }
 }
