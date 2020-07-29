@@ -20,7 +20,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-4.987-3.744A7.966 7.966 0 0 0 12 20c1.97 0 3.773-.712 5.167-1.892A6.979 6.979 0 0 0 12.16 16a6.981 6.981 0 0 0-5.147 2.256zM5.616 16.82A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634 8 8 0 1 0-12.906.187zM12 13a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
                             </span>
                             <input type="text" name="username" id="username" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Nom complet" autocomplete="off" required/>
+                                placeholder="Nom complet (Obligatoire)" autocomplete="off" required/>
                         </div>
                         <span class="text-danger" id="username-error"> </span>
                     </div>
@@ -30,7 +30,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
                             </span>
                             <input type="text" name="useraddress" id="useraddress" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Adresse" autocomplete="off" required/>
+                                placeholder="Adresse (Obligatoire)" autocomplete="off" required/>
                         </div>
                         <span class="text-danger" id="useraddress-error"> </span>
                     </div>
@@ -40,7 +40,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.366 10.682a10.556 10.556 0 0 0 3.952 3.952l.884-1.238a1 1 0 0 1 1.294-.296 11.422 11.422 0 0 0 4.583 1.364 1 1 0 0 1 .921.997v4.462a1 1 0 0 1-.898.995c-.53.055-1.064.082-1.602.082C9.94 21 3 14.06 3 5.5c0-.538.027-1.072.082-1.602A1 1 0 0 1 4.077 3h4.462a1 1 0 0 1 .997.921A11.422 11.422 0 0 0 10.9 8.504a1 1 0 0 1-.296 1.294l-1.238.884zm-2.522-.657l1.9-1.357A13.41 13.41 0 0 1 7.647 5H5.01c-.006.166-.009.333-.009.5C5 12.956 11.044 19 18.5 19c.167 0 .334-.003.5-.01v-2.637a13.41 13.41 0 0 1-3.668-1.097l-1.357 1.9a12.442 12.442 0 0 1-1.588-.75l-.058-.033a12.556 12.556 0 0 1-4.702-4.702l-.033-.058a12.442 12.442 0 0 1-.75-1.588z"/></svg>
                             </span>
                             <input pattern="[0-9]{3}[0-9]{3}[0-9]{3}" type="tel" name="userphone" id="userphone" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Téléphone" autocomplete="off" required/>
+                                placeholder="Téléphone (Obligatoire)" autocomplete="off" required/>
                         </div>
                         <span class="text-danger" id="userphone-error"> </span>
                     </div>
@@ -50,7 +50,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
                             </span>
                             <input type="email" name="useremail" id="useremail" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Email" autocomplete="off" required/>
+                                placeholder="Email (Obligatoire)" autocomplete="off" required/>
                         </div>
                         <span class="text-danger" id="useremail-error"> </span>
                     </div>
@@ -64,7 +64,7 @@
                                 </svg>
                             </span>
                             <input type="text" name="userusername" id="userusername" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Nom d'utilisateur" autocomplete="off" required/>
+                                placeholder="Nom d'utilisateur (Obligatoire)" autocomplete="off" required/>
                         </div>
                         <span class="text-danger" id="userusername-error"> </span>
                     </div>
@@ -78,7 +78,7 @@
                                 </svg>
                             </span>
                             <input type="password" name="userpassword" id="password" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Mot de passe (au moins 8 caractères)" required autocomplete="off"/>
+                                placeholder="Mot de passe (au moins 8 caractères)" required autocomplete="off" minlength="8"/>
                             <span class="input-icon-addon mr-2">
                                 <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
                                         xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -111,7 +111,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 21H2v-2h1V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v5h2v10h1v2zm-5-2h2v-8h-6v8h2v-6h2v6zm0-10V5H5v14h6V9h6zM7 11h2v2H7v-2zm0 4h2v2H7v-2zm0-8h2v2H7V7z"/></svg>
                             </span>
                             <input type="text" name="companyname" id="companyname" class="auth-input form-control form-control-rounded py-2 px-5"
-                            placeholder="Nom de l'entreprise" autocomplete="off" required>
+                            placeholder="Nom de l'entreprise (Obligatoire)" autocomplete="off" required>
                         </div>
                         <span class="text-danger" id="companyname-error"> </span>
                     </div>
@@ -121,7 +121,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
                             </span>
                             <input type="email" name="companyemail" id="companyemail" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Email" autocomplete="off" required/>
+                                placeholder="Email (Obligatoire)" autocomplete="off" required/>
                         </div>
                         <span class="text-danger" id="companyemail-error"> </span>
                     </div>
@@ -131,7 +131,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
                             </span>
                             <input type="text" name="companytown" id="companytown" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Ville" autocomplete="off" />
+                                placeholder="Ville (Obligatoire)" autocomplete="off" />
                         </div>
                         <span class="text-danger" id="companytown-error"> </span>
                     </div>
@@ -141,7 +141,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
                             </span>
                             <input type="text" name="companystreet" id="companystreet" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Quartier" autocomplete="off" required/>
+                                placeholder="Quartier (Obligatoire)" autocomplete="off" required/>
                         </div>
                         <span class="text-danger" id="companystreet-error"> </span>
                     </div>
@@ -151,7 +151,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.366 10.682a10.556 10.556 0 0 0 3.952 3.952l.884-1.238a1 1 0 0 1 1.294-.296 11.422 11.422 0 0 0 4.583 1.364 1 1 0 0 1 .921.997v4.462a1 1 0 0 1-.898.995c-.53.055-1.064.082-1.602.082C9.94 21 3 14.06 3 5.5c0-.538.027-1.072.082-1.602A1 1 0 0 1 4.077 3h4.462a1 1 0 0 1 .997.921A11.422 11.422 0 0 0 10.9 8.504a1 1 0 0 1-.296 1.294l-1.238.884zm-2.522-.657l1.9-1.357A13.41 13.41 0 0 1 7.647 5H5.01c-.006.166-.009.333-.009.5C5 12.956 11.044 19 18.5 19c.167 0 .334-.003.5-.01v-2.637a13.41 13.41 0 0 1-3.668-1.097l-1.357 1.9a12.442 12.442 0 0 1-1.588-.75l-.058-.033a12.556 12.556 0 0 1-4.702-4.702l-.033-.058a12.442 12.442 0 0 1-.75-1.588z"/></svg>
                             </span>
                             <input pattern="[0-9]{3}[0-9]{3}[0-9]{3}" type="tel" name="companyphone1" id="companyphone1" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="N° Téléphone 1" autocomplete="off" required/>
+                                placeholder="N° Téléphone Principale (Obligatoire)" autocomplete="off" required/>
                         </div>
                         <span class="text-danger" id="companyphone1-error"> </span>
                     </div>
@@ -184,7 +184,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 21H2v-2h1V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v5h2v10h1v2zm-5-2h2v-8h-6v8h2v-6h2v6zm0-10V5H5v14h6V9h6zM7 11h2v2H7v-2zm0 4h2v2H7v-2zm0-8h2v2H7V7z"/></svg>
                             </span>
                             <input type="text" name="sitename" id="sitename" class="auth-input form-control form-control-rounded py-2 px-5"
-                            placeholder="Nom du site">
+                            placeholder="Nom du site (Obligatoire)">
                         </div>
                         <span class="text-danger" id="sitename-error"> </span>
                     </div>
@@ -194,7 +194,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
                             </span>
                             <input type="email" name="siteemail" id="siteemail" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Email" autocomplete="off" />
+                                placeholder="Email (Obligatoire)" autocomplete="off" />
                         </div>
                         <span class="text-danger" id="siteemail-error"> </span>
                     </div>
@@ -204,7 +204,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
                             </span>
                             <input type="text" name="sitetown" id="sitetown" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Ville" autocomplete="off" />
+                                placeholder="Ville (Obligatoire)" autocomplete="off" />
                         </div>
                         <span class="text-danger" id="sitetown-error"> </span>
                     </div>
@@ -214,7 +214,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
                             </span>
                             <input type="text" name="sitestreet" id="sitestreet" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Quartier" autocomplete="off" />
+                                placeholder="Quartier (Obligatoire)" autocomplete="off" />
                         </div>
                         <span class="text-danger" id="sitestreet-error"> </span>
                     </div>
@@ -224,7 +224,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.366 10.682a10.556 10.556 0 0 0 3.952 3.952l.884-1.238a1 1 0 0 1 1.294-.296 11.422 11.422 0 0 0 4.583 1.364 1 1 0 0 1 .921.997v4.462a1 1 0 0 1-.898.995c-.53.055-1.064.082-1.602.082C9.94 21 3 14.06 3 5.5c0-.538.027-1.072.082-1.602A1 1 0 0 1 4.077 3h4.462a1 1 0 0 1 .997.921A11.422 11.422 0 0 0 10.9 8.504a1 1 0 0 1-.296 1.294l-1.238.884zm-2.522-.657l1.9-1.357A13.41 13.41 0 0 1 7.647 5H5.01c-.006.166-.009.333-.009.5C5 12.956 11.044 19 18.5 19c.167 0 .334-.003.5-.01v-2.637a13.41 13.41 0 0 1-3.668-1.097l-1.357 1.9a12.442 12.442 0 0 1-1.588-.75l-.058-.033a12.556 12.556 0 0 1-4.702-4.702l-.033-.058a12.442 12.442 0 0 1-.75-1.588z"/></svg>
                             </span>
                             <input pattern="[0-9]{3}[0-9]{3}[0-9]{3}" type="tel" name="sitephone1" id="sitephone1" class="auth-input form-control form-control-rounded py-2 px-5"
-                                placeholder="Téléphone N°1" autocomplete="off" />
+                                placeholder="N° Téléphone Principale (Obligatoire)" autocomplete="off" />
                         </div>
                         <span class="text-danger" id="sitephone1-error"> </span>
                     </div>

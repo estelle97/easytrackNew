@@ -60,7 +60,7 @@
                             <div class="col text-center p-0"><h4>ou</h4></div>
                         </div>
                         <a href={{route('register')}} tabindex="-1" class="btn btn-dark btn-block btn-pill btn-no-border mt-3">
-                            Créer votre snack
+                            Inscription
                         </a>
                     </div>
                     <div class="text-center text-muted mb-3">

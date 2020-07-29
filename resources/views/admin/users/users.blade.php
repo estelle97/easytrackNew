@@ -234,9 +234,22 @@
                                     <span class="text-danger" id="phone-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
-                                <label class="form-label">Mot de passe</label>
-                                <input type="password" id="user-password-add" class="form-control"
+                                <label class="form-label">
+                                    Mot de passe
+                                    <a id="show-password" class="link-secondary" title="Show password" data-toggle="tooltip"><svg
+                                        xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" />
+                                        <circle cx="12" cy="12" r="2" />
+                                        <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
+                                        <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
+                                    </svg>
+                                </a>
+                                </label>
+                                <input type="password" id="password" class="form-control"
                                     placeholder="Saisissez le mot de passe..." required minlength="8">
+
                                     <span class="text-danger" id="password-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
@@ -286,7 +299,7 @@
 @endsection
 
 @section('scripts')
-    <script> 
+    <script>
         function addUser(){
             var token = '{{csrf_token()}}';
             var name = $("#user-name-add").val();
@@ -295,7 +308,7 @@
             var phone = $("#user-phone-add").val();
             var address = $("#user-address-add").val();
             var bio = $("#user-bio-add").val();
-            var password = $("#user-password-add").val();
+            var password = $("#password").val();
             var site = $("#user-site-add").val();
             var role = $("#user-role-add").val();
 

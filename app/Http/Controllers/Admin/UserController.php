@@ -32,12 +32,12 @@ class UserController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
+            'email' => 'nullable|email|unique:users',
             'address' => 'required',
             'phone' => 'required|min:200000000|max:999999999|numeric|unique:users',
             'password' => 'required|min:8',
-        ]);   
-       
+        ]);
+
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
@@ -88,7 +88,7 @@ class UserController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'phone' => 'required|min:200000000|max:999999999|numeric',
-            'email' => 'required|email',
+            'email' => 'email|nullable',
             'username' => 'required',
             'address' => 'required',
             'role_id' => 'required',
@@ -109,9 +109,9 @@ class UserController extends Controller
         $user->employee->contact_phone = $request->contact_phone;
         $user->save();
         $user->employee->save();
-        
-        
-        
+
+
+
         notify()->success('Mise à jour de l\'utilisateur effectuée avec succès', 'Mise à jour utilisateur');
         return redirect()->back();
     }

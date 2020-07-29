@@ -38,7 +38,7 @@
     </style>
     @yield('styles')
 </head>
-{{-- End Head Section --}} 
+{{-- End Head Section --}}
 
 <body class="antialiased">
 
@@ -51,7 +51,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 @if (Auth::user()->is_admin == 1)
-                    
+
                 @elseif(Auth::user()->is_admin == 2)
                     <a href={{route('admin.dashboard')}} class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
                         <img src={{asset("template/assets/static/logo-white.svg")}} alt="easytrak" class="navbar-brand-image" />
@@ -61,11 +61,11 @@
                         <img src={{asset("template/assets/static/logo-white.svg")}} alt="easytrak" class="navbar-brand-image" />
                     </a>
                 @endif
-                
-        
-                {{-- User Bloc--}} 
+
+
+                {{-- User Bloc--}}
                     @if (Auth::user()->is_admin == 1)
-                        
+
                     @elseif(Auth::user()->is_admin == 2)
                         @include("partials.admin.userBloc")
                     @else
@@ -73,19 +73,19 @@
                     @endif
 
                 {{-- End User Bloc--}}
-        
-        
+
+
                 {{-- Menu de navigation--}}
                     @if (Auth::user()->is_admin == 1)
-                        
+
                     @elseif(Auth::user()->is_admin == 2)
                         @include("partials.admin.navigation")
                     @else
                     @include("partials.superAdmin.navigation")
                     @endif
-                    
+
                 {{-- End Menu de navigation--}}
-        
+
             </div>
         </header>
         {{-- End Header--}}
@@ -101,7 +101,7 @@
             {{-- Footer --}}
                 @include("partials.admin.navigation")
             {{-- End Footer--}}
-            
+
         </div>
         {{-- End Page Content--}}
     </div>
@@ -519,9 +519,17 @@
     <script>
         document.body.style.display = "block"
 
+        $("#show-password").click(function(){
+            let input = document.getElementById('password');
+            if (input.type == "password") {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
+        });
     </script>
     @yield('scripts')
-    
+
 </body>
 
 </html>
