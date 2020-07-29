@@ -8,7 +8,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <h2 class="page-title">
-                                <a href="./users.html" class="mr-2">
+                                <a href={{route('admin.user.show',Auth::user()->username)}} class="mr-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                         <path fill="none" d="M0 0h24v24H0z" />
                                         <path
@@ -70,13 +70,14 @@
                                             <path
                                                 d="M8.686 4l2.607-2.607a1 1 0 0 1 1.414 0L15.314 4H19a1 1 0 0 1 1 1v3.686l2.607 2.607a1 1 0 0 1 0 1.414L20 15.314V19a1 1 0 0 1-1 1h-3.686l-2.607 2.607a1 1 0 0 1-1.414 0L8.686 20H5a1 1 0 0 1-1-1v-3.686l-2.607-2.607a1 1 0 0 1 0-1.414L4 8.686V5a1 1 0 0 1 1-1h3.686zM6 6v3.515L3.515 12 6 14.485V18h3.515L12 20.485 14.485 18H18v-3.515L20.485 12 18 9.515V6h-3.515L12 3.515 9.515 6H6zm6 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
                                         </svg>
+                                        Permissions
                                     </a>
                                 </li>
                             </ul>
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active show" id="tabs-home-ex6">
-                                    
+
                                         <form class="row" method="POST">
                                         @csrf
                                             <div class="col-sm-12 col-md-5">
@@ -134,7 +135,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-sm-12 col-md-6">
                                                 <div class="mb-2">
                                                     <label class="form-label">Addresse</label>
@@ -159,10 +160,10 @@
                                             </div>
 
                                             <hr>
-                                            
+
                                             <div class="col-sm-12 col-md-3">
                                                 <div class="mb-2">
-                                                    <label class="form-label">N° CNI</label>
+                                                    <label class="form-label">N° CNI de l'employée</label>
                                                     <input type="text" name="cni_number" value="{{$user->employee->cni_number}}" class="form-control form-control-rounded"
                                                         placeholder="Numéro de CNI">
                                                     @if($errors->has('cni_number'))
@@ -174,9 +175,9 @@
                                             </div>
                                             <div class="col-sm-12 col-md-5">
                                                 <div class="mb-2">
-                                                    <label class="form-label">Nom d'un responsable</label>
+                                                    <label class="form-label">Personne à contacter en cas d'urgence</label>
                                                     <input type="text" name="contact_name" value="{{$user->employee->contact_name}}" class="form-control form-control-rounded"
-                                                        placeholder="Nom du responsable" required>
+                                                        placeholder="Nom du responsable">
                                                     @if($errors->has('contact_name'))
                                                         <span>
                                                             <strong class="text-danger">{{ $errors->first('contact_name') }}</strong>
@@ -186,7 +187,7 @@
                                             </div>
                                             <div class="col-sm-12 col-md-4">
                                                 <div class="mb-2">
-                                                    <label class="form-label">Téléphone du responsable</label>
+                                                    <label class="form-label">Téléphone</label>
                                                     <input type="text" name="contact_phone" value="{{$user->employee->contact_phone}}" class="form-control form-control-rounded"
                                                         placeholder="Téléphone du responsable">
                                                     @if($errors->has('contact_phone'))
@@ -196,7 +197,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            
+
 
                                             <div class="col-md-12">
                                                 <div class="mb-2 mb-0">
@@ -294,7 +295,7 @@
                                         <tbody id="permissions-add">
                                             @foreach ($user->permissions()->get() as $perm)
                                                 <tr id="perm-user-list{{$perm->id}}">
-                                                    <td> {{$perm->name}} </td> 
+                                                    <td> {{$perm->name}} </td>
                                                     <td class="text-right">
                                                         <a class="mt-1 text-blue" onclick="detachPermissionToUser({{$user->id}},{{$perm->id}})">
                                                             Supprimer
@@ -315,12 +316,12 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 @endsection
 
 @section('scripts')
-    <script> 
+    <script>
 
         function attachPermissionToUser(user_id){
             var token = '{{csrf_token()}}';
