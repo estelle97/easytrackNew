@@ -14,7 +14,7 @@ class SiteController extends Controller
 {
     public function index()
     {
-        return view('admin.sites');
+        return view('admin.sites.sites');
     }
 
     public function store(Request $request)
@@ -44,6 +44,12 @@ class SiteController extends Controller
         }
     }
 
+    public function users($site_slug){
+
+        $site = Site::whereSlug($site_slug)->first();
+        return view('admin.sites.users', compact('site'));
+    }
+
 
     public function update(Request $request)
     {
@@ -56,7 +62,7 @@ class SiteController extends Controller
         ]);
 
         $site = Site::find($request->site_id);
-        
+
         $site->name = $request->name;
         $site->email = $request->email;
         $site->phone1 = $request->phone1;

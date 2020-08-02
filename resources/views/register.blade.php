@@ -9,7 +9,10 @@
                 <div class="text-center mb-5">
                     <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
                 </div>
+
                 <h2 class="auth-title mb-2 text-center text-black">Inscription</h2>
+
+
                 <div class="register-step-1">
                     <h4 class="mb-5 text-center text-muted">
                         Créer un compte sur la plateforme
@@ -101,6 +104,8 @@
                         <div class="text-center mt-3">Vous avez un compte ? <a href={{route('login')}} class="text-muted" tabindex="-1">Connexion</a></div>
                     </div>
                 </div>
+
+
                 <div class="register-step-2">
                     <h4 class="mb-5 text-center text-muted">
                         Ajouter une entreprise sur la plateforme
@@ -174,6 +179,8 @@
                         </button>
                     </div>
                 </div>
+
+
                 <div class="register-step-3">
                     <h4 class="mb-5 text-center text-muted">
                         Ajouter un site à votre entreprise
@@ -247,6 +254,8 @@
                         </button>
                     </div>
                 </div>
+
+
                 <div class="register-step-4">
                     <h4 class="mb-5 text-center text-muted">
                         Sélectionez la license pour votre entreprose
@@ -324,22 +333,161 @@
 @endsection
 
 @section('scripts')
+    <script src={{asset("https://cdn.jsdelivr.net/gh/contributte/live-form-validation@master/live-form-validation.js")}}> </script>
+    <script src={{asset("https://cdn.jsdelivr.net/gh/contributte/live-form-validation@master/live-form-validation.js")}}> </script>
     <script>
         document.body.style.display = "block";
 
         $(".register-step-2, .register-step-3, .register-step-4, .register-step-5, .register-step-6").toggle();
-        $(".btn-submit-step-1, .btn-back-step-1").click(function() {
+        $(".btn-back-step-1").click(function() {
             $(".register-step-1").toggle();
             $(".register-step-2").toggle();
         });
-        $(".btn-submit-step-2, .btn-back-step-2").click(function() {
+
+        // Submit step1
+        $(".btn-submit-step-1").click(function() {
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                type: "post",
+                url: "register",
+                data: {
+                    _token: token,
+                    username : $("#username").val(),
+                    useremail : $("#useremail").val(),
+                    userusername : $("#userusername").val(),
+                    userphone : $("#userphone").val(),
+                    useraddress : $("#useraddress").val(),
+                    userpassword : $("#password").val(),
+                    step: 'one'
+                },
+                dataType: 'json',              // let's set the expected response format
+                success: function(data){
+                    $(".text-danger").html('');
+                    $(".register-step-1").toggle();
+                    $(".register-step-2").toggle();
+                },
+                error: function (err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                        //console.log(err.responseJSON);
+                        // $('#success_message').fadeIn().html(err.responseJSON.message);
+
+                        // you can loop through the errors object and show it to the user
+                        //console.warn(err.responseJSON.errors);
+                        // display errors on each form field
+
+                        $(".text-danger").html('');
+
+                        $.each(err.responseJSON.errors, function (i, error) {
+                            var el = $('#'+i+'-error');
+                            el.html(error);
+                        });
+                    }
+                }
+            });
+        });
+
+        $(".btn-back-step-2").click(function() {
             $(".register-step-2").toggle();
             $(".register-step-3").toggle();
         });
-        $(".btn-submit-step-3, .btn-back-step-3").click(function() {
+
+        // submit step2
+        $(".btn-submit-step-2").click(function() {
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                type: "post",
+                url: "register",
+                data: {
+                    _token: token,
+
+                    companyname : $("#companyname").val(),
+                    companyemail : $("#companyemail").val(),
+                    companyphone1 : $("#companyphone1").val(),
+                    companyphone2 : $("#companyphone2").val(),
+                    companystreet : $("#companystreet").val(),
+                    companytown : $("#companytown").val(),
+                    step: 'two'
+                },
+                dataType: 'json',              // let's set the expected response format
+                success: function(data){
+                    $(".text-danger").html('');
+                    $(".register-step-2").toggle();
+                    $(".register-step-3").toggle();
+                },
+                error: function (err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                        // console.log(err.responseJSON);
+                        // $('#success_message').fadeIn().html(err.responseJSON.message);
+
+                        // you can loop through the errors object and show it to the user
+                        // console.warn(err.responseJSON.errors);
+                        // display errors on each form field
+
+                        $(".text-danger").html('');
+
+                        $.each(err.responseJSON.errors, function (i, error) {
+                            var el = $('#'+i+'-error');
+                            el.html(error);
+                        });
+                    }
+                }
+            });
+        });
+
+        $(".btn-back-step-3").click(function() {
             $(".register-step-3").toggle();
             $(".register-step-4").toggle();
         });
+
+        // submit steph3
+        $(".btn-submit-step-3").click(function() {
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                type: "post",
+                url: "register",
+                data: {
+                    _token: token,
+
+                    sitename : $("#sitename").val(),
+                    sitetown : $("#sitetown").val(),
+                    sitestreet : $("#sitestreet").val(),
+                    sitephone1 : $("#sitephone1").val(),
+                    sitephone2 : $("#sitephone2").val(),
+                    siteemail : $("#siteemail").val(),
+                    step: 'three'
+                },
+                dataType: 'json',              // let's set the expected response format
+                success: function(data){
+                    $(".text-danger").html('');
+                    $(".register-step-3").toggle();
+                    $(".register-step-4").toggle();
+
+                    $(".auth-title").hide();
+                },
+                error: function (err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                        // console.log(err.responseJSON);
+                        // $('#success_message').fadeIn().html(err.responseJSON.message);
+
+                        // you can loop through the errors object and show it to the user
+                        // console.warn(err.responseJSON.errors);
+                        // display errors on each form field
+
+                        $(".text-danger").html('');
+
+                        $.each(err.responseJSON.errors, function (i, error) {
+                            var el = $('#'+i+'-error');
+                            el.html(error);
+                        });
+                    }
+                }
+            });
+        });
+
+
         $(".btn-submit-step-4, .btn-back-step-4").click(function() {
             $(".register-step-4").toggle();
             $(".register-step-5").toggle();
@@ -360,11 +508,13 @@
         function register(){
             var token = '{{csrf_token()}}';
 
+
             $.ajax({
                 type: "post",
                 url: "register",
                 data: {
                     _token: token,
+
                     username : $("#username").val(),
                     useremail : $("#useremail").val(),
                     userusername : $("#userusername").val(),
@@ -385,7 +535,7 @@
                     sitephone1 : $("#sitephone1").val(),
                     sitephone2 : $("#sitephone2").val(),
                     siteemail : $("#siteemail").val(),
-
+                    step : 'last',
                     type : $("#type").val(),
                 },
                 dataType: 'json',              // let's set the expected response format
@@ -397,11 +547,11 @@
                 },
                 error: function (err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
-                        console.log(err.responseJSON);
+                        // console.log(err.responseJSON);
                         // $('#success_message').fadeIn().html(err.responseJSON.message);
 
                         // you can loop through the errors object and show it to the user
-                        console.warn(err.responseJSON.errors);
+                        // console.warn(err.responseJSON.errors);
                         // display errors on each form field
 
                         $(".text-danger").html('');

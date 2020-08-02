@@ -44,16 +44,16 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        // if (Auth::check() && Auth::user()->is_admin == 3)
-        // {
-        //     $this->redirectTo = route('superadmin.dashboard');
-        // } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        // {
-        //     $this->redirectTo = route('admin.dashboard');
-        // } else{
-        //     $this->redirectTo = route('user.dashboard');
-        // }
-        // $this->middleware('guest');
+        if (Auth::check() && Auth::user()->is_admin == 3)
+        {
+            $this->redirectTo = route('easytrack.dashboard');
+        } elseif (Auth::check() && Auth::user()->is_admin == 2)
+        {
+            $this->redirectTo = route('admin.dashboard');
+        } else{
+            $this->redirectTo = route('user.dashboard');
+        }
+        $this->middleware('guest');
     }
 
     public function index(Request $request){
@@ -61,26 +61,47 @@ class RegisterController extends Controller
         return view('register', compact('types'));
     }
 
+      /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateRegister(Request $request)
+    {
+        $messages = [
+            'login.required' => "L'adresse email ou le nom d'utilisateur doit être renseigné",
+            'password.required' => 'Veuillez entrer un mot de passe',
+        ];
+
+        $request->validate([
+            'login' => 'required|string',
+            'password' => 'required|string',
+        ], $messages);
+    }
+
     public function store(Request $request){
 
         // Validate and create admin
-        $request->validate([
-            'username' => 'required',
-            'useraddress' => 'required',
-            'userphone' => 'required|min:9|max:9|unique:users,phone',
-            'useremail' => 'required|email|unique:users,email',
-            'userusername' => 'required|unique:users,username',
-            'userpassword' => 'required|min:8',
+        $validateUser =  $request->validate([
+            'username' => 'sometimes|sometimes|required',
+            'useraddress' => 'sometimes|required',
+            'userphone' => 'sometimes|required|min:9|max:9|unique:users,phone',
+            'useremail' => 'sometimes|required|email|unique:users,email',
+            'userusername' => 'sometimes|required|unique:users,username',
+            'userpassword' => 'sometimes|required|min:8',
 
-            'companyname' => 'required|unique:companies,name',
-            'companyphone1' => 'required|min:9|max:9|unique:companies,phone1',
-            'companyemail' => 'required|email|unique:companies,email',
+            'companyname' => 'sometimes|required|unique:companies,name',
+            'companyphone1' => 'sometimes|required|min:9|max:9|unique:companies,phone1',
+            'companyemail' => 'sometimes|required|email|unique:companies,email',
 
-            'sitename' => 'required|unique:sites,name',
-            'sitephone1' => 'required|min:9|max:9|unique:sites,phone1',
-            'siteemail' => 'required|email|unique:sites,email',
-            'sitestreet' => 'required',
-            'sitetown' => 'required'
+            'sitename' => 'sometimes|required|unique:sites,name',
+            'sitephone1' => 'sometimes|required|min:9|max:9|unique:sites,phone1',
+            'siteemail' => 'sometimes|required|email|unique:sites,email',
+            'sitestreet' => 'sometimes|required',
+            'sitetown' => 'sometimes|required'
         ]);
 
         // Remove password_confirmation field to user array
@@ -116,7 +137,11 @@ class RegisterController extends Controller
             'town' => $request->sitetown,
             'street' =>$request->sitestreet,
         ]);
-
+        if($request->step != 'last'){
+            return response()->json([
+                "message" => "Operation success!",
+            ], 200);
+        }
         DB::transaction(function () use($user, $company, $site){
             $user->save();
                 $company->user_id = $user->id;

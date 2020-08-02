@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\Permission;
+use App\Site;
 use Auth;
 use Hash;
 use Keygen;
@@ -118,6 +119,10 @@ class UserController extends Controller
 
     public function search(Request $request){
         $text = $request->text;
+        if(!is_null($request->site_id)){
+            $site = Site::find($request->site_id);
+            return view('ajax.admin.employees_search', compact('text','site'));
+        }
         return view('ajax.admin.employees_search', compact('text'));
     }
 
