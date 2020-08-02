@@ -73,7 +73,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="./purchaseorders.html">
+                        <a class="dropdown-item" href={{route('admin.purchases')}}>
                             Bons de commandes
                         </a>
                     </li>

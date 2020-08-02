@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Mes sites
+                    Bons de commande
                 </h2>
             </div>
             <div class="col-auto">
@@ -41,11 +41,13 @@
                             <th class="w-1">
                                 <input class="form-check-input m-0 align-middle" type="checkbox">
                             </th>
-                            <th class="exportable">Nom</th>
-                            <th class="exportable">Email</th>
-                            <th class="exportable"> Emplacement </th>
-                            <th class="exportable">Teléphone</th>
-                            <th class="exportable"> Employés </th>
+                            <th class="exportable">N°</th>
+                            <th class="exportable">Date</th>
+                            <th class="exportable"> Fournisseur </th>
+                            <th class="exportable">Descriptio</th>
+                            <th class="exportable"> initié par </th>
+                            <th class="exportable"> validé par </th>
+                            <th class="exportable"> Montant </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -63,17 +65,17 @@
                                 </td>
                                 <td>
                                     <span id="site-town{{$site->id}}">
-                                        {{$site->town}} 
-                                    </span> 
+                                        {{$site->town}}
+                                    </span>
                                         -
                                     <span id="site-street{{$site->id}}">
                                         {{$site->street}}
-                                    </span> 
+                                    </span>
                                 </td>
                                 <td>
                                     <span id="site-phone1{{$site->id}}">
-                                        {{$site->phone1}} 
-                                    </span> 
+                                        {{$site->phone1}}
+                                    </span>
                                     @if($site->phone2 != null)
                                         <span id="site-phone2{{$site->id}}">
                                             - {{$site->phone2}}
@@ -81,7 +83,21 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{$site->employees()->count()}}
+                                    @if ($site->employees()->count() == 0)
+                                        Aucun employé
+                                    @else
+                                <a href={{route('admin.site.employees',$site->slug)}}> {{$site->employees()->count()}} Employé(s)</a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($site->employees()->count() == 0)
+                                        Aucun employé
+                                    @else
+                                <a href={{route('admin.site.employees',$site->slug)}}> {{$site->employees()->count()}} Employé(s)</a>
+                                    @endif
+                                </td>
+                                <td>
+                                    15000
                                 </td>
                                 <td class="text-right">
                                     <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-site{{$site->id}}">
@@ -147,9 +163,9 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal-section">
-        
+
         {{-- Modal Add site--}}
         <div class="modal modal-blur fade" id="modal-create-site" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -286,14 +302,14 @@
                 </div>
             </div>
         </div>
-    </div>      
+    </div>
 @endsection
 
 @section('scripts')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
-    
+
     <script>
         $(document).ready(function() {
             $('#sites').DataTable({
@@ -301,7 +317,7 @@
                 buttons: [
                     'colvis',
                     {
-                        extend: 'copy', 
+                        extend: 'copy',
                         text: 'Copier',
                         title : 'Easytrack',
                         exportOptions: {
@@ -309,7 +325,7 @@
                         }
                     },
                     {
-                        extend: 'excel', 
+                        extend: 'excel',
                         text: 'Excel',
                         title : 'Easytrack',
                         exportOptions: {
@@ -317,7 +333,7 @@
                         }
                     },
                     {
-                        extend: 'csv', 
+                        extend: 'csv',
                         text: 'CSV',
                         title : 'Easytrack',
                         exportOptions: {
@@ -325,7 +341,7 @@
                         }
                     },
                     {
-                        extend: 'pdf', 
+                        extend: 'pdf',
                         text: 'PDF',
                         title : 'Easytrack',
                         exportOptions: {

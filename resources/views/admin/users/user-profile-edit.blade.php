@@ -253,7 +253,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Ajouter des permissions à l'utilisateur</h5>
+                        <h5 class="modal-title">Ajouter des permissions au {{$user->role->name}} {{$user->name}}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -265,6 +265,28 @@
                             </button>
                         </div>
                         <div class="modal-body bg-white">
+                            <div class="card border-0 shadow-none">
+                                <div class="card-header">
+                                    <h3 class="card-title">Permissions du {{$user->role->name}} {{$user->name}}</h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Permissions</th>
+                                                <th> description </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="permissions">
+                                            @foreach ($user->role->permissions()->get() as $perm)
+                                                <tr id="perm-user-list{{$perm->id}}">
+                                                    <td> {{$perm->name}} </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <div class="row mb-3 align-items-end">
                                 <div class="col-lg-9">
                                     <label class="form-label">Permission</label>
@@ -282,7 +304,7 @@
                             </div>
                             <div class="card border-0 shadow-none">
                                 <div class="card-header">
-                                    <h3 class="card-title">Permissions</h3>
+                                    <h3 class="card-title">Permissions spéciales</h3>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-vcenter card-table">
