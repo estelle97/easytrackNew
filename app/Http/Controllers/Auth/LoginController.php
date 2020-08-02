@@ -100,7 +100,7 @@ class LoginController extends Controller
 
         $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))){
-            Notify::warning('Login et/ou mot de passe incorrect', 'Informations incorrects');
+            flashy()->warning('Login et/ou mot de passe incorrect', 'Informations incorrects');
             return redirect()->back();
         }
 
@@ -109,7 +109,7 @@ class LoginController extends Controller
         if($user->active == '0'){
             Auth::logout();
 
-            Notify::warning("Ce copte a été suprimé, Veuillez contacter l'administrateur", "Compte Supprimé");
+            flashy()->warning("Ce compte a été suprimé, Veuillez contacter l'administrateur", "Compte Supprimé");
             return redirect()->back();
         }
 
@@ -127,9 +127,7 @@ class LoginController extends Controller
     protected function logout(Request $request)
     {
         $this->guard()->logout();
-
         $request->session()->flush();
-
         $request->session()->regenerate();
 
         return redirect('/login');

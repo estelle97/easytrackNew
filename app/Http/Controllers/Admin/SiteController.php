@@ -38,8 +38,10 @@ class SiteController extends Controller
         $site->street = $request->street;
 
         if($site->save()){
+            flashy()->success('Le site a été ajouté avec succès');
             return 'success';
         } else {
+            flashy()->success("Une erreur s'est produite lors de l'ajout du site ");
             return 'error';
         }
     }

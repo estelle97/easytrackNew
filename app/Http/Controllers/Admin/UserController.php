@@ -63,6 +63,7 @@ class UserController extends Controller
                 $employee->save();
         });
 
+        flashy()->success("l'employé <strong>$user->name</strong> a été ajouté avec succès");
         return 'success';
     }
 

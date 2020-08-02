@@ -220,6 +220,7 @@
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label"> Site </label>
                                 <select name="site_id" id="supplier-site-add" class="form-select">
+                                    <option value="all"> Tous les sites</option>
                                      @foreach (Auth::user()->companies->first()->sites()->get() as $site)
                                         <option value="{{$site->id}}"> {{$site->name}} </option>
                                     @endforeach
@@ -304,7 +305,7 @@
                                     <div class="col-lg-12 mb-4">
                                         <label class="form-label"> Site </label>
                                         <select name="site_id" id="supplier-site-update{{$supl->id}}" class="form-select">
-                                             @foreach (Auth::user()->companies->first()->sites()->get() as $site)
+                                            @foreach (Auth::user()->companies->first()->sites()->get() as $site)
                                                 <option {{($site->id == $supl->site->id) ? 'selected' : ''}} value="{{$site->id}}"> {{$site->name}} </option>
                                             @endforeach
                                         </select>

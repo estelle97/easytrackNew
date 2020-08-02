@@ -70,6 +70,7 @@ class ProductController extends Controller
             }
         }
 
+        flashy()->success('Le produit a été ajouté avec succès');
         return 'success';
     }
 

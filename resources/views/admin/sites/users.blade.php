@@ -113,7 +113,7 @@
                     <div class="card-body">
                         <div class="row row-sm align-items-center">
                             <div class="col-auto">
-                                    <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?name={{$emp->user->name}}')"> </span>
+                                <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?name={{$emp->user->name}}')"> </span>
                             </div>
                             <div class="col">
                                 <h3 class="mb-0">
