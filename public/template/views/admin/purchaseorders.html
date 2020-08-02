@@ -66,6 +66,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="http://salepropos.com/public/css/dropzone.css">
+    <link rel="stylesheet" href="http://salepropos.com/public/css/style.css">
 
     <script type="text/javascript" src="http://salepropos.com/public/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="http://salepropos.com/public/vendor/jquery/jquery-ui.min.js"></script>
@@ -1220,8 +1221,8 @@
                 // options here (using position utility)
                 position: {
                     of: '#lims_productcodeSearch',
-                    my: 'top+18px',
-                    at: 'center',
+                    my: 'right top',
+                    at: 'center bottom',
                     collision: 'flip'
                 }
             });
@@ -1241,7 +1242,7 @@
         $('.selectpicker').selectpicker('refresh');
 
         products.forEach(data => {
-            lims_product_array = [];
+            // lims_product_array = [];
             product_code.push(data.product.code);
             product_name.push(data.product.name);
             product_qty.push(data.qty);
@@ -1393,12 +1394,14 @@
 
         lims_productcodeSearch.autocomplete({
             source: function (request, response) {
+                console.log("source_request", request)
                 var matcher = new RegExp(".?" + $.ui.autocomplete.escapeRegex(request.term), "i");
                 response($.grep(lims_product_array, function (item) {
                     return matcher.test(item);
                 }));
             },
             response: function (event, ui) {
+                console.log("response_ui", ui)
                 if (ui.content.length == 1) {
                     var data = ui.content[0].value;
                     $(this).autocomplete("close");
@@ -1406,6 +1409,7 @@
                 };
             },
             select: function (event, ui) {
+                console.log("select_event", event)
                 var data = ui.item.value;
                 productSearch(data);
             },
@@ -1691,15 +1695,17 @@
             return false;
         }
 
-        function checkProducts(age) {
-            for (var key in filter) {
+        function checkProducts(item) {
+            for (var key in products) {
                 if (item[key] === undefined || item[key] != filter[key])
                     return false;
             }
             return true;
         }
 
-        function productSearch(data) {
+        function productSearch(searchdata) {
+            console.log("productSearch -> data", searchdata);
+            console.log("productSearch -> products", products)
             var data = products.filter(checkProducts);
             var flag = 1;
             $(".product-code").each(function (i) {
@@ -1720,6 +1726,7 @@
             });
             $("input[name='product_code_name']").val('');
             if (flag) {
+                console.log("productSearch -> flag", flag)
                 addNewProduct(data);
             }
         }
