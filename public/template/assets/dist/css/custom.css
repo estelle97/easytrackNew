@@ -84,3 +84,35 @@
 .input-icon-addon {
     pointer-events: all !important;
 }
+
+/* KANBAN */
+.easy-kanban-board {
+    max-height: 700px;
+}
+.easy-kanban-board .status-dot {
+    height: 20px;
+    width: 20px;
+}
+.easy-border {
+    border-radius: 5px;
+}
+.easy-kanban-card {
+    border-radius: 5px;
+}
+.easy-kanban-column {
+    max-height: 650px;
+}
+.easy-kanban-column .column-body {
+    max-height: 570px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.easy-kanban-column::-webkit-scrollbar, .easy-kanban-column .column-body::-webkit-scrollbar {
+    display: none;
+}
+.easy-kanban-card .card-footer {
+    border-radius: 0px 0px 10px 10px;
+}
+.easy-kanban-card .dropdown-toggle:after  {
+    display: none !important;
+}
