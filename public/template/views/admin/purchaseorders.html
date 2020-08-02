@@ -662,10 +662,11 @@
                                                                         class="table table-hover table-striped order-list table-fixed">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th class="col-sm-4">Produit</th>
+                                                                                <th class="col-sm-4">Nom</th>
                                                                                 <th class="col-sm-2">Prix</th>
                                                                                 <th class="col-sm-3">Quantité</th>
                                                                                 <th class="col-sm-3">SubTotal</th>
+                                                                                <th class="col-sm-3"></th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -718,17 +719,17 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 totals"
-                                                                style="border-top: 2px solid #e4e6fc; padding-top: 10px;">
+                                                                style="border-top: 2px solid rgba(0,0,0,0.1); padding-top: 10px;">
                                                                 <div class="row">
-                                                                    <div class="col-sm-4">
-                                                                        <span class="totals-title">Items</span><span
+                                                                    <div class="col-sm-4 mb-2">
+                                                                        <span class="totals-title mr-3">Produits</span><span
                                                                             id="item">0</span>
                                                                     </div>
-                                                                    <div class="col-sm-4">
-                                                                        <span class="totals-title">Total</span><span
-                                                                            id="subtotal">0.00</span>
+                                                                    <div class="col-sm-4 mb-2">
+                                                                        <span class="totals-title mr-3">Total</span><span
+                                                                            id="subtotal" class="md">0.00</span>
                                                                     </div>
-                                                                    <div class="col-sm-4">
+                                                                    <div class="col-sm-4 mb-2">
                                                                         <span class="totals-title">Discount <button
                                                                                 type="button"
                                                                                 class="btn btn-link btn-sm"
@@ -1432,7 +1433,9 @@
             select: function (event, ui) {
                 console.log("select_event", event)
                 var data = ui.item.value;
-                productSearch(data);
+                console.log("select_ui.item", ui.item);
+
+                productSearch(data.substring(0, data.indexOf(' -')).split("#").join(""));
             },
         });
 
@@ -1716,18 +1719,12 @@
             return false;
         }
 
-        function checkProducts(item) {
-            for (var key in products) {
-                if (item[key] === undefined || item[key] != filter[key])
-                    return false;
-            }
-            return true;
-        }
-
         function productSearch(searchdata) {
             console.log("productSearch -> data", searchdata);
-            console.log("productSearch -> products", products)
-            var data = products.filter(checkProducts);
+            console.log("productSearch -> product_list", product_list)
+            var data = products.filter((item) => {
+                return item.product.code == searchdata || item.product.name == searchdata;
+            });
             var flag = 1;
             $(".product-code").each(function (i) {
                 if ($(this).val() == data[1]) {
@@ -1747,30 +1744,30 @@
             });
             $("input[name='product_code_name']").val('');
             if (flag) {
-                console.log("productSearch -> flag", flag)
                 addNewProduct(data);
             }
         }
 
         function addNewProduct(data) {
+            console.log("addNewProduct -> data", data);
             var newRow = $("<tr>");
             var cols = '';
-            temp_unit_name = (data[6]).split(',');
+            // temp_unit_name = (data[6]).split(',');
             cols +=
                 '<td class="col-sm-4 product-title"><button type="button" class="edit-product btn btn-link" data-toggle="modal" data-target="#editModal"><strong>' +
-                data[0] + '</strong></button> [' + data[1] + '] </td>';
+                data[0].product.name + '</strong></button> [' + data[0].product.code + '] </td>';
             cols += '<td class="col-sm-2 product-price"></td>';
             cols +=
-                '<td class="col-sm-3"><div class="input-group"><span class="input-group-btn"><button type="button" class="btn btn-default minus"><span class="dripicons-minus"></span></button></span><input type="text" name="qty[]" class="form-control qty numkey input-number" value="1" step="any" required><span class="input-group-btn"><button type="button" class="btn btn-default plus"><span class="dripicons-plus"></span></button></span></div></td>';
+                '<td class="col-sm-3"><div class="input-group"><span class="input-group-btn mr-1"><button type="button" class="btn btn-light minus text-black" style="font-size: 1.5rem;">-</button></span><input type="text" name="qty[]" class="form-control qty numkey input-number" value="1" step="any" required><span class="input-group-btn ml-1"><button type="button" class="btn btn-light plus text-black" style="font-size: 1.5rem;">+</button></span></div></td>';
             cols += '<td class="col-sm-2 sub-total"></td>';
             cols +=
-                '<td class="col-sm-1"><button type="button" class="ibtnDel btn btn-danger btn-sm"><i class="dripicons-cross"></i></button></td>';
-            cols += '<input type="hidden" class="product-code" name="product_code[]" value="' + data[1] + '"/>';
-            cols += '<input type="hidden" class="product-id" name="product_id[]" value="' + data[9] + '"/>';
+                '<td class="col-sm-1"><button type="button" class="ibtnDel btn btn-danger btn-sm">x</button></td>';
+            cols += '<input type="hidden" class="product-code" name="product_code[]" value="' + data[0].product.code + '"/>';
+            cols += '<input type="hidden" class="product-id" name="product_id[]" value="' + data[0].product.id + '"/>';
             cols += '<input type="hidden" class="sale-unit" name="sale_unit[]" value="' + temp_unit_name[0] + '"/>';
             cols += '<input type="hidden" class="net_unit_price" name="net_unit_price[]" />';
             cols += '<input type="hidden" class="discount-value" name="discount[]" />';
-            cols += '<input type="hidden" class="tax-rate" name="tax_rate[]" value="' + data[3] + '"/>';
+            cols += '<input type="hidden" class="tax-rate" name="tax_rate[]" value="' + data[0].tax + '"/>';
             cols += '<input type="hidden" class="tax-value" name="tax[]" />';
             cols += '<input type="hidden" class="subtotal-value" name="subtotal[]" />';
 
@@ -1800,7 +1797,7 @@
             } else
                 $("table.order-list tbody").append(newRow);
 
-            product_price.push(parseFloat(data[2]) + parseFloat(data[2]));
+            product_price.push(parseFloat(data[0].price));
             product_discount.push('0.00');
             tax_rate.push(parseFloat(data[3]));
             tax_name.push(data[4]);
@@ -1855,51 +1852,11 @@
             if (rownumber < 0) {
                 alert("Please insert product to order table!")
             } else if ($("#coupon-code").val() != '') {
-                valid = 0;
+                valid = 1;
                 $.each(coupon_list, function (key, value) {
-                    if ($("#coupon-code").val() == value['code']) {
-                        valid = 1;
-                        todyDate = "2020-08-02";
-                        if (parseFloat(value['quantity']) <= parseFloat(value['used']))
-                            alert('This Coupon is no longer available');
-                        else if (todyDate > value['expired_date'])
-                            alert('This Coupon has expired!');
-                        else if (value['type'] == 'fixed') {
-                            if (parseFloat($('input[name="grand_total"]').val()) >= value['minimum_amount']) {
-                                $('input[name="grand_total"]').val($('input[name="grand_total"]').val() - value[
-                                    'amount']);
-                                $('#grand-total').text(parseFloat($('input[name="grand_total"]').val()).toFixed(
-                                    2));
-                                if (!$('input[name="coupon_active"]').val())
-                                    alert('Congratulation! You got ' + value['amount'] + ' ' + currency +
-                                        ' discount');
-                                $(".coupon-check").prop("disabled", true);
-                                $("#coupon-code").prop("disabled", true);
-                                $('input[name="coupon_active"]').val(1);
-                                $("#coupon-modal").modal('hide');
-                                $('input[name="coupon_id"]').val(value['id']);
-                                $('input[name="coupon_discount"]').val(value['amount']);
-                                $('#coupon-text').text(parseFloat(value['amount']).toFixed(2));
-                            } else
-                                alert('Grand Total is not sufficient for discount! Required ' + value[
-                                    'minimum_amount'] + ' ' + currency);
-                        } else {
-                            var grand_total = $('input[name="grand_total"]').val();
-                            var coupon_discount = grand_total * (value['amount'] / 100);
-                            grand_total = grand_total - coupon_discount;
-                            $('input[name="grand_total"]').val(grand_total);
-                            $('#grand-total').text(parseFloat(grand_total).toFixed(2));
-                            if (!$('input[name="coupon_active"]').val())
-                                alert('Congratulation! You got ' + value['amount'] + '% discount');
-                            $(".coupon-check").prop("disabled", true);
-                            $("#coupon-code").prop("disabled", true);
-                            $('input[name="coupon_active"]').val(1);
-                            $("#coupon-modal").modal('hide');
-                            $('input[name="coupon_id"]').val(value['id']);
-                            $('input[name="coupon_discount"]').val(coupon_discount);
-                            $('#coupon-text').text(parseFloat(coupon_discount).toFixed(2));
-                        }
-                    }
+                    var grand_total = $('input[name="grand_total"]').val();
+                    $('input[name="grand_total"]').val(grand_total);
+                    $('#grand-total').text(parseFloat(grand_total).toFixed(2));
                 });
                 if (!valid)
                     alert('Invalid coupon code!');
