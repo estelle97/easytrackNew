@@ -34,7 +34,34 @@
             display: none;
         }
 
+        .ui-menu {
+            position: absolute !important;
+            width: 49.5% !important;
+            top: 40% !important;
+            left: 350px;
+            z-index: 1060 !important;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 7px;
+            background-color: white;
+            /* box-shadow: none; */
+            -webkit-box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.08);
+            -moz-box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.08);
+            box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.08);
+        }
+
+        .ui-menu-item {
+            color: rgba(0, 0, 0, 0.7) !important;
+            padding: 1rem 1.5rem !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .ui-menu-item:last-child {
+            border-bottom: none;
+        }
+
     </style>
+
+    <link href="../../assets/dist/libs/selectize/dist/css/selectize.css" rel="stylesheet" />
 </head>
 
 <body class="antialiased">
@@ -55,7 +82,7 @@
                                 <span class="badge bg-red"></span>
                             </span>
                             <div class="d-none d-xl-block pl-2">
-                                <div>Astride</div>
+                                <div>Estelle Belinga</div>
                                 <div class="mt-1 small text-muted">
                                     Admin
                                 </div>
@@ -137,7 +164,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown active">
                                 <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
                                     role="button" aria-expanded="false">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -154,7 +181,7 @@
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="active">
+                                    <li>
                                         <a class="dropdown-item" href="./products.html">
                                             Produits
                                         </a>
@@ -165,56 +192,21 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a class="dropdown-item" href="./salesorders-kanban-board.html">
+                                            Commandes clients
+                                        </a>
+                                    </li>
+                                    <li class="active">
+                                        <a class="dropdown-item" href="./purchaseorders.html">
+                                            Bons de commandes
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item" href="./sites.html">
                                             Gérer les sites
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
-                                    role="button" aria-expanded="false">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                            height="24" class="icon">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1zm2 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-                                                fill="rgba(255,255,255,0.8)" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Commandes
-                                    </span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="active">
-                                        <a class="dropdown-item" href="./salesorders.html">
-                                            Commandes clients
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="./purchaseorders.html">
-                                            Bons de commandes
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./invoices.html">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                            height="24" class="icon">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M21 8v12.993A1 1 0 0 1 20.007 22H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8zm-2 1h-5V4H5v16h14V9z"
-                                                fill="rgba(255,255,255,0.8)" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Facturations
-                                    </span>
-                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./users.html">
@@ -273,15 +265,12 @@
                         <!-- Page title actions -->
                         <div class="col-auto ml-auto d-print-none">
                             <div class="d-flex align-items-center">
-                                <a href="#" class="btn btn-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <line x1="12" y1="5" x2="12" y2="19" />
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                    </svg>
-                                    Nouveau
+                                <a class="text-white mr-3 mb-0" data-toggle="modal" data-target="#modal-pos">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
+                                        class="mr-2">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)" /></svg>
+                                    <span class="h2 align-middle">Nouveau</span>
                                 </a>
                                 <span class="dropdown ml-3">
                                     <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
@@ -311,7 +300,7 @@
                                                 <path
                                                     d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
                                             </svg>
-                                            Forunisseur
+                                            Quantité
                                         </a>
                                         <a class="dropdown-item" href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
@@ -320,7 +309,7 @@
                                                 <path
                                                     d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
                                             </svg>
-                                            Quantité
+                                            Prix
                                         </a>
                                         <a class="dropdown-item" href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
@@ -343,13 +332,12 @@
                                         </a>
                                     </div>
                                 </span>
-
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-9">
                         <div class="card">
                             <div class="table-responsive">
                                 <table class="table table-vcenter card-table">
@@ -360,9 +348,11 @@
                                             <th class="w-1">No.
                                             </th>
                                             <th>Date</th>
+                                            <th>Produit</th>
                                             <th>Forunisseur</th>
-                                            <th>Description</th>
                                             <th>Quantité</th>
+                                            <th>PU</th>
+                                            <th>Total</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -374,27 +364,33 @@
                                             <td><a href="invoice.html" class="text-reset" tabindex="-1">20-06-2020</a>
                                             </td>
                                             <td>
-                                                Mbarga Zoua
+                                                Guinness Smooth
                                             </td>
                                             <td>
-                                                Casiers de Guinness Smooth
+                                                Mbarga Zoua
                                             </td>
                                             <td>
                                                 50
                                             </td>
+                                            <td>
+                                                500
+                                            </td>
+                                            <td>
+                                                2500
+                                            </td>
                                             <td class="text-right">
-                                                <a href="#" class="btn btn-white btn-sm mt-1">
-                                                    Modifier
-                                                </a>
                                                 <span class="dropdown">
                                                     <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                                         data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">
+                                                        <a class="dropdown-item" data-toggle="modal" data-target="#modal-pos">
+                                                            Modifier
+                                                        </a>
+                                                        <a class="dropdown-item" >
                                                             Dupiquer
                                                         </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme inactif
+                                                        <a class="dropdown-item" >
+                                                            Annulé
                                                         </a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" href="#">
@@ -445,6 +441,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card col-lg-3 p-3" style="max-height: 600px;">
+                        <div class="row">
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <footer class="footer footer-transparent">
@@ -473,17 +474,763 @@
                 </div>
             </footer>
         </div>
+        <div class="modal-section">
+            <div class="modal modal-blur fade" id="modal-pos" tabindex="-1" role="dialog"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div id="pos-app">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Passer une commande</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" />
+                                        <line x1="18" y1="6" x2="6" y2="18" />
+                                        <line x1="6" y1="6" x2="18" y2="18" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="modal-body bg-white">
+                                <section class="pos-section">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card border-0 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row d-flex justify-content-around">
+                                                                <div class="col-md-12 mb-4">
+                                                                    <div class="search-box input-icon">
+                                                                        <span class="input-icon-addon">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                class="icon" width="24" height="24"
+                                                                                viewBox="0 0 24 24" stroke-width="2"
+                                                                                stroke="currentColor" fill="none"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round">
+                                                                                <path stroke="none" d="M0 0h24v24H0z">
+                                                                                </path>
+                                                                                <circle cx="10" cy="10" r="7"></circle>
+                                                                                <line x1="21" y1="21" x2="15" y2="15">
+                                                                                </line>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <!-- <input type="text" class="form-control"
+                                                                            name="product_code_name"
+                                                                            id="lims_productcodeSearch"
+                                                                            placeholder="Rechercher un produit"> -->
+                                                                        <selectize v-model="selectedProduct" :settings="selectizeSettings" class="form-select" @input="addProduct">
+                                                                            <option disabled selected :value="null">Selectionnez un produit</option>
+                                                                            <option v-for="item in products" :key="item.id" :value="item.id">{{item.product.name}}</option>
+                                                                        </selectize>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="table-responsive transaction-list">
+                                                                    <table class="table table-hover table-striped order-list table-fixed">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="col-sm-4">Nom</th>
+                                                                                <th class="col-sm-2">Prix</th>
+                                                                                <th class="col-sm-3">Quantité</th>
+                                                                                <th class="col-sm-3 pl-3">SubTotal</th>
+                                                                                <th class="col-sm-3"></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr v-for="(item, index) in order.products" :key="item.id">
+                                                                                <td class="col-sm-4 product-title">
+                                                                                    <button type="button"
+                                                                                        class="edit-product btn btn-link"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#editModal">
+                                                                                        <strong> {{item.product.name}} </strong>
+                                                                                    </button>
+                                                                                </td>
+                                                                                <td class="align-middle">{{item.price}}</td>
+                                                                                <td class="align-middle">
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-btn mr-1" @click="reduceQuantity(item)">
+                                                                                            <a class="p-1">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>
+                                                                                            </a>
+                                                                                        </span>
+                                                                                        <input
+                                                                                            type="number"
+                                                                                            class="form-control p-0 text-center border-0"
+                                                                                            v-model="item.qty"
+                                                                                            required>
+                                                                                        <span class="input-group-btn ml-1" @click="addQuantity(item)">
+                                                                                            <a class="p-1">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>
+                                                                                            </a>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="align-middle pl-3">{{item.subtotal}}</td>
+                                                                                <td class="col-sm-2">
+                                                                                    <a class="btn btn-danger p-1" @click="removeProduct(index)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgba(255,255,255,1)"/></svg></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4 mb-2">
+                                                                        <span
+                                                                            class="totals-title mr-3">Produits</span><span
+                                                                            id="item">{{order.products.length}}</span>
+                                                                    </div>
+                                                                    <div class="col-sm-4 mb-2">
+                                                                        <span class="totals-title mr-3">Total</span>
+                                                                        <span class="md">{{order.subtotal}}</span>
+                                                                    </div>
+                                                                    <div class="col-sm-4 mb-2">
+                                                                        <span class="totals-title mr-3">Réduction</span>
+                                                                        <span>0.00</span>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <span class="totals-title mr-3">Coupon</span>
+                                                                        <span >0.00</span>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <span class="totals-title mr-3">Tax</span>
+                                                                        <span >0.00</span>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <span class="totals-title mr-3">Transport</span>
+                                                                        <span >0.00</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="payment-amount text-right">
+                                                    <h4>Grand Total <span id="grand-total" class="h2 ml-2">{{order.total}}</span></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
+                                    Enregistrer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal modal-blur fade" id="modal-delete-purchaseorder" tabindex="-1" role="dialog"
+                aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modal-title">Êtes vous sure ?</div>
+                            <div>
+                                Si vous continuez, vous perdrez toutes les
+                                données de cette commande.
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link link-secondary mr-auto" data-dismiss="modal">
+                                Annuler
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                Oui, supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Libs JS -->
     <script src="../../assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/dist/libs/jquery/dist/jquery.slim.min.js"></script>
     <!-- easytrak Core -->
     <script src="../../assets/dist/js/easytrak.min.js"></script>
-
+    <!-- Basic JS -->
     <script>
         document.body.style.display = "block";
-
+        /* $(document).ready(function () {
+            $("#select-products").selectize({});
+        }); */
     </script>
+    <!-- Vue JS Core -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Vue JS Plugins -->
+    <script src="https://unpkg.com/vue2-selectize@1.1.7/dist/vue2-selectize.js"></script>
+    <!-- POS TABLE JS -->
+    <script type="text/javascript">
+
+        // Global variables
+        var productsList = [
+            {
+                "id": "5f296f8ee97bf81b26e4131a",
+                "cost": 139705,
+                "price": 558999,
+                "qty": 475,
+                "qty_alert": 25,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e1e1b91b402f1c64f",
+                    "name": "Hendrix",
+                    "code": 2306,
+                    "description": "Futuris",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "975ac4a9-5120-45a4-827b-367e286474ee",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e45f0541145fff620",
+                "cost": 390219,
+                "price": 51785,
+                "qty": 607,
+                "qty_alert": 22,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e518505ecf7dc2b92",
+                    "name": "Bowen",
+                    "code": 3698,
+                    "description": "Zaphire",
+                    "brand": "Brasserie du cameroun",
+                    "active": false,
+                    "type": "boisson",
+                    "barcode_symbology": "054a1b48-c9db-4266-8f24-7ff16de21ce7",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e528ba315fa539a4b",
+                "cost": 169995,
+                "price": 793226,
+                "qty": 629,
+                "qty_alert": 23,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8ea08c5369120599dc",
+                    "name": "Hopkins",
+                    "code": 8805,
+                    "description": "Zanilla",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "f7e64431-0a63-4e3b-81fe-e94229b56200",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e9729e023f4560248",
+                "cost": 522913,
+                "price": 575889,
+                "qty": 495,
+                "qty_alert": 22,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8eeb0f958cfde3c3b1",
+                    "name": "Mclean",
+                    "code": 2654,
+                    "description": "Boilcat",
+                    "brand": "Brasserie du cameroun",
+                    "active": false,
+                    "type": "boisson",
+                    "barcode_symbology": "08e09cd9-9780-4c8b-8891-ef43dd8cc261",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8ebd37f22ca1e53e24",
+                "cost": 167783,
+                "price": 332599,
+                "qty": 829,
+                "qty_alert": 24,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8eebca2b102a03c864",
+                    "name": "Pace",
+                    "code": 1505,
+                    "description": "Proflex",
+                    "brand": "Brasserie du cameroun",
+                    "active": false,
+                    "type": "boisson",
+                    "barcode_symbology": "17667222-4c67-4fe5-8b90-a7a3c54cd286",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e509b55f97a4e534d",
+                "cost": 771701,
+                "price": 529787,
+                "qty": 832,
+                "qty_alert": 20,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8efdca33297e825d78",
+                    "name": "Pate",
+                    "code": 3140,
+                    "description": "Plasmos",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "0bb08a72-b998-4399-a8e5-47e106be84ac",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e4f42f2fe2266e13e",
+                "cost": 407586,
+                "price": 452561,
+                "qty": 993,
+                "qty_alert": 21,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e073e09e9c96f0eac",
+                    "name": "Dalton",
+                    "code": 6550,
+                    "description": "Virxo",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "a6aceb7f-2ca7-40c6-bde7-5ef539dbd8c3",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8efcd98f46f63bb281",
+                "cost": 586905,
+                "price": 452792,
+                "qty": 176,
+                "qty_alert": 22,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8ed9fd6086c4869d3e",
+                    "name": "Shaw",
+                    "code": 8400,
+                    "description": "Pathways",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "0c1b2fe6-95ee-4f7b-91ea-2186d9c1889f",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e986d93fb939fe504",
+                "cost": 394032,
+                "price": 365762,
+                "qty": 874,
+                "qty_alert": 23,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e51bf5004ec7375d4",
+                    "name": "Stevens",
+                    "code": 3163,
+                    "description": "Zoid",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "61b124b8-1c5e-489e-8570-b00e28e7d1a0",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8ed7aed6dff0b00cf0",
+                "cost": 903163,
+                "price": 474155,
+                "qty": 628,
+                "qty_alert": 20,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e97b9fa75eb5afd6a",
+                    "name": "Rosales",
+                    "code": 3172,
+                    "description": "Navir",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "1eb7241a-1678-4074-b798-9cc1b1531ece",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e4c513cf4549267eb",
+                "cost": 94948,
+                "price": 325818,
+                "qty": 908,
+                "qty_alert": 24,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8eb2a536784d184f20",
+                    "name": "Townsend",
+                    "code": 8834,
+                    "description": "Endipin",
+                    "brand": "Brasserie du cameroun",
+                    "active": false,
+                    "type": "boisson",
+                    "barcode_symbology": "d7c2c930-9610-4cf6-a1fe-6cd2eb891ee1",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8ec064b0ea5fdc9eb8",
+                "cost": 446910,
+                "price": 169047,
+                "qty": 958,
+                "qty_alert": 21,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e3dbdbe9b525785bc",
+                    "name": "Chapman",
+                    "code": 6633,
+                    "description": "Isoternia",
+                    "brand": "Brasserie du cameroun",
+                    "active": false,
+                    "type": "boisson",
+                    "barcode_symbology": "304cb949-b664-4134-94f0-05bd3e18a0e9",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e2f96c5445d098fc2",
+                "cost": 589827,
+                "price": 681361,
+                "qty": 579,
+                "qty_alert": 22,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e14960ef3df5938c8",
+                    "name": "Benjamin",
+                    "code": 3727,
+                    "description": "Manufact",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "ec9e5d81-b15d-46fe-9696-413bca339c4e",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e898255fc93289edf",
+                "cost": 551308,
+                "price": 495292,
+                "qty": 563,
+                "qty_alert": 25,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e780c1cd0c0301bf9",
+                    "name": "Ware",
+                    "code": 6099,
+                    "description": "Zoarere",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "985f03b8-832a-4013-9617-0f960765f7c8",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e23a4e8c0ad6f7df8",
+                "cost": 137895,
+                "price": 948233,
+                "qty": 991,
+                "qty_alert": 21,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8efd7d9d15dd7f8344",
+                    "name": "Garrett",
+                    "code": 8087,
+                    "description": "Exoblue",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "0377f3bb-04de-4913-a3fe-0bc93bc896f0",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8eddbeb55fecc11269",
+                "cost": 230992,
+                "price": 632555,
+                "qty": 472,
+                "qty_alert": 21,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8efb80c5835eddaf35",
+                    "name": "Flores",
+                    "code": 9912,
+                    "description": "Exospeed",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "895ce513-0675-48e7-8fc8-73fdd1b02552",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e27c18ff9259c8f6f",
+                "cost": 664585,
+                "price": 410827,
+                "qty": 182,
+                "qty_alert": 21,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e5b44a24441fb75cc",
+                    "name": "Cohen",
+                    "code": 3594,
+                    "description": "Cemention",
+                    "brand": "Brasserie du cameroun",
+                    "active": false,
+                    "type": "boisson",
+                    "barcode_symbology": "00f3eee6-e423-40ed-ad0a-302a6fb75150",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e14816707d6994480",
+                "cost": 66580,
+                "price": 967992,
+                "qty": 192,
+                "qty_alert": 20,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e7836fab30ab225f6",
+                    "name": "Carroll",
+                    "code": 9563,
+                    "description": "Earthplex",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "3a6ad87d-f5d3-40e3-b302-44e7529c4a7b",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e6bdd346e29be4d3a",
+                "cost": 302992,
+                "price": 542338,
+                "qty": 557,
+                "qty_alert": 25,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8eb637096ff481148b",
+                    "name": "Velazquez",
+                    "code": 9471,
+                    "description": "Extragene",
+                    "brand": "Brasserie du cameroun",
+                    "active": false,
+                    "type": "boisson",
+                    "barcode_symbology": "e1c91532-2078-4c40-b439-b261de28f25e",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e131e582706b46d99",
+                "cost": 455797,
+                "price": 926179,
+                "qty": 329,
+                "qty_alert": 22,
+                "active": true,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8ecef3f14540054934",
+                    "name": "Colon",
+                    "code": 6350,
+                    "description": "Xurban",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "fac57600-b2dc-4386-b6ed-46e3cc7c0ebf",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8ecce237a92dafda4a",
+                "cost": 693927,
+                "price": 27524,
+                "qty": 943,
+                "qty_alert": 25,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8ed406132d3f590042",
+                    "name": "Burnett",
+                    "code": 2830,
+                    "description": "Mitroc",
+                    "brand": "Brasserie du cameroun",
+                    "active": false,
+                    "type": "boisson",
+                    "barcode_symbology": "2d927f24-06fd-4825-913c-fca1147fc14e",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            },
+            {
+                "id": "5f296f8e5154d40fe0cc9540",
+                "cost": 52168,
+                "price": 839799,
+                "qty": 459,
+                "qty_alert": 22,
+                "active": false,
+                "created_at": "04/08/2020",
+                "product": {
+                    "id": "5f296f8e585e3d595a8677c7",
+                    "name": "Carney",
+                    "code": 9209,
+                    "description": "Exoswitch",
+                    "brand": "Brasserie du cameroun",
+                    "active": true,
+                    "type": "boisson",
+                    "barcode_symbology": "7c5c760b-116d-412e-9295-ca43d08df276",
+                    "photo": "",
+                    "created_at": "04/08/2020",
+                    "deleted_at": ""
+                }
+            }
+        ];
+        var posOrder = {
+            products: [],
+            subtotal: 0,
+            total: 0,
+        };
+
+        // POS APP
+        var app = new Vue({
+            el: '#pos-app',
+            components: {
+                Selectize
+            },
+            data: {
+                selectizeSettings: {},
+                products: productsList,
+                order: posOrder,
+                selectedProduct: null
+            },
+            watch: {
+                orderProdutcs(val) {
+                    this.caculTotal();
+                }
+            },
+            computed: {
+                orderProdutcs() {
+                    return this.order.products
+                }
+            },
+            methods: {
+                caculTotal() {
+                    this.order.subtotal = this.order.products.reduce((acc, item) => acc + item.subtotal, 0);
+                    this.order.total = this.order.subtotal;
+                },
+                addProduct(value) {
+                    const data = this.products.filter(item => {return item.id === value})
+                    const item = Object.assign({}, data[0]);
+                    this.order.products.push({
+                        id: item.id,
+                        price: item.price,
+                        qty: 1,
+                        subtotal: item.price,
+                        product: item.product
+                    });
+                },
+                removeProduct(position) {
+                    this.order.products.splice(position, 1);
+                },
+                addQuantity(item) {
+                    item.qty = item.qty + 1;
+                    item.subtotal = item.price * item.qty;
+                    this.caculTotal();
+                },
+                reduceQuantity(item) {
+                    item.qty = item.qty - 1;
+                    item.subtotal = item.price * item.qty;
+                    this.caculTotal();
+                },
+                saveOrder() {
+                    this.order = {
+                        products: [],
+                        subtotal: 0,
+                        total: 0,
+                    }
+                    $('#pos-app').modal('hide');
+                }
+            }
+        });
+    </script>
+
+
+
+
+
 </body>
 
 </html>
