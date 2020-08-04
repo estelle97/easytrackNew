@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-   
+
 
     /**
      * Show the application dashboard.
@@ -32,7 +32,7 @@ class DashboardController extends Controller
         return view('admin.dashboard');
     }
 
-    
+
 
     public function profile()
     {
@@ -52,7 +52,7 @@ class DashboardController extends Controller
             'address' => 'required',
             'phone' => 'required|min:200000000|max:999999999|numeric'
         ]);
-        
+
         $user = Auth::user();
 
         $user->name = $request->name;
@@ -62,8 +62,8 @@ class DashboardController extends Controller
         $user->phone = $request->phone;
         $user->bio = $request->bio;
         $user->save();
-        
-        Notify::info("Profil mis à jour avec succès!");
+
+        flashy()->info("Profil mis à jour avec succès!");
         return redirect()->back();
     }
 
@@ -71,13 +71,13 @@ class DashboardController extends Controller
         return view('admin.profileSetting');
     }
 
-    
+
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
-        Notify::info("Nous espérons vous revoir bientôt!", 'Au revoir');
+        flashy()->info("Nous espérons vous revoir bientôt!", 'Au revoir');
         return redirect('/login');
-        
+
       }
 
 

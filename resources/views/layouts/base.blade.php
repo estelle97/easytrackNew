@@ -117,6 +117,9 @@
     {{-- easytrak Core --}}
     <script src={{asset("template/assets/dist/js/easytrak.min.js")}}></script>
     {{-- c'chart-revenue-bg --}}
+
+    @include('flashy::message')
+    
     <script>
         // @formatter:off
         document.addEventListener("DOMContentLoaded", function () {

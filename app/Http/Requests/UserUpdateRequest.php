@@ -13,7 +13,7 @@ class UserUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,26 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'email' => 'required|email',
+            'username' => 'required',
+            'address' => 'required',
+            'phone' => 'required|min:222222222|max:999999999|numeric'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required' => 'Ce champ est obligatoire',
+            'phone.min' => "Veuillez entrer un numéro de téléphone valide",
+            'phone.max' => "Veuillez entrer un numéro de téléphone valide",
+            'phone.numeric' => "Veuillez entrer un numéro de téléphone valide",
         ];
     }
 }

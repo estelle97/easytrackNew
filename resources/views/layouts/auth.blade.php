@@ -112,7 +112,7 @@
     </script>
     @yield('scripts')
 
-    {!! Notify::render() !!}
+    @include('flashy::message')
 </body>
 
 </html>

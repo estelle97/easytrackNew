@@ -15,7 +15,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Easytrak - Application pour la gestion de stock</title>
-    @notifyCss
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <meta name="msapplication-TileColor" content="#206bc4" />
     <meta name="theme-color" content="#206bc4" />
@@ -647,8 +646,7 @@
         document.body.style.display = "block"
 
     </script>
-    @include('notify::messages')
-    @notifyJs
+    @include('flashy::message')
 </body>
 
 </html>

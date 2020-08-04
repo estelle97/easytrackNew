@@ -1,5 +1,7 @@
 <?php
 
+use App\Company;
+use App\Employee;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -78,6 +80,67 @@ class UserTableSeeder extends Seeder
         ];
 
         DB::table('companies')->insert($companies);
+
+        $sites= [
+            [
+                'company_id' => Company::whereSlug('slug2')->first()->id,
+                'name' => 'le Relais Bastos',
+                'slug' => 'slug1',
+                'email' => 'lrbastos@gmail.com',
+                'phone1' => '223344556',
+                'town' => 'Yaoundé',
+                'street' => 'Miniprix Bastos',
+            ],
+            [
+                'company_id' => Company::whereSlug('slug2')->first()->id,
+                'name' => 'Le Relais Elig-edzoa',
+                'slug' => 'slug2',
+                'email' => 'lrnlongkak@gmail.com',
+                'phone1' => '223984456',
+                'town' => 'Yaoundé',
+                'street' => 'Elig-edzoa Pharmacie',
+            ],
+            [
+                'company_id' => Company::whereSlug('slug2')->first()->id,
+                'name' => 'le Relais Akwa',
+                'slug' => 'slug3',
+                'email' => 'lrakwa@gmail.com',
+                'phone1' => '223344556',
+                'town' => 'Douala',
+                'street' => 'Akwa',
+            ],
+        ];
+
+        DB::table('sites')->insert($sites);
+
+
+
+
+
+        for($i=0; $i<15; $i++){
+            $user = new User([
+                'name' => 'employee '.$i,
+                'username' => 'employee'.$i,
+                'email' => 'employee'.$i.'@gmail.com',
+                'phone' => random_int(777777777,999999999),
+                'address' => 'adresse employee'.$i,
+                'password' => bcrypt('password'),
+                'is_admin' => 1,
+                'role_id' => random_int(1,5)
+            ]);
+
+            $employee = new Employee();
+            $employee->cni_number = '002274514';
+            $employee->contact_name= 'Resposable employee '.$i;
+            $employee->contact_phone = random_int(777777777, 999999999);
+            $employee->site_id = random_int(31,33);
+
+            DB::transaction(function () use($user, $employee){
+                $user->save();
+                    $employee->user_id = $user->id;
+                    $employee->save();
+            });
+        }
     }
 
 }
