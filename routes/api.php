@@ -25,26 +25,38 @@ Route::apiResource('types', 'API\TypeController');
 Route::get('/uniques', 'API\UserController@getUniqueElements');
 
 Route::group(['middleware' => 'auth:api'], function(){
-    
+
     Route::post('logout', 'API\UserController@logout');
     Route::put('users/{user}/activate', 'API\UserController@activateUser');
     Route::put('users/{user}/changeAdminLevel', 'API\UserController@changeAdminLevel');
     Route::apiResource('users', 'API\UserController');
-    
-    Route::apiResource('Categories', 'API\CategoryController');
-    Route::apiResource('Types', 'API\TypeController');
+
     Route::apiResource('companies', 'API\CompanyController');
     Route::apiResource('employees', 'API\EmployeeController');
 
+    Route::get('sites/{site}/customers', 'API\SiteController@sitesCustomers');
+    Route::get('sites/{site}/suppliers', 'API\SiteController@sitesSuppliers');
     Route::post('sites/{site}', 'API\SiteController@update');
     Route::apiResource('sites', 'API\SiteController');
-    Route::apiResource('bills', 'API\BillController');
-    Route::apiResource('invoices', 'API\InvoiceController');
+
+    Route::get('sales/{sale}/validate', 'API\SaleController@validateSale');
+    Route::get('sales/{sale}/invalidate', 'API\SaleController@invalidateSale');
+    Route::apiResource('sales', 'API\SaleController');
+
+    Route::get('purchases/{purchase}/validate', 'API\PurchaseController@validatePurchase');
+    Route::get('purchases/{purchase}/invalidate', 'API\PurchaseController@invalidatePurchase');
+    Route::apiResource('purchases', 'API\PurchaseController');
+
+    Route::get('customers/sites/{site}', 'API\CustomerController@customersSite');
+    Route::apiResource('customers', 'API\CustomerController');
+
+    Route::get('suppliers/sites/{site}', 'API\SupplierController@suppliersSite');
+    Route::apiResource('suppliers' ,'API\SupplierController');
+
     Route::apiResource('products', 'API\ProductController');
+    Route::apiResource('categories', 'API\CategoryController');
     Route::apiResource('roles', 'API\RoleController');
     Route::apiResource('permissions','API\PermissionController');
-    Route::apiResource('categories', 'API\CategoryController');
-    Route::apiResource('suppliers' ,'API\SupplierController');
 
     Route::post('attachPermissionsToRole/{role}', 'API\RoleController@attachPermissionstoRole');
     Route::post('detachPermissionsToRole/{role}', 'API\RoleController@detachPermissionstoRole');

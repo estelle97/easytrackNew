@@ -16,8 +16,8 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('site_id')->nullable();
-            $table->integer('initiator')->nullable();
-            $table->integer('validator')->nullable();
+            $table->integer('initiator_id')->nullable();
+            $table->integer('validator_id')->nullable();
             $table->integer('customer_id')->nullable();
             $table->string('code')->nullable();
             $table->tinyInteger('is_active')->default(1);
@@ -30,7 +30,7 @@ class CreateSalesTable extends Migration
             $table->softDeletes();
         });
     }
-   
+
     /**
      * Reverse the migrations.
      *

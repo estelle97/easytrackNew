@@ -8,24 +8,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Purchase extends Model
 {
     use SoftDeletes;
-    
+
     protected $guarded = ['id'];
     public $timestamps = null;
     protected $dates = ['created_at'];
 
     public function products(){
-        return $this->belongsToMany('App\Product')->withPivot('site_id','supplier_id','qty','cost','damages');
+        return $this->belongsToMany('App\Product')->withPivot('qty','cost','damages');
     }
 
     public function initiator(){
-        return $this->belongsTo('App\User','initiator');
+        return $this->belongsTo('App\User');
     }
 
     public function validator(){
-        return $this->belongsTo('App\User','validator');
+        return $this->belongsTo('App\User');
     }
 
     public function site(){
-        return $this->belongsTo('Appî\Site');
+        return $this->belongsTo('App\Site');
+    }
+
+    public function supplier(){
+        return $this->belongsTo('App\Supplier');
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use SoftDeletes;
-    
+
     protected $guarded = ['id'];
     public $timestamps = null;
     protected $dates = ['created_at'];
@@ -26,7 +26,7 @@ class Product extends Model
     }
 
     public function purchases(){
-        return $this->belongsToMany('App\Purchase')->withPivot('site_id','supplier_id','qty','cost','damages');
+        return $this->belongsToMany('App\Purchase')->withPivot('site_id','qty','cost','damages');
     }
 
     public function sales(){

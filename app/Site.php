@@ -29,7 +29,12 @@ class Site extends Model
         return $this->hasMany('App\Employee');
     }
 
+    public function customers(){
+        return $this->hasMany('App\Customer');
+    }
+
     public function agendas(){
         return $this->belongsToMany('App\User','agendas')->withPivot('status','start','end');
     }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SupplierResource;
+use App\Site;
 use App\Supplier;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,10 @@ class SupplierController extends Controller
     public function index()
     {
         return SupplierResource::collection(Supplier::all()->load('site'));
+    }
+
+    public function suppliersSite(Site $site){
+        return SupplierResource::collection($site->suppliers);
     }
 
     /**
@@ -34,10 +39,10 @@ class SupplierController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param String name
-     * @param String email 
+     * @param String email
      * @param String tel1
      * @param String tel2 [optional]
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -56,7 +61,7 @@ class SupplierController extends Controller
             'site_id' => 5,
         ]);
         $supplier->save();
-        
+
         return response()->json([
             'message' => 'Supplier added successfully!',
             'supplier' => new SupplierResource($supplier->loadMissing('site')),
@@ -106,7 +111,7 @@ class SupplierController extends Controller
             'tel1' => $request->tel1,
             'tel2' => $request->tel2
         ]);
-        
+
         return response()->json([
             'message' => 'Supplier updated successfully!',
             'supplier' => new SupplierResource($supplier->loadMissing('site')),

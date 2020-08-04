@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupplierController extends Controller
 {
@@ -15,6 +16,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
+
         return view('admin.suppliers');
     }
 
@@ -42,10 +44,27 @@ class SupplierController extends Controller
             'phone1' => 'required|min:200000000|max:999999999|numeric'
         ]);
 
-        $supplier = Supplier::create($request->only(
-            'name','company_name','email','phone1','phone2','town','street','postal_code','site_id'
-        ));
+        if($request->site_id != 'all'){
+            $supplier = Supplier::create($request->only(
+                'name','company_name','email','phone1','phone2','town','street','postal_code','site_id'
+            ));
+        }else{
+            foreach(Auth::user()->companies->first()->sites as $site){
+                Supplier::create([
+                    'name' => $request->name,
+                    'company_name' => $request->company_name,
+                    'email' => $request->email,
+                    'phone1' => $request->phone1,
+                    'phone2' => $request->phone2,
+                    'town' => $request->town,
+                    'street' => $request->street,
+                    'postal_code' => $request->postal_code,
+                    'site_id' => $site->id,
+                ]);
+            }
+        }
 
+        flashy()->success("Le fournisseur a été ajouté avec succès");
         return 'success';
     }
 
@@ -86,8 +105,6 @@ class SupplierController extends Controller
             'phone1' => 'required|min:200000000|max:999999999|numeric'
         ]);
 
-        dump($request->all());
-        
         $supplier->update($request->only(
             'name','company_name','email','phone1','phone2','town','street','postal_code','site_id'
         ));
