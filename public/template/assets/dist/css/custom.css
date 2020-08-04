@@ -13,8 +13,11 @@
 }
 
 /* HEADER */
-.page-header .dropdown-toggle {
-
+.nav-item.dropdown.active .dropdown-menu .active .dropdown-item {
+    color: #267fc9 !important;
+}
+.page-header .dropdown-toggle:after  {
+    display: none !important;
 }
 
 /* BUTTONS */
