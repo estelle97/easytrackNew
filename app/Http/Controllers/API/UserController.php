@@ -29,11 +29,11 @@ class UserController extends Controller
      * @param String password_confirmation
      * @param Integer company_id [optional]
      * @param Char is_admin (1, 2, 3) default 1
-     * 
+     *
      * @return String message
      */
     public function register(Request $request){
-        
+
         // Validate and create admin
         $request->validate([
             'username' => 'required',
@@ -76,7 +76,7 @@ class UserController extends Controller
             'town' => $request->companytown,
             'street' =>$request->companystreet,
         ]);
-        
+
 
         $site = new Site([
             'name' => $request->sitename,
@@ -87,7 +87,7 @@ class UserController extends Controller
             'town' => $request->sitetown,
             'street' =>$request->sitestreet,
         ]);
-        
+
         DB::transaction(function () use($user, $company, $site){
             $user->save();
                 $company->user_id = $user->id;
@@ -105,7 +105,7 @@ class UserController extends Controller
 
         return response()->json([
             "message" => "Operation success!",
-        ], 201); 
+        ], 201);
 
     }
 
@@ -114,7 +114,7 @@ class UserController extends Controller
      * @param String login
      * @param String password
      * @param [boolean] remember_me
-     * 
+     *
      * @return String access_token
      * @return String token_type
      * @return String expires_at
@@ -135,9 +135,9 @@ class UserController extends Controller
 
         // $credentials = request(['email', 'password']);
 
-        // if(!Auth::attempt($credentials)) 
+        // if(!Auth::attempt($credentials))
         //     return response()->json(['message' => 'username/password incorrect'], 401);
-        
+
         $user = $request->user();
         if($user->active == '0'){
             return response()->json([
@@ -166,7 +166,7 @@ class UserController extends Controller
 
     /**
      * Logout user (Revoke the token)
-     * 
+     *
      * @return String message
      */
     public function logout(Request $request){
@@ -266,7 +266,7 @@ class UserController extends Controller
      * @param String address
      * @param String password_confirmation
      * @param Char is_admin (1, 2, 3) default 1
-     * 
+     *
      * @return String message
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
@@ -291,7 +291,7 @@ class UserController extends Controller
         $user->cni_number = $request->cni_number;
         $user->contact_name = $request->contact_name;
         $user->contact_tel = $request->contact_tel;
-        
+
         $user->save();
 
         return response()->json([
@@ -358,7 +358,7 @@ class UserController extends Controller
 
     /**
      * Attach Roles to a User
-     * @param Integer[] roles 
+     * @param Integer[] roles
      */
     public function attachRolesToUser(Request $request, User $user){
         foreach($request->roles as $role){
@@ -371,7 +371,7 @@ class UserController extends Controller
 
     /**
      * Detach Roles to a User
-     * @param Integer[] roles 
+     * @param Integer[] roles
      */
     public function detachRolesToUser(Request $request, User $user){
         foreach($request->roles as $role){
@@ -384,7 +384,7 @@ class UserController extends Controller
 
     /**
      * Attach Roles to a User
-     * @param Integer[] roles 
+     * @param Integer[] roles
      */
     public function attachPermissionsToUser(Request $request, User $user){
         foreach($request->permissions as $perm){
@@ -397,7 +397,7 @@ class UserController extends Controller
 
     /**
      * Detach Roles to a User
-     * @param Integer[] roles 
+     * @param Integer[] roles
      */
     public function detachPermissionsToUser(Request $request, User $user){
         foreach($request->permissions as $perm){
@@ -451,6 +451,6 @@ class UserController extends Controller
         return response()->json([
             'data' => $data
         ], 200);
-        
+
     }
 }

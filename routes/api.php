@@ -25,12 +25,12 @@ Route::apiResource('types', 'API\TypeController');
 Route::get('/uniques', 'API\UserController@getUniqueElements');
 
 Route::group(['middleware' => 'auth:api'], function(){
-    
+
     Route::post('logout', 'API\UserController@logout');
     Route::put('users/{user}/activate', 'API\UserController@activateUser');
     Route::put('users/{user}/changeAdminLevel', 'API\UserController@changeAdminLevel');
     Route::apiResource('users', 'API\UserController');
-    
+
     Route::apiResource('Categories', 'API\CategoryController');
     Route::apiResource('Types', 'API\TypeController');
     Route::apiResource('companies', 'API\CompanyController');
@@ -39,7 +39,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('sites/{site}', 'API\SiteController@update');
     Route::apiResource('sites', 'API\SiteController');
     Route::apiResource('bills', 'API\BillController');
-    Route::apiResource('invoices', 'API\InvoiceController');
+
+    Route::get('purchases/{purchase}/validate', 'API\PurchaseController@validatePurchase');
+    Route::get('purchases/{purchase}/invalidate', 'API\PurchaseController@invalidatePurchase');
+    Route::apiResource('purchases', 'API\PurchaseController');
     Route::apiResource('products', 'API\ProductController');
     Route::apiResource('roles', 'API\RoleController');
     Route::apiResource('permissions','API\PermissionController');

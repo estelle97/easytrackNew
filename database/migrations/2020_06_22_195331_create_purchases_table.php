@@ -15,9 +15,10 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('supplier_id')->nullable();
             $table->integer('site_id');
-            $table->integer('initiator')->nullagle();
-            $table->integer('validator')->nullable();
+            $table->integer('initiator_id')->nullagle();
+            $table->integer('validator_id')->nullable();
             $table->string('code')->unique();
             $table->tinyInteger('status')->default(0);
             $table->double('shipping_cost')->nullable();
@@ -28,7 +29,7 @@ class CreatePurchasesTable extends Migration
             $table->softDeletes();
         });
     }
-   
+
     /**
      * Reverse the migrations.
      *

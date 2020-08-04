@@ -109,6 +109,24 @@ class UserTableSeeder extends Seeder
                 'town' => 'Douala',
                 'street' => 'Akwa',
             ],
+            [
+                'company_id' => Company::whereSlug('slug1')->first()->id,
+                'name' => 'Facebook',
+                'slug' => 'slug4',
+                'email' => 'facebook@gmail.com',
+                'phone1' => '224144556',
+                'town' => 'Douala',
+                'street' => 'Ange raphael',
+            ],
+            [
+                'company_id' => Company::whereSlug('slug1')->first()->id,
+                'name' => 'Dream palace',
+                'slug' => 'slug5',
+                'email' => 'dream@gmail.com',
+                'phone1' => '227144556',
+                'town' => 'Douala',
+                'street' => 'Ange raphael',
+            ],
         ];
 
         DB::table('sites')->insert($sites);
@@ -117,7 +135,7 @@ class UserTableSeeder extends Seeder
 
 
 
-        for($i=0; $i<15; $i++){
+        for($i=0; $i<40; $i++){
             $user = new User([
                 'name' => 'employee '.$i,
                 'username' => 'employee'.$i,
@@ -133,7 +151,7 @@ class UserTableSeeder extends Seeder
             $employee->cni_number = '002274514';
             $employee->contact_name= 'Resposable employee '.$i;
             $employee->contact_phone = random_int(777777777, 999999999);
-            $employee->site_id = random_int(31,33);
+            $employee->site_id = random_int(31,35);
 
             DB::transaction(function () use($user, $employee){
                 $user->save();

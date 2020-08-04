@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         // Replissage de la table product_site
         foreach (App\Site::all() as $site) {
-            
+
             $products = App\Product::all('id')->random(rand(10,25));
             foreach ($products as $prod) {
                 $price = rand(4,20)*150;
@@ -59,6 +59,13 @@ class DatabaseSeeder extends Seeder
                 $supl->site_id = $site->id;
                 $supl->save();
             }
+
+            App\Customer::create([
+                'name' => 'Passager',
+                'street' => $site->street,
+                'town' => $site->town,
+                'site_id' => $site->id
+            ]);
         };
 
 

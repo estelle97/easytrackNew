@@ -15,16 +15,17 @@ class PurchaseResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'bill_id' => $this->id,
+            'purchase_id' => $this->id,
             'code' => $this->code,
             'status' => $this->status,
             'paying_method' => $this->paying_method,
             'shipping_cost' => $this->shipping_cost,
             'purchase_text' => $this->purchase_text,
-            'site_id' => $this->site_id,
-            'initiator' => new UserResource($this->initiator()),
-            'validator' => new UserResource($this->validator()),
-            'products' => ProductResource::collection($this->whenLoaded('products')),
+            'site' => new SiteResource($this->whenLoaded('site')),
+            'supplier' => new SupplierResource($this->whenLoaded('supplier')),
+            'initiator' => new UserResource($this->whenLoaded('initiator')),
+            'validator' => $this->when(!is_null($this->validator), new UserResource($this->whenLoaded('validator'))),
+            'products' => $this->products,
         ];
     }
 }
