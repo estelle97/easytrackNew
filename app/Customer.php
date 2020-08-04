@@ -13,4 +13,8 @@ class Customer extends Model
     public function sales(){
         return $this->hasMany('App\Site');
     }
+
+    public function site(){
+        return $this->belongsTo('App\Site');
+    }
 }
