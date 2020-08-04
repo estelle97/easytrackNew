@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CustomerResource;
 use App\Http\Resources\SiteResource;
+use App\Http\Resources\SupplierResource;
 use App\Site;
 use Illuminate\Http\Request;
 
@@ -17,6 +19,14 @@ class SiteController extends Controller
     public function index()
     {
         return SiteResource::collection(Site::all()->load('employees.user','company','products','suppliers'));
+    }
+
+    public function sitesSuppliers(Site $site){
+        return SupplierResource::collection($site->suppliers);
+    }
+
+    public function sitesCustomers(Site $site){
+        return CustomerResource::collection($site->customers);
     }
 
     /**
@@ -38,7 +48,7 @@ class SiteController extends Controller
      * @param String phone2 [optional]
      * @param String town
      * @param String street
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -103,7 +113,7 @@ class SiteController extends Controller
      * @param String phone2 [optional]
      * @param String town
      * @param String street
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Site $site)

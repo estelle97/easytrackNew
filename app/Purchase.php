@@ -14,7 +14,7 @@ class Purchase extends Model
     protected $dates = ['created_at'];
 
     public function products(){
-        return $this->belongsToMany('App\Product')->withPivot('site_id','qty','cost','damages');
+        return $this->belongsToMany('App\Product')->withPivot('qty','cost','damages');
     }
 
     public function initiator(){
