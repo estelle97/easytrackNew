@@ -18,7 +18,15 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return SaleResource::collection(Sale::all()->load('site','validator'));
+        if(Auth::user()->is_admin == 2){
+            $sales = Auth::user()->companies->first()->sites->load('sales');
+        } else {
+            $sales = Auth::user()->employee->site->sales;
+        }
+        
+        return response()->json([
+            'sales' => $sales,
+        ], 200);
     }
 
     /**

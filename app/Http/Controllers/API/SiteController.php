@@ -8,6 +8,7 @@ use App\Http\Resources\SiteResource;
 use App\Http\Resources\SupplierResource;
 use App\Site;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
@@ -18,7 +19,12 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return SiteResource::collection(Site::all()->load('employees.user','company','products','suppliers'));
+        if(Auth::user()->is_admin == 2){
+            $sites = Auth::user()->companies->first()->sites;
+        } else {
+            $sites = Auth::user()->employee->site;
+        }
+        return SiteResource::collection($sites->load('employees.user','company','products','suppliers'));
     }
 
     public function sitesSuppliers(Site $site){

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\EmployeeResource;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
@@ -18,8 +19,15 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all()->load('site','user');
-        return EmployeeResource::collection($employees);
+        if(Auth::user()->is_admin == 2){
+            $employees = Auth::user()->companies->first()->sites->load('employees.user');
+        } else {
+            $employees = Auth::user()->employee->site->employees->load('user');
+        }
+        
+        return response()->json([
+            'employees' => $employees
+        ], 200);
     }
 
     /**
