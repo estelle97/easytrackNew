@@ -412,18 +412,18 @@
                                     <form class="form-inline">
                                         <div class="form-group mb-3">
                                             <label for="">Site</label>
-                                            <select id="select-site" class="form-select">
-                                                <option>Bastos</option>
-                                                <option>Odja</option>
-                                                <option>Essos</option>
+                                            <select id="sites" class="form-select">
+                                                <option value="1">Bastos</option>
+                                                <option value="2">Odja</option>
+                                                <option value="3">Essos</option>
                                             </select>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="">Fournisseur</label>
-                                            <select id="select-supplier" class="form-select">
-                                                <option>Santa Maria</option>
-                                                <option>Perica LCC</option>
-                                                <option>Laurent Serge LCC</option>
+                                            <select id="suppliers" class="form-select">
+                                                <option value="1">Santa Maria</option>
+                                                <option value="2">Perica LCC</option>
+                                                <option value="3">Laurent Serge LCC</option>
                                             </select>
                                         </div>
                                     </form>
@@ -441,45 +441,45 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <select id="select-category" class="form-select">
-                                                <option>Beer</option>
-                                                <option>Jus naturel</option>
-                                                <option>Wisky</option>
+                                                <option value="1">Beer</option>
+                                                <option value="2">Jus naturel</option>
+                                                <option value="3">Wisky</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="card-deck d-flex flex-row justify-content-between">
-                                        <div class="card mr-2 pt-3">
+                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="800" value="1">
                                           <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
                                           <div class="card-body text-center">
                                             <h5 class="card-title">Ice black</h5>
                                           </div>
                                         </div>
-                                        <div class="card mr-2 pt-3">
-                                          <img class="card-img-top" src="../../assets/static/products/beer-2.jpg" alt="Card image cap">
+                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="500" value="2">
+                                          <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
                                           <div class="card-body text-center">
                                             <h5 class="card-title">Kadji Beer</h5>
                                           </div>
                                         </div>
-                                        <div class="card mr-2 pt-3">
-                                          <img class="card-img-top" src="../../assets/static/products/beer-3.jpg" alt="Card image cap">
+                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="1000" value="3">
+                                          <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
                                           <div class="card-body text-center">
                                             <h5 class="card-title">Heineken</h5>
                                           </div>
                                         </div>
-                                        <div class="card mr-2 pt-3">
-                                            <img class="card-img-top" src="../../assets/static/products/beer-4.jpg" alt="Card image cap">
+                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="800" value="4">
+                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Guiness</h5>
                                             </div>
                                         </div>
-                                        <div class="card mr-2 pt-3">
-                                            <img class="card-img-top" src="../../assets/static/products/beer-3.jpg" alt="Card image cap">
+                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="700" value="5">
+                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Muzik</h5>
                                             </div>
                                         </div>
-                                        <div class="card pt-3">
-                                            <img class="card-img-top" src="../../assets/static/products/beer-2.jpg" alt="Card image cap">
+                                        <div class="card pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="700" value="6">
+                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Beaufort</h5>
                                             </div>
@@ -500,20 +500,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="order-list">
-                                                <tr>
+                                                <!-- <tr>
                                                     <td>
                                                         <div class="product-image mt-3 mb-3"
-                                                            style="background-image: url('../../assets/static/products/beer.jpg')"></div>
+                                                            style="background-image: url('../../assets/static/products/beer.jpg')">
+                                                        </div>
                                                     </td>
                                                     <td style="vertical-align: middle;">
-                                                        <div class="product-name">Kadji Beer</div>
+                                                        <div class="product-name" id="name-1" data-name="kadji beer">Kadji Beer</div>
+                                                    </td>
+                                                    <td style="vertical-align: middle;">
+                                                        <div class="product-price" id="price-1"  data-price="4">800 FCFA</div>
                                                     </td>
                                                     <td style="vertical-align: middle;">
                                                         <div class="quantity-selector">
                                                             <div class="quantity-input">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn mr-1">
-                                                                        <a class="p-1">
+                                                                        <a class="btn btn-light p-1" id="minus-1">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>
                                                                         </a>
                                                                     </span>
@@ -521,9 +525,10 @@
                                                                         type="number"
                                                                         class="form-control p-0 text-center border-0"
                                                                         value="2"
+                                                                        id="qty-4" data-total="800" data-qty="1"
                                                                         required>
                                                                     <span class="input-group-btn ml-1">
-                                                                        <a class="p-1">
+                                                                        <a class="btn btn-light p-1" id="plus-1">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>
                                                                         </a>
                                                                     </span>
@@ -532,56 +537,12 @@
                                                         </div>
                                                     </td>
                                                     <td style="vertical-align: middle;">
-                                                        <div class="product-price">800 FCFA</div>
+                                                        <div class="product-price" id="subtotal-1" data-subtotal="800">1600 FCFA</div>
                                                     </td>
                                                     <td style="vertical-align: middle;">
-                                                        <div class="product-price">1600 FCFA</div>
+                                                        <a class="btn btn-light p-1 delete" data-product="1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgb(255, 62, 62)"/></svg></a>
                                                     </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <a class="btn btn-light p-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgb(255, 62, 62)"/></svg></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="product-image mt-3 mb-3"
-                                                            style="background-image: url('../../assets/static/products/beer.jpg')"></div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="product-name">Ice black</div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="quantity-selector">
-                                                            <div class="quantity-input">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-btn mr-1">
-                                                                        <a class="p-1">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>
-                                                                        </a>
-                                                                    </span>
-                                                                    <input
-                                                                        type="number"
-                                                                        class="form-control p-0 text-center border-0"
-                                                                        value="1"
-                                                                        required>
-                                                                    <span class="input-group-btn ml-1">
-                                                                        <a class="p-1">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>
-                                                                        </a>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="product-price">800 FCFA</div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="product-price">800 FCFA</div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <a class="btn btn-light p-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgb(255, 62, 62)"/></svg></a>
-                                                    </td>
-                                                </tr>
+                                                </tr> -->
                                             </tbody>
                                         </table>
                                     </div>
@@ -589,42 +550,50 @@
                                 <div class="order-foot">
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
-                                            <h5>Notes</h5>
-                                            <div class="form-group">
-                                                <textarea class="form-control mb-4" placeholder="Donner un avis"></textarea>
-                                                <button class="btn btn-primary">Enregister</button>
+                                            <div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6 mb-4">
+                                                        <label class="form-label"> Moyen de payement </label>
+                                                        <select name="role" id="paying_method" class="form-select">
+                                                            <option value="cash">Cash</option>
+                                                            <option value="om">Orange Mony</option>
+                                                            <option value="momo">MoMo</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 mb-4">
+                                                        <label class="form-label"> Etat </label>
+                                                        <select name="role" id="status" class="form-select">
+                                                            <option value="1">Non livré</option>
+                                                            <option value="2">   livré   </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <div>
+                                                <div class="form-group">
+                                                    <label class="form-label"> Notes </label>
+                                                    <textarea class="form-control mb-4" placeholder="Donner un avis"></textarea>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" onclick="order()">Enregister</button>
                                         </div>
                                         <div class="col-md-5 offset-md-1">
                                             <h5 class="order-section-heading">Récapitulatif</h5>
                                             <div class="order-summary-row">
                                                 <div class="order-summary-label"><span>Subtotal</span></div>
-                                                <div class="order-summary-value">2400 FCFA</div>
+                                                <div class="order-summary-value subtotal">0</div>
                                             </div>
                                             <div class="order-summary-row">
-                                                <div class="order-summary-label"><span>Réduction</span>
-                                                </div>
+                                                <div class="order-summary-label"><span>Tax</span></div>
                                                 <div class="order-summary-value">0</div>
                                             </div>
                                             <div class="order-summary-row">
-                                                <div class="order-summary-label"><span>Coupon</span>
-                                                </div>
-                                                <div class="order-summary-value">0</div>
-                                            </div>
-                                            <div class="order-summary-row">
-                                                <div class="order-summary-label"><span>Tax</span>
-                                                </div>
-                                                <div class="order-summary-value">0</div>
-                                            </div>
-                                            <div class="order-summary-row">
-                                                <div class="order-summary-label">
-                                                    <span>Transport</span>
-                                                </div>
+                                                <div class="order-summary-label"><span>Transport</span></div>
                                                 <div class="order-summary-value">0</div>
                                             </div>
                                             <div class="order-summary-row as-total">
                                                 <div class="order-summary-label"><span>Total</span></div>
-                                                <div class="order-summary-value">2400 FCFA</div>
+                                                <div class="order-summary-value grand-total">0</div>
                                             </div>
                                         </div>
                                     </div>
@@ -688,9 +657,9 @@
             $( ".order-sub-info-date" ).text( today_converted );
 
             // Autocomplte
-            $("#select-site").selectize({});
-            $("#select-supplier").selectize({});
-            $("#select-category").selectize({});
+            $("#site").selectize({});
+            $("#supplier").selectize({});
+            $("#category").selectize({});
         });
     </script>
     <script>
@@ -702,7 +671,9 @@
                 total  += parseInt($("#qty-"+val).data('qty')) * parseInt($("#price-"+val).data('price'));
                 $("#subtotal-"+val).html(parseInt($("#qty-"+val).data('qty')) * parseInt($("#price-"+val).data('price')));
                 $("#subtotal-"+val).data('subtotal', parseInt($("#qty-"+val).data('qty')) * parseInt($("#price-"+val).data('price')));
-            })
+            });
+
+            $(".subtotal").html(total);
 
             $(".grand-total").html(total);
         }
@@ -713,8 +684,6 @@
             products = jQuery.grep(products, function(value) {
                 return value != el;
             });
-
-            $(".product-number").html(products.length);
             calculate();
         }
         function addElement(el) {
@@ -722,38 +691,46 @@
                 updateQty(el.data('id'));
             } else{
                 $('.order-list').append(
-
-                $('.order-list').append(
                     '<tr id="product-'+el.data("id")+'">' +
-                    '    <td class="col-sm-4">' +
-                    '        <button type="button" class="btn btn-link">' +
-                    '            <strong id="name-'+el.data("id")+'" data-name="'+el.text()+'"> '+el.text()+' </strong>' +
-                    '        </button>' +
-                    '    </td>' +
-                    '    <td class="text-center col-sm-2" id="price-'+el.data("id")+'"  data-price="'+el.data("price")+'"> '+el.data("price")+' </td>' +
-                    '    <td class="col-sm-3">' +
-                    '        <div class="input-group">' +
-                    '            <span class="input-group-btn mr-1">' +
-                    '                <a class="btn btn-warning p-1" id="minus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+', -1)">' +
-                    '                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>' +
-                    '                </a>' +
-                    '            </span>' +
-                    '                <input type="text" class="form-control  p-0 text-center border-0" value="1" id="qty-'+el.data("id")+'" data-total="'+el.data("qty")+'" data-qty="1" required  oninput="updateQty('+el.data("id")+', '+this.value+')">' +
-                    '            <span class="input-group-btn ml-1">' +
-                    '                <a class="btn btn-success p-1" id="plus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+')">' +
-                    '                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>' +
-                    '                </a>' +
-                    '            </span>' +
+                    '    <td>' +
+                    '        <div class="product-image mt-3 mb-3"' +
+                    '            style="background-image: url("'+el.data("imgsrc")+'")">' +
                     '        </div>' +
                     '    </td>' +
-                    '    <td class="text-center" id="subtotal-'+el.data("id")+'" data-subtotal="'+el.data("price")+'">'+el.data("price")+'</td>' +
-                    '    <td class="col-sm-2">' +
-                    '        <a class="btn btn-danger p-1 delete" data-product="'+el.data("id")+'" onclick="removeElement('+el.data("id")+')" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgba(255,255,255,1)"/></svg></a>' +
+                    '    <td style="vertical-align: middle;">' +
+                    '        <div class="product-name" id="name-'+el.data("id")+'" data-name="'+el.text()+'">'+el.text()+'</div>' +
+                    '    </td>' +
+                    '    <td style="vertical-align: middle;">' +
+                    '        <div class="product-price" id="price-'+el.data("id")+'"  data-price="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
+                    '    </td>' +
+                    '    <td style="vertical-align: middle;">' +
+                    '        <div class="quantity-selector">' +
+                    '            <div class="quantity-input">' +
+                    '                <div class="input-group">' +
+                    '                    <span class="input-group-btn mr-1">' +
+                    '                        <a class="btn btn-light p-1" id="minus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+', -1)">' +
+                    '                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>' +
+                    '                        </a>' +
+                    '                    </span>' +
+                    '                    <input type="number" class="form-control p-0 text-center border-0" value="1" id="qty-'+el.data("id")+'" data-total="'+el.data("qty")+'" data-qty="1" required oninput="updateQty('+el.data("id")+', '+this.value+')">' +
+                    '                    <span class="input-group-btn ml-1">' +
+                    '                        <a class="btn btn-light p-1" id="plus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+')">' +
+                    '                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>' +
+                    '                        </a>' +
+                    '                    </span>' +
+                    '                </div>' +
+                    '            </div>' +
+                    '        </div>' +
+                    '    </td>' +
+                    '    <td style="vertical-align: middle;">' +
+                    '        <div class="product-price" id="subtotal-'+el.data("id")+'" data-subtotal="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
+                    '    </td>' +
+                    '    <td style="vertical-align: middle;">' +
+                    '        <a class="btn btn-light p-1 delete" data-product="'+el.data("id")+'" onclick="removeElement('+el.data("id")+')" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgb(255, 62, 62)"/></svg></a>' +
                     '    </td>' +
                     '</tr>'
                 );
                 products.push(el.data('id'));
-                $(".product-number").html(products.length);
                 calculate();
             }
         }
@@ -772,9 +749,9 @@
             calculate();
         }
 
-        $('#products').change(function () {
-            // console.log($(this).children('option:selected').data());
-            element = ($(this).children('option:selected'));
+        $('.product').click(function () {
+            console.log('Ajouter le produit');
+            element = ($(this));
             addElement(element);
         });
 
