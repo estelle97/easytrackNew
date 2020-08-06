@@ -34,32 +34,6 @@
         body {
             display: none;
         }
-
-        .ui-menu {
-            position: absolute !important;
-            width: 49.5% !important;
-            top: 40% !important;
-            left: 350px;
-            z-index: 1060 !important;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 7px;
-            background-color: white;
-            /* box-shadow: none; */
-            -webkit-box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.08);
-            -moz-box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.08);
-            box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.08);
-        }
-
-        .ui-menu-item {
-            color: rgba(0, 0, 0, 0.7) !important;
-            padding: 1rem 1.5rem !important;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .ui-menu-item:last-child {
-            border-bottom: none;
-        }
-
     </style>
 </head>
 
@@ -517,11 +491,6 @@
                                                                         <option value ="3">Laurent Serge LCC</option>
                                                                     </select>
                                                                 </div>
-                                                                <div class="col-md-1 mb-4">
-                                                                    <a class="btn border-0 shadow-none p-1">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.537 19.567A9.961 9.961 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10c0 2.136-.67 4.116-1.81 5.74L17 12h3a8 8 0 1 0-2.46 5.772l.997 1.795z"/></svg>
-                                                                    </a>
-                                                                </div>
                                                                 <div class="col-md-12 mb-4">
                                                                     <select name="role" id="products" class="form-select">
                                                                         <option disabled selected>Selectionnez un produit</option>
@@ -554,13 +523,13 @@
                                                                                 <td class="col-sm-3">
                                                                                     <div class="input-group">
                                                                                         <span class="input-group-btn mr-1">
-                                                                                            <a class="btn btn-warning p-1" id="minus-4">
+                                                                                            <a class="btn btn-light p-1" id="minus-4">
                                                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>
                                                                                             </a>
                                                                                         </span>
-                                                                                            <input type="text" class="form-control  p-0 text-center border-0" value="1" id="qty-4" data-total="10" data-qty="1" required>
+                                                                                            <input type="text" class="quantity-input form-control p-0 text-center border-0" value="1" id="qty-4" data-total="10" data-qty="1" required>
                                                                                         <span class="input-group-btn ml-1">
-                                                                                            <a class="btn btn-success p-1" id="plus-4">
+                                                                                            <a class="btn btn-light p-1" id="plus-4">
                                                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>
                                                                                             </a>
                                                                                         </span>
@@ -671,9 +640,9 @@
     <script>
         document.body.style.display = "block";
         $(document).ready(function () {
-            $("#select-site").selectize({});
-            $("#select-supplier").selectize({});
-            $("#select-products").selectize({});
+            /* $("#sites").selectize({});
+            $("#suppliers").selectize({});
+            $("#products").selectize({}); */
         });
     </script>
     <script>
@@ -716,13 +685,13 @@
                     '    <td class="col-sm-3">' +
                     '        <div class="input-group">' +
                     '            <span class="input-group-btn mr-1">' +
-                    '                <a class="btn btn-warning p-1" id="minus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+', -1)">' +
+                    '                <a class="btn btn-light p-1" id="minus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+', -1)">' +
                     '                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>' +
                     '                </a>' +
                     '            </span>' +
-                    '                <input type="text" class="form-control  p-0 text-center border-0" value="1" id="qty-'+el.data("id")+'" data-total="'+el.data("qty")+'" data-qty="1" required  oninput="updateQty('+el.data("id")+', '+this.value+')">' +
+                    '                <input type="text" class="quantity-input form-control p-0 text-center border-0" value="1" id="qty-'+el.data("id")+'" data-total="'+el.data("qty")+'" data-qty="1" required  oninput="updateQty('+el.data("id")+', '+this.value+')">' +
                     '            <span class="input-group-btn ml-1">' +
-                    '                <a class="btn btn-success p-1" id="plus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+')">' +
+                    '                <a class="btn btn-light p-1" id="plus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+')">' +
                     '                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>' +
                     '                </a>' +
                     '            </span>' +
