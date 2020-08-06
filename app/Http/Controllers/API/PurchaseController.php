@@ -18,7 +18,15 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return PurchaseResource::collection(Purchase::all()->load('supplier','site','validator'));
+        if(Auth::user()->is_admin == 2){
+            $purchases = Auth::user()->companies->first()->sites->load('purchases');
+        } else {
+            $purchases = Auth::user()->employee->site->purchases;
+        }
+        
+        return response()->json([
+            'purchases' => $purchases,
+        ], 200);
     }
 
     /**

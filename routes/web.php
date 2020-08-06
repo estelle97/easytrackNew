@@ -97,12 +97,18 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
     Route::post('easytrack/roles/attachPermissionToRole', 'SuperAdmin\RoleController@attachPermissionToRole');
 
+
+    Route::post('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');
     Route::get('purchases', 'Employee\PurchaseController@index');
+    Route::post('admin/purchases', 'Admin\PurchaseController@store');
     Route::get('admin/purchases', 'Admin\PurchaseController@index')->name('admin.purchases');
+
     Route::get('admin/{site}/users', 'Admin\SiteController@users')->name('admin.site.employees');
+
     Route::post('admin/products/{product}', 'Admin\ProductController@update');
     Route::post('admin/products', 'Admin\ProductController@store');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
+    
     Route::resource('admin/suppliers', 'Admin\SupplierController');
     Route::resource('easytrack/products', 'SuperAdmin\ProductController');
     Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');

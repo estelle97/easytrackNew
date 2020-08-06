@@ -30,6 +30,12 @@
     border: none !important;
 }
 
+/* INPUT */
+.quantity-input {
+    height: 1.6rem !important;
+    min-height: 1.6rem !important;
+}
+
 .btn-gradient {
     color: #fff;
     background: rgb(38,127,201) !important;
