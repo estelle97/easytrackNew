@@ -7,6 +7,7 @@ use App\Http\Resources\SupplierResource;
 use App\Site;
 use App\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupplierController extends Controller
 {
@@ -17,7 +18,14 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return SupplierResource::collection(Supplier::all()->load('site'));
+        if(Auth::user()->is_admin == 2){
+            $suppliers = Auth::user()->companies->first()->sites->load('suppliers');
+        } else {
+            $suppliers = Auth::user()->employee->site->suppliers;
+        }
+        return response()->json([
+            'suppliers' => $suppliers
+        ], 200);
     }
 
     public function suppliersSite(Site $site){

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerResource;
 use App\Site;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -17,7 +18,15 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return CustomerResource::collection(Customer::all()->load('site'));
+        if(Auth::user()->is_admin == 2){
+            $customers = Auth::user()->companies->first()->sites->load('customers');
+        } else {
+            $customers = Auth::user()->employee->site->customers;
+        }
+        
+        return response()->json([
+            'customers' => $customers
+        ], 200);
     }
 
     public function customersSite(Site $site){

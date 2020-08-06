@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Extension\HeadingPermalink\Slug\DefaultSlugGenerator;
 use League\CommonMark\Normalizer\SlugNormalizer;
 
@@ -18,7 +19,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection(Product::where('active','1')->get()->load('category','sites'));
+        if(Auth::user()->is_admin == 2){
+            $products = Auth::user()->companies->first()->sites->load('products.category');
+        } else {
+            $products = Auth::user()->employee->site->products->load('category');
+        }
+
+        return response()->json([
+            'products' => $products
+        ]);
     }
 
     /**

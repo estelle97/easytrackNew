@@ -37,4 +37,13 @@ class Site extends Model
         return $this->belongsToMany('App\User','agendas')->withPivot('status','start','end');
     }
 
+    public function purchases(){
+        return $this->hasMany('App\Purchase');
+    }
+
+    public function sales(){
+        return $this->hasMany('App\Sale');
+    }
+
+
 }
