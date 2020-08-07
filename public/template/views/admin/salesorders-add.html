@@ -429,7 +429,6 @@
                                     </form>
                                 </div>
                                 <div class="order-products mb-5">
-
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <div class="input-icon mb-3">
@@ -440,7 +439,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <select id="select-category" class="form-select">
+                                            <select id="categories" class="form-select">
                                                 <option value="1">Beer</option>
                                                 <option value="2">Jus naturel</option>
                                                 <option value="3">Wisky</option>
@@ -448,38 +447,38 @@
                                         </div>
                                     </div>
                                     <div class="card-deck d-flex flex-row justify-content-between">
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="800" value="1">
+                                        <div class="product-card card mr-2 pt-3" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="800" value="1">
                                           <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
                                           <div class="card-body text-center">
                                             <h5 class="card-title">Ice black</h5>
                                           </div>
                                         </div>
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="500" value="2">
-                                          <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
+                                        <div class="product-card card mr-2 pt-3" data-imgsrc="../../assets/static/products/beer-2.jpg" data-id="2"  data-qty="10" data-price="500" value="2">
+                                          <img class="card-img-top" src="../../assets/static/products/beer-2.jpg" alt="Card image cap">
                                           <div class="card-body text-center">
                                             <h5 class="card-title">Kadji Beer</h5>
                                           </div>
                                         </div>
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="1000" value="3">
-                                          <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
+                                        <div class="product-card card mr-2 pt-3" data-imgsrc="../../assets/static/products/beer-3.jpg" data-id="3"  data-qty="10" data-price="1000" value="3">
+                                          <img class="card-img-top" src="../../assets/static/products/beer-3.jpg" alt="Card image cap">
                                           <div class="card-body text-center">
                                             <h5 class="card-title">Heineken</h5>
                                           </div>
                                         </div>
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="800" value="4">
-                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
+                                        <div class="product-card card mr-2 pt-3" data-imgsrc="../../assets/static/products/beer-4.jpg" data-id="4"  data-qty="10" data-price="800" value="4">
+                                            <img class="card-img-top" src="../../assets/static/products/beer-4.jpg" alt="Card image cap">
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Guiness</h5>
                                             </div>
                                         </div>
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="700" value="5">
-                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
+                                        <div class="product-card card mr-2 pt-3" data-imgsrc="../../assets/static/products/beer-2.jpg" data-id="5"  data-qty="10" data-price="700" value="5">
+                                            <img class="card-img-top" src="../../assets/static/products/beer-2.jpg" alt="Card image cap">
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Muzik</h5>
                                             </div>
                                         </div>
-                                        <div class="card pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="700" value="6">
-                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
+                                        <div class="product-card card pt-3" data-imgsrc="../../assets/static/products/beer-4.jpg" data-id="6"  data-qty="10" data-price="700" value="6">
+                                            <img class="card-img-top" src="../../assets/static/products/beer-4.jpg" alt="Card image cap">
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Beaufort</h5>
                                             </div>
@@ -584,10 +583,6 @@
                                                 <div class="order-summary-value subtotal">0</div>
                                             </div>
                                             <div class="order-summary-row">
-                                                <div class="order-summary-label"><span>Tax</span></div>
-                                                <div class="order-summary-value">0</div>
-                                            </div>
-                                            <div class="order-summary-row">
                                                 <div class="order-summary-label"><span>Transport</span></div>
                                                 <div class="order-summary-value">0</div>
                                             </div>
@@ -633,7 +628,7 @@
     </div>
     <!-- Libs JS -->
     <script src="../../assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/dist/libs/jquery/dist/jquery.slim.min.js"></script>
+    <script src="../../assets/dist/libs/jquery/dist/jquery.min.js"></script>
     <script src="../../assets/dist/libs/selectize/dist/js/standalone/selectize.min.js"></script>
     <!-- easytrak Core -->
     <script src="../../assets/dist/js/easytrak.min.js"></script>
@@ -657,9 +652,9 @@
             $( ".order-sub-info-date" ).text( today_converted );
 
             // Autocomplte
-            $("#site").selectize({});
-            $("#supplier").selectize({});
-            $("#category").selectize({});
+            $("#sites").selectize({});
+            $("#suppliers").selectize({});
+            $("#categories").selectize({});
         });
     </script>
     <script>
@@ -679,6 +674,7 @@
         }
 
         function removeElement(el) {
+            console.log(`removeElement -> #product-${el}`);
             $("#product-"+el).remove().fadeOut(1000);
 
             products = jQuery.grep(products, function(value) {
@@ -694,7 +690,7 @@
                     '<tr id="product-'+el.data("id")+'">' +
                     '    <td>' +
                     '        <div class="product-image mt-3 mb-3"' +
-                    '            style="background-image: url("'+el.data("imgsrc")+'")">' +
+                    '            style="background-image: url('+el.data("imgsrc")+')">' +
                     '        </div>' +
                     '    </td>' +
                     '    <td style="vertical-align: middle;">' +
@@ -749,9 +745,8 @@
             calculate();
         }
 
-        $('.product').click(function () {
-            console.log('Ajouter le produit');
-            element = ($(this));
+        $('.product-card').click(function () {
+            element = $(this);
             addElement(element);
         });
 
