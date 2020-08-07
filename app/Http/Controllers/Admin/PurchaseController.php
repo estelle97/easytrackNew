@@ -128,6 +128,7 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
+
     }
 
     /**
