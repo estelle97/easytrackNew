@@ -19,7 +19,7 @@
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a class="text-white mr-3 mb-0" data-toggle="modal" data-target="#modal-pos">
+                    <a class="text-white mr-3 mb-0" data-toggle="modal" data-target="#modal-pos">.modal();
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
                             class="mr-2">
                             <path fill="none" d="M0 0h24v24H0z" />
@@ -137,7 +137,7 @@
                                                 <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                                     data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" data-toggle="modal" data-target="#modal-pos">
+                                                    <a class="dropdown-item" onclick="updatePurchase({{$pur->id}})">
                                                         Modifier
                                                     </a>
                                                     <a class="dropdown-item" >
@@ -205,7 +205,7 @@
             
 
     <div class="modal-section">
-        <div class="modal modal-blur fade" id="modal-pos" tabindex="-1" role="dialog"
+        <div class="modal modal-blur fade" id="modal-pos" .modal();tabindex="-1" role="dialog"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div id="pos-app">
@@ -552,6 +552,21 @@
 
             });
         });
+
+        function updatePurchase(id){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url: '/admin/purchases/'+id,
+                method: 'post',
+                data: {
+                    _token: token
+                },
+                success: function(data){
+                    $("#modal-pos").modal().html(data);
+                }
+            });
+        }
 
     </script>
 @endsection
