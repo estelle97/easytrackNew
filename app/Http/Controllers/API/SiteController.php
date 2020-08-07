@@ -24,7 +24,7 @@ class SiteController extends Controller
         } else {
             $sites = Auth::user()->employee->site;
         }
-        return SiteResource::collection($sites->load('employees.user','company','products','suppliers'));
+        return SiteResource::collection($sites->load('employees.user.role','customers','suppliers'));
     }
 
     public function sitesSuppliers(Site $site){
@@ -95,7 +95,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        return new SiteResource($site->loadMissing('employees.user.role','company','products','suppliers'));
+        return new SiteResource($site->loadMissing('employees.user.role','customers','suppliers'));
     }
 
     /**

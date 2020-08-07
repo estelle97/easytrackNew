@@ -47,7 +47,7 @@ class PurchaseController extends Controller
         ]);
 
         do {
-            $code = mt_rand(1000000000, 9999999999);
+            $code = rand(1000000000, 9999999999);
         } while(Purchase::whereCode($code)->exists());
 
         $purchase = new Purchase([
@@ -116,7 +116,7 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
-        //
+        return view('ajax/admin/purchase_update', compact('purchase'));
     }
 
     /**
@@ -128,7 +128,6 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        //
     }
 
     /**
