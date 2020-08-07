@@ -101,7 +101,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('purchases', 'Employee\PurchaseController@index');
     
     Route::post('admin/purchases/{purchase}', 'Admin\PurchaseController@edit');
-    Route::post('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');
+    Route::get('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');
     Route::post('admin/purchases', 'Admin\PurchaseController@store');
     Route::get('admin/purchases', 'Admin\PurchaseController@index')->name('admin.purchases');
 

@@ -19,7 +19,7 @@
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a class="text-white mr-3 mb-0" data-toggle="modal" data-target="#modal-pos">.modal();
+                    <a class="text-white mr-3 mb-0" data-toggle="modal" data-target="#modal-pos">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
                             class="mr-2">
                             <path fill="none" d="M0 0h24v24H0z" />
@@ -284,7 +284,7 @@
                                                                 </div>
                                                                 <div class="col-sm-4 mb-2">
                                                                     <span class="totals-title mr-3">Total</span>
-                                                                    <span class="md total">800</span>
+                                                                    <span class="md total">0</span>
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <span class="totals-title mr-3">Transport</span>
@@ -338,6 +338,9 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal modal-blur fade" id="modal-pos-update" .modal();tabindex="-1" role="dialog" aria-hidden="true"> </div>
+
         <div class="modal modal-blur fade" id="modal-delete-purchaseorder" tabindex="-1" role="dialog"
             aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -425,8 +428,9 @@
                 $("#subtotal-"+val).html(parseInt($("#qty-"+val).data('qty')) * parseInt($("#price-"+val).data('price')));
                 $("#subtotal-"+val).data('subtotal', parseInt($("#qty-"+val).data('qty')) * parseInt($("#price-"+val).data('price')));
             })
-
+            console.log(total);
             $(".grand-total").html(total);
+            $(".total").html(total);
         }
 
         function removeElement(el) {
@@ -440,6 +444,7 @@
             calculate();
         }
         function addElement(el) {
+            console.log(el);
             if(products.includes(el.data('id'))){
                 updateQty(el.data('id'));
             } else{
@@ -480,13 +485,14 @@
         }
 
         function updateQty(el, one = 1){
+            console.log(el);
             var  product = $("#qty-"+el);
             var nbr;
             if(one != 1 && one != -1) nbr = one;
             else  {
                 nbr = parseInt(product.val()) + one;
             }
-            if(product.data('total') >= nbr && nbr >= 1){
+            if(nbr >= 1){
                 product.data('qty', nbr);
                 product.val(nbr);
             }
@@ -494,7 +500,8 @@
         }
 
         $('#products').change(function () {
-            // console.log($(this).children('option:selected').data());
+
+            console.log($(this).children('option:selected').data());
             element = ($(this).children('option:selected'));
             addElement(element);
         });
@@ -539,7 +546,7 @@
 
             $.ajax({
                 url: '/admin/purchases/site',
-                method: 'post',
+                method: 'get',
                 data: {
                     _token: token,
                     site_id: site
@@ -563,7 +570,7 @@
                     _token: token
                 },
                 success: function(data){
-                    $("#modal-pos").modal().html(data);
+                    $("#modal-pos").html(data).modal();
                 }
             });
         }
