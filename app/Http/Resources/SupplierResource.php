@@ -20,6 +20,8 @@ class SupplierResource extends JsonResource
             'email' => $this->email,
             'phone1' => $this->phone1,
             'phone2' => $this->phone2,
+            'town' => $this->town,
+            'street' => $this->street,
             'site' => new SiteResource($this->whenLoaded('site'))
         ];
     }
