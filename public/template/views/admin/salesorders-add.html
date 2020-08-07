@@ -784,14 +784,15 @@
 
         // SEARCH
         $("#product-search").change(function() {
-            console.log('Search -> ', $(this).val());
             var val = $(this).val();
             var result = productCardList.filter(product => {
                 return product.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
             });
-            console.log("result", result);
             if (result.length > 0) {
+                // INITIALIZE HTML CONTENT
                 $('.card-deck').empty();
+
+                // CORE
                 injectCardList(result);
             }
         });
