@@ -19,9 +19,9 @@ class SaleController extends Controller
     public function index()
     {
         if(Auth::user()->is_admin == 2){
-            $sales = Auth::user()->companies->first()->sites->load('sales');
+            $sales = Auth::user()->companies->first()->sites->load('sales.customer','sales.initiator','sales.validator');
         } else {
-            $sales = Auth::user()->employee->site->sales;
+            $sales = Auth::user()->employee->site->sales->load('customer','initiator','validator');
         }
         
         return response()->json([

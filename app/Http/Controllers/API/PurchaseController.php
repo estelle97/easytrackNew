@@ -19,9 +19,9 @@ class PurchaseController extends Controller
     public function index()
     {
         if(Auth::user()->is_admin == 2){
-            $purchases = Auth::user()->companies->first()->sites->load('purchases');
+            $purchases = Auth::user()->companies->first()->sites->load('purchases.supplier','purchases.initiator','purchases.validator');
         } else {
-            $purchases = Auth::user()->employee->site->purchases;
+            $purchases = Auth::user()->employee->site->purchases->load('supplier','initiator','validator');
         }
         
         return response()->json([
