@@ -27,6 +27,7 @@
     <!-- CSS files -->
     <link href="../../assets/dist/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/easytrak.min.css" rel="stylesheet" />
+    <link href="../../assets/dist/css/easytrak-payments.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/demo.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/custom.css" rel="stylesheet" />
     <link href="../../assets/dist/libs/selectize/dist/css/selectize.css" rel="stylesheet" />
@@ -185,6 +186,27 @@
             margin-top: 20px;
             padding-top: 10px;
             border-top: 3px solid #222
+        }
+        .product-card {
+            transition: all 0.5s;
+        }
+        .product-card:hover {
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            transform: scale(1.07);
+            -webkit-box-shadow: 0px 4px 30px -15px rgba(0,0,0,0.5);
+            -moz-box-shadow: 0px 4px 30px -15px rgba(0,0,0,0.5);
+            box-shadow: 0px 4px 30px -15px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        .product-card:focus {
+            outline: none !important;
+        }
+        .product-card:active{
+            transform: scale(1.025);
+            -webkit-box-shadow: 0px 4px 30px -15px rgba(0,0,0,0.1);
+            -moz-box-shadow: 0px 4px 30px -15px rgba(0,0,0,0.1);
+            box-shadow: 0px 4px 30px -15px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -389,18 +411,10 @@
                                 Passer une commande
                             </h2>
                         </div>
-                        <!-- Page title actions -->
-                        <div class="col-auto ml-auto d-print-none">
-                            <div class="d-flex align-items-center">
-                                <a href="./salesorders-add.html" class="text-white mr-4 mb-0">
-                                    <span class="h2 align-middle">Enregister</span>
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12" style="max-height: 700px;">
+                    <div class="col-lg-8" style="max-height: 700px;">
                         <div class="card">
                             <div class="order-box">
                                 <div class="order-details-box">
@@ -408,7 +422,7 @@
                                     <div class="order-sub-info"><span>Créer le</span><strong class="order-sub-info-date">January 14th, 2019</strong>
                                     </div>
                                 </div>
-                                <div class="order-controls bg-gray-lt border-primary p-4 mb-5">
+                                <div class="order-controls mb-4">
                                     <form class="form-inline">
                                         <div class="form-group mb-3">
                                             <label for="">Site</label>
@@ -429,62 +443,25 @@
                                     </form>
                                 </div>
                                 <div class="order-products mb-5">
-
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <div class="input-icon mb-3">
-                                                <input type="text" class="form-control" placeholder="Rechercher un produit..">
+                                                <input id="product-search" type="text" class="form-control" placeholder="Rechercher un produit..">
                                                 <span class="input-icon-addon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg>
                                                 </span>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <select id="select-category" class="form-select">
+                                            <select id="categories" class="form-select">
                                                 <option value="1">Beer</option>
                                                 <option value="2">Jus naturel</option>
                                                 <option value="3">Wisky</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="card-deck d-flex flex-row justify-content-between">
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="800" value="1">
-                                          <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
-                                          <div class="card-body text-center">
-                                            <h5 class="card-title">Ice black</h5>
-                                          </div>
-                                        </div>
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="500" value="2">
-                                          <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
-                                          <div class="card-body text-center">
-                                            <h5 class="card-title">Kadji Beer</h5>
-                                          </div>
-                                        </div>
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="1000" value="3">
-                                          <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
-                                          <div class="card-body text-center">
-                                            <h5 class="card-title">Heineken</h5>
-                                          </div>
-                                        </div>
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="800" value="4">
-                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title">Guiness</h5>
-                                            </div>
-                                        </div>
-                                        <div class="card mr-2 pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="700" value="5">
-                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title">Muzik</h5>
-                                            </div>
-                                        </div>
-                                        <div class="card pt-3" class="product" data-imgsrc="../../assets/static/products/beer.jpg" data-id="1"  data-qty="10" data-price="700" value="6">
-                                            <img class="card-img-top" src="../../assets/static/products/beer.jpg" alt="Card image cap">
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title">Beaufort</h5>
-                                            </div>
-                                        </div>
-                                      </div>
+                                    <div class="card-deck row d-flex flex-row">
+                                    </div>
                                 </div>
                                 <div class="order-items-table">
                                     <div class="table-responsive">
@@ -500,107 +477,108 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="order-list">
-                                                <!-- <tr>
-                                                    <td>
-                                                        <div class="product-image mt-3 mb-3"
-                                                            style="background-image: url('../../assets/static/products/beer.jpg')">
-                                                        </div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="product-name" id="name-1" data-name="kadji beer">Kadji Beer</div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="product-price" id="price-1"  data-price="4">800 FCFA</div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="quantity-selector">
-                                                            <div class="quantity-input">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-btn mr-1">
-                                                                        <a class="btn btn-light p-1" id="minus-1">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>
-                                                                        </a>
-                                                                    </span>
-                                                                    <input
-                                                                        type="number"
-                                                                        class="form-control p-0 text-center border-0"
-                                                                        value="2"
-                                                                        id="qty-4" data-total="800" data-qty="1"
-                                                                        required>
-                                                                    <span class="input-group-btn ml-1">
-                                                                        <a class="btn btn-light p-1" id="plus-1">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>
-                                                                        </a>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <div class="product-price" id="subtotal-1" data-subtotal="800">1600 FCFA</div>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <a class="btn btn-light p-1 delete" data-product="1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgb(255, 62, 62)"/></svg></a>
-                                                    </td>
-                                                </tr> -->
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div class="order-foot">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <div>
-                                                <div class="form-group row">
-                                                    <div class="col-md-6 mb-4">
-                                                        <label class="form-label"> Moyen de payement </label>
-                                                        <select name="role" id="paying_method" class="form-select">
-                                                            <option value="cash">Cash</option>
-                                                            <option value="om">Orange Mony</option>
-                                                            <option value="momo">MoMo</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6 mb-4">
-                                                        <label class="form-label"> Etat </label>
-                                                        <select name="role" id="status" class="form-select">
-                                                            <option value="1">Non livré</option>
-                                                            <option value="2">   livré   </option>
-                                                        </select>
-                                                    </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card p-3 order-foot">
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    <div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12 mb-4">
+                                                <label class="form-label">Moyen de payement</label>
+                                                <div
+                                                    class="form-selectgroup form-selectgroup-boxes d-flex flex-row">
+                                                    <label class="form-selectgroup-item flex-fill">
+                                                        <input type="radio" name="payment-method" value="cash"
+                                                            class="form-selectgroup-input" checked>
+                                                        <div
+                                                            class="form-selectgroup-label d-flex align-items-center p-3">
+                                                            <div class="mr-3">
+                                                                <span class="form-selectgroup-check"></span>
+                                                            </div>
+                                                            <div>
+                                                                <span
+                                                                    class="payment payment-provider-cash payment-sm mr-2 shadow-none"></span>
+                                                                Cash
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                    <label class="form-selectgroup-item flex-fill">
+                                                        <input type="radio" name="payment-method" value="om"
+                                                            class="form-selectgroup-input">
+                                                        <div
+                                                            class="form-selectgroup-label d-flex align-items-center p-3">
+                                                            <div class="mr-3">
+                                                                <span class="form-selectgroup-check"></span>
+                                                            </div>
+                                                            <div>
+                                                                <span
+                                                                    class="payment payment-provider-om payment-sm mr-2 shadow-none"></span>
+                                                                Orange Money
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                    <label class="form-selectgroup-item flex-fill">
+                                                        <input type="radio" name="payment-method" value="momo"
+                                                            class="form-selectgroup-input">
+                                                        <div
+                                                            class="form-selectgroup-label d-flex align-items-center p-3">
+                                                            <div class="mr-3">
+                                                                <span class="form-selectgroup-check"></span>
+                                                            </div>
+                                                            <div>
+                                                                <span
+                                                                    class="payment payment-provider-mtn payment-sm mr-2 shadow-none"></span>
+                                                                MOMO
+                                                            </div>
+                                                        </div>
+                                                    </label>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div class="form-group">
-                                                    <label class="form-label"> Notes </label>
-                                                    <textarea class="form-control mb-4" placeholder="Donner un avis"></textarea>
-                                                </div>
-                                            </div>
-                                            <button class="btn btn-primary" onclick="order()">Enregister</button>
-                                        </div>
-                                        <div class="col-md-5 offset-md-1">
-                                            <h5 class="order-section-heading">Récapitulatif</h5>
-                                            <div class="order-summary-row">
-                                                <div class="order-summary-label"><span>Subtotal</span></div>
-                                                <div class="order-summary-value subtotal">0</div>
-                                            </div>
-                                            <div class="order-summary-row">
-                                                <div class="order-summary-label"><span>Tax</span></div>
-                                                <div class="order-summary-value">0</div>
-                                            </div>
-                                            <div class="order-summary-row">
-                                                <div class="order-summary-label"><span>Transport</span></div>
-                                                <div class="order-summary-value">0</div>
-                                            </div>
-                                            <div class="order-summary-row as-total">
-                                                <div class="order-summary-label"><span>Total</span></div>
-                                                <div class="order-summary-value grand-total">0</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-12 mb-4">
+                                    <h5 class="order-section-heading">Récapitulatif</h5>
+                                    <div class="order-summary-row">
+                                        <div class="order-summary-label"><span>Subtotal</span></div>
+                                        <div class="order-summary-value subtotal">0</div>
+                                    </div>
+                                    <div class="order-summary-row">
+                                        <div class="order-summary-label"><span>Transport</span></div>
+                                        <div class="order-summary-value">0</div>
+                                    </div>
+                                    <div class="order-summary-row as-total">
+                                        <div class="order-summary-label"><span>Total</span></div>
+                                        <div class="order-summary-value grand-total">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-4">
+                                    <label class="form-label"> Etat </label>
+                                    <select name="role" id="status" class="form-select">
+                                        <option value="1">Non livré</option>
+                                        <option value="2">   livré   </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="form-group">
+                                            <label class="form-label"> Notes </label>
+                                            <textarea class="form-control mb-4" placeholder="Donner un avis"></textarea>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-block" onclick="order()">Enregister</button>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -633,7 +611,7 @@
     </div>
     <!-- Libs JS -->
     <script src="../../assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/dist/libs/jquery/dist/jquery.slim.min.js"></script>
+    <script src="../../assets/dist/libs/jquery/dist/jquery.min.js"></script>
     <script src="../../assets/dist/libs/selectize/dist/js/standalone/selectize.min.js"></script>
     <!-- easytrak Core -->
     <script src="../../assets/dist/js/easytrak.min.js"></script>
@@ -655,16 +633,171 @@
             }
             var today_converted = dd + '/' + mm + '/' + yyyy;
             $( ".order-sub-info-date" ).text( today_converted );
-
-            // Autocomplte
-            $("#site").selectize({});
-            $("#supplier").selectize({});
-            $("#category").selectize({});
         });
     </script>
     <script>
+        // AUTOCOMPLETE
+        var categoriesSelect = $("#categories").selectize({});
+        var suppliersSelect = $("#suppliers").selectize({});
+        var sitesSelect = $("#sites").selectize({});
+
+        // GLOBAL VARIABLES
+        let productInDB = [
+            {
+                id: "1",
+                name: "Kadji Beer",
+                photo:"../../assets/static/products/beer.jpg",
+                category_id: 1,
+                qty:"10",
+                price:"600"
+            },
+            {
+                id: "2",
+                name: "Ice black",
+                photo:"../../assets/static/products/beer-2.jpg",
+                category_id: 1,
+                qty:"10",
+                price:"750"
+            },
+            {
+                id: "3",
+                name: "Booster",
+                photo:"../../assets/static/products/beer-3.jpg",
+                category_id: 1,
+                qty:"10",
+                price:"700"
+            },
+            {
+                id: "4",
+                name: "Beaufort",
+                photo:"../../assets/static/products/beer-4.jpg",
+                category_id: 1,
+                qty:"10",
+                price:"600"
+            },
+            {
+                id: "5",
+                name: "Guiness Smooth",
+                photo:"../../assets/static/products/beer.jpg",
+                category_id: 1,
+                qty:"10",
+                price:"950"
+            },
+            {
+                id: "6",
+                name: "Guiness",
+                photo:"../../assets/static/products/beer-2.jpg",
+                category_id: 1,
+                qty:"10",
+                price:"900"
+            },
+            {
+                id: "7",
+                name: "Muzik",
+                photo:"../../assets/static/products/beer-3.jpg",
+                category_id: 1,
+                qty:"10",
+                price:"500"
+            },
+            {
+                id: "8",
+                name: "33",
+                photo:"../../assets/static/products/beer-4.jpg",
+                category_id: 1,
+                qty:"10",
+                price:"550"
+            },
+            {
+                id: "9",
+                name: "Jus d'ananas",
+                photo:"../../assets/static/products/beer-2.jpg",
+                category_id: 2,
+                qty:"10",
+                price:"1000"
+            },
+            {
+                id: "10",
+                name: "Jus de goyave",
+                photo:"../../assets/static/products/beer-4.jpg",
+                category_id: 2,
+                qty:"10",
+                price:"1000"
+            },
+            {
+                id: "11",
+                name: "Jus de pommes",
+                photo:"../../assets/static/products/beer.jpg",
+                category_id: 2,
+                qty:"10",
+                price:"1000"
+            },
+            {
+                id: "12",
+                name: "COntesa",
+                photo:"../../assets/static/products/beer-3.jpg",
+                category_id: 3,
+                qty:"10",
+                price:"1000"
+            },
+            {
+                id: "13",
+                name: "Grant's",
+                photo:"../../assets/static/products/beer-3.jpg",
+                category_id: 3,
+                qty:"10",
+                price:"1000"
+            },
+        ]
+        let productCardList = [];
         let products = [];
 
+        // DYNAMIC PRODUCT LOADER
+        function injectCardList(itemList) {
+            $.each(itemList, function (key, item) {
+                $('.card-deck').append(
+                    '<div class="col-md-3 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
+                    '    <img class="w-50" src="'+item.photo+'" alt="Card image cap">' +
+                    '    <div class="card-body text-center">' +
+                    '    <h5 class="card-title">'+item.name+'</h5>' +
+                    '    </div>' +
+                    '</div>'
+                );
+            });
+        }
+
+        function displayProduct() {
+            // INITIALIZE HTML CONTENT
+            $('.card-deck').empty();
+
+            // CORE
+            var category = categoriesSelect[0].selectize.getValue();
+            productCardList = productInDB.filter(product => product.category_id == category);
+            injectCardList(productCardList);
+        };
+
+        displayProduct();
+
+        // CATEGORY SELECT EVENT
+        categoriesSelect[0].selectize.on('change', () => {
+            displayProduct();
+        });
+
+        // SEARCH
+        $("#product-search").change(function() {
+            var val = $(this).val();
+            var result = productCardList.filter(product => {
+                return product.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
+            });
+            if (result.length > 0) {
+                // INITIALIZE HTML CONTENT
+                $('.card-deck').empty();
+
+                // CORE
+                injectCardList(result);
+            }
+        });
+
+        // POS FUNCTIONS
         function calculate(){
             var total = 0;
             $.each(products, function (key, val) {
@@ -694,7 +827,7 @@
                     '<tr id="product-'+el.data("id")+'">' +
                     '    <td>' +
                     '        <div class="product-image mt-3 mb-3"' +
-                    '            style="background-image: url("'+el.data("imgsrc")+'")">' +
+                    '            style="background-image: url('+el.data("imgsrc")+')">' +
                     '        </div>' +
                     '    </td>' +
                     '    <td style="vertical-align: middle;">' +
@@ -749,9 +882,8 @@
             calculate();
         }
 
-        $('.product').click(function () {
-            console.log('Ajouter le produit');
-            element = ($(this));
+        $('.product-card').click(function () {
+            element = $(this);
             addElement(element);
         });
 
