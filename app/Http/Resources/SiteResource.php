@@ -26,7 +26,7 @@ class SiteResource extends JsonResource
             'company' => new CompanyResource($this->whenLoaded('company')),
             'employees' => EmployeeResource::collection($this->whenLoaded('employees')),
             'suppliers' => SupplierResource::collection($this->whenLoaded('suppliers')),
-            'produits' => ProductResource::collection($this->whenLoaded('products')),
+            'customers' => CustomerResource::collection($this->whenLoaded('customers')),
         ];
     }
 }
