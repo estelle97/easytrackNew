@@ -749,6 +749,7 @@
             },
         ]
         let productCardList = [];
+        let productCardOnClick = null;
         let products = [];
 
         // DYNAMIC PRODUCT LOADER
@@ -773,6 +774,7 @@
             var category = categoriesSelect[0].selectize.getValue();
             productCardList = productInDB.filter(product => product.category_id == category);
             injectCardList(productCardList);
+            productCardOnClick = cardOnCick();
         };
 
         displayProduct();
@@ -785,7 +787,7 @@
         // SEARCH
         $("#product-search").change(function() {
             var val = $(this).val();
-            var result = productCardList.filter(product => {
+            var result = productInDB.filter(product => {
                 return product.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
             });
             if (result.length > 0) {
@@ -794,6 +796,7 @@
 
                 // CORE
                 injectCardList(result);
+                productCardOnClick = cardOnCick();
             }
         });
 
@@ -882,10 +885,12 @@
             calculate();
         }
 
-        $('.product-card').click(function () {
-            element = $(this);
-            addElement(element);
-        });
+        function cardOnCick() {
+            return $('.product-card').click(function () {
+                element = $(this);
+                addElement(element);
+            });
+        }
 
         function order() {
             var order = '';
