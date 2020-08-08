@@ -29,6 +29,7 @@
     <link href="../../assets/dist/css/easytrak.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/demo.min.css" rel="stylesheet" />
     <link href="../../assets/dist/css/custom.css" rel="stylesheet" />
+    <link href="../../assets/dist//libs/flatpickr/dist/flatpickr.min.css" rel="stylesheet"/>
     <style>
         body {
             display: none;
@@ -228,7 +229,7 @@
                             <h2 class="page-title">
                                 Commandes clients
                             </h2>
-                            <span class="order-global-date text-white h4 mt-2"></span>
+                            <span class="order-global-date text-white h4 mt-2 text-capitalize"></span>
                         </div>
                         <!-- Page title actions -->
                         <div class="col-auto ml-auto d-print-none">
@@ -331,7 +332,7 @@
                                     <div class="row pl-4">
                                         <div class="column-header col-lg-12 d-flex align-items-center">
                                             <div class="status-dot rounded-circle bg-blue"></div>
-                                            <h3 class="status-type font-weight-normal m-0 ml-3">En attente</h3>
+                                            <h3 class="status-type font-weight-normal m-0 ml-3">Commandé</h3>
                                         </div>
                                         <div class="column-body col-lg-12 mt-4">
                                             <div class="easy-kanban-card card">
@@ -351,10 +352,13 @@
                                                                         Voir la facture
                                                                     </a>
                                                                     <a class="dropdown-item" href="#">
-                                                                        Marquer comme facturé
+                                                                        Marquer comme servi
                                                                     </a>
                                                                     <a class="dropdown-item" href="#">
                                                                         Marquer comme payé
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Modifier
                                                                     </a>
                                                                     <a class="dropdown-item" href="#">
                                                                         Dupiquer
@@ -420,13 +424,22 @@
 
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <a class="dropdown-item" href="#">
+                                                                        Voir la facture
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Marquer comme servi
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Marquer comme payé
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Modifier
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
                                                                         Dupiquer
                                                                     </a>
                                                                     <a class="dropdown-item" href="#">
-                                                                        Marquer comme invalide
-                                                                    </a>
-                                                                    <a class="dropdown-item" href="#">
-                                                                        Ajouter à une categorie
+                                                                        Annulé
                                                                     </a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <a class="dropdown-item" href="#">
@@ -486,13 +499,22 @@
 
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <a class="dropdown-item" href="#">
+                                                                        Voir la facture
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Marquer comme servi
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Marquer comme payé
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Modifier
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
                                                                         Dupiquer
                                                                     </a>
                                                                     <a class="dropdown-item" href="#">
-                                                                        Marquer comme invalide
-                                                                    </a>
-                                                                    <a class="dropdown-item" href="#">
-                                                                        Ajouter à une categorie
+                                                                        Annulé
                                                                     </a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <a class="dropdown-item" href="#">
@@ -552,13 +574,22 @@
 
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <a class="dropdown-item" href="#">
+                                                                        Voir la facture
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Marquer comme servi
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Marquer comme payé
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Modifier
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
                                                                         Dupiquer
                                                                     </a>
                                                                     <a class="dropdown-item" href="#">
-                                                                        Marquer comme invalide
-                                                                    </a>
-                                                                    <a class="dropdown-item" href="#">
-                                                                        Ajouter à une categorie
+                                                                        Annulé
                                                                     </a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <a class="dropdown-item" href="#">
@@ -615,7 +646,7 @@
                                     <div class="row">
                                         <div class="column-header col-lg-12 d-flex align-items-center">
                                             <div class="status-dot rounded-circle bg-yellow"></div>
-                                            <h3 class="status-type font-weight-normal m-0 ml-3">Facturé</h3>
+                                            <h3 class="status-type font-weight-normal m-0 ml-3">Servi</h3>
                                         </div>
                                         <div class="column-body col-lg-12 mt-4">
                                             <div class="easy-kanban-card card">
@@ -632,13 +663,22 @@
 
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <a class="dropdown-item" href="#">
+                                                                        Voir la facture
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Marquer comme servi
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Marquer comme payé
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        Modifier
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="#">
                                                                         Dupiquer
                                                                     </a>
                                                                     <a class="dropdown-item" href="#">
-                                                                        Marquer comme invalide
-                                                                    </a>
-                                                                    <a class="dropdown-item" href="#">
-                                                                        Ajouter à une categorie
+                                                                        Annulé
                                                                     </a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <a class="dropdown-item" href="#">
@@ -698,9 +738,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card col-lg-3 p-3" style="max-height: 600px;">
+                    <div class="card col-lg-3 p-3" style="max-height: 700px;">
                         <div class="row">
-
+                            <div class="col-md-12">
+                                <div id="calendar-inline"></div>
+                            </div>
+                            <div class="col-md-12 text-center mt-4">
+                                <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez gagnez aujourd'hui</h5>
+                                <h1 style="font-size: 2.5rem;">1.45m FCFA</h1>
+                                <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="row justify-content-between">
+                                    <div class="col-md-12 pl-2 pr-2 mb-3">
+                                        <div class="stat-content bg-blue-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
+                                            <h1>300</h1>
+                                            <h4>Articles vendus</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pl-2">
+                                        <div class="stat-content bg-orange-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
+                                            <h1>1.45m</h1>
+                                            <h4>Coûts</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pl-1 pr-2">
+                                        <div class="stat-content bg-purple-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
+                                            <h1>10</h1>
+                                            <h4>Catégories</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -734,27 +803,28 @@
     </div>
     <!-- Libs JS -->
     <script src="../../assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/dist/libs/jquery/dist/jquery.slim.min.js"></script>
+    <script src="../../assets/dist/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../../assets/dist/libs/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="../../assets/dist/libs/flatpickr/dist/plugins/rangePlugin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js" integrity="sha512-qSnlnyh7EcD3vTqRoSP4LYsy2yVuqqmnkM9tW4dWo6xvAoxuVXyM36qZK54fyCmHoY1iKi9FJAUZrlPqmGNXFw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/fr.min.js" integrity="sha512-FdyYwPVGhYAZ83iS8NXHmex3ZLv44/R/9QGKvC6R/LDosWDbhviyZpprKY30ilfxZKcr6sx+LeoxBCBAbs45eg==" crossorigin="anonymous"></script>
     <!-- easytrak Core -->
     <script src="../../assets/dist/js/easytrak.min.js"></script>
 
     <script>
         document.body.style.display = "block";
         $(document).ready(function() {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-
-            var yyyy = today.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-            var today_converted = dd + '/' + mm + '/' + yyyy;
-            $( ".order-global-date" ).text( today_converted );
+            var today = moment().format('MMMM Do, YYYY');
+            $( ".order-global-date" ).text( today );
+            $( ".order-global-date-2" ).text( today );
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr(document.getElementById('calendar-inline'), {
+                inline: true,
+            });
         });
     </script>
 </body>
