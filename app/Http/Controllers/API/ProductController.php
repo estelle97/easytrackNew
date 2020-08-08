@@ -33,11 +33,11 @@ class ProductController extends Controller
     public function getProductsByCategory($category_id){
         if(Auth::user()->is_admin == 2){
             $products = Auth::user()->companies->first()->sites->load(['products' => function($query){
-                $query->where('category_id', 1)->get();
+                $query->where('products.category_id', 1)->get();
             }]);
         } else{
             $products = Auth::user()->employee->sites->load(['products' => function($query){
-                $query->where('category_id', 1)->get();
+                $query->where('products.category_id', 1)->get();
             }]);
 
         }
