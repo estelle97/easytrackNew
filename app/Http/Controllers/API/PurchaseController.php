@@ -54,7 +54,7 @@ class PurchaseController extends Controller
             ]);
 
             do {
-                $code = mt_rand(1000000000, 9999999999);
+                $code = random_int(1000000, 9999999);
             } while(Purchase::whereCode($code)->exists());
 
             $purchase = new Purchase([
