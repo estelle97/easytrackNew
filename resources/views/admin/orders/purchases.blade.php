@@ -199,9 +199,33 @@
                 </div>
             </div>
         </div>
-        <div class="card col-lg-3 p-3" style="max-height: 600px;">
+        <div class="card col-lg-3 p-3" style="max-height: 700px;">
             <div class="row">
+                <div class="col-md-12">
+                    <div id="calendar-inline"></div>
+                </div>
+                <div class="col-md-12 text-center mt-4">
+                    <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez dépensé ce mois</h5>
+                    <h1 style="font-size: 2.5rem;">1.45m FCFA</h1>
+                    <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row justify-content-between">
+                        <div class="col-md-12 pl-2 pr-2 mb-3">
+                            <div class="stat-content bg-blue-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
+                                <h1>300</h1>
+                                <h4>Articles achetés</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pl-2 pr-2 mb-3">
+                            <div class="stat-content bg-orange-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
+                                <h1>10</h1>
+                                <h4>Catégorie</h4>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
@@ -412,6 +436,13 @@
 @endsection
 
 @section('scripts')
+    <script src={{asset('template/assets/dist/libs/flatpickr/dist/flatpickr.min.js')}}></script>
+    <script src={{asset('template/assets/dist/libs/flatpickr/dist/plugins/rangePlugin.js')}}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js" integrity="sha512-qSnlnyh7EcD3vTqRoSP4LYsy2yVuqqmnkM9tW4dWo6xvAoxuVXyM36qZK54fyCmHoY1iKi9FJAUZrlPqmGNXFw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/fr.min.js" integrity="sha512-FdyYwPVGhYAZ83iS8NXHmex3ZLv44/R/9QGKvC6R/LDosWDbhviyZpprKY30ilfxZKcr6sx+LeoxBCBAbs45eg==" crossorigin="anonymous"></script>
+
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
@@ -620,9 +651,25 @@
         }
 
     </script>
+    <script>
+        document.body.style.display = "block";
+        $(document).ready(function() {
+            var today = moment().format('MMMM Do, YYYY');
+            $( ".order-global-date" ).text( today );
+            $( ".order-global-date-2" ).text( today );
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr(document.getElementById('calendar-inline'), {
+                inline: true,
+            });
+        });
+    </script>
 @endsection
 
 @section('styles')
+    <link href={{asset("template/assets/dist/libs/flatpickr/dist/flatpickr.min.css")}} rel="stylesheet"/>
     <link href={{asset("template/assets/dist/css/easytrak-payments.min.css")}} rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.css"/>
 @endsection
