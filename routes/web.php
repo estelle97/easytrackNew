@@ -102,8 +102,10 @@ Route::group(['middleware' => 'auth'], function() {
     
 
     Route::post('admin/sales', 'Admin\SaleController@store');
+    Route::get('admin/kanban', 'Admin\SaleController@kanban')->name('admin.sales.kanban');
+    Route::get('admin/sales', 'Admin\SaleController@index')->name('admin.sales.all');
     Route::get('admin/sales/site', 'Admin\SaleController@getElementBySite');
-    Route::get('admin/pos', 'Admin\SaleController@create')->name('admin.pos');
+    Route::get('admin/pos', 'Admin\SaleController@create')->name('admin.sales.pos');
 
     Route::post('admin/purchases/{purchase}', 'Admin\PurchaseController@edit');
     Route::get('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');

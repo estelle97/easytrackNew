@@ -18,7 +18,11 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.orders.sales');
+    }
+
+    public function kanban(){
+        return view('admin.orders.kanban');
     }
 
     /**
@@ -102,7 +106,7 @@ class SaleController extends Controller
             }
         });
 
-
+        flashy()->success('La commande a été enregistré avec succès');
         return "success";
     }
 

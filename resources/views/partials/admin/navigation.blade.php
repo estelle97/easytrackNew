@@ -67,14 +67,22 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="active">
-                        <a class="dropdown-item" href={{route('admin.pos')}}>
-                            Commandes clients
-                        </a>
-                    </li>
                     <li>
                         <a class="dropdown-item" href={{route('admin.purchases')}}>
-                            Bons de commandes
+                            Commande fournisseur
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a class="dropdown-item" href={{route('admin.sales.pos')}}>
+                            Enregistrer commande clien
+                        </a>
+                    </li><li class="active">
+                        <a class="dropdown-item" href={{route('admin.sales.all')}}>
+                            Afficher commandes clients
+                        </a>
+                    </li><li class="active">
+                        <a class="dropdown-item" href={{route('admin.sales.kanban')}}>
+                            Kanban Board
                         </a>
                     </li>
                 </ul>

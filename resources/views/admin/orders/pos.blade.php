@@ -256,7 +256,7 @@
     });
 
     // SEARCH
-    $("#product-search").change(function() {
+    $("#product-search").keyup(function() {
         var val = $(this).val();
         var result = productInDB.filter(product => {
             return product.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
@@ -320,7 +320,7 @@
                 '                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>' +
                 '                        </a>' +
                 '                    </span>' +
-                '                    <input type="number" class="form-control p-0 text-center border-0" value="1" id="qty-'+el.data("id")+'" data-total="'+el.data("qty")+'" data-qty="1" required oninput="updateQty('+el.data("id")+', '+this.value+')">' +
+                '                    <input type="text" class="form-control p-0 text-center border-0" value="1" id="qty-'+el.data("id")+'" data-total="'+el.data("qty")+'" data-qty="1" required oninput="updateQty('+el.data("id")+', '+this.value+')">' +
                 '                    <span class="input-group-btn ml-1">' +
                 '                        <a class="btn btn-light p-1" id="plus-'+el.data("id")+'" onclick="updateQty('+el.data("id")+')">' +
                 '                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>' +
@@ -382,23 +382,22 @@
         });
 
         $.ajax({
-                url: '/admin/sales',
-                method: 'post',
-                data: {
-                    _token: token,
-                    order : order,
-                    site_id : site,
-                    customer_id: customer,
-                    status: status,
-                    paying_method: paying_method,
-                    sale_note: sale_note
-                },
-                success: function(data){
-                    location.reload();
-                }
+            url: '/admin/sales',
+            method: 'post',
+            data: {
+                _token: token,
+                order : order,
+                site_id : site,
+                customer_id: customer,
+                status: status,
+                paying_method: paying_method,
+                sale_note: sale_note
+            },
+            success: function(data){
+                location.reload();
+            }
 
-            });
-        console.log(order,site,customer,status,paying_method,sale_note);
+        });
     }
 
     $("#sites").change(function(){

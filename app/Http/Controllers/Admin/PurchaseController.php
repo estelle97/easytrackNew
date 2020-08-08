@@ -75,6 +75,7 @@ class PurchaseController extends Controller
             }
         });
 
+        flashy()->success('La commande a été enregistré avec succès');
 
         return "success";
     }
