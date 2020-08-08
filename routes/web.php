@@ -100,6 +100,11 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('purchases', 'Employee\PurchaseController@index');
     
+
+    Route::post('admin/sales', 'Admin\SaleController@store');
+    Route::get('admin/sales/site', 'Admin\SaleController@getElementBySite');
+    Route::get('admin/pos', 'Admin\SaleController@create')->name('admin.pos');
+
     Route::post('admin/purchases/{purchase}', 'Admin\PurchaseController@edit');
     Route::get('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');
     Route::post('admin/purchases', 'Admin\PurchaseController@store');

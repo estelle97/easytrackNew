@@ -47,13 +47,18 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('purchases/{purchase}/invalidate', 'API\PurchaseController@invalidatePurchase');
     Route::apiResource('purchases', 'API\PurchaseController');
 
+
     Route::get('customers/sites/{site}', 'API\CustomerController@customersSite');
     Route::apiResource('customers', 'API\CustomerController');
 
     Route::get('suppliers/sites/{site}', 'API\SupplierController@suppliersSite');
     Route::apiResource('suppliers' ,'API\SupplierController');
 
+
+    Route::get('products/site/{category_id}', 'API\ProductController@getProductsByCategory');
     Route::apiResource('products', 'API\ProductController');
+
+
     Route::apiResource('categories', 'API\CategoryController');
     Route::apiResource('roles', 'API\RoleController');
     Route::apiResource('permissions','API\PermissionController');

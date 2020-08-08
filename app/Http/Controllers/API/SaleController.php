@@ -54,7 +54,7 @@ class SaleController extends Controller
         ]);
 
         do {
-            $code = mt_rand(1000000000, 9999999999);
+            $code = random_int(1000000, 9999999);
         } while(Sale::whereCode($code)->exists());
 
         $sale = new Sale([
