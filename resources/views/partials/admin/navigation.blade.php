@@ -68,7 +68,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="active">
-                        <a class="dropdown-item" href="./salesorders.html">
+                        <a class="dropdown-item" href={{route('admin.pos')}}>
                             Commandes clients
                         </a>
                     </li>
