@@ -41,9 +41,9 @@ class ProductController extends Controller
         $request->validate([
             'product_id' => 'required',
             'price' => 'required|numeric',
-            'cost' => 'required|numeric',
-            'qty' => 'required|numeric',
-            'qty_alert' => 'required|numeric'
+            'cost' => 'required|numeric|min:0',
+            'qty' => 'required|numeric|min:1',
+            'qty_alert' => 'required|numeric|min:1'
         ]);
 
         $product = Product::find($request->product_id);
@@ -112,9 +112,9 @@ class ProductController extends Controller
     {
         $request->validate([
             'price' => 'required|numeric',
-            'cost' => 'required|numeric',
-            'qty' => 'required|numeric',
-            'qty_alert' => 'required|numeric'
+            'cost' => 'required|numeric|min:0',
+            'qty' => 'required|numeric|min:1',
+            'qty_alert' => 'required|numeric|min:1'
         ]);
 
         if($request->site_id == 'all'){
