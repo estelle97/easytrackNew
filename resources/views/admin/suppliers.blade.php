@@ -453,7 +453,7 @@
             var site_id = $("#supplier-site-update"+id).val();
 
             var site = $('#supplier-site-update'+id+' option:selected').text();
-            alert(site);
+    
             $.ajax({
                 url: '/admin/suppliers/'+id,
                 method: 'put',

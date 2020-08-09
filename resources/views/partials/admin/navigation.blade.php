@@ -74,7 +74,7 @@
                     </li>
                     <li class="active">
                         <a class="dropdown-item" href={{route('admin.sales.pos')}}>
-                            Enregistrer commande clien
+                            Enregistrer commande client
                         </a>
                     </li><li class="active">
                         <a class="dropdown-item" href={{route('admin.sales.all')}}>

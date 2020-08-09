@@ -99,7 +99,7 @@
                         <div>
                             <div class="form-group row">
                                 <div class="col-md-12 mb-4">
-                                    <label class="form-label">Moyen de payement</label>
+                                    <label class="form-label">Moyen de paiement</label>
                                     <div
                                         class="form-selectgroup form-selectgroup-boxes d-flex flex-row">
                                         <label class="form-selectgroup-item flex-fill">

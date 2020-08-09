@@ -134,9 +134,6 @@
                                             data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">
-                                                Dupiquer
-                                            </a>
-                                            <a class="dropdown-item" href="#">
                                                 Marquer comme inactif
                                             </a>
                                             <a class="dropdown-item" href="#">
@@ -234,23 +231,23 @@
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label">Prix D'achat</label>
-                            <input type="number" id="product-cost-add" class="form-control"  placeholder="Prix de d'achat " required>
+                            <input type="number" id="product-cost-add" class="form-control" min="0"  placeholder="Prix de d'achat" required>
                             <span class="text-danger" id="cost-error"></span>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label">Prix de vente</label>
-                            <input type="number" id="product-price-add" class="form-control"  placeholder="Prix de vente" required>
+                            <input type="number" id="product-price-add" class="form-control" min="0"  placeholder="Prix de vente" required>
                             <span class="text-danger" id="price-error"></span>
                         </div>
 
                         <div class="col-lg-12 mb-4">
                             <label class="form-label">Quantité</label>
-                            <input type="number" id="product-qty-add" class="form-control"  placeholder="Quantité en stock" required>
+                            <input type="number" id="product-qty-add" class="form-control" min="1"  placeholder="Quantité en stock" required>
                             <span class="text-danger" id="qty-error"></span>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label">Minimum</label>
-                            <input type="number" id="product-qty_alert-add" class="form-control"  placeholder="Le Stock minimum" required>
+                            <input type="number" id="product-qty_alert-add" class="form-control" min="1"  placeholder="Le Stock minimum" required>
                             <span class="text-danger" id="qty_alert-error"></span>
                         </div>
                     </div>
@@ -293,23 +290,23 @@
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Prix D'achat</label>
-                                <input type="number" id="product-cost-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->cost}}" class="form-control"  placeholder="Prix de d'achat " required>
+                                <input type="number" min="0" id="product-cost-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->cost}}" class="form-control"  placeholder="Prix de d'achat " required>
                                     <span class="text-danger" id="cost-error{{$site->id}}{{$product->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Prix de vente</label>
-                                <input type="number" id="product-price-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->price}}" class="form-control"  placeholder="Prix de vente" required>
+                                <input type="number" min="0" id="product-price-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->price}}" class="form-control"  placeholder="Prix de vente" required>
                                     <span class="text-danger" id="price-error{{$site->id}}{{$product->id}}"></span>
                                 </div>
 
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Quantité</label>
-                                    <input type="number" id="product-qty-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->qty}}" class="form-control"  placeholder="Quantité en stock" required>
+                                    <input type="number" min="1" id="product-qty-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->qty}}" class="form-control"  placeholder="Quantité en stock" required>
                                     <span class="text-danger" id="qty-error{{$site->id}}{{$product->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Minimum</label>
-                                    <input type="number" id="product-qty_alert-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->qty_alert}}" class="form-control"  placeholder="Le Stock minimum" required>
+                                    <input type="number" min="1" id="product-qty_alert-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->qty_alert}}" class="form-control"  placeholder="Le Stock minimum" required>
                                     <span class="text-danger" id="qty_alert-error{{$site->id}}{{$product->id}}"></span>
                                 </div>
 

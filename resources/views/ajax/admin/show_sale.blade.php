@@ -173,7 +173,7 @@
                             <td><a href="./salesorders-kanban-board.html" class="btn btn-info"><i class="fa fa-arrow-left"></i>
                                     Retour</a> </td>
                             <td><button onclick="window.print();" class="btn btn-primary"><i class="dripicons-print"></i>
-                                    Inprimer</button></td>
+                                    imprimer</button></td>
                         </tr>
                     </tbody>
                 </table>
