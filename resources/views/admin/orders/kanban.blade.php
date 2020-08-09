@@ -20,69 +20,7 @@
                     </a>
                     <a href={{route('admin.sales.all')}} class="text-white mr-4 mb-0">
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 8h14V5H5v3zm9 11v-9H5v9h9zm2 0h3v-9h-3v9zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="rgba(255,255,255,1)"/></svg>
-                        <span class="h2 align-middle">Nouveau</span>
                     </a>
-                    
-                    <span class="dropdown ml-4">
-                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                height="24">
-                                <path fill="none" d="M0 0h24v24H0z" />
-                                <path
-                                    d="M2 18h7v2H2v-2zm0-7h9v2H2v-2zm0-7h20v2H2V4zm18.674 9.025l1.156-.391 1 1.732-.916.805a4.017 4.017 0 0 1 0 1.658l.916.805-1 1.732-1.156-.391c-.41.37-.898.655-1.435.83L19 21h-2l-.24-1.196a3.996 3.996 0 0 1-1.434-.83l-1.156.392-1-1.732.916-.805a4.017 4.017 0 0 1 0-1.658l-.916-.805 1-1.732 1.156.391c.41-.37.898-.655 1.435-.83L17 11h2l.24 1.196c.536.174 1.024.46 1.434.83zM18 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
-                                    fill="rgba(255,255,255,1)" /></svg>
-                        </div>
-
-                        <div class="dropdown-menu dropdown-menu-right mt-3">
-                            <span class="dropdown-header">Trier par</span>
-                            <a class="dropdown-item" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                    height="18" class="mr-2">
-                                    <path fill="none" d="M0 0h24v24H0z" />
-                                    <path
-                                        d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
-                                </svg>
-                                Nom
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                    height="18" class="mr-2">
-                                    <path fill="none" d="M0 0h24v24H0z" />
-                                    <path
-                                        d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
-                                </svg>
-                                Quantité
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                    height="18" class="mr-2">
-                                    <path fill="none" d="M0 0h24v24H0z" />
-                                    <path
-                                        d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
-                                </svg>
-                                Prix
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                    height="18" class="mr-2">
-                                    <path fill="none" d="M0 0h24v24H0z" />
-                                    <path
-                                        d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
-                                </svg>
-                                Date
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                    height="18" class="mr-2">
-                                    <path fill="none" d="M0 0h24v24H0z" />
-                                    <path
-                                        d="M5.463 4.433A9.961 9.961 0 0 1 12 2c5.523 0 10 4.477 10 10 0 2.136-.67 4.116-1.81 5.74L17 12h3A8 8 0 0 0 6.46 6.228l-.997-1.795zm13.074 15.134A9.961 9.961 0 0 1 12 22C6.477 22 2 17.523 2 12c0-2.136.67-4.116 1.81-5.74L7 12H4a8 8 0 0 0 13.54 5.772l.997 1.795z" />
-                                </svg>
-                                Actualiser
-                            </a>
-                        </div>
-                    </span>
                 </div>
             </div>
         </div>
@@ -98,307 +36,83 @@
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Commandé</h3>
                             </div>
                             <div class="column-body col-lg-12 mt-4">
-                                <div class="easy-kanban-card card">
-                                    <div class="card-header border-bottom-0 pr-0 pb-0">
-                                        <div class="w-100 row align-items-center">
-                                            <div class="col-auto pl-2">
-                                                <h2 class="m-0">S0-105</h2>
-                                            </div>
-                                            <div class="col-auto pr-1 ml-auto">
-                                                <span class="dropdown">
-                                                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
-                                                    </div>
 
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">
-                                                            Voir la facture
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme servi
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme payé
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Dupiquer
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Annulé
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                width="18" height="18" class="mr-2">
-                                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                                <path
-                                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                            </svg>
-                                                            Supprimer
-                                                        </a>
+                                @foreach (Auth::user()->companies->first()->sites as $site)
+                                    @foreach ($site->sales->where('status',0) as $sale)
+                                    <div class="easy-kanban-card card">
+                                            <div class="card-header border-bottom-0 pr-0 pb-0">
+                                                <div class="w-100 row align-items-center">
+                                                    <div class="col-auto pl-2">
+                                                        <h2 class="m-0">S0-{{$sale->code}} </h2>
                                                     </div>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-2 pb-2">
-                                        <h4 class="font-weight-normal m-0">5 Produits</h4>
-                                        <h4 class="text-muted font-weight-normal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
-                                            Juillet 30, 2019
-                                        </h4>
-                                    </div>
-                                    <!-- Card footer -->
-                                    <div class="card-footer bg-white border-top-0 pt-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Alex+Gautier&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Jeane+Marie&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0">+3</span>
+                                                    <div class="col-auto pr-1 ml-auto">
+                                                        <span class="dropdown">
+                                                            <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
+                                                            </div>
+        
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
+                                                                    Voir la facture
+                                                                </a>
+                                                                <a class="dropdown-item" href="#" onclick="validateSale({{$sale->id}})">
+                                                                    Valider la commande
+                                                                </a>
+                                                                <a class="dropdown-item" href="#" onclick="updateStatus({{$sale->id}},1)">
+                                                                    Marquer comme servi
+                                                                </a>
+                                                                <a class="dropdown-item" href="#" onclick="updateStatus({{$sale->id}},2)">
+                                                                    Marquer comme payé
+                                                                </a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item" href="#">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                        width="18" height="18" class="mr-2">
+                                                                        <path fill="none" d="M0 0h24v24H0z" />
+                                                                        <path
+                                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                                    </svg>
+                                                                    Supprimer
+                                                                </a>
+                                                            </div>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-auto ml-auto">
-                                                <h6 class="m-0">Total</h6>
-                                                <h4 class="m-0">35,000 FCFA</h4>
-                                                <!-- <a href="#" class="">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" fill="rgba(120,120,120,1)"/></svg>
-                                                </a> -->
+                                            <div class="card-body pt-2 pb-2">
+                                                <h4 class="font-weight-normal m-0"> {{$sale->products->count()}} Produit(s)</h4>
+                                                <h4 class="text-muted font-weight-normal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
+                                                    {{ date('M d, Y', strtotime($sale->created_at))}}
+                                                </h4>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="easy-kanban-card card">
-                                    <div class="card-header border-bottom-0 pr-0 pb-0">
-                                        <div class="w-100 row align-items-center">
-                                            <div class="col-auto pl-2">
-                                                <h2 class="m-0">S0-104</h2>
-                                            </div>
-                                            <div class="col-auto pr-1 ml-auto">
-                                                <span class="dropdown">
-                                                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
+                                            <!-- Card footer -->
+                                            <div class="card-footer bg-white border-top-0 pt-0">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        {{-- <div class="avatar-list avatar-list-stacked pt-2">
+                                                            <span class="avatar border mb-0"
+                                                                style="background-image: url('https://ui-avatars.com/api/?name=Alex+Gautier&background=f1f3f8&color=6e7582')"></span>
+                                                            <span class="avatar border mb-0"
+                                                                style="background-image: url('https://ui-avatars.com/api/?name=Jeane+Marie&background=f1f3f8&color=6e7582')"></span>
+                                                            <span class="avatar border mb-0">+3</span>
+                                                        </div> --}}
+                                                        {{$site->name}}
                                                     </div>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">
-                                                            Voir la facture
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme servi
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme payé
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Dupiquer
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Annulé
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                width="18" height="18" class="mr-2">
-                                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                                <path
-                                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                            </svg>
-                                                            Supprimer
-                                                        </a>
+                                                    <div class="col-auto ml-auto">
+                                                        <h6 class="m-0">Total</h6>
+                                                        <h4 class="m-0">{{$sale->total()}} FCFA</h4>
+                                                        <!-- <a href="#" class="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" fill="rgba(120,120,120,1)"/></svg>
+                                                        </a> -->
                                                     </div>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-2 pb-2">
-                                        <h4 class="font-weight-normal m-0">1 Produit</h4>
-                                        <h4 class="text-muted font-weight-normal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
-                                            Juillet 30, 2019
-                                        </h4>
-                                    </div>
-                                    <!-- Card footer -->
-                                    <div class="card-footer bg-white border-top-0 pt-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Alex+Gautier&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Jeane+Marie&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0">+3</span>
                                                 </div>
                                             </div>
-                                            <div class="col-auto ml-auto">
-                                                <h6 class="m-0">Total</h6>
-                                                <h4 class="m-0">35,000 FCFA</h4>
-                                                <!-- <a href="#" class="">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" fill="rgba(120,120,120,1)"/></svg>
-                                                </a> -->
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="easy-kanban-card card">
-                                    <div class="card-header border-bottom-0 pr-0 pb-0">
-                                        <div class="w-100 row align-items-center">
-                                            <div class="col-auto pl-2">
-                                                <h2 class="m-0">S0-103</h2>
-                                            </div>
-                                            <div class="col-auto pr-1 ml-auto">
-                                                <span class="dropdown">
-                                                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
-                                                    </div>
+                                    @endforeach
+                                @endforeach
 
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">
-                                                            Voir la facture
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme servi
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme payé
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Dupiquer
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Annulé
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                width="18" height="18" class="mr-2">
-                                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                                <path
-                                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                            </svg>
-                                                            Supprimer
-                                                        </a>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-2 pb-2">
-                                        <h4 class="font-weight-normal m-0">3 Produit</h4>
-                                        <h4 class="text-muted font-weight-normal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
-                                            Juillet 30, 2019
-                                        </h4>
-                                    </div>
-                                    <!-- Card footer -->
-                                    <div class="card-footer bg-white border-top-0 pt-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Alex+Gautier&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Jeane+Marie&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0">+3</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto ml-auto">
-                                                <h6 class="m-0">Total</h6>
-                                                <h4 class="m-0">35,000 FCFA</h4>
-                                                <!-- <a href="#" class="">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" fill="rgba(120,120,120,1)"/></svg>
-                                                </a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="easy-kanban-card card">
-                                    <div class="card-header border-bottom-0 pr-0 pb-0">
-                                        <div class="w-100 row align-items-center">
-                                            <div class="col-auto pl-2">
-                                                <h2 class="m-0">S0-102</h2>
-                                            </div>
-                                            <div class="col-auto pr-1 ml-auto">
-                                                <span class="dropdown">
-                                                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
-                                                    </div>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">
-                                                            Voir la facture
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme servi
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme payé
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Dupiquer
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Annulé
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                width="18" height="18" class="mr-2">
-                                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                                <path
-                                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                            </svg>
-                                                            Supprimer
-                                                        </a>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-2 pb-2">
-                                        <h4 class="font-weight-normal m-0">3 Produit</h4>
-                                        <h4 class="text-muted font-weight-normal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
-                                            Juillet 30, 2019
-                                        </h4>
-                                    </div>
-                                    <!-- Card footer -->
-                                    <div class="card-footer bg-white border-top-0 pt-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Alex+Gautier&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Jeane+Marie&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0">+3</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto ml-auto">
-                                                <h6 class="m-0">Total</h6>
-                                                <h4 class="m-0">35,000 FCFA</h4>
-                                                <!-- <a href="#" class="">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" fill="rgba(120,120,120,1)"/></svg>
-                                                </a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-light btn-pill btn-block">
+                                <a href={{route('admin.sales.pos')}} class="btn btn-light btn-pill btn-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                     Ajouter une commande
                                 </a>
@@ -412,81 +126,80 @@
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Servi</h3>
                             </div>
                             <div class="column-body col-lg-12 mt-4">
-                                <div class="easy-kanban-card card">
-                                    <div class="card-header border-bottom-0 pr-0 pb-0">
-                                        <div class="w-100 row align-items-center">
-                                            <div class="col-auto pl-2">
-                                                <h2 class="m-0">S0-105</h2>
-                                            </div>
-                                            <div class="col-auto pr-1 ml-auto">
-                                                <span class="dropdown">
-                                                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
+                                @foreach (Auth::user()->companies->first()->sites as $site)
+                                    @foreach ($site->sales->where('status',1) as $sale)
+                                        <div class="easy-kanban-card card">
+                                            <div class="card-header border-bottom-0 pr-0 pb-0">
+                                                <div class="w-100 row align-items-center">
+                                                    <div class="col-auto pl-2">
+                                                        <h2 class="m-0">S0-{{$sale->code}} </h2>
                                                     </div>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">
-                                                            Voir la facture
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme servi
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Marquer comme payé
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Dupiquer
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            Annulé
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                width="18" height="18" class="mr-2">
-                                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                                <path
-                                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                            </svg>
-                                                            Supprimer
-                                                        </a>
+                                                    <div class="col-auto pr-1 ml-auto">
+                                                        <span class="dropdown">
+                                                            <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
+                                                            </div>
+        
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
+                                                                    Voir la facture
+                                                                </a>
+                                                                <a class="dropdown-item" href="#" onclick="validateSale({{$sale->id}})">
+                                                                    Valider la commande
+                                                                </a>
+                                                                <a class="dropdown-item" href="#" onclick="updateStatus({{$sale->id}},0)">
+                                                                    Marquer comme commandé
+                                                                </a>
+                                                                <a class="dropdown-item" href="#" onclick="updateStatus({{$sale->id}},2)">
+                                                                    Marquer comme payé
+                                                                </a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item" href="#">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                        width="18" height="18" class="mr-2">
+                                                                        <path fill="none" d="M0 0h24v24H0z" />
+                                                                        <path
+                                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                                    </svg>
+                                                                    Supprimer
+                                                                </a>
+                                                            </div>
+                                                        </span>
                                                     </div>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-2 pb-2">
-                                        <h4 class="font-weight-normal m-0">5 Produits</h4>
-                                        <h4 class="text-muted font-weight-normal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
-                                            Juillet 30, 2019
-                                        </h4>
-                                    </div>
-                                    <!-- Card footer -->
-                                    <div class="card-footer bg-white border-top-0 pt-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Alex+Gautier&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0"
-                                                        style="background-image: url('https://ui-avatars.com/api/?name=Jeane+Marie&background=f1f3f8&color=6e7582')"></span>
-                                                    <span class="avatar border mb-0">+3</span>
                                                 </div>
                                             </div>
-                                            <div class="col-auto ml-auto">
-                                                <h6 class="m-0">Total</h6>
-                                                <h4 class="m-0">35,000 FCFA</h4>
-                                                <!-- <a href="#" class="">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" fill="rgba(120,120,120,1)"/></svg>
-                                                </a> -->
+                                            <div class="card-body pt-2 pb-2">
+                                                <h4 class="font-weight-normal m-0"> {{$sale->products->count()}} Produit(s)</h4>
+                                                <h4 class="text-muted font-weight-normal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
+                                                    {{ date('M d, Y', strtotime($sale->created_at))}}
+                                                </h4>
+                                            </div>
+                                            <!-- Card footer -->
+                                            <div class="card-footer bg-white border-top-0 pt-0">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        {{-- <div class="avatar-list avatar-list-stacked pt-2">
+                                                            <span class="avatar border mb-0"
+                                                                style="background-image: url('https://ui-avatars.com/api/?name=Alex+Gautier&background=f1f3f8&color=6e7582')"></span>
+                                                            <span class="avatar border mb-0"
+                                                                style="background-image: url('https://ui-avatars.com/api/?name=Jeane+Marie&background=f1f3f8&color=6e7582')"></span>
+                                                            <span class="avatar border mb-0">+3</span>
+                                                        </div> --}}
+                                                        {{$site->name}}
+                                                    </div>
+                                                    <div class="col-auto ml-auto">
+                                                        <h6 class="m-0">Total</h6>
+                                                        <h4 class="m-0">{{$sale->total()}} FCFA</h4>
+                                                        <!-- <a href="#" class="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" fill="rgba(120,120,120,1)"/></svg>
+                                                        </a> -->
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    @endforeach
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -495,6 +208,88 @@
                             <div class="column-header col-lg-12 d-flex align-items-center">
                                 <div class="status-dot rounded-circle bg-green"></div>
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Payé</h3>
+                            </div>
+                            <div class="column-body col-lg-12 mt-4">
+                                @foreach (Auth::user()->companies->first()->sites as $site)
+                                    @foreach ($site->sales->where('status',2) as $sale)
+                                        <div class="easy-kanban-card card">
+                                            <div class="card-header border-bottom-0 pr-0 pb-0">
+                                                <div class="w-100 row align-items-center">
+                                                    <div class="col-auto pl-2">
+                                                        <h2 class="m-0">S0-{{$sale->code}} </h2>
+                                                    </div>
+                                                    <div class="col-auto pr-1 ml-auto">
+                                                        <span class="dropdown">
+                                                            <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
+                                                            </div>
+        
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
+                                                                    Voir la facture
+                                                                </a>
+                                                                @if ($sale->validator_id == null)
+                                                                    <a class="dropdown-item" href="#" onclick="validateSale({{$sale->id}})">
+                                                                        Valider la commande
+                                                                    </a>
+                                                                @else
+                                                                    @if ($sale->validator_id == Auth::user()->id)
+                                                                        <a class="dropdown-item" href="#" onclick="invalidateSale({{$sale->id}})">
+                                                                           annuler validation
+                                                                        </a>
+                                                                    @else
+                                                                        <a class="dropdown-item disabled" href="#">
+                                                                            annuler validation
+                                                                        </a>
+                                                                    @endif
+                                                                @endif
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item" href="#">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                        width="18" height="18" class="mr-2">
+                                                                        <path fill="none" d="M0 0h24v24H0z" />
+                                                                        <path
+                                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                                    </svg>
+                                                                    Supprimer
+                                                                </a>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-2 pb-2">
+                                                <h4 class="font-weight-normal m-0"> {{$sale->products->count()}} Produit(s)</h4>
+                                                <h4 class="text-muted font-weight-normal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
+                                                    {{ date('M d, Y', strtotime($sale->created_at))}}
+                                                </h4>
+                                            </div>
+                                            <!-- Card footer -->
+                                            <div class="card-footer bg-white border-top-0 pt-0">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        {{-- <div class="avatar-list avatar-list-stacked pt-2">
+                                                            <span class="avatar border mb-0"
+                                                                style="background-image: url('https://ui-avatars.com/api/?name=Alex+Gautier&background=f1f3f8&color=6e7582')"></span>
+                                                            <span class="avatar border mb-0"
+                                                                style="background-image: url('https://ui-avatars.com/api/?name=Jeane+Marie&background=f1f3f8&color=6e7582')"></span>
+                                                            <span class="avatar border mb-0">+3</span>
+                                                        </div> --}}
+                                                        {{$site->name}}
+                                                    </div>
+                                                    <div class="col-auto ml-auto">
+                                                        <h6 class="m-0">Total</h6>
+                                                        <h4 class="m-0">{{$sale->total()}} FCFA</h4>
+                                                        <!-- <a href="#" class="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" fill="rgba(120,120,120,1)"/></svg>
+                                                        </a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -562,6 +357,56 @@
                 inline: true,
             });
         });
+    </script>
+    <script>
+        function validateSale(id){
+            var token  = '{{csrf_token()}}';
+
+            $.ajax({
+                url: '/admin/sales/'+id+'/validate',
+                method: 'post',
+                data: {
+                    _token: token
+                },
+                success: function(data){
+                    // console.log(data);
+                    location.reload();
+                }
+            });
+        }
+
+        function invalidateSale(id){
+            var token  = '{{csrf_token()}}';
+
+            $.ajax({
+                url: '/admin/sales/'+id+'/invalidate',
+                method: 'post',
+                data: {
+                    _token: token
+                },
+                success: function(data){
+                    // console.log(data);
+                    location.reload();
+                }
+            });
+        }
+
+        function updateStatus(id, status){
+            var token  = '{{csrf_token()}}';
+
+            $.ajax({
+                url: '/admin/sales/'+id+'/status',
+                method: 'post',
+                data: {
+                    _token: token,
+                    status: status
+                },
+                success: function(data){
+                    // console.log(data);
+                    location.reload();
+                }
+            });
+        }
     </script>
 @endsection
 

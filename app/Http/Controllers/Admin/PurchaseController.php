@@ -106,7 +106,7 @@ class PurchaseController extends Controller
      */
     public function show(Purchase $purchase)
     {
-        //
+        return view('admin.orders.purchase_order', compact('purchase'));
     }
 
     /**
@@ -130,6 +130,72 @@ class PurchaseController extends Controller
     public function update(Request $request, Purchase $purchase)
     {
 
+    }
+
+    public function validatePurchase(Request $request, Purchase $purchase){
+
+        if($purchase->validator_id == null){
+            $purchase->validator_id = Auth::user()->id;
+            foreach ($purchase->products as $prod) {
+                $qty = $purchase->site->products()->findOrFail($prod->id)->pivot->qty + $prod->pivot->qty;
+                $purchase->site->products()->updateExistingPivot($prod->id, [
+                    'qty' => $qty
+                ]);
+            }
+            $purchase->status = 1;
+            $purchase->save();
+    
+            return response()->json([
+                'message' => 'purchase validated susscessfully',
+                'validator' => $purchase->validator->username,
+            ],200);
+        }
+
+        return response()->json([
+            'message' => 'unauthorized',
+        ],403);        
+    }
+
+    public function invalidatePurchase(Request $request, Purchase $purchase){
+
+        if($purchase->validator != null){
+            if(Auth::user()->id == $purchase->validator_id){
+                $purchase->validator_id = null;
+                foreach ($purchase->products as $prod) {
+                    $qty = $purchase->site->products()->findOrFail($prod->id)->pivot->qty - $prod->pivot->qty;
+                    $purchase->site->products()->updateExistingPivot($prod->id, [
+                        'qty' => $qty
+                    ]);
+                }
+                $purchase->save();
+    
+                return response()->json([
+                    'message' => 'purchase unvalidated susscessfully',
+                ],200);
+            }
+        }
+
+        return response()->json([
+            'message' => 'unauthorized',
+        ],403);
+    }
+
+    public function updatePurchaseStatus(Request $request, Purchase $purchase){
+        if($purchase->status == 0){
+            $purchase->status = 1;
+            $purchase->save();
+            return $purchase->status;
+        } else {
+            if($purchase->validator == null){
+                $purchase->status = 0;
+                $purchase->save();
+                return $purchase->status;
+            }
+        }
+
+        return response()->json([
+            'message' => 'La commande a déja été validée',
+        ], 403);
     }
 
     /**

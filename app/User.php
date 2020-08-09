@@ -77,8 +77,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Permission::class,'permission_user');
     }
-
-    public function getPermissions(){
-        return $this->permissions->merge($this->role->permissions);
-    }
 }

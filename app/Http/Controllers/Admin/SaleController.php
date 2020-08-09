@@ -118,7 +118,7 @@ class SaleController extends Controller
      */
     public function show(Sale $sale)
     {
-        //
+        return view('admin.orders.sale_order', compact('sale'));
     }
 
     /**
@@ -142,6 +142,73 @@ class SaleController extends Controller
     public function update(Request $request, Sale $sale)
     {
         //
+    }
+
+    public function validateSale(Request $request, Sale $sale){
+
+        if($sale->validator_id == null){
+            $sale->validator_id = Auth::user()->id;
+            foreach ($sale->products as $prod) {
+                $qty = $sale->site->products()->findOrFail($prod->id)->pivot->qty - $prod->pivot->qty;
+                $sale->site->products()->updateExistingPivot($prod->id, [
+                    'qty' => $qty
+                ]);
+            }
+            $sale->status = 2;
+            $sale->save();
+    
+            return response()->json([
+                'message' => 'sale validated susscessfully',
+                'validator' => $sale->validator->username,
+            ],200);
+        }
+
+        return response()->json([
+            'message' => 'unauthorized',
+        ],403);
+
+    }
+
+    public function invalidateSale(Request $request, Sale $sale){
+
+        if($sale->validator != null){
+            if(Auth::user()->id == $sale->validator_id){
+                $sale->validator_id = null;
+                foreach ($sale->products as $prod) {
+                    $qty = $sale->site->products()->findOrFail($prod->id)->pivot->qty + $prod->pivot->qty;
+                    $sale->site->products()->updateExistingPivot($prod->id, [
+                        'qty' => $qty
+                    ]);
+                }
+                $sale->status = 1;
+                $sale->save();
+    
+                return response()->json([
+                    'message' => 'sale unvalidated susscessfully',
+    
+                ],200);
+            }
+        }
+
+        return response()->json([
+            'message' => 'unauthorized',
+        ],403);
+    }
+
+    public function updateSaleStatus(Request $request, Sale $sale){
+        if($sale->validator == null){
+            $sale->status = $request->status;
+            $sale->save();
+            
+            return response()->json([
+                'message' => 'Le statut de la commande a bien été mise à jour',
+                'status' => $sale->status,
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'La commande a déja été validée',
+        ], 403);
     }
 
     /**

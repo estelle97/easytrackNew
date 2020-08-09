@@ -172,27 +172,15 @@ class PurchaseController extends Controller
 
     public function validatePurchase(Request $request, Purchase $purchase){
 
-        $purchase->validator_id = Auth::user()->id;
-        foreach ($purchase->products as $prod) {
-            $purchase->site->products()->findOrFail($prod->id)->pivot->qty += $prod->pivot->qty;
-            $purchase->site->products()->findOrFail($prod->id)->pivot->save();
-        }
-        $purchase->save();
-
-        return response()->json([
-            'message' => 'purchase validated susscessfully',
-            'purchase' => new PurchaseResource($purchase->load('validator')),
-        ],200);
-    }
-
-    public function invalidatePurchase(Request $request, Purchase $purchase){
-
-        if(Auth::user()->id == $purchase->validator_id){
-            $purchase->validator_id = null;
+        if($purchase->validator_id == null){
+            $purchase->validator_id = Auth::user()->id;
             foreach ($purchase->products as $prod) {
-                $purchase->site->products()->findOrFail($prod->id)->pivot->qty -= $prod->pivot->qty;
-                $purchase->site->products()->findOrFail($prod->id)->pivot->save();
+                $qty = $purchase->site->products()->findOrFail($prod->id)->pivot->qty + $prod->pivot->qty;
+                $purchase->site->products()->updateExistingPivot($prod->id, [
+                    'qty' => $qty
+                ]);
             }
+            $purchase->status = 1;
             $purchase->save();
 
             return response()->json([
@@ -203,8 +191,60 @@ class PurchaseController extends Controller
 
         return response()->json([
             'message' => 'unauthorized',
+        ],403); 
+
+    }
+
+    public function invalidatePurchase(Request $request, Purchase $purchase){
+
+        if($purchase->validator_id != null){
+            if(Auth::user()->id == $purchase->validator_id){
+                $purchase->validator_id = null;
+                foreach ($purchase->products as $prod) {
+                    $qty = $purchase->site->products()->findOrFail($prod->id)->pivot->qty - $prod->pivot->qty;
+                    $purchase->site->products()->updateExistingPivot($prod->id, [
+                        'qty' => $qty
+                    ]);
+                }
+                $purchase->save();
+    
+                return response()->json([
+                    'message' => 'purchase validated susscessfully',
+                    'purchase' => new PurchaseResource($purchase->load('validator')),
+                ],200);
+            }
+        }
+
+        return response()->json([
+            'message' => 'unauthorized',
             'purchase' => new PurchaseResource($purchase->load('validator')),
         ],403);
+    }
+
+    public function updatePurchaseStatus(Request $request, Purchase $purchase){
+        if($purchase->status == 0){
+            $purchase->status = 1;
+            $purchase->save();
+            
+            return response()->json([
+                'message' => 'purchase status updated susscessfully',
+                'purchase' => new PurchaseResource($purchase->load('validator')),
+            ],200);
+        } else {
+            if($purchase->validator == null){
+                $purchase->status = 0;
+                $purchase->save();
+                
+                return response()->json([
+                    'message' => 'purchase status updated susscessfully',
+                    'purchase' => new PurchaseResource($purchase->load('validator')),
+                ],200);
+            }
+        }
+
+        return response()->json([
+            'message' => 'La commande a déja été validée',
+        ], 403);
     }
 
     /**

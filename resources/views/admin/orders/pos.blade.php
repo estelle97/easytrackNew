@@ -170,8 +170,9 @@
                     <div class="col-md-12 mb-4">
                         <label class="form-label"> Etat </label>
                         <select name="role" id="status" class="form-select">
-                            <option value="1">Non livré</option>
-                            <option value="2">   livré   </option>
+                            <option value="0"> Commandé </option>
+                            <option value="1">   Servi   </option>
+                            <option value="2">   Payé   </option>
                         </select>
                     </div>
                     <div class="col-md-12">
@@ -360,7 +361,10 @@
     function cardOnClick(){
         return  $('.product-card').click(function () {
             element = $(this);
-            console.log(element);
+            if(element.data('qty') == 0){
+                return alert('produit en rupture de stock!');
+            }
+            // console.log(element.data('qty'));
             addElement(element);
         });
     }
