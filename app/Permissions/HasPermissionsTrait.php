@@ -48,23 +48,9 @@ trait HasPermissionsTrait {
     return false;
   }
 
-  public function hasRole( ... $roles ) {
+  public function hasRole($role) {
 
-    foreach ($roles as $role) {
-      if ($this->roles->contains('slug', $role)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public function hasRoles($roles) {
-
-    foreach ($roles as $role) {
-      if ($this->roles->contains('slug', $role)) {
-        return true;
-      }
-    }
+    if ($this->role->name == $role || $this->role->slug == $role) return true;
     return false;
   }
 
@@ -74,23 +60,19 @@ trait HasPermissionsTrait {
 
 
   public function permissions() {
-
     return $this->belongsToMany(Permission::class);
-
   }
-  protected function hasPermission($permission) {
 
-    return (bool) $this->permissions->where('slug', $permission->slug)->count();
+  public function hasPermission($permission) {
+    return (bool) $this->getPermissions()->where('slug', $permission)->count();
   }
 
   protected function getAllRoles(array $roles){
     return Role::whereIn('slug', $roles)->get();
   }
 
-  protected function getAllPermissions(array $permissions) {
-
-    return Permission::whereIn('slug',$permissions)->get();
-    
+  public function getPermissions(){
+      return $this->permissions->merge($this->role->permissions);
   }
 
 }

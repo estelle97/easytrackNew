@@ -101,12 +101,21 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('purchases', 'Employee\PurchaseController@index');
     
 
+    Route::get('admin/sales/{sale}/show', 'Admin\SaleController@show')->name('admin.sales.show');
+    Route::post('admin/sales/{sale}/status', 'Admin\SaleController@updateSaleStatus');
+    Route::post('admin/sales/{sale}/validate', 'Admin\SaleController@validateSale');
+    Route::post('admin/sales/{sale}/invalidate', 'Admin\SaleController@invalidateSale');
     Route::post('admin/sales', 'Admin\SaleController@store');
     Route::get('admin/kanban', 'Admin\SaleController@kanban')->name('admin.sales.kanban');
     Route::get('admin/sales', 'Admin\SaleController@index')->name('admin.sales.all');
     Route::get('admin/sales/site', 'Admin\SaleController@getElementBySite');
     Route::get('admin/pos', 'Admin\SaleController@create')->name('admin.sales.pos');
 
+
+    Route::get('admin/purchases/{purchase}/show', 'Admin\PurchaseController@show')->name('admin.purchases.show');
+    Route::post('admin/purchases/{purchase}/status', 'Admin\PurchaseController@updatePurchaseStatus');
+    Route::post('admin/purchases/{purchase}/validate', 'Admin\PurchaseController@validatePurchase');
+    Route::post('admin/purchases/{purchase}/invalidate', 'Admin\PurchaseController@invalidatePurchase');
     Route::post('admin/purchases/{purchase}', 'Admin\PurchaseController@edit');
     Route::get('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');
     Route::post('admin/purchases', 'Admin\PurchaseController@store');

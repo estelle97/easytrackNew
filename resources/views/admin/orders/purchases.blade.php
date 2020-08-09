@@ -104,6 +104,7 @@
                                     <th class="exportable">Site</th>
                                     <th class="exportable">Forunisseur</th>
                                     <th class="exportable">Initié par</th>
+                                    <th class="exportable"> Statut </th>
                                     <th class="exportable">Validé par</th>
                                     <th class="exportable">Total</th>
                                     <th></th>
@@ -111,7 +112,7 @@
                             </thead>
                             <tbody>
                                 @foreach (Auth::user()->companies->first()->sites as $site)
-                                    @foreach ($site->purchases->load('products') as $pur)
+                                    @foreach ($site->purchases->load('products')->reverse() as $pur)
                                         
                                         
                                         <tr id="purchase{{$pur->id}}">
@@ -126,28 +127,67 @@
                                                 {{$pur->supplier->name}}
                                             </td>
                                             <td>
-                                                {{$pur->initiator->name}}
+                                                @if (Auth::user()->is_admin == 2)
+                                                    <a href={{route('admin.profile')}}>
+                                                        {{$pur->initiator->name}}
+                                                    </a>
+                                                @else
+                                                    <a href={{route('admin.user.show', $pur->initiator->username)}}>
+                                                        {{$pur->initiator->name}}
+                                                    </a>
+                                                @endif
                                             </td>
                                             <td>
-                                                {{($pur->validator->name ?? ' non Validé')}}
+                                            <select class="btn btn-sm {{($pur->status == 0) ? 'btn-warning' : 'btn-success'}}" name="status" id="status" onchange="updateStatus({{$pur->id}})">
+                                                    <option {{($pur->status == 0) ? 'selected' : ''}} value="0"> Non livrée </option>
+                                                    <option {{($pur->status == 1) ? 'selected' : ''}} value="1"> Livrée </option>
+                                                </select>
                                             </td>
                                             <td>
-                                                2500
+                                                @if($pur->validator == null)
+                                                    <span class="text-warning"> Non validée </span>
+                                                @else
+                                                    @if (Auth::user()->is_admin == 2)
+                                                        <a href={{route('admin.profile')}}>
+                                                            {{$pur->validator->name}}
+                                                        </a>
+                                                    @else
+                                                        <a href={{route('admin.user.show', $pur->validator->username)}}>
+                                                            {{$pur->validator->name}}
+                                                        </a>
+                                                    @endif
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{$pur->total()}} Fcfa
                                             </td>
                                             <td class="text-right">
                                                 <span class="dropdown">
                                                     <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                                         data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                                     <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href={{route('admin.purchases.show', $pur->id)}}>
+                                                            Afficher bon de commande
+                                                        </a>
                                                         <a class="dropdown-item" onclick="updatePurchase({{$pur->id}})">
                                                             Modifier
                                                         </a>
-                                                        <a class="dropdown-item" >
-                                                            Dupiquer
-                                                        </a>
-                                                        <a class="dropdown-item" >
-                                                            Annulés
-                                                        </a>
+                                                        @if ($pur->validator == null)
+                                                            <a class="dropdown-item" onclick="validatePurchase({{$pur->id}})">
+                                                                Valider
+                                                            </a>
+                                                        @else
+                                                            @if ($pur->validator_id == Auth::user()->id)
+                                                                <a class="dropdown-item" onclick="invalidatePurchase({{$pur->id}})">
+                                                                    Annuler la validation
+                                                                </a>
+                                                            @else
+                                                                <a class="dropdown-item disabled" >
+                                                                    Annuler la validation
+                                                                </a>
+                                                            @endif
+                                                        @endif
+                                                        
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" href="#">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -379,8 +419,8 @@
                                                 <div class="col-md-12 mb-4">
                                                     <label class="form-label"> Etat </label>
                                                     <select name="role" id="status" class="form-select">
-                                                        <option value="1">Non livré</option>
-                                                        <option value="2">   livré   </option>
+                                                        <option value="0">Non livrée</option>
+                                                        <option value="1"> livrée </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -486,7 +526,7 @@
                         }
                     },
                 ],
-                select: true,
+                select: false,
                 colReorder: true,
             });
         } );
@@ -646,6 +686,54 @@
                 },
                 success: function(data){
                     $("#modal-pos").html(data).modal();
+                }
+            });
+        }
+
+        function validatePurchase(id){
+            var token  = '{{csrf_token()}}';
+
+            $.ajax({
+                url: '/admin/purchases/'+id+'/validate',
+                method: 'post',
+                data: {
+                    _token: token
+                },
+                success: function(data){
+                    // console.log(data);
+                    location.reload();
+                }
+            });
+        }
+
+        function invalidatePurchase(id){
+            var token  = '{{csrf_token()}}';
+
+            $.ajax({
+                url: '/admin/purchases/'+id+'/invalidate',
+                method: 'post',
+                data: {
+                    _token: token
+                },
+                success: function(data){
+                    // console.log(data);
+                    location.reload();
+                }
+            });
+        }
+
+        function updateStatus(id){
+            var token  = '{{csrf_token()}}';
+
+            $.ajax({
+                url: '/admin/purchases/'+id+'/status',
+                method: 'post',
+                data: {
+                    _token: token
+                },
+                success: function(data){
+                    // console.log(data);
+                    location.reload();
                 }
             });
         }

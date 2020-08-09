@@ -543,7 +543,7 @@
                 success: function(data){
                     if(data == 'success'){
                         $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-site"+id).modal().hide();
+                        // $("#modal-edit-category"+id+" .close").click();
 
                         $("#cat-name"+id).fadeOut().html(name).fadeIn();
                     }

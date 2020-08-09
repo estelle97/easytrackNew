@@ -33,4 +33,15 @@ class Sale extends Model
         return $this->belongsTo('App\Customer');
     }
 
+    public function total(){
+        $total = 0;
+        
+        foreach($this->products as $prod){
+            $total += $prod->pivot->price * $prod->pivot->qty;
+        }
+        $total += $this->shipping_cost;
+
+        return $total;
+    }
+
 }

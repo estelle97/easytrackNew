@@ -13,14 +13,14 @@ class OwnerMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $snack, $site = null)
+    public function handle($request, Closure $next, $company, $site = null)
     {
-        $snack = $request->route()->parameter($snack);
+        $company = $request->route()->parameter($company);
         $user = $request->user();
 
         
         if($user->is_admin == '2'){
-            if($snack->user_id != $user->id){
+            if($company->user_id != $user->id){
                 abort(403, 'Access Denied');
             }
             return $next($request);

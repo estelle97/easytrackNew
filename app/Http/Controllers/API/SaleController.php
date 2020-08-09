@@ -171,17 +171,28 @@ class SaleController extends Controller
 
     public function validateSale(Request $request, Sale $sale){
 
-        $sale->validator_id = Auth::user()->id;
-        foreach ($sale->products as $prod) {
-            $sale->site->products()->findOrFail($prod->id)->pivot->qty -= $prod->pivot->qty;
-            $sale->site->products()->findOrFail($prod->id)->pivot->save();
+        if($sale->validator_id != null){
+            if($sale->validator_id == null){
+                $sale->validator_id = Auth::user()->id;
+                foreach ($sale->products as $prod) {
+                    $qty = $sale->site->products()->findOrFail($prod->id)->pivot->qty + $prod->pivot->qty;
+                    $sale->site->products()->updateExistingPivot($prod->id, [
+                        'qty' => $qty
+                    ]);
+                }
+                $sale->status = 1;
+                $sale->save();
+        
+                return response()->json([
+                    'message' => 'sale validated susscessfully',
+                    'sale' => new SaleResource($sale->load('validator')),
+                ],200);
+            }
         }
-        $sale->save();
 
         return response()->json([
-            'message' => 'sale validated susscessfully',
-            'sale' => new SaleResource($sale->load('validator')),
-        ],200);
+            'message' => 'unauthorized',
+        ],403);
     }
 
     public function invalidateSale(Request $request, Sale $sale){
@@ -204,6 +215,22 @@ class SaleController extends Controller
             'message' => 'unauthorized',
             'sale' => new SaleResource($sale->load('validator')),
         ],403);
+    }
+
+    public function updateSaleStatus(Request $request, Sale $sale){
+        if($sale->validator == null){
+            $sale->status = $request->status;
+            $sale->save();
+            
+            return response()->json([
+                'message' => 'Le statut de la commande a bien été mise à jour',
+                'sale' => new SaleResource($sale->load('validator')),
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'La commande a déja été validée',
+        ], 403);
     }
 
     /**

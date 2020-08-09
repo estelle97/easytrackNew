@@ -57,6 +57,9 @@ class ProductController extends Controller
                         'qty' => $request->qty,
                         'qty_alert' => $request->qty_alert,
                     ]);
+                    flashy()->success("Le produit $product->name a été ajouté avec succès au site $site->name");
+                } else {
+                    flashy()->warning("Le produit $product->name fait déja partir du site $site->name. Veuillez juste le modifier");
                 }
             }
         } else {
@@ -67,10 +70,12 @@ class ProductController extends Controller
                     'qty' => $request->qty,
                     'qty_alert' => $request->qty_alert,
                 ]);
+                flashy()->success('Le produit a été ajouté avec succès');
+            } else {
+                flashy()->warning("Le produit $product->name fait déja partir du site ".Site::find($request->site_id)->name.". Veuillez juste le modifier");
             }
         }
 
-        flashy()->success('Le produit a été ajouté avec succès');
         return 'success';
     }
 

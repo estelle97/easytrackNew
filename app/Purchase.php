@@ -32,4 +32,19 @@ class Purchase extends Model
     public function supplier(){
         return $this->belongsTo('App\Supplier');
     }
+
+    public function getTotalOrder(){
+        return $this->products;
+    }
+
+    public function total(){
+        $total = 0;
+        
+        foreach($this->products as $prod){
+            $total += $prod->pivot->cost * $prod->pivot->qty;
+        }
+        $total += $this->shipping_cost;
+
+        return $total;
+    }
 }
