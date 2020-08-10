@@ -48,7 +48,7 @@ class LoginController extends Controller
         {
             $this->redirectTo = route('admin.dashboard');
         } else{
-            $this->redirectTo = route('user.dashboard');
+            $this->redirectTo = route('employee.dashboard');
         }
         $this->middleware('guest')->except('logout');
     }
@@ -120,7 +120,7 @@ class LoginController extends Controller
         {
             return redirect()->route('admin.dashboard');
         } else{
-            return redirect()->route('user.dashboard');
+            return redirect()->route('employee.dashboard');
         }
     }
 
