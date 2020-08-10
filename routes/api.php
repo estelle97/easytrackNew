@@ -34,11 +34,15 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('companies', 'API\CompanyController');
     Route::apiResource('employees', 'API\EmployeeController');
 
+
+    Route::get('sites/{site}/stats', 'API\SiteController@stats');
     Route::get('sites/{site}/customers', 'API\SiteController@sitesCustomers');
     Route::get('sites/{site}/suppliers', 'API\SiteController@sitesSuppliers');
     Route::post('sites/{site}', 'API\SiteController@update');
     Route::apiResource('sites', 'API\SiteController');
 
+
+    Route::post('sales/{sale}/status', 'Admin\SaleController@updateSaleStatus');
     Route::get('sales/{sale}/validate', 'API\SaleController@validateSale');
     Route::get('sales/{sale}/invalidate', 'API\SaleController@invalidateSale');
     Route::apiResource('sales', 'API\SaleController');
