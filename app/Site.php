@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -43,6 +44,38 @@ class Site extends Model
 
     public function sales(){
         return $this->hasMany('App\Sale');
+    }
+
+    public function allSales($day = null){
+        
+        $total = 0;
+        if($day){
+            foreach($this->sales->where('created_at', Carbon::today()) as $sale){
+                $total += $sale->total();
+            }    
+        } else {
+            foreach($this->sales as $sale){
+                $total += $sale->total();
+            }
+        }
+
+        return $total;
+    }
+
+    public function allPurchases($day = null){
+        
+        $total = 0;
+        if($day){
+            foreach($this->purchases->where('created_at', Carbon::today()) as $pur){
+                $total += $pur->total();
+            }
+        } else{
+            foreach($this->purchases as $pur){
+                $total += $pur->total();
+            }
+        }
+
+        return $total;
     }
 
 

@@ -121,6 +121,39 @@ class SaleController extends Controller
         return view('admin.orders.sale_order', compact('sale'));
     }
 
+    public function stats(){
+        $stats = [];
+
+        if(Auth::user()->is_admin == 2){
+            foreach (Auth::user()->companies->first()->sites as $site) {
+                $stats[] = [
+                    'site' => $site->name,
+                    'allSales' => $site->allSales(),
+                    'allPurchases' => $site->allPurchases(),
+                    'dailySales' => $site->allSales(true),
+                    'dailyPurchases' => $site->allPurchases(true),
+                    'allIncomes' => $site->allSales() - $site->allPurchases(),
+                    'dailyIncome' => $site->allSales(true) - $site->allPurchases(true),
+                ];
+            }
+
+            return response()->json([
+                'stats' => $stats,
+            ], 200);
+        } else {
+            $site = Auth::user()->employee->site;
+
+            return response()->json([
+                'allSales' => $site->allSales(),
+                'allPurchases' => $site->allPurchases(),
+                'dailySales' => $site->allSales(true),
+                'dailyPurchases' => $site->allPurchases(true),
+                'allIncomes' => $site->allSales() - $site->allPurchases(),
+                'dailyIncome' => $site->allSales(true) - $site->allPurchases(true),
+            ], 200);
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

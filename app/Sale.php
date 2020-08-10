@@ -25,6 +25,7 @@ class Sale extends Model
         return $this->belongsTo('App\User');
     }
 
+    
     public function site(){
         return $this->belongsTo('App\Site');
     }
