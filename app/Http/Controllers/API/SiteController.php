@@ -98,6 +98,19 @@ class SiteController extends Controller
         return new SiteResource($site->loadMissing('employees.user.role','customers','suppliers'));
     }
 
+
+    public function stats(Site $site){
+
+        return response()->json([
+            'allSales' => $site->allSales(),
+            'allPurchases' => $site->allPurchases(),
+            'dailySales' => $site->allSales(true),
+            'dailyPurchases' => $site->allPurchases(true),
+            'allIncomes' => $site->allSales() - $site->allPurchases(),
+            'dailyIncome' => $site->allSales(true) - $site->allPurchases(true),
+        ], 200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
