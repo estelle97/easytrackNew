@@ -58,7 +58,6 @@ Route::post('password-forgot', [
 
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('logout', 'Admin\DashboardController@logout')->name('logout');
 
     Route::get('admin/dashboard', ['as'=> 'admin.dashboard','uses' => 'Admin\DashboardController@index']);
@@ -66,7 +65,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileEdit' , 'as' => 'admin.profile.edit']);
     Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
-
+    
+    Route::get('admin/{site}/users', 'Admin\SiteController@users')->name('admin.site.employees');
     Route::get('admin/sites', 'Admin\SiteController@index')->name('admin.sites');
     Route::post('admin/sites/add', 'Admin\SiteController@store');
     Route::post('admin/sites/update', 'Admin\SiteController@update');
@@ -91,16 +91,17 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileUpdate' , 'as' => 'easytrack.profile.update']);
     Route::get('easytrack/profile/settings', ['uses' => 'SuperAdmin\DashboardController@profileSettings' , 'as' => 'easytrack.profile.settings']);
     Route::get('easytrack/roles', 'SuperAdmin\RoleController@index')->name('easytrack.roles');
-
+    
     Route::post('easytrack/roles/add', 'SuperAdmin\RoleController@store');
     Route::post('easytrack/roles/update', 'SuperAdmin\RoleController@update');
     Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
     Route::post('easytrack/roles/attachPermissionToRole', 'SuperAdmin\RoleController@attachPermissionToRole');
-
-
-    Route::get('purchases', 'Employee\PurchaseController@index');
+    Route::resource('easytrack/products', 'SuperAdmin\ProductController');
+    Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
     
 
+    
+    
     Route::get('admin/sales/{sale}/show', 'Admin\SaleController@show')->name('admin.sales.show');
     Route::post('admin/sales/{sale}/status', 'Admin\SaleController@updateSaleStatus');
     Route::post('admin/sales/{sale}/validate', 'Admin\SaleController@validateSale');
@@ -110,8 +111,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('admin/sales', 'Admin\SaleController@index')->name('admin.sales.all');
     Route::get('admin/sales/site', 'Admin\SaleController@getElementBySite');
     Route::get('admin/pos', 'Admin\SaleController@create')->name('admin.sales.pos');
-
-
+    
+    
+    
     Route::get('admin/purchases/{purchase}/show', 'Admin\PurchaseController@show')->name('admin.purchases.show');
     Route::post('admin/purchases/{purchase}/status', 'Admin\PurchaseController@updatePurchaseStatus');
     Route::post('admin/purchases/{purchase}/validate', 'Admin\PurchaseController@validatePurchase');
@@ -120,50 +122,61 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');
     Route::post('admin/purchases', 'Admin\PurchaseController@store');
     Route::get('admin/purchases', 'Admin\PurchaseController@index')->name('admin.purchases');
-
-    Route::get('admin/{site}/users', 'Admin\SiteController@users')->name('admin.site.employees');
-
+    
+    
     Route::post('admin/products/{product}', 'Admin\ProductController@update');
     Route::post('admin/products', 'Admin\ProductController@store');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
     
     Route::resource('admin/suppliers', 'Admin\SupplierController');
-    Route::resource('easytrack/products', 'SuperAdmin\ProductController');
-    Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
-});
 
 
 
+    Route::get('employee/sales/{sale}/show', 'Employee\SaleController@show')->name('employee.sales.show');
+    Route::post('employee/sales/{sale}/status', 'Employee\SaleController@updateSaleStatus');
+    Route::post('employee/sales/{sale}/validate', 'Employee\SaleController@validateSale');
+    Route::post('employee/sales/{sale}/invalidate', 'Employee\SaleController@invalidateSale');
+    Route::post('employee/sales', 'Employee\SaleController@store');
+    Route::get('employee/kanban', 'Employee\SaleController@kanban')->name('employee.sales.kanban');
+    Route::get('employee/sales', 'Employee\SaleController@index')->name('employee.sales.all');
+    Route::get('employee/sales/site', 'Employee\SaleController@getElementBySite');
+    Route::get('employee/pos', 'Employee\SaleController@create')->name('employee.sales.pos');
+    
+    
+    
+    Route::get('employee/purchases/{purchase}/show', 'Employee\PurchaseController@show')->name('employee.purchases.show');
+    Route::post('employee/purchases/{purchase}/status', 'Employee\PurchaseController@updatePurchaseStatus');
+    Route::post('employee/purchases/{purchase}/validate', 'Employee\PurchaseController@validatePurchase');
+    Route::post('employee/purchases/{purchase}/invalidate', 'Employee\PurchaseController@invalidatePurchase');
+    Route::post('employee/purchases/{purchase}', 'Employee\PurchaseController@edit');
+    Route::get('employee/purchases/site', 'Employee\PurchaseController@getElementBySite');
+    Route::post('employee/purchases', 'Employee\PurchaseController@store');
+    Route::get('employee/purchases', 'Employee\PurchaseController@index')->name('employee.purchases');
 
-Route::group(['as'=>'superadmin.','prefix'=>'superadmin','middleware' => ['auth', 'active', 'superadmin']], function() {
+    Route::post('employee/roles/detachPermissionToUser', 'Employee\RoleController@detachPermissionToUser');
+    Route::post('employee/roles/attachPermissionToUser', 'Employee\RoleController@attachPermissionToUser');
+
+    Route::get('employee/users', 'Employee\UserController@index')->name('employee.company.users');
+    Route::post('employee/users', 'Employee\UserController@search')->name('employee.company.users.search');
+    Route::get('employee/users/{user}/show', 'Employee\UserController@show')->name('employee.user.show');
+    Route::get('employee/users/{user}/edit', 'Employee\UserController@edit')->name('employee.user.edit');
+    Route::post('employee/users/{user}/edit', 'Employee\UserController@update');
+    Route::post('employee/users/store', 'Employee\UserController@store');
 
 
-    Route::get('dashboard', 'SuperAdmin\DashboardController@index')->name('dashboard');
+    Route::post('employee/sites/update', 'Employee\SiteController@update');
+    Route::get('employee/{site}/users', 'Employee\SiteController@users')->name('employee.site.employees');
+    Route::get('employee/sites', 'Employee\SiteController@index')->name('employee.sites');
+    Route::post('employee/products/{product}', 'Employee\ProductController@update');
+    Route::post('employee/products', 'Employee\ProductController@store');
+    Route::get('employee/products','Employee\ProductController@index')->name('employee.products');
+    
+    Route::resource('employee/suppliers', 'Employee\SupplierController');
 
-    Route::get('user/profile/{id}', 'SuperAdmin\DashboardController@profile')->name('user.profile');
-	Route::put('user/update_profile/{id}', 'SuperAdmin\DashboardController@profileUpdate')->name('user.profileUpdate');
-	Route::put('user/changepass/{id}', 'SuperAdmin\DashboardController@changePassword')->name('user.password');
-    Route::get('user/genpass', 'SuperAdmin\DashboardController@generatePassword');
-
-});
-
-
-
-Route::group(['as'=>'admin.','prefix'=>'admin','middleware' => ['auth', 'active', 'admin']], function() {
-
-
-
-    //Term of sercice route
-    Route::get('terms', 'HomeController@termOfService')->name('terms');
-});
-
-Route::group(['as'=>'user.','prefix'=>'user','middleware' => ['auth', 'active', 'user']], function() {
-
-    //Route::get('/', 'HomeController@index');
-    Route::get('dashboard', 'User\DashboardController@index')->name('dashboard');
-
-    Route::get('user/profile/{id}', 'Admin\DashboardController@profile')->name('user.profile');
-	Route::put('user/update_profile/{id}', 'UserController@profileUpdate')->name('user.profileUpdate');
-	Route::put('user/changepass/{id}', 'UserController@changePassword')->name('user.password');
-	Route::get('user/genpass', 'UserController@generatePassword');
+    Route::get('employee/profil',[ 'uses' => 'Employee\DashboardController@profile','as' => 'employee.profile']);
+    Route::get('employee/profile/edit', ['uses' => 'Employee\DashboardController@profileEdit' , 'as' => 'employee.profile.edit']);
+    Route::post('employee/profile/edit', ['uses' => 'Employee\DashboardController@profileUpdate' , 'as' => 'employee.profile.update']);
+    Route::get('employee/profile/settings', ['uses' => 'Employee\DashboardController@profileSettings' , 'as' => 'employee.profile.settings']);
+    Route::get('employee/dashboard', 'Employee\DashboardController@index')->name('employee.dashboard');
+    Route::get('purchases', 'Employee\PurchaseController@index');
 });

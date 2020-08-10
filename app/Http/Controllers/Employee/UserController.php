@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Employee;
 
 use App\Employee;
 use App\Http\Controllers\Controller;
@@ -19,7 +19,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('admin.users.users');
+        return view('employee.users.users');
     }
 
     public function generatePassword()
@@ -76,13 +76,13 @@ class UserController extends Controller
     public function show($user)
     {
         $user = User::whereUsername($user)->first();
-        return view('admin.users.user-profile', compact('user'));
+        return view('employee.users.user-profile', compact('user'));
     }
 
     public function edit($user)
     {
         $user = User::whereUsername($user)->first();
-        return view('admin.users.user-profile-edit', compact('user'));
+        return view('employee.users.user-profile-edit', compact('user'));
     }
 
     public function update(Request $request, $user)
@@ -114,7 +114,7 @@ class UserController extends Controller
 
 
 
-        notify()->success('Mise à jour de l\'utilisateur effectuée avec succès', 'Mise à jour utilisateur');
+        flashy()->success('Mise à jour de l\'utilisateur effectuée avec succès');
         return redirect()->back();
     }
 
@@ -122,16 +122,16 @@ class UserController extends Controller
         $text = $request->text;
         if(!is_null($request->site_id)){
             $site = Site::find($request->site_id);
-            return view('ajax.admin.employees_search', compact('text','site'));
+            return view('ajax.employee.employees_search', compact('text','site'));
         }
-        return view('ajax.admin.employees_search', compact('text'));
+        return view('ajax.employee.employees_search', compact('text'));
     }
 
     public function destroy($id)
     {
         $lims_user_data = User::find($id);
         $lims_user_data->delete();
-        notify()->success('Utilisateur supprimé avec succès', 'Suppression d\'utilisateur');
+        flashy()->success('Utilisateur supprimé avec succès');
         return redirect()->back();
     }
 }
