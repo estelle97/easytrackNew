@@ -243,8 +243,8 @@
                     <div id="calendar-inline"></div>
                 </div>
                 <div class="col-md-12 text-center mt-4">
-                    <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez gagnez aujourd'hui</h5>
-                    <h1 style="font-size: 2.5rem;">1.45m FCFA</h1>
+                    <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez vendu</h5>
+                    <h1 style="font-size: 2.5rem;"> {{Auth::user()->companies->first()->totalSales()}} FCFA</h1>
                     <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
                 </div>
                 <div class="col-md-12 mt-3">

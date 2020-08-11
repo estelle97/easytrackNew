@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Site;
+use App\Customer;
 use Auth;
 use App\Snack;
 use App\User;
@@ -38,6 +39,14 @@ class SiteController extends Controller
         $site->street = $request->street;
 
         if($site->save()){
+
+            $customers = Customer::create([
+                'name' => 'Passager',
+                'street' => $site->street,
+                'town' => $site->town,
+                'site_id' => $site->id
+            ]);
+
             flashy()->success('Le site a été ajouté avec succès');
             return 'success';
         } else {

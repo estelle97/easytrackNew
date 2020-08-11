@@ -30,4 +30,26 @@ class Company extends Model
     public function activity(){
         return $this->belongsTo('App\Activity');
     }
+
+    public function totalPurchases(){
+        $total = 0;
+        foreach ($this->sites as $site) {
+           foreach($site->purchases->where('validator_id','!=', null) as $pur){
+            $total += $pur->total();
+           }
+        }
+       
+        return $total;
+    }
+
+    public function totalSales(){
+        $total = 0;
+        foreach ($this->sites as $site) {
+           foreach($site->sales->where('validator_id','!=', null) as $sale){
+            $total += $sale->total();
+           }
+        }
+       
+        return $total;
+    }
 }

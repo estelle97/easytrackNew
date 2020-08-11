@@ -57,4 +57,19 @@ class Controller extends BaseController
 
         return $text;
     }
+
+    public function totalPurchases(){
+        $total = 0;
+        if(Auth::user()->is_admin == 2){
+            foreach (Auth::user()->companies()->first()->sites as $site) {
+                $total += $site->purchases()->where('validator_id','!=', null)->total();
+            }
+        } else {
+            foreach (Auth::user()->employee->site->purchases->where('validator_id','!=', null) as $pur) {
+                $total += $pur->total();
+            }
+        }
+
+        return $total;
+    }
 }

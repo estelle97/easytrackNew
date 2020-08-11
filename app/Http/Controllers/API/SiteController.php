@@ -7,6 +7,7 @@ use App\Http\Resources\CustomerResource;
 use App\Http\Resources\SiteResource;
 use App\Http\Resources\SupplierResource;
 use App\Site;
+use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,6 +81,13 @@ class SiteController extends Controller
         ]);
 
         $site->save();
+
+        $customers = Customer::create([
+            'name' => 'Passager',
+            'street' => $site->street,
+            'town' => $site->town,
+            'site_id' => $site->id
+        ]);
 
         return response()->json([
             'message' => 'Site created successfully!',

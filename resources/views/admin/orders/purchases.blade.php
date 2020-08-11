@@ -245,8 +245,8 @@
                     <div id="calendar-inline"></div>
                 </div>
                 <div class="col-md-12 text-center mt-4">
-                    <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez dépensé ce mois</h5>
-                    <h1 style="font-size: 2.5rem;">1.45m FCFA</h1>
+                    <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez dépensé </h5>
+                    <h1 style="font-size: 2.5rem;"> {{Auth::user()->companies->first()->totalPurchases()}} FCFA</h1>
                     <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
                 </div>
                 <div class="col-md-12 mt-3">
@@ -616,8 +616,9 @@
 
         $('#products').change(function () {
 
-            console.log($(this).children('option:selected').data());
+            // console.log($(this).children('option:selected').data());
             element = ($(this).children('option:selected'));
+            if(element.data('id') != null)
             addElement(element);
         });
 

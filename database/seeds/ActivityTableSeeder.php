@@ -36,5 +36,22 @@ class ActivityTableSeeder extends Seeder
         ];
 
         DB::table('activities')->insert($activities);
+
+        $units = [
+            [
+                'name' => 'Bouteille',
+                'code' => 'Btle'
+            ],
+            [
+                'name' => 'Casier',
+                'code' => 'casier'
+            ],
+            [
+                'name' => 'Carton',
+                'code' => 'carton'
+            ],
+        ];
+
+        DB::table('units')->insert($units);
     }
 }

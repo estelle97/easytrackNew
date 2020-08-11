@@ -171,18 +171,41 @@ class SaleController extends Controller
 
     public function validateSale(Request $request, Sale $sale){
 
-        if($sale->validator_id != null){
-            if($sale->validator_id == null){
-                $sale->validator_id = Auth::user()->id;
-                foreach ($sale->products as $prod) {
-                    $qty = $sale->site->products()->findOrFail($prod->id)->pivot->qty + $prod->pivot->qty;
-                    $sale->site->products()->updateExistingPivot($prod->id, [
-                        'qty' => $qty
-                    ]);
-                }
-                $sale->status = 1;
-                $sale->save();
         
+        if($sale->validator_id == null){
+            $sale->validator_id = Auth::user()->id;
+            foreach ($sale->products as $prod) {
+                $qty = $sale->site->products()->findOrFail($prod->id)->pivot->qty - $prod->pivot->qty;
+                $sale->site->products()->updateExistingPivot($prod->id, [
+                    'qty' => $qty
+                ]);
+            }
+            $sale->status = 2;
+            $sale->save();
+    
+            return response()->json([
+                'message' => 'sale validated susscessfully',
+                'sale' => new SaleResource($sale->load('validator')),
+            ],200);
+        }
+        
+
+        return response()->json([
+            'message' => 'unauthorized',
+        ],403);
+    }
+
+    public function invalidateSale(Request $request, Sale $sale){
+
+        if($sale->validator_id != null){
+            if(Auth::user()->id == $sale->validator_id){
+                $sale->validator_id = null;
+                foreach ($sale->products as $prod) {
+                    $sale->site->products()->findOrFail($prod->id)->pivot->qty += $prod->pivot->qty;
+                    $sale->site->products()->findOrFail($prod->id)->pivot->save();
+                }
+                $sale->save();
+
                 return response()->json([
                     'message' => 'sale validated susscessfully',
                     'sale' => new SaleResource($sale->load('validator')),
@@ -192,33 +215,12 @@ class SaleController extends Controller
 
         return response()->json([
             'message' => 'unauthorized',
-        ],403);
-    }
-
-    public function invalidateSale(Request $request, Sale $sale){
-
-        if(Auth::user()->id == $sale->validator_id){
-            $sale->validator_id = null;
-            foreach ($sale->products as $prod) {
-                $sale->site->products()->findOrFail($prod->id)->pivot->qty += $prod->pivot->qty;
-                $sale->site->products()->findOrFail($prod->id)->pivot->save();
-            }
-            $sale->save();
-
-            return response()->json([
-                'message' => 'sale validated susscessfully',
-                'sale' => new SaleResource($sale->load('validator')),
-            ],200);
-        }
-
-        return response()->json([
-            'message' => 'unauthorized',
             'sale' => new SaleResource($sale->load('validator')),
         ],403);
     }
 
     public function updateSaleStatus(Request $request, Sale $sale){
-        if($sale->validator == null){
+        if($sale->validator_id == null){
             $sale->status = $request->status;
             $sale->save();
             

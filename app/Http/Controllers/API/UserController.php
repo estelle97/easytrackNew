@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Site;
 use App\Company;
+use App\Customer;
 use App\Type;
 use App\User;
 use Carbon\Carbon;
@@ -96,6 +97,13 @@ class UserController extends Controller
                     $site->save();
 
         });
+
+        $customers = Customer::create([
+            'name' => 'Passager',
+            'street' => $site->street,
+            'town' => $site->town,
+            'site_id' => $site->id
+        ]);
 
         // Attach company with his type of subscription
         $type = Type::findOrFail($request->type);
