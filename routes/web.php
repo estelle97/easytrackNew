@@ -97,14 +97,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
     Route::post('easytrack/roles/attachPermissionToRole', 'SuperAdmin\RoleController@attachPermissionToRole');
 
+    Route::post('easytrack/products/{product}/destroy', 'SuperAdmin\ProductController@destroy');
     Route::post('easytrack/products/{product}', 'SuperAdmin\ProductController@update');
     Route::resource('easytrack/products', 'SuperAdmin\ProductController');
 
+    Route::post('easytrack/categories/{category}/destroy', 'SuperAdmin\CategoryController@destroy');
     Route::post('easytrack/categories/{category}', 'SuperAdmin\CategoryController@update');
-    Route::get('easytrack/categories/{category}', 'SuperAdmin\CategoryController@show');
-    Route::post('easytrack/categories', 'SuperAdmin\CategoryController@store');
-    Route::get('easytrack/categories/{category}', 'SuperAdmin\CategoryController@index');
-    Route::delete('easytrack/categories/{category}', 'SuperAdmin\CategoryController@delete');
+    Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
     
 
     
@@ -135,6 +134,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('admin/products', 'Admin\ProductController@store');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
     
+    Route::post('admin/suppliers/{supplier}/destroy', 'Admin\SupplierController@destroy');
+    Route::post('admin/suppliers/{supplier}', 'Admin\SupplierController@update');
     Route::resource('admin/suppliers', 'Admin\SupplierController');
 
 
@@ -178,6 +179,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('employee/products', 'Employee\ProductController@store');
     Route::get('employee/products','Employee\ProductController@index')->name('employee.products');
     
+    Route::post('employee/suppliers/{supplier}/destroy', 'Employee\SupplierController@destroy');
+    Route::post('employee/suppliers/{supplier}', 'Employee\SupplierController@update');
     Route::resource('employee/suppliers', 'Employee\SupplierController');
 
     Route::get('employee/profil',[ 'uses' => 'Employee\DashboardController@profile','as' => 'employee.profile']);
