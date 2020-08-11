@@ -204,7 +204,7 @@ class SaleController extends Controller
 
     public function invalidateSale(Request $request, Sale $sale){
 
-        if($sale->validator != null){
+        if($sale->validator_id != null){
             if(Auth::user()->id == $sale->validator_id){
                 $sale->validator_id = null;
                 foreach ($sale->products as $prod) {
@@ -229,7 +229,7 @@ class SaleController extends Controller
     }
 
     public function updateSaleStatus(Request $request, Sale $sale){
-        if($sale->validator == null){
+        if($sale->validator_id == null){
             $sale->status = $request->status;
             $sale->save();
             

@@ -77,7 +77,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                    <select class="btn btn-sm {{($sale->status == 0) ? 'btn-info' : (($sale->status == 1) ? 'btn-warning' : 'btn-success')}}" name="status" id="status" onchange="updateStatus({{$sale->id}}, this.value)">
+                                    <select class="btn btn-sm {{($sale->status == 0) ? 'btn-info' : (($sale->status == 1) ? 'btn-warning' : 'btn-success')}} {{(Auth::user()->role->slug == 'server') ? 'disabled' : ''}} " name="status" id="status" onchange="updateStatus({{$sale->id}}, this.value)">
                                             <option {{($sale->status == 0) ? 'selected' : ''}} value="0"> Commandé </option>
                                             <option {{($sale->status == 1) ? 'selected' : ''}} value="1"> Servi </option>
                                             <option {{($sale->status == 2) ? 'selected' : ''}} value="2">  Payé </option>
@@ -185,8 +185,8 @@
                     <div id="calendar-inline"></div>
                 </div>
                 <div class="col-md-12 text-center mt-4">
-                    <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez gagnez aujourd'hui</h5>
-                    <h1 style="font-size: 2.5rem;">1.45m FCFA</h1>
+                    <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez vendu</h5>
+                    <h1 style="font-size: 2.5rem;"> {{Auth::user()->employee->site->allSales()}} FCFA</h1>
                     <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
                 </div>
                 <div class="col-md-12 mt-3">

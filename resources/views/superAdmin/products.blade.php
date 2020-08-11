@@ -142,7 +142,6 @@
                                     type="checkbox"></th>
                             <th class="exportable w-1">Code</th>
                             <th class="exportable">Nom</th>
-                            <th class="exportable">Type</th>
                             <th class="exportable">Categorie</th>
                             <th>Brand</th>
                             <th>Unit</th>
@@ -157,9 +156,6 @@
                                 <td><span class="text-muted"> {{$product->code}} </span></td>
                                 <td><a id="product-name{{$product->id}}" href="invoice.html" class="text-reset" tabindex="-1">{{$product->name}}</a>
                                 </td>
-                                <td id="product-type{{$product->id}}">
-                                    {{$product->type}}
-                                </td>
                                 <td id="product-category{{$product->id}}">
                                     {{$product->category->name}}
                                 </td>
@@ -167,7 +163,7 @@
                                     {{$product->brand}}
                                 </td>
                                 <td id="product-unit{{$product->id}}">
-                                    {{$product->name}}
+                                    {{($product->unit->name ?? 'bouteille')}}
                                 </td>
                                 <td class="text-right">
                                     <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{$product->id}}">
@@ -259,7 +255,7 @@
                 <div class="modal-body">
                     <div class="row mb-3 align-items-end">
                         <div class="col-lg-12 mb-4">
-                            <label class="form-label">Nom</label>
+                            <label class="form-label">saisissez le nom de la catégorie</label>
                             <input type="text" id="category-name-add" class="form-control" placeholder="Saisissez le nom du site..." required>
                             <span class="text-danger" id="name-error"></span>
                         </div>

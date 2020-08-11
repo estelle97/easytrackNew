@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Company;
+use App\Customer;
 use App\User;
 use App\Site;
 use App\Http\Controllers\Controller;
@@ -150,6 +151,13 @@ class RegisterController extends Controller
                     $site->save();
 
         });
+
+        $customers = Customer::create([
+            'name' => 'Passager',
+            'street' => $site->street,
+            'town' => $site->town,
+            'site_id' => $site->id
+        ]);
 
         // Attach snack with his type of subscription
         $type = \App\Type::findOrFail($request->type);

@@ -50,11 +50,11 @@ class Site extends Model
         
         $total = 0;
         if($day){
-            foreach($this->sales->where('created_at', Carbon::today()) as $sale){
+            foreach($this->sales->where('created_at', Carbon::today())->where('validator_id','!=', null) as $sale){
                 $total += $sale->total();
             }    
         } else {
-            foreach($this->sales as $sale){
+            foreach($this->sales->where('validator_id','!=', null) as $sale){
                 $total += $sale->total();
             }
         }
@@ -66,11 +66,11 @@ class Site extends Model
         
         $total = 0;
         if($day){
-            foreach($this->purchases->where('created_at', Carbon::today()) as $pur){
+            foreach($this->purchases->where('created_at', Carbon::today())->where('validator_id','!=', null) as $pur){
                 $total += $pur->total();
             }
         } else{
-            foreach($this->purchases as $pur){
+            foreach($this->purchases->where('validator_id','!=', null) as $pur){
                 $total += $pur->total();
             }
         }

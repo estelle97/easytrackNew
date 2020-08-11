@@ -82,7 +82,7 @@ class PurchaseController extends Controller
 
     public function getElementBySite(Request $request){
         $suppliers = '';
-        $products = '';
+        $products = "<option selected> Sélectionnez un produit </option>";
 
         foreach (Site::find($request->site_id)->suppliers as $supl) {
             $suppliers .= "<option value='".$supl->id."'> ".$supl->name."</option>";
