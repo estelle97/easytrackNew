@@ -96,7 +96,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('easytrack/roles/update', 'SuperAdmin\RoleController@update');
     Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
     Route::post('easytrack/roles/attachPermissionToRole', 'SuperAdmin\RoleController@attachPermissionToRole');
+
+    Route::post('easytrack/products/{product}', 'SuperAdmin\ProductController@update');
     Route::resource('easytrack/products', 'SuperAdmin\ProductController');
+
+    Route::post('easytrack/categories/{category}', 'SuperAdmin\CategoryController@update');
     Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
     
 

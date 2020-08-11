@@ -531,7 +531,7 @@
 
             $.ajax({
                 url: '/easytrack/categories/'+id,
-                method: 'put',
+                method: 'post',
                 data: {
                     _token : token,
                     name : name,
