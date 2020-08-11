@@ -101,7 +101,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('easytrack/products', 'SuperAdmin\ProductController');
 
     Route::post('easytrack/categories/{category}', 'SuperAdmin\CategoryController@update');
-    Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
+    Route::get('easytrack/categories/{category}', 'SuperAdmin\CategoryController@show');
+    Route::post('easytrack/categories', 'SuperAdmin\CategoryController@store');
+    Route::get('easytrack/categories/{category}', 'SuperAdmin\CategoryController@index');
+    Route::delete('easytrack/categories/{category}', 'SuperAdmin\CategoryController@delete');
     
 
     
