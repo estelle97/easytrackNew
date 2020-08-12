@@ -45,12 +45,19 @@
                                     Fournisseurs
                                 </a>
                             </li>
+                            
                             <li>
                                 <a class="dropdown-item" href={{route('employee.sites')}}>
                                     Gérer Site
                                 </a>
                             </li>
                         @endif
+                        <li>
+                            <a class="dropdown-item" href="/employee/customers">
+                                Clients
+                            </a>
+                        </li>
+        
                     </ul>
                 </li>
             @endif

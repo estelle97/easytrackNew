@@ -15,7 +15,7 @@
                                 d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z"
                                 fill="rgba(255,255,255,1)" /></svg>
                     </a>
-                    Passer une commande
+                    Mettre à jour la commande SO-{{$sale->code}}
                 </h2>
             </div>
         </div>
@@ -25,23 +25,24 @@
             <div class="card">
                 <div class="order-box">
                     <div class="order-details-box">
-                        <div class="order-main-info"><span>Commande #</span><strong>KHD8374</strong></div>
-                        <div class="order-sub-info"><span>Créer le</span><strong class="order-sub-info-date">January 14th, 2019</strong>
+                        <div class="order-main-info"><span>Commande </span><strong>SO-{{$sale->code}}</strong></div>
+                        <div class="order-sub-info"><span>Créer le</span><strong class="order-sub-info-date">{{ date('M d, Y', strtotime($sale->created_at))}}</strong>
                         </div>
                     </div>
                     <div class="order-controls mb-4">
                         <form class="form-inline">
                             <div class="form-group mb-3">
                                 <label for="">Site</label>
-                                <select name="role" id="sites" class="form-select">
-                                    <option selected> Sélectionnez un site </option>
-                                    <option value={{Auth::user()->employee->site->id}}> {{Auth::user()->employee->site->name}} </option>
+                                <select name="role" id="sites" disabled class="form-select">
+                                    <option selected value={{$sale->site->id}}> {{$sale->site->name}} </option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for=""> Client </label>
                                 <select id="customers" class="form-select">
-                                   
+                                    @foreach ($sale->site->customers as $cus)
+                                        <option {{($sale->site->customer_id == $cus->id) ? 'selected' : ''}} value={{$cus->id}} > {{$cus->name}} </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </form>
@@ -76,11 +77,51 @@
                                         <th>Nom</th>
                                         <th>Quantité</th>
                                         <th>Prix unitaire</th>
-                                        <th>Subtotal</th>
+                                        <th>sous total</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody class="order-list">
+                                    @foreach ($sale->products as $prod)
+                                        <tr id="product-{{$prod->id}}">
+                                                <td>
+                                                    <div class="product-image mt-3 mb-3"
+                                                        style="background-image: url({{asset('template/assets/static/products/beer-2.jpg')}})">
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align: middle;">
+                                                    <div class="product-name" id="name-{{$prod->id}}" data-name="{{$prod->name}}">{{$prod->name}}</div>
+                                                </td>
+                                                <td style="vertical-align: middle;">
+                                                    <div class="product-price" id="price-{{$prod->id}}"  data-price="{{$prod->pivot->price}}">{{$prod->pivot->price}} FCFA</div>
+                                                </td>
+                                                <td style="vertical-align: middle;">
+                                                    <div class="quantity-selector">
+                                                        <div class="quantity-input">
+                                                            <div class="input-group">
+                                                                <span class="input-group-btn mr-1">
+                                                                    <a class="btn btn-light p-1" id="minus-{{$prod->id}}" onclick="updateQty({{$prod->id}}, -1)">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z" fill="rgba(0,0,0,1)"/></svg>
+                                                                    </a>
+                                                                </span>
+                                                                <input type="text" class="form-control p-0 text-center border-0" value="{{$prod->pivot->qty}}" id="qty-{{$prod->id}}" data-total={{$sale->site->products->find($prod->id)->pivot->qty}} data-qty={{$prod->pivot->qty}} required oninput="updateQty({{$prod->id}}, this.value)">
+                                                                <span class="input-group-btn ml-1">
+                                                                    <a class="btn btn-light p-1" id="plus-{{$prod->id}}" onclick="updateQty({{$prod->id}})">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(0,0,0,1)"/></svg>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align: middle;">
+                                                    <div class="product-price" id="subtotal-{{$prod->id}}" data-subtotal={{$prod->pivot->price * $prod->pivot->qty}}> {{$prod->pivot->price * $prod->pivot->qty}} FCFA </div>
+                                                </td>
+                                                <td style="vertical-align: middle;">
+                                                    <a class="btn btn-light p-1 delete" data-product="{{$prod->id}}" onclick="removeElement({{$prod->id}})" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgb(255, 62, 62)"/></svg></a>
+                                                </td>
+                                            </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -101,8 +142,8 @@
                                     <div
                                         class="form-selectgroup form-selectgroup-boxes d-flex flex-row">
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="cash"
-                                                class="form-selectgroup-input" checked>
+                                            <input type="radio" {{($sale->paying_method == 'cash') ? 'checked' : ''}} class="paying_method" name="paying_method" value="cash"
+                                                class="form-selectgroup-input">
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
                                                 <div class="mr-3">
@@ -116,7 +157,7 @@
                                             </div>
                                         </label>
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="om"
+                                            <input type="radio" {{($sale->paying_method == 'om') ? 'checked' : ''}} class="paying_method" name="paying_method" value="om"
                                                 class="form-selectgroup-input">
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
@@ -131,7 +172,7 @@
                                             </div>
                                         </label>
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="momo"
+                                            <input type="radio" {{($sale->paying_method == 'momo') ? 'checked' : ''}} class="paying_method" name="paying_method" value="momo"
                                                 class="form-selectgroup-input">
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
@@ -153,34 +194,32 @@
                     <div class="col-md-12 mb-4">
                         <h5 class="order-section-heading">Récapitulatif</h5>
                         <div class="order-summary-row">
-                            <div class="order-summary-label"><span>Subtotal</span></div>
-                            <div class="order-summary-value subtotal">0</div>
+                            <div class="order-summary-label"><span>Total</span></div>
+                            <div class="order-summary-value subtotal"> {{$sale->total()}} </div>
                         </div>
                         <div class="order-summary-row">
                             <div class="order-summary-label"><span>Transport</span></div>
                             <div class="order-summary-value">0</div>
                         </div>
                         <div class="order-summary-row as-total">
-                            <div class="order-summary-label"><span>Total</span></div>
-                            <div class="order-summary-value grand-total">0</div>
+                            <div class="order-summary-label"><span> Grand Total</span></div>
+                            <div class="order-summary-value grand-total"> {{$sale->total()}} </div>
                         </div>
                     </div>
                     <div class="col-md-12 mb-4">
                         <label class="form-label"> Etat </label>
                         <select name="role" id="status" class="form-select">
-                            <option value="0"> Commandé </option>
-                            @if(Auth::user()->role->slug == 'manager' || Auth::user()->role->slug == 'cashier')
-                                <option value="1">   Servi   </option>
-                                <option value="2">   Payé   </option>
-                            @endif
+                            <option {{($sale->status == 0) ? 'selected' : ''}} value="0"> Commandé </option>
+                            <option {{($sale->status == 1) ? 'selected' : ''}} value="1">   Servi   </option>
+                            <option {{($sale->status == 2) ? 'selected' : ''}} value="2">   Payé   </option>
                         </select>
                     </div>
                     <div class="col-md-12">
                         <div>
                             <div class="form-group">
                                 <label class="form-label"> Notes </label>
-                                <textarea class="form-control mb-4" id="sale_note" placeholder="Donner un avis"></textarea>
-                            </div>
+                                <textarea class="form-control mb-4" id="sale_note" placeholder="Donner un avis">{{$sale->sale_note}} </textarea>
+                        </div>
                         </div>
                         <button class="btn btn-primary btn-block" onclick="order()">Enregister</button>
                     </div>
@@ -214,6 +253,8 @@
     });
 </script>
 <script>
+    // INItIALISATION
+    init();
     // AUTOCOMPLETE
     var categoriesSelect = $("#categories").selectize({});
     var suppliersSelect = $("#suppliers").selectize({});
@@ -386,7 +427,7 @@
         });
 
         $.ajax({
-            url: '/employee/sales',
+            url: '/employee/sales/{{$sale->id}}',
             method: 'post',
             data: {
                 _token: token,
@@ -404,15 +445,14 @@
         });
     }
 
-    $("#sites").change(function(){
-        var token = '{{@csrf_token()}}';
-        var site = $(this).val();
+
+    function init(){
+        var site = $("#sites").val();
 
         $.ajax({
-            url: '/employee/sales/site',
+            url: '/employee/sales/{{$sale->id}}/update/init',
             method: 'get',
             data: {
-                _token: token,
                 site_id: site
                 
             },
@@ -422,11 +462,14 @@
                 productInDB = [
                     ...data.products
                 ];
+                products = [
+                    ...data.saleProducts
+                ]
             displayProduct();
             }
 
         });
-    });
+    }
 
 </script>
 @endsection

@@ -19,7 +19,7 @@
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a class="text-white mr-3 mb-0" data-toggle="modal" data-target="#modal-pos">
+                    <a class="text-white mr-3 mb-0" onclick="createPurchase()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
                             class="mr-2">
                             <path fill="none" d="M0 0h24v24H0z" />
@@ -138,7 +138,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                            <select class="btn btn-sm {{($pur->status == 0) ? 'btn-warning' : 'btn-success'}}" name="status" id="status" onchange="updateStatus({{$pur->id}})">
+                                            <select class="btn btn-sm {{($pur->status == 0) ? 'btn-warning' : 'btn-success'}}" name="status" onchange="updateStatus({{$pur->id}})">
                                                     <option {{($pur->status == 0) ? 'selected' : ''}} value="0"> Non livrée </option>
                                                     <option {{($pur->status == 1) ? 'selected' : ''}} value="1"> Livrée </option>
                                                 </select>
@@ -272,182 +272,10 @@
             
 
     <div class="modal-section">
-        <div class="modal modal-blur fade" id="modal-pos" .modal();tabindex="-1" role="dialog"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div id="pos-app">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Passer une commande</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <line x1="18" y1="6" x2="6" y2="18" />
-                                    <line x1="6" y1="6" x2="18" y2="18" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="modal-body bg-white">
-                            <section class="pos-section">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card border-0 p-0">
-                                            <div class="card-body p-0">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row d-flex justify-content-between">
-                                                            <div class="col-md-6 mb-4">
-                                                                <label class="form-label"> Site </label>
-                                                                <select name="role" id="sites" class="form-select">
-                                                                    <option selected> Sélectionnez un site </option>
-                                                                    @foreach (Auth::user()->companies->first()->sites as $site)
-                                                                        <option value={{$site->id}}> {{$site->name}} </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
 
-                                                            <div class="col-md-6 mb-4">
-                                                                <label class="form-label"> Fournisseur </label>
-                                                                <select name="role" id="suppliers" class="form-select">
-                                                                   
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-12 mb-4">
-                                                                <select name="role" id="products" class="form-select">
-                                                                    <option disabled selected>Selectionnez un produit</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="table-responsive transaction-list">
-                                                                <table class="table table-hover table-striped table-fixed">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th class="col-sm-4 ">Nom</th>
-                                                                            <th class="col-sm-2 text-center">Prix</th>
-                                                                            <th class="col-sm-3 text-center">Quantité</th>
-                                                                            <th class="col-sm-3 text-center pl-3">Sous total</th>
-                                                                            <th class="col-sm-3 text-center"></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody class="order-list">
-                                                                        
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="row">
-                                                                <div class="col-sm-4 mb-2">
-                                                                    <span class="totals-title mr-3">Produits</span>
-                                                                    <span class="product-number">0</span>
-                                                                </div>
-                                                                <div class="col-sm-4 mb-2">
-                                                                    <span class="totals-title mr-3">Total</span>
-                                                                    <span class="md total">0</span>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <span class="totals-title mr-3">Transport</span>
-                                                                    <span >0.00</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="payment-amount text-right">
-                                                <h4>Grand Total <span class="grand-total" class="h2 ml-2">0</span></h4>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-md-12 mb-4">
-                                                    <label class="form-label">Moyen de paiement</label>
-                                                    <div
-                                                        class="form-selectgroup form-selectgroup-boxes d-flex flex-row">
-                                                        <label class="form-selectgroup-item flex-fill">
-                                                            <input type="radio" class="paying_method" name="paying_method" value="cash"
-                                                                class="form-selectgroup-input" checked>
-                                                            <div
-                                                                class="form-selectgroup-label d-flex align-items-center p-3">
-                                                                <div class="mr-3">
-                                                                    <span class="form-selectgroup-check"></span>
-                                                                </div>
-                                                                <div>
-                                                                    <span
-                                                                        class="payment payment-provider-cash payment-sm mr-2 shadow-none"></span>
-                                                                    Cash
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                        <label class="form-selectgroup-item flex-fill">
-                                                            <input type="radio" class="paying_method" name="paying_method" value="om"
-                                                                class="form-selectgroup-input">
-                                                            <div
-                                                                class="form-selectgroup-label d-flex align-items-center p-3">
-                                                                <div class="mr-3">
-                                                                    <span class="form-selectgroup-check"></span>
-                                                                </div>
-                                                                <div>
-                                                                    <span
-                                                                        class="payment payment-provider-om payment-sm mr-2 shadow-none"></span>
-                                                                    Orange Money
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                        <label class="form-selectgroup-item flex-fill">
-                                                            <input type="radio" class="paying_method" name="paying_method" value="momo"
-                                                                class="form-selectgroup-input">
-                                                            <div
-                                                                class="form-selectgroup-label d-flex align-items-center p-3">
-                                                                <div class="mr-3">
-                                                                    <span class="form-selectgroup-check"></span>
-                                                                </div>
-                                                                <div>
-                                                                    <span
-                                                                        class="payment payment-provider-mtn payment-sm mr-2 shadow-none"></span>
-                                                                    MOMO
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-md-12 mb-4">
-                                                    <label class="form-label"> Etat </label>
-                                                    <select name="role" id="status" class="form-select">
-                                                        <option value="0">Non livrée</option>
-                                                        <option value="1"> livrée </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12">
-                                                <div class="mb-2 mb-0">
-                                                    <label class="form-label"> Notes </label>
-                                                    <textarea rows="5" class="form-control" id="purchase_text" placeholder="Description">  </textarea>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" style="width: 100%;" onclick="order()">
-                                Enregistrer
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="modal modal-blur fade" id="modal-pos" .modal();tabindex="-1" role="dialog" aria-hidden="true">
+            
         </div>
-
-        <div class="modal modal-blur fade" id="modal-pos-update" .modal();tabindex="-1" role="dialog" aria-hidden="true"> </div>
 
         <div class="modal modal-blur fade" id="modal-delete-purchaseorder" tabindex="-1" role="dialog"
             aria-hidden="true">
@@ -543,7 +371,7 @@
                 $("#subtotal-"+val).html(parseInt($("#qty-"+val).data('qty')) * parseInt($("#price-"+val).data('price')));
                 $("#subtotal-"+val).data('subtotal', parseInt($("#qty-"+val).data('qty')) * parseInt($("#price-"+val).data('price')));
             })
-            console.log(total);
+            // console.log(total);
             $(".grand-total").html(total);
             $(".total").html(total);
         }
@@ -558,8 +386,9 @@
             $(".product-number").html(products.length);
             calculate();
         }
+
         function addElement(el) {
-            console.log(el);
+            // console.log(el);
             if(products.includes(el.data('id'))){
                 updateQty(el.data('id'));
             } else{
@@ -600,7 +429,7 @@
         }
 
         function updateQty(el, one = 1){
-            console.log(el);
+           
             var  product = $("#qty-"+el);
             var nbr;
             if(one != 1 && one != -1) nbr = one;
@@ -611,18 +440,24 @@
                 product.data('qty', nbr);
                 product.val(nbr);
             }
-            calculate();
+            return calculate();
+        }
+
+        function addProduct(){
+            element = ($("#products").children('option:selected'));
+            if(element.data('id') != null)
+            addElement(element);
         }
 
         $('#products').change(function () {
 
-            // console.log($(this).children('option:selected').data());
+            console.log($(this).children('option:selected').data());
             element = ($(this).children('option:selected'));
             if(element.data('id') != null)
             addElement(element);
         });
 
-        function order() {
+        function order_create() {
             var token = '{{@csrf_token()}}';
             var order = '';
             var site = $("#sites").val();
@@ -656,9 +491,44 @@
             });
         }
 
-        $("#sites").change(function(){
+        function order_update(purchase_id) {
             var token = '{{@csrf_token()}}';
-            var site = $(this).val();
+            var order = '';
+            var site = $("#sites").val();
+            var supplier = $("#suppliers").val();
+            var paying_method = $("input[type='radio']:checked").val();
+            var status = $("#status").val();
+            var purchase_text = $("#purchase_text").val();
+            $.each(products, function (key, val) {
+                id = val;
+                qty = $("#qty-"+val).data('qty');
+                price = $("#price-"+val).data('price');
+                order += id+';'+qty+';'+price+';0|';
+            });
+
+            
+            $.ajax({
+                url: '/admin/purchases/'+purchase_id+'/update',
+                method: 'post',
+                data: {
+                    _token: token,
+                    order : order,
+                    site_id : site,
+                    supplier_id: supplier,
+                    status: status,
+                    paying_method: paying_method,
+                    purchase_text: purchase_text
+                },
+                success: function(data){
+                    location.reload();
+                }
+
+            });
+        }
+
+        function changeSite(){
+            var token = '{{@csrf_token()}}';
+            var site = $("#sites").val();
 
             $.ajax({
                 url: '/admin/purchases/site',
@@ -672,9 +542,24 @@
                     $("#suppliers").html(data.suppliers);
                     $("#products").html(data.products);
                 }
-
             });
-        });
+        }
+
+        function createPurchase(){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url: '/admin/purchases/create',
+                method: 'get',
+                data: {
+                    _token: token
+                },
+                success: function(data){
+                    $("#modal-pos").html(data).modal();
+                    
+                }
+            });
+        }
 
         function updatePurchase(id){
             var token = '{{csrf_token()}}';
@@ -686,7 +571,8 @@
                     _token: token
                 },
                 success: function(data){
-                    $("#modal-pos").html(data).modal();
+                    $("#modal-pos").html(data.view).modal();
+                    products = [...data.products];
                 }
             });
         }

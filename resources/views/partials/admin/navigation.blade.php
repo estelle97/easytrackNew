@@ -44,6 +44,11 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" href="/admin/customers">
+                            Clients
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" href={{route('admin.sites')}}>
                             Gérer Sites
                         </a>

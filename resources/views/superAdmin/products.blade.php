@@ -85,7 +85,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="card col-lg-3 p-3" style="max-height: 400px;">
+    <div class="card col-lg-3 p-3">
         <div class="row">
             <div class="col-lg-6">
                 <h2 class="">
@@ -125,6 +125,14 @@
                                 <path fill="none" d="M0 0h24v24H0z" />
                                 <path
                                     d="M15.728 9.686l-1.414-1.414L5 17.586V19h1.414l9.314-9.314zm1.414-1.414l1.414-1.414-1.414-1.414-1.414 1.414 1.414 1.414zM7.242 21H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 21z" />
+                            </svg>
+                        </a>
+                        <a  class="btn-e-icon text-black" onclick="deleteCategory({{$cat->id}})">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                width="20" height="20">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
                             </svg>
                         </a>
                     </div>
@@ -174,16 +182,13 @@
                                             data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">
-                                                Dupiquer
+                                                Afficher
                                             </a>
                                             <a class="dropdown-item" href="#">
                                                 Marquer comme inactif
                                             </a>
-                                            <a class="dropdown-item" href="#">
-                                                Ajouter à une categorie
-                                            </a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" onclick="deleteProduct({{$product->id}})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                     width="18" height="18" class="mr-2">
                                                     <path fill="none" d="M0 0h24v24H0z" />
@@ -255,8 +260,8 @@
                 <div class="modal-body">
                     <div class="row mb-3 align-items-end">
                         <div class="col-lg-12 mb-4">
-                            <label class="form-label">saisissez le nom de la catégorie</label>
-                            <input type="text" id="category-name-add" class="form-control" placeholder="Saisissez le nom du site..." required>
+                            <label class="form-label">Nom</label>
+                            <input type="text" id="category-name-add" class="form-control" placeholder="Saisissez le nom de la categorie..." required>
                             <span class="text-danger" id="name-error"></span>
                         </div>
                     </div>
@@ -618,7 +623,7 @@
 
             $.ajax({
                 url : '/easytrack/products/'+id,
-                method : 'put',
+                method : 'post',
                 data : {
                     _token : token,
                     name : name,
@@ -655,6 +660,41 @@
                 }
 
             });
+        }
+
+        function deleteProduct(id){
+            var token = '{{csrf_token()}}';
+            if(confirm('Voulez vous vraiment supprimer ce produit?')){
+                $.ajax({
+                    url: '/easytrack/products/'+id+'/destroy',
+                    method: 'post',
+                    data: {
+                        _token: token
+                    },
+                    success: function(){
+                        $("#product"+id).fadeOut();
+                    }
+                });
+            }
+        }
+
+        function deleteCategory(id){
+            var token = '{{csrf_token()}}';
+            if(confirm('Voulez vous vraiment supprimer ce produit?')){
+                $.ajax({
+                    url: '/easytrack/categories/'+id+'/destroy',
+                    method: 'post',
+                    data: {
+                        _token: token
+                    },
+                    success: function(){
+                        $("#category"+id).fadeOut();
+                    },
+                    error: function(data){
+                        alert(data.responseJSON.message);
+                    }
+                });
+            }
         }
     </script>
 @endsection

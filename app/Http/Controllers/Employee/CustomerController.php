@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Employee;
 
+use App\Customer;
 use App\Http\Controllers\Controller;
-use App\Supplier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class SupplierController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class SupplierController extends Controller
     public function index()
     {
 
-        return view('employee.suppliers');
+        return view('employee.customers');
     }
 
     /**
@@ -40,21 +39,20 @@ class SupplierController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric'
+            'phone' => 'required|min:200000000|max:999999999|numeric'
         ]);
 
         if($request->site_id != 'all'){
-            $supplier = Supplier::create($request->only(
-                'name','company_name','email','phone1','phone2','town','street','postal_code','site_id'
+            $customer = Customer::create($request->only(
+                'name','company_name','email','phone','town','street','site_id'
             ));
         }else{
             foreach(Auth::user()->companies->first()->sites as $site){
-                Supplier::create([
+                Customer::create([
                     'name' => $request->name,
                     'company_name' => $request->company_name,
                     'email' => $request->email,
-                    'phone1' => $request->phone1,
-                    'phone2' => $request->phone2,
+                    'phone' => $request->phone,
                     'town' => $request->town,
                     'street' => $request->street,
                     'postal_code' => $request->postal_code,
@@ -63,17 +61,17 @@ class SupplierController extends Controller
             }
         }
 
-        flashy()->success("Le fournisseur a été ajouté avec succès");
+        flashy()->success("Le client a été ajouté avec succès");
         return 'success';
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Supplier  $supplier
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Supplier $supplier)
+    public function show(Customer $customer)
     {
         //
     }
@@ -81,10 +79,10 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Supplier  $supplier
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Supplier $supplier)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -93,18 +91,18 @@ class SupplierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Supplier  $supplier
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(Request $request, Customer $customer)
     {
         $request->validate([
             'name' => 'required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric'
+            'phone' => 'required|min:200000000|max:999999999|numeric'
         ]);
 
-        $supplier->update($request->only(
-            'name','company_name','email','phone1','phone2','town','street','postal_code','site_id'
+        $customer->update($request->only(
+            'name','company_name','email','phone','town','street','site_id'
         ));
 
         return 'success';
@@ -113,10 +111,10 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Supplier  $supplier
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Supplier $supplier)
+    public function destroy(Customer $customer)
     {
         //
     }

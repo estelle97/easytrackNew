@@ -167,7 +167,7 @@
                                                         <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
                                                             Afficher
                                                         </a>
-                                                    <a class="dropdown-item" onclick="updateSale({{$sale->id}})">
+                                                    <a class="dropdown-item" href={{route('admin.sales.edit', $sale->id)}}>
                                                         Modifier
                                                     </a>
                                                     @if ($sale->validator_id == null)

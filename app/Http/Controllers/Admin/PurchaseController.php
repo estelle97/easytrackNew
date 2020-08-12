@@ -29,7 +29,7 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        return view('ajax.admin.purchase_create');
     }
 
     /**
@@ -117,7 +117,15 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
-        return view('ajax/admin/purchase_update', compact('purchase'));
+        $products = [];
+        foreach($purchase->products as $prod){
+            $products[] = $prod->id;
+        }
+
+        return response()->json([
+            'products' => $products,
+            'view' =>  (string)view('ajax/admin/purchase_update', compact('purchase')),
+        ], 200);
     }
 
     /**
@@ -129,7 +137,37 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
+        $request->validate([
+            'site_id' => 'required',
+            'supplier_id' => 'required',
+            'order' => 'required',
+        ]);
 
+        $purchase->supplier_id = $request->supplier_id;
+        $purchase->purchase_text = $request->purchase_text;
+        $purchase->shipping_cost = $request->shipping_cost;
+        $purchase->paying_method = $request->paying_method;
+        $purchase->status = $request->status;
+        
+       
+        DB::transaction(function () use($request,$purchase){
+            $products = explode('|', rtrim($request->order,'|'));
+            $purchase->save();
+            $purchase->products()->detach();
+            foreach ($products as $prods) {
+                $prod = explode(';', $prods);
+                $purchase->products()->attach($prod[0],[
+                    'qty' => $prod[1],
+                    'cost' => $prod[2],
+                    'damages' => $prod[3],
+                    'site_id' => $request->site_id,
+                ]);
+            }
+        });
+
+        flashy()->success('La commande a été mise à jour avec succès');
+
+        return "success";
     }
 
     public function validatePurchase(Request $request, Purchase $purchase){
