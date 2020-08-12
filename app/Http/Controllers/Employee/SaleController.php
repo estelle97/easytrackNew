@@ -64,6 +64,41 @@ class SaleController extends Controller
         ], 200);
     }
 
+
+    public function getElementBySale(Request $request, Sale $sale){
+        $customers = '';
+        $products = [];
+        $saleProducts = [];
+
+    
+        foreach ($sale->site->products as $prod) {
+            $products[] = [
+                'id' => $prod->id,
+                'name' => $prod->name,
+                'photo' => asset("template/assets/static/products/beer-2.jpg"),
+                'category_id' => $prod->category_id,
+                'qty'=> $prod->pivot->qty,
+                'price' => $prod->pivot->price
+            ];
+        }
+
+        foreach($sale->products as $sprod){
+            $saleProducts[] = $sprod->id;
+        }
+
+        // dd($products);
+
+        foreach ($sale->site->customers as $cus) {
+            $customers .= "<option value='".$cus->id."'> ".$cus->name."</option>";
+        }
+
+        return response()->json([
+            "customers" => $customers,
+            "products" => $products,
+            "saleProducts" => $saleProducts
+        ], 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -162,7 +197,7 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        //
+        return view('employee.orders.pos_update', compact('sale'));
     }
 
     /**
@@ -174,7 +209,35 @@ class SaleController extends Controller
      */
     public function update(Request $request, Sale $sale)
     {
-        //
+        $request->validate([
+            'site_id' => 'required',
+            'customer_id' => 'required',
+            'order' => 'required',
+        ]);
+
+
+        $sale->customer_id = $request->customer_id;
+        $sale->sale_note = $request->sale_note;
+        $sale->shipping_cost = $request->shipping_cost;
+        $sale->paying_method = $request->paying_method;
+        $sale->status = $request->status;
+
+        DB::transaction(function () use($request,$sale){
+            $products = explode('|', rtrim($request->order,'|'));
+            $sale->save();
+            $sale->products()->detach();
+            foreach ($products as $prods) {
+                $prod = explode(';', $prods);
+                $sale->products()->attach($prod[0],[
+                    'qty' => $prod[1],
+                    'price' => $prod[2],
+                    'site_id' => $request->site_id,
+                ]);
+            }
+        });
+
+        flashy()->success('La commande a été mise à jour avec succès');
+        return "success";
     }
 
     public function validateSale(Request $request, Sale $sale){

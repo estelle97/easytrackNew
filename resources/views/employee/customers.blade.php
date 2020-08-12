@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Les Fournisseurs
+                    Les Clients
                 </h2>
             </div>
             <div class="col-auto">
@@ -18,7 +18,7 @@
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="btn btn-white" data-toggle="modal" data-target="#modal-create-supplier">
+                    <a href="#" class="btn btn-white" data-toggle="modal" data-target="#modal-create-customer">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -35,7 +35,7 @@
     <div class="row row-deck row-cards">
         <div class="card">
             <div class="table-responsive">
-                <table id="suppliers" class="table card-table table-vcenter text-nowrap datatable">
+                <table id="customers" class="table card-table table-vcenter text-nowrap datatable">
                     <thead>
                         <tr>
                             <th class="w-1">
@@ -46,51 +46,41 @@
                             <th class="exportable"> email </th>
                             <th class="exportable">Tel</th>
                             <th class="exportable"> Emplacement </th>
-                            <th class="exportable"> BP </th>
                             <th class="exportable"> Site </th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="suppliers">
-                        @foreach (Auth::user()->employee->site->suppliers()->get() as $supl)
-                            <tr id="supplier{{$supl->id}}">
+                    <tbody class="customers">
+                        @foreach (Auth::user()->employee->site->customers()->get() as $cus)
+                            <tr id="customer{{$cus->id}}">
                                 <td>
-                                    <input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select supplier">
-                                </td>
-                                <td>
-                                    <a class="text-reset" tabindex="-1" id="supplier-name{{$supl->id}}"> {{$supl->name}} </a>
-                                </td>
-                                <td id="supplier-company_name{{$supl->id}}">
-                                    {{$supl->company_name}}
-                                </td>
-                                <td id="supplier-email{{$supl->id}}">
-                                    {{$supl->email}}
+                                    <input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select customer">
                                 </td>
                                 <td>
-                                    <span id="supplier-phone1{{$supl->id}}">
-                                        {{$supl->phone1}}
-                                    </span>
-                                        -
-                                    <span id="supplier-phone2{{$supl->id}}">
-                                        {{$supl->phone2}}
+                                    <a class="text-reset" tabindex="-1" id="customer-name{{$cus->id}}"> {{$cus->name}} </a>
+                                </td>
+                                <td id="customer-company_name{{$cus->id}}">
+                                    {{$cus->company_name}}
+                                </td>
+                                <td id="customer-email{{$cus->id}}">
+                                    {{$cus->email}}
+                                </td>
+                                <td>
+                                    <span id="customer-phone{{$cus->id}}">
+                                        {{$cus->phone}}
                                     </span>
                                 </td>
                                 <td>
-                                    <span id="supplier-town{{$supl->id}}">
-                                        {{$supl->town}}
+                                    <span id="customer-town{{$cus->id}}">
+                                        {{$cus->town}} - {{$cus->street}}
                                     </span>
-                                    <span id="supplier-street{{$supl->id}}">
-                                        - {{$supl->street}}
-                                    </span>
+                                    
                                 </td>
-                                <td id="supplier-postal_code{{$supl->id}}">
-                                    {{$supl->postal_code}}
-                                </td>
-                                <td id="supplier-site{{$supl->id}}">
-                                    {{$supl->site->name}}
+                                <td id="customer-site{{$cus->id}}">
+                                    {{$cus->site->name}}
                                 </td>
                                 <td class="text-right">
-                                    <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-supplier{{$supl->id}}">
+                                    <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-customer{{$cus->id}}">
                                         Modifier
                                     </a>
                                     <span class="dropdown">
@@ -156,12 +146,12 @@
 
     <div class="modal-section">
 
-        {{-- Modal Add Supplier--}}
-        <div class="modal modal-blur fade" id="modal-create-supplier" tabindex="-1" role="dialog" aria-hidden="true">
+        {{-- Modal Add customer--}}
+        <div class="modal modal-blur fade" id="modal-create-customer" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Ajouter un nouveau fournisseur</h5>
+                        <h5 class="modal-title">Ajouter un nouveau client</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -175,66 +165,56 @@
                         <div class="row mb-3 align-items-end">
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Nom</label>
-                                <input type="text" id="supplier-name-add" class="form-control" placeholder="Saisissez le nom du fournisseur" required>
+                                <input type="text" id="customer-name-add" class="form-control" placeholder="Saisissez le nom du client" required>
                                 <span class="text-danger" id="name-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Companie</label>
-                                <input type="text" id="supplier-company_name-add" class="form-control"  placeholder="Saisissez la companie du fournisseur" required>
+                                <input type="text" id="customer-company_name-add" class="form-control"  placeholder="Saisissez la companie du client" required>
                                 <span class="text-danger" id="company_name-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Email</label>
-                                <input type="email" id="supplier-email-add" class="form-control"  placeholder="Saisissez l'adresse électronique...">
+                                <input type="email" id="customer-email-add" class="form-control"  placeholder="Saisissez l'adresse électronique...">
                                 <span class="text-danger" id="email-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
-                                <label class="form-label">Téléphone N°1</label>
-                                <input type="tel" id="supplier-phone1-add" class="form-control" placeholder="Saisissez le numéro de téléphone principal..." required  pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
-                                <span class="text-danger" id="phone1-error"></span>
-                            </div>
-                            <div class="col-lg-12 mb-4">
-                                <label class="form-label">Téléphone N°2</label>
-                                <input type="tel" id="supplier-phone2-add" class="form-control" placeholder="Saisissez le numéro de téléphone...">
-                                <span class="text-danger" id="phone2-error"></span>
+                                <label class="form-label">Téléphone </label>
+                                <input type="tel" id="customer-phone-add" class="form-control" placeholder="Saisissez le numéro de téléphone principal..."  required  pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
+                                <span class="text-danger" id="phone-error"></span>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Ville</label>
-                                <input type="text" id="supplier-town-add" class="form-control"  placeholder="Saisissez la ville..." required>
+                                <input type="text" id="customer-town-add" class="form-control"  placeholder="Saisissez la ville..." required>
                                 <span class="text-danger" id="town-error"></span>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Quartier</label>
-                                <input type="text" id="supplier-street-add" class="form-control" placeholder="Saisissez le quartier..." required>
+                                <input type="text" id="customer-street-add" class="form-control" placeholder="Saisissez le quartier..." required>
                                 <span class="text-danger" id="street-error"></span>
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-label">Boite postale</label>
-                                <input type="text" id="supplier-postal_code-add" class="form-control" placeholder="Saisissez le code postal...">
-                                <span class="text-danger" id="postal_code-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label"> Site </label>
-                                <select name="site_id" disabled id="supplier-site-add" class="form-select">
-                                    <option value={{Auth::user()->employee->site->id}}> {{Auth::user()->employee->site->name}} </option>
+                                <select name="site_id" disabled id="customer-site-add" class="form-select">
+                                    <option value="{{Auth::user()->employee->site->id}}"> {{Auth::user()->employee->site->name}} </option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick="addSupplier()" class="btn btn-primary" style="width: 100%;">Ajouter</button>
+                        <button type="button" onclick="addCustomer()" class="btn btn-primary" style="width: 100%;">Ajouter</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        {{-- Modal Update Supplier--}}
-        @foreach (Auth::user()->employee->site->suppliers()->get() as $supl)
-            <div class="modal modal-blur fade" id="modal-edit-supplier{{$supl->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+        {{-- Modal Update customer--}}
+        @foreach (Auth::user()->employee->site->customers()->get() as $cus)
+            <div class="modal modal-blur fade" id="modal-edit-customer{{$cus->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title"> Modifier le fournisseur </h5>
+                            <h5 class="modal-title"> Modifier le client </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -248,62 +228,50 @@
                             <div class="row mb-3 align-items-end">
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Nom</label>
-                                    <input type="text" id="supplier-name-update{{$supl->id}}" value="{{$supl->name}}" class="form-control"
-                                        placeholder="Saisissez le nom du fournisseur..." required>
-                                        <span class="text-danger" id="name-error{{$supl->id}}"></span>
+                                    <input type="text" id="customer-name-update{{$cus->id}}" value="{{$cus->name}}" class="form-control"
+                                        placeholder="Saisissez le nom du client..." required>
+                                        <span class="text-danger" id="name-error{{$cus->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Companie</label>
-                                    <input type="text" id="supplier-company_name-update{{$supl->id}}" value="{{$supl->company_name}}" class="form-control"
+                                    <input type="text" id="customer-company_name-update{{$cus->id}}" value="{{$cus->company_name}}" class="form-control"
                                         placeholder="Saisissez l'adresse..." required>
-                                        <span class="text-danger" id="company_name-error{{$supl->id}}"></span>
+                                        <span class="text-danger" id="company_name-error{{$cus->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Email</label>
-                                    <input type="email" id="supplier-email-update{{$supl->id}}" value="{{$supl->email}}" class="form-control"
+                                    <input type="email" id="customer-email-update{{$cus->id}}" value="{{$cus->email}}" class="form-control"
                                         placeholder="Saisissez l'adresse...">
-                                        <span class="text-danger" id="email-error{{$supl->id}}"></span>
+                                        <span class="text-danger" id="email-error{{$cus->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Téléphone N°1</label>
-                                    <input type="tel" id="supplier-phone1-update{{$supl->id}}" value="{{$supl->phone1}}" class="form-control"
+                                    <label class="form-label">Téléphone </label>
+                                    <input type="tel" id="customer-phone-update{{$cus->id}}" value="{{$cus->phone}}" class="form-control"
                                         placeholder="Saisissez le numéro de téléphone principale..."  pattern="[0-9]{3}[0-9]{3}[0-9]{3}" required>
-                                        <span class="text-danger" id="phone1-error{{$supl->id}}"></span>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Téléphone N°2</label>
-                                    <input type="tel" id="supplier-phone2-update{{$supl->id}}" value="{{$supl->phone2}}" class="form-control"
-                                        placeholder="Saisissez le numéro de téléphone...">
-                                        <span class="text-danger" id="phone2-error{{$supl->id}}"></span>
+                                        <span class="text-danger" id="phone-error{{$cus->id}}"></span>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label">Ville</label>
-                                    <input type="text" id="supplier-town-update{{$supl->id}}" value="{{$supl->town}}" class="form-control"
+                                    <input type="text" id="customer-town-update{{$cus->id}}" value="{{$cus->town}}" class="form-control"
                                         placeholder="Saisissez la ville..." required>
-                                        <span class="text-danger" id="town-error{{$supl->id}}"></span>
+                                        <span class="text-danger" id="town-error{{$cus->id}}"></span>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label">Quartier</label>
-                                    <input type="text" id="supplier-street-update{{$supl->id}}" value="{{$supl->street}}" class="form-control"
+                                    <input type="text" id="customer-street-update{{$cus->id}}" value="{{$cus->street}}" class="form-control"
                                         placeholder="Saisissez le quartier..." required>
-                                        <span class="text-danger" id="street-error{{$supl->id}}"></span>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-label">Boite Postale</label>
-                                    <input type="text" id="supplier-postal_code-update{{$supl->id}}" value="{{$supl->postal_code}}" class="form-control"
-                                        placeholder="Saisissez le quartier..." required>
-                                        <span class="text-danger" id="postal_code-error{{$supl->id}}"></span>
+                                        <span class="text-danger" id="street-error{{$cus->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label"> Site </label>
-                                    <select name="site_id" disabled id="supplier-site-update{{$supl->id}}" class="form-select">
-                                        <option value={{Auth::user()->employee->site->id}}> {{Auth::user()->employee->site->name}} </option>
+                                    <select name="site_id" disabled id="customer-site-update{{$cus->id}}" class="form-select">
+                                        <option selected value="{{Auth::user()->employee->site->id}}"> {{Auth::user()->employee->site->name}} </option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button onclick="updateSupplier({{$supl->id}})" type="button" class="btn btn-primary" style="width: 100%;"> Mettre à jour </button>
+                            <button onclick="updateCustomer({{$cus->id}})" type="button" class="btn btn-primary" style="width: 100%;"> Mettre à jour </button>
                         </div>
                     </div>
                 </div>
@@ -336,7 +304,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#suppliers').DataTable({
+            $('#customers').DataTable({
                  dom: 'Blfrtip',
                 buttons: [
                     'colvis',
@@ -379,35 +347,31 @@
         } );
     </script>
     <script>
-        function addSupplier(){
+        function addCustomer(){
             var token = '{{csrf_token()}}';
-            var name = $("#supplier-name-add").val();
-            var company_name = $("#supplier-company_name-add").val();
-            var email = $("#supplier-email-add").val();
-            var phone1 = $("#supplier-phone1-add").val();
-            var phone2 = $("#supplier-phone2-add").val();
-            var town = $("#supplier-town-add").val();
-            var street = $("#supplier-street-add").val();
-            var postal_code = $("#supplier-postal_code-add").val();
-            var site_id = $("#supplier-site-add").val();
+            var name = $("#customer-name-add").val();
+            var company_name = $("#customer-company_name-add").val();
+            var email = $("#customer-email-add").val();
+            var phone = $("#customer-phone-add").val();
+            var town = $("#customer-town-add").val();
+            var street = $("#customer-street-add").val();
+            var site_id = $("#customer-site-add").val();
 
             $.ajax({
-                url: '/employee/suppliers',
+                url: '/employee/customers',
                 method: 'post',
                 data: {
                     _token : token,
                     name : name,
                     company_name : company_name,
                     email : email,
-                    phone1 : phone1,
-                    phone2 : phone2,
+                    phone : phone,
                     town : town,
                     street : street,
-                    postal_code : postal_code,
                     site_id : site_id,
                 },
                 success: function(data){
-                    // $("#modal-create-supplier").modal('hide');
+                    // $("#modal-create-customer").modal('hide');
                     location.reload();
                 },
                 error: function (err) {
@@ -429,49 +393,43 @@
             });
         }
 
-        function updateSupplier(id){
+        function updateCustomer(id){
             var token = '{{csrf_token()}}';
-            var name = $("#supplier-name-update"+id).val();
-            var company_name = $("#supplier-company_name-update"+id).val();
-            var email = $("#supplier-email-update"+id).val();
-            var phone1 = $("#supplier-phone1-update"+id).val();
-            var phone2 = $("#supplier-phone2-update"+id).val();
-            var town = $("#supplier-town-update"+id).val();
-            var street = $("#supplier-street-update"+id).val();
-            var postal_code = $("#supplier-postal_code-update"+id).val();
-            var site_id = $("#supplier-site-update"+id).val();
+            var name = $("#customer-name-update"+id).val();
+            var company_name = $("#customer-company_name-update"+id).val();
+            var email = $("#customer-email-update"+id).val();
+            var phone = $("#customer-phone-update"+id).val();
+            var town = $("#customer-town-update"+id).val();
+            var street = $("#customer-street-update"+id).val();
+            var site_id = $("#customer-site-update"+id).val();
 
-            var site = $('#supplier-site-update'+id+' option:selected').text();
+            var site = $('#customer-site-update'+id+' option:selected').text();
     
             $.ajax({
-                url: '/employee/suppliers/'+id,
+                url: '/employee/customers/'+id,
                 method: 'post',
                 data: {
                     _token : token,
                     name : name,
                     company_name : company_name,
                     email : email,
-                    phone1 : phone1,
-                    phone2 : phone2,
+                    phone : phone,
                     town : town,
                     street : street,
-                    postal_code : postal_code,
                     site_id : site_id,
                 },
                 success: function(data){
                     if(data == 'success'){
                         $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-supplier"+id).modal().hide();
+                        // $("#modal-edit-customer"+id).modal().hide();
 
-                        $("#supplier-name"+id).fadeOut().html(name).fadeIn();
-                        $("#supplier-company_name"+id).fadeOut().html(company_name).fadeIn();
-                        $("#supplier-postal_code"+id).fadeOut().html(postal_code).fadeIn();
-                        $("#supplier-site"+id).fadeOut().html(site).fadeIn();
-                        $("#supplier-email"+id).fadeOut().html(email).fadeIn();
-                        $("#supplier-phone1"+id).fadeOut().html(phone1).fadeIn();
-                        $("#supplier-phone2"+id).fadeOut().html(phone2).fadeIn();
-                        $("#supplier-town"+id).fadeOut().html(town).fadeIn();
-                        $("#supplier-street"+id).fadeOut().html(street).fadeIn();
+                        $("#customer-name"+id).fadeOut().html(name).fadeIn();
+                        $("#customer-company_name"+id).fadeOut().html(company_name).fadeIn();
+                        $("#customer-site"+id).fadeOut().html(site).fadeIn();
+                        $("#customer-email"+id).fadeOut().html(email).fadeIn();
+                        $("#customer-phone"+id).fadeOut().html(phone).fadeIn();
+                        $("#customer-town"+id).fadeOut().html(town).fadeIn();
+                        $("#customer-street"+id).fadeOut().html(street).fadeIn();
                     }
                 },
                 error: function (err) {

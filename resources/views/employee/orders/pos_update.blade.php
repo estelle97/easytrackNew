@@ -8,7 +8,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    <a href={{route('admin.sales.kanban')}} class="mr-2">
+                    <a href={{route('employee.sales.kanban')}} class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path
@@ -427,7 +427,7 @@
         });
 
         $.ajax({
-            url: '/admin/sales/{{$sale->id}}',
+            url: '/employee/sales/{{$sale->id}}',
             method: 'post',
             data: {
                 _token: token,
@@ -450,7 +450,7 @@
         var site = $("#sites").val();
 
         $.ajax({
-            url: '/admin/sales/{{$sale->id}}/update/init',
+            url: '/employee/sales/{{$sale->id}}/update/init',
             method: 'get',
             data: {
                 site_id: site

@@ -99,6 +99,16 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if($category->products->count() == 0){
+            if($category->delete()){
+                return response()->json([
+                    'message' => 'Catégorie supprimé avec succès',
+                ], 200);
+            }
+        }
+
+        return response()->json([
+            'message' => 'Impossible de supprimer cette catégorie car elle contient des produits'
+        ], 403);
     }
 }

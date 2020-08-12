@@ -139,16 +139,23 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('admin/products', 'Admin\ProductController@store');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
     
+    Route::post('admin/customers/{customer}/destroy', 'Admin\CustomerController@destroy');
+    Route::post('admin/customers/{customer}', 'Admin\CustomerController@update');
+    Route::resource('admin/customers', 'Admin\CustomerController');
+
     Route::post('admin/suppliers/{supplier}/destroy', 'Admin\SupplierController@destroy');
     Route::post('admin/suppliers/{supplier}', 'Admin\SupplierController@update');
     Route::resource('admin/suppliers', 'Admin\SupplierController');
 
 
 
+    Route::get('employee/sales/{sale}/update/init', 'Employee\SaleController@getElementBySale');
+    Route::get('employee/sales/{sale}/update', 'Employee\SaleController@edit')->name('employee.sales.edit');
     Route::get('employee/sales/{sale}/show', 'Employee\SaleController@show')->name('employee.sales.show');
     Route::post('employee/sales/{sale}/status', 'Employee\SaleController@updateSaleStatus');
     Route::post('employee/sales/{sale}/validate', 'Employee\SaleController@validateSale');
     Route::post('employee/sales/{sale}/invalidate', 'Employee\SaleController@invalidateSale');
+    Route::post('employee/sales/{sale}', 'Employee\SaleController@update');
     Route::post('employee/sales', 'Employee\SaleController@store');
     Route::get('employee/kanban', 'Employee\SaleController@kanban')->name('employee.sales.kanban');
     Route::get('employee/sales', 'Employee\SaleController@index')->name('employee.sales.all');
@@ -186,6 +193,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('employee/products', 'Employee\ProductController@store');
     Route::get('employee/products','Employee\ProductController@index')->name('employee.products');
     
+    Route::post('employee/customers/{customer}/destroy', 'Employee\CustomerController@destroy');
+    Route::post('employee/customers/{customer}', 'Employee\CustomerController@update');
+    Route::resource('employee/customers', 'Employee\CustomerController');
+
     Route::post('employee/suppliers/{supplier}/destroy', 'Employee\SupplierController@destroy');
     Route::post('employee/suppliers/{supplier}', 'Employee\SupplierController@update');
     Route::resource('employee/suppliers', 'Employee\SupplierController');
