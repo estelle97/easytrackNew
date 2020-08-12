@@ -24,8 +24,8 @@
                                             <div class="row d-flex justify-content-between">
                                                 <div class="col-md-5 mb-4">
                                                     <label class="form-label"> Site </label>
-                                                    <select name="role" id="sites" class="form-select">
-                                                        <option selected> Sélectionnez un site </option>
+                                                    <select name="role" disabled id="sites" class="form-select">
+                                                        <option> Sélectionnez un site </option>
                                                         @foreach (Auth::user()->companies->first()->sites as $site)
                                                             <option {{($purchase->site_id == $site->id) ? 'selected' : ''}} value={{$site->id}}> {{$site->name}} </option>
                                                         @endforeach
@@ -46,10 +46,10 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md-12 mb-4">
-                                                    <select name="role" id="products" class="form-select">
+                                                    <select name="role" id="products" class="form-select" onchange="addProduct()">
                                                         <option disabled selected>Selectionnez un produit</option>
                                                         @foreach ($purchase->site->products as $prod)
-                                                            <option class="product" data-id="{{$prod->id}}" data-qty="{{$prod->pivot->qty}}" data-price="{{$prod->pivot->price}}" value="{{$prod->id}}"> {{$prod->name}} </option>
+                                                            <option class="product" data-id="{{$prod->id}}" data-qty="{{$prod->pivot->qty}}" data-price="{{$prod->pivot->cost}}" value="{{$prod->id}}"> {{$prod->name}} </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -74,7 +74,7 @@
                                                                             <strong id="name-{{$prod->id}}" data-name={{$prod->name}}  >{{$prod->name}}  </strong>
                                                                         </button>
                                                                     </td>
-                                                                    <td class="text-center col-sm-2" id="price-{{$prod->id}}"  data-price={{$prod->pivot->price}}>  {{$prod->pivot->price}}  </td>
+                                                                    <td class="text-center col-sm-2" id="price-{{$prod->id}}"  data-price={{$prod->pivot->cost}}>  {{$prod->pivot->cost}}  </td>
                                                                     <td class="col-sm-3">
                                                                         <div class="input-group">
                                                                             <span class="input-group-btn mr-1">
@@ -90,7 +90,7 @@
                                                                             </span>
                                                                         </div>
                                                                     </td>
-                                                                    <td class="text-center" id="subtotal-{{$prod->id}}" data-subtotal={{$prod->pivot->price}}> {{$prod->pivot->price}} </td>
+                                                                    <td class="text-center" id="subtotal-{{$prod->id}}" data-subtotal={{$prod->pivot->cost}}> {{$prod->pivot->cost * $prod->pivot->qty}} </td>
                                                                     <td class="col-sm-2">
                                                                         <a class="btn btn-danger p-1 delete" data-product="{{$prod->id}}" onclick="removeElement({{$prod->id}})" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgba(255,255,255,1)"/></svg></a>
                                                                     </td>
@@ -108,7 +108,7 @@
                                                     </div>
                                                     <div class="col-sm-4 mb-2">
                                                         <span class="totals-title mr-3">Total</span>
-                                                        <span class="md total">0</span>
+                                                        <span class="md total"> {{$purchase->total()}} </span>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <span class="totals-title mr-3">Transport</span>
@@ -120,23 +120,69 @@
                                     </div>
                                 </div>
                                 <div class="payment-amount text-right">
-                                    <h4>Grand Total <span class="grand-total" class="h2 ml-2">0</span></h4>
+                                    <h4>Grand Total <span class="grand-total" class="h2 ml-2"> {{$purchase->total()}} </span></h4>
                                 </div>
 
-                                <div class="form-group row">
-                                    <div class="col-md-6 mb-4">
-                                        <label class="form-label"> Moyen de payement </label>
-                                        <select name="role" id="paying_method" class="form-select">
-                                            <option value="cash">Cash</option>
-                                            <option value="om">Orange Mony</option>
-                                            <option value="momo">MoMo</option>
-                                        </select>
+                                    <div class="form-group row">
+                                        <div class="col-md-12 mb-4">
+                                            <label class="form-label">Moyen de paiement</label>
+                                            <div
+                                                class="form-selectgroup form-selectgroup-boxes d-flex flex-row">
+                                                <label class="form-selectgroup-item flex-fill">
+                                                    <input type="radio" {{($purchase->paying_method == 'cash') ? 'checked' : ''}} class="paying_method" name="paying_method" value="cash"
+                                                        class="form-selectgroup-input">
+                                                    <div
+                                                        class="form-selectgroup-label d-flex align-items-center p-3">
+                                                        <div class="mr-3">
+                                                            <span class="form-selectgroup-check"></span>
+                                                        </div>
+                                                        <div>
+                                                            <span
+                                                                class="payment payment-provider-cash payment-sm mr-2 shadow-none"></span>
+                                                            Cash
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <label class="form-selectgroup-item flex-fill">
+                                                    <input type="radio" {{($purchase->paying_method == 'om') ? 'checked' : ''}} class="paying_method" name="paying_method" value="om"
+                                                        class="form-selectgroup-input">
+                                                    <div
+                                                        class="form-selectgroup-label d-flex align-items-center p-3">
+                                                        <div class="mr-3">
+                                                            <span class="form-selectgroup-check"></span>
+                                                        </div>
+                                                        <div>
+                                                            <span
+                                                                class="payment payment-provider-om payment-sm mr-2 shadow-none"></span>
+                                                            Orange Money
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <label class="form-selectgroup-item flex-fill">
+                                                    <input type="radio" {{($purchase->paying_method == 'momo') ? 'checked' : ''}} class="paying_method" name="paying_method" value="momo"
+                                                        class="form-selectgroup-input">
+                                                    <div
+                                                        class="form-selectgroup-label d-flex align-items-center p-3">
+                                                        <div class="mr-3">
+                                                            <span class="form-selectgroup-check"></span>
+                                                        </div>
+                                                        <div>
+                                                            <span
+                                                                class="payment payment-provider-mtn payment-sm mr-2 shadow-none"></span>
+                                                            MOMO
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+
+                                <div class="form-group">
+                                    <div class="col-md-12 mb-4">
                                         <label class="form-label"> Etat </label>
                                         <select name="role" id="status" class="form-select">
-                                            <option value="1">Non livré</option>
-                                            <option value="2">   livré   </option>
+                                            <option {{($purchase->status == 0) ? 'selected' : ''}} value="0">Non livré</option>
+                                            <option {{($purchase->status == 1) ? 'selected' : ''}} value="1">   livré   </option>
                                         </select>
                                     </div>
                                 </div>
@@ -144,7 +190,7 @@
                                 <div class="col-md-12">
                                     <div class="mb-2 mb-0">
                                         <label class="form-label"> Notes </label>
-                                        <textarea rows="5" class="form-control" id="purchase_text" placeholder="Description">  </textarea>
+                                        <textarea rows="5" class="form-control" id="purchase_text" placeholder="Description">{{$purchase->purchase_text}}</textarea>
                                     </div>
                                 </div>
 
@@ -154,7 +200,7 @@
                 </section>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" style="width: 100%;" onclick="order()">
+                <button type="button" class="btn btn-primary" style="width: 100%;" onclick='order_update({{$purchase->id}})'>
                     Enregistrer
                 </button>
             </div>
