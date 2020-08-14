@@ -87,11 +87,9 @@
                                         <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                             data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                         <div class="dropdown-menu dropdown-menu-right">
+                                             
                                             <a class="dropdown-item" href="#">
-                                                Dupiquer
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Marquer comme inactif
+                                                 Afficher
                                             </a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-site">

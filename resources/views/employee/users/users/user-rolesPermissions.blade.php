@@ -115,9 +115,7 @@
                                                         Actions
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">
-                                                            Dupliquer
-                                                        </a>
+                                                        c
                                                         <a class="dropdown-item" data-toggle="modal"
                                                             data-target="#modal-delete-role">
                                                             Supprimer

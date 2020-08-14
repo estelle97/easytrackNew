@@ -43,7 +43,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'cost' => 'required|numeric|min:0',
             'qty' => 'required|numeric|min:1',
-            'qty_alert' => 'required|numeric|min:1'
+            'qty_alert' => 'required|numeric|min:1',
         ]);
 
         $product = Product::find($request->product_id);

@@ -147,7 +147,7 @@
                                                             Marquer comme Payé
                                                         </a>
                                                         <a class="dropdown-item" href="#">
-                                                            Marquer comme inactif
+                                                             Afficher
                                                         </a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" href="#">
