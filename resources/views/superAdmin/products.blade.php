@@ -713,6 +713,26 @@
             }
         }
 
+        $("#profile").click(function(){
+            $(".file").click();
+
+            $('input[type="file"]').change(function(e) {
+                console.log(e.target.files);
+                var fileName = e.target.files[0].name;
+                // $("#file").val(fileName);
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    // get loaded data and render thumbnail.
+                    pic = "<img src='"+e.target.result+"' class='img img-responsive' width='100px' height='100px' />";
+                    $("#profile").html(pic);
+                    // document.getElementById("preview").src = e.target.result;
+                };
+                // read the image file as a data URL.
+                reader.readAsDataURL(this.files[0]);
+            });
+        })
+
         function preview(id){
              $(".file"+id).click();
 
