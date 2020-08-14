@@ -316,7 +316,7 @@
             form_data.append("phone", $("#user-phone-add").val());
             form_data.append("address", $("#user-address-add").val());
             form_data.append("bio", $("#user-bio-add").val());
-            form_data.append("password", $("#user-password-add").val());
+            form_data.append("password", $("#password").val());
             form_data.append("site_id", $("#user-site-add").val());
             form_data.append("role_id", $("#user-role-add").val());
             form_data.append("_token", '{{csrf_token()}}');
