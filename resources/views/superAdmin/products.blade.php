@@ -146,8 +146,7 @@
                 <table id="products" class="table card-table table-vcenter text-nowrap datatable">
                     <thead>
                         <tr>
-                            <th class="w-1"><input class="form-check-input m-0 align-middle"
-                                    type="checkbox"></th>
+                            <th class="w-1"></th>
                             <th class="exportable w-1">Code</th>
                             <th class="exportable">Nom</th>
                             <th class="exportable">Categorie</th>
@@ -159,8 +158,11 @@
                     <tbody class="products">
                         @foreach (App\Product::all() as $product)
                             <tr id="product{{$product->id}}">
-                                <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                        aria-label="Select invoice"></td>
+                                <td>
+                                     <a class="avatar avatar-upload rounded thumbnail" id="product-photo{{$product->id}}">
+                                        <img src="{{asset($product->photo)}}" />
+                                    </a>
+                                </td>
                                 <td><span class="text-muted"> {{$product->code}} </span></td>
                                 <td><a id="product-name{{$product->id}}" href="invoice.html" class="text-reset" tabindex="-1">{{$product->name}}</a>
                                 </td>
@@ -185,7 +187,7 @@
                                                 Afficher
                                             </a>
                                             <a class="dropdown-item" href="#">
-                                                Marquer comme inactif
+                                                 Afficher
                                             </a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" onclick="deleteProduct({{$product->id}})">
@@ -290,6 +292,18 @@
                 </div>
                 <div class="modal-body">
                     <div class="row mb-3 align-items-end">
+                        <div class="col-lg-3">
+                            <input type="file" name="img[]" class="file" accept="image/*" hidden>  
+                            <a id="profile" class="avatar avatar-upload rounded thumbnail">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                                    <span class="avatar-upload-text">Photo </span>
+                            </a>
+                        </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label">Nom</label>
                             <input type="text" id="product-name-add" class="form-control" placeholder="Saisissez le nom du produit..." required>
@@ -381,6 +395,10 @@
                     </div>
                     <div class="modal-body">
                         <div class="row mb-3 align-items-end">
+                            <input type="file" name="img[]" class="file{{$product->id}}" accept="image/*" hidden>  
+                            <a id="profile{{$product->id}}" class="avatar avatar-upload rounded thumbnail" onclick="preview({{$product->id}})">
+                               <img src="{{asset($product->photo)}}" class="img img-responsive"/>
+                            </a>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Nom</label>
                                 <input type="text" id="product-name-update{{$product->id}}" value="{{$product->name}}" class="form-control"
@@ -569,24 +587,22 @@
         }
 
         function addProduct(){
-            var token = '{{csrf_token()}}';
-            var name = $("#product-name-add").val();
-            var brand = $("#product-brand-add").val();
-            var description = $("#product-description-add").val();
-            var unit_id = $("#product-unit-add").val();
-            var category_id = $("#product-category-add").val();
+            var form_data = new FormData(); // Creating object of FormData class
 
+            form_data.append("photo", $('.file').prop('files')[0]);
+            form_data.append("name", $("#product-name-add").val());
+            form_data.append("brand", $("#product-brand-add").val());
+            form_data.append("description", $("#product-description-add").val());
+            form_data.append("unit_id", $("#product-unit-add").val());
+            form_data.append("category_id", $("#product-category-add").val());
+            form_data.append("_token", '{{csrf_token()}}');
             $.ajax({
                 url : '/easytrack/products',
+                cache: false,
+                contentType: false,
+                processData: false,
                 method : 'post',
-                data : {
-                    _token : token,
-                    name : name,
-                    brand : brand,
-                    category_id : category_id,
-                    unit_id : unit_id,
-                    description : description,
-                },
+                data : form_data,
                 success : function(){
                     location.reload();
                 },
@@ -611,34 +627,34 @@
         }
 
         function updateProduct(id){
-            var token = '{{csrf_token()}}';
-            var name = $("#product-name-update"+id).val();
-            var brand = $("#product-brand-update"+id).val();
-            var description = $("#product-description-update"+id).val();
-            var unit_id = $("#product-unit-update"+id).val();
-            var category_id = $("#product-category-update"+id).val();
+
+            var form_data = new FormData(); // Creating object of FormData class
+
+            form_data.append("photo", $('.file'+id).prop('files')[0]);
+            form_data.append("name", $("#product-name-update"+id).val());
+            form_data.append("brand", $("#product-brand-update"+id).val());
+            form_data.append("description", $("#product-description-update"+id).val());
+            form_data.append("unit_id", $("#product-unit-update"+id).val());
+            form_data.append("category_id", $("#product-category-update"+id).val());
+            form_data.append("_token", '{{csrf_token()}}');
 
             var unit = $('#product-unit-update'+id+' option:selected').text();
             var category = $('#product-category-update'+id+' option:selected').text();
 
             $.ajax({
                 url : '/easytrack/products/'+id,
+                cache: false,
+                contentType: false,
+                processData: false,
                 method : 'post',
-                data : {
-                    _token : token,
-                    name : name,
-                    brand : brand,
-                    category_id : category_id,
-                    unit_id : unit_id,
-                    description : description,
-                },
+                data : form_data,
                 success : function(){
                     $(".text-danger").fadeOut().html('');
                         // $("#modal-edit-site"+id).modal().hide();
 
-                        $("#product-name"+id).fadeOut().html(name).fadeIn();
-                        $("#product-brand"+id).fadeOut().html(brand).fadeIn();
-                        $("#product-description"+id).fadeOut().html(description).fadeIn();
+                        
+                        $("#product-name"+id).fadeOut().html( $("#product-name-update"+id).val()).fadeIn();
+                        $("#product-brand"+id).fadeOut().html($("#product-brand-update"+id).val()).fadeIn();
                         $("#product-category"+id).fadeOut().html(category).fadeIn();
                         $("#product-unit"+id).fadeOut().html(unit).fadeIn();
                 },
@@ -696,6 +712,23 @@
                 });
             }
         }
+
+        function preview(id){
+             $(".file"+id).click();
+
+            $('.file'+id).change(function(e) {
+                var fileName = e.target.files[0].name;
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    pic = "<img src='"+e.target.result+"' class='img img-responsive' width='100px' />";
+                    $("#profile"+id).html(pic);
+                    $("#product-photo"+id).html(pic);
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
+        }
+
     </script>
 @endsection
 

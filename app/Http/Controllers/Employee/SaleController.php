@@ -44,7 +44,7 @@ class SaleController extends Controller
             $products[] = [
                 'id' => $prod->id,
                 'name' => $prod->name,
-                'photo' => asset("template/assets/static/products/beer-2.jpg"),
+                'photo' =>  asset($prod->photo),
                 'category_id' => $prod->category_id,
                 'qty'=> $prod->pivot->qty,
                 'price' => $prod->pivot->price
@@ -75,7 +75,7 @@ class SaleController extends Controller
             $products[] = [
                 'id' => $prod->id,
                 'name' => $prod->name,
-                'photo' => asset("template/assets/static/products/beer-2.jpg"),
+                'photo' => asset($prod->photo),
                 'category_id' => $prod->category_id,
                 'qty'=> $prod->pivot->qty,
                 'price' => $prod->pivot->price

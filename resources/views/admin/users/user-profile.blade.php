@@ -35,8 +35,8 @@
     <div class="row">
         <div class="card col-lg-3 px-3 py-0"
             style="max-height: 200px; border:none; box-shadow: none; background-color: transparent;">
-            <a href="#">
-                <img class="card-img-top" src="https://picsum.photos/id/700/400" alt="Profile picture">
+            <a >
+                <img class="card-img-top" src="{{($user->photo != null) ? asset($user->photo) : "https://picsum.photos/id/700/400"}}" alt="Profile picture">
             </a>
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mt-auto">

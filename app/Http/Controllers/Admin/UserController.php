@@ -32,11 +32,13 @@ class UserController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
-            'username' => 'required|unique:users',
+            'username' => 'required|string|unique:users|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'email' => 'nullable|email|unique:users',
             'address' => 'required',
             'phone' => 'required|min:200000000|max:999999999|numeric|unique:users',
             'password' => 'required|min:8',
+            'role_id' => 'required',
+            'photo' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
 
         $user = new User([
@@ -56,6 +58,15 @@ class UserController extends Controller
             'cni_number' => $request->cni_number,
             'site_id' => $request->site_id
         ]);
+
+        $photo = $request->file('photo');
+        if($photo){
+            $path = 'template/assets/static/users/'.Auth::user()->companies->first()->name.'/'.\App\Site::find($request->site_id)->name.'/';
+            $fileName = $request->username.'.'.$photo->extension();
+            $name = $path.$fileName;
+            $photo->move($path,$name);
+            $user->photo = $name;
+        }
 
         DB::transaction(function () use($user, $employee) {
             $user->save();
@@ -91,9 +102,10 @@ class UserController extends Controller
             'name' => 'required',
             'phone' => 'required|min:200000000|max:999999999|numeric',
             'email' => 'email|nullable',
-            'username' => 'required',
+            'username' => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'address' => 'required',
             'role_id' => 'required',
+            'photo' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
 
         $user = User::whereUsername($user)->first();
@@ -109,6 +121,17 @@ class UserController extends Controller
         $user->employee->cni_number = $request->cni_number;
         $user->employee->contact_name = $request->contact_name;
         $user->employee->contact_phone = $request->contact_phone;
+
+
+        $photo = $request->file('photo');
+        if($photo){
+            $path = 'template/assets/static/users/'.Auth::user()->companies->first()->name.'/'.\App\Site::find($request->site_id)->name.'/';
+            $fileName = $request->username.'.'.$photo->extension();
+            $name = $path.$fileName;
+            $photo->move($path,$name);
+            $user->photo = $name;
+        }
+
         $user->save();
         $user->employee->save();
 
