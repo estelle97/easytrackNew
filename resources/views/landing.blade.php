@@ -72,8 +72,8 @@
                     <!-- Button Block -->
                     <div class="col">
                         <div class="header-btns">
-                            <a href="#" class="btn btn--transparent ">Mon compte</a>
-                            <a href="#" class="btn btn--primary hvr-shine">S'enregister</a>
+                            <a href="{{route('login')}}" class="btn btn--transparent ">Mon compte</a>
+                            <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
                         </div>
                     </div>
                 </div>
@@ -126,8 +126,8 @@
                 <!-- Header buttons start -->
                 <div class="header-btns offcanvas">
                     <div class="header-btns">
-                        <a href="#" class="btn btn-primary--opacity hvr-bounce-to-right">Mon compte</a>
-                        <a href="#" class="btn btn--primary hvr-shine">S'enregister</a>
+                        <a href="{{route('login')}}" class="btn btn-primary--opacity hvr-bounce-to-right">Mon compte</a>
+                        <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
                     </div>
                 </div>
                 <!-- Header buttons end -->
