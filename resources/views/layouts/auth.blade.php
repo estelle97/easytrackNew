@@ -45,6 +45,11 @@
         .features-list li {
             font-size: 1.2rem;
         }
+        @media (max-width: 991.98px) {
+            .illustration-block {
+                display: none !important;
+            }
+        }
     </style>
 
     @yield('styles')
@@ -57,7 +62,7 @@
     <div class="auth-page row flex-fill d-flex flex-row justify-content-center">
 
         {{-- App infos section--}}
-        <div class="col-12 col-sm-12 col-md-5 col-lg-5 d-flex flex-column justify-content-center align-items-left">
+        <div class="col-12 col-sm-12 col-md-5 col-lg-5 d-flex flex-column justify-content-center align-items-left illustration-block">
             <img src={{asset("template/assets/static/illustrations/revenue.svg")}} alt="" class="img-fluid">
             <div class="social-networks mt-4 d-flex flex-row justify-content-center">
                 {{-- <h1 class="mb-2">Upgrade your bussiness</h1> --}}
