@@ -3,6 +3,7 @@
 use App\Company;
 use App\Employee;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -80,6 +81,25 @@ class UserTableSeeder extends Seeder
         ];
 
         DB::table('companies')->insert($companies);
+
+        $subscriptions = [
+            [
+                'company_id' => Company::whereSlug('slug1')->first()->id,
+                'type_id' => 1,
+                'end_date' => Carbon::now()->addMonths(2),
+                'status' => 0,
+                'is_active' => 1,
+            ],
+            [
+                'company_id' => Company::whereSlug('slug2')->first()->id,
+                'type_id' => 1,
+                'end_date' => Carbon::now()->addMonths(2),
+                'status' => 0,
+                'is_active' => 1,
+            ]
+        ];
+
+        DB::table('subscriptions')->insert($subscriptions);
 
         $sites= [
             [

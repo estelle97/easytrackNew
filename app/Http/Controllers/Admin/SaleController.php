@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Action;
 use App\Http\Controllers\Controller;
 use App\Sale;
 use App\Site;
@@ -141,6 +142,10 @@ class SaleController extends Controller
         });
 
         flashy()->success('La commande a été enregistré avec succès');
+        Action::store('Sale', $sale->id, 'create',
+            "Initiation de la commande client SO-".$sale->code
+        );
+
         return "success";
     }
 
@@ -236,6 +241,10 @@ class SaleController extends Controller
         });
 
         flashy()->success('La commande a été mise à jour avec succès');
+        Action::store('Sale', $sale->id, 'update',
+            "Mise à jour de la commande client SO-".$sale->code
+        );
+
         return "success";
     }
 
@@ -252,6 +261,10 @@ class SaleController extends Controller
             $sale->status = 2;
             $sale->save();
     
+            Action::store('Sale', $sale->id, 'validate',
+                "Validation de la commande client SO-".$sale->code
+            );
+            
             return response()->json([
                 'message' => 'sale validated susscessfully',
                 'validator' => $sale->validator->username,
@@ -278,6 +291,10 @@ class SaleController extends Controller
                 $sale->status = 1;
                 $sale->save();
     
+                Action::store('Sale', $sale->id, 'invalidate',
+                    "Invalidation de la commande client SO-".$sale->code
+                );
+                
                 return response()->json([
                     'message' => 'sale unvalidated susscessfully',
     
@@ -314,6 +331,10 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+
+        
+        Action::store('Sale', $sale->id, 'destroy',
+            "Suppression de la commande client SO-".$sale->code
+        );
     }
 }

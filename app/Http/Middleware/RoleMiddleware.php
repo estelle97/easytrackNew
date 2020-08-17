@@ -18,7 +18,7 @@ class RoleMiddleware
     public function handle($request, Closure $next, $roles, $permission = null)
     {
 
-        dd($request->route());
+        // dd($request->route());
         if($request->user()->is_admin == '1'){
             $roles = explode('|',$roles);
             if(!$request->user()->hasRoles($roles)) {

@@ -57,7 +57,7 @@ Route::post('password-forgot', [
 
 
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('logout', 'Admin\DashboardController@logout')->name('logout');
 
     Route::get('admin/dashboard', ['as'=> 'admin.dashboard','uses' => 'Admin\DashboardController@index']);

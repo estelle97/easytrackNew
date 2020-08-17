@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'user' => NormalMiddleware::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'owner' => \App\Http\Middleware\OwnerMiddleware::class,
+        'verifyLicence' => \App\Http\Middleware\verifyLicenceMiddleware::class,
     ];
 
     /**

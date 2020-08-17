@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Employee;
 
+use App\Action;
 use App\Employee;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -75,6 +76,9 @@ class UserController extends Controller
         });
 
         flashy()->success("l'employé $user->name a été ajouté avec succès");
+        Action::store('Employee', $employee->id, 'create',
+            "Création du ".$user->role->name." ".$user->name
+        );
         return 'success';
     }
 
@@ -136,6 +140,11 @@ class UserController extends Controller
 
 
         flashy()->success('Mise à jour de l\'utilisateur effectuée avec succès');
+
+        Action::store('Employee', $user->mployee->id, 'update',
+            "Mise à jour du ".$user->role->name." ".$user->name
+        );
+
         return redirect()->back();
     }
 
@@ -148,11 +157,13 @@ class UserController extends Controller
         return view('ajax.employee.employees_search', compact('text'));
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $lims_user_data = User::find($id);
-        $lims_user_data->delete();
-        flashy()->success('Utilisateur supprimé avec succès');
+   
+        flashy()->info("L'utilisateur a été supprimé avec succès");
+        Action::store('Employee', $user->employee->id, 'destroy',
+            "Suppression du ".$user->role->name." ".$user->name
+        );
         return redirect()->back();
     }
 }

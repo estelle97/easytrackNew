@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Action;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PurchaseResource;
 use App\Purchase;
@@ -76,6 +77,9 @@ class PurchaseController extends Controller
         });
 
         flashy()->success('La commande a été enregistré avec succès');
+        Action::store('Purchase', $purchase->id, 'create',
+            "Initiation de la commande fournisseur PO-".$purchase->code
+        );
 
         return "success";
     }
@@ -166,6 +170,9 @@ class PurchaseController extends Controller
         });
 
         flashy()->success('La commande a été mise à jour avec succès');
+        Action::store('Purchase', $purchase->id, 'update',
+            "Mise à jour de la commande fournisseur PO-".$purchase->code
+        );
 
         return "success";
     }
@@ -182,6 +189,10 @@ class PurchaseController extends Controller
             }
             $purchase->status = 1;
             $purchase->save();
+
+            Action::store('Purchase', $purchase->id, 'validate',
+                "validation de la commande fournisseur PO-".$purchase->code
+            );
     
             return response()->json([
                 'message' => 'purchase validated susscessfully',
@@ -207,6 +218,10 @@ class PurchaseController extends Controller
                 }
                 $purchase->save();
     
+                Action::store('Purchase', $purchase->id, 'invalidate',
+                    "Invaliedation de la commande fournisseur PO-".$purchase->code
+                );
+
                 return response()->json([
                     'message' => 'purchase unvalidated susscessfully',
                 ],200);
@@ -244,6 +259,10 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        //
+        
+
+        Action::store('Purchase', $purchase->id, 'destroy',
+            "Suppression de la commande fournisseur PO-".$purchase->code
+        );
     }
 }

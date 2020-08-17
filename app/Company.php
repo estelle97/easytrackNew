@@ -24,7 +24,7 @@ class Company extends Model
 
     public function types(){
         return $this->belongsToMany('App\Type','subscriptions')
-                        ->withPivot('end_date','status');
+                        ->withPivot('end_date','status','is_active');
     }
 
     public function activity(){
