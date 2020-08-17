@@ -11,7 +11,9 @@
 |
 */
 
-Route::redirect('/', 'login');
+Route::get('/', function () {
+    return view('landing');
+});
 
 //Route::redirect('/register', 'login');
 
@@ -65,7 +67,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileEdit' , 'as' => 'admin.profile.edit']);
     Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
-    
+
     Route::get('admin/{site}/users', 'Admin\SiteController@users')->name('admin.site.employees');
     Route::get('admin/sites', 'Admin\SiteController@index')->name('admin.sites');
     Route::post('admin/sites/add', 'Admin\SiteController@store');
@@ -91,7 +93,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileUpdate' , 'as' => 'easytrack.profile.update']);
     Route::get('easytrack/profile/settings', ['uses' => 'SuperAdmin\DashboardController@profileSettings' , 'as' => 'easytrack.profile.settings']);
     Route::get('easytrack/roles', 'SuperAdmin\RoleController@index')->name('easytrack.roles');
-    
+
     Route::post('easytrack/roles/add', 'SuperAdmin\RoleController@store');
     Route::post('easytrack/roles/update', 'SuperAdmin\RoleController@update');
     Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
@@ -104,10 +106,10 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('easytrack/categories/{category}/destroy', 'SuperAdmin\CategoryController@destroy');
     Route::post('easytrack/categories/{category}', 'SuperAdmin\CategoryController@update');
     Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
-    
 
-    
-    
+
+
+
     Route::get('admin/sales/{sale}/update/init', 'Admin\SaleController@getElementBySale');
     Route::get('admin/sales/{sale}/update', 'Admin\SaleController@edit')->name('admin.sales.edit');
     Route::get('admin/sales/{sale}/show', 'Admin\SaleController@show')->name('admin.sales.show');
@@ -120,9 +122,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/sales', 'Admin\SaleController@index')->name('admin.sales.all');
     Route::get('admin/sales/site', 'Admin\SaleController@getElementBySite');
     Route::get('admin/pos', 'Admin\SaleController@create')->name('admin.sales.pos');
-    
-    
-    
+
+
+
     Route::get('admin/purchases/create', 'Admin\PurchaseController@create');
     Route::get('admin/purchases/{purchase}/show', 'Admin\PurchaseController@show')->name('admin.purchases.show');
     Route::post('admin/purchases/{purchase}/status', 'Admin\PurchaseController@updatePurchaseStatus');
@@ -133,12 +135,12 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');
     Route::post('admin/purchases', 'Admin\PurchaseController@store');
     Route::get('admin/purchases', 'Admin\PurchaseController@index')->name('admin.purchases');
-    
-    
+
+
     Route::post('admin/products/{product}', 'Admin\ProductController@update');
     Route::post('admin/products', 'Admin\ProductController@store');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
-    
+
     Route::post('admin/customers/{customer}/destroy', 'Admin\CustomerController@destroy');
     Route::post('admin/customers/{customer}', 'Admin\CustomerController@update');
     Route::resource('admin/customers', 'Admin\CustomerController');
@@ -161,9 +163,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/sales', 'Employee\SaleController@index')->name('employee.sales.all');
     Route::get('employee/sales/site', 'Employee\SaleController@getElementBySite');
     Route::get('employee/pos', 'Employee\SaleController@create')->name('employee.sales.pos');
-    
-    
-    
+
+
+
     Route::get('employee/purchases/create', 'Employee\PurchaseController@create');
     Route::get('employee/purchases/{purchase}/show', 'Employee\PurchaseController@show')->name('employee.purchases.show');
     Route::post('employee/purchases/{purchase}/status', 'Employee\PurchaseController@updatePurchaseStatus');
@@ -192,7 +194,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('employee/products/{product}', 'Employee\ProductController@update');
     Route::post('employee/products', 'Employee\ProductController@store');
     Route::get('employee/products','Employee\ProductController@index')->name('employee.products');
-    
+
     Route::post('employee/customers/{customer}/destroy', 'Employee\CustomerController@destroy');
     Route::post('employee/customers/{customer}', 'Employee\CustomerController@update');
     Route::resource('employee/customers', 'Employee\CustomerController');
