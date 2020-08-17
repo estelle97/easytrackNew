@@ -146,7 +146,6 @@
                                 surtout très complète.</p>
                             <div class="hero-btn">
                                 <a href="#" class="btn btn--primary hvr-shine">Essayez maintenant</a>
-                                <span class="text--info">No credit card required</span>
                             </div>
                         </div>
                     </div>
