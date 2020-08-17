@@ -134,10 +134,10 @@
                                             data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">
-                                                Marquer comme inactif
+                                                 Afficher
                                             </a>
                                             <a class="dropdown-item" href="#">
-                                                Ajouter à une categorie
+                                                marquer comme inactif
                                             </a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">

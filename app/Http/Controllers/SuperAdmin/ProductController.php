@@ -38,9 +38,10 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:products',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
 
-        $product = Product::create([
+        $product = new Product([
             'name' => $request->name,
             'code' => uniqid(),
             'description' => $request->description,
@@ -49,6 +50,17 @@ class ProductController extends Controller
             'unit_id' => $request->unit_id,
         ]);
 
+        
+        $photo = $request->file('photo');
+        if($photo){
+            $path = 'template/assets/static/users/'.\App\Activity::find(1)->name.'/'.\App\Category::find($request->category_id)->name.'/';
+            $fileName = $product->name.'.'.$photo->extension();
+            $name = $path.$fileName;
+            $photo->move($path,$name);
+            $product->photo = $name;
+        }
+
+        $product->save();
         $product->activities()->attach(1);
 
         return 'success';
@@ -98,6 +110,19 @@ class ProductController extends Controller
             'unit_id' => $request->unit_id,
         ]);
 
+        dump($request->all());
+        $photo = $request->file('photo');
+        if($photo){
+            $path = 'template/assets/static/users/'.\App\Activity::find(1)->name.'/'.\App\Category::find($request->category_id)->name.'/';
+            $fileName = $product->name.'.'.$photo->extension();
+            $name = $path.$fileName;
+            $photo->move($path,$name);
+            $product->photo = $name;
+            $product->save();
+        }
+        dd($product);
+        
+
         return 'success';
     }
 
@@ -109,6 +134,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if($product->delete()) {
+            return response()->json([
+                'message' => 'Le produit a bien été supprimé'
+            ], 200);
+        }
     }
 }

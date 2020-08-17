@@ -109,7 +109,7 @@
                                                     <a class="dropdown-item" href={{route('employee.sales.show', $sale->id)}}>
                                                         Afficher
                                                     </a>
-                                                <a class="dropdown-item" onclick="updateSale({{$sale->id}})">
+                                                <a class="dropdown-item" href={{route('employee.sales.edit', $sale->id)}}>
                                                     Modifier
                                                 </a>
                                                 @if(Auth::user()->role->slug == 'manager' || Auth::user()->role->slug == 'cashier')

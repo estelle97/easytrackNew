@@ -97,11 +97,9 @@
                                         <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                             data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                         <div class="dropdown-menu dropdown-menu-right">
+                                             
                                             <a class="dropdown-item" href="#">
-                                                Dupiquer
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Marquer comme inactif
+                                                 Afficher
                                             </a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-site">
@@ -185,7 +183,7 @@
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Email</label>
-                                <input type="email" id="supplier-email-add" class="form-control"  placeholder="Saisissez l'adresse électronique..." required>
+                                <input type="email" id="supplier-email-add" class="form-control"  placeholder="Saisissez l'adresse électronique...">
                                 <span class="text-danger" id="email-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
@@ -261,7 +259,7 @@
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Email</label>
                                     <input type="email" id="supplier-email-update{{$supl->id}}" value="{{$supl->email}}" class="form-control"
-                                        placeholder="Saisissez l'adresse..." required>
+                                        placeholder="Saisissez l'adresse...">
                                         <span class="text-danger" id="email-error{{$supl->id}}"></span>
                                 </div>
                                 <div class="col-lg-12 mb-4">
@@ -445,7 +443,7 @@
     
             $.ajax({
                 url: '/employee/suppliers/'+id,
-                method: 'put',
+                method: 'post',
                 data: {
                     _token : token,
                     name : name,

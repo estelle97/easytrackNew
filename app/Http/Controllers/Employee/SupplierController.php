@@ -40,7 +40,6 @@ class SupplierController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'email|required',
             'phone1' => 'required|min:200000000|max:999999999|numeric'
         ]);
 
@@ -101,7 +100,6 @@ class SupplierController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'email|required',
             'phone1' => 'required|min:200000000|max:999999999|numeric'
         ]);
 

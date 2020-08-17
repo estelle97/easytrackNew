@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
         factory(\App\Company::class, 4)->create();
         factory(\App\Site::class, 30)->create();
         factory(\App\Supplier::class, 40)->create();
-        factory(\App\Category::class, 5)->create();
-        // factory(\App\Product::class, 100)->create();
+        // factory(\App\Category::class, 5)->create();
+        // factory(\App\Product::class, 30)->create();
         factory(\App\Type::class, 4)->create();
 
         $this->call([
@@ -35,9 +35,9 @@ class DatabaseSeeder extends Seeder
         });
 
         // Remplissage de la table activity_product
-        App\Product::all()->each(function($product){
-            $product->activities()->attach(1);
-        });
+        // App\Product::all()->each(function($product){
+        //     $product->activities()->attach(1);
+        // });
 
         // Replissage de la table product_site
         foreach (App\Site::all() as $site) {

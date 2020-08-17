@@ -113,11 +113,15 @@
                 <div class="card-body">
                     <div class="row row-sm align-items-center">
                         <div class="col-auto">
-                                <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?name={{$emp->user->name}}')"> </span>
+                             @if ($emp->user->photo)
+                                <span class="avatar avatar-md"  style="background-image: url('{{asset($emp->user->photo)}}')"> </span>
+                            @else
+                                <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?name={{$emp->user->name}}')"> </span> 
+                            @endif
                         </div>
                         <div class="col">
                             <h3 class="mb-0">
-                                <a href={{route('admin.user.show', $emp->user->username)}}> {{$emp->user->name}} </a>
+                                <a href={{route('employee.user.show', $emp->user->username)}}> {{$emp->user->name}} </a>
                             </h3>
                             <div class="text-muted text-h5">
                                {{$emp->user->role->name}}
@@ -148,7 +152,7 @@
                         </div>
                         <div class="col-auto">
                             <div class="btn-list">
-                                <a href={{route('admin.user.show', $emp->user->username)}} class="btn btn-white btn-sm">
+                                <a href={{route('employee.user.show', $emp->user->username)}} class="btn btn-white btn-sm">
                                     Gérer
                                 </a>
                                 <a class="btn btn-white btn-sm" data-toggle="modal"
@@ -191,14 +195,15 @@
                     <div class="modal-body">
                         <div class="row mb-3 align-items-end">
                             <div class="col-lg-3">
-                                <a href="#" class="avatar avatar-upload rounded">
+                                <input type="file" name="img[]" class="file" accept="image/*" hidden>  
+                                <a id="profile" class="avatar avatar-upload rounded thumbnail">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <line x1="12" y1="5" x2="12" y2="19" />
-                                        <line x1="5" y1="12" x2="19" y2="12" /></svg>
-                                    <span class="avatar-upload-text">Photo</span>
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                                        <span class="avatar-upload-text">Photo </span>
                                 </a>
                             </div>
                             <div class="col-lg-9 mb-4">
@@ -298,32 +303,28 @@
 @section('scripts')
     <script>
         function addUser(){
-            var token = '{{csrf_token()}}';
-            var name = $("#user-name-add").val();
-            var email = $("#user-email-add").val();
-            var username = $("#user-username-add").val();
-            var phone = $("#user-phone-add").val();
-            var address = $("#user-address-add").val();
-            var bio = $("#user-bio-add").val();
-            var password = $("#password").val();
-            var site = $("#user-site-add").val();
-            var role = $("#user-role-add").val();
+
+            var form_data = new FormData(); // Creating object of FormData class
+
+            form_data.append("photo", $('input[type="file"]').prop('files')[0]);
+            form_data.append("name", $("#user-name-add").val());
+            form_data.append("email", $("#user-email-add").val());
+            form_data.append("username", $("#user-username-add").val());
+            form_data.append("phone", $("#user-phone-add").val());
+            form_data.append("address", $("#user-address-add").val());
+            form_data.append("bio", $("#user-bio-add").val());
+            form_data.append("password", $("#user-password-add").val());
+            form_data.append("site_id", $("#user-site-add").val());
+            form_data.append("role_id", $("#user-role-add").val());
+            form_data.append("_token", '{{csrf_token()}}');
 
             $.ajax({
-                url : '/admin/users/store',
+                url : '/employee/users/store',
+                cache: false,
+                contentType: false,
+                processData: false,
                 method : 'post',
-                data : {
-                    _token : token,
-                    name : name,
-                    email : email,
-                    username : username,
-                    phone : phone,
-                    address : address,
-                    bio : bio,
-                    site_id : site,
-                    role_id : role,
-                    password : password
-                },
+                data : form_data,
                 success : function(){
                     location.reload();
                 },
@@ -346,6 +347,26 @@
 
             });
         }
+
+         $("#profile").click(function(){
+            $(".file").click();
+
+            $('input[type="file"]').change(function(e) {
+                console.log(e.target.files);
+                var fileName = e.target.files[0].name;
+                // $("#file").val(fileName);
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    // get loaded data and render thumbnail.
+                    pic = "<img src='"+e.target.result+"' class='img img-responsive' width='100px' height='100px' />";
+                    $("#profile").html(pic);
+                    // document.getElementById("preview").src = e.target.result;
+                };
+                // read the image file as a data URL.
+                reader.readAsDataURL(this.files[0]);
+            });
+        })
 
         function search(text){
             var token = '{{csrf_token()}}';
