@@ -15,19 +15,19 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
     <meta name="robots" content="noindex,nofollow,noarchive" />
-    <link rel="icon" href="../assets/static/favicon.png" type="image/png" />
-    <link rel="shortcut icon" href="../assets/static/favicon.png" type="image/png" />
+    <link rel="icon" href={{asset("template/assets/static/favicon.png")}} type="image/png" />
+    <link rel="shortcut icon" href={{asset("template/assets/static/favicon.png")}} type="image/png" />
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="../assets/dist/libs/bootstrap-4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href=../assets/dist/libs/fancybox-master/jquery.fancybox.min.css"> <link rel="stylesheet"
-        href="../assets/dist/libs/aos-animation/aos.css">
+    <link rel="stylesheet" href={{asset("template/assets/dist/libs/bootstrap-4.3.1/css/bootstrap.min.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/libs/fancybox-master/jquery.fancybox.min.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/libs/aos-animation/aos.css")}}>
     <!-- fonts -->
-    <link rel="stylesheet" href="../assets/dist/fonts/ep-icon-fonts/css/style.css">
-    <link rel="stylesheet" href="../assets/dist/fonts/fontawesome-5/css/all.min.css">
-    <link rel="stylesheet" href="../assets/dist/fonts/typography-font/typo-fonts.css">
+    <link rel="stylesheet" href={{asset("template/assets/dist/fonts/ep-icon-fonts/css/style.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/fonts/fontawesome-5/css/all.min.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/fonts/typography-font/typo-fonts.css")}}>
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="../assets/dist/css/landing-settings.css">
-    <link rel="stylesheet" href="../assets/dist/css/landing.css">
+    <link rel="stylesheet" href={{asset("template/assets/dist/css/landing-settings.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/css/landing.css")}}>
     <link rel="stylesheet" href="https://startbootstrap.github.io/startbootstrap-new-age/device-mockups/device-mockups.min.css">
 </head>
 
@@ -53,7 +53,7 @@
                     <div class="col">
                         <!-- Brand Logo -->
                         <div class="brand-logo">
-                            <a href=""><img src="../assets/static/logo.svg" alt="" /></a>
+                            <a href=""><img src={{asset("template/assets/static/logo.svg")}} alt="" /></a>
                         </div>
                     </div>
                     <!-- Menu Block -->
@@ -86,7 +86,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-4 col-7">
                         <a href="index.html" class="site-brand">
-                            <img src="../assets/static/logo.svg" alt="">
+                            <img src={{asset("template/assets/static/logo.svg")}} alt="">
                         </a>
                     </div>
                     <div class="col-md-8 col-5 text-right">
@@ -152,7 +152,7 @@
                     </div>
                     <div class="col-12">
                         <div class="dashboard-img" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true">
-                            <img src="../assets/static/landing/dashboard.png" alt="">
+                            <img src={{asset("template/assets/static/landing/dashboard.png")}} alt="">
                         </div>
                     </div>
                 </div>
@@ -214,14 +214,14 @@
                         <div class="content-img content-img-group-1">
                             <div class="image-1 d-none d-md-block " data-aos="fade-left" data-aos-duration='1500'
                                 data-aos-once="true">
-                                <img src="../assets/static/landing/kanban.png" alt="" class="">
+                                <img src={{asset("template/assets/static/landing/kanban.png")}} alt="" class="">
                             </div>
                             <div class="image-2 image-overlay d-none d-md-block" data-aos="fade-right" dat
                                 data-aos-duration="1500" data-aos-once="true">
-                                <img src="../assets/static/landing/sales-stats.png" alt="">
+                                <img src={{asset("template/assets/static/landing/sales-stats.png")}} alt="">
                             </div>
                             <div class="image-mobile d-md-none">
-                                <img src="../assets/static/landing/sales.png" alt="" class="">
+                                <img src={{asset("template/assets/static/landing/sales.png")}} alt="" class="">
                             </div>
                         </div>
                     </div>
@@ -245,14 +245,14 @@
                         <div class="content-img content-img-group-2">
                             <div class="image-1 d-none d-md-block" data-aos="fade-right" data-aos-duration='1500'
                                 data-aos-once="true">
-                                <img src="../assets/static/landing/stats.png" alt="">
+                                <img src={{asset("template/assets/static/landing/stats.png")}} alt="">
                             </div>
                             <div class="image-2 d-none d-md-block" data-aos="fade-left" data-aos-duration='1500'
                                 data-aos-once="true">
-                                <img src="../assets/static/landing/content-2-2.png" alt="">
+                                <img src={{asset("template/assets/static/landing/content-2-2.png")}} alt="">
                             </div>
                             <div class="image-mobile d-md-none">
-                                <img src="../assets/static/landing/stats.png" alt="">
+                                <img src={{asset("template/assets/static/landing/stats.png")}} alt="">
                             </div>
                         </div>
                     </div>
@@ -287,7 +287,7 @@
                                 <div class="device">
                                     <div class="screen">
                                         <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                        <img src="../assets/static/landing/screen.png" class="img-fluid" alt="">
+                                        <img src={{asset("template/assets/static/landing/screen.png")}} class="img-fluid" alt="">
                                     </div>
                                     <div class="button">
                                         <!-- You can hook the "home button" to some JavaScript events or just remove it -->
@@ -367,8 +367,8 @@
                   <h2 class="section-heading text-white m-0" style="font-size: 70px;">Découvrez l'application mobile</h2>
                   <p class="text-white mt-4 mb-4" style="font-size: 18px; line-height: 1.5;">Notre application est disponible sur tous les appareils mobiles ! Téléchargez maintenant pour commencer !</p>
                   <div class="badges">
-                    <a class="badge-link" href="#"><img src="../assets/static/landing/google-play-badge.svg" alt=""></a>
-                    <a class="badge-link" href="#"><img src="../assets/static/landing/app-store-badge.svg" alt=""></a>
+                    <a class="badge-link" href="#"><img src={{asset("template/assets/static/landing/google-play-badge.svg")}} alt=""></a>
+                    <a class="badge-link" href="#"><img src={{asset("template/assets/static/landing/app-store-badge.svg")}} alt=""></a>
                   </div>
                 </div>
               </div>
@@ -405,16 +405,16 @@
         </footer>
     </div>
     <!-- Vendor JS-->
-    <script src="../assets/dist/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/dist/libs/jquery/dist/jquery-migrate.min.js"></script>
-    <script src="../assets/dist/libs/bootstrap-4.3.1/js/bootstrap.bundle.js"></script>
+    <script src={{asset("template/assets/dist/libs/jquery/dist/jquery.min.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/jquery/dist/jquery-migrate.min.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/bootstrap-4.3.1/js/bootstrap.bundle.js")}}></script>
 
     <!-- Plugins JS -->
-    <script src="../assets/dist/libs/fancybox-master/jquery.fancybox.min.js"></script>
-    <script src="../assets/dist/libs/aos-animation/aos.js"></script>
+    <script src={{asset("template/assets/dist/libs/fancybox-master/jquery.fancybox.min.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/aos-animation/aos.js")}}></script>
 
     <!-- Custom JS -->
-    <script src="../assets/dist/js/active.js"></script>
+    <script src={{asset("template/assets/dist/js/active.js")}}></script>
 </body>
 
 </html>
