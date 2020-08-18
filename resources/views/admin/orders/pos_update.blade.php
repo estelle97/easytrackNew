@@ -344,7 +344,7 @@
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +
-                '            style="background-image: url('+el.data("imgsrc")+')">' +
+                '            style="background-image: url(\''+el.data("imgsrc")+'\')">' +
                 '        </div>' +
                 '    </td>' +
                 '    <td style="vertical-align: middle;">' +
