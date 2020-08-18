@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('employee.products');
+        return view('employee.products.products');
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.products.create_products');
     }
 
     /**
@@ -76,6 +76,61 @@ class ProductController extends Controller
             }
         }
 
+        return 'success';
+    }
+
+
+    public function getAllProducts(){
+        
+        $products = [];
+
+        foreach (Auth::user()->employee->site->company->activity->products as $prod) {
+            $products[] = [
+                'id' => $prod->id,
+                'name' => $prod->name,
+                'photo' =>  asset($prod->photo),
+                'category_id' => $prod->category_id,
+            ];
+        }
+
+        return response()->json([
+            'products' => $products
+        ], 200);
+    }
+
+    public function storeManyProducts(Request $request){
+        $products = explode('|', rtrim($request->products,'|'));
+
+        foreach ($products as $prods) {
+            $prod = explode(';', $prods);
+            
+            $product = Product::find($prod[0]);
+            
+            if($request->site_id == 'all'){
+                foreach(Auth::user()->companies->first()->sites as $site){
+                    if(!$product->sites->contains($site->id)){
+                        $product->sites()->attach($site->id, [
+                            'qty' => $prod[1],
+                            'qty_alert' => $prod[2],
+                            'cost' => $prod[3],
+                            'price' => $prod[4],
+                            ]);
+                        }
+                    }
+            } else {
+                if(!$product->sites->contains($request->site_id)){
+                    $product->sites()->attach($request->site_id, [
+                        'qty' => $prod[1],
+                        'qty_alert' => $prod[2],
+                        'cost' => $prod[3],
+                        'price' => $prod[4],
+                    ]);
+                }
+            }
+
+        }
+        
+        flashy()->success('Les produits ont été ajouté à votre stock avec succès!');
         return 'success';
     }
 

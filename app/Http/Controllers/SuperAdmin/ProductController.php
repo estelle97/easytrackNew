@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('superAdmin.products');
+        return view('superAdmin.products.products');
     }
 
     /**
@@ -25,7 +25,16 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = '';
+        $units = '';
+        foreach(\App\Category::all() as $cat){
+            $categories .= "<option value=$cat->id> $cat->name </option>";
+        }
+        foreach(\App\Unit::all() as $unit){
+            $units .= "<option value=$unit->id> $unit->name </option>";
+        }
+
+        return view('superAdmin.products.create_products', compact('categories', 'units'));
     }
 
     /**
@@ -53,7 +62,7 @@ class ProductController extends Controller
         
         $photo = $request->file('photo');
         if($photo){
-            $path = 'template/assets/static/users/'.\App\Activity::find(1)->name.'/'.\App\Category::find($request->category_id)->name.'/';
+            $path = 'template/assets/static/products/'.\App\Activity::find(1)->name.'/'.\App\Category::find($request->category_id)->name.'/';
             $fileName = $product->name.'.'.$photo->extension();
             $name = $path.$fileName;
             $photo->move($path,$name);
@@ -64,6 +73,44 @@ class ProductController extends Controller
         $product->activities()->attach(1);
 
         return 'success';
+    }
+
+    public function storeManyProducts(Request $request){
+        
+        $products = explode('|', rtrim($request->products,'|'));
+        foreach($products as $key => $prods){
+            $request->validate([
+                'photo'.$key => 'required|image|mimes:png|max:1024'
+                ]);
+            }
+            
+        foreach($products as $key => $prods){
+            $prod = explode(';', $prods);
+            $product = new Product([
+                'name' => $prod[0],
+                'code' => uniqid(),
+                'brand' => $prod[1],
+                'category_id' => $prod[2],
+                'unit_id' => $prod[3],
+                'description' => $prod[4]
+            ]);
+            $photo =$request->file('photo'.$key);
+
+            $path = 'template/assets/static/products/'.\App\Activity::find(1)->name.'/'.\App\Category::find($prod[2])->name.'/';
+            $fileName = $product->name.'.'.$photo->extension();
+            $name = $path.$fileName;
+            $photo->move($path,$name);
+            $product->photo = $name;
+
+            $product->save();
+            $product->activities()->attach(1);
+
+        }
+        flashy()->success('Les produits ont été ajoutés avec succès');
+
+        return response()->json([
+            'message' => 'Les produits ont été ajoutes avec succès',
+        ],200);
     }
 
     /**
@@ -110,17 +157,15 @@ class ProductController extends Controller
             'unit_id' => $request->unit_id,
         ]);
 
-        dump($request->all());
         $photo = $request->file('photo');
         if($photo){
-            $path = 'template/assets/static/users/'.\App\Activity::find(1)->name.'/'.\App\Category::find($request->category_id)->name.'/';
+            $path = 'template/assets/static/products/'.\App\Activity::find(1)->name.'/'.\App\Category::find($request->category_id)->name.'/';
             $fileName = $product->name.'.'.$photo->extension();
             $name = $path.$fileName;
             $photo->move($path,$name);
             $product->photo = $name;
             $product->save();
         }
-        dd($product);
         
 
         return 'success';
@@ -134,6 +179,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+
         if($product->delete()) {
             return response()->json([
                 'message' => 'Le produit a bien été supprimé'

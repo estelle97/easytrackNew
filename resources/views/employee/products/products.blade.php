@@ -28,6 +28,18 @@
                     </svg>
                     Ajouter un produit
                 </a>
+
+                <a href={{route('employee.products.create')}} class="btn btn-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Ajouter plusieurs produits
+                </a>
+
                 <span class="dropdown ml-3">
                     <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
@@ -92,8 +104,8 @@
                 <table id="products" class="table card-table table-vcenter text-nowrap datatable">
                     <thead>
                         <tr>
-                            <th class="w-1"><input class="form-check-input m-0 align-middle"type="checkbox"></th>
-                            <th class="exportable w-1">Produit</th>
+                            <th class="exportable"> Photo </th>
+                            <th class="exportable">Produit</th>
                             <th class="exportable">Categorie</th>
                             <th class="exportable">PA</th>
                             <th class="exportable">PV</th>
@@ -104,29 +116,28 @@
                         </tr>
                     </thead>
                     <tbody class="products">
-                        @foreach (Auth::user()->companies->first()->sites as $site)
-                            @foreach ($site->products as $product)
-                            <tr id="product{{$site->id}}{{$product->id}}">
-                                <td><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select invoice"></td>
-                                <td><span id="product-name{{$site->id}}{{$product->id}}" class="text-muted"> {{$product->name}} </span></td>
-                                <td><a id="product-category{{$site->id}}{{$product->id}}"  class="text-reset" tabindex="-1">{{$product->category->name}}</a></td>
-                                <td id="product-cost{{$site->id}}{{$product->id}}">
+                        @foreach (Auth::user()->employee->site->products as $product)
+                            <tr id="product{{Auth::user()->employee->site->id}}{{$product->id}}">
+                                <td> <img src="{{asset($product->photo)}}" class="avatar avatar-upload rounded thumbnail" alt="{{$product->name}}"> </td>
+                                <td><span id="product-name{{Auth::user()->employee->site->id}}{{$product->id}}" class="text-muted"> {{$product->name}} </span></td>
+                                <td><a id="product-category{{Auth::user()->employee->site->id}}{{$product->id}}"  class="text-reset" tabindex="-1">{{$product->category->name}}</a></td>
+                                <td id="product-cost{{Auth::user()->employee->site->id}}{{$product->id}}">
                                     {{$product->pivot->cost}}
                                 </td>
-                                <td id="product-price{{$site->id}}{{$product->id}}">
+                                <td id="product-price{{Auth::user()->employee->site->id}}{{$product->id}}">
                                     {{$product->pivot->price}}
                                 </td>
-                                <td id="product-qty{{$site->id}}{{$product->id}}">
+                                <td id="product-qty{{Auth::user()->employee->site->id}}{{$product->id}}">
                                     {{$product->pivot->qty}}
                                 </td>
-                                <td id="product-site{{$site->id}}{{$product->id}}">
-                                    {{$site->name}}
+                                <td id="product-site{{Auth::user()->employee->site->id}}{{$product->id}}">
+                                    {{Auth::user()->employee->site->name}}
                                 </td>
-                                <td id="product-brand{{$site->id}}{{$product->id}}">
+                                <td id="product-brand{{Auth::user()->employee->site->id}}{{$product->id}}">
                                     {{$product->brand}}
                                 </td>
                                 <td class="text-right">
-                                    <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{$site->id}}{{$product->id}}">
+                                    <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{Auth::user()->employee->site->id}}{{$product->id}}">
                                         Modifier
                                     </a>
                                     <span class="dropdown">
@@ -153,7 +164,6 @@
                                     </span>
                                 </td>
                             </tr>
-                            @endforeach
                         @endforeach
                     </tbody>
                 </table>
@@ -215,18 +225,15 @@
                         <div class="col-lg-12 mb-4">
                             <label class="form-label"> Produit </label>
                             <select name="produit" id="product-product-add" class="form-select" data-live-search="true">
-                                @foreach (Auth::user()->companies->first()->activity->products as $product)
+                                @foreach (Auth::user()->employee->site->company->activity->products as $product)
                                     <option value="{{$product->id}}"> {{$product->name}} </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label"> Site </label>
-                            <select name="site_id" id="product-site-add" class="form-select">
-                                <option value="all"> Tous les sites </option>
-                                @foreach (Auth::user()->companies->first()->sites()->get() as $site)
-                                    <option value="{{$site->id}}"> {{$site->name}} </option>
-                                @endforeach
+                            <select name="site_id" disabled id="product-site-add" class="form-select">
+                                <option value={{Auth::user()->employee->site->id}}> {{Auth::user()->employee->site->name}} </option>
                             </select>
                         </div>
                         <div class="col-lg-12 mb-4">
@@ -260,65 +267,60 @@
     </div>
 
     {{-- Modal Update product--}}
-    @foreach (Auth::user()->companies->first()->sites as $site)
-        @foreach ($site->products as $product)
-            <div class="modal modal-blur fade" id="modal-edit-product{{$site->id}}{{$product->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"> Modifier le produit </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <line x1="18" y1="6" x2="6" y2="18" />
-                                    <line x1="6" y1="6" x2="18" y2="18" /></svg>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row mb-3 align-items-end">
+    @foreach (Auth::user()->employee->site->products as $product)
+        <div class="modal modal-blur fade" id="modal-edit-product{{Auth::user()->employee->site->id}}{{$product->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Modifier le produit </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3 align-items-end">
 
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label"> Site </label>
-                                    <select name="site_id" id="product-site-update{{$site->id}}{{$product->id}}" class="form-select">
-                                        <option value="all"> Tous les sites </option>
-                                        @foreach (Auth::user()->companies->first()->sites()->get() as $allSite)
-                                            <option {{($allSite->id == $site->id) ? 'selected' : ''}} value="{{$allSite->id}}"> {{$allSite->name}} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Prix D'achat</label>
-                                <input type="number" min="0" id="product-cost-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->cost}}" class="form-control"  placeholder="Prix de d'achat " required>
-                                    <span class="text-danger" id="cost-error{{$site->id}}{{$product->id}}"></span>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Prix de vente</label>
-                                <input type="number" min="0" id="product-price-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->price}}" class="form-control"  placeholder="Prix de vente" required>
-                                    <span class="text-danger" id="price-error{{$site->id}}{{$product->id}}"></span>
-                                </div>
-
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Quantité</label>
-                                    <input type="number" min="1" id="product-qty-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->qty}}" class="form-control"  placeholder="Quantité en stock" required>
-                                    <span class="text-danger" id="qty-error{{$site->id}}{{$product->id}}"></span>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Minimum</label>
-                                    <input type="number" min="1" id="product-qty_alert-update{{$site->id}}{{$product->id}}" value="{{$product->pivot->qty_alert}}" class="form-control"  placeholder="Le Stock minimum" required>
-                                    <span class="text-danger" id="qty_alert-error{{$site->id}}{{$product->id}}"></span>
-                                </div>
-
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label"> Site </label>
+                                <select name="site_id" disabled id="product-site-update{{Auth::user()->employee->site->id}}{{$product->id}}" class="form-select">
+                                    <option value={{Auth::user()->employee->site->id}}> {{Auth::user()->employee->site->name}} </option>
+                                </select>
                             </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Prix D'achat</label>
+                            <input type="number" min="0" id="product-cost-update{{Auth::user()->employee->site->id}}{{$product->id}}" value="{{$product->pivot->cost}}" class="form-control"  placeholder="Prix de d'achat " required>
+                                <span class="text-danger" id="cost-error{{Auth::user()->employee->site->id}}{{$product->id}}"></span>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Prix de vente</label>
+                            <input type="number" min="0" id="product-price-update{{Auth::user()->employee->site->id}}{{$product->id}}" value="{{$product->pivot->price}}" class="form-control"  placeholder="Prix de vente" required>
+                                <span class="text-danger" id="price-error{{Auth::user()->employee->site->id}}{{$product->id}}"></span>
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Quantité</label>
+                                <input type="number" min="1" id="product-qty-update{{Auth::user()->employee->site->id}}{{$product->id}}" value="{{$product->pivot->qty}}" class="form-control"  placeholder="Quantité en stock" required>
+                                <span class="text-danger" id="qty-error{{Auth::user()->employee->site->id}}{{$product->id}}"></span>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Minimum</label>
+                                <input type="number" min="1" id="product-qty_alert-update{{Auth::user()->employee->site->id}}{{$product->id}}" value="{{$product->pivot->qty_alert}}" class="form-control"  placeholder="Le Stock minimum" required>
+                                <span class="text-danger" id="qty_alert-error{{Auth::user()->employee->site->id}}{{$product->id}}"></span>
+                            </div>
+
                         </div>
-                        <div class="modal-footer">
-                            <button onclick="updateProduct({{$site->id}} , {{$product->id}})" type="button" class="btn btn-primary" style="width: 100%;"> Mettre à jour </button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="updateProduct({{Auth::user()->employee->site->id}} , {{$product->id}})" type="button" class="btn btn-primary" style="width: 100%;"> Mettre à jour </button>
                     </div>
                 </div>
             </div>
-        @endforeach
+        </div>
     @endforeach
 
 
@@ -403,7 +405,7 @@
             var site_id = $("#product-site-add").val();
 
             $.ajax({
-                url : '/admin/products',
+                url : '/employee/products',
                 method : 'post',
                 data : {
                     _token : token,
@@ -448,7 +450,7 @@
             var site = $('#product-site-update'+site+product+' option:selected').text();
 
             $.ajax({
-                url : '/admin/products/'+product,
+                url : '/employee/products/'+product,
                 method : 'post',
                 data : {
                     _token : token,

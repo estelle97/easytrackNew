@@ -101,6 +101,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
     Route::post('easytrack/products/{product}/destroy', 'SuperAdmin\ProductController@destroy');
     Route::post('easytrack/products/{product}', 'SuperAdmin\ProductController@update');
+    Route::get('easytrack/products/add', 'SuperAdmin\ProductController@create')->name('easytrack.products.create');
+    Route::post('easytrack/products/store/many', 'SuperAdmin\ProductController@storeManyProducts');
     Route::resource('easytrack/products', 'SuperAdmin\ProductController');
 
     Route::post('easytrack/categories/{category}/destroy', 'SuperAdmin\CategoryController@destroy');
@@ -139,6 +141,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
     Route::post('admin/products/{product}', 'Admin\ProductController@update');
     Route::post('admin/products', 'Admin\ProductController@store');
+    Route::get('admin/products/init', 'Admin\ProductController@getAllProducts');
+    Route::get('admin/products/add', 'Admin\ProductController@create')->name('admin.products.create');
+    Route::post('admin/products/store/many', 'Admin\ProductController@storeManyProducts');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
 
     Route::post('admin/customers/{customer}/destroy', 'Admin\CustomerController@destroy');
@@ -192,6 +197,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/{site}/users', 'Employee\SiteController@users')->name('employee.site.employees');
     Route::get('employee/sites', 'Employee\SiteController@index')->name('employee.sites');
     Route::post('employee/products/{product}', 'Employee\ProductController@update');
+    Route::get('employee/products/init', 'Employee\ProductController@getAllProducts');
+    Route::get('employee/products/add', 'Employee\ProductController@create')->name('employee.products.create');
+    Route::post('employee/products/store/many', 'Employee\ProductController@storeManyProducts');
     Route::post('employee/products', 'Employee\ProductController@store');
     Route::get('employee/products','Employee\ProductController@index')->name('employee.products');
 
