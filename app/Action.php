@@ -39,5 +39,16 @@ class Action extends Model
         ]);
     }
 
+    public function initiator(){
+        return $this->belongsTo('App\User');
+    }
+
+    public function site(){
+        return $this->belongsTo('App\Site');
+    }
+
+    public function company(){
+        return $this->belongsTo('App\Company');
+    }
 
 }

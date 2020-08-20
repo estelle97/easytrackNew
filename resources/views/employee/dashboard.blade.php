@@ -15,7 +15,7 @@
 
     {{-- Content Body--}}
     <div class="row row-deck row-cards">
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-sm-6 col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -34,7 +34,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="h1 mb-3">75%</div>
+                    <div class="d-flex align-items-baseline">
+                        <div class="h1 mb-0 mr-2"> {{Auth::user()->totalSales()}} Fcfa </div>
+                        <div class="mr-auto">
+                            <span class="text-green d-inline-flex align-items-center lh-1">
+                                {{Auth::user()->salesPercentage()}} % <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24"
+                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <polyline points="3 17 9 11 13 15 21 7" />
+                                    <polyline points="14 7 21 7 21 14" /></svg>
+                            </span>
+                        </div>
+                    </div>
                     <div class="d-flex mb-2">
                         <div>Taux de conversion</div>
                         <div class="ml-auto">
@@ -57,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-sm-6 col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -77,10 +89,10 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-baseline">
-                        <div class="h1 mb-0 mr-2">4M XAF</div>
+                        <div class="h1 mb-0 mr-2"> {{Auth::user()->totalSales()}} Fcfa</div>
                         <div class="mr-auto">
                             <span class="text-green d-inline-flex align-items-center lh-1">
-                                8% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24"
+                                {{Auth::user()->purchasesPercentage()}}% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24"
                                     height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" />
@@ -93,7 +105,7 @@
                 <div id="chart-revenue-bg" class="chart-sm"></div>
             </div>
         </div>
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-sm-6 col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -113,7 +125,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-baseline">
-                        <div class="h1 mb-3 mr-2">6,782</div>
+                        <div class="h1 mb-3 mr-2"> {{Auth::user()->totalPurchases()}} </div>
                         <div class="mr-auto">
                             <span class="text-yellow d-inline-flex align-items-center lh-1">
                                 0% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24"
@@ -125,42 +137,6 @@
                         </div>
                     </div>
                     <div id="chart-new-clients" class="chart-sm"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="subheader">Utilisateurs actifs </div>
-                        <div class="ml-auto lh-1">
-                            <div class="dropdown">
-                                <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    7 derniers jours
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                    <a class="dropdown-item" href="#">30 derniers jours</a>
-                                    <a class="dropdown-item" href="#">3 derniers mois</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-baseline">
-                        <div class="h1 mb-3 mr-2">15</div>
-                        <div class="mr-auto">
-                            <span class="text-green d-inline-flex align-items-center lh-1">
-                                4% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24"
-                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <polyline points="3 17 9 11 13 15 21 7" />
-                                    <polyline points="14 7 21 7 21 14" /></svg>
-                            </span>
-                        </div>
-                    </div>
-                    <div id="chart-active-users" class="chart-sm"></div>
                 </div>
             </div>
         </div>
@@ -177,7 +153,7 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body p-4 text-center">
-                            <div class="h1 m-0">40</div>
+                            <div class="h1 m-0"> {{Auth::user()->employee->site->products->count()}} </div>
                             <div class="text-muted">Produits</div>
                         </div>
                     </div>
@@ -185,15 +161,15 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body p-4 text-center">
-                            <div class="h1 m-0">8</div>
-                            <div class="text-muted">Services</div>
+                            <div class="h1 m-0"> {{Auth::user()->employee->site->customers->count()}} </div>
+                            <div class="text-muted"> Clients </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body p-4 text-center">
-                            <div class="h1 m-0">13</div>
+                            <div class="h1 m-0"> {{Auth::user()->employee->site->suppliers->count()}} </div>
                             <div class="text-muted">Fournisseurs</div>
                         </div>
                     </div>
@@ -213,50 +189,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="w-1">
-                                    <span class="avatar">PR</span>
-                                </td>
-                                <td class="td-truncate">
-                                    <div class="text-truncate">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    </div>
-                                </td>
-                                <td class="text-nowrap text-muted">17 Juin 2020</td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span class="avatar">DW</span>
-                                </td>
-                                <td class="td-truncate">
-                                    <div class="text-truncate">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    </div>
-                                </td>
-                                <td class="text-nowrap text-muted">17 Juin 2020</td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span class="avatar">IU</span>
-                                </td>
-                                <td class="td-truncate">
-                                    <div class="text-truncate">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    </div>
-                                </td>
-                                <td class="text-nowrap text-muted">17 Juin 2020</td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span class="avatar">LA</span>
-                                </td>
-                                <td class="td-truncate">
-                                    <div class="text-truncate">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    </div>
-                                </td>
-                                <td class="text-nowrap text-muted">17 Juin 2020</td>
-                            </tr>
+                            @foreach (App\Action::where('site_id', Auth::user()->employee->site->id) as $action)
+                                <tr>
+                                    <td class="w-1">
+                                    <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                    </td>
+                                    <td class="td-truncate">
+                                        <div class="text-truncate">
+                                            {{$action->action}}
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap text-muted"> {{$cation->createdt_a}} </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

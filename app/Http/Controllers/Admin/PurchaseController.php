@@ -219,7 +219,7 @@ class PurchaseController extends Controller
                 $purchase->save();
     
                 Action::store('Purchase', $purchase->id, 'invalidate',
-                    "Invaliedation de la commande fournisseur PO-".$purchase->code
+                    "Invalidation de la commande fournisseur PO-".$purchase->code
                 );
 
                 return response()->json([

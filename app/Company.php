@@ -52,4 +52,40 @@ class Company extends Model
        
         return $total;
     }
+
+    public function totalProducts(){
+        $total = 0;
+        foreach ($this->sites as $site) {
+            $total += $site->products->count();
+        }
+
+        return $total;
+    }
+
+    public function totalSuppliers(){
+        $total = 0;
+        foreach ($this->sites as $site) {
+            $total += $site->suppliers->count();
+        }
+
+        return $total;
+    }
+
+    public function totalCustomers(){
+        $total = 0;
+        foreach ($this->sites as $site) {
+            $total += $site->customers->count();
+        }
+
+        return $total;
+    }
+
+    public function totalEmployees(){
+        $total = 0;
+        foreach ($this->sites as $site) {
+            $total += $site->employees->count();
+        }
+
+        return $total;
+    }
 }
