@@ -98,50 +98,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="w-1">
-                                    <span class="avatar">PK</span>
-                                </td>
-                                <td class="td-truncate">
-                                    <div class="text-truncate">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    </div>
-                                </td>
-                                <td class="text-nowrap text-muted">17 Juin 2020</td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span class="avatar">PK</span>
-                                </td>
-                                <td class="td-truncate">
-                                    <div class="text-truncate">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    </div>
-                                </td>
-                                <td class="text-nowrap text-muted">17 Juin 2020</td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span class="avatar">PK</span>
-                                </td>
-                                <td class="td-truncate">
-                                    <div class="text-truncate">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    </div>
-                                </td>
-                                <td class="text-nowrap text-muted">17 Juin 2020</td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span class="avatar">PK</span>
-                                </td>
-                                <td class="td-truncate">
-                                    <div class="text-truncate">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    </div>
-                                </td>
-                                <td class="text-nowrap text-muted">17 Juin 2020</td>
-                            </tr>
+                            @foreach ($user->actions->reverse() as $action)
+                                <tr>
+                                    <td class="w-1">
+                                    <span class="avatar"> <img src="{{asset($user->photo)}}" alt=""> </span>
+                                    </td>
+                                    <td class="td-truncate">
+                                        <div class="text-truncate">
+                                            {{$action->action}}
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

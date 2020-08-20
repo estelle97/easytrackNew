@@ -78,5 +78,22 @@ class Site extends Model
         return $total;
     }
 
+    public function totalSales(){
+        $total = 0;
+        foreach($this->sales->where('validator_id','!=', null) as $sale){
+            $total += $sale->total();
+        }
+
+        return $total;
+    }
+
+    public function totalPurchases(){
+        $total = 0;
+        foreach($this->purchases->where('validator_id','!=', null) as $purchase){
+            $total += $purchase->total();
+        }
+
+        return $total;
+    }
 
 }

@@ -77,4 +77,46 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Permission::class,'permission_user');
     }
+
+    public function actions(){
+        return $this->hasMany('App\Action','initiator_id');
+    }
+    
+    public function sales(){
+        return $this->hasMany('App\Sale', 'initiator_id');
+    }
+
+    public function purchases(){
+        return $this->hasMany('App\Purchase', 'initiator_id');
+    }
+
+    public function totalSales(){
+        $total = 0;
+        foreach($this->sales->where('validator_id','!=', null) as $sale){
+            $total += $sale->total();
+        }
+
+        return $total;
+    }
+
+    public function totalPurchases(){
+        $total = 0;
+        foreach($this->purchases->where('validator_id','!=', null) as $pur){
+            $total += $pur->total();
+        }
+
+        return $total;
+    }
+
+    public function salesPercentage(){
+        if($this->employee->site->totalSales() == 0) return 0;
+        return ($this->totalSales() / $this->employee->site->totalSales())*100;
+    }
+
+
+    public function purchasesPercentage(){
+        if($this->employee->site->totalPurchases() == 0) return 0;
+        return ($this->totalPurchases() / $this->site->totalPurchases())*100;
+    }
+
 }
