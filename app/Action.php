@@ -28,7 +28,6 @@ class Action extends Model
         return static::create([
             'company_id' => $company_id,
             'site_id' => $site_id,
-            'initiator' => Auth::user()->name,
             'initiator_id' => Auth::user()->id,
             'target' => $target,
             'target_id' => $target_id,

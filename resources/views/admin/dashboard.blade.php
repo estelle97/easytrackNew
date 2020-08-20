@@ -196,7 +196,7 @@
                                             {{$action->action}}
                                         </div>
                                     </td>
-                                    <td class="text-nowrap text-muted"> {{$cation->createdt_a}} </td>
+                                    <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
                                 </tr>
                         @endforeach
                         </tbody>
@@ -495,7 +495,7 @@
         // @formatter:on
 
     </script>
-    
+
     {{-- chart-development-activity --}}
     <script>
         // @formatter:off

@@ -17,7 +17,6 @@ class CreateActionsTable extends Migration
             $table->increments('id');
             $table->integer('company_id')->nullable();
             $table->integer('site_id')->nullable();
-            $table->string('initiator');
             $table->integer('initiator_id');
             $table->string('target');
             $table->integer('target_id');

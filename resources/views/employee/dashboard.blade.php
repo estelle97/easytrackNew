@@ -151,7 +151,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (Auth::user()->actions() as $action)
+                            @foreach (Auth::user()->actions as $action)
                                 <tr>
                                     <td class="w-1">
                                         <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
@@ -161,7 +161,7 @@
                                             {{$action->action}}
                                         </div>
                                     </td>
-                                    <td class="text-nowrap text-muted"> {{$cation->createdt_a}} </td>
+                                    <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
                                 </tr>
                         @endforeach
                         </tbody>
