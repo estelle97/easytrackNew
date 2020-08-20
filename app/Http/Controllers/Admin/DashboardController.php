@@ -29,7 +29,35 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.dashboard');
+
+    $sales = Auth::user()->companies->first()->sites->find(31)->sales;
+
+    $sales = [];
+    $purchases = [];
+    $dates = [];
+    for ($i=30; $i >= 0; $i--) { 
+        $totalSales = 0;
+        $totalPurchases = 0;
+        foreach(Auth::user()->companies->first()->sites as $site){
+            foreach($site->sales->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
+                $totalSales += $sale->total();
+            }
+        }
+
+        foreach(Auth::user()->companies->first()->sites as $site){
+            foreach($site->purchases->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
+                $totalPurchases += $purchase->total();
+            }
+        }
+
+        $sales[] = $totalSales;
+        $purchases[] = $totalPurchases;
+        $dates[]= \Carbon\Carbon::today()->subDays($i)->toDateString();
+    }
+
+    // dump($purchases); dump($sales);  dump($dates);
+
+        return view('admin.dashboard', compact('purchases','sales','dates'));
     }
 
 

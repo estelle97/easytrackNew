@@ -111,6 +111,11 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
 
 
+    Route::get('admin/stats/sales/{days}', 'Admin\StatController@sales');
+    Route::get('admin/stats/purchases/{days}', 'Admin\StatController@purchases');
+    Route::get('admin/stats/profits/{days}', 'Admin\StatController@profits');
+
+
 
     Route::get('admin/sales/{sale}/update/init', 'Admin\SaleController@getElementBySale');
     Route::get('admin/sales/{sale}/update', 'Admin\SaleController@edit')->name('admin.sales.edit');
@@ -155,6 +160,10 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::resource('admin/suppliers', 'Admin\SupplierController');
 
 
+
+    Route::get('employee/stats/sales/{days}', 'Employee\StatController@sales');
+    Route::get('employee/stats/purchases/{days}', 'Employee\StatController@purchases');
+    Route::get('employee/stats/profits/{days}', 'Employee\StatController@profits');
 
     Route::get('employee/sales/{sale}/update/init', 'Employee\SaleController@getElementBySale');
     Route::get('employee/sales/{sale}/update', 'Employee\SaleController@edit')->name('employee.sales.edit');

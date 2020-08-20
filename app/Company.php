@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -31,23 +32,40 @@ class Company extends Model
         return $this->belongsTo('App\Activity');
     }
 
-    public function totalPurchases(){
+    public function totalPurchases($days = null){
         $total = 0;
-        foreach ($this->sites as $site) {
-           foreach($site->purchases->where('validator_id','!=', null) as $pur){
-            $total += $pur->total();
-           }
+        if($days){
+            foreach ($this->sites as $site) {
+               foreach($site->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $pur){
+                $total += $pur->total();
+               }
+            }
+        }else {
+            foreach ($this->sites as $site) {
+                foreach($site->purchases->where('validator_id','!=', null) as $pur){
+                 $total += $pur->total();
+                }
+             }
         }
        
         return $total;
     }
 
-    public function totalSales(){
+    public function totalSales($days = null){
         $total = 0;
-        foreach ($this->sites as $site) {
-           foreach($site->sales->where('validator_id','!=', null) as $sale){
-            $total += $sale->total();
-           }
+
+        if($days){
+            foreach ($this->sites as $site) {
+                foreach($site->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
+                 $total += $sale->total();
+                }
+             }    
+        } else {
+            foreach ($this->sites as $site) {
+               foreach($site->sales->where('validator_id','!=', null) as $sale){
+                $total += $sale->total();
+               }
+            }
         }
        
         return $total;

@@ -78,19 +78,31 @@ class Site extends Model
         return $total;
     }
 
-    public function totalSales(){
+    public function totalSales($days = null){
         $total = 0;
-        foreach($this->sales->where('validator_id','!=', null) as $sale){
-            $total += $sale->total();
+        if($days){
+            foreach($this->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
+                $total += $sale->total();
+            }
+        } else {
+            foreach($this->sales->where('validator_id','!=', null) as $sale){
+                $total += $sale->total();
+            }
         }
 
         return $total;
     }
 
-    public function totalPurchases(){
+    public function totalPurchases($days = null){
         $total = 0;
-        foreach($this->purchases->where('validator_id','!=', null) as $purchase){
-            $total += $purchase->total();
+        if($days){
+            foreach($this->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $purchase){
+                $total += $purchase->total();
+            }    
+        } else {
+            foreach($this->purchases->where('validator_id','!=', null) as $purchase){
+                $total += $purchase->total();
+            }
         }
 
         return $total;
