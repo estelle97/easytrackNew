@@ -15,7 +15,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        //
+        // Ceci est le premier test effectue sur l'api
     }
 
     /**
