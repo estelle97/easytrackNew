@@ -13,7 +13,7 @@ class SupplierStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class SupplierStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'phone1' => 'required|min:200000000|max:999999999|numeric'
+        ];
+    }
+
+     /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required' => 'Ce champ est obligatoire',
+            'phone1.*' => "Format de téléphone incorrect"
         ];
     }
 }

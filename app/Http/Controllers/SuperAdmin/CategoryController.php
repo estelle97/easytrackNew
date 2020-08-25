@@ -4,6 +4,8 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -34,11 +36,8 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:categories'
-        ]);
 
         $category = Category::create([
             'name' => $request->name,
@@ -77,11 +76,8 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
 
         $category->update([
             'name' => $request->name,

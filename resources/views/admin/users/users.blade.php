@@ -309,7 +309,6 @@
 
             var form_data = new FormData(); // Creating object of FormData class
 
-            form_data.append("photo", $('input[type="file"]').prop('files')[0]);
             form_data.append("name", $("#user-name-add").val());
             form_data.append("email", $("#user-email-add").val());
             form_data.append("username", $("#user-username-add").val());
@@ -320,6 +319,7 @@
             form_data.append("site_id", $("#user-site-add").val());
             form_data.append("role_id", $("#user-role-add").val());
             form_data.append("_token", '{{csrf_token()}}');
+            if($(".file").get(0).files.length != 0)    form_data.append("photo", $('input[type="file"]').prop('files')[0]);
 
             $.ajax({
                 url : '/admin/users/store',

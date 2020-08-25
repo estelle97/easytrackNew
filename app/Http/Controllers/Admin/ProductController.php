@@ -40,7 +40,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'product_id' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
             'cost' => 'required|numeric|min:0',
             'qty' => 'required|numeric|min:1',
             'qty_alert' => 'required|numeric|min:1',

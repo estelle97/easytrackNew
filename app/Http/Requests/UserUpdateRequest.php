@@ -25,10 +25,12 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email',
-            'username' => 'required',
+            'phone' => 'required|min:200000000|max:999999999|numeric',
+            'email' => 'email|nullable',
+            'username' => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'address' => 'required',
-            'phone' => 'required|min:222222222|max:999999999|numeric'
+            'role_id' => 'required',
+            'photo' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ];
     }
 
@@ -41,9 +43,12 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'required' => 'Ce champ est obligatoire',
-            'phone.min' => "Veuillez entrer un numéro de téléphone valide",
-            'phone.max' => "Veuillez entrer un numéro de téléphone valide",
-            'phone.numeric' => "Veuillez entrer un numéro de téléphone valide",
+            'phone.*' => "Format de téléphone incorrect",
+            'email' => 'Adresse email invalide',
+            'password.min' => "Le mot de passe doit avoir au moins 8 caracètres",
+            'photo.*' => "Format de photo incorrect",
+            'username.unique' => "Ce nom d'utilisateur n'est plus disponible",
+            'username.*' => "Nom d'utilisateur incorrect",
         ];
     }
 }

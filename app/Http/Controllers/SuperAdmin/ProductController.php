@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -43,12 +45,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:products',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
-        ]);
 
         $product = new Product([
             'name' => $request->name,
@@ -142,11 +140,8 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|unique:products,name,'.$product->id.'',
-        ]);
 
         $product->update([
             'name' => $request->name,

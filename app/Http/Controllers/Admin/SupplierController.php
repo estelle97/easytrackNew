@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SupplierStoreRequest;
+use App\Http\Requests\SupplierUpdateRequest;
 use App\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,12 +38,8 @@ class SupplierController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SupplierStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric'
-        ]);
 
         if($request->site_id != 'all'){
             $supplier = Supplier::create($request->only(
@@ -96,12 +94,8 @@ class SupplierController extends Controller
      * @param  \App\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(SupplierUpdateRequest $request, Supplier $supplier)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric'
-        ]);
 
         $supplier->update($request->only(
             'name','company_name','email','phone1','phone2','town','street','postal_code','site_id'

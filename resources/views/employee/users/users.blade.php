@@ -372,7 +372,7 @@
             var token = '{{csrf_token()}}';
 
             $.ajax({
-                url : '/admin/users',
+                url : '/employee/users',
                 method : 'post',
                 data: {
                     _token: token,

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SiteStoreRequest;
+use App\Http\Requests\SiteUpdateRequest;
 use Illuminate\Http\Request;
 use App\Site;
 use Auth;
@@ -15,15 +17,8 @@ class SiteController extends Controller
         return view('employee.sites.sites', compact('site'));
     }
 
-    public function store(Request $request)
+    public function store(SiteStoreRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:sites',
-            'email' => 'email|required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric|unique:sites',
-            'town' => 'required',
-            'street' => 'required'
-        ]);
 
         $site = new Site();
         $site->company_id = Auth::user()->companies()->first()->id;
@@ -51,15 +46,8 @@ class SiteController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(SiteUpdateRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'email|required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric',
-            'town' => 'required',
-            'street' => 'required'
-        ]);
 
         $site = Site::find($request->site_id);
 

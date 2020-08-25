@@ -312,18 +312,21 @@
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" /></svg>
-                                    <span class="avatar-upload-text">Photo </span>
+                                <span class="avatar-upload-text">Photo </span>
                             </a>
+                        </div>
+                        <div class="col-lg-9">
+                            <span class="text-danger" id="product-photo-error"></span>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label">Nom</label>
                             <input type="text" id="product-name-add" class="form-control" placeholder="Saisissez le nom du produit..." required>
-                            <span class="text-danger" id="name-error"></span>
+                            <span class="text-danger" id="product-name-error"></span>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label">Marque</label>
                             <input type="text" id="product-brand-add" class="form-control"  placeholder="Saisissez la marque du produit..." required>
-                            <span class="text-danger" id="brand-error"></span>
+                            <span class="text-danger" id="product-brand-error"></span>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label"> Catégorie </label>
@@ -414,13 +417,13 @@
                                 <label class="form-label">Nom</label>
                                 <input type="text" id="product-name-update{{$product->id}}" value="{{$product->name}}" class="form-control"
                                     placeholder="Saisissez le nom du produit" required>
-                                    <span class="text-danger" id="name-error{{$product->id}}"></span>
+                                    <span class="text-danger" id="product-name-error{{$product->id}}"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">brand</label>
                                 <input type="text" id="product-brand-update{{$product->id}}" value="{{$product->brand}}" class="form-control"
                                     placeholder="Saisissez la marque " required>
-                                    <span class="text-danger" id="brand-error{{$product->id}}"></span>
+                                    <span class="text-danger" id="product-brand-error{{$product->id}}"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label"> Catégorie </label>
@@ -628,7 +631,7 @@
                         $(".text-danger").fadeOut().html('');
 
                         $.each(err.responseJSON.errors, function (i, error) {
-                            var el = $('#'+i+'-error');
+                            var el = $('#product-'+i+'-error');
                             el.html(error).fadeIn();
                         });
                     }
@@ -680,7 +683,7 @@
                         $(".text-danger").fadeOut().html('');
 
                         $.each(err.responseJSON.errors, function (i, error) {
-                            var el = $('#'+i+'-error');
+                            var el = $('#product-'+i+'-error'+id);
                             el.html(error).fadeIn();
                         });
                     }

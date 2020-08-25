@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Employee;
 
 use App\Customer;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerStoreRequest;
+use App\Http\Requests\CustomerUpdateRequest;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -35,12 +37,8 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required|min:200000000|max:999999999|numeric'
-        ]);
 
         if($request->site_id != 'all'){
             $customer = Customer::create($request->only(
@@ -94,12 +92,8 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(CustomerUpdateRequest $request, Customer $customer)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required|min:200000000|max:999999999|numeric'
-        ]);
 
         $customer->update($request->only(
             'name','company_name','email','phone','town','street','site_id'

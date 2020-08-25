@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Action;
 use App\Employee;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
@@ -29,18 +31,8 @@ class UserController extends Controller
         return $id;
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $this->validate($request,[
-            'name' => 'required',
-            'username' => 'required|string|unique:users|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
-            'email' => 'nullable|email|unique:users',
-            'address' => 'required',
-            'phone' => 'required|min:200000000|max:999999999|numeric|unique:users',
-            'password' => 'required|min:8',
-            'role_id' => 'required',
-            'photo' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
-        ]);
 
         $user = new User([
             'name' => $request->name,
@@ -100,17 +92,8 @@ class UserController extends Controller
         return view('admin.users.user-profile-edit', compact('user'));
     }
 
-    public function update(Request $request, $user)
+    public function update(UserUpdateRequest $request, $user)
     {
-        $this->validate($request,[
-            'name' => 'required',
-            'phone' => 'required|min:200000000|max:999999999|numeric',
-            'email' => 'email|nullable',
-            'username' => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
-            'address' => 'required',
-            'role_id' => 'required',
-            'photo' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
-        ]);
 
         $user = User::whereUsername($user)->first();
 
