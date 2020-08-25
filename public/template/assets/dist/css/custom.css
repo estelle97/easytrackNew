@@ -20,6 +20,11 @@
     display: none !important;
 }
 
+/* CARDS */
+.card-actions .dropdown-toggle:after  {
+    display: none !important;
+}
+
 /* BUTTONS */
 .btn-gradient:hover {
     color: #fff;

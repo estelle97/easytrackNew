@@ -30,6 +30,8 @@
     <link href={{asset("template/assets/dist/css/easytrak.min.css")}} rel="stylesheet" />
     <link href={{asset("template/assets/dist/css/demo.min.css")}} rel="stylesheet" />
     <link href={{asset("template/assets/dist/css/custom.css")}} rel="stylesheet" />
+    <!-- Datatables Plugin -->
+    <script src="template/assets/dist/assets/libs/datatables/plugin.js"></script>
     <style>
         body {
             display: none;
@@ -46,7 +48,7 @@
     <div class="page">
         {{-- Header --}}
         <header class="navbar navbar-expand-md navbar-dark navbar-bg-gradient navbar-overlap">
-            <div class="container-xl">
+            <div class="container-xl mt-2">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -116,14 +118,14 @@
     <script src={{asset("template/assets/dist/libs/jqvmap/dist/maps/jquery.vmap.world.js")}}></script>
     <script src={{asset("template/assets/dist/libs/peity/jquery.peity.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/apexcharts/dist/apexcharts.min.js")}}></script>
-    
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {{-- easytrak Core --}}
     <script src={{asset("template/assets/dist/js/easytrak.min.js")}}></script>
     {{-- c'chart-revenue-bg --}}
 
     @include('flashy::message')
-    
+
     <script>
         document.body.style.display = "block"
 

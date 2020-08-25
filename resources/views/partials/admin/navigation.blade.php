@@ -2,7 +2,7 @@
     <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href={{route('admin.dashboard')}}>
+                <a class="nav-link" href="{{route('admin.dashboard')}}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                             height="24" class="icon">
@@ -33,14 +33,9 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="active">
-                        <a class="dropdown-item" href={{route('admin.products')}}>
-                            Produits
-                        </a>
-                    </li>
                     <li>
-                        <a class="dropdown-item" href="/admin/suppliers">
-                            Fournisseurs
+                        <a class="dropdown-item" href="{{route('admin.products')}}">
+                            Produits
                         </a>
                     </li>
                     <li>
@@ -49,51 +44,39 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href={{route('admin.sites')}}>
-                            Gérer Sites
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
-                    role="button" aria-expanded="false">
-                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                            height="24" class="icon">
-                            <path fill="none" d="M0 0h24v24H0z" />
-                            <path
-                                d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1zm2 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-                                fill="rgba(255,255,255,0.8)" />
-                        </svg>
-                    </span>
-                    <span class="nav-link-title">
-                        Commandes
-                    </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href={{route('admin.purchases')}}>
-                            Commande fournisseur
+                        <a class="dropdown-item" href="/admin/suppliers">
+                            Fournisseurs
                         </a>
                     </li>
                     <li class="active">
-                        <a class="dropdown-item" href={{route('admin.sales.pos')}}>
-                            Enregistrer commande client
+                        <a class="dropdown-item" href="{{route('admin.sales.kanban')}}">
+                            Commandes clients
                         </a>
-                    </li><li class="active">
-                        <a class="dropdown-item" href={{route('admin.sales.all')}}>
-                            Afficher commandes clients
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{route('admin.purchases')}}">
+                            Bons de commandes
                         </a>
-                    </li><li class="active">
-                        <a class="dropdown-item" href={{route('admin.sales.kanban')}}>
-                            Kanban Board
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{route('admin.sites')}}">
+                            Gérer les sites
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href={{route('admin.company.users')}}>
+                <a class="nav-link" href="{{route('admin.reports')}}">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 12h2v9H3v-9zm16-4h2v13h-2V8zm-8-6h2v19h-2V2z" fill="rgba(255,255,255, 0.8)"/></svg>
+                    </span>
+                    <span class="nav-link-title">
+                        Rapports
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.company.users')}}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                             height="24" class="icon">
@@ -109,7 +92,23 @@
                 </a>
             </li>
         </ul>
-
-        @yield('search-form')
+        {{-- <div
+            class="ml-md-auto pl-md-4 py-2 py-md-0 mr-md-4 order-first order-md-last flex-grow-1 flex-md-grow-0">
+            <form action="." method="get">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <circle cx="10" cy="10" r="7" />
+                            <line x1="21" y1="21" x2="15" y2="15" />
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control form-control-rounded form-control-dark"
+                        placeholder="Search…" />
+                </div>
+            </form>
+        </div> --}}
     </div>
 </div>

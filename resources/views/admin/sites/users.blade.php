@@ -28,11 +28,6 @@
                     Gestion des utilisateurs
                 </h2>
             </div>
-            <div class="col-auto">
-                <div class="text-white text-h5 mt-2">
-                    1-18 of 413 people
-                </div>
-            </div>
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
@@ -113,55 +108,57 @@
                     <div class="card-body">
                         <div class="row row-sm align-items-center">
                             <div class="col-auto">
-                                <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?name={{$emp->user->name}}')"> </span>
+                                    @if ($emp->user->photo)
+                                        <span class="avatar avatar-md"  style="background-image: url('{{asset($emp->user->photo)}}')"> </span>
+                                    @else
+                                        <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$emp->user->name}}')"> </span>
+                                    @endif
+                            </div>
+                            <div class="col-auto">
+
                             </div>
                             <div class="col">
                                 <h3 class="mb-0">
                                     <a href={{route('admin.user.show', $emp->user->username)}}> {{$emp->user->name}} </a>
                                 </h3>
-                                <div class="text-muted text-h5">
-                                {{$emp->user->role->name}}
+                                <div class="text-muted text-h4">
+                                   {{$emp->user->role->name}}
                                 </div>
-                            </div>
-                            <div class="col-auto lh-1 align-self-start">
-                                <span class="badge bg-info">
-                                    {{$emp->site->name}}
-                                </span>
                             </div>
                         </div>
-                        <div class="row align-items-center mt-4">
+                        <div class="row align-items-center  mt-4">
                             <div class="col">
-                                <div>
-                                    <div class="d-flex mb-1 align-items-center lh-1">
-                                        <div class="text-h5 font-weight-bolder m-0">
-                                            Temps de travail
-                                        </div>
-                                        <span class="ml-auto text-h6 strong">84%</span>
-                                    </div>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-blue" style="width: 84%;" role="progressbar"
-                                            aria-valuenow="84" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="sr-only">84% Complete</span>
-                                        </div>
-                                    </div>
+                                <div class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mr-2 text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="11" r="3"></circle><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"></path></svg>
+                                    {{$emp->site->name}}
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <div class="btn-list">
-                                    <a href={{route('admin.user.show', $emp->user->username)}} class="btn btn-white btn-sm">
-                                        Gérer
-                                    </a>
-                                    <a class="btn btn-white btn-sm" data-toggle="modal"
+                            <div class="col-auto card-actions">
+                                <span class="dropdown">
+                                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                                height="20">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                            </svg>
+                                    </div>
+
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <span class="dropdown-header">Actions</span>
+                                        <a class="dropdown-item" href="{{route('admin.user.show', $emp->user->username)}}">
+                                            Gérer l'utilisateur
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            Envoyer un message
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#" data-toggle="modal"
                                         data-target="#modal-delete-user">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                                            height="15">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"
-                                                fill="rgba(0,0,0,1)" />
-                                        </svg>
-                                    </a>
-                                </div>
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </span>
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,40 @@
 <div class="navbar-nav flex-row order-md-last">
+    <div class="nav-item d-none d-md-flex mr-2">
+        <a href="#" class="nav-link px-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                >
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path
+                    d="M10 3h4a8 8 0 1 1 0 16v3.5c-5-2-12-5-12-11.5a8 8 0 0 1 8-8zm2 14h2a6 6 0 1 0 0-12h-4a6 6 0 0 0-6 6c0 3.61 2.462 5.966 8 8.48V17z"
+                    fill="rgba(255,255,255,1)" />
+            </svg>
+        </a>
+    </div>
+    <div class="nav-item dropdown d-none d-md-flex mr-3">
+        <a href="#" class="nav-link px-0" data-toggle="dropdown" tabindex="-1" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path
+                    d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z"
+                    fill="rgba(255,255,255,1)" /></svg>
+            <span class="badge bg-red"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-card">
+            <div class="card">
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="nav-item dropdown">
         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
             <span class="avatar"
-        style="background-image: url('https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=FFFFFF&color=267FC9&font-size=0.30');">
-                <span class="badge bg-green"></span>
+                style="background-image: url('https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=FFFFFF&color=267FC9&font-size=0.30');">
+
             </span>
             <div class="d-none d-xl-block pl-2">
-            <div> {{Auth::user()->name}} </div>
+                <div> {{Auth::user()->name}} </div>
                 <div class="mt-1 small text-muted">
                     Super Admin
                 </div>
@@ -31,24 +59,6 @@
                 </svg>
                 Agenda
             </a> --}}
-            <a class="dropdown-item" href="./notifications.html">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                    class="icon dropdown-item-icon">
-                    <path fill="none" d="M0 0h24v24H0z" />
-                    <path
-                        d="M5 18h14v-6.969C19 7.148 15.866 4 12 4s-7 3.148-7 7.031V18zm7-16c4.97 0 9 4.043 9 9.031V20H3v-8.969C3 6.043 7.03 2 12 2zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
-                </svg>
-                Notifications &nbsp;<span class="badge text-info"> 5 </span>
-            </a>
-            <a class="dropdown-item" href="./chat.html">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                    class="icon dropdown-item-icon">
-                    <path fill="none" d="M0 0h24v24H0z" />
-                    <path
-                        d="M10 3h4a8 8 0 1 1 0 16v3.5c-5-2-12-5-12-11.5a8 8 0 0 1 8-8zm2 14h2a6 6 0 1 0 0-12h-4a6 6 0 0 0-6 6c0 3.61 2.462 5.966 8 8.48V17z" />
-                </svg>
-                Chat  &nbsp;<span class="badge text-info"> 5 </span>
-            </a>
             <a class="dropdown-item" href="./help.html">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                     class="icon dropdown-item-icon">
