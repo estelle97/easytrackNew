@@ -97,7 +97,7 @@
                                         <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                             data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                             
+
                                             <a class="dropdown-item" href="#">
                                                  Afficher
                                             </a>
@@ -118,36 +118,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer d-flex align-items-center">
-                <p class="m-0 text-muted">Affichage <span>1</span> à <span>10</span> de <span>30</span>
-                    élements</p>
-                <ul class="pagination m-0 ml-auto">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <polyline points="15 6 9 12 15 18" /></svg>
-                            précédent
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            suivant <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <polyline points="9 6 15 12 9 18" /></svg>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -330,52 +300,7 @@
 @section('scripts')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#suppliers').DataTable({
-                 dom: 'Blfrtip',
-                buttons: [
-                    'colvis',
-                    {
-                        extend: 'copy',
-                        text: 'Copier',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        text: 'Excel',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: 'PDF',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable'
-                        }
-                    },
-                ],
-                select: true,
-                colReorder: true,
-            });
-        } );
-    </script>
     <script>
         function addSupplier(){
             var token = '{{csrf_token()}}';
@@ -440,7 +365,7 @@
             var site_id = $("#supplier-site-update"+id).val();
 
             var site = $('#supplier-site-update'+id+' option:selected').text();
-    
+
             $.ajax({
                 url: '/employee/suppliers/'+id,
                 method: 'post',
