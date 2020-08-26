@@ -10,35 +10,25 @@
                 Gestion des produits
             </h2>
         </div>
-        <div class="col-auto">
-            <div class="text-white text-h5 mt-2">
-                1-10 of 30
-            </div>
-        </div>
         <!-- Page title actions -->
         <div class="col-auto ml-auto d-print-none">
             <div class="d-flex align-items-center">
-                <a href="#" class="btn btn-white" data-toggle="modal" data-target="#modal-create-product">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    Ajouter un produit
-                </a>
+                <span class="dropdown mr-4">
+                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)"/></svg>
+                    <span class="h2 align-middle">Nouveau</span>
+                    </div>
 
-                <a href={{route('admin.products.create')}} class="btn btn-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    Ajouter plusieurs produits
-                </a>
+                    <div class="dropdown-menu dropdown-menu-right mt-3">
+                        <span class="dropdown-header">Menu</span>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#modal-create-product">
+                            Ajouter un produit
+                        </a>
+                        <a class="dropdown-item" href="{{route('admin.products.create')}}">
+                            Ajouter plusieurs produits
+                        </a>
+                    </div>
+                </span>
 
                 <span class="dropdown ml-3">
                     <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
@@ -169,36 +159,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer d-flex align-items-center">
-                <p class="m-0 text-muted">Affichage <span>1</span> à <span>10</span> de <span>30</span>
-                    élements</p>
-                <ul class="pagination m-0 ml-auto">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <polyline points="15 6 9 12 15 18" /></svg>
-                            précédent
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            suivant <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <polyline points="9 6 15 12 9 18" /></svg>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -355,55 +315,7 @@
 @section('scripts')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#products').DataTable({
-                 dom: 'Blfrtip',
-                buttons: [
-                    {
-                        extend: 'colvis',
-                        text: 'Colones visibles'
-                    },
-                    {
-                        extend: 'copy',
-                        text: 'Copier',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        text: 'Excel',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: 'PDF',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable'
-                        }
-                    },
-                ],
-                select: false,
-                colReorder: true,
-            });
-        } );
-    </script>
     <script>
         function addProduct(){
             var token = '{{csrf_token()}}';

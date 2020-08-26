@@ -20,6 +20,11 @@
     display: none !important;
 }
 
+/* CARDS */
+.card-actions .dropdown-toggle:after  {
+    display: none !important;
+}
+
 /* BUTTONS */
 .btn-gradient:hover {
     color: #fff;
@@ -124,4 +129,22 @@
 }
 .easy-kanban-card .dropdown-toggle:after  {
     display: none !important;
+}
+
+.notification-menu {
+    min-width: 20rem !important;
+}
+
+.fixed-table-toolbar {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.fixed-table-toolbar .search {
+    width: 65%;
+}
+
+body .fixed-table-container thead th {
+    border-left: none !important
 }

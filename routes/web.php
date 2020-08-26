@@ -68,6 +68,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
 
+    Route::get('admin/reports', 'Admin\ReportController@index')->name('admin.reports');
+
     Route::get('admin/{site}/users', 'Admin\SiteController@users')->name('admin.site.employees');
     Route::get('admin/sites', 'Admin\SiteController@index')->name('admin.sites');
     Route::post('admin/sites/add', 'Admin\SiteController@store');
@@ -108,6 +110,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('easytrack/categories/{category}/destroy', 'SuperAdmin\CategoryController@destroy');
     Route::post('easytrack/categories/{category}', 'SuperAdmin\CategoryController@update');
     Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
+
+    Route::get('easytrack/customers', 'SuperAdmin\CustomerController@index')->name('easytrack.customers');
+    Route::get('easytrack/companies', 'SuperAdmin\CompanyController@index')->name('easytrack.companies');
 
 
 
