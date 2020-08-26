@@ -35,7 +35,7 @@ function browserSync(done) {
 }
 function css() {
 	return gulp
-		.src('public/template/assets/dist/css/*.scss')
+		.src('public/template/assets/dist/css/*.css')
 		.pipe(browsersync.stream());
 }
 

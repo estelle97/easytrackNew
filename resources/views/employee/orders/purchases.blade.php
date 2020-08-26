@@ -112,8 +112,8 @@
                             </thead>
                             <tbody>
                                     @foreach (Auth::user()->employee->site->purchases->load('products')->reverse() as $pur)
-                                        
-                                        
+
+
                                         <tr id="purchase{{$pur->id}}">
                                             <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                     aria-label="Select invoice"></td>
@@ -194,7 +194,7 @@
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                        
+
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" href="#">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -212,36 +212,6 @@
                                     @endforeach
                             </tbody>
                         </table>
-                </div>
-                <div class="card-footer d-flex align-items-center">
-                    <p class="m-0 text-muted">Affichage <span>1</span> à <span>10</span> de <span>30</span>
-                        élements</p>
-                    <ul class="pagination m-0 ml-auto">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <polyline points="15 6 9 12 15 18" /></svg>
-                                précédent
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                suivant <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <polyline points="9 6 15 12 9 18" /></svg>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -275,12 +245,12 @@
             </div>
         </div>
     </div>
-            
+
 
     <div class="modal-section">
 
         <div class="modal modal-blur fade" id="modal-pos" .modal();tabindex="-1" role="dialog" aria-hidden="true">
-            
+
         </div>
 
         <div class="modal modal-blur fade" id="modal-delete-purchaseorder" tabindex="-1" role="dialog"
@@ -319,53 +289,7 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#purchases').DataTable({
-                 dom: 'Blfrtip',
-                buttons: [
-                    'colvis',
-                    {
-                        extend: 'copy',
-                        text: 'Copier',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        text: 'Excel',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: 'PDF',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable'
-                        }
-                    },
-                ],
-                select: false,
-                colReorder: true,
-            });
-        } );
-    </script>
-    
 
     <script>
         let products = [];
@@ -435,7 +359,7 @@
         }
 
         function updateQty(el, one = 1){
-           
+
             var  product = $("#qty-"+el);
             var nbr;
             if(one != 1 && one != -1) nbr = one;
@@ -477,7 +401,7 @@
                 price = $("#price-"+val).data('price');
                 order += id+';'+qty+';'+price+';0|';
             });
-            
+
             $.ajax({
                 url: '/employee/purchases',
                 method: 'post',
@@ -512,7 +436,7 @@
                 order += id+';'+qty+';'+price+';0|';
             });
 
-            
+
             $.ajax({
                 url: '/employee/purchases/'+purchase_id+'/update',
                 method: 'post',
@@ -542,7 +466,7 @@
                 data: {
                     _token: token,
                     site_id: site
-                    
+
                 },
                 success: function(data){
                     $("#suppliers").html(data.suppliers);
@@ -562,7 +486,7 @@
                 },
                 success: function(data){
                     $("#modal-pos").html(data).modal();
-                    
+
                 }
             });
         }
