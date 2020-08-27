@@ -86,80 +86,77 @@
         </div>
     </div>
 </div>
-<div class="row">
-
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="table-responsive">
-                <table id="products" class="table card-table table-vcenter text-nowrap datatable">
-                    <thead>
-                        <tr>
-                            <th class="exportable"> Photo </th>
-                            <th class="exportable">Produit</th>
-                            <th class="exportable">Categorie</th>
-                            <th class="exportable">PA</th>
-                            <th class="exportable">PV</th>
-                            <th class="exportable">Qté</th>
-                            <th class="exportable">Site</th>
-                            <th>Marque</th>
-                            <th></th>
+<div class="row row-deck row-cards">
+    <div class="card">
+        <div class="table-responsive">
+            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
+                <thead>
+                    <tr>
+                        <th class="exportable"> Photo </th>
+                        <th class="exportable">Produit</th>
+                        <th class="exportable">Categorie</th>
+                        <th class="exportable">PA</th>
+                        <th class="exportable">PV</th>
+                        <th class="exportable">Qté</th>
+                        <th class="exportable">Site</th>
+                        <th>Marque</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="products">
+                    @foreach (Auth::user()->companies->first()->sites as $site)
+                        @foreach ($site->products as $product)
+                        <tr id="product{{$site->id}}{{$product->id}}">
+                            <td> <img src="{{asset($product->photo)}}" class="avatar avatar-upload rounded thumbnail" alt="{{$product->name}}"> </td>
+                            <td><span id="product-name{{$site->id}}{{$product->id}}" class="text-muted"> {{$product->name}} </span></td>
+                            <td><a id="product-category{{$site->id}}{{$product->id}}"  class="text-reset" tabindex="-1">{{$product->category->name}}</a></td>
+                            <td id="product-cost{{$site->id}}{{$product->id}}">
+                                {{$product->pivot->cost}}
+                            </td>
+                            <td id="product-price{{$site->id}}{{$product->id}}">
+                                {{$product->pivot->price}}
+                            </td>
+                            <td id="product-qty{{$site->id}}{{$product->id}}">
+                                {{$product->pivot->qty}}
+                            </td>
+                            <td id="product-site{{$site->id}}{{$product->id}}">
+                                {{$site->name}}
+                            </td>
+                            <td id="product-brand{{$site->id}}{{$product->id}}">
+                                {{$product->brand}}
+                            </td>
+                            <td class="text-right">
+                                <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{$site->id}}{{$product->id}}">
+                                    Modifier
+                                </a>
+                                <span class="dropdown">
+                                    <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                        data-boundary="viewport" data-toggle="dropdown">Actions</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">
+                                             Afficher
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            marquer comme inactif
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                width="18" height="18" class="mr-2">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                            </svg>
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </span>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody class="products">
-                        @foreach (Auth::user()->companies->first()->sites as $site)
-                            @foreach ($site->products as $product)
-                            <tr id="product{{$site->id}}{{$product->id}}">
-                                <td> <img src="{{asset($product->photo)}}" class="avatar avatar-upload rounded thumbnail" alt="{{$product->name}}"> </td>
-                                <td><span id="product-name{{$site->id}}{{$product->id}}" class="text-muted"> {{$product->name}} </span></td>
-                                <td><a id="product-category{{$site->id}}{{$product->id}}"  class="text-reset" tabindex="-1">{{$product->category->name}}</a></td>
-                                <td id="product-cost{{$site->id}}{{$product->id}}">
-                                    {{$product->pivot->cost}}
-                                </td>
-                                <td id="product-price{{$site->id}}{{$product->id}}">
-                                    {{$product->pivot->price}}
-                                </td>
-                                <td id="product-qty{{$site->id}}{{$product->id}}">
-                                    {{$product->pivot->qty}}
-                                </td>
-                                <td id="product-site{{$site->id}}{{$product->id}}">
-                                    {{$site->name}}
-                                </td>
-                                <td id="product-brand{{$site->id}}{{$product->id}}">
-                                    {{$product->brand}}
-                                </td>
-                                <td class="text-right">
-                                    <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{$site->id}}{{$product->id}}">
-                                        Modifier
-                                    </a>
-                                    <span class="dropdown">
-                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                            data-boundary="viewport" data-toggle="dropdown">Actions</button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">
-                                                 Afficher
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                marquer comme inactif
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    width="18" height="18" class="mr-2">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                </svg>
-                                                Supprimer
-                                            </a>
-                                        </div>
-                                    </span>
-                                </td>
-                            </tr>
-                            @endforeach
                         @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

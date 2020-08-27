@@ -37,12 +37,10 @@
     {{-- Editor CSS --}}
     <link rel="stylesheet" href={{asset("template/assets/dist/css/editor/select2.css")}}>
     <link rel="stylesheet" href={{asset("template/assets/dist/css/editor/datetimepicker.css")}}>
-    <link rel="stylesheet" href={{asset("template/assets/dist/css/editor/bootstrap-editable.css")}}>
     <link rel="stylesheet" href={{asset("template/assets/dist/css/editor/x-editor-style.css")}}>
 
     {{-- Data-table CSS --}}
     <link rel="stylesheet" href={{asset("template/assets/dist/css/data-table/bootstrap-table.css")}}>
-    <link rel="stylesheet" href={{asset("template/assets/dist/css/data-table/bootstrap-editable.css")}}>
     <style>
         body {
             display: none;
@@ -133,19 +131,9 @@
     <script src={{asset("template/assets/dist/libs/data-table/bootstrap-table.js")}}></script>
     <script src={{asset("template/assets/dist/libs/data-table/tableExport.js")}}></script>
     <script src={{asset("template/assets/dist/libs/data-table/data-table-active.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/data-table/bootstrap-table-editable.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/data-table/bootstrap-editable.js")}}></script>
     <script src={{asset("template/assets/dist/libs/data-table/bootstrap-table-resizable.js")}}></script>
     <script src={{asset("template/assets/dist/libs/data-table/colResizable-1.5.source.js")}}></script>
     <script src={{asset("template/assets/dist/libs/data-table/bootstrap-table-export.js")}}></script>
-
-    <script src={{asset("template/assets/dist/libs/editable/jquery.mockjax.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/editable/mock-active.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/editable/select2.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/editable/moment.min.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/editable/bootstrap-datetimepicker.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/editable/bootstrap-editable.js")}}></script>
-    <script src={{asset("template/assets/dist/libs/editable/xediable-active.js")}}></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {{-- easytrak Core --}}
