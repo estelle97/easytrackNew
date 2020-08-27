@@ -18,7 +18,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)"/></svg>
                         <span class="h2 align-middle">Nouveau</span>
                     </a>
-                    <a href={{route('admin.sales.all')}} class="text-white mr-4 mb-0">
+                    <a href={{route('admin.sales.all')}} class="text-white mb-0">
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 8h14V5H5v3zm9 11v-9H5v9h9zm2 0h3v-9h-3v9zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="rgba(255,255,255,1)"/></svg>
                     </a>
                 </div>
@@ -50,7 +50,7 @@
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
-        
+
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
                                                                     Voir la facture
@@ -139,7 +139,7 @@
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
-        
+
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
                                                                     Voir la facture
@@ -223,7 +223,7 @@
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
-        
+
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
                                                                     Voir la facture
@@ -331,7 +331,7 @@
             </div>
         </div>
     </div>
-            
+
 @endsection
 
 

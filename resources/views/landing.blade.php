@@ -297,7 +297,7 @@
                                             <span class="outer-circle circle-bg-3"></span>
                                         </div>
                                         <div class="widget__body divider--right">
-                                            <h3 class="widget__heading h6">Notifcations</h3>
+                                            <h3 class="widget__heading h6">Notifications</h3>
                                             <p>Suivez votre activité en temps réel via votre mobile.</p>
                                         </div>
                                     </div>
@@ -311,7 +311,7 @@
                                         </div>
                                         <div class="widget__body">
                                             <h3 class="widget__heading h6">Chat</h3>
-                                            <p>Discutez instantanément avec tout vos employées</p>
+                                            <p>Discutez instantanément avec tout vos employés</p>
                                         </div>
                                     </div>
                                 </div>
