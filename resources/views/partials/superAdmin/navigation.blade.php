@@ -55,7 +55,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">
-                                Activités
+                                Activités des utilisateurs
                             </a>
                         </li>
                     </ul>
