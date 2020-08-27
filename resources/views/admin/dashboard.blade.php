@@ -198,7 +198,7 @@
                                     </td>
                                     <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
                                 </tr>
-                        @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -425,8 +425,8 @@
             })
         }
 
-        
-       // chart-active-users 
+
+       // chart-active-users
         // @formatter:off
         document.addEventListener("DOMContentLoaded", function () {
             window.ApexCharts && (new ApexCharts(document.getElementById('chart-active-users'), {
