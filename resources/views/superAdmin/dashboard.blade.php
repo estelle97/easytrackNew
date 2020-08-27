@@ -326,11 +326,11 @@
                 <div class="card card-sm">
                     <div class="card-body d-flex align-items-center">
                         <div class="mr-3">
-                            <div class="chart-sparkline chart-sparkline-square" id="sparkline-intermediate"></div>
+                            <div class="chart-sparkline chart-sparkline-square" id="sparkline-pro"></div>
                         </div>
                         <div class="mr-3 lh-sm">
                             <div class="strong">
-                                Pro (Annulé)
+                                Profesionnel (Annulé)
                             </div>
                             <div class="text-muted">5 Utilisateurs</div>
                         </div>
@@ -465,7 +465,7 @@
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        $().peity && $('#sparkline-intermediate').text("5/100").peity("pie", {
+        $().peity && $('#sparkline-pro').text("5/100").peity("pie", {
             width: 40,
             height: 40,
             stroke: "#206bc4",
