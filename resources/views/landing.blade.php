@@ -139,11 +139,10 @@
         <section class="hero-area">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-8 col-md-10">
+                    <div class="col-xl-8 col-lg-8 col-md-10">
                         <div class="hero-content">
-                            <h1 class="title h2">Upgrade your business</h1>
-                            <p>Une plateforme 360° de gestion de nouvelle génération simple d’utilisation, intuitive et
-                                surtout très complète.</p>
+                            <h1 class="title h2">Améliorez votre Business</h1>
+                            <p>La solution logicielle simple, intuitive, efficace et surtout très complète</p>
                             <div class="hero-btn">
                                 <a href="#" class="btn btn--primary hvr-shine">Essayez maintenant</a>
                             </div>
@@ -172,7 +171,7 @@
                             </div>
                             <div class="widget__body divider--right">
                                 <h3 class="widget__heading h6">Gestion des stocks</h3>
-                                <p>Gérer vos produits facilement en ajoutant des mouvements sous formes d’entrées et de sorties.</p>
+                                <p>Gérez vos produits en toute simplicité et réalisez facilement vos inventaires.</p>
                             </div>
                         </div>
                     </div>
@@ -185,7 +184,7 @@
                             </div>
                             <div class="widget__body divider--right">
                                 <h3 class="widget__heading h6">Notifcations</h3>
-                                <p>Recevez des informations pour tenir votre caisse et gérer son établissement en temps réel.</p>
+                                <p>Visualisez  instantanément l'état de votre caisse ou de vos stocks  et détecter rapidement d’éventuelles anomalies.</p>
                             </div>
                         </div>
                     </div>
@@ -198,7 +197,7 @@
                             </div>
                             <div class="widget__body">
                                 <h3 class="widget__heading h6">Gestion d’équipe</h3>
-                                <p>Gérer les rôles et permissions de chacun de vos employés et suivez instantanément leur performance.</p>
+                                <p>Administrez efficacement le travail de vos employés en suivant quotidiennement leur performance.</p>
                             </div>
                         </div>
                     </div>
@@ -227,10 +226,7 @@
                     <div class="col-xl-5 offset-xl-1 col-lg-6 col-md-6">
                         <div class="content-section-text">
                             <h2 class="title">Gérer les ventes</h2>
-                            <p>Vos vendeurs(ses), avec la fonctionnalité « Kanban Commander » pourront facilement
-                                prendre des commandes de vos clients et/ou ajouter une nouvelle commande. Avec la
-                                fonctionnalité e-ticket, ils pourront envoyez vos factures par e-mail,whatsap, et
-                                Messenger. </p>
+                            <p>L’efficacité et la rentabilité de vos  ventes  sont privilégiées  grâce à une facturation personnalisable et une traçabilité nette et agile  par messagerie instantanée.</p>
                         </div>
                     </div>
                 </div>
@@ -258,12 +254,7 @@
                     <div class="col-xl-5 col-lg-6 col-md-6 order-md-1">
                         <div class="content-section-text">
                             <h2 class="title">Données statistiques <br class="d-none d-xs-block">et rapports</h2>
-                            <p>Entrez vos charges fixes et variables et l’algorithme superpuissant d’Easytrack calcule
-                                votre résultat net en temps réel en fonction de vos ventes. Notre algorithme va traquer
-                                pour vous les produits les plus vendus par période et vous pourrez ainsi anticiper vos
-                                commandes chez votre fournisseur. <br><br> Une exportation et importation de fichiers au
-                                format défini par vos soins est possible, notamment sur les mouvements et l’état de
-                                votre stock et surtout, vous pourrez l’importer dans l’application en quelques clics.
+                            <p>L’algorithme superpuissant d’Easytrack calculera en temps réel votre résultat net en fonction de vos ventes, et traquera les produits les plus vendus par période pour vous assurer une meilleure prise de décisions.
                             </p>
                         </div>
                     </div>
@@ -362,9 +353,9 @@
         <section class="content-section section-padding bg-gradient text-center" id="download">
             <div class="container">
               <div class="row">
-                <div class="col-md-8 mx-auto">
-                  <h2 class="section-heading text-white m-0" style="font-size: 70px;">Découvrez l'application mobile</h2>
-                  <p class="text-white mt-4 mb-4" style="font-size: 18px; line-height: 1.5;">Notre application est disponible sur tous les appareils mobiles ! Téléchargez maintenant pour commencer !</p>
+                <div class="col-md-9 mx-auto">
+                  <h2 class="section-heading text-white m-0" style="font-size: 70px;">Découvrez<br>Easytrack sur mobile</h2>
+                  <p class="text-white mt-4 mb-4" style="font-size: 18px; line-height: 1.5;">Notre application est disponible sur tous les appareils mobiles via un Smartphone, une tablette ou votre ordinateur. Téléchargez-la maintenant pour vous connecter sur notre plateforme !</p>
                   <div class="badges">
                     <a class="badge-link" href="#"><img src={{asset("template/assets/static/landing/google-play-badge.svg")}} alt=""></a>
                     <a class="badge-link" href="#"><img src={{asset("template/assets/static/landing/app-store-badge.svg")}} alt=""></a>

@@ -15,10 +15,10 @@
             <div class="d-flex align-items-center">
                 <span class="dropdown">
                     <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="rgba(255,255,255,1)" /></svg>
-                        <span class="selected-site" data-site="all"> Tous les sites </span>
+                        <span class="selected-site align-middle" data-site="all"> Tous les sites </span>
                     </div>
 
                     <div class="dropdown-menu dropdown-menu-right mt-3">
@@ -37,7 +37,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-2">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-8h4v2h-6V7h2v5z" fill="rgba(255,255,255,1)" /></svg>
-                        <span class="selected-period" data-period="all"> Global </span>
+                        <span class="selected-period align-middle" data-period="all"> Global </span>
                     </div>
 
                     <div class="dropdown-menu dropdown-menu-right mt-3">
@@ -142,7 +142,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-8">
+    <div class="col-sm-12 col-lg-8" style="max-height: 300px;">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Ventes par catégorie</h4>
@@ -158,7 +158,7 @@
                         </tr>
                     </thead>
                     <tbody class='salesPerCategory'>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -185,12 +185,31 @@
                         6% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg>
                       </span>
                     </div>
-                    <div class="h1 m-0">8K</div>
-                    <div class="text-muted mb-4">Total artciles achetés</div>
+                    <div class="h1 m-0">20</div>
+                    <div class="text-muted mb-4">Employé(s)</div>
                   </div>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body p-2 text-center">
+                        <div class="text-right text-red">
+                            <span class="text-red d-inline-flex align-items-center lh-1">
+                                -2% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z"></path>
+                                    <polyline points="3 7 9 13 13 9 21 17"></polyline>
+                                    <polyline points="21 10 21 17 14 17"></polyline>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="h1 m-0">40</div>
+                        <div class="text-muted mb-4">Produit(s) ventdu(s)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body p-2 text-center">
                         <div class="text-right text-green">
@@ -204,8 +223,8 @@
                                 </svg>
                             </span>
                         </div>
-                        <div class="h1 m-0">80%</div>
-                        <div class="text-muted mb-4">Pourcentage moyen de ventes</div>
+                        <div class="h1 m-0">40</div>
+                        <div class="text-muted mb-4">Produit(s) acheté(s)</div>
                     </div>
                 </div>
             </div>
@@ -229,31 +248,12 @@
                                 </svg>
                             </span>
                         </div>
-                        <div class="h1 m-0">8K</div>
-                        <div class="text-muted mb-4">Total artciles achetés</div>
+                        <div class="h1 m-0">80%</div>
+                        <div class="text-muted mb-4">Pourcentage moyen de ventes</div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body p-2 text-center">
-                        <div class="text-right text-red">
-                            <span class="text-red d-inline-flex align-items-center lh-1">
-                                -2% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <polyline points="3 7 9 13 13 9 21 17"></polyline>
-                                    <polyline points="21 10 21 17 14 17"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="h1 m-0">18M</div>
-                        <div class="text-muted mb-4">Coût total d'achats</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body p-2 text-center">
                         <div class="text-right text-green">
@@ -275,7 +275,7 @@
         </div>
 
     </div>
-    <div class="col-sm-12 col-lg-7">
+    <div class="col-sm-12 col-lg-7" style="max-height: 300px;">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Achat par catégorie</h4>
@@ -291,13 +291,13 @@
                         </tr>
                     </thead>
                     <tbody class="purchasesPerCategory">
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-4">
+    <div class="col-sm-12 col-lg-4" style="max-height: 340px;">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Ventes par employé</h4>
@@ -312,13 +312,13 @@
                         </tr>
                     </thead>
                     <tbody class="salesPerEmployee">
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-5">
+    <div class="col-sm-12 col-lg-5" style="max-height: 240px;">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Ventes par type de paiement</h4>
@@ -332,7 +332,7 @@
                         </tr>
                     </thead>
                     <tbody class="salesPerPaying_method">
-                        
+
                     </tbody>
                 </table>
             </div>
