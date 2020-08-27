@@ -142,7 +142,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-8">
+    <div class="col-sm-12 col-lg-8" style="max-height: 265px;">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Ventes par catégorie</h4>
@@ -158,7 +158,7 @@
                         </tr>
                     </thead>
                     <tbody class='salesPerCategory'>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -275,7 +275,7 @@
         </div>
 
     </div>
-    <div class="col-sm-12 col-lg-7">
+    <div class="col-sm-12 col-lg-7" style="max-height: 265px;">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Achat par catégorie</h4>
@@ -291,7 +291,7 @@
                         </tr>
                     </thead>
                     <tbody class="purchasesPerCategory">
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -312,13 +312,13 @@
                         </tr>
                     </thead>
                     <tbody class="salesPerEmployee">
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-5">
+    <div class="col-sm-12 col-lg-5" style="max-height: 240px;">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Ventes par type de paiement</h4>
@@ -332,7 +332,7 @@
                         </tr>
                     </thead>
                     <tbody class="salesPerPaying_method">
-                        
+
                     </tbody>
                 </table>
             </div>

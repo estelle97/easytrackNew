@@ -87,7 +87,9 @@
                     <thead>
                         <tr>
                             <th>Nom du forfait</th>
-                            <th>Description</th>
+                            <th>Durée / jours</th>
+                            <th>Nombre de sites</th>
+                            <th>Prix</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -96,11 +98,14 @@
                             <td class="w-1">
                                 <span>Gold</span>
                             </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit
-                                </div>
+                            <td class="w-1">
+                                <span>180 Jours</span>
+                            </td>
+                            <td class="w-1">
+                                <span>5</span>
+                            </td>
+                            <td class="w-1">
+                                <span>150 000 XAF</span>
                             </td>
                             <td class="text-right">
                                 <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
@@ -220,125 +225,5 @@
 @endsection
 
 @section('scripts')
-<script>
-        var permissions = [];
 
-        function addPermissionToRole(){
-            var permission_id = $('#select-permission').val();
-            var permission = $('#select-permission-text'+permission_id).text();
-            if(!permissions.includes(permission_id)){
-                $("#permissions-add").append("<tr id='perm"+permission_id+"'><td>"+
-                                                permission+
-                                            "</td>"+
-                                            "<td class='text-right'>"+
-                                                "<a class='mt-1 text-blue' onclick='removePermissionToRole("+permission_id+")'>"+
-                                                    "Supprimer"+
-                                                "</a>"+
-                                            "</td></tr>"
-                                        );
-                // Ajout de l'identifiant de la permission dans le tableau permissions[]
-                permissions.push(permission_id);
-            }
-        }
-
-        function removePermissionToRole(id){
-            // Retrait de l'identifiant de la permission dans le tableau permissions[]
-            $("#perm"+id).fadeOut();
-            permissions = jQuery.grep(permissions, function(value) {
-                return value != id;
-            });
-        }
-
-        function roleAdd(){
-            var token = '{{csrf_token()}}';
-            var name = $("#name-add").val();
-            var description = $("#description-add").val();
-
-            $.ajax({
-                url: '/easytrack/roles/add',
-                data: {
-                    _token : token,
-                    name : name,
-                    description : description,
-                    permissions : permissions,
-                },
-                method : 'post',
-                success:function (data) {
-                    document.location.reload(true);
-                }
-            });
-        }
-
-        function roleUpdate(id){
-            var token = '{{csrf_token()}}';
-            var name = $("#name"+id).val();
-            var description = $("#description"+id).val();
-
-            $.ajax({
-                url: '/easytrack/roles/update',
-                data: {
-                    _token : token,
-                    name : name,
-                    description : description,
-                    role_id : id,
-                },
-                method : 'post',
-                success:function (data) {
-                    if(data == 'success'){
-                        $("#role-name"+id).hide().fadeIn().html(name);
-                         $("#role-description"+id).hide().fadeIn().html(description);
-                    }
-                }
-            });
-        }
-
-        function attachPermissionToRole(id){
-            var token = '{{csrf_token()}}';
-            var permission_id = $('#select-permission-update'+id).val();
-            var permission = $('#edit-perm-option'+id+'-'+permission_id).text();
-
-            $.ajax({
-                url: '/easytrack/roles/attachPermissionToRole',
-                data: {
-                    _token : token,
-                    role_id : id,
-                    permission_id : permission_id,
-                },
-                method : 'post',
-                success:function (data) {
-                    if(data == 'success'){
-                        $("#permission-edit"+id).append("<tr id='perm-role-list"+id+"-"+permission_id+"'><td>"+
-                                                permission+
-                                            "</td>"+
-                                            "<td class='text-right'>"+
-                                                "<a class='mt-1 text-blue' onclick='detachPermissionToRole("+id+","+permission_id+")'>"+
-                                                    "Supprimer"+
-                                                "</a>"+
-                                            "</td></tr>"
-                                    )
-                    }
-                }
-            });
-        }
-
-        function detachPermissionToRole(role_id, permission_id){
-            var token = '{{csrf_token()}}';
-
-            $.ajax({
-                url: '/easytrack/roles/detachPermissionToRole',
-                data: {
-                    _token : token,
-                    role_id : role_id,
-                    permission_id : permission_id,
-                },
-                method : 'post',
-                success:function (data) {
-                    if(data == 'success'){
-                        $("#perm-role-list"+role_id+"-"+permission_id).fadeOut();
-                    }
-                }
-            });
-
-        }
-    </script>
 @endsection
