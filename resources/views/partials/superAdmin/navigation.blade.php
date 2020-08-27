@@ -49,18 +49,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="{{route('easytrack.roles')}}">
-                                Roles
-                            </a>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="/easytrack/products">
                                 Produits
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">
-                                Chat
+                                Activités
                             </a>
                         </li>
                     </ul>
