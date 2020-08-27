@@ -230,20 +230,38 @@
         <div class="row row-cards">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Statistique d'abonements</h4>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">Statistique d'Abonements</div>
+                            <div class="ml-auto lh-1">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        7 derniers jours
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item active" href="#">7 derniers jours</a>
+                                        <a class="dropdown-item" href="#">30 derniers jours</a>
+                                        <a class="dropdown-item" href="#">3 derniers mois</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <table class="table card-table table-vcenter">
                         <thead>
                             <tr>
                                 <th>Forfaits</th>
-                                <th colspan="2">Utilisateurs</th>
+                                <th>Utilisateurs</th>
+                                <th>Désabonés</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Gold</td>
                                 <td>3,550</td>
+                                <td>200</td>
                                 <td class="w-50">
                                     <div class="progress progress-xs">
                                         <div class="progress-bar bg-primary" style="width: 71.0%"></div>
@@ -253,6 +271,7 @@
                             <tr>
                                 <td>Premium</td>
                                 <td>1,798</td>
+                                <td>150</td>
                                 <td class="w-50">
                                     <div class="progress progress-xs">
                                         <div class="progress-bar bg-primary" style="width: 35.96%"></div>
@@ -260,17 +279,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Pro</td>
-                                <td>1,245</td>
-                                <td class="w-50">
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar bg-primary" style="width: 24.9%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>Classic</td>
                                 <td>854</td>
+                                <td>10</td>
                                 <td class="w-50">
                                     <div class="progress progress-xs">
                                         <div class="progress-bar bg-primary" style="width: 17.08%"></div>
@@ -343,12 +354,87 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-12 col-lg-3">
+        <div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-1">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle h2 text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Cameroun
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item active" href="#">7 derniers jours</a>
+                                    <a class="dropdown-item" href="#">30 derniers jours</a>
+                                    <a class="dropdown-item" href="#">3 derniers mois</a>
+                                </div>
+                            </div>
+                            <div class="ml-auto lh-1">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        7 derniers jours
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item active" href="#">7 derniers jours</a>
+                                        <a class="dropdown-item" href="#">30 derniers jours</a>
+                                        <a class="dropdown-item" href="#">3 derniers mois</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="subheader">Abonements par ville</div>
+                        </div>
+
+                        <div id="chart-subscriptions-peer-city"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 {{-- end Content Body--}}
 @endsection
 
 @section('scripts')
+<script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function () {
+        window.ApexCharts && (new ApexCharts(document.getElementById('chart-subscriptions-peer-city'), {
+            chart: {
+                type: "donut",
+                fontFamily: 'inherit',
+                height: 240,
+                sparkline: {
+                    enabled: true
+                },
+                animations: {
+                    enabled: false
+                },
+            },
+            fill: {
+                opacity: 1,
+            },
+            series: [44, 55, 12, 2],
+            labels: ["Yaound", "Douala", "Bafoussam", "Kribi"],
+            grid: {
+                strokeDashArray: 4,
+            },
+            colors: ["#206bc4", "#79a6dc", "#bfe399", "#e9ecf1"],
+            legend: {
+                show: false,
+            },
+            tooltip: {
+                fillSeriesColor: false
+            },
+        })).render();
+    });
+    // @formatter:on
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         $().peity && $('#sparkline-gold').text("10/100").peity("pie", {
