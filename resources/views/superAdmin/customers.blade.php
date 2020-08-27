@@ -117,71 +117,75 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                    aria-label="Select invoice"></td>
-                            <td><a href="./user-profile.html" class="text-reset" tabindex="-1">Steve Mangekwu</a>
-                            </td>
-                            <td>
-                                steve.mangekwu@gmail.com
-                            </td>
-                            <td>
-                                +237 691234567
-                            </td>
-                            <td>
-                                Mendong
-                            </td>
-                            <td>
-                                Admin
-                            </td>
-                            <td>
-                                Black & white
-                            </td>
-                            <td>
-                                <div>
-                                    <div class="d-flex mb-1 align-items-center lh-1">
-                                        <div class="text-h5 font-weight-bolder m-0">
-                                            1 an
+                    <tbody id="companies">
+                        @foreach (\App\Company::all() as $com)
+                            <tr>
+                                <td><input class="form-check-input m-0 align-middle" type="checkbox"
+                                        aria-label="Select invoice"></td>
+                                <td>
+                                    <a href="./user-profile.html" class="text-reset" tabindex="-1">Steve Mangekwu</a>
+                                </td>
+                                <td>
+                                    steve.mangekwu@gmail.com
+                                </td>
+                                <td>
+                                    +237 691234567
+                                </td>
+                                <td>
+                                    Mendong
+                                </td>
+                                <td>
+                                    Admin
+                                </td>
+                                <td>
+                                    Black & white
+                                </td>
+                                <td>
+                                    <div>
+                                        <div class="d-flex mb-1 align-items-center lh-1">
+                                            <div class="text-h5 font-weight-bolder m-0">
+                                                1 an
+                                            </div>
+                                            <span class="ml-auto text-h6 strong">60%</span>
+                                        </div>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-blue" style="width: 60%;" role="progressbar"
+                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                                                <span class="sr-only">60% d'utilisation</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-blue" style="width: 60%;" role="progressbar"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="sr-only">60% d'utilisation</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="dropdown">
+                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                            data-boundary="viewport" data-toggle="dropdown">Actions</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+    
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#modal-edit-licence">
+                                                Mettre à jour la licene
+                                            </a>
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#modal-edit-user">
+                                                Modifier
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                Bloquer
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    width="18" height="18" class="mr-2">
+                                                    <path fill="none" d="M0 0h24v24H0z" />
+                                                    <path
+                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                </svg>
+                                                Supprimer
+                                            </a>
                                         </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-right">
-                                <span class="dropdown">
-                                    <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                        data-boundary="viewport" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#modal-edit-licence">
-                                            Mettre à jour la licene
-                                        </a>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#modal-edit-user">
-                                            Modifier
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            Bloquer
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                width="18" height="18" class="mr-2">
-                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                <path
-                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                            </svg>
-                                            Supprimer
-                                        </a>
-                                    </div>
-                                </span>
-                            </td>
-                        </tr>
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -291,6 +295,213 @@
                                     <button type="text" class="btn btn-gradient btn-block btn-submit-step-1 btn-no-border">
                                         Continuer
                                     </button>
+                                </div>
+                            </div>
+                            <div class="register-step-2">
+                                    <h4 class="mb-5 text-center text-muted">
+                                        Ajouter une entreprise sur la plateforme
+                                    </h4>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 21H2v-2h1V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v5h2v10h1v2zm-5-2h2v-8h-6v8h2v-6h2v6zm0-10V5H5v14h6V9h6zM7 11h2v2H7v-2zm0 4h2v2H7v-2zm0-8h2v2H7V7z"/></svg>
+                                            </span>
+                                            <input type="text" name="companyname" id="companyname" class="auth-input form-control form-control-rounded py-2 px-5"
+                                            placeholder="Nom de l'entreprise (Obligatoire)" autocomplete="off" required>
+                                        </div>
+                                        <span class="text-danger" id="companyname-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                                            </span>
+                                            <input type="email" name="companyemail" id="companyemail" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="Email (Obligatoire)" autocomplete="off" required/>
+                                        </div>
+                                        <span class="text-danger" id="companyemail-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                                            </span>
+                                            <input type="text" name="companytown" id="companytown" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="Ville (Obligatoire)" autocomplete="off" />
+                                        </div>
+                                        <span class="text-danger" id="companytown-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                                            </span>
+                                            <input type="text" name="companystreet" id="companystreet" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="Quartier (Obligatoire)" autocomplete="off" required/>
+                                        </div>
+                                        <span class="text-danger" id="companystreet-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.366 10.682a10.556 10.556 0 0 0 3.952 3.952l.884-1.238a1 1 0 0 1 1.294-.296 11.422 11.422 0 0 0 4.583 1.364 1 1 0 0 1 .921.997v4.462a1 1 0 0 1-.898.995c-.53.055-1.064.082-1.602.082C9.94 21 3 14.06 3 5.5c0-.538.027-1.072.082-1.602A1 1 0 0 1 4.077 3h4.462a1 1 0 0 1 .997.921A11.422 11.422 0 0 0 10.9 8.504a1 1 0 0 1-.296 1.294l-1.238.884zm-2.522-.657l1.9-1.357A13.41 13.41 0 0 1 7.647 5H5.01c-.006.166-.009.333-.009.5C5 12.956 11.044 19 18.5 19c.167 0 .334-.003.5-.01v-2.637a13.41 13.41 0 0 1-3.668-1.097l-1.357 1.9a12.442 12.442 0 0 1-1.588-.75l-.058-.033a12.556 12.556 0 0 1-4.702-4.702l-.033-.058a12.442 12.442 0 0 1-.75-1.588z"/></svg>
+                                            </span>
+                                            <input pattern="[0-9]{3}[0-9]{3}[0-9]{3}" type="tel" name="companyphone1" id="companyphone1" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="N° Téléphone Principale (Obligatoire)" autocomplete="off" required/>
+                                        </div>
+                                        <span class="text-danger" id="companyphone1-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.366 10.682a10.556 10.556 0 0 0 3.952 3.952l.884-1.238a1 1 0 0 1 1.294-.296 11.422 11.422 0 0 0 4.583 1.364 1 1 0 0 1 .921.997v4.462a1 1 0 0 1-.898.995c-.53.055-1.064.082-1.602.082C9.94 21 3 14.06 3 5.5c0-.538.027-1.072.082-1.602A1 1 0 0 1 4.077 3h4.462a1 1 0 0 1 .997.921A11.422 11.422 0 0 0 10.9 8.504a1 1 0 0 1-.296 1.294l-1.238.884zm-2.522-.657l1.9-1.357A13.41 13.41 0 0 1 7.647 5H5.01c-.006.166-.009.333-.009.5C5 12.956 11.044 19 18.5 19c.167 0 .334-.003.5-.01v-2.637a13.41 13.41 0 0 1-3.668-1.097l-1.357 1.9a12.442 12.442 0 0 1-1.588-.75l-.058-.033a12.556 12.556 0 0 1-4.702-4.702l-.033-.058a12.442 12.442 0 0 1-.75-1.588z"/></svg>
+                                            </span>
+                                            <input pattern="[0-9]{3}[0-9]{3}[0-9]{3}" type="tel" name="companyphone2" id="companyphone2" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="N° Téléphone 2" autocomplete="off" required/>
+                                        </div>
+                                        <span class="text-danger" id="companyphone2-error"> </span>
+                                    </div>
+                                    <div class="form-footer mb-3">
+                                        <button type="text" class="btn btn-gradient btn-block btn-pill btn-submit-step-2 btn-no-border">
+                                            Continuer
+                                        </button>
+                                        <button type="text" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-1 mt-3">
+                                            Retour
+                                        </button>
+                                    </div>
+                                </div>
+                
+                
+                                <div class="register-step-3">
+                                    <h4 class="mb-5 text-center text-muted">
+                                        Ajouter un site à votre entreprise
+                                    </h4>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 21H2v-2h1V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v5h2v10h1v2zm-5-2h2v-8h-6v8h2v-6h2v6zm0-10V5H5v14h6V9h6zM7 11h2v2H7v-2zm0 4h2v2H7v-2zm0-8h2v2H7V7z"/></svg>
+                                            </span>
+                                            <input type="text" name="sitename" id="sitename" class="auth-input form-control form-control-rounded py-2 px-5"
+                                            placeholder="Nom du site (Obligatoire)">
+                                        </div>
+                                        <span class="text-danger" id="sitename-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                                            </span>
+                                            <input type="email" name="siteemail" id="siteemail" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="Email (Obligatoire)" autocomplete="off" />
+                                        </div>
+                                        <span class="text-danger" id="siteemail-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                                            </span>
+                                            <input type="text" name="sitetown" id="sitetown" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="Ville (Obligatoire)" autocomplete="off" />
+                                        </div>
+                                        <span class="text-danger" id="sitetown-error"> </span>
+                                    </div>
+                                   <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                                            </span>
+                                            <input type="text" name="sitestreet" id="sitestreet" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="Quartier (Obligatoire)" autocomplete="off" />
+                                        </div>
+                                        <span class="text-danger" id="sitestreet-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.366 10.682a10.556 10.556 0 0 0 3.952 3.952l.884-1.238a1 1 0 0 1 1.294-.296 11.422 11.422 0 0 0 4.583 1.364 1 1 0 0 1 .921.997v4.462a1 1 0 0 1-.898.995c-.53.055-1.064.082-1.602.082C9.94 21 3 14.06 3 5.5c0-.538.027-1.072.082-1.602A1 1 0 0 1 4.077 3h4.462a1 1 0 0 1 .997.921A11.422 11.422 0 0 0 10.9 8.504a1 1 0 0 1-.296 1.294l-1.238.884zm-2.522-.657l1.9-1.357A13.41 13.41 0 0 1 7.647 5H5.01c-.006.166-.009.333-.009.5C5 12.956 11.044 19 18.5 19c.167 0 .334-.003.5-.01v-2.637a13.41 13.41 0 0 1-3.668-1.097l-1.357 1.9a12.442 12.442 0 0 1-1.588-.75l-.058-.033a12.556 12.556 0 0 1-4.702-4.702l-.033-.058a12.442 12.442 0 0 1-.75-1.588z"/></svg>
+                                            </span>
+                                            <input pattern="[0-9]{3}[0-9]{3}[0-9]{3}" type="tel" name="sitephone1" id="sitephone1" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="N° Téléphone Principale (Obligatoire)" autocomplete="off" />
+                                        </div>
+                                        <span class="text-danger" id="sitephone1-error"> </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.366 10.682a10.556 10.556 0 0 0 3.952 3.952l.884-1.238a1 1 0 0 1 1.294-.296 11.422 11.422 0 0 0 4.583 1.364 1 1 0 0 1 .921.997v4.462a1 1 0 0 1-.898.995c-.53.055-1.064.082-1.602.082C9.94 21 3 14.06 3 5.5c0-.538.027-1.072.082-1.602A1 1 0 0 1 4.077 3h4.462a1 1 0 0 1 .997.921A11.422 11.422 0 0 0 10.9 8.504a1 1 0 0 1-.296 1.294l-1.238.884zm-2.522-.657l1.9-1.357A13.41 13.41 0 0 1 7.647 5H5.01c-.006.166-.009.333-.009.5C5 12.956 11.044 19 18.5 19c.167 0 .334-.003.5-.01v-2.637a13.41 13.41 0 0 1-3.668-1.097l-1.357 1.9a12.442 12.442 0 0 1-1.588-.75l-.058-.033a12.556 12.556 0 0 1-4.702-4.702l-.033-.058a12.442 12.442 0 0 1-.75-1.588z"/></svg>
+                                            </span>
+                                            <input  pattern="[0-9]{3}[0-9]{3}[0-9]{3}" type="tel" name="sitephone2" id="sitephone2" class="auth-input form-control form-control-rounded py-2 px-5"
+                                                placeholder="Téléphone N°2" autocomplete="off" />
+                                        </div>
+                                        <span class="text-danger" id="sitephone2-error"> </span>
+                                    </div>
+                                    <div class="form-footer mb-3">
+                                        <button type="text" class="btn btn-gradient btn-block btn-pill btn-submit-step-3 btn-no-border">
+                                            Continuer
+                                        </button>
+                                        <button type="text" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-2 mt-3">
+                                            Retour
+                                        </button>
+                                    </div>
+                                </div>
+                
+                
+                                <div class="register-step-4">
+                                    <h4 class="mb-5 text-center text-muted">
+                                        Sélectionez la license pour votre entreprose
+                                    </h4>
+                                    <div class="mb-4">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 9V4H5v16h6.056c.328.417.724.785 1.18 1.085l1.39.915H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8v1h-7zm-2 2h9v5.949c0 .99-.501 1.916-1.336 2.465L16.5 21.498l-3.164-2.084A2.953 2.953 0 0 1 12 16.95V11zm2 5.949c0 .316.162.614.436.795l2.064 1.36 2.064-1.36a.954.954 0 0 0 .436-.795V13h-5v3.949z"/></svg>
+                                            </span>
+                                            <select name="type" id="type" class="auth-input form-select form-control-rounded py-2 px-5">
+                                                @foreach(App\Type::all() as $t)
+                                                    <option id="type{{$t->id}}" value="{{$t->id}}"> {{$t->title}} </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-footer mb-3">
+                                        <button type="text" class="btn btn-gradient btn-block btn-pill btn-submit-step-4 btn-no-border">
+                                            Continuer
+                                        </button>
+                                        <button type="text" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-3 mt-3">
+                                            Retour
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="register-step-5">
+                                    <h1 class=" mb-4">Récapitulatif</h1>
+                                    <div class=" mb-4">
+                                        <h4 class="text-muted">Nom</h4>
+                                        <h2 id="user-recap-name"></h2>
+                                    </div>
+                                    <div class=" mb-4">
+                                        <h4 class="text-muted">Nom d'utilisateur</h4>
+                                        <h2 id="username-recap-name"></h2>
+                                    </div>
+                                    <div class=" mb-4">
+                                        <h4 class="text-muted">Entreprise</h4>
+                                        <h2 id="company-recap-name">Black & White</h2>
+                                    </div>
+                                    <div class=" mb-4">
+                                        <h4 class="text-muted">Site</h4>
+                                        <h2 id="site-recap-name"></h2>
+                                    </div>
+                                    <div class=" mb-4">
+                                        <h4 class="text-muted">Licence</h4>
+                                        <h2 id="company-recap-type"></h2>
+                                    </div>
+                                    <div class="form-footer mb-3">
+                                        <button type="submit" onclick="register()" class="btn btn-gradient btn-block btn-pill btn-submit-step-5 btn-no-border">
+                                            Terminer
+                                        </button>
+                                        <button type="text" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-4 mt-3">
+                                            Retour
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="register-step-6">
@@ -432,7 +643,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 9V4H5v16h6.056c.328.417.724.785 1.18 1.085l1.39.915H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8v1h-7zm-2 2h9v5.949c0 .99-.501 1.916-1.336 2.465L16.5 21.498l-3.164-2.084A2.953 2.953 0 0 1 12 16.95V11zm2 5.949c0 .316.162.614.436.795l2.064 1.36 2.064-1.36a.954.954 0 0 0 .436-.795V13h-5v3.949z"/></svg>
                                 </span>
                                 <select name="type" id="type" class="auth-input form-select form-control-rounded py-2 px-5">
-                                    @foreach(App\Type::all())
+                                    @foreach(App\Type::all() as $t)
                                         <option id="type{{$t->id}}" value="{{$t->id}}"> {{$t->title}} </option>
                                     @endforeach
                                 </select>
@@ -482,7 +693,7 @@
 
         $.ajax({
             type: "post",
-            url: "register",
+            url: "/easytrack/customers/store",
             data: {
                 _token: token,
                 username : $("#username").val(),
@@ -530,7 +741,7 @@
 
         $.ajax({
             type: "post",
-            url: "register",
+            url: "/easytrack/customers/store",
             data: {
                 _token: token,
 
@@ -579,7 +790,7 @@
 
         $.ajax({
             type: "post",
-            url: "register",
+            url: "/easytrack/customers/store",
             data: {
                 _token: token,
 
@@ -643,7 +854,7 @@
 
         $.ajax({
             type: "post",
-            url: "register",
+            url: "/easytrack/customers/store",
             data: {
                 _token: token,
 
