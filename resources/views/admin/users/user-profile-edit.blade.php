@@ -21,14 +21,18 @@
                         <!-- Page title actions -->
                         <div class="col-auto ml-auto d-print-none">
                             <div class="d-flex align-items-center">
-                                <a href={{route('admin.company.users')}} class="d-flex align-items-center text-white mr-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                        class="mr-2">
-                                        <path fill="none" d="M0 0h24v24H0z" />
-                                        <path
-                                            d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"
-                                            fill="rgba(255,255,255,1)" /></svg>
+                                <a href={{route('admin.user.show',Auth::user()->username)}} class="d-flex align-items-center text-white mr-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="rgba(255,255,255,1)"/></svg>
                                     Vue d'ensemble
+                                </a>
+                                <a href="#" class="d-flex align-items-center text-white" data-toggle="modal" data-target="#modal-create-role">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    class="mr-2">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm9 6h1v5h-8v-5h1v-1a3 3 0 0 1 6 0v1zm-2 0v-1a1 1 0 0 0-2 0v1h2z"
+                                        fill="rgba(255,255,255,1)" /></svg>
+                                    Permissions
                                 </a>
                             </div>
                         </div>
@@ -51,31 +55,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-9">
-
                                 <div class="card">
-                                    <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs">
-                                        <li class="nav-item">
-                                            <a href="#tabs-home-ex6" class="nav-link active" data-toggle="tab">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15"
-                                                    height="15" class="mr-2">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z" />
-                                                </svg>
-                                                Profile</a>
-                                        </li>
-                                        <li class="nav-item ml-auto">
-                                            <a href="#" class="nav-link" title="Settings" data-toggle="modal" data-target="#modal-create-role">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                                    height="18">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M8.686 4l2.607-2.607a1 1 0 0 1 1.414 0L15.314 4H19a1 1 0 0 1 1 1v3.686l2.607 2.607a1 1 0 0 1 0 1.414L20 15.314V19a1 1 0 0 1-1 1h-3.686l-2.607 2.607a1 1 0 0 1-1.414 0L8.686 20H5a1 1 0 0 1-1-1v-3.686l-2.607-2.607a1 1 0 0 1 0-1.414L4 8.686V5a1 1 0 0 1 1-1h3.686zM6 6v3.515L3.515 12 6 14.485V18h3.515L12 20.485 14.485 18H18v-3.515L20.485 12 18 9.515V6h-3.515L12 3.515 9.515 6H6zm6 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                                                </svg>
-                                                Permissions
-                                            </a>
-                                        </li>
-                                    </ul>
                                     <div class="card-body">
                                         <div class="tab-content">
                                             <div class="tab-pane active show" id="tabs-home-ex6">
@@ -85,14 +65,14 @@
                                                     <div class="col-sm-12 col-md-5">
                                                         <div class="mb-2">
                                                             <label class="form-label">Company</label>
-                                                            <input type="text" value="{{$user->employee->site->company()->first()->name}}" class="form-control form-control-rounded"
+                                                            <input type="text" value="{{$user->employee->site->company()->first()->name}}" class="form-control"
                                                                 disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-12 col-md-7">
                                                         <div class="mb-2">
                                                             <label class="form-label">Nom complet</label>
-                                                            <input type="text" name="name" value="{{$user->name}}" class="form-control form-control-rounded"
+                                                            <input type="text" name="name" value="{{$user->name}}" class="form-control"
                                                                 placeholder="Saisissez votre nom" required>
                                                             @if($errors->has('name'))
                                                                 <span>
@@ -104,7 +84,7 @@
                                                     <div class="col-sm-6 col-md-4">
                                                         <div class="mb-2">
                                                             <label class="form-label">Nom d'utilisateur</label>
-                                                            <input type="text" name="username" value="{{$user->username}}" class="form-control form-control-rounded"
+                                                            <input type="text" name="username" value="{{$user->username}}" class="form-control"
                                                                 placeholder="Saisisez votre nom d'utilisateur" required>
                                                             @if($errors->has('username'))
                                                                 <span>
@@ -116,7 +96,7 @@
                                                     <div class="col-sm-6 col-md-4">
                                                         <div class="mb-2">
                                                             <label class="form-label">Email</label>
-                                                            <input type="email" name="email" value="{{$user->email}}" class="form-control form-control-rounded"
+                                                            <input type="email" name="email" value="{{$user->email}}" class="form-control"
                                                                 placeholder="Email" required>
                                                             @if($errors->has('email'))
                                                                 <span>
@@ -128,7 +108,7 @@
                                                     <div class="col-sm-6 col-md-4">
                                                         <div class="mb-2">
                                                             <label class="form-label">Téléphone</label>
-                                                            <input type="tel" name="phone" value="{{$user->phone}}" class="form-control form-control-rounded"
+                                                            <input type="tel" name="phone" value="{{$user->phone}}" class="form-control"
                                                                 placeholder="N° de Téléphone" required pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
                                                             @if($errors->has('phone'))
                                                                 <span>
@@ -141,7 +121,7 @@
                                                     <div class="col-sm-12 col-md-4">
                                                         <div class="mb-2">
                                                             <label class="form-label">Addresse</label>
-                                                            <input type="text" name="address" value="{{$user->address}}" class="form-control form-control-rounded"
+                                                            <input type="text" name="address" value="{{$user->address}}" class="form-control"
                                                                 placeholder="Saisisez votre adresse" required>
                                                             @if($errors->has('address'))
                                                                 <span>
@@ -176,7 +156,7 @@
                                                     <div class="col-sm-12 col-md-3">
                                                         <div class="mb-2">
                                                             <label class="form-label">N° CNI de l'employée</label>
-                                                            <input type="text" name="cni_number" value="{{$user->employee->cni_number}}" class="form-control form-control-rounded"
+                                                            <input type="text" name="cni_number" value="{{$user->employee->cni_number}}" class="form-control"
                                                                 placeholder="Numéro de CNI">
                                                             @if($errors->has('cni_number'))
                                                                 <span>
@@ -188,7 +168,7 @@
                                                     <div class="col-sm-12 col-md-5">
                                                         <div class="mb-2">
                                                             <label class="form-label">Personne à contacter en cas d'urgence</label>
-                                                            <input type="text" name="contact_name" value="{{$user->employee->contact_name}}" class="form-control form-control-rounded"
+                                                            <input type="text" name="contact_name" value="{{$user->employee->contact_name}}" class="form-control"
                                                                 placeholder="Nom du responsable">
                                                             @if($errors->has('contact_name'))
                                                                 <span>
@@ -200,7 +180,7 @@
                                                     <div class="col-sm-12 col-md-4">
                                                         <div class="mb-2">
                                                             <label class="form-label">Téléphone</label>
-                                                            <input type="text" name="contact_phone" value="{{$user->employee->contact_phone}}" class="form-control form-control-rounded"
+                                                            <input type="text" name="contact_phone" value="{{$user->employee->contact_phone}}" class="form-control"
                                                                 placeholder="Téléphone du responsable">
                                                             @if($errors->has('contact_phone'))
                                                                 <span>
@@ -218,7 +198,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="text-right">
-                                                        <button type="submit" class="btn btn-primary btn-pill">Mettre à jour</button>
+                                                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
                                                     </div>
                                                 </div>
                                             </div>
