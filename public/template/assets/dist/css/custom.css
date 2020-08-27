@@ -19,6 +19,9 @@
 .page-header .dropdown-toggle:after  {
     display: none !important;
 }
+.nav-link:focus {
+    outline: none !important;
+}
 
 /* CARDS */
 .card-actions .dropdown-toggle:after  {
@@ -148,3 +151,4 @@
 body .fixed-table-container thead th {
     border-left: none !important
 }
+
