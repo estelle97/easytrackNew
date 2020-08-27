@@ -4,7 +4,7 @@
 
     <!-- Page title -->
     <!-- Page title -->
-    <div class="page-header text-white">
+    <div class="page-header text-white mt-4">
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
@@ -22,7 +22,7 @@
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="text-white" data-toggle="modal" data-target="#modal-create-role">
+                    <a href="#" class="text-white" data-toggle="modal" data-target="#modal-create-package">
                         <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="24" height="24"
                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -30,7 +30,7 @@
                             <line x1="12" y1="5" x2="12" y2="19" />
                             <line x1="5" y1="12" x2="19" y2="12" />
                         </svg>
-                        Nouveau fofait
+                        <span class="align-middle">Nouveau fofait</span>
                     </a>
 
                     <span class="dropdown ml-5">
@@ -81,149 +81,429 @@
         </div>
     </div>
     <div class="row">
-        <div class="card">
-            <div class="table-responsive">
-                <table class="table card-table table-vcenter text-nowrap datatable">
-                    <thead>
-                        <tr>
-                            <th>Nom du forfait</th>
-                            <th>Durée / jours</th>
-                            <th>Nombre de sites</th>
-                            <th>Prix</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="w-1">
-                                <span>Gold</span>
-                            </td>
-                            <td class="w-1">
-                                <span>180 Jours</span>
-                            </td>
-                            <td class="w-1">
-                                <span>5</span>
-                            </td>
-                            <td class="w-1">
-                                <span>150 000 XAF</span>
-                            </td>
-                            <td class="text-right">
-                                <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
-                                    data-target="#modal-edit-role">
-                                    Modifier
-                                </a>
-                                <span class="dropdown">
-                                    <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                        data-boundary="viewport" data-toggle="dropdown">
-                                        Actions
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
+        <div class="col-lg-7 mt-2">
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table card-table table-vcenter text-nowrap datatable">
+                        <thead>
+                            <tr>
+                                <th>Nom du forfait</th>
+                                <th>Durée / jours</th>
+                                <th>Nombre de sites</th>
+                                <th>Prix</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="w-1">
+                                    <span>Gold</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>365 Jours</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>5</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>500.000 XAF</span>
+                                </td>
+                                <td class="text-right">
+                                    <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
+                                        data-target="#modal-edit-package">
+                                        Modifier
+                                    </a>
+                                    <span class="dropdown">
+                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                            data-boundary="viewport" data-toggle="dropdown">
+                                            Actions
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
 
-                                        <a class="dropdown-item" data-toggle="modal"
-                                            data-target="#modal-delete-role">
-                                            Supprimer
-                                        </a>
-                                    </div>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span>Premium</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit
+                                            <a class="dropdown-item" data-toggle="modal"
+                                                data-target="#modal-delete-role">
+                                                Supprimer
+                                            </a>
+                                        </div>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-1">
+                                    <span>Premium</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>183 Jours</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>3</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>250 000 XAF</span>
+                                </td>
+                                <td class="text-right">
+                                    <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
+                                        data-target="#modal-edit-package">
+                                        Modifier
+                                    </a>
+                                    <span class="dropdown">
+                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                            data-boundary="viewport" data-toggle="dropdown">
+                                            Actions
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+
+                                            <a class="dropdown-item" data-toggle="modal"
+                                                data-target="#modal-delete-role">
+                                                Supprimer
+                                            </a>
+                                        </div>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-1">
+                                    <span>Profesionnel</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>90 Jours</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>2</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>125 000 XAF</span>
+                                </td>
+                                <td class="text-right">
+                                    <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
+                                        data-target="#modal-edit-package">
+                                        Modifier
+                                    </a>
+                                    <span class="dropdown">
+                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                            data-boundary="viewport" data-toggle="dropdown">
+                                            Actions
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+
+                                            <a class="dropdown-item" data-toggle="modal"
+                                                data-target="#modal-delete-role">
+                                                Supprimer
+                                            </a>
+                                        </div>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-1">
+                                    <span>Classic</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>45 Jours</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>1</span>
+                                </td>
+                                <td class="w-1">
+                                    <span>62 500 XAF</span>
+                                </td>
+                                <td class="text-right">
+                                    <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
+                                        data-target="#modal-edit-package">
+                                        Modifier
+                                    </a>
+                                    <span class="dropdown">
+                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                            data-boundary="viewport" data-toggle="dropdown">
+                                            Actions
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+
+                                            <a class="dropdown-item" data-toggle="modal"
+                                                data-target="#modal-delete-role">
+                                                Supprimer
+                                            </a>
+                                        </div>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5 mt-2">
+            <div class="card p-2">
+                <div class="d-flex align-items-center mb-2 p-2">
+                    <div class="subheader">Statistique d'Abonements</div>
+                    <div class="ml-auto lh-1">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                7 derniers jours
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item active" href="#">7 derniers jours</a>
+                                <a class="dropdown-item" href="#">30 derniers jours</a>
+                                <a class="dropdown-item" href="#">3 derniers mois</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cards">
+                    <div class="col-lg-6">
+                        <div class="card card-sm border-0 shadow-none">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="mr-3">
+                                    <div class="chart-sparkline chart-sparkline-square" id="sparkline-gold"></div>
                                 </div>
-                            </td>
-                            <td class="text-right">
-                                <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
-                                    data-target="#modal-edit-role">
-                                    Modifier
-                                </a>
-                                <span class="dropdown">
-                                    <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                        data-boundary="viewport" data-toggle="dropdown">
-                                        Actions
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-
-                                        <a class="dropdown-item" data-toggle="modal"
-                                            data-target="#modal-delete-role">
-                                            Supprimer
-                                        </a>
+                                <div class="mr-3 lh-sm">
+                                    <div class="strong">
+                                        Gold
                                     </div>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span>Pro</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit
+                                    <div class="text-muted">10 Utilisateur(s)</div>
                                 </div>
-                            </td>
-                            <td class="text-right">
-                                <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
-                                    data-target="#modal-edit-role">
-                                    Modifier
-                                </a>
-                                <span class="dropdown">
-                                    <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                        data-boundary="viewport" data-toggle="dropdown">
-                                        Actions
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-
-                                        <a class="dropdown-item" data-toggle="modal"
-                                            data-target="#modal-delete-role">
-                                            Supprimer
-                                        </a>
-                                    </div>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span>Classic</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card card-sm border-0 shadow-none">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="mr-3">
+                                    <div class="chart-sparkline chart-sparkline-square" id="sparkline-premium"></div>
                                 </div>
-                            </td>
-                            <td class="text-right">
-                                <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
-                                    data-target="#modal-edit-role">
-                                    Modifier
-                                </a>
-                                <span class="dropdown">
-                                    <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                        data-boundary="viewport" data-toggle="dropdown">
-                                        Actions
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-
-                                        <a class="dropdown-item" data-toggle="modal"
-                                            data-target="#modal-delete-role">
-                                            Supprimer
-                                        </a>
+                                <div class="mr-3 lh-sm">
+                                    <div class="strong">
+                                        Premium
                                     </div>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    <div class="text-muted">20 Utilisateur(s)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card card-sm border-0 shadow-none">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="mr-3">
+                                    <div class="chart-sparkline chart-sparkline-square" id="sparkline-pro"></div>
+                                </div>
+                                <div class="mr-3 lh-sm">
+                                    <div class="strong">
+                                        Profesionnel
+                                    </div>
+                                    <div class="text-muted">5 Utilisateur(s)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card card-sm border-0 shadow-none">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="mr-3">
+                                    <div class="chart-sparkline chart-sparkline-square" id="sparkline-classic"></div>
+                                </div>
+                                <div class="mr-3 lh-sm">
+                                    <div class="strong">
+                                        Classic
+                                    </div>
+                                    <div class="text-muted">0 Utilisateur(s)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-section">
+        <div class="modal modal-blur fade" id="modal-create-package" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ajouter un nouveau forfait</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Nom</label>
+                                <input type="text" class="form-control" placeholder="Saisissez le nom..." />
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label class="form-label">Durée</label>
+                                <input type="number" class="form-control" placeholder="Saisissez la durée de l'abonement..." />
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label class="form-label">Nombre de sites</label>
+                                <select name="role" class="form-select">
+                                    <option value="1">1 site</option>
+                                    <option value="2">1 sites</option>
+                                    <option value="3">3 sites</option>
+                                    <option value="4">4 sites</option>
+                                    <option value="5">5 sites</option>
+                                    <option value="6">6 sites</option>
+                                    <option value="7">7 sites</option>
+                                    <option value="8">8 sites</option>
+                                    <option value="9">9 sites</option>
+                                    <option value="10">10 sites</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-12">
+                                <label class="form-label">Prix</label>
+                                <input type="number" class="form-control" placeholder="Saisissez le prix..." />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal-blur fade" id="modal-edit-package" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modifier le forfait</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Nom</label>
+                                <input type="text" class="form-control" placeholder="Saisissez le nom..." />
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label class="form-label">Durée</label>
+                                <input type="number" class="form-control" placeholder="Saisissez la durée de l'abonement..." />
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label class="form-label">Nombre de sites</label>
+                                <select name="role" class="form-select">
+                                    <option value="1">1 site</option>
+                                    <option value="2">1 sites</option>
+                                    <option value="3">3 sites</option>
+                                    <option value="4">4 sites</option>
+                                    <option value="5">5 sites</option>
+                                    <option value="6">6 sites</option>
+                                    <option value="7">7 sites</option>
+                                    <option value="8">8 sites</option>
+                                    <option value="9">9 sites</option>
+                                    <option value="10">10 sites</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-12">
+                                <label class="form-label">Prix</label>
+                                <input type="number" class="form-control" placeholder="Saisissez le prix..." />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal-blur fade" id="modal-delete-role" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="modal-title">Êtes vous sure ?</div>
+                        <div>
+                            Si vous continuez, vous perdrez toutes les
+                            données lié à ce forfait.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link link-secondary mr-auto" data-dismiss="modal">
+                            Annuler
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            Oui, supprimer
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endsection
 
 @section('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $().peity && $('#sparkline-gold').text("10/100").peity("pie", {
+            width: 40,
+            height: 40,
+            stroke: "#206bc4",
+            strokeWidth: 2,
+            fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
+            padding: .2,
+            innerRadius: 17,
+        });
+    });
 
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $().peity && $('#sparkline-premium').text("20/100").peity("pie", {
+            width: 40,
+            height: 40,
+            stroke: "#206bc4",
+            strokeWidth: 2,
+            fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
+            padding: .2,
+            innerRadius: 17,
+        });
+    });
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $().peity && $('#sparkline-pro').text("5/100").peity("pie", {
+            width: 40,
+            height: 40,
+            stroke: "#206bc4",
+            strokeWidth: 2,
+            fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
+            padding: .2,
+            innerRadius: 17,
+        });
+    });
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $().peity && $('#sparkline-classic').text("0/100").peity("pie", {
+            width: 40,
+            height: 40,
+            stroke: "#206bc4",
+            strokeWidth: 2,
+            fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
+            padding: .2,
+            innerRadius: 17,
+        });
+    });
+
+</script>
 @endsection
