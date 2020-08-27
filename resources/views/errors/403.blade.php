@@ -1,4 +1,4 @@
-@extends('layouts.loginlayout')
+@extends('layouts.auth')
 
 @section('content')
 <body class="antialiased border-top-wide border-primary d-flex flex-column">

@@ -229,7 +229,7 @@
 
                     window.ApexCharts && (new ApexCharts(document.getElementById('chart-ventes'), {
                         chart: {
-                            type: "area",
+                            type: "bar",
                             fontFamily: 'inherit',
                             height: 40.0,
                             sparkline: {
@@ -372,7 +372,7 @@
 
                     window.ApexCharts && (new ApexCharts(document.getElementById('chart-revenues'), {
                         chart: {
-                            type: "line",
+                            type: "bar",
                             fontFamily: 'inherit',
                             height: 40.0,
                             sparkline: {

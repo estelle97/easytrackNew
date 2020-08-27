@@ -76,13 +76,6 @@ class SiteController extends Controller
         }
     }
 
-
-    public function edit($id)
-    {
-        $lims_site_data = Site::find($id);
-        return $lims_site_data;
-    }
-
     public function destroy($id)
     {
         $lims_site_data = Site::find($id);

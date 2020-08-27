@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
 
     Route::get('admin/reports', 'Admin\ReportController@index')->name('admin.reports');
+    Route::get('admin/reports/{site}/{period}', 'Admin\ReportController@showReports');
 
     Route::get('admin/{site}/users', 'Admin\SiteController@users')->name('admin.site.employees');
     Route::get('admin/sites', 'Admin\SiteController@index')->name('admin.sites');

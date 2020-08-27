@@ -16,7 +16,7 @@ class StatController extends Controller
             for ($i=$days; $i >= 0; $i--) { 
                 $totalSales = 0;
                 foreach(Auth::user()->companies->first()->sites as $site){
-                    foreach($site->sales->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
+                    foreach($site->sales->where('validator_id','!=',null)->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
                         $totalSales += $sale->total();
                     }
                 }
@@ -29,7 +29,7 @@ class StatController extends Controller
             for ($i=30; $i >= 0; $i--) { 
                 $totalSales = 0;
                 foreach(Auth::user()->companies->first()->sites as $site){
-                    foreach($site->sales->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
+                    foreach($site->sales->where('validator_id','!=',null)->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
                         $totalSales += $sale->total();
                     }
                 }
@@ -57,7 +57,7 @@ class StatController extends Controller
                 $totalPurchases = 0;
     
                 foreach(Auth::user()->companies->first()->sites as $site){
-                    foreach($site->purchases->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
+                    foreach($site->purchases->where('validator_id','!=',null)->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
                         $totalPurchases += $purchase->total();
                     }
                 }
@@ -72,7 +72,7 @@ class StatController extends Controller
                 $totalPurchases = 0;
     
                 foreach(Auth::user()->companies->first()->sites as $site){
-                    foreach($site->purchases->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
+                    foreach($site->purchases->where('validator_id','!=',null)->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
                         $totalPurchases += $purchase->total();
                     }
                 }
@@ -99,13 +99,13 @@ class StatController extends Controller
                 $totalSales = 0;
                 $totalPurchases = 0;
                 foreach(Auth::user()->companies->first()->sites as $site){
-                    foreach($site->sales->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
+                    foreach($site->sales->where('validator_id','!=',null)->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
                         $totalSales += $sale->total();
                     }
                 }
     
                 foreach(Auth::user()->companies->first()->sites as $site){
-                    foreach($site->purchases->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
+                    foreach($site->purchases->where('validator_id','!=',null)->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
                         $totalPurchases += $purchase->total();
                     }
                 }
@@ -120,13 +120,13 @@ class StatController extends Controller
                 $totalSales = 0;
                 $totalPurchases = 0;
                 foreach(Auth::user()->companies->first()->sites as $site){
-                    foreach($site->sales->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
+                    foreach($site->sales->where('validator_id','!=',null)->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
                         $totalSales += $sale->total();
                     }
                 }
     
                 foreach(Auth::user()->companies->first()->sites as $site){
-                    foreach($site->purchases->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
+                    foreach($site->purchases->where('validator_id','!=',null)->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
                         $totalPurchases += $purchase->total();
                     }
                 }
