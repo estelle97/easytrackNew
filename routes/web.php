@@ -113,6 +113,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
 
     Route::get('easytrack/customers', 'SuperAdmin\CustomerController@index')->name('easytrack.customers');
+    Route::get('easytrack/packages', 'SuperAdmin\PackageController@index')->name('easytrack.packages');
     Route::get('easytrack/companies', 'SuperAdmin\CompanyController@index')->name('easytrack.companies');
 
 
