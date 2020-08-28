@@ -19,6 +19,9 @@
 .page-header .dropdown-toggle:after  {
     display: none !important;
 }
+.nav-link:focus {
+    outline: none !important;
+}
 
 /* CARDS */
 .card-actions .dropdown-toggle:after  {
@@ -135,16 +138,106 @@
     min-width: 20rem !important;
 }
 
+.fixed-table-container {
+    border: none !important;
+}
+
+.fixed-table-container tbody td {
+    border: none !important;
+}
+
 .fixed-table-toolbar {
     display: flex;
     flex-direction: row-reverse;
+    justify-content: end;
+}
+
+.fixed-table-pagination {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 }
 
-.fixed-table-toolbar .search {
-    width: 65%;
+.fixed-table-pagination .pagination {
+    align-items: center;
 }
 
-body .fixed-table-container thead th {
+.pagination .page-pre a, .pagination .page-next a {
+    position: relative;
+    display: block;
+    color: #6e7582 !important;
+    font-size: 1.5rem;
+    background-color: transparent !important;
+    padding: .25rem .25rem;
+}
+
+.pagination .page-number a {
+    position: relative;
+    display: block;
+    color: #6e7582 !important;
+    background-color: transparent !important;
+    padding: .25rem .25rem;
+}
+
+.pagination .page-number.active a {
+    z-index: 3;
+    color: #fff !important;
+    background-color: #206bc4 !important;
+    border-color: #206bc4 !important;
+}
+
+.fixed-table-pagination .pagination-detail {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.fixed-table-toolbar .search {
+    width: 100%;
+}
+
+.fixed-table-toolbar .search input {
+    border-radius: 7px !important;
+    background-color: rgba(0,0,0,0.04);
+}
+
+.fixed-table-toolbar .dropdown-menu li {
+    padding: 0.2rem 1rem !important;
+}
+
+.fixed-table-toolbar .dropdown-menu li a {
+    color: #252525 !important;
+}
+
+
+.fixed-table-toolbar .columns .btn {
+    border-radius: 7px !important;
+    box-shadow: none !important;
+}
+
+.fixed-table-toolbar .columns .btn:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+
+
+.card-table thead th {
     border-left: none !important
 }
+
+.card-table tbody tr {
+    padding: 1rem 1rem !important;
+}
+
+.card-table tr td:first-child {
+    padding-left: 1rem !important;
+}
+.card-table tr th:first-child {
+    padding-left: 0.5rem !important;
+}
+
+.card-table tr td {
+    padding: 0.5rem 0.5rem !important;
+}
+

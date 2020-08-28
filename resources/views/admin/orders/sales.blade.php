@@ -10,11 +10,6 @@
                     Commandes clients
                 </h2>
             </div>
-            <div class="col-auto">
-                <div class="text-white text-h5 mt-2">
-                    1-10 of 30
-                </div>
-            </div>
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
@@ -25,7 +20,7 @@
                     <a href={{route('admin.sales.kanban')}} class="text-white mr-4 mb-0">
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 8h14V5H5v3zm9 11v-9H5v9h9zm2 0h3v-9h-3v9zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="rgba(255,255,255,1)"/></svg>
                     </a>
-                    <span class="dropdown ml-4">
+                    <span class="dropdown">
                         <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                 height="24">
@@ -90,10 +85,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8">
-            <div class="card">
+        <div class="col-lg-9">
+            <div class="card pl-2 pr-2">
                 <div class="table-responsive">
-                    <table class="table table-vcenter card-table">
+                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
                         <thead>
                             <tr>
                                 <th class="w-1"><input class="form-check-input m-0 align-middle"
