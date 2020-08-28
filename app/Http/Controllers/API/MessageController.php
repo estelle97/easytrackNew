@@ -25,7 +25,7 @@ class MessageController extends Controller
         $messages = Message::where(function ($query) use ($receiver) {
             $query->where('sender', Auth::user()->id)->where('receiver', $receiver);
         })->orWhere(function ($query) use ($receiver) {
-            $query->where('receiver', Auth::user()->id)->where('sender', 3);
+            $query->where('receiver', Auth::user()->id)->where('sender', $receiver);
         })->orderBy('created_at', 'asc')->get();
         
 
