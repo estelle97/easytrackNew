@@ -86,8 +86,6 @@ class SaleController extends Controller
             $saleProducts[] = $sprod->id;
         }
 
-        // dd($products);
-
         foreach ($sale->site->customers as $cus) {
             $customers .= "<option value='".$cus->id."'> ".$cus->name."</option>";
         }

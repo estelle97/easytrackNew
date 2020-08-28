@@ -86,110 +86,77 @@
         </div>
     </div>
 </div>
-<div class="row">
-
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="table-responsive">
-                <table id="products" class="table card-table table-vcenter text-nowrap datatable">
-                    <thead>
-                        <tr>
-                            <th class="exportable"> Photo </th>
-                            <th class="exportable">Produit</th>
-                            <th class="exportable">Categorie</th>
-                            <th class="exportable">PA</th>
-                            <th class="exportable">PV</th>
-                            <th class="exportable">Qté</th>
-                            <th class="exportable">Site</th>
-                            <th>Marque</th>
-                            <th></th>
+<div class="row row-deck row-cards">
+    <div class="card">
+        <div class="table-responsive">
+            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
+                <thead>
+                    <tr>
+                        <th class="exportable"> Photo </th>
+                        <th class="exportable">Produit</th>
+                        <th class="exportable">Categorie</th>
+                        <th class="exportable">PA</th>
+                        <th class="exportable">PV</th>
+                        <th class="exportable">Qté</th>
+                        <th class="exportable">Site</th>
+                        <th>Marque</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="products">
+                    @foreach (Auth::user()->companies->first()->sites as $site)
+                        @foreach ($site->products as $product)
+                        <tr id="product{{$site->id}}{{$product->id}}">
+                            <td> <img src="{{asset($product->photo)}}" class="avatar avatar-upload rounded thumbnail" alt="{{$product->name}}"> </td>
+                            <td><span id="product-name{{$site->id}}{{$product->id}}" class="text-muted"> {{$product->name}} </span></td>
+                            <td><a id="product-category{{$site->id}}{{$product->id}}"  class="text-reset" tabindex="-1">{{$product->category->name}}</a></td>
+                            <td id="product-cost{{$site->id}}{{$product->id}}">
+                                {{$product->pivot->cost}}
+                            </td>
+                            <td id="product-price{{$site->id}}{{$product->id}}">
+                                {{$product->pivot->price}}
+                            </td>
+                            <td id="product-qty{{$site->id}}{{$product->id}}">
+                                {{$product->pivot->qty}}
+                            </td>
+                            <td id="product-site{{$site->id}}{{$product->id}}">
+                                {{$site->name}}
+                            </td>
+                            <td id="product-brand{{$site->id}}{{$product->id}}">
+                                {{$product->brand}}
+                            </td>
+                            <td class="text-right">
+                                <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{$site->id}}{{$product->id}}">
+                                    Modifier
+                                </a>
+                                <span class="dropdown">
+                                    <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                        data-boundary="viewport" data-toggle="dropdown">Actions</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">
+                                             Afficher
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            marquer comme inactif
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                width="18" height="18" class="mr-2">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                            </svg>
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </span>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody class="products">
-                        @foreach (Auth::user()->companies->first()->sites as $site)
-                            @foreach ($site->products as $product)
-                            <tr id="product{{$site->id}}{{$product->id}}">
-                                <td> <img src="{{asset($product->photo)}}" class="avatar avatar-upload rounded thumbnail" alt="{{$product->name}}"> </td>
-                                <td><span id="product-name{{$site->id}}{{$product->id}}" class="text-muted"> {{$product->name}} </span></td>
-                                <td><a id="product-category{{$site->id}}{{$product->id}}"  class="text-reset" tabindex="-1">{{$product->category->name}}</a></td>
-                                <td id="product-cost{{$site->id}}{{$product->id}}">
-                                    {{$product->pivot->cost}}
-                                </td>
-                                <td id="product-price{{$site->id}}{{$product->id}}">
-                                    {{$product->pivot->price}}
-                                </td>
-                                <td id="product-qty{{$site->id}}{{$product->id}}">
-                                    {{$product->pivot->qty}}
-                                </td>
-                                <td id="product-site{{$site->id}}{{$product->id}}">
-                                    {{$site->name}}
-                                </td>
-                                <td id="product-brand{{$site->id}}{{$product->id}}">
-                                    {{$product->brand}}
-                                </td>
-                                <td class="text-right">
-                                    <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{$site->id}}{{$product->id}}">
-                                        Modifier
-                                    </a>
-                                    <span class="dropdown">
-                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                            data-boundary="viewport" data-toggle="dropdown">Actions</button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">
-                                                 Afficher
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                marquer comme inactif
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    width="18" height="18" class="mr-2">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                </svg>
-                                                Supprimer
-                                            </a>
-                                        </div>
-                                    </span>
-                                </td>
-                            </tr>
-                            @endforeach
                         @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="card-footer d-flex align-items-center">
-                <p class="m-0 text-muted">Affichage <span>1</span> à <span>10</span> de <span>30</span>
-                    élements</p>
-                <ul class="pagination m-0 ml-auto">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <polyline points="15 6 9 12 15 18" /></svg>
-                            précédent
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            suivant <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <polyline points="9 6 15 12 9 18" /></svg>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -345,55 +312,7 @@
 @section('scripts')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#products').DataTable({
-                 dom: 'Blfrtip',
-                buttons: [
-                    {
-                        extend: 'colvis',
-                        text: 'Colones visibles'
-                    },
-                    {
-                        extend: 'copy',
-                        text: 'Copier',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        text: 'Excel',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: 'PDF',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable'
-                        }
-                    },
-                ],
-                select: false,
-                colReorder: true,
-            });
-        } );
-    </script>
     <script>
         function addProduct(){
             var token = '{{csrf_token()}}';

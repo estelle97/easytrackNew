@@ -37,13 +37,21 @@ class Purchase extends Model
         return $this->products;
     }
 
-    public function total(){
+    public function total($category_id = null){
         $total = 0;
         
-        foreach($this->products as $prod){
-            $total += $prod->pivot->cost * $prod->pivot->qty;
+        if(!$category_id){
+            foreach($this->products as $prod){
+                $total += $prod->pivot->cost * $prod->pivot->qty;
+            }
+            $total += $this->shipping_cost;
+        } else {
+            foreach($this->products->where('category_id', $category_id) as $prod){
+                if($this->validator_id == null) continue;
+                $total += $prod->pivot->cost * $prod->pivot->qty;
+            }
+            $total += $this->shipping_cost;
         }
-        $total += $this->shipping_cost;
 
         return $total;
     }

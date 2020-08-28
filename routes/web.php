@@ -63,12 +63,15 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('logout', 'Admin\DashboardController@logout')->name('logout');
 
     Route::get('admin/dashboard', ['as'=> 'admin.dashboard','uses' => 'Admin\DashboardController@index']);
-    Route::get('admin/profil',[ 'uses' => 'Admin\DashboardController@profile','as' => 'admin.profile']);
+    Route::get('admin/profile',[ 'uses' => 'Admin\DashboardController@profile','as' => 'admin.profile']);
     Route::get('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileEdit' , 'as' => 'admin.profile.edit']);
     Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
+    Route::get('admin/settings', 'Admin\SettingController@index')->name('admin.settings');
+
 
     Route::get('admin/reports', 'Admin\ReportController@index')->name('admin.reports');
+    Route::get('admin/reports/{site}/{period}', 'Admin\ReportController@showReports');
 
     Route::get('admin/{site}/users', 'Admin\SiteController@users')->name('admin.site.employees');
     Route::get('admin/sites', 'Admin\SiteController@index')->name('admin.sites');
@@ -112,6 +115,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
 
     Route::get('easytrack/customers', 'SuperAdmin\CustomerController@index')->name('easytrack.customers');
+    Route::get('easytrack/packages', 'SuperAdmin\PackageController@index')->name('easytrack.packages');
     Route::get('easytrack/companies', 'SuperAdmin\CompanyController@index')->name('easytrack.companies');
 
 
@@ -225,7 +229,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('employee/suppliers/{supplier}', 'Employee\SupplierController@update');
     Route::resource('employee/suppliers', 'Employee\SupplierController');
 
-    Route::get('employee/profil',[ 'uses' => 'Employee\DashboardController@profile','as' => 'employee.profile']);
+    Route::get('employee/profile',[ 'uses' => 'Employee\DashboardController@profile','as' => 'employee.profile']);
     Route::get('employee/profile/edit', ['uses' => 'Employee\DashboardController@profileEdit' , 'as' => 'employee.profile.edit']);
     Route::post('employee/profile/edit', ['uses' => 'Employee\DashboardController@profileUpdate' , 'as' => 'employee.profile.update']);
     Route::get('employee/profile/settings', ['uses' => 'Employee\DashboardController@profileSettings' , 'as' => 'employee.profile.settings']);

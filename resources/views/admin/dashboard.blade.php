@@ -198,7 +198,7 @@
                                     </td>
                                     <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
                                 </tr>
-                        @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -229,7 +229,7 @@
 
                     window.ApexCharts && (new ApexCharts(document.getElementById('chart-ventes'), {
                         chart: {
-                            type: "area",
+                            type: "bar",
                             fontFamily: 'inherit',
                             height: 40.0,
                             sparkline: {
@@ -372,7 +372,7 @@
 
                     window.ApexCharts && (new ApexCharts(document.getElementById('chart-revenues'), {
                         chart: {
-                            type: "line",
+                            type: "bar",
                             fontFamily: 'inherit',
                             height: 40.0,
                             sparkline: {
@@ -425,8 +425,8 @@
             })
         }
 
-        
-       // chart-active-users 
+
+       // chart-active-users
         // @formatter:off
         document.addEventListener("DOMContentLoaded", function () {
             window.ApexCharts && (new ApexCharts(document.getElementById('chart-active-users'), {

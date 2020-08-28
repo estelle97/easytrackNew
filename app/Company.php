@@ -32,18 +32,18 @@ class Company extends Model
         return $this->belongsTo('App\Activity');
     }
 
-    public function totalPurchases($days = null){
+    public function totalPurchases($days = null, $category_id= null){
         $total = 0;
         if($days){
             foreach ($this->sites as $site) {
                foreach($site->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $pur){
-                $total += $pur->total();
+                $total += $pur->total($category_id);
                }
             }
         }else {
             foreach ($this->sites as $site) {
                 foreach($site->purchases->where('validator_id','!=', null) as $pur){
-                 $total += $pur->total();
+                 $total += $pur->total($category_id);
                 }
              }
         }
@@ -51,19 +51,19 @@ class Company extends Model
         return $total;
     }
 
-    public function totalSales($days = null){
+    public function totalSales($days = null, $category_id = null){
         $total = 0;
 
         if($days){
             foreach ($this->sites as $site) {
                 foreach($site->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
-                 $total += $sale->total();
+                 $total += $sale->total($category_id);
                 }
              }    
         } else {
             foreach ($this->sites as $site) {
                foreach($site->sales->where('validator_id','!=', null) as $sale){
-                $total += $sale->total();
+                $total += $sale->total($category_id);
                }
             }
         }

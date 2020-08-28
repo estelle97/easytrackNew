@@ -49,18 +49,28 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="{{route('easytrack.roles')}}">
-                                Roles
-                            </a>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="/easytrack/products">
                                 Produits
                             </a>
                         </li>
                         <li>
+                            <a class="dropdown-item" href="{{route('easytrack.roles')}}">
+                                Gestions des rôles
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{route('easytrack.packages')}}">
+                                Gestions des forfaits
+                            </a>
+                        </li>
+                        <li>
                             <a class="dropdown-item" href="#">
-                                Chat
+                                Gestions des notifications
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                Activités des utilisateurs
                             </a>
                         </li>
                     </ul>

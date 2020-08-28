@@ -18,16 +18,63 @@
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="btn btn-white" data-toggle="modal" data-target="#modal-create-site">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="12" y1="5" x2="12" y2="19" />
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                        </svg>
-                        Créer
-                    </a>
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="text-white mb-0" data-toggle="modal" data-target="#modal-create-site">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)"/></svg>
+                            <span class="h2 align-middle">Créer un site</span>
+                        </a>
+                    </div>
+                    <span class="dropdown ml-4">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                height="24">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M2 18h7v2H2v-2zm0-7h9v2H2v-2zm0-7h20v2H2V4zm18.674 9.025l1.156-.391 1 1.732-.916.805a4.017 4.017 0 0 1 0 1.658l.916.805-1 1.732-1.156-.391c-.41.37-.898.655-1.435.83L19 21h-2l-.24-1.196a3.996 3.996 0 0 1-1.434-.83l-1.156.392-1-1.732.916-.805a4.017 4.017 0 0 1 0-1.658l-.916-.805 1-1.732 1.156.391c.41-.37.898-.655 1.435-.83L17 11h2l.24 1.196c.536.174 1.024.46 1.434.83zM18 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+                                    fill="rgba(255,255,255,1)" /></svg>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right mt-3">
+                            <span class="dropdown-header">Trier par</span>
+                            <a class="dropdown-item" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" class="mr-2">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
+                                </svg>
+                                Nom
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" class="mr-2">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
+                                </svg>
+                                Emplacment
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" class="mr-2">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
+                                </svg>
+                                Employés
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" class="mr-2">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M5.463 4.433A9.961 9.961 0 0 1 12 2c5.523 0 10 4.477 10 10 0 2.136-.67 4.116-1.81 5.74L17 12h3A8 8 0 0 0 6.46 6.228l-.997-1.795zm13.074 15.134A9.961 9.961 0 0 1 12 22C6.477 22 2 17.523 2 12c0-2.136.67-4.116 1.81-5.74L7 12H4a8 8 0 0 0 13.54 5.772l.997 1.795z" />
+                                    </svg>
+                                Actualiser
+                            </a>
+                        </div>
+                    </span>
                 </div>
             </div>
         </div>
@@ -35,7 +82,7 @@
     <div class="row row-deck row-cards">
         <div class="card">
             <div class="table-responsive">
-                <table id="sites" class="table card-table table-vcenter text-nowrap datatable">
+                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
                     <thead>
                         <tr>
                             <th class="w-1">
@@ -95,7 +142,7 @@
                                         <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                             data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                             
+
                                             <a class="dropdown-item" href="#">
                                                  Afficher
                                             </a>
@@ -116,36 +163,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer d-flex align-items-center">
-                <p class="m-0 text-muted">Affichage <span>1</span> à <span>10</span> de <span>30</span>
-                    élements</p>
-                <ul class="pagination m-0 ml-auto">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <polyline points="15 6 9 12 15 18" /></svg>
-                            précédent
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            suivant <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <polyline points="9 6 15 12 9 18" /></svg>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -294,52 +311,7 @@
 @section('scripts')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.5/rr-1.2.7/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#sites').DataTable({
-                 dom: 'Blfrtip',
-                buttons: [
-                    'colvis',
-                    {
-                        extend: 'copy',
-                        text: 'Copier',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        text: 'Excel',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable',
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: 'PDF',
-                        title : 'Easytrack',
-                        exportOptions: {
-                            columns: '.exportable'
-                        }
-                    },
-                ],
-                select: true,
-                colReorder: true,
-            });
-        } );
-    </script>
     <script>
         function addSite(){
             var token = '{{csrf_token()}}';
