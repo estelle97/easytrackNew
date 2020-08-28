@@ -106,4 +106,15 @@ class Company extends Model
 
         return $total;
     }
+
+    public function subscription(){
+        $subDuration = $this->types->last()->duration;
+        $subRemainingDays = Carbon::now()->diffInDays($this->types->last()->pivot->end_date, false);
+        $subUsedPercentage = round(($subDuration - $subRemainingDays) * 100/$subDuration, 1);
+        return (object)[
+            'duration' => $subDuration,
+            'remainingDays' => $subRemainingDays,
+            'percentage' => $subUsedPercentage
+        ];
+    }
 }

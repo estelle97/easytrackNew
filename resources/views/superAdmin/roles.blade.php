@@ -1,13 +1,13 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
     <!-- Page title -->
     <div class="page-header text-white">
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    <a href="./users.html" class="mr-2">
+                    <a href="{{route('easytrack.customers')}}" class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path
@@ -112,7 +112,7 @@
                                             Actions
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                
+
                                             <a class="dropdown-item" data-toggle="modal"
                                                 data-target="#modal-delete-role">
                                                 Supprimer
@@ -128,7 +128,7 @@
             </div>
         </div>
     </div>
-            
+
     <div class="modal-section">
             @foreach (App\Role::all() as $role)
             <div class="modal modal-blur fade" id="modal-edit-role{{$role->id}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -146,7 +146,7 @@
                                     </svg>
                                 </button>
                             </div>
-    
+
                             <div class="modal-body bg-white">
                                 <div class="row mb-3 align-items-end">
                                     <div class="col-lg-12 mb-4">
@@ -198,7 +198,7 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
-    
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -213,7 +213,7 @@
                     </div>
                 </div>
             @endforeach
-    
+
             <div class="modal modal-blur fade" id="modal-delete-role" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -235,7 +235,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="modal modal-blur fade" id="modal-create-role" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -288,7 +288,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="permissions-add">
-        
+
                                         </tbody>
                                     </table>
                                 </div>
