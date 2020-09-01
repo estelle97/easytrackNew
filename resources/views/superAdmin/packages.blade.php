@@ -90,143 +90,50 @@
                                 <th>Nom du forfait</th>
                                 <th>Durée / jours</th>
                                 <th>Nombre de sites</th>
+                                <th>Nombre d'employée</th>
                                 <th>Prix</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="w-1">
-                                    <span>Gold</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>365 Jours</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>5</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>500.000 XAF</span>
-                                </td>
-                                <td class="text-right">
-                                    <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
-                                        data-target="#modal-edit-package">
-                                        Modifier
-                                    </a>
-                                    <span class="dropdown">
-                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                            data-boundary="viewport" data-toggle="dropdown">
-                                            Actions
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
+                            @foreach (\App\Type::all() as $type)
+                                <tr>
+                                    <td class="w-1">
+                                        <span id="title{{$type->id}}"> {{$type->title}} </span>
+                                    </td>
+                                    <td class="w-1">
+                                        <span id="duration{{$type->id}}"> {{$type->duration}}</span> Jours
+                                    </td>
+                                    <td class="w-1">
+                                        <span id="number_of_site{{$type->id}}"> {{$type->number_of_site}} </span>
+                                    </td>
+                                    <td class="w-1">
+                                        <span id="number_of_employee{{$type->id}}"> {{$type->number_of_employee}} </span>
+                                    </td>
+                                    <td class="w-1">
+                                        <span id="price{{$type->id}}"> {{$type->price}} </span> Fcfa
+                                    </td>
+                                    <td class="text-right">
+                                        <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
+                                            data-target="#modal-edit-package{{$type->id}}">
+                                            Modifier
+                                        </a>
+                                        <span class="dropdown">
+                                            <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
+                                                data-boundary="viewport" data-toggle="dropdown">
+                                                Actions
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
 
-                                            <a class="dropdown-item" data-toggle="modal"
-                                                data-target="#modal-delete-role">
-                                                Supprimer
-                                            </a>
-                                        </div>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span>Premium</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>183 Jours</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>3</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>250 000 XAF</span>
-                                </td>
-                                <td class="text-right">
-                                    <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
-                                        data-target="#modal-edit-package">
-                                        Modifier
-                                    </a>
-                                    <span class="dropdown">
-                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                            data-boundary="viewport" data-toggle="dropdown">
-                                            Actions
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-
-                                            <a class="dropdown-item" data-toggle="modal"
-                                                data-target="#modal-delete-role">
-                                                Supprimer
-                                            </a>
-                                        </div>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span>Profesionnel</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>90 Jours</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>2</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>125 000 XAF</span>
-                                </td>
-                                <td class="text-right">
-                                    <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
-                                        data-target="#modal-edit-package">
-                                        Modifier
-                                    </a>
-                                    <span class="dropdown">
-                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                            data-boundary="viewport" data-toggle="dropdown">
-                                            Actions
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-
-                                            <a class="dropdown-item" data-toggle="modal"
-                                                data-target="#modal-delete-role">
-                                                Supprimer
-                                            </a>
-                                        </div>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-1">
-                                    <span>Classic</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>45 Jours</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>1</span>
-                                </td>
-                                <td class="w-1">
-                                    <span>62 500 XAF</span>
-                                </td>
-                                <td class="text-right">
-                                    <a class="btn btn-white btn-sm mt-1" data-toggle="modal"
-                                        data-target="#modal-edit-package">
-                                        Modifier
-                                    </a>
-                                    <span class="dropdown">
-                                        <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
-                                            data-boundary="viewport" data-toggle="dropdown">
-                                            Actions
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-
-                                            <a class="dropdown-item" data-toggle="modal"
-                                                data-target="#modal-delete-role">
-                                                Supprimer
-                                            </a>
-                                        </div>
-                                    </span>
-                                </td>
-                            </tr>
+                                                <a class="dropdown-item" data-toggle="modal"
+                                                    data-target="#modal-delete-role">
+                                                    Supprimer
+                                                </a>
+                                            </div>
+                                        </span>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -335,31 +242,28 @@
                     <div class="modal-body bg-white">
                         <div class="row mb-3 align-items-end">
                             <div class="col-lg-12 mb-4">
-                                <label class="form-label">Nom</label>
-                                <input type="text" class="form-control" placeholder="Saisissez le nom..." />
+                                <label class="form-label">Titre</label>
+                                <input type="text" id="title-add" class="form-control" placeholder="Saisissez le nom..." />
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <label class="form-label">Durée</label>
-                                <input type="number" class="form-control" placeholder="Saisissez la durée de l'abonement..." />
+                                <input type="number" id="duration-add" class="form-control" placeholder="Saisissez la durée de l'abonement..." />
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <label class="form-label">Nombre de sites</label>
-                                <select name="role" class="form-select">
-                                    <option value="1">1 site</option>
-                                    <option value="2">1 sites</option>
-                                    <option value="3">3 sites</option>
-                                    <option value="4">4 sites</option>
-                                    <option value="5">5 sites</option>
-                                    <option value="6">6 sites</option>
-                                    <option value="7">7 sites</option>
-                                    <option value="8">8 sites</option>
-                                    <option value="9">9 sites</option>
-                                    <option value="10">10 sites</option>
+                                <select id="number_of_site-add" class="form-select">
+                                    @for ($i = 1; $i <= 10; $i++)
+                                        <option value="{{$i}}"> {{$i}} sites</option>
+                                    @endfor
                                 </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="form-label">Nombre d'employées</label>
+                                <input type="number" id="number_of_employee-add" class="form-control" placeholder="Saisissez le nombre d'employé" />
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label">Prix</label>
-                                <input type="number" class="form-control" placeholder="Saisissez le prix..." />
+                                <input type="number" id="price-add" class="form-control" placeholder="Saisissez le prix..." />
                             </div>
                         </div>
                     </div>
@@ -371,60 +275,61 @@
                 </div>
             </div>
         </div>
-        <div class="modal modal-blur fade" id="modal-edit-package" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Modifier le forfait</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row mb-3 align-items-end">
-                            <div class="col-lg-12 mb-4">
-                                <label class="form-label">Nom</label>
-                                <input type="text" class="form-control" placeholder="Saisissez le nom..." />
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <label class="form-label">Durée</label>
-                                <input type="number" class="form-control" placeholder="Saisissez la durée de l'abonement..." />
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <label class="form-label">Nombre de sites</label>
-                                <select name="role" class="form-select">
-                                    <option value="1">1 site</option>
-                                    <option value="2">1 sites</option>
-                                    <option value="3">3 sites</option>
-                                    <option value="4">4 sites</option>
-                                    <option value="5">5 sites</option>
-                                    <option value="6">6 sites</option>
-                                    <option value="7">7 sites</option>
-                                    <option value="8">8 sites</option>
-                                    <option value="9">9 sites</option>
-                                    <option value="10">10 sites</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-12">
-                                <label class="form-label">Prix</label>
-                                <input type="number" class="form-control" placeholder="Saisissez le prix..." />
+
+        @foreach (\App\Type::all() as $type)
+            <div class="modal modal-blur fade" id="modal-edit-package{{$type->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modifier le forfait</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="modal-body bg-white">
+                            <div class="row mb-3 align-items-end">
+                                <div class="col-lg-12 mb-4">
+                                    <label class="form-label">Titre</label>
+                                    <input type="text" id="title-update{{$type->id}}" value="{{$type->title}}" class="form-control" placeholder="Saisissez le nom..." />
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <label class="form-label">Durée</label>
+                                    <input type="number" id="duration-update{{$type->id}}" value="{{$type->duration}}" class="form-control" placeholder="Saisissez la durée de l'abonement..." />
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <label class="form-label">Nombre de sites</label>
+                                    <select id="number_of_site-update{{$type->id}}" class="form-select">
+                                        @for ($i = 1; $i <= 10; $i++)
+                                            <option {{($type->number_of_site == $i) ? 'selected' : ''}} value="{{$i}}"> {{$i}} site</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <label class="form-label">Nombre d'employé </label>
+                                    <input type="number" id="number_of_employee-update{{$type->id}}" value="{{$type->number_of_employee}}" class="form-control" placeholder="Saisissez la durée de l'abonement..." />
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <label class="form-label">Prix</label>
+                                    <input type="number" id="price-update{{$type->id}}"  value="{{$type->price}}" class="form-control" placeholder="Saisissez le prix..." />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
-                            Enregistrer
-                        </button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" style="width: 100%;" onclick="updateType({{$type->id}})">
+                                Mettre à jour
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
         <div class="modal modal-blur fade" id="modal-delete-role" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -450,6 +355,32 @@
 @endsection
 
 @section('scripts')
+
+<script>
+    function addType(){
+
+        var form_data = new FormData(); // Creating object of FormData class
+
+        form_data.append("title", $("#name-add").val());
+        form_data.append("duration", $("#duration-add").val());
+        form_data.append("number_of_site", $("#number_of_site-add").val());
+        form_data.append("number_of_employee", $("#number_of_employee-add").val());
+        form_data.append("price", $("#price-add").val());
+
+    }
+
+    function updateType(id){
+
+        var form_data = new FormData(); // Creating object of FormData class
+
+        form_data.append("title", $("#name-update"+id).val());
+        form_data.append("duration", $("#duration-update"+id).val());
+        form_data.append("number_of_site", $("#number_of_site-update"+id).val());
+        form_data.append("number_of_employee", $("#number_of_employee-update"+id).val());
+        form_data.append("price", $("#price-update"+id).val());
+    }
+</script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         $().peity && $('#sparkline-gold').text("10/100").peity("pie", {

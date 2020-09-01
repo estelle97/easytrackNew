@@ -264,7 +264,7 @@
                                 <td>200</td>
                                 <td class="w-50">
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar bg-primary" style="width: 71.0%"></div>
+                                        <div class="progress-bar bg-primary" style="width: 100%"></div>
                                     </div>
                                 </td>
                             </tr>
@@ -529,7 +529,11 @@
             },
             xaxis: {
                 labels: {
-                    padding: 0
+                    padding: 0,
+                    datetimeFormatter: {
+                        year: 'yyyy',
+                        month: 'MMM \'yy',
+                    },
                 },
                 tooltip: {
                     enabled: false
