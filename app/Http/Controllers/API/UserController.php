@@ -10,7 +10,9 @@ use App\Customer;
 use App\Http\Requests\RegisterStoreRequest;
 use App\Type;
 use App\User;
+use App\Employee;
 use Carbon\Carbon;
+use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -442,5 +444,65 @@ class UserController extends Controller
             'data' => $data
         ], 200);
 
+    }
+
+    public function contacts() {
+        $user = Auth::user();
+
+        if($user->is_admin == 1) {
+            $employee = Employee::where('user_id', '=', $user->id)->first(); 
+            $employees = Employee::where('site_id', $employee->site_id)->where('user_id', '!=', $employee->user_id)->get();
+            $contacts = [];
+            foreach ($employees as $emp) {
+                $add = User::findOrFail($emp->user_id);
+                $add->last_message = Message::where(function ($query) use ($add) {
+                    $query->where('sender', Auth::user()->id)->where('receiver', $add->id);
+                })->orWhere(function ($query) use($add) {
+                    $query->where('receiver', Auth::user()->id)->where('sender', $add->id);
+                })->orderBy('created_at', 'desc')->first();
+
+                if(!in_array($user, $contacts)){
+                    array_push($contacts, $add);
+                }
+                
+            }
+            
+        } if($user->is_admin == 2) {
+            $company = Company::where('user_id', $user->id)->first();
+            $sites = Site::where('company_id', $company->id)->get();
+            $contacts = [];
+            foreach ($sites as $site) {
+                $employees = Employee::where('site_id', $site->id)->get();
+                foreach ($employees as $employee) {
+                    $add = User::findOrFail($employee->user_id);
+                    $add->last_message = $message = Message::where(function ($query) use ($add) {
+                        $query->where('sender', Auth::user()->id)->where('receiver', $add->id);
+                    })->orWhere(function ($query) use($add) {
+                        $query->where('receiver', Auth::user()->id)->where('sender', $add->id);
+                    })->orderBy('created_at', 'desc')->first();
+                    
+                    if(!in_array($user, $contacts) && $user != $add){
+                        array_push($contacts, $add);
+                    }
+                    
+                }
+            }
+        } else {
+            $contacts = User::where('is_admin', 2)->where('id', '!=', $user->id)->get();
+            foreach ($contacts as $contact) {
+                $contact->last_message = Message::where(function ($query) use ($contact) {
+                    $query->where('sender', Auth::user()->id)->where('receiver', $contact->id);
+                })->orWhere(function ($query) use($contact) {
+                    $query->where('receiver', Auth::user()->id)->where('sender', $contact->id);
+                })->orderBy('created_at', 'desc')->first();
+            }
+        }
+
+        $response = [
+            'data' => $contacts,
+            'message' => 'Contact de l\'utilisateur ' . $user->name
+        ];
+
+        return response()->json($response, 200);
     }
 }

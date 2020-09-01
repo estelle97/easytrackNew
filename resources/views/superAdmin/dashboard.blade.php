@@ -24,11 +24,11 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                                7 derniers jours
+                                Ce mois ci
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                <a class="dropdown-item" href="#">30 derniers jours</a>
+                                <a class="dropdown-item active" href="#">Ce mois ci</a>
+                                <a class="dropdown-item" href="#">Le mois derniers</a>
                                 <a class="dropdown-item" href="#">3 derniers mois</a>
                             </div>
                         </div>
@@ -66,11 +66,11 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                                7 derniers jours
+                                Ce mois ci
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                <a class="dropdown-item" href="#">30 derniers jours</a>
+                                <a class="dropdown-item active" href="#">Ce mois ci</a>
+                                <a class="dropdown-item" href="#">Le mois derniers</a>
                                 <a class="dropdown-item" href="#">3 derniers mois</a>
                             </div>
                         </div>
@@ -102,11 +102,11 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                                7 derniers jours
+                                Ce mois ci
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                <a class="dropdown-item" href="#">30 derniers jours</a>
+                                <a class="dropdown-item active" href="#">Ce mois ci</a>
+                                <a class="dropdown-item" href="#">Le mois derniers</a>
                                 <a class="dropdown-item" href="#">3 derniers mois</a>
                             </div>
                         </div>
@@ -137,11 +137,11 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                                7 derniers jours
+                                Ce mois ci
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                <a class="dropdown-item" href="#">30 derniers jours</a>
+                                <a class="dropdown-item active" href="#">Ce mois ci</a>
+                                <a class="dropdown-item" href="#">Le mois derniers</a>
                                 <a class="dropdown-item" href="#">3 derniers mois</a>
                             </div>
                         </div>
@@ -235,13 +235,13 @@
                             <div class="subheader">Statistique d'Abonements</div>
                             <div class="ml-auto lh-1">
                                 <div class="dropdown">
-                                    <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        7 derniers jours
+                                    <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        Ce mois ci
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                        <a class="dropdown-item" href="#">30 derniers jours</a>
+                                        <a class="dropdown-item active" href="#">Ce mois ci</a>
+                                        <a class="dropdown-item" href="#">Le mois derniers</a>
                                         <a class="dropdown-item" href="#">3 derniers mois</a>
                                     </div>
                                 </div>
@@ -361,25 +361,25 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-1">
                             <div class="dropdown">
-                                <a class="dropdown-toggle h2 text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
+                                <a class="dropdown-toggle h2 text-muted" href="#" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
                                     Cameroun
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item active" href="#">7 derniers jours</a>
+                                    <a class="dropdown-item active" href="#">Ce mois ci</a>
                                     <a class="dropdown-item" href="#">30 derniers jours</a>
                                     <a class="dropdown-item" href="#">3 derniers mois</a>
                                 </div>
                             </div>
                             <div class="ml-auto lh-1">
                                 <div class="dropdown">
-                                    <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        7 derniers jours
+                                    <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        Ce mois ci
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                        <a class="dropdown-item" href="#">30 derniers jours</a>
+                                        <a class="dropdown-item active" href="#">Ce mois ci</a>
+                                        <a class="dropdown-item" href="#">Le mois derniers</a>
                                         <a class="dropdown-item" href="#">3 derniers mois</a>
                                     </div>
                                 </div>
@@ -434,6 +434,7 @@
         })).render();
     });
     // @formatter:on
+
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

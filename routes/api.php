@@ -26,6 +26,10 @@ Route::get('/uniques', 'API\UserController@getUniqueElements');
 
 Route::group(['middleware' => 'auth:api'], function(){
 
+    Route::get('messages/{receiver}', 'API\MessageController@index');
+    Route::post('messages', 'API\MessageController@store');
+    Route::get('contacts', 'API\UserController@contacts');
+
     Route::post('logout', 'API\UserController@logout');
     Route::post('users/{user}/activate', 'API\UserController@activateUser');
     Route::post('users/{user}/changeAdminLevel', 'API\UserController@changeAdminLevel');
