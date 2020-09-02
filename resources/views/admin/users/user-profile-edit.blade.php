@@ -25,7 +25,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="rgba(255,255,255,1)"/></svg>
                                     Vue d'ensemble
                                 </a>
-                                <a href="#" class="d-flex align-items-center text-white" data-toggle="modal" data-target="#modal-create-role">
+                                <a href="#" class="d-flex align-items-center text-white mr-5" data-toggle="modal" data-target="#modal-create-role">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                     class="mr-2">
                                     <path fill="none" d="M0 0h24v24H0z" />
@@ -33,6 +33,10 @@
                                         d="M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm9 6h1v5h-8v-5h1v-1a3 3 0 0 1 6 0v1zm-2 0v-1a1 1 0 0 0-2 0v1h2z"
                                         fill="rgba(255,255,255,1)" /></svg>
                                     Permissions
+                                </a>
+                                <a href="#" class="d-flex align-items-center text-white" data-toggle="modal" data-target="#modal-edit-password">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" fill="rgba(255,255,255,1)"/></svg>
+                                    Sécurité
                                 </a>
                             </div>
                         </div>
@@ -214,6 +218,110 @@
             </div>
         </div>
         <div class="modal-section">
+            <div class="modal modal-blur fade" id="modal-edit-password" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Sécurité du compte</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="modal-body bg-white">
+                            <div class="row mb-3 align-items-end">
+                                <div class="col-lg-12 mb-4">
+                                    <label class="form-label">Mot de passe actuel</label>
+                                    <div class="input-icon">
+                                        <span class="input-icon-addon ml-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
+                                            </svg>
+                                        </span>
+                                        <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
+                                            placeholder="Mot de passe (au moins 8 caractères)" required autocomplete="off" minlength="8"/>
+                                        <span class="input-icon-addon mr-2">
+                                            <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                                    <circle cx="12" cy="12" r="2" />
+                                                    <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
+                                                    <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
+                                                </svg>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 mb-4">
+                                    <label class="form-label">Nouveau mot de passe</label>
+                                    <div class="input-icon">
+                                        <span class="input-icon-addon ml-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
+                                            </svg>
+                                        </span>
+                                        <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
+                                            placeholder="Mot de passe (au moins 8 caractères)" required autocomplete="off" minlength="8"/>
+                                        <span class="input-icon-addon mr-2">
+                                            <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                                    <circle cx="12" cy="12" r="2" />
+                                                    <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
+                                                    <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
+                                                </svg>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="input-icon">
+                                        <span class="input-icon-addon ml-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path
+                                                    d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
+                                            </svg>
+                                        </span>
+                                        <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
+                                            placeholder="Ressaisisez le mot de passe" required autocomplete="off" minlength="8"/>
+                                        <span class="input-icon-addon mr-2">
+                                            <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                                    <circle cx="12" cy="12" r="2" />
+                                                    <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
+                                                    <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
+                                                </svg>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
+                                Sauvegarder
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="modal modal-blur fade" id="modal-save-profile" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                     <div class="modal-content">
