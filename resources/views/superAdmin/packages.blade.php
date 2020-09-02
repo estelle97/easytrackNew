@@ -8,7 +8,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    <a href="{{route('easytrack.customers')}}" class="mr-2">
+                    <a href="{{route('easytrack.dashboard')}}" class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path
@@ -125,8 +125,7 @@
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right">
 
-                                                <a class="dropdown-item" data-toggle="modal"
-                                                    data-target="#modal-delete-role">
+                                                <a class="dropdown-item" onclick="deleteType({{$type->id}})">
                                                     Supprimer
                                                 </a>
                                             </div>
@@ -144,81 +143,25 @@
             <div class="card p-2">
                 <div class="d-flex align-items-center mb-2 p-2">
                     <div class="subheader">Statistique d'Abonements</div>
-                    <div class="ml-auto lh-1">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                7 derniers jours
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                <a class="dropdown-item" href="#">30 derniers jours</a>
-                                <a class="dropdown-item" href="#">3 derniers mois</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="row row-cards">
-                    <div class="col-lg-6">
-                        <div class="card card-sm border-0 shadow-none">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="mr-3">
-                                    <div class="chart-sparkline chart-sparkline-square" id="sparkline-gold"></div>
-                                </div>
-                                <div class="mr-3 lh-sm">
-                                    <div class="strong">
-                                        Gold
+                    @foreach (App\Type::all() as $type)
+                        <div class="col-lg-6">
+                            <div class="card card-sm border-0 shadow-none">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="mr-3">
+                                        <div class="chart-sparkline chart-sparkline-square" id="{{$type->title}}"></div>
                                     </div>
-                                    <div class="text-muted">10 Utilisateur(s)</div>
+                                    <div class="mr-3 lh-sm">
+                                        <div class="strong">
+                                            {{$type->title}}
+                                        </div>
+                                        <div class="text-muted"> {{$type->numberOfUsers()}} Utilisateur(s)</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card card-sm border-0 shadow-none">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="mr-3">
-                                    <div class="chart-sparkline chart-sparkline-square" id="sparkline-premium"></div>
-                                </div>
-                                <div class="mr-3 lh-sm">
-                                    <div class="strong">
-                                        Premium
-                                    </div>
-                                    <div class="text-muted">20 Utilisateur(s)</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card card-sm border-0 shadow-none">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="mr-3">
-                                    <div class="chart-sparkline chart-sparkline-square" id="sparkline-pro"></div>
-                                </div>
-                                <div class="mr-3 lh-sm">
-                                    <div class="strong">
-                                        Profesionnel
-                                    </div>
-                                    <div class="text-muted">5 Utilisateur(s)</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card card-sm border-0 shadow-none">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="mr-3">
-                                    <div class="chart-sparkline chart-sparkline-square" id="sparkline-classic"></div>
-                                </div>
-                                <div class="mr-3 lh-sm">
-                                    <div class="strong">
-                                        Classic
-                                    </div>
-                                    <div class="text-muted">0 Utilisateur(s)</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -268,7 +211,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
+                        <button type="button" class="btn btn-primary" style="width: 100%;" onclick="addType()">
                             Enregistrer
                         </button>
                     </div>
@@ -356,85 +299,85 @@
 
 @section('scripts')
 
-<script>
-    function addType(){
+    <script>
+        function addType(){
 
-        var form_data = new FormData(); // Creating object of FormData class
+            var form_data = new FormData(); // Creating object of FormData class
 
-        form_data.append("title", $("#name-add").val());
-        form_data.append("duration", $("#duration-add").val());
-        form_data.append("number_of_site", $("#number_of_site-add").val());
-        form_data.append("number_of_employee", $("#number_of_employee-add").val());
-        form_data.append("price", $("#price-add").val());
+            form_data.append("_token", '{{csrf_token()}}');
+            form_data.append("title", $("#title-add").val());
+            form_data.append("duration", $("#duration-add").val());
+            form_data.append("number_of_site", $("#number_of_site-add").val());
+            form_data.append("number_of_employee", $("#number_of_employee-add").val());
+            form_data.append("price", $("#price-add").val());
 
-    }
+            $.ajax({
+                url: '/easytrack/packages',
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'post',
+                data: form_data,
+                success: function(data){
+                    location.reload();
+                }
+            });
 
-    function updateType(id){
+        }
 
-        var form_data = new FormData(); // Creating object of FormData class
+        function updateType(id){
 
-        form_data.append("title", $("#name-update"+id).val());
-        form_data.append("duration", $("#duration-update"+id).val());
-        form_data.append("number_of_site", $("#number_of_site-update"+id).val());
-        form_data.append("number_of_employee", $("#number_of_employee-update"+id).val());
-        form_data.append("price", $("#price-update"+id).val());
-    }
-</script>
+            var form_data = new FormData(); // Creating object of FormData class
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        $().peity && $('#sparkline-gold').text("10/100").peity("pie", {
-            width: 40,
-            height: 40,
-            stroke: "#206bc4",
-            strokeWidth: 2,
-            fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
-            padding: .2,
-            innerRadius: 17,
-        });
-    });
+            form_data.append("_token", '{{csrf_token()}}');
+            form_data.append("title", $("#title-update"+id).val());
+            form_data.append("duration", $("#duration-update"+id).val());
+            form_data.append("number_of_site", $("#number_of_site-update"+id).val());
+            form_data.append("number_of_employee", $("#number_of_employee-update"+id).val());
+            form_data.append("price", $("#price-update"+id).val());
 
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        $().peity && $('#sparkline-premium').text("20/100").peity("pie", {
-            width: 40,
-            height: 40,
-            stroke: "#206bc4",
-            strokeWidth: 2,
-            fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
-            padding: .2,
-            innerRadius: 17,
-        });
-    });
+            $.ajax({
+                url: '/easytrack/packages/'+id,
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'post',
+                data: form_data,
+                success: function(data){
+                    location.reload();
+                }
+            });
+        }
 
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        $().peity && $('#sparkline-pro').text("5/100").peity("pie", {
-            width: 40,
-            height: 40,
-            stroke: "#206bc4",
-            strokeWidth: 2,
-            fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
-            padding: .2,
-            innerRadius: 17,
-        });
-    });
+        function deleteType(id){
+            $.ajax({
+                url: '/easytrack/packages/'+id+'/destroy',
+                method: 'post',
+                data: {
+                    _token: '{{@csrf_token()}}'
+                },
+                success: function(data){
+                    if(data == 'success') location.reload();
+                    else alert(data);
+                }
+            });
+        }
+    </script>
 
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        $().peity && $('#sparkline-classic').text("0/100").peity("pie", {
-            width: 40,
-            height: 40,
-            stroke: "#206bc4",
-            strokeWidth: 2,
-            fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
-            padding: .2,
-            innerRadius: 17,
-        });
-    });
+    @foreach (App\Type::all() as $type)
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                $().peity && $('#{{$type->title}}').text("{{$type->usage()}}/100").peity("pie", {
+                    width: 40,
+                    height: 40,
+                    stroke: "#206bc4",
+                    strokeWidth: 2,
+                    fill: ["#206bc4", "rgba(110, 117, 130, 0.2)"],
+                    padding: .2,
+                    innerRadius: 17,
+                });
+            });
+        </script>
+    @endforeach
 
-</script>
 @endsection

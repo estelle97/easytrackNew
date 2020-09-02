@@ -39,6 +39,14 @@ class DatabaseSeeder extends Seeder
             $product->activities()->attach(1);
         });
 
+        // Remplissage de la table subscriptions
+        App\Company::all()->each(function($company){
+            $type = App\Type::all()->random();
+            $company->types()->attach($type->id, [
+                'end_date' => \Carbon\Carbon::now()->addDays($type->duration),
+            ]);
+        });
+
         // Replissage de la table product_site
         foreach (App\Site::all() as $site) {
 

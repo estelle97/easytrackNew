@@ -90,6 +90,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/roles/attachPermissionToUser', 'Admin\RoleController@attachPermissionToUser');
 
 
+    Route::get('easytrack/stats/towns', 'SuperAdmin\StatController@subscribersPerTown');
+    Route::get('easytrack/stats/purchases/{days}', 'Admin\StatController@purchases');
+    Route::get('easytrack/stats/profits/{days}', 'Admin\StatController@profits');
 
 
     Route::get('easytrack/dashboard', ['as'=> 'easytrack.dashboard','uses' => 'SuperAdmin\DashboardController@index']);
@@ -121,6 +124,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('easytrack/customers/store', 'SuperAdmin\CustomerController@store');
     Route::get('easytrack/customers', 'SuperAdmin\CustomerController@index')->name('easytrack.customers');
     Route::get('easytrack/packages', 'SuperAdmin\PackageController@index')->name('easytrack.packages');
+    Route::post('easytrack/packages', 'SuperAdmin\PackageController@store');
+    Route::post('easytrack/packages/{type}/destroy', 'SuperAdmin\PackageController@destroy');
+    Route::post('easytrack/packages/{type}', 'SuperAdmin\PackageController@update');
     Route::get('easytrack/companies', 'SuperAdmin\CompanyController@index')->name('easytrack.companies');
 
 

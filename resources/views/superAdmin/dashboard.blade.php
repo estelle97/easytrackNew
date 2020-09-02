@@ -359,34 +359,8 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex align-items-center mb-1">
-                            <div class="dropdown">
-                                <a class="dropdown-toggle h2 text-muted" href="#" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    Cameroun
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item active" href="#">Ce mois ci</a>
-                                    <a class="dropdown-item" href="#">30 derniers jours</a>
-                                    <a class="dropdown-item" href="#">3 derniers mois</a>
-                                </div>
-                            </div>
-                            <div class="ml-auto lh-1">
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        Ce mois ci
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item active" href="#">Ce mois ci</a>
-                                        <a class="dropdown-item" href="#">Le mois derniers</a>
-                                        <a class="dropdown-item" href="#">3 derniers mois</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-4">
-                            <div class="subheader">Abonements par ville</div>
+                        <div class="d-flex">
+                            <div class="subheader">Abonements par ville (il faut adapter le design)</div>
                         </div>
 
                         <div id="chart-subscriptions-peer-city"></div>
@@ -402,38 +376,45 @@
 
 @section('scripts')
 <script>
+    getSubPerTown();
     // @formatter:off
-    document.addEventListener("DOMContentLoaded", function () {
-        window.ApexCharts && (new ApexCharts(document.getElementById('chart-subscriptions-peer-city'), {
-            chart: {
-                type: "donut",
-                fontFamily: 'inherit',
-                height: 240,
-                sparkline: {
-                    enabled: true
+    function getSubPerTown(){
+        $.ajax({
+            url: '/easytrack/stats/towns',
+                method: 'get',
+                success: function(data) {
+                    console.log(data);
+                    window.ApexCharts && (new ApexCharts(document.getElementById('chart-subscriptions-peer-city'), {
+                        chart: {
+                            type: "donut",
+                            fontFamily: 'inherit',
+                            height: 240,
+                            sparkline: {
+                                enabled: true
+                            },
+                            animations: {
+                                enabled: false
+                            },
+                        },
+                        fill: {
+                            opacity: 1,
+                        },
+                        series: data.users,
+                        labels: data.towns,
+                        grid: {
+                            strokeDashArray: 4,
+                        },
+                        colors: data.colors,
+                        legend: {
+                            show: false,
+                        },
+                        tooltip: {
+                            fillSeriesColor: false
+                        },
+                    })).render();
                 },
-                animations: {
-                    enabled: false
-                },
-            },
-            fill: {
-                opacity: 1,
-            },
-            series: [44, 55, 12, 2],
-            labels: ["Yaound", "Douala", "Bafoussam", "Kribi"],
-            grid: {
-                strokeDashArray: 4,
-            },
-            colors: ["#206bc4", "#79a6dc", "#bfe399", "#e9ecf1"],
-            legend: {
-                show: false,
-            },
-            tooltip: {
-                fillSeriesColor: false
-            },
-        })).render();
-    });
-    // @formatter:on
+        });
+    }
 
 </script>
 <script>
