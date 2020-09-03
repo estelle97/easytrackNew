@@ -183,7 +183,7 @@
                                 <span class="outer-circle circle-bg-2"></span>
                             </div>
                             <div class="widget__body divider--right">
-                                <h3 class="widget__heading h6">Notifcations</h3>
+                                <h3 class="widget__heading h6">Notifications</h3>
                                 <p>Visualisez  instantanément l'état de votre caisse ou de vos stocks  et détecter rapidement d’éventuelles anomalies.</p>
                             </div>
                         </div>
