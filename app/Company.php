@@ -25,7 +25,7 @@ class Company extends Model
 
     public function types(){
         return $this->belongsToMany('App\Type','subscriptions')
-                        ->withPivot('end_date','status','is_active');
+                        ->withPivot('end_date','status','is_active','created_at');
     }
 
     public function activity(){
@@ -47,7 +47,7 @@ class Company extends Model
                 }
              }
         }
-       
+
         return $total;
     }
 
@@ -59,7 +59,7 @@ class Company extends Model
                 foreach($site->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
                  $total += $sale->total($category_id);
                 }
-             }    
+             }
         } else {
             foreach ($this->sites as $site) {
                foreach($site->sales->where('validator_id','!=', null) as $sale){
@@ -67,7 +67,7 @@ class Company extends Model
                }
             }
         }
-       
+
         return $total;
     }
 

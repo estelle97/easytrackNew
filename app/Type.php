@@ -11,7 +11,7 @@ class Type extends Model
     protected $dates = ['created_at'];
 
     public function companies(){
-        return $this->belongsToMany('App\Company', 'subscriptions')->withPivot('end_date','status');
+        return $this->belongsToMany('App\Company', 'subscriptions')->withPivot('end_date','status','is_active','created_at');
     }
 
     public function numberOfUsers(){

@@ -312,7 +312,7 @@
             form_data.append("price", $("#price-add").val());
 
             $.ajax({
-                url: '/easytrack/packages',
+                url: '/easytrack/types',
                 cache: false,
                 contentType: false,
                 processData: false,
@@ -337,7 +337,7 @@
             form_data.append("price", $("#price-update"+id).val());
 
             $.ajax({
-                url: '/easytrack/packages/'+id,
+                url: '/easytrack/types/'+id,
                 cache: false,
                 contentType: false,
                 processData: false,
@@ -351,7 +351,7 @@
 
         function deleteType(id){
             $.ajax({
-                url: '/easytrack/packages/'+id+'/destroy',
+                url: '/easytrack/types/'+id+'/destroy',
                 method: 'post',
                 data: {
                     _token: '{{@csrf_token()}}'

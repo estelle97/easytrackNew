@@ -30,12 +30,10 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
 
-    $sales = Auth::user()->companies->first()->sites->find(31)->sales;
-
     $sales = [];
     $purchases = [];
     $dates = [];
-    for ($i=30; $i >= 0; $i--) { 
+    for ($i=30; $i >= 0; $i--) {
         $totalSales = 0;
         $totalPurchases = 0;
         foreach(Auth::user()->companies->first()->sites as $site){

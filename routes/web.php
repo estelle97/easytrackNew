@@ -91,8 +91,10 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
 
     Route::get('easytrack/stats/towns', 'SuperAdmin\StatController@subscribersPerTown');
-    Route::get('easytrack/stats/purchases/{days}', 'Admin\StatController@purchases');
-    Route::get('easytrack/stats/profits/{days}', 'Admin\StatController@profits');
+    Route::get('easytrack/stats/packages/{months}', 'SuperAdmin\StatController@packages');
+    Route::get('easytrack/stats/companies/{months}', 'SuperAdmin\StatController@companies');
+    Route::get('easytrack/stats/profits/{months}', 'SuperAdmin\StatController@profits');
+    Route::get('easytrack/stats/users/{months}', 'SuperAdmin\StatController@users');
 
 
     Route::get('easytrack/dashboard', ['as'=> 'easytrack.dashboard','uses' => 'SuperAdmin\DashboardController@index']);
@@ -118,16 +120,16 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
 
 
-    Route::get("/easytrack/companies/update/{company}/state", 'SuperAdmin\CustomerController@updateState');
-    Route::post("/easytrack/companies/update/{company}", 'SuperAdmin\CustomerController@update');
-    Route::get("/easytrack/companies/subscription/update/{company}", 'SuperAdmin\CustomerController@subscriptionUpdate');
-    Route::post('easytrack/customers/store', 'SuperAdmin\CustomerController@store');
-    Route::get('easytrack/customers', 'SuperAdmin\CustomerController@index')->name('easytrack.customers');
-    Route::get('easytrack/packages', 'SuperAdmin\PackageController@index')->name('easytrack.packages');
-    Route::post('easytrack/packages', 'SuperAdmin\PackageController@store');
-    Route::post('easytrack/packages/{type}/destroy', 'SuperAdmin\PackageController@destroy');
-    Route::post('easytrack/packages/{type}', 'SuperAdmin\PackageController@update');
+    Route::get("/easytrack/companies/update/{company}/state", 'SuperAdmin\CompanyController@updateState');
+    Route::post("/easytrack/companies/update/{company}", 'SuperAdmin\CompanyController@update');
+    Route::get("/easytrack/companies/subscription/update/{company}", 'SuperAdmin\CompanyController@subscriptionUpdate');
+    Route::post('easytrack/companies/store', 'SuperAdmin\CompanyController@store');
     Route::get('easytrack/companies', 'SuperAdmin\CompanyController@index')->name('easytrack.companies');
+    Route::get('easytrack/types', 'SuperAdmin\PackageController@index')->name('easytrack.types');
+    Route::post('easytrack/types', 'SuperAdmin\PackageController@store');
+    Route::post('easytrack/types/{type}/destroy', 'SuperAdmin\PackageController@destroy');
+    Route::post('easytrack/types/{type}', 'SuperAdmin\PackageController@update');
+    Route::get('easytrack/users', 'SuperAdmin\UserController@index')->name('easytrack.users');
 
 
 
