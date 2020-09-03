@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
     <!-- Page title -->
     <div class="page-header text-white">
         <div class="row align-items-center">
@@ -59,13 +59,13 @@
             </div>
         </div>
     </div>
-            
+
 @endsection
-    
+
 
 
 @section('scripts')
-    
+
 <script src={{asset("template/assets/dist/libs/selectize/dist/js/standalone/selectize.min.js")}} ></script>
 
 <script>
@@ -75,7 +75,7 @@
     var sitesSelect = $("#sites").selectize({});
 
     // GLOBAL VARIABLES
-    
+
 
     let productCardList = [];
     let productCardOnClick = null;
@@ -208,5 +208,5 @@
 @endsection
 
 @section('styles')
-    
+
 @endsection

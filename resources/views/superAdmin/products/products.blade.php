@@ -24,7 +24,7 @@
                         <a class="dropdown-item" data-toggle="modal" data-target="#modal-create-product">
                             Ajouter un produit
                         </a>
-                        <a class="dropdown-item" href="{{route('admin.products.create')}}">
+                        <a class="dropdown-item" href="{{route('easytrack.products.create')}}">
                             Ajouter plusieurs produits
                         </a>
                     </div>
