@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
 <div class="container-xl">
     <!-- Page title -->
     <div class="page-header text-white">
@@ -43,7 +43,7 @@
                             <div class="form-group mb-3">
                                 <label for=""> Client </label>
                                 <select id="customers" class="form-select">
-                                   
+
                                 </select>
                             </div>
                         </form>
@@ -102,9 +102,9 @@
                                     <label class="form-label">Moyen de paiement</label>
                                     <div
                                         class="form-selectgroup form-selectgroup-boxes d-flex flex-row">
+
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="cash"
-                                                class="form-selectgroup-input" checked>
+                                            <input type="radio" name="paying_method" value="cash" class="paying_method form-selectgroup-input" checked>
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
                                                 <div class="mr-3">
@@ -117,9 +117,9 @@
                                                 </div>
                                             </div>
                                         </label>
+
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="om"
-                                                class="form-selectgroup-input">
+                                            <input type="radio" name="paying_method" value="om" class="paying_method form-selectgroup-input">
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
                                                 <div class="mr-3">
@@ -132,9 +132,10 @@
                                                 </div>
                                             </div>
                                         </label>
+
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="momo"
-                                                class="form-selectgroup-input">
+                                            <input type="radio" name="paying_method" value="momo"
+                                                class="paying_method form-selectgroup-input">
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
                                                 <div class="mr-3">
@@ -368,7 +369,7 @@
             addElement(element);
         });
     }
-   
+
 
     function order() {
         var token = '{{@csrf_token()}}';
@@ -414,7 +415,7 @@
             data: {
                 _token: token,
                 site_id: site
-                
+
             },
             success: function(data){
                 $("#customers").html(data.customers);
