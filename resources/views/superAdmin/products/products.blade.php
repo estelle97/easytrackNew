@@ -505,7 +505,7 @@
 
             var form_data = new FormData(); // Creating object of FormData class
 
-            form_data.append("photo", $('.file'+id).prop('files')[0]);
+            if($(".file"+id).get(0).files.length != 0)   form_data.append("photo", $('.file'+id).prop('files')[0]);
             form_data.append("name", $("#product-name-update"+id).val());
             form_data.append("brand", $("#product-brand-update"+id).val());
             form_data.append("description", $("#product-description-update"+id).val());

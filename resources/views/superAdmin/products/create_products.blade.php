@@ -106,14 +106,14 @@
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="Nom du produit" id="name'+productId+'" data-name="Nom du produit">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Nom du produit" id="name'+productId+'" data-name="Nom du produit">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="1" min="0" id="brand'+productId+'" data-brand="1">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Marque du produit" min="0" id="brand'+productId+'" data-brand="1">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +
@@ -138,7 +138,7 @@
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="1" id="description'+productId+'" data-description="1">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Description du produit" id="description'+productId+'" data-description="1">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +
