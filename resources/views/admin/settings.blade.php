@@ -14,8 +14,8 @@
     </div>
 </div>
 <div class="row row-deck row-cards">
-
-
+    <div class="card col-lg-12 p-2">
+    </div>
 </div>
 
 @endsection
