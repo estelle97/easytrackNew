@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Gestion des clients
+                    Gestion des companies
                 </h2>
             </div>
             <!-- Page title actions -->

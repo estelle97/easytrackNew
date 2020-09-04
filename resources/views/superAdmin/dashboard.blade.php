@@ -28,10 +28,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item active" onclick="getCompanies('all', 'derniers mois')"> Global </a>
-                                <a class="dropdown-item active" onclick="getCompanies(1, 'Ce mois ci')">Ce mois ci</a>
+                                <a class="dropdown-item" onclick="getCompanies(1, 'Ce mois ci')">Ce mois ci</a>
                                 <a class="dropdown-item" onclick="getCompanies(2, '2 derniers mois')">2 deriers mois</a>
                                 <a class="dropdown-item" onclick="getCompanies(3, '3 derniers mois')">3 derniers mois</a>
-                                <a class="dropdown-item active" onclick="getCompanies(6, '6 derniers mois')">6 derniers mois</a>
+                                <a class="dropdown-item" onclick="getCompanies(6, '6 derniers mois')">6 derniers mois</a>
                             </div>
                         </div>
                     </div>
@@ -66,10 +66,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item active" onclick="getProfits('all', 'derniers mois')"> Global </a>
-                                <a class="dropdown-item active" onclick="getProfits(1, 'Ce mois ci')">Ce mois ci</a>
+                                <a class="dropdown-item" onclick="getProfits(1, 'Ce mois ci')">Ce mois ci</a>
                                 <a class="dropdown-item" onclick="getProfits(2, '2 derniers mois')">2 deriers mois</a>
                                 <a class="dropdown-item" onclick="getProfits(3, '3 derniers mois')">3 derniers mois</a>
-                                <a class="dropdown-item active" onclick="getProfits(6, '6 derniers mois')">6 derniers mois</a>
+                                <a class="dropdown-item" onclick="getProfits(6, '6 derniers mois')">6 derniers mois</a>
                             </div>
                         </div>
                     </div>
@@ -104,10 +104,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item active" onclick="getUsers('all', 'derniers mois')"> Global </a>
-                                <a class="dropdown-item active" onclick="getUsers(1, 'Ce mois ci')">Ce mois ci</a>
+                                <a class="dropdown-item" onclick="getUsers(1, 'Ce mois ci')">Ce mois ci</a>
                                 <a class="dropdown-item" onclick="getUsers(2, '2 derniers mois')">2 deriers mois</a>
                                 <a class="dropdown-item" onclick="getUsers(3, '3 derniers mois')">3 derniers mois</a>
-                                <a class="dropdown-item active" onclick="getUsers(6, '6 derniers mois')">6 derniers mois</a>
+                                <a class="dropdown-item" onclick="getUsers(6, '6 derniers mois')">6 derniers mois</a>
                             </div>
                         </div>
                     </div>
@@ -230,7 +230,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-6">
+            {{-- <div class="col-lg-6">
                 <div class="card card-sm">
                     <div class="card-body d-flex align-items-center">
                         <div class="mr-3">
@@ -289,7 +289,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="col-sm-12 col-lg-3">
@@ -297,8 +297,8 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex">
-                            <div class="subheader">Abonements par ville (il faut adapter le design)</div>
+                        <div class="d-flex mb-2">
+                            <div class="subheader">Abonements par ville<br>sur la plateforme</div>
                         </div>
 
                         <div id="chart-subscriptions-peer-city"></div>
