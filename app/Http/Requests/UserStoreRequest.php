@@ -45,7 +45,8 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'required' => 'Ce champ est obligatoire',
-            'phone.*' => "Format de téléphone incorrect",
+            'phone.unique' => "Ce numé",
+            'phone.*' => "Numéro de téléphone déja utilisé",
             'email' => 'Adresse email invalide',
             'password.min' => "Le mot de passe doit avoir au moins 8 caracètres",
             'photo.*' => "Format de photo incorrect",

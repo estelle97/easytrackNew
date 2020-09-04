@@ -37,16 +37,16 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-baseline">
-                    <div class="h1 mb-0 mr-2 companies"> 500 </div>
+                    <div class="h1 mb-0 mr-2 companies"> 0 </div>
                     <div class="mr-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
+                        {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                             8% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <polyline points="3 17 9 11 13 15 21 7" />
                                 <polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
             </div>
@@ -75,16 +75,16 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-baseline">
-                    <div class="h1 mb-0 mr-2 profits"> 500 </div>
+                    <div class="h1 mb-0 mr-2 profits"> 0 </div>
                     <div class="mr-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
+                        {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                             8% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <polyline points="3 17 9 11 13 15 21 7" />
                                 <polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
             </div>
@@ -113,16 +113,16 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-baseline">
-                    <div class="h1 mb-3 mr-2 users">15</div>
+                    <div class="h1 mb-3 mr-2 users"> 0 </div>
                     <div class="mr-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
+                        {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                             4% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <polyline points="3 17 9 11 13 15 21 7" />
                                 <polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
                 <div id="chart-users" class="chart-sm"></div>
@@ -378,9 +378,8 @@
                 $(".companies").fadeOut().html(data.total).fadeIn();
                 $('.selected-companies').html(text);
 
-                console.log(data);
-                // dates = data.dates;
-                // sales = data.sales;
+                dates = data.dates;
+                companies = data.companies;
 
                 $('#chart-companies').html('');
 
@@ -409,10 +408,8 @@
                         curve: "smooth",
                     },
                     series: [{
-                        name: "Profits",
-                        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                            93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67
-                        ]
+                        name: "Companies",
+                        data: companies
                     }],
                     grid: {
                         strokeDashArray: 4,
@@ -438,14 +435,7 @@
                             padding: 4
                         },
                     },
-                    labels: [
-                        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                        '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                        '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                        '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                        '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                        '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                    ],
+                    labels: dates,
                     colors: ["#206bc4"],
                     legend: {
                         show: false,
@@ -464,7 +454,7 @@
                 $(".profits").fadeOut().html(data.total).fadeIn();
                 $('.selected-profits').html(text);
                 dates = data.dates;
-                sales = data.sales;
+                profits = data.profits;
 
                 $('#chart-profits').html('');
 
@@ -494,9 +484,7 @@
                     },
                     series: [{
                         name: "Profits",
-                        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                            93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67
-                        ]
+                        data: profits
                     }],
                     grid: {
                         strokeDashArray: 4,
@@ -522,14 +510,7 @@
                             padding: 4
                         },
                     },
-                    labels: [
-                        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                        '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                        '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                        '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                        '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                        '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                    ],
+                    labels: dates,
                     colors: ["#206bc4"],
                     legend: {
                         show: false,
@@ -548,7 +529,7 @@
                 $(".users").fadeOut().html(data.total).fadeIn();
                 $('.selected-users').html(text);
                 dates = data.dates;
-                sales = data.sales;
+                users = data.users;
 
                 $('#chart-users').html('');
 
@@ -577,10 +558,8 @@
                         curve: "smooth",
                     },
                     series: [{
-                        name: "Profits",
-                        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                            93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67
-                        ]
+                        name: "Utilisateurs",
+                        data: users
                     }],
                     grid: {
                         strokeDashArray: 4,
@@ -606,14 +585,7 @@
                             padding: 4
                         },
                     },
-                    labels: [
-                        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                        '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                        '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                        '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                        '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                        '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                    ],
+                    labels: dates,
                     colors: ["#206bc4"],
                     legend: {
                         show: false,

@@ -33,12 +33,12 @@ class RegisterStoreRequest extends FormRequest
 
             'companyname' => 'sometimes|required|unique:companies,name',
             'companyphone1' => 'sometimes|required|min:200000000|max:999999999|numeric|unique:companies,phone1',
-            'companyphone2' => 'sometimes|min:200000000|max:999999999|numeric|unique:companies,phone2',
+            'companyphone2' => 'sometimes|nullable|min:200000000|max:999999999|numeric|unique:companies,phone2',
             'companyemail' => 'sometimes|required|email|unique:companies,email',
 
             'sitename' => 'sometimes|required|unique:sites,name',
             'sitephone1' => 'sometimes|required|min:200000000|max:999999999|numeric|unique:sites,phone1',
-            'sitephone2' => 'sometimes|min:200000000|max:999999999|numeric|unique:sites,phone2',
+            'sitephone2' => 'sometimes|nullable|min:200000000|max:999999999|numeric|unique:sites,phone2',
             'siteemail' => 'sometimes|required|email|unique:sites,email',
             'sitestreet' => 'sometimes|required',
             'sitetown' => 'sometimes|required'

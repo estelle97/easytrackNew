@@ -100,8 +100,8 @@
                             <th class="exportable w-1">Code</th>
                             <th class="exportable">Nom</th>
                             <th class="exportable">Categorie</th>
-                            <th>Brand</th>
-                            <th>Unit</th>
+                            <th>Marque</th>
+                            <th>Unité</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -114,7 +114,8 @@
                                     </a>
                                 </td>
                                 <td><span class="text-muted"> {{$product->code}} </span></td>
-                                <td><a id="product-name{{$product->id}}" href="invoice.html" class="text-reset" tabindex="-1">{{$product->name}}</a>
+                                <td id="product-name{{$product->id}}">  
+                                    {{$product->name}}
                                 </td>
                                 <td id="product-category{{$product->id}}">
                                     {{$product->category->name}}
@@ -329,7 +330,7 @@
                                     <span class="text-danger" id="product-name-error{{$product->id}}"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
-                                <label class="form-label">brand</label>
+                                <label class="form-label">Marque</label>
                                 <input type="text" id="product-brand-update{{$product->id}}" value="{{$product->brand}}" class="form-control"
                                     placeholder="Saisissez la marque " required>
                                     <span class="text-danger" id="product-brand-error{{$product->id}}"></span>
@@ -505,7 +506,7 @@
 
             var form_data = new FormData(); // Creating object of FormData class
 
-            form_data.append("photo", $('.file'+id).prop('files')[0]);
+            if($(".file"+id).get(0).files.length != 0)   form_data.append("photo", $('.file'+id).prop('files')[0]);
             form_data.append("name", $("#product-name-update"+id).val());
             form_data.append("brand", $("#product-brand-update"+id).val());
             form_data.append("description", $("#product-description-update"+id).val());

@@ -47,13 +47,13 @@ class StatController extends Controller
         if($months != 'all'){
             for ($i=$months; $i >= 0; $i--) {
                 $companies[] = Company::all()->where('created_at', '>', \Carbon\Carbon::today()->subMonths($i)->startOfMonth())->where('created_at', '<', \Carbon\Carbon::today()->subMonths($i)->endOfMonth())->count();
-                $dates[]= \Carbon\Carbon::today()->subMonths($i)->toDateString();
+                $dates[]= \Carbon\Carbon::today()->subMonths($i)->startOfMonth()->toDateString();
             }
             $total =  Company::all()->where('created_at', '<', \Carbon\Carbon::today()->subMonths($i)->startOfMonth())->count();
         } else {
             for ($i=24; $i >= 0; $i--) {
                 $companies[] = Company::all()->where('created_at', '>', \Carbon\Carbon::today()->subMonths($i)->startOfMonth())->where('created_at', '<', \Carbon\Carbon::today()->subMonths($i)->endOfMonth())->count();
-                $dates[]= \Carbon\Carbon::today()->subMonths($i)->toDateString();
+                $dates[]= \Carbon\Carbon::today()->subMonths($i)->startOfMonth()->toDateString();
             }
             $total =  Company::all()->count();
         }
@@ -76,13 +76,12 @@ class StatController extends Controller
                     $totalProfits += $com->types()->wherePivot('created_at', '>', \Carbon\Carbon::today()->subMonths($i)->startOfMonth())->wherePivot('created_at', '<', \Carbon\Carbon::today()->subMonths($i)->endOfMonth())->sum('price');
                 }
                 $profits[] = $totalProfits;
-                $dates[]= \Carbon\Carbon::today()->subMonths($i)->toDateString();
+                $dates[]= \Carbon\Carbon::today()->subMonths($i)->startOfMonth()->toDateString();
             }
             $total = 0;
             foreach (Company::all() as $com) {
                 $total += $com->types()->wherePivot('created_at', '<', \Carbon\Carbon::today()->subMonths($i)->startOfMonth())->sum('price');
             }
-            $total = Company::all()->where('created_at', '<', \Carbon\Carbon::today()->subMonths($i)->startOfMonth())->count();
         } else {
             for ($i=24; $i >= 0; $i--) {
                 $totalProfits = 0;
@@ -90,7 +89,7 @@ class StatController extends Controller
                     $totalProfits += $com->types()->wherePivot('created_at', '>', \Carbon\Carbon::today()->subMonths($i)->startOfMonth())->wherePivot('created_at', '<', \Carbon\Carbon::today()->subMonths($i)->endOfMonth())->sum('price');
                 }
                 $profits[] = $totalProfits;
-                $dates[]= \Carbon\Carbon::today()->subMonths($i)->toDateString();
+                $dates[]= \Carbon\Carbon::today()->subMonths($i)->startOfMonth()->toDateString();
             }
             $total = 0;
             foreach (Company::all() as $com) {
@@ -119,7 +118,7 @@ class StatController extends Controller
                     }
                 }
                 $users[] = $totalusers;
-                $dates[]= \Carbon\Carbon::today()->subMonths($i)->toDateString();
+                $dates[]= \Carbon\Carbon::today()->subMonths($i)->startOfMonth()->toDateString();
             }
 
             $total = 0;
@@ -139,7 +138,7 @@ class StatController extends Controller
                     }
                 }
                 $users[] = $totalusers;
-                $dates[]= \Carbon\Carbon::today()->subMonths($i)->toDateString();
+                $dates[]= \Carbon\Carbon::today()->subMonths($i)->startOfMonth()->toDateString();
             }
 
             $total = 0;

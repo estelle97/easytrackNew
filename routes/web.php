@@ -24,6 +24,7 @@ Route::get('/', function () {
 * Authentification
 */
 
+
 Route::get('login', [
     'as' => 'login',
     'uses' => 'Auth\LoginController@login'
