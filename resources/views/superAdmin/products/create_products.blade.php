@@ -95,7 +95,7 @@
         const productId = products.length + 1;
         var categories = '{!! $categories !!}';
         var units = '{!! $units !!}';
-        $('.order-list').append(
+        $('.order-list').prepend(
             '<tr id="product'+productId+'">' +
             '    <td>' +
             '    <input type="file" name="img[]" id="file'+productId+'" accept="image/*" hidden>' +
