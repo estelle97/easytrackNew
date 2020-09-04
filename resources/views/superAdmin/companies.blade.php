@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Gestion des clients
+                    Gestion des companies
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -35,7 +35,7 @@
                                 fill="rgba(255,255,255,1)" /></svg>
                         Gérer les rôles
                     </a>
-                    <span class="dropdown ml-5">
+                    <span class="dropdown button-click-action ml-5">
                         <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                 height="24">

@@ -241,3 +241,6 @@
     padding: 0.5rem 0.5rem !important;
 }
 
+.button-click-action {
+    cursor: pointer;
+}

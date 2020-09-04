@@ -14,10 +14,10 @@
         <div class="col-auto ml-auto d-print-none">
             <div class="d-flex align-items-center">
                 <span class="dropdown mr-4">
-                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                    <a class="dropdown-toggle button-click-action" data-boundary="viewport" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)"/></svg>
-                    <span class="h2 align-middle">Nouveau produit</span>
-                    </div>
+                    <span class="align-middle">Nouveau produit</span>
+                    </a>
 
                     <div class="dropdown-menu dropdown-menu-right mt-3">
                         <span class="dropdown-header">Menu</span>
@@ -91,7 +91,7 @@
         </div>
     </div>
     <div class="col-lg-9">
-        <div class="card">
+        <div class="card p-2">
             <div class="table-responsive">
                 <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
                     <thead>

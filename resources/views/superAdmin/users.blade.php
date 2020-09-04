@@ -22,7 +22,7 @@
                         </svg>
                         Ajouter une compagnie
                     </a>
-                    <span class="dropdown ml-3">
+                    <span class="dropdown button-click-action ml-3">
                         <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                 height="24">

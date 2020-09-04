@@ -20,7 +20,7 @@
                         <a href="#">Voir les details</a>
                     </div>
                     <div class="text-gray font-weight-normal mt-0">Abonement</div>
-                    <h3 class="h2 mt-2 mb-3">180 Jour(s) restant</h3>
+                    <h3 class="h2 mt-2 mb-3">180 Jour(s) : 10h : 30min : 15s restantes</h3>
                     <p class="mb-0 text-muted">
                         <span class="text-yellow d-inline-flex align-items-center lh-1">
                             45% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
@@ -30,7 +30,7 @@
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                             </svg>
                         </span>
-                        <span class="text-nowrap text-gray">18-05-2020</span>
+                        <span class="text-nowrap text-gray">18-05-2020 / 15-11-2020</span>
                     </p>
                 </div>
             </div>
