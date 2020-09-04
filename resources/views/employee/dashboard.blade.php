@@ -28,7 +28,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getSales('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getSales(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getSales(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getSales(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getSales(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getSales(90, '3 derniers mois')">3 derniers mois</a>
@@ -58,7 +58,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getPurchases('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getPurchases(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getPurchases(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getPurchases(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getPurchases(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getPurchases(90, '3 derniers mois')">3 derniers mois</a>
@@ -86,7 +86,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getProfits('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getProfits(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getProfits(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getProfits(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getProfits(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getProfits(90, '3 derniers mois')">3 derniers mois</a>
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-lg-6">
             <div class="row row-cards row-deck">
                 <div class="col-sm-12">
@@ -390,8 +390,8 @@
             })
         }
 
-        
-       // chart-active-users 
+
+       // chart-active-users
         // @formatter:off
         document.addEventListener("DOMContentLoaded", function () {
             window.ApexCharts && (new ApexCharts(document.getElementById('chart-active-users'), {
@@ -460,7 +460,7 @@
         // @formatter:on
 
     </script>
-    
+
     {{-- chart-development-activity --}}
     <script>
         // @formatter:off
