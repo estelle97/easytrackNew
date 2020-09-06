@@ -35,7 +35,7 @@
                                                     <div class="col-md-6 mb-4">
                                                         <label class="form-label"> Fournisseur </label>
                                                         <select name="role" id="suppliers" class="form-select">
-                                                           
+
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12 mb-4">
@@ -57,7 +57,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="order-list">
-                                                                
+
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -91,8 +91,8 @@
                                             <div
                                                 class="form-selectgroup form-selectgroup-boxes d-flex flex-row">
                                                 <label class="form-selectgroup-item flex-fill">
-                                                    <input type="radio" class="paying_method" name="paying_method" value="cash"
-                                                        class="form-selectgroup-input" checked>
+                                                    <input type="radio" name="paying_method" value="cash"
+                                                        class="paying_method form-selectgroup-input" checked>
                                                     <div
                                                         class="form-selectgroup-label d-flex align-items-center p-3">
                                                         <div class="mr-3">
@@ -106,8 +106,8 @@
                                                     </div>
                                                 </label>
                                                 <label class="form-selectgroup-item flex-fill">
-                                                    <input type="radio" class="paying_method" name="paying_method" value="om"
-                                                        class="form-selectgroup-input">
+                                                    <input type="radio" name="paying_method" value="om"
+                                                        class="paying_method form-selectgroup-input">
                                                     <div
                                                         class="form-selectgroup-label d-flex align-items-center p-3">
                                                         <div class="mr-3">
@@ -121,8 +121,8 @@
                                                     </div>
                                                 </label>
                                                 <label class="form-selectgroup-item flex-fill">
-                                                    <input type="radio" class="paying_method" name="paying_method" value="momo"
-                                                        class="form-selectgroup-input">
+                                                    <input type="radio" name="paying_method" value="momo"
+                                                        class="paying_method form-selectgroup-input">
                                                     <div
                                                         class="form-selectgroup-label d-flex align-items-center p-3">
                                                         <div class="mr-3">
