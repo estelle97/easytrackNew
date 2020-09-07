@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="col-lg-4 d-flex flex-row align-items-center">
+<div class="col-12 col-sm-12 col-md-12 col-lg-4 d-flex flex-row align-items-center">
     <div class="container-tight">
         <div class="card card-md auth-card pt-3 pb-5 px-3">
             <div class="card-body mb-3">
