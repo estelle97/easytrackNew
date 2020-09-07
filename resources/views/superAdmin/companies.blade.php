@@ -655,12 +655,12 @@
                 </div>
             </div>
         @endforeach
-        <div class="modal modal-blur fade" id="modal-delete-user" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal modal-blur fade" id="modal-delete-company" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="modal-title">Êtes vous sure ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de cette utilisateurs.</div>
+                        <div>Si vous continuez, vous perdrez toutes les données de cette companie.</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link link-secondary mr-auto"

@@ -36,12 +36,23 @@
             </div>
         </div>
     </div>
-    <div class="card col-lg-5" style="max-height: 400px;">
+    <div class="card col-lg-5 p-4">
         <div class="row">
-
+            <h3 class="text-muted">Nom de la compangnie</h3>
+            <h2 class="mb-4 button-click-action" contenteditable="true">Le Relais de la Citée</h2>
+            <h3 class="text-muted">Ville</h3>
+            <h2 class="mb-4 button-click-action" contenteditable="true">Yaoundé</h2>
+            <h3 class="text-muted">Quartier</h3>
+            <h2 class="mb-4 button-click-action" contenteditable="true">Elig-edzoa Pharmacie</h2>
+            <h3 class="text-muted">Téléphone N°1</h3>
+            <h2 class="mb-4 button-click-action" contenteditable="true">223984456</h2>
+            <h3 class="text-muted">Téléphone N°2</h3>
+            <h2 class="mb-4 button-click-action" contenteditable="true"></h2>
+            <h3 class="text-muted">Email</h3>
+            <h2 class="button-click-action" contenteditable="true">lerelais@gmail.com</h2>
         </div>
     </div>
-    <div class="card col-lg-3 ml-3 p-3">
+    <div class="card col-lg-3 ml-3 p-3" style="max-height: 500px; overflow-y: auto;">
         <div class="d-flex align-item-center justify-content-between mb-2">
             <span class="d-flex align-item-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -51,7 +62,7 @@
                         fill="rgba(38,127,201,1)" /></svg>
                 <h3 class="ml-2">Gold</h3 class="ml-2">
             </span>
-            <a href="#">Se désabonner</a>
+            <a href="#" data-toggle="modal" data-target="#modal-unsubscribe-licence">Se désabonner</a>
         </div>
         <h1>180 Jours</h1>
         <p class="mb-0 text-muted">
@@ -63,7 +74,7 @@
                 </div>
             </div>
         </p>
-        <a href="#" class="btn btn-outline-primary btn-block mb-3">
+        <a href="#" class="btn btn-outline-primary btn-block mb-3" data-toggle="modal" data-target="#modal-update-licence">
             Payer une nouvelle licence
         </a>
         <h3 class="mb-1">Historique</h3>
@@ -103,6 +114,59 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal-section">
+    <div class="modal modal-blur fade" id="modal-update-licence" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Payer une licence</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="input-icon">
+                            <span class="input-icon-addon ml-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 9V4H5v16h6.056c.328.417.724.785 1.18 1.085l1.39.915H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8v1h-7zm-2 2h9v5.949c0 .99-.501 1.916-1.336 2.465L16.5 21.498l-3.164-2.084A2.953 2.953 0 0 1 12 16.95V11zm2 5.949c0 .316.162.614.436.795l2.064 1.36 2.064-1.36a.954.954 0 0 0 .436-.795V13h-5v3.949z"/></svg>
+                            </span>
+                            <select id="type-update" class="auth-input type-update form-control py-2 px-5">
+                                <option selected> Choisisez un forfait</option>
+                                @foreach(App\Type::all() as $t)
+                                    <option data-duration="{{$t->duration}}" id="type{{$t->id}}" value="{{$t->id}}"> {{$t->title}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="update-subscription" class="btn btn-primary" style="width: 100%">Envoyer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-unsubscribe-package" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-title">Désabonement</div>
+                    <div>Si vous continuez, cette action sera irreversible.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link link-secondary mr-auto"
+                        data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, se désabonner</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -22,7 +22,7 @@
                         <div class="subheader">Ventes</div>
                         <div class="ml-auto lh-1">
                             <div class="dropdown">
-                                <a class="dropdown-toggle text-muted selected-sales" href="#" data-toggle="dropdown"
+                                <a href="#" class="dropdown-toggle text-muted selected-sales" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     Global
                                 </a>
