@@ -112,7 +112,13 @@
             </div>
 
             {{-- Footer --}}
-                @include("partials.admin.navigation")
+                @if (Auth::user()->is_admin == 1)
+                    @include("partials.employee.footer")
+                @elseif(Auth::user()->is_admin == 2)
+                    @include("partials.admin.footer")
+                @else
+                    @include("partials.superAdmin.footer")
+                @endif
             {{-- End Footer--}}
 
         </div>
