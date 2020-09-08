@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <script> 
+    <script>
         $('#clock').countdown('2020/10/10 12:34:56').on('update.countdown', function(event) {
             var format = '%H:%M:%S';
             if(event.offset.totalDays > 0) {
@@ -56,8 +56,8 @@
             });
     </script>
 
-    <div class="nav-item d-none d-md-flex mr-2">
-        <a href="#" class="nav-link px-0">
+    <div class="nav-item button-click-action d-none d-md-flex mr-2">
+        <a href="{{route('chat')}}" class="nav-link px-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path
