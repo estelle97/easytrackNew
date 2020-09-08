@@ -19,7 +19,7 @@
         <!-- Page title actions -->
         <div class="col-auto ml-auto d-print-none">
             <div class="d-flex align-items-center">
-                <a href={{route('easytrack.profile')}} class="d-flex align-items-center text-white mr-5">
+                <a href={{route('admin.profile')}} class="d-flex align-items-center text-white mr-5">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-2">
                         <path fill="none" d="M0 0h24v24H0z" />
                         <path
@@ -46,31 +46,27 @@
         style="height: 380px;">
         @include("partials.admin.settingsSidebar")
     </div>
-    <div class="card col-lg-5 ml-4 p-4">
+    <div class="view card col-lg-5 ml-4 p-4">
         <div class="row">
-            <div class="col-lg-auto ml-3">
+            <div class="ml-3">
+                <h3 class="text-gray">Email</h3>
+                <h2 class="button-click-action" contenteditable="true" onkeyup="if(event.keyCode!=13) updateCompany(this.textContent, 'email')"> {{Auth::user()->companies->first()->email}}</h2>
+            </div>
+            <div class="ml-3">
                 <h3 class="text-gray">Ville</h3>
-                <h2 class="mb-4 button-click-action" contenteditable="true">Yaoundé</h2>
+                <h2 class="mb-4 button-click-action" contenteditable="true" onkeyup="if(event.keyCode!=13) updateCompany(this.textContent, 'town')"> {{Auth::user()->companies->first()->town}}</h2>
             </div>
-            <div class="col-lg-auto ml-5">
+            <div class="ml-3">
                 <h3 class="text-gray">Quartier</h3>
-                <h2 class="mb-4 button-click-action" contenteditable="true">Elig-edzoa Pharmacie</h2>
+                <h2 class="mb-4 button-click-action" contenteditable="true" onkeyup="if(event.keyCode!=13) updateCompany(this.textContent, 'street')"> {{Auth::user()->companies->first()->street}} </h2>
             </div>
             <div class="ml-3">
                 <h3 class="text-gray">Téléphone N°1</h3>
-                <h2 class="mb-4 button-click-action" contenteditable="true">+237 223984456</h2>
-            </div>
-            <div class="ml-3">
-                <h3 class="text-gray">Téléphone N°1</h3>
-                <h2 class="mb-4 button-click-action" contenteditable="true">+237 90948839</h2>
+                <h2 class="mb-4 button-click-action" contenteditable="true" onkeyup="if(event.keyCode!=13) updateCompany(this.textContent, 'phone1')"> {{Auth::user()->companies->first()->phone1}} </h2>
             </div>
             <div class="ml-3">
                 <h3 class="text-gray">Téléphone N°2</h3>
-                <h2 class="mb-4 button-click-action" contenteditable="true">+237 90948839</h2>
-            </div>
-            <div class="ml-3">
-                <h3 class="text-gray">Email</h3>
-                <h2 class="button-click-action" contenteditable="true">lerelais@gmail.com</h2>
+                <h2 class="mb-4 button-click-action" contenteditable="true" onkeyup="if(event.keyCode!=13) updateCompany(this.textContent, 'phone2')"> {{Auth::user()->companies->first()->phone2}}</h2>
             </div>
         </div>
     </div>
@@ -82,17 +78,17 @@
                     <path
                         d="M11 2l7.298 2.28a1 1 0 0 1 .702.955V7h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1l-3.22.001c-.387.51-.857.96-1.4 1.33L11 22l-5.38-3.668A6 6 0 0 1 3 13.374V5.235a1 1 0 0 1 .702-.954L11 2zm0 2.094L5 5.97v7.404a4 4 0 0 0 1.558 3.169l.189.136L11 19.58 14.782 17H10a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h7V5.97l-6-1.876zM11 12v3h9v-3h-9zm0-2h9V9h-9v1z"
                         fill="rgba(38,127,201,1)" /></svg>
-                <h3 class="ml-2">Gold</h3 class="ml-2">
+                <h3 class="ml-2"> {{Auth::user()->companies->first()->types->last()->title}} </h3 class="ml-2">
             </span>
             <a href="#" data-toggle="modal" data-target="#modal-unsubscribe-licence">Se désabonner</a>
         </div>
-        <h1>180 Jours</h1>
+        <h1>{{Auth::user()->companies->first()->subscription()->remainingDays}} Jours</h1>
         <p class="mb-0 text-muted">
-            <span class="text-nowrap text-gray">18-05-2020 / 15-11-2020</span>
+            <span class="text-nowrap text-gray"> {{ date('M d, Y', strtotime(Auth::user()->companies->first()->types->last()->pivot->created_at))}} / {{ date('M d, Y', strtotime(Auth::user()->companies->first()->types->last()->pivot->end_date))}} </span>
             <div class="progress progress-sm mt-3">
-                <div class="progress-bar bg-blue" style="width: 35%" role="progressbar" aria-valuenow="75"
+                <div class="progress-bar bg-blue" style="width: {{Auth::user()->companies->first()->subscription()->percentage}}%" role="progressbar" aria-valuenow="75"
                     aria-valuemin="0" aria-valuemax="100">
-                    <span class="sr-only">75% Complete</span>
+                    <span class="sr-only">{{Auth::user()->companies->first()->subscription()->percentage}}% d'utilisation</span>
                 </div>
             </div>
         </p>
@@ -105,35 +101,18 @@
             <thead>
                 <tr>
                     <th>Abonnement</th>
-                    <th>Paiment</th>
+                    <th>Prix</th>
                     <th colspan="2">Date</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach (Auth::user()->companies->first()->types as $type)
+                    
+                @endforeach
                 <tr>
-                    <td>Gold</td>
-                    <td>500k FCFA</td>
-                    <td>18-05-2020</td>
-                </tr>
-                <tr>
-                    <td>Gold</td>
-                    <td>500k FCFA</td>
-                    <td>18-05-2020</td>
-                </tr>
-                <tr>
-                    <td>Gold</td>
-                    <td>500k FCFA</td>
-                    <td>18-05-2020</td>
-                </tr>
-                <tr>
-                    <td>Gold</td>
-                    <td>500k FCFA</td>
-                    <td>18-05-2020</td>
-                </tr>
-                <tr>
-                    <td>Gold</td>
-                    <td>500k FCFA</td>
-                    <td>18-05-2020</td>
+                    <td> {{$type->title}} </td>
+                    <td> {{$type->price}} FCFA</td>
+                    <td> {{date('M d, Y', strtotime($type->pivot->created_at))}} </td>
                 </tr>
             </tbody>
         </table>
@@ -204,6 +183,65 @@
 
 @section('scripts')
 
+    <script>
+
+        function updateCompany(value, field){
+            
+            var form_data = new FormData();
+            form_data.append(field, value);
+            form_data.append('value', value),
+            form_data.append("_token", '{{csrf_token()}}');
+            $.ajax({
+                url: '/admin/companies/update/'+field,
+                method: 'post',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                success: function(data){
+                   console.log(data);
+                }
+            });
+        }
+
+
+        $("#profile").click(function(){
+            $(".file").click();
+
+            $('input[type="file"]').change(function(e) {
+                console.log(e.target.files);
+                var fileName = e.target.files[0].name;
+                // $("#file").val(fileName);
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    // get loaded data and render thumbnail.
+                    pic = "<img src='"+e.target.result+"' class='img img-responsive' width='100px' height='100px' />";
+                    $("#profile").html(pic);
+                    // document.getElementById("preview").src = e.target.result;
+                };
+                // read the image file as a data URL.
+                reader.readAsDataURL(this.files[0]);
+                updateCompany(this.files[0], 'logo');
+
+            });
+        });
+
+        $(".settings").click(function(){
+            $(".settings").removeClass('active');
+            $(this).addClass('active');
+            page = $(this).attr('id');
+
+            $.ajax({
+                url: '/admin/settings/view/'+page,
+                method: 'get',
+                success: function(data){
+                    $(".view").fadeOut().html(data).fadeIn();
+                }
+            });
+        })
+
+    </script>
 
 @endsection
 

@@ -68,6 +68,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileEdit' , 'as' => 'admin.profile.edit']);
     Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
+
+    Route::post('admin/companies/update/{field}', 'Admin\SettingController@update');
+    Route::get('admin/settings/view/{page}', 'Admin\SettingController@showView');
     Route::get('admin/settings', 'Admin\SettingController@index')->name('admin.settings');
 
 

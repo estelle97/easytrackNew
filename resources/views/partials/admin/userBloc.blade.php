@@ -8,6 +8,10 @@
                     d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm3.536-12.95l1.414 1.414-4.95 4.95L10.586 12l4.95-4.95z"
                     fill="rgba(255,255,255,1)" /></svg>
         </a>
+        <div class="countdown">
+            Limited Time Only!
+            <span id="clock"></span>
+          </div>
         <div class="dropdown-menu notification-menu dropdown-menu-right dropdown-menu-card">
             <div class="card">
                 <div class="progress card-progress">
@@ -36,6 +40,22 @@
             </div>
         </div>
     </div>
+
+    <script> 
+        $('#clock').countdown('2020/10/10 12:34:56').on('update.countdown', function(event) {
+            var format = '%H:%M:%S';
+            if(event.offset.totalDays > 0) {
+                format = '%-d day%!d ' + format;
+            }
+            if(event.offset.weeks > 0) {
+                format = '%-w week%!w ' + format;
+            }
+            $(this).html(event.strftime(format));
+        }).on('finish.countdown', function(event) {
+                $(this).html('This offer has expired!').parent().addClass('disabled');
+            });
+    </script>
+
     <div class="nav-item d-none d-md-flex mr-2">
         <a href="#" class="nav-link px-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
