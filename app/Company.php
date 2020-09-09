@@ -36,7 +36,7 @@ class Company extends Model
         $total = 0;
         if($days){
             foreach ($this->sites as $site) {
-               foreach($site->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $pur){
+               foreach($site->purchases->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $pur){
                 $total += $pur->total($category_id);
                }
             }
@@ -56,7 +56,7 @@ class Company extends Model
 
         if($days){
             foreach ($this->sites as $site) {
-                foreach($site->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
+                foreach($site->sales->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
                  $total += $sale->total($category_id);
                 }
              }
