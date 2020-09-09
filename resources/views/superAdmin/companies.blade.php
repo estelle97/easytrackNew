@@ -100,7 +100,7 @@
                                     <div>
                                         <div class="d-flex mb-1 align-items-center lh-1">
                                             <div class="text-h5 font-weight-bolder m-0">
-                                                <span class="ml-auto text-h6 strong"> {{$com->subscription()->duration}} jr </span>
+                                                <span class="ml-auto text-h6 strong"> {{$com->subscription()->remainingDays}} jrs </span>
                                             </div>
                                         </div>
                                         <div class="progress progress-sm">

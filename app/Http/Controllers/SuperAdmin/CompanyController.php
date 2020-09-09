@@ -94,13 +94,19 @@ class CompanyController extends Controller
     }
 
     public function subscriptionUpdate(Request $request, Company $company){
+
         $type = Type::find($request->type);
         $remainingDays = $company->subscription()->remainingDays;
-        // dd($type->duration + $remainingDays);
-        // Gérer le cas où le forfait est déja expiré
-        $company->types()->attach($type->id, [
-            'end_date' => Carbon::now()->addDays(400)
-        ]);
+
+        if($remainingDays > 0){
+            $company->types()->attach($type->id, [
+                'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
+            ]);
+        } else {
+            $company->types()->attach($type->id, [
+                'end_date' => Carbon::now()->addDays($type->duration)
+            ]);
+        }
 
         return 'success';
     }
