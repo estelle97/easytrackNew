@@ -160,6 +160,17 @@
             }
         });
     </script>
+    <script src={{asset('template/assets/dist/libs/jquery/dist/jquery.countdown.min.js')}}></script>
+    <script> 
+        
+        $('#clock').countdown('{{Auth::user()->companies->first()->types->last()->pivot->end_date}}', function(event) {
+            $(this).html(event.strftime('%D Jour(s)'));
+        });
+
+        $('#clock-full').countdown('{{Auth::user()->companies->first()->types->last()->pivot->end_date}}', function(event) {
+            $(this).html(event.strftime('%D Jour(s) %H:%M:%S Restantes'));
+        });
+    </script>
     @yield('scripts')
 
 </body>
