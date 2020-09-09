@@ -115,8 +115,8 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body p-4 text-center">
-                            <div class="h1 m-0"> {{Auth::user()->employee->site->products->count()}} </div>
-                            <div class="text-muted">Produits</div>
+                            <div class="h1 m-0"> {{Auth::user()->employee->site->employees->count()}} </div>
+                            <div class="text-muted">employee</div>
                         </div>
                     </div>
                 </div>
@@ -151,19 +151,46 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (Auth::user()->actions as $action)
-                                <tr>
-                                    <td class="w-1">
-                                        <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
-                                    </td>
-                                    <td class="td-truncate">
-                                        <div class="text-truncate">
-                                            {{$action->action}}
-                                        </div>
-                                    </td>
-                                    <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
-                                </tr>
-                        @endforeach
+                            @if (Auth::user()->role->slug == 'manager')
+                                @foreach (Auth::user()->employee->site->actions as $action)
+                                    <tr>
+                                        <td class="w-1">
+                                            <a href={{(Auth::user()->id == $action->initiator->id) ? route('employee.profile') : route('employee.user.show', $action->initiator->id)}}>
+                                                @if ($action->initiator->photo)
+                                                    <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                                @else
+                                                    <span class="avatar"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$action->initiator->name}}')"> </span>
+                                                @endif
+                                            </a>
+                                        </td>
+                                        <td class="td-truncate">
+                                            <div class="text-truncate">
+                                                {{$action->action}}
+                                            </div>
+                                        </td>
+                                        <td class="text-nowrap text-muted"> {{date('j-m-y à H:i', strtotime($action->created_at))}} </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                @foreach (Auth::user()->actions as $action)
+                                    <tr>
+                                        <td class="w-1">
+                                            @if ($action->initiator->photo)
+                                                <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                            @else
+                                                <span class="avatar"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$action->initiator->name}}')"> </span>
+                                            @endif
+                                        </td>
+                                        <td class="td-truncate">
+                                            <div class="text-truncate">
+                                                {{$action->action}}
+                                            </div>
+                                        </td>
+                                        <td class="text-nowrap text-muted"> {{date('j-m-y à H:i', strtotime($action->created_at))}} </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                                
                         </tbody>
                     </table>
                 </div>

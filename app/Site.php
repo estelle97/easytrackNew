@@ -26,6 +26,10 @@ class Site extends Model
         return $this->belongsTo('App\Company');
     }
 
+    public function actions(){
+        return $this->hasMany('App\Action');
+    }
+
     public function employees(){
         return $this->hasMany('App\Employee');
     }
