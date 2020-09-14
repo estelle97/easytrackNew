@@ -485,7 +485,7 @@ class UserController extends Controller
                 
             }
             
-        } if($user->is_admin == 2) {
+        } else if($user->is_admin == 2) {
             $company = Company::where('user_id', $user->id)->first();
             $sites = Site::where('company_id', $company->id)->get();
             $contacts = [];
