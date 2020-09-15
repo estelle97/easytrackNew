@@ -86,14 +86,4 @@ class MessageController extends Controller
 
         return response()->json($response, 201);
     }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }
