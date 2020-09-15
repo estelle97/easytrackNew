@@ -62,6 +62,7 @@
                             <th class="exportable">Qté</th>
                             <th class="exportable">Site</th>
                             <th>Marque</th>
+                            <th>Vendu(s)</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -86,6 +87,9 @@
                                 <td id="product-brand{{Auth::user()->employee->site->id}}{{$product->id}}">
                                     {{$product->brand}}
                                 </td>
+                                <td>
+                                    {{$product->getTotalSales(Auth::user()->employee->site->id)}}
+                                 </td>
                                 <td class="text-right">
                                     <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{Auth::user()->employee->site->id}}{{$product->id}}">
                                         Modifier

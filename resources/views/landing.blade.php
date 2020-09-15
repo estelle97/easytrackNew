@@ -72,8 +72,25 @@
                     <!-- Button Block -->
                     <div class="col">
                         <div class="header-btns">
-                            <a href="{{route('login')}}" class="btn btn--transparent ">Mon compte</a>
-                            <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
+                            @if (Auth::check())
+                                @if (Auth::user()->is_admin == 1)
+                                    <a href="{{route('employee.profile')}}" class="btn btn--transparent "> Profile </a>
+                                    <a href="{{route('employee.dashboard')}}" class="btn btn--transparent"> Tableau de bord </a>
+                                @endif
+
+                                @if (Auth::user()->is_admin == 2)
+                                    <a href="{{route('admin.profile')}}" class="btn btn--transparent "> Profile </a>
+                                    <a href="{{route('admin.dashboard')}}" class="btn btn--transparent"> Tableau de bord </a>
+                                @endif
+
+                                @if (Auth::user()->is_admin == 3)
+                                    <a href="{{route('easytrack.profile')}}" class="btn btn--transparent "> Profile </a>
+                                    <a href="{{route('easytrack.dashboard')}}" class="btn btn--transparent"> Tableau de bord </a>
+                                @endif
+                            @else
+                                <a href="{{route('login')}}" class="btn btn--transparent "> Connexion </a>
+                                <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
+                            @endif
                         </div>
                     </div>
                 </div>

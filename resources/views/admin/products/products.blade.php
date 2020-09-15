@@ -50,6 +50,7 @@
                         <th class="exportable">Qté</th>
                         <th class="exportable">Site</th>
                         <th>Marque</th>
+                        <th>Vendu(s)</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -74,6 +75,9 @@
                             </td>
                             <td id="product-brand{{$site->id}}{{$product->id}}">
                                 {{$product->brand}}
+                            </td>
+                            <td>
+                               {{$product->getTotalSales($site->id)}}
                             </td>
                             <td class="text-right">
                                 <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{$site->id}}{{$product->id}}">
