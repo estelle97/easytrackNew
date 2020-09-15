@@ -88,7 +88,7 @@
                 <div class="text-muted font-weight-normal mt-0">Revenue</div>
                 <h3 class="h2 mt-2 mb-3 profits">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
-                    <span class="text-red d-inline-flex align-items-center lh-1">
+                    {{-- <span class="text-red d-inline-flex align-items-center lh-1">
                         -3.1% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -96,7 +96,7 @@
                             <polyline points="3 7 9 13 13 9 21 17"></polyline>
                             <polyline points="21 10 21 17 14 17"></polyline>
                         </svg>
-                    </span>
+                    </span> --}}
                     <span class="text-nowrap selected-period">30 Derniers jours</span>
                 </p>
             </div>
@@ -108,7 +108,7 @@
                 <div class="text-muted font-weight-normal mt-0">Ventes</div>
                 <h3 class="h2 mt-2 mb-3 sales">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
-                    <span class="text-green d-inline-flex align-items-center lh-1">
+                    {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                         5.2% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -116,7 +116,7 @@
                             <polyline points="3 17 9 11 13 15 21 7"></polyline>
                             <polyline points="14 7 21 7 21 14"></polyline>
                         </svg>
-                    </span>
+                    </span> --}}
                     <span class="text-nowrap selected-period">30 Derniers jours</span>
                 </p>
             </div>
@@ -128,7 +128,7 @@
                 <div class="text-muted font-weight-normal mt-0">Achats</div>
                 <h3 class="h2 mt-2 mb-3 purchases">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
-                    <span class="text-red d-inline-flex align-items-center lh-1">
+                    {{-- <span class="text-red d-inline-flex align-items-center lh-1">
                         -3.1% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -136,7 +136,7 @@
                             <polyline points="3 7 9 13 13 9 21 17"></polyline>
                             <polyline points="21 10 21 17 14 17"></polyline>
                         </svg>
-                    </span>
+                    </span> --}}
                     <span class="text-nowrap selected-period">30 Derniers jours</span>
                 </p>
             </div>

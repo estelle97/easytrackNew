@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Action;
 use App\Http\Controllers\Controller;
+use App\Notification;
 use App\Sale;
 use App\Site;
 use Illuminate\Http\Request;
@@ -146,6 +147,8 @@ class SaleController extends Controller
         Action::store('Sale', $sale->id, 'create',
             'Initiation de la commande client SO-'.$sale->code
         );
+        Notification::commandAlert($sale->site, $sale);
+        
         return "success";
     }
 
@@ -256,6 +259,14 @@ class SaleController extends Controller
                 $sale->site->products()->updateExistingPivot($prod->id, [
                     'qty' => $qty
                 ]);
+
+                if($qty <= $sale->site->products()->findOrFail($prod->id)->pivot->qty_alert){
+                    if($qty == 0){
+                        Notification::ProductAlert($sale->site, $prod, 'empty');
+                    } else {
+                        Notification::ProductAlert($sale->site, $prod);
+                    }
+                }
             }
             $sale->status = 2;
             $sale->save();
@@ -263,6 +274,7 @@ class SaleController extends Controller
             Action::store('Sale', $sale->id, 'validate',
                 'Validation de la commande client SO-'.$sale->code
             );
+            
             return response()->json([
                 'message' => 'sale validated susscessfully',
                 'validator' => $sale->validator->username,

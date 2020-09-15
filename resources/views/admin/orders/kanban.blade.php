@@ -37,8 +37,8 @@
                             </div>
                             <div class="column-body col-lg-12 mt-4">
 
-                                @foreach (Auth::user()->companies->first()->sites as $site)
-                                    @foreach ($site->sales->where('status',0) as $sale)
+                                @foreach (Auth::user()->companies->first()->sites->reverse() as $site)
+                                    @foreach ($site->sales->where('status',0)->reverse() as $sale)
                                     <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">
@@ -126,8 +126,8 @@
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Servi</h3>
                             </div>
                             <div class="column-body col-lg-12 mt-4">
-                                @foreach (Auth::user()->companies->first()->sites as $site)
-                                    @foreach ($site->sales->where('status',1) as $sale)
+                                @foreach (Auth::user()->companies->first()->sites->reverse() as $site)
+                                    @foreach ($site->sales->where('status',1)->reverse() as $sale)
                                         <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">
@@ -210,8 +210,8 @@
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Payé</h3>
                             </div>
                             <div class="column-body col-lg-12 mt-4">
-                                @foreach (Auth::user()->companies->first()->sites as $site)
-                                    @foreach ($site->sales->where('status',2) as $sale)
+                                @foreach (Auth::user()->companies->first()->sites->reverse() as $site)
+                                    @foreach ($site->sales->where('status',2)->reverse() as $sale)
                                         <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">

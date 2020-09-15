@@ -234,9 +234,9 @@
                         <div class="col-lg-12 mb-4">
                             <select class="form-select">
                                 <option value="" selected disabled>Selectionnez un utilisateur</option>
-                                <option value="1">Estelle Belinga</option>
-                                <option value="2">Steve Wiltek</option>
-                                <option value="3">Stephane Tsana</option>
+                                @foreach (App\Message::getRecipients() as $emp)
+                                    <option value={{$emp->user->id}}> {{$emp->user->name}} </option>  
+                                @endforeach
                             </select>
                           </div>
                         <div class="col-lg-12">
@@ -254,7 +254,6 @@
         </div>
     </div>
 @endsection
-
 @section('styles')
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
