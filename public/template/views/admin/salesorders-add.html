@@ -826,7 +826,7 @@
             if(products.includes(el.data('id'))){
                 updateQty(el.data('id'));
             } else{
-                $('.order-list').append(
+                $('.order-list').prepend(
                     '<tr id="product-'+el.data("id")+'">' +
                     '    <td>' +
                     '        <div class="product-image mt-3 mb-3"' +

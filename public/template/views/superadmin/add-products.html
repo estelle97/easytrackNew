@@ -664,7 +664,7 @@
 
         function addElement() {
             const productId = products.length + 1;
-            $('.order-list').append(
+            $('.order-list').prepend(
                 '<tr id="product-'+productId+'">' +
                 '    <td>' +
                 '    <input type="file" name="img[]" class="file" accept="image/*" hidden>' +

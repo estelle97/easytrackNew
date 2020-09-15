@@ -169,7 +169,7 @@
     function addElement(el) {
         if (!products.includes(el.data('id'))) {
             console.log(el.data());
-            $('.order-list').append(
+            $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +
