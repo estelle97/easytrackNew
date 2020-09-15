@@ -468,8 +468,11 @@ class UserController extends Controller
         $user = Auth::user();
 
         if($user->is_admin == 1) {
-            $employee = Employee::where('user_id', '=', $user->id)->first(); 
+            $employee = Employee::where('user_id', '=', $user->id)->first();
+            $site = Site::where('id', $employee->site_id)->first();
+            $company = Company::where('id', $site->company_id)->first();
             $employees = Employee::where('site_id', $employee->site_id)->where('user_id', '!=', $employee->user_id)->get();
+            /* array_push($employees, User::findOrFail($company->user_id)); */
             $contacts = [];
             foreach ($employees as $emp) {
                 $add = User::findOrFail($emp->user_id);
@@ -482,9 +485,19 @@ class UserController extends Controller
                 if(!in_array($user, $contacts)){
                     array_push($contacts, $add);
                 }
-                
             }
-            
+
+            $add = User::findOrFail($company->user_id);
+            $add->last_message = Message::where(function ($query) use ($add) {
+                $query->where('sender', Auth::user()->id)->where('receiver', $add->id);
+            })->orWhere(function ($query) use($add) {
+                $query->where('receiver', Auth::user()->id)->where('sender', $add->id);
+            })->orderBy('created_at', 'desc')->first();
+
+            if(!in_array($user, $contacts)){
+                array_push($contacts, $add);
+            }
+
         } else if($user->is_admin == 2) {
             $company = Company::where('user_id', $user->id)->first();
             $sites = Site::where('company_id', $company->id)->get();
