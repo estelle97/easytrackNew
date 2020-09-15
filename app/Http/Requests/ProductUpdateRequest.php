@@ -25,7 +25,7 @@ class ProductUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'photo' => 'image|mimes:png|max:1024'
+            'photo' => 'sometimes|image|mimes:png|max:1024'
         ];
     }
 

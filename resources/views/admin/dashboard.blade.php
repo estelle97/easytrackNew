@@ -15,20 +15,20 @@
 
     {{-- Content Body--}}
     <div class="row row-deck row-cards">
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-sm-6 col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="subheader">Ventes</div>
                         <div class="ml-auto lh-1">
                             <div class="dropdown">
-                                <a class="dropdown-toggle text-muted selected-sales" href="#" data-toggle="dropdown"
+                                <a href="#" class="dropdown-toggle text-muted selected-sales" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     Global
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getSales('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getSales(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getSales(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getSales(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getSales(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getSales(90, '3 derniers mois')">3 derniers mois</a>
@@ -45,7 +45,7 @@
         </div>
 
 
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-sm-6 col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -58,7 +58,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getPurchases('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getPurchases(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getPurchases(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getPurchases(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getPurchases(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getPurchases(90, '3 derniers mois')">3 derniers mois</a>
@@ -73,7 +73,7 @@
                 <div id="chart-commandes" class="chart-sm"></div>
             </div>
         </div>
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-sm-6 col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -86,7 +86,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getProfits('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getProfits(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getProfits(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getProfits(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getProfits(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getProfits(90, '3 derniers mois')">3 derniers mois</a>
@@ -101,42 +101,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-lg-3">
+        {{-- <div class="col-sm-6 col-lg-3">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="subheader"> Employés </div>
-                        {{-- <div class="ml-auto lh-1">
-                            <div class="dropdown">
-                                <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    7 derniers jours
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item active" href="#">7 derniers jours</a>
-                                    <a class="dropdown-item" href="#">30 derniers jours</a>
-                                    <a class="dropdown-item" href="#">3 derniers mois</a>
-                                </div>
-                            </div>
-                        </div> --}}
+                        
                     </div>
                     <div class="d-flex align-items-baseline">
-                        <div class="h1 mb-3 mr-2"> {{Auth::user()->companies->first()->totalEmployees()}} </div>
-                        {{-- <div class="mr-auto">
-                            <span class="text-green d-inline-flex align-items-center lh-1">
-                                4% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24"
-                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <polyline points="3 17 9 11 13 15 21 7" />
-                                    <polyline points="14 7 21 7 21 14" /></svg>
-                            </span>
-                        </div> --}}
+                        <div class="h1 mb-3 mr-2"> 15 </div>
+                        
                     </div>
                     <div id="chart-active-users" class="chart-sm"></div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-lg-6">
             <div class="row row-cards row-deck">
                 <div class="col-sm-12">
@@ -150,8 +129,8 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body p-4 text-center">
-                            <div class="h1 m-0"> {{Auth::user()->companies->first()->totalProducts()}} </div>
-                            <div class="text-muted">Produits</div>
+                            <div class="h1 m-0"> {{Auth::user()->companies->first()->totalEmployees()}} </div>
+                            <div class="text-muted"> Employé(s) </div>
                         </div>
                     </div>
                 </div>
@@ -159,7 +138,7 @@
                     <div class="card">
                         <div class="card-body p-4 text-center">
                             <div class="h1 m-0"> {{Auth::user()->companies->first()->totalCustomers()}} </div>
-                            <div class="text-muted">Clients</div>
+                            <div class="text-muted">Client(s)</div>
                         </div>
                     </div>
                 </div>
@@ -167,7 +146,7 @@
                     <div class="card">
                         <div class="card-body p-4 text-center">
                             <div class="h1 m-0"> {{Auth::user()->companies->first()->totalSuppliers()}} </div>
-                            <div class="text-muted">Fournisseurs</div>
+                            <div class="text-muted">Fournisseur(s)</div>
                         </div>
                     </div>
                 </div>
@@ -186,17 +165,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (App\Action::where('company_id', Auth::user()->companies->first()->id) as $action)
+                            @foreach (App\Action::all()->where('company_id', Auth::user()->companies->first()->id)->reverse() as $action)
                                 <tr>
                                     <td class="w-1">
-                                    <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                        <a href={{(Auth::user()->id == $action->initiator->id) ? route('admin.profile') : route('admin.user.show', $action->initiator->id)}}>
+                                            @if ($action->initiator->photo)
+                                                <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                            @else
+                                                <span class="avatar"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$action->initiator->name}}')"> </span>
+                                            @endif
+                                        </a>
                                     </td>
                                     <td class="td-truncate">
                                         <div class="text-truncate">
                                             {{$action->action}}
                                         </div>
                                     </td>
-                                    <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
+                                    <td class="text-nowrap text-muted"> {{date('j-m-y à H:i', strtotime($action->created_at))}} </td>
                                 </tr>
                             @endforeach
                         </tbody>

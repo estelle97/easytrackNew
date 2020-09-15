@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-    <div class="col-12 col-sm-12 col-md-4 col-lg-4 d-flex flex-row align-items-center">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 d-flex flex-row align-items-center">
         <div class="container-tight">
             <form class="card card-md auth-card pt-6 pb-5 px-3" action="" method="post">
                 <div class="card-body">

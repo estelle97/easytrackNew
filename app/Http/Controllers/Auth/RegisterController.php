@@ -45,19 +45,19 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        if (Auth::check() && Auth::user()->is_admin == 3)
-        {
-            $this->redirectTo = route('easytrack.dashboard');
-        } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        {
-            $this->redirectTo = route('admin.dashboard');
-        } else{
-            $this->redirectTo = route('employee.dashboard');
-        }
         $this->middleware('guest');
     }
 
     public function index(Request $request){
+        if (Auth::user() && Auth::user()->is_admin == 3){
+            return redirect()->route('easytrack.dashboard');
+        } elseif (Auth::user() && Auth::user()->is_admin == 2){
+            return redirect()->route('admin.dashboard');
+        }
+        elseif (Auth::user() && Auth::user()->is_admin == 1){
+            return redirect()->route('employee.dashboard');
+        }
+
         $types = \App\Type::all();
         return view('register', compact('types'));
     }
@@ -83,27 +83,7 @@ class RegisterController extends Controller
         ], $messages);
     }
 
-    public function store(Request $request){
-
-        // Validate and create admin
-        $validateUser =  $request->validate([
-            'username' => 'sometimes|sometimes|required',
-            'useraddress' => 'sometimes|required',
-            'userphone' => 'sometimes|required|min:9|max:9|unique:users,phone',
-            'useremail' => 'sometimes|required|email|unique:users,email',
-            'userusername' => 'sometimes|required|unique:users,username',
-            'userpassword' => 'sometimes|required|min:8',
-
-            'companyname' => 'sometimes|required|unique:companies,name',
-            'companyphone1' => 'sometimes|required|min:9|max:9|unique:companies,phone1',
-            'companyemail' => 'sometimes|required|email|unique:companies,email',
-
-            'sitename' => 'sometimes|required|unique:sites,name',
-            'sitephone1' => 'sometimes|required|min:9|max:9|unique:sites,phone1',
-            'siteemail' => 'sometimes|required|email|unique:sites,email',
-            'sitestreet' => 'sometimes|required',
-            'sitetown' => 'sometimes|required'
-        ]);
+    public function store(RegisterStoreRequest $request){
 
         // Remove password_confirmation field to user array
 
@@ -162,7 +142,7 @@ class RegisterController extends Controller
         // Attach snack with his type of subscription
         $type = \App\Type::findOrFail($request->type);
         $company->types()->attach($type->id,[
-            'end_date' => Carbon::now()->addMonth($type->duration),
+            'end_date' => Carbon::now()->addDays($type->duration),
         ]);
 
         return response()->json([

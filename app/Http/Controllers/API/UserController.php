@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Site;
 use App\Company;
 use App\Customer;
+use App\Http\Requests\RegisterStoreRequest;
 use App\Type;
 use App\User;
 use App\Employee;
@@ -35,27 +36,8 @@ class UserController extends Controller
      *
      * @return String message
      */
-    public function register(Request $request){
+    public function register(RegisterStoreRequest $request){
 
-        // Validate and create admin
-        $request->validate([
-            'username' => 'required',
-            'useraddress' => 'required',
-            'userphone' => 'required|min:9|max:9|unique:users,phone',
-            'useremail' => 'required|email|unique:users,email',
-            'userusername' => 'required|unique:users,username',
-            'userpassword' => 'required|min:8',
-
-            'companyname' => 'required|unique:companies,name',
-            'companyphone1' => 'required|min:9|max:9|unique:companies,phone1',
-            'companyemail' => 'required|email|unique:companies,email',
-
-            'sitename' => 'required|unique:sites,name',
-            'sitephone1' => 'required|min:9|max:9|unique:sites,phone1',
-            'siteemail' => 'required|email|unique:sites,email',
-            'sitestreet' => 'required',
-            'sitetown' => 'required'
-        ]);
 
         // Remove password_confirmation field to user array
 
@@ -110,7 +92,7 @@ class UserController extends Controller
         // Attach company with his type of subscription
         $type = Type::findOrFail($request->type);
         $company->types()->attach($type->id,[
-            'end_date' => Carbon::now()->addMonth($type->duration),
+            'end_date' => Carbon::now()->addDays($type->duration),
         ]);
 
         return response()->json([

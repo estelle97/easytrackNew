@@ -5,7 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,6 @@ class CustomerController extends Controller
     public function index()
     {
 
-        return view('superAdmin.customers');
+        return view('superAdmin.users');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
     <!-- Page title -->
     <div class="page-header text-white">
         <div class="row align-items-center">
@@ -59,13 +59,13 @@
             </div>
         </div>
     </div>
-            
+
 @endsection
-    
+
 
 
 @section('scripts')
-    
+
 <script src={{asset("template/assets/dist/libs/selectize/dist/js/standalone/selectize.min.js")}} ></script>
 
 <script>
@@ -75,7 +75,7 @@
     var sitesSelect = $("#sites").selectize({});
 
     // GLOBAL VARIABLES
-    
+
 
     let productCardList = [];
     let productCardOnClick = null;
@@ -95,7 +95,7 @@
         const productId = products.length + 1;
         var categories = '{!! $categories !!}';
         var units = '{!! $units !!}';
-        $('.order-list').append(
+        $('.order-list').prepend(
             '<tr id="product'+productId+'">' +
             '    <td>' +
             '    <input type="file" name="img[]" id="file'+productId+'" accept="image/*" hidden>' +
@@ -106,14 +106,14 @@
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="Nom du produit" id="name'+productId+'" data-name="Nom du produit">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Nom du produit" id="name'+productId+'" data-name="Nom du produit">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="1" min="0" id="brand'+productId+'" data-brand="1">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Marque du produit" min="0" id="brand'+productId+'" data-brand="1">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +
@@ -138,7 +138,7 @@
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="1" id="description'+productId+'" data-description="1">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Description du produit" id="description'+productId+'" data-description="1">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +
@@ -208,5 +208,5 @@
 @endsection
 
 @section('styles')
-    
+
 @endsection

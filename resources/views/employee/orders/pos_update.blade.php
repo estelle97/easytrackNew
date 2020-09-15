@@ -86,7 +86,7 @@
                                         <tr id="product-{{$prod->id}}">
                                                 <td>
                                                     <div class="product-image mt-3 mb-3"
-                                                        style="background-image: url({{asset('template/assets/static/products/beer-2.jpg')}})">
+                                                        style="background-image: url('{{asset($prod->photo)}}')">
                                                     </div>
                                                 </td>
                                                 <td style="vertical-align: middle;">
@@ -340,7 +340,7 @@
         if(products.includes(el.data('id'))){
             updateQty(el.data('id'));
         } else{
-            $('.order-list').append(
+            $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +

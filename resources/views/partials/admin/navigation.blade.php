@@ -20,13 +20,7 @@
                 <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
                     role="button" aria-expanded="false">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                            height="24" class="icon">
-                            <path fill="none" d="M0 0h24v24H0z" />
-                            <path
-                                d="M6.5 2h11a1 1 0 0 1 .8.4L21 6v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6l2.7-3.6a1 1 0 0 1 .8-.4zM19 8H5v12h14V8zm-.5-2L17 4H7L5.5 6h13zM9 10v2a3 3 0 0 0 6 0v-2h2v2a5 5 0 0 1-10 0v-2h2z"
-                                fill="rgba(255,255,255,0.8)" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 19V5.7a1 1 0 0 1 .658-.94l9.671-3.516a.5.5 0 0 1 .671.47v4.953l6.316 2.105a1 1 0 0 1 .684.949V19h2v2H1v-2h2zm2 0h7V3.855L5 6.401V19zm14 0v-8.558l-5-1.667V19h5z" fill="rgba(255,255,255, 0.8)"/></svg>
                     </span>
                     <span class="nav-link-title">
                         Sites
@@ -48,6 +42,30 @@
                             Fournisseurs
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" href="{{route('admin.sites')}}">
+                            Gérer les sites
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
+                    role="button" aria-expanded="false">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                            height="24" class="icon">
+                            <path fill="none" d="M0 0h24v24H0z" />
+                            <path
+                                d="M6.5 2h11a1 1 0 0 1 .8.4L21 6v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6l2.7-3.6a1 1 0 0 1 .8-.4zM19 8H5v12h14V8zm-.5-2L17 4H7L5.5 6h13zM9 10v2a3 3 0 0 0 6 0v-2h2v2a5 5 0 0 1-10 0v-2h2z"
+                                fill="rgba(255,255,255,0.8)" />
+                        </svg>
+                    </span>
+                    <span class="nav-link-title">
+                        Commandes
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
                     <li class="active">
                         <a class="dropdown-item" href="{{route('admin.sales.kanban')}}">
                             Commandes clients
@@ -56,11 +74,6 @@
                     <li>
                         <a class="dropdown-item" href="{{route('admin.purchases')}}">
                             Bons de commandes
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{route('admin.sites')}}">
-                            Gérer les sites
                         </a>
                     </li>
                 </ul>

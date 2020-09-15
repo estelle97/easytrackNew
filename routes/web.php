@@ -24,6 +24,7 @@ Route::get('/', function () {
 * Authentification
 */
 
+
 Route::get('login', [
     'as' => 'login',
     'uses' => 'Auth\LoginController@login'
@@ -67,7 +68,12 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileEdit' , 'as' => 'admin.profile.edit']);
     Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
+
+    Route::post('admin/companies/update/{field}', 'Admin\SettingController@update');
+    Route::get('admin/settings/view/{page}', 'Admin\SettingController@showView');
     Route::get('admin/settings', 'Admin\SettingController@index')->name('admin.settings');
+
+    Route::get('chat', 'ChatController@index')->name('chat');
 
 
     Route::get('admin/reports', 'Admin\ReportController@index')->name('admin.reports');
@@ -90,6 +96,11 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/roles/attachPermissionToUser', 'Admin\RoleController@attachPermissionToUser');
 
 
+    Route::get('easytrack/stats/towns', 'SuperAdmin\StatController@subscribersPerTown');
+    Route::get('easytrack/stats/packages/{months}', 'SuperAdmin\StatController@packages');
+    Route::get('easytrack/stats/companies/{months}', 'SuperAdmin\StatController@companies');
+    Route::get('easytrack/stats/profits/{months}', 'SuperAdmin\StatController@profits');
+    Route::get('easytrack/stats/users/{months}', 'SuperAdmin\StatController@users');
 
 
     Route::get('easytrack/dashboard', ['as'=> 'easytrack.dashboard','uses' => 'SuperAdmin\DashboardController@index']);
@@ -114,9 +125,17 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('easytrack/categories/{category}', 'SuperAdmin\CategoryController@update');
     Route::resource('easytrack/categories', 'SuperAdmin\CategoryController');
 
-    Route::get('easytrack/customers', 'SuperAdmin\CustomerController@index')->name('easytrack.customers');
-    Route::get('easytrack/packages', 'SuperAdmin\PackageController@index')->name('easytrack.packages');
+
+    Route::get("/easytrack/companies/update/{company}/state", 'SuperAdmin\CompanyController@updateState');
+    Route::post("/easytrack/companies/update/{company}", 'SuperAdmin\CompanyController@update');
+    Route::get("/easytrack/companies/subscription/update/{company}", 'SuperAdmin\CompanyController@subscriptionUpdate');
+    Route::post('easytrack/companies/store', 'SuperAdmin\CompanyController@store');
     Route::get('easytrack/companies', 'SuperAdmin\CompanyController@index')->name('easytrack.companies');
+    Route::get('easytrack/types', 'SuperAdmin\PackageController@index')->name('easytrack.types');
+    Route::post('easytrack/types', 'SuperAdmin\PackageController@store');
+    Route::post('easytrack/types/{type}/destroy', 'SuperAdmin\PackageController@destroy');
+    Route::post('easytrack/types/{type}', 'SuperAdmin\PackageController@update');
+    Route::get('easytrack/users', 'SuperAdmin\UserController@index')->name('easytrack.users');
 
 
 

@@ -9,8 +9,8 @@
                 </ul>
             </div>
             <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                Copyright © 2020
-                <a href="." class="link-secondary">Easytrak</a>.
+                Copyright © <span id="copyright"><script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span>
+                <a href="/" class="link-secondary">Easytrak</a>.
                 Tous droits réservés.
             </div>
         </div>

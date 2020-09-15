@@ -28,7 +28,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getSales('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getSales(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getSales(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getSales(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getSales(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getSales(90, '3 derniers mois')">3 derniers mois</a>
@@ -58,7 +58,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getPurchases('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getPurchases(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getPurchases(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getPurchases(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getPurchases(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getPurchases(90, '3 derniers mois')">3 derniers mois</a>
@@ -86,7 +86,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item active" onclick="getProfits('all'), 'Global'"> Global </a>
-                                    <a class="dropdown-item" onclick="getProfits(1, 'Aujourd\'huit')">Aujourd'huit</a>
+                                    <a class="dropdown-item" onclick="getProfits(1, 'Aujourd\'huit')">aujourd'hui</a>
                                     <a class="dropdown-item" onclick="getProfits(7, '7 derniers jours')">7 derniers jours</a>
                                     <a class="dropdown-item" onclick="getProfits(30, '30 derniers jours')">30 derniers jours</a>
                                     <a class="dropdown-item" onclick="getProfits(90, '3 derniers mois')">3 derniers mois</a>
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-lg-6">
             <div class="row row-cards row-deck">
                 <div class="col-sm-12">
@@ -115,8 +115,8 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body p-4 text-center">
-                            <div class="h1 m-0"> {{Auth::user()->employee->site->products->count()}} </div>
-                            <div class="text-muted">Produits</div>
+                            <div class="h1 m-0"> {{Auth::user()->employee->site->employees->count()}} </div>
+                            <div class="text-muted">employee</div>
                         </div>
                     </div>
                 </div>
@@ -151,19 +151,46 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (Auth::user()->actions as $action)
-                                <tr>
-                                    <td class="w-1">
-                                        <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
-                                    </td>
-                                    <td class="td-truncate">
-                                        <div class="text-truncate">
-                                            {{$action->action}}
-                                        </div>
-                                    </td>
-                                    <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
-                                </tr>
-                        @endforeach
+                            @if (Auth::user()->role->slug == 'manager')
+                                @foreach (Auth::user()->employee->site->actions as $action)
+                                    <tr>
+                                        <td class="w-1">
+                                            <a href={{(Auth::user()->id == $action->initiator->id) ? route('employee.profile') : route('employee.user.show', $action->initiator->id)}}>
+                                                @if ($action->initiator->photo)
+                                                    <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                                @else
+                                                    <span class="avatar"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$action->initiator->name}}')"> </span>
+                                                @endif
+                                            </a>
+                                        </td>
+                                        <td class="td-truncate">
+                                            <div class="text-truncate">
+                                                {{$action->action}}
+                                            </div>
+                                        </td>
+                                        <td class="text-nowrap text-muted"> {{date('j-m-y à H:i', strtotime($action->created_at))}} </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                @foreach (Auth::user()->actions as $action)
+                                    <tr>
+                                        <td class="w-1">
+                                            @if ($action->initiator->photo)
+                                                <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                            @else
+                                                <span class="avatar"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$action->initiator->name}}')"> </span>
+                                            @endif
+                                        </td>
+                                        <td class="td-truncate">
+                                            <div class="text-truncate">
+                                                {{$action->action}}
+                                            </div>
+                                        </td>
+                                        <td class="text-nowrap text-muted"> {{date('j-m-y à H:i', strtotime($action->created_at))}} </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                                
                         </tbody>
                     </table>
                 </div>
@@ -390,8 +417,8 @@
             })
         }
 
-        
-       // chart-active-users 
+
+       // chart-active-users
         // @formatter:off
         document.addEventListener("DOMContentLoaded", function () {
             window.ApexCharts && (new ApexCharts(document.getElementById('chart-active-users'), {
@@ -460,7 +487,7 @@
         // @formatter:on
 
     </script>
-    
+
     {{-- chart-development-activity --}}
     <script>
         // @formatter:off

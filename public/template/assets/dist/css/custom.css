@@ -241,3 +241,49 @@
     padding: 0.5rem 0.5rem !important;
 }
 
+.button-click-action {
+    cursor: pointer;
+}
+
+.settings-sidebar ul {
+    list-style: none;
+    padding-left: 0px !important;
+}
+
+.settings-sidebar li {
+    padding: 0.7rem 0rem;
+}
+
+.settings-sidebar li a {
+    display: flex;
+    -ms-flex: flex;
+    align-items: center;
+    font-size: 16px;
+    text-align: left;
+    color: #bdbdbd;
+    transition: all 0.3s;
+}
+.settings-sidebar li a:hover {
+    color: #206bc4 !important;
+}
+
+.settings-sidebar li a .icone-menu {
+    height: 24px;
+    width: 24px;
+    margin-right: 15px;
+    color: #bdbdbd;
+    transition: all 0.3s;
+}
+
+.settings-sidebar li a:hover icone-menu {
+    color: #206bc4 !important;
+}
+
+.settings-sidebar li .active {
+    color: #206bc4 !important;
+    background-color: rgba(32, 106, 196, 0.10);
+
+}
+.settings-sidebar .active .icone-menu {
+    color: #206bc4 !important;
+}

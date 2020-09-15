@@ -99,17 +99,21 @@
                         </thead>
                         <tbody>
                             @foreach ($user->actions->reverse() as $action)
-                                <tr>
-                                    <td class="w-1">
-                                    <span class="avatar"> <img src="{{asset($user->photo)}}" alt=""> </span>
-                                    </td>
-                                    <td class="td-truncate">
-                                        <div class="text-truncate">
-                                            {{$action->action}}
-                                        </div>
-                                    </td>
-                                    <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
-                                </tr>
+                                 <tr>
+                                <td class="w-1">
+                                    @if ($action->initiator->photo)
+                                        <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                    @else
+                                        <span class="avatar"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$action->initiator->name}}')"> </span>
+                                    @endif
+                                </td>
+                                <td class="td-truncate">
+                                    <div class="text-truncate">
+                                        {{$action->action}}
+                                    </div>
+                                </td>
+                                <td class="text-nowrap text-muted"> {{date('j-m-y à H:i', strtotime($action->created_at))}} </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>

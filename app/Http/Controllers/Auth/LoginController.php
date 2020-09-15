@@ -40,16 +40,7 @@ class LoginController extends Controller
      * @return void
      */
     public function __construct()
-    {
-        if (Auth::check() && Auth::user()->is_admin == 3)
-        {
-            $this->redirectTo = route('easytrack.dashboard');
-        } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        {
-            $this->redirectTo = route('admin.dashboard');
-        } else{
-            $this->redirectTo = route('employee.dashboard');
-        }
+    { 
         $this->middleware('guest')->except('logout');
     }
 
@@ -90,6 +81,14 @@ class LoginController extends Controller
     }
 
     public function login(){
+        if (Auth::user() && Auth::user()->is_admin == 3){
+            return redirect()->route('easytrack.dashboard');
+        } elseif (Auth::user() && Auth::user()->is_admin == 2){
+            return redirect()->route('admin.dashboard');
+        }
+        elseif (Auth::user() && Auth::user()->is_admin == 1){
+            return redirect()->route('employee.dashboard');
+        }
 
         return view('login');
     }
