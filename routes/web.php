@@ -73,9 +73,6 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/settings/view/{page}', 'Admin\SettingController@showView');
     Route::get('admin/settings', 'Admin\SettingController@index')->name('admin.settings');
 
-    Route::get('chat', 'ChatController@index')->name('chat');
-
-
     Route::get('admin/reports', 'Admin\ReportController@index')->name('admin.reports');
     Route::get('admin/reports/{site}/{period}', 'Admin\ReportController@showReports');
 
@@ -254,4 +251,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/profile/settings', ['uses' => 'Employee\DashboardController@profileSettings' , 'as' => 'employee.profile.settings']);
     Route::get('employee/dashboard', 'Employee\DashboardController@index')->name('employee.dashboard');
     Route::get('purchases', 'Employee\PurchaseController@index');
+
+    Route::get('chat', 'ChatController@index')->name('chat');
+    Route::get('agenda', 'AgendaController@index')->name('agenda');
 });
