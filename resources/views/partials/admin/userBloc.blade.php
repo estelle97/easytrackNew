@@ -8,7 +8,7 @@
                     d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm3.536-12.95l1.414 1.414-4.95 4.95L10.586 12l4.95-4.95z"
                     fill="rgba(255,255,255,1)" /></svg>
         </a>
-        
+
         <div class="dropdown-menu notification-menu dropdown-menu-right dropdown-menu-card">
             <div class="card">
                 <div class="progress card-progress">
@@ -24,7 +24,7 @@
                     <h3 class="h2 mt-2 mb-3" id="clock-full"> </h3>
                     <p class="mb-0 text-muted">
                         <span class="text-yellow d-inline-flex align-items-center lh-1">
-                            {{Auth::user()->companies->first()->subscription()->percentage}}% 
+                            {{Auth::user()->companies->first()->subscription()->percentage}}%
                         </span>
                         <span class="text-nowrap text-gray ml-6"> {{date('d-m-Y', strtotime(Auth::user()->companies->first()->types->last()->pivot->created_at))}} / {{date('d-m-Y', strtotime(Auth::user()->companies->first()->types->last()->pivot->end_date))}}</span>
                     </p>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="nav-item d-none d-md-flex mr-2">
-        <a href="#" class="nav-link px-0">
+        <a href="{{route('chat')}}" class="nav-link px-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path
