@@ -27,6 +27,9 @@
 .card-actions .dropdown-toggle:after  {
     display: none !important;
 }
+.agenda-card .dropdown-toggle:after  {
+    display: none !important;
+}
 
 /* BUTTONS */
 .btn-gradient:hover {
