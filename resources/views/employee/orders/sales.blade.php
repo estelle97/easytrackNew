@@ -10,11 +10,7 @@
                     Commandes clients
                 </h2>
             </div>
-            <div class="col-auto">
-                <div class="text-white text-h5 mt-2">
-                    1-10 of 30
-                </div>
-            </div>
+            
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
@@ -77,7 +73,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                    <select class="btn btn-sm {{($sale->status == 0) ? 'btn-info' : (($sale->status == 1) ? 'btn-warning' : 'btn-success')}} {{(Auth::user()->role->slug == 'server') ? 'disabled' : ''}} " name="status" id="status" onchange="updateStatus({{$sale->id}}, this.value)">
+                                    <select class="btn btn-sm {{($sale->status == 0) ? 'btn-info' : (($sale->status == 1) ? 'btn-warning' : 'btn-success')}}" {{(Auth::user()->role->slug == 'server') ? 'disabled' : ''}}  name="status" id="status" onchange="updateStatus({{$sale->id}}, this.value)">
                                             <option {{($sale->status == 0) ? 'selected' : ''}} value="0"> Commandé </option>
                                             <option {{($sale->status == 1) ? 'selected' : ''}} value="1"> Servi </option>
                                             <option {{($sale->status == 2) ? 'selected' : ''}} value="2">  Payé </option>
@@ -106,12 +102,14 @@
                                             <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                                 data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href={{route('employee.sales.show', $sale->id)}}>
-                                                        Afficher
-                                                    </a>
-                                                <a class="dropdown-item" href={{route('employee.sales.edit', $sale->id)}}>
-                                                    Modifier
+                                                <a class="dropdown-item" href={{route('employee.sales.show', $sale->id)}}>
+                                                    Afficher
                                                 </a>
+                                                @if (Auth::user()->id == $sale->initiator_id)
+                                                    <a class="dropdown-item" href={{route('employee.sales.edit', $sale->id)}}>
+                                                        Modifier
+                                                    </a>
+                                                @endif
                                                 @if(Auth::user()->role->slug == 'manager' || Auth::user()->role->slug == 'cashier')
                                                     @if ($sale->validator_id == null)
                                                         <a class="dropdown-item" onclick="validateSale({{$sale->id}})">

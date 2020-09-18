@@ -98,7 +98,7 @@
 
 <script>
     // INITIALIZATION
-    init();
+    init('{{Auth::user()->companies->first()->sites->first()->id}}');
     // AUTOCOMPLETE
     var categoriesSelect = $("#categories").selectize({});
 
@@ -251,10 +251,10 @@
         })
     }
 
-    function init(){
+    function init(site){
 
         $.ajax({
-            url: '/admin/products/init',
+            url: '/admin/products/init/'+site,
             method: 'get',
             success: function(data){
                 $("#customers").html(data.customers);

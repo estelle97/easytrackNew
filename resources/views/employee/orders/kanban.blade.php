@@ -38,7 +38,7 @@
                             <div class="column-body col-lg-12 mt-4">
 
                                 
-                                    @foreach (Auth::user()->employee->site->sales->where('status',0) as $sale)
+                                    @foreach (Auth::user()->employee->site->sales->where('status',0)->reverse() as $sale)
                                     <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">
@@ -127,7 +127,7 @@
                             </div>
                             <div class="column-body col-lg-12 mt-4">
                                 
-                                    @foreach (Auth::user()->employee->site->sales->where('status',1) as $sale)
+                                    @foreach (Auth::user()->employee->site->sales->where('status',1)->reverse() as $sale)
                                         <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">
@@ -211,7 +211,7 @@
                             </div>
                             <div class="column-body col-lg-12 mt-4">
                                 
-                                    @foreach (Auth::user()->employee->site->sales->where('status',2) as $sale)
+                                    @foreach (Auth::user()->employee->site->sales->where('status',2)->reverse()->take(10) as $sale)
                                         <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">

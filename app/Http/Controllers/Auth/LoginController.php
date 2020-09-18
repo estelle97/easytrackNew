@@ -112,13 +112,33 @@ class LoginController extends Controller
             return redirect()->back();
         }
 
-        if (Auth::check() && Auth::user()->is_admin == 3)
-        {
+
+        if (Auth::check() && Auth::user()->is_admin == 3){
             return redirect()->route('easytrack.dashboard');
-        } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        {
+        } elseif (Auth::check() && Auth::user()->is_admin == 2){
+            $remainingDays = Carbon::now()->diffInDays(Auth::user()->companies->first()->types->last()->pivot->end_date);
+            if($remainingDays <= 0){
+                Auth::user()->companies->first()->types->last()->pivot->is_active = 0;
+                Auth::user()->companies->first()->types->last()->pivot->timestamps = null;
+                Auth::user()->companies->first()->types->last()->pivot->save();
+                Auth::logout();
+                flashy()->error("Votre abonnement est terminé! Veuillez contacter l'administrateur");
+
+                return redirect()->route('login');
+            }
+
             return redirect()->route('admin.dashboard');
         } else{
+            $remainingDays = Carbon::now()->diffInDays(Auth::user()->employee->site->company->types->last()->pivot->end_date);
+            if($remainingDays <= 0){
+                Auth::user()->employee->site->company->types->last()->pivot->is_active = 0;
+                Auth::user()->employee->site->company->types->last()->pivot->timestamps = null;
+                Auth::user()->employee->site->company->types->last()->pivot->save();
+                Auth::logout();
+                flashy()->error('Votre entreprise a été désactivée! Veuillez contacter l\'administrateur');
+
+                return redirect()->route('login');
+            }
             return redirect()->route('employee.dashboard');
         }
     }

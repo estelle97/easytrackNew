@@ -171,7 +171,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
     Route::post('admin/products/{product}', 'Admin\ProductController@update');
     Route::post('admin/products', 'Admin\ProductController@store');
-    Route::get('admin/products/init', 'Admin\ProductController@getAllProducts');
+    Route::get('admin/products/init/{site}', 'Admin\ProductController@getAllProducts');
     Route::get('admin/products/add', 'Admin\ProductController@create')->name('admin.products.create');
     Route::post('admin/products/store/many', 'Admin\ProductController@storeManyProducts');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
@@ -231,7 +231,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/{site}/users', 'Employee\SiteController@users')->name('employee.site.employees');
     Route::get('employee/sites', 'Employee\SiteController@index')->name('employee.sites');
     Route::post('employee/products/{product}', 'Employee\ProductController@update');
-    Route::get('employee/products/init', 'Employee\ProductController@getAllProducts');
+    Route::get('employee/products/init/{site}', 'Employee\ProductController@getAllProducts');
     Route::get('employee/products/add', 'Employee\ProductController@create')->name('employee.products.create');
     Route::post('employee/products/store/many', 'Employee\ProductController@storeManyProducts');
     Route::post('employee/products', 'Employee\ProductController@store');
