@@ -116,7 +116,7 @@ class LoginController extends Controller
         if (Auth::check() && Auth::user()->is_admin == 3){
             return redirect()->route('easytrack.dashboard');
         } elseif (Auth::check() && Auth::user()->is_admin == 2){
-            $remainingDays = Carbon::now()->diffInDays(Auth::user()->companies->first()->types->last()->pivot->end_date);
+            $remainingDays = Auth::user()->companies->first()->subscription()->remainingDays;
             if($remainingDays <= 0){
                 Auth::user()->companies->first()->types->last()->pivot->is_active = 0;
                 Auth::user()->companies->first()->types->last()->pivot->timestamps = null;
@@ -129,7 +129,7 @@ class LoginController extends Controller
 
             return redirect()->route('admin.dashboard');
         } else{
-            $remainingDays = Carbon::now()->diffInDays(Auth::user()->employee->site->company->types->last()->pivot->end_date);
+            $remainingDays = Auth::user()->employee->site->company->subscription()->remainingDays;
             if($remainingDays <= 0){
                 Auth::user()->employee->site->company->types->last()->pivot->is_active = 0;
                 Auth::user()->employee->site->company->types->last()->pivot->timestamps = null;
