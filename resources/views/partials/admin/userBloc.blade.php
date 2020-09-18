@@ -8,7 +8,7 @@
                     d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm3.536-12.95l1.414 1.414-4.95 4.95L10.586 12l4.95-4.95z"
                     fill="rgba(255,255,255,1)" /></svg>
         </a>
-        
+
         <div class="dropdown-menu notification-menu dropdown-menu-right dropdown-menu-card">
             <div class="card">
                 <div class="progress card-progress">
@@ -24,7 +24,7 @@
                     <h3 class="h2 mt-2 mb-3" id="clock-full"> </h3>
                     <p class="mb-0 text-muted">
                         <span class="text-yellow d-inline-flex align-items-center lh-1">
-                            {{Auth::user()->companies->first()->subscription()->percentage}}% 
+                            {{Auth::user()->companies->first()->subscription()->percentage}}%
                         </span>
                         <span class="text-nowrap text-gray ml-6"> {{date('d-m-Y', strtotime(Auth::user()->companies->first()->types->last()->pivot->created_at))}} / {{date('d-m-Y', strtotime(Auth::user()->companies->first()->types->last()->pivot->end_date))}}</span>
                     </p>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="nav-item d-none d-md-flex mr-2">
-        <a href="#" class="nav-link px-0">
+        <a href="{{route('chat')}}" class="nav-link px-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path
@@ -107,6 +107,10 @@
                         d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
                 </svg>
                 Mon Profile
+            </a>
+            <a class="dropdown-item" href="{{route('agenda')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm3 8H4v8h16v-8zm-5-6H9v2H7V5H4v4h16V5h-3v2h-2V5zm-9 8h2v2H6v-2zm5 0h2v2h-2v-2zm5 0h2v2h-2v-2z"/></svg>
+                Agenda
             </a>
             <a class="dropdown-item" href="{{route('admin.settings')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 1l9.5 5.5v11L12 23l-9.5-5.5v-11L12 1zm0 2.311L4.5 7.653v8.694l7.5 4.342 7.5-4.342V7.653L12 3.311zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
