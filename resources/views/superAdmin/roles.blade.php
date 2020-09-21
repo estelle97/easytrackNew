@@ -119,7 +119,7 @@
                                         <label class="form-label">Permission</label>
                                         <select name="roleUpdate" id="select-permission-update{{$role->id}}" class="form-select">
                                             @foreach(App\Permission::orderBy('slug')->get() as $newPerm)
-                                        <option id="edit-perm-option{{$role->id}}-{{$newPerm->id}}" value="{{$newPerm->id}}"  {{$newPerm->roles->contains($role->id) ? 'disabled' : ''}} > {{$newPerm->name}} </option>
+                                                <option id="edit-perm-option{{$role->id}}-{{$newPerm->id}}" value="{{$newPerm->id}}"  {{$newPerm->roles->contains($role->id) ? 'disabled' : ''}}> {{$newPerm->name}} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -154,7 +154,6 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
-
                                             </tbody>
                                         </table>
                                     </div>

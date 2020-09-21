@@ -91,6 +91,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Purchase', 'initiator_id');
     }
 
+    public function teams(){
+        return $this->belongsToMany('App\Team');
+    }
+
     public function totalSales($days = null){
         $total = 0;
         if($days){

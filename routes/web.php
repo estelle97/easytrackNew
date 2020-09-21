@@ -251,7 +251,15 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/profile/settings', ['uses' => 'Employee\DashboardController@profileSettings' , 'as' => 'employee.profile.settings']);
     Route::get('employee/dashboard', 'Employee\DashboardController@index')->name('employee.dashboard');
     Route::get('purchases', 'Employee\PurchaseController@index');
+    Route::get('employee/teams', 'Employee\AgendaController@teams')->name('employee.team');
+
 
     Route::get('chat', 'ChatController@index')->name('chat');
-    Route::get('agenda', 'AgendaController@index')->name('agenda');
+
+
+    Route::get('admin/teams', 'Admin\AgendaController@teams')->name('admin.team');
+    Route::post('admin/agenda/add', 'Admin\AgendaController@addTeam');
+    Route::post('admin/agenda/attachUserToTeam/{team}', 'Admin\AgendaController@attachUserToTeam');
+    Route::post('admin/agenda/detachUserToTeam/{team}', 'Admin\AgendaController@detachUserToTeam');
+    Route::post("/admin/agenda/team/{team}/destroy", 'Admin\AgendaController@destroyTeam');
 });
