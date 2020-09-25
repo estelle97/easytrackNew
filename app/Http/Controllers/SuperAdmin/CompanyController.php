@@ -95,7 +95,7 @@ class CompanyController extends Controller
 
     public function subscriptionUpdate(Request $request, Company $company){
 
-        $verif = null;
+        // $verif = null;
         $type = Type::find($request->type);
         $remainingDays = $company->subscription()->remainingDays;
 
@@ -103,24 +103,24 @@ class CompanyController extends Controller
             $company->types()->attach($type->id, [
                 'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
             ]);
-            
-            $verif = $company->types->last();
+
+            // $verif = $company->types->last();
         } else {
             $company->types()->attach($type->id, [
                 'end_date' => Carbon::now()->addDays($type->duration)
             ]);
 
-            $verif = $company->types->last();
+            // $verif = $company->types->last();
         }
 
-        $test = [
-            'type' => $type->title,
-            'remainingDays' => $remainingDays,
-            'company' =>  $company->name,
-            'verif' => $verif,
-        ];
-
-        return $test;
+        // $test = [
+        //     'type' => $type->title,
+        //     'remainingDays' => $remainingDays,
+        //     'company' =>  $company->name,
+        //     'verif' => $verif,
+        // ];
+        flashy()->success("L'abonnement a été mis à jour avec succès!");
+        return 'success';
     }
 
     public function update(Request $request, Company $company){

@@ -123,6 +123,7 @@ class RegisterController extends Controller
                 "message" => "Operation success!",
             ], 200);
         }
+        
         DB::transaction(function () use($user, $company, $site){
             $user->save();
                 $company->user_id = $user->id;
