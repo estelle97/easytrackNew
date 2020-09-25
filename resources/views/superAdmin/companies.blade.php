@@ -119,7 +119,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
 
                                             <a class="dropdown-item" data-toggle="modal" data-target="#modal-edit-licence{{$com->id}}">
-                                                Mettre à jour la licene
+                                                Mettre à jour la licence
                                             </a>
                                             <a class="dropdown-item" data-toggle="modal" data-target="#modal-edit-company{{$com->id}}">
                                                 Modifier companie
@@ -405,7 +405,7 @@
 
                                 <div class="register-step-4">
                                     <h4 class="mb-5 text-center text-muted">
-                                        Sélectionez la license pour votre entreprose
+                                        Sélectionez la licence pour votre entreprose
                                     </h4>
                                     <div class="mb-4">
                                         <div class="input-icon">
