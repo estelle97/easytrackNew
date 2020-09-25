@@ -45,14 +45,13 @@ class Notification extends Model
 
     public static function commandAlert(Site $site, Sale $sale){ 
         
-        (Auth::user()->is_admin == 2) ? $action =  'admin.kanban' : $action = 'employee.kanban';
         $user = Auth::user();
         return static::create([
             'company_id' => $site->company->id,
             'site_id' => $site->id,
             'type' => 'commandAlert',
             'text' => "$user->name a pris la commande SO-$sale->code du client ".$sale->customer->name,
-            'action' => $action
+            'action' => 'kanban'
         ]);
     }
 }

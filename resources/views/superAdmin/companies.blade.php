@@ -634,7 +634,7 @@
                 duration: $('#type-update-days'+company).val()
             },
             success: function(){
-                location.reload();
+                // location.reload();
             }
         });
     }
