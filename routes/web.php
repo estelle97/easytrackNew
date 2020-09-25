@@ -262,4 +262,5 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/agenda/attachUserToTeam/{team}', 'Admin\AgendaController@attachUserToTeam');
     Route::post('admin/agenda/detachUserToTeam/{team}', 'Admin\AgendaController@detachUserToTeam');
     Route::post("/admin/agenda/team/{team}/destroy", 'Admin\AgendaController@destroyTeam');
+    Route::get('notifications', 'NotificationController@index')->name('notifications');
 });
