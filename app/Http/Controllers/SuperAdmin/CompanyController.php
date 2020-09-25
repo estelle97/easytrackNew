@@ -95,23 +95,28 @@ class CompanyController extends Controller
 
     public function subscriptionUpdate(Request $request, Company $company){
 
+        $verif = null;
         $type = Type::find($request->type);
         $remainingDays = $company->subscription()->remainingDays;
 
-        // if($remainingDays > 0){
-        //     $company->types()->attach($type->id, [
-        //         'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
-        //     ]);
-        // } else {
-        //     $company->types()->attach($type->id, [
-        //         'end_date' => Carbon::now()->addDays($type->duration)
-        //     ]);
-        // 
+        if($remainingDays > 0){
+            $company->types()->attach($type->id, [
+                'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
+            ]);
+            $verif = $remainingDays + $type->duration;
+        } else {
+            $company->types()->attach($type->id, [
+                'end_date' => Carbon::now()->addDays($type->duration)
+            ]);
+
+            $verif = $type->duration;
+        }
 
         $test = [
             'type' => $type->title,
             'remainingDays' => $remainingDays,
             'company' =>  $company->name,
+            'verif' => $verif,
         ];
 
         return $test;
