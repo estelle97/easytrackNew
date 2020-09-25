@@ -103,13 +103,14 @@ class CompanyController extends Controller
             $company->types()->attach($type->id, [
                 'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
             ]);
-            $verif = $remainingDays + $type->duration;
+            
+            $verif = $company->types->last();
         } else {
             $company->types()->attach($type->id, [
                 'end_date' => Carbon::now()->addDays($type->duration)
             ]);
 
-            $verif = $type->duration;
+            $verif = $company->types->last();
         }
 
         $test = [
