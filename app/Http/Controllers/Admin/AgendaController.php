@@ -9,16 +9,16 @@ use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
-    
+
      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function teams()
+    public function index()
     {
 
-        return view('admin.teams');
+        return view('admin.agenda');
     }
 
     public function addTeam(Request $request){
@@ -30,7 +30,7 @@ class AgendaController extends Controller
                 'start' => $request->start,
                 'end' => $request->end
            ]);
-    
+
            foreach ($request->employees as $key => $user_id) {
                 if(!$team->users->contains($user_id)){
                     $team->users()->attach($user_id);
@@ -45,7 +45,7 @@ class AgendaController extends Controller
     }
 
     public function attachUserToTeam(Request $request, Team $team){
-        
+
         if(!$team->users->contains($request->user_id)){
             $team->users()->attach($request->user_id);
 
@@ -57,7 +57,7 @@ class AgendaController extends Controller
 
 
     public function detachUserToTeam(Request $request, Team $team){
-        
+
         if($team->users->contains($request->user_id)){
             $team->users()->detach($request->user_id);
 

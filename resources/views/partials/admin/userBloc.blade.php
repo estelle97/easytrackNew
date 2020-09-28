@@ -63,7 +63,7 @@
                         <a href="{{route('notifications')}}">Voir plus</a>
                     </div>
                 </div>
-                
+
                 @foreach (App\Notification::where('company_id', Auth::user()->companies->first()->id)->where('type', 'packageAlert')->take(5)->get()->reverse() as $not)
                     <div class="card-body">
                         <div class="notification-card d-flex align-items-center">
@@ -111,9 +111,9 @@
                 </svg>
                 Mon Profile
             </a>
-            <a class="dropdown-item" href="{{route('admin.team')}}">
+            <a class="dropdown-item" href="{{route('admin.agenda')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm3 8H4v8h16v-8zm-5-6H9v2H7V5H4v4h16V5h-3v2h-2V5zm-9 8h2v2H6v-2zm5 0h2v2h-2v-2zm5 0h2v2h-2v-2z"/></svg>
-                Equipes
+                Agenda
             </a>
             <a class="dropdown-item" href="{{route('admin.settings')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 1l9.5 5.5v11L12 23l-9.5-5.5v-11L12 1zm0 2.311L4.5 7.653v8.694l7.5 4.342 7.5-4.342V7.653L12 3.311zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
