@@ -106,11 +106,11 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="subheader"> Employés </div>
-                        
+
                     </div>
                     <div class="d-flex align-items-baseline">
                         <div class="h1 mb-3 mr-2"> 15 </div>
-                        
+
                     </div>
                     <div id="chart-active-users" class="chart-sm"></div>
                 </div>
@@ -153,7 +153,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card">
+            <div class="card" style="max-height: 445px;">
                 <div id="chart-development-activity" class="mt-4"></div>
                 <div class="table-responsive">
                     <table class="table card-table table-vcenter">
