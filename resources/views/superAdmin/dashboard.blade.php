@@ -129,65 +129,14 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-4">
+    <div class="col-sm-12 col-lg-5">
         <div class="card">
-            <div id="chart-development-activity" class="mt-4"></div>
-            <div class="table-responsive">
-                <table class="table card-table table-vcenter">
-                    <thead>
-                        <tr>
-                            <th>Utilisateur</th>
-                            <th>Action</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="w-1">
-                                <span class="avatar">PR</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-muted">17 Juin 2020</td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span class="avatar">DW</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-muted">17 Juin 2020</td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span class="avatar">IU</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-muted">17 Juin 2020</td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span class="avatar">LA</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-muted">17 Juin 2020</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card-body">
+                <div class="d-flex mb-2">
+                    <div class="subheader">Abonements par ville<br>sur la plateforme</div>
+                </div>
+
+                <div id="chart-subscriptions-peer-city" class="p-4"></div>
             </div>
         </div>
     </div>
@@ -292,21 +241,7 @@
             </div> --}}
         </div>
     </div>
-    <div class="col-sm-12 col-lg-3">
-        <div>
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex mb-2">
-                            <div class="subheader">Abonements par ville<br>sur la plateforme</div>
-                        </div>
 
-                        <div id="chart-subscriptions-peer-city"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>
 {{-- end Content Body--}}
@@ -329,7 +264,7 @@
                         chart: {
                             type: "donut",
                             fontFamily: 'inherit',
-                            height: 240,
+                            height: 330,
                             sparkline: {
                                 enabled: true
                             },

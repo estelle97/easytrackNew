@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
 <div class="container-xl">
     <!-- Page title -->
     <div class="page-header text-white">
@@ -269,7 +269,7 @@
     function injectCardList(itemList) {
         $.each(itemList, function (key, item) {
             $('.card-deck').append(
-                '<div class="col-md-3 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
+                '<div class="col-md-1 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
                 '    <img class="w-50" src="'+item.photo+'" alt="Card image cap">' +
                 '    <div class="card-body text-center">' +
                 '    <h5 class="card-title">'+item.name+'</h5>' +
@@ -409,7 +409,7 @@
             addElement(element);
         });
     }
-   
+
 
     function order() {
         var token = '{{@csrf_token()}}';
@@ -454,7 +454,7 @@
             method: 'get',
             data: {
                 site_id: site
-                
+
             },
             success: function(data){
                 $("#customers").html(data.customers);

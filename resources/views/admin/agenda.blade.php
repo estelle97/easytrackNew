@@ -6,21 +6,21 @@
     <div class="row align-items-center">
         <div class="col-auto">
             <h2 class="page-title">
-                Equipes de travail
+                Mon Agenda
             </h2>
             <span class="order-global-date text-white h4 mt-2 text-capitalize"></span>
         </div>
         <!-- Page title actions -->
         <div class="col-auto ml-auto d-print-none">
             <div class="d-flex align-items-center">
-                {{-- <span class="dropdown ml-5 button-click-action">
+                <span class="dropdown ml-5 button-click-action">
                     <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path
                                 d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
                                 fill="rgba(255,255,255,1)" /></svg>
-                        <span class="h2 selected-site align-middle" data-site="all"> Tous les sites </span>
+                        <span class="h2 selected-site align-middle ml-2" data-site="all"> Tous les sites </span>
                     </div>
 
                     <div class="dropdown-menu dropdown-menu-right mt-3">
@@ -33,15 +33,15 @@
                         </a>
                         @endforeach
                     </div>
-                </span> --}}
+                </span>
             </div>
         </div>
     </div>
 </div>
 <div class="row row-deck row-cards">
     <div class="col-lg-12">
-        <div class="card p-4" style="height: 700px; max-height: 700px; overflow-x: hidden;">
-            
+        <div class="card p-4" style="height: 550px; max-height: 700px; overflow-x: hidden;">
+
             @foreach (Auth::user()->companies->first()->sites as $site)
                 <div class="row">
                     @for ($i = 1; $i <= 7; $i++)
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     @endfor
-                </div> 
+                </div>
             @endforeach
         </div>
     </div>
@@ -216,12 +216,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="team-user-add{{$site->id}}-{{$i}}">
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-        
+
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -296,7 +296,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nom complet</th>
-                                                <th> Action </th>
+                                                <th class='text-right'> Action </th>
                                             </tr>
                                         </thead>
                                         <tbody id="team-edit{{$team->id}}">
@@ -388,7 +388,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     @endforeach
 
 
@@ -418,7 +418,7 @@
                                                 user+
                                             "</td>"+
                                             "<td class='text-right'>"+
-                                                "<a class='mt-1 text-blue' onclick='removeUserToTeam("+user_id+")'>"+
+                                                "<a class='mt-1 text-blue button-click-action' onclick='removeUserToTeam("+user_id+")'>"+
                                                     "Supprimer"+
                                                 "</a>"+
                                             "</td></tr>"
@@ -477,7 +477,7 @@
                                                 user+
                                             "</td>"+
                                             "<td class='text-right'>"+
-                                                "<a class='mt-1 text-blue' onclick='detachUserToTeam("+team_id+","+user_id+")'>"+
+                                                "<a class='mt-1 text-blue button-click-action' onclick='detachUserToTeam("+team_id+","+user_id+")'>"+
                                                     "Supprimer"+
                                                 "</a>"+
                                             "</td></tr>"
