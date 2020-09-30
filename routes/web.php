@@ -257,6 +257,9 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('chat', 'ChatController@index')->name('chat');
 
 
+    Route::post('admin/notifications/last', 'Admin\NotificationController@getNotifications');
+
+
     Route::get('admin/teams', 'Admin\AgendaController@teams')->name('admin.team');
     Route::post('admin/agenda/add', 'Admin\AgendaController@addTeam');
     Route::post('admin/agenda/attachUserToTeam/{team}', 'Admin\AgendaController@attachUserToTeam');

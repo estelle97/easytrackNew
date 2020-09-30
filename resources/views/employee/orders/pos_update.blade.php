@@ -208,7 +208,7 @@
                     </div>
                     <div class="col-md-12 mb-4">
                         <label class="form-label"> Etat </label>
-                        <select name="role" id="status" class="form-select">
+                        <select name="role" id="status" {{(Auth::user()->role->slug == 'server') ? 'disabled' : ''}} class="form-select">
                             <option {{($sale->status == 0) ? 'selected' : ''}} value="0"> Commandé </option>
                             <option {{($sale->status == 1) ? 'selected' : ''}} value="1">   Servi   </option>
                             <option {{($sale->status == 2) ? 'selected' : ''}} value="2">   Payé   </option>

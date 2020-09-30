@@ -171,6 +171,26 @@
             $('#clock-full').countdown('{{Auth::user()->companies->first()->types->last()->pivot->end_date}}', function(event) {
                 $(this).html(event.strftime('%D Jour(s) %H:%M:%S Restantes'));
             });
+
+
+            function showNotifications(){
+
+                var token = '{{@csrf_token()}}';
+                $.ajax({
+                    url: '/admin/notifications/last',
+                    method: 'post',
+                    data: {
+                        _token: token,
+                    },
+                    success: function(data){
+                        $('#notifications').html(data);
+                    }
+                });
+
+                setTimeout(showNotifications,300000);
+            }
+
+            showNotifications();
         </script>
     @endif
     @yield('scripts')
