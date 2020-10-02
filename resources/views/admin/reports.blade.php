@@ -142,7 +142,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-8" style="max-height: 300px;">
+    <div class="col-sm-12 col-lg-8" style="max-height: 340px;">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Ventes par catégorie</h4>
@@ -158,139 +158,6 @@
                         </tr>
                     </thead>
                     <tbody class='salesPerCategory'>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-lg-4">
-        <div class="row row-cards">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body p-2 text-center">
-                        <div class="text-right text-red">
-                            <span class="text-red d-inline-flex align-items-center lh-1"></span>
-                        </div>
-                        <div class="h1 m-0 categories">20</div>
-                        <div class="text-muted mb-4">Catégorie(s)</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body p-2 text-center">
-                    <div class="text-right text-green">
-                      <span class="text-green d-inline-flex align-items-center lh-1">
-                        6% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg>
-                      </span>
-                    </div>
-                    <div class="h1 m-0">20</div>
-                    <div class="text-muted mb-4">Employé(s)</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body p-2 text-center">
-                        <div class="text-right text-red">
-                            <span class="text-red d-inline-flex align-items-center lh-1">
-                                -2% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <polyline points="3 7 9 13 13 9 21 17"></polyline>
-                                    <polyline points="21 10 21 17 14 17"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="h1 m-0">40</div>
-                        <div class="text-muted mb-4">Produit(s) ventdu(s)</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body p-2 text-center">
-                        <div class="text-right text-green">
-                            <span class="text-green d-inline-flex align-items-center lh-1">
-                                6% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <polyline points="3 17 9 11 13 15 21 7"></polyline>
-                                    <polyline points="14 7 21 7 21 14"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="h1 m-0">40</div>
-                        <div class="text-muted mb-4">Produit(s) acheté(s)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-sm-12 col-lg-5">
-        <div class="row row-cards">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body p-2 text-center">
-                        <div class="text-right text-green">
-                            <span class="text-green d-inline-flex align-items-center lh-1">
-                                6% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <polyline points="3 17 9 11 13 15 21 7"></polyline>
-                                    <polyline points="14 7 21 7 21 14"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="h1 m-0">80%</div>
-                        <div class="text-muted mb-4">Pourcentage moyen de ventes</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body p-2 text-center">
-                        <div class="text-right text-green">
-                            <span class="text-green d-inline-flex align-items-center lh-1">
-                                6% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <polyline points="3 17 9 11 13 15 21 7"></polyline>
-                                    <polyline points="14 7 21 7 21 14"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="h1 m-0">80%</div>
-                        <div class="text-muted mb-4">Pourcentage moyen d'achats</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-sm-12 col-lg-7" style="max-height: 300px;">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Achat par catégorie</h4>
-            </div>
-            <div class="table-responsive">
-                <table class="table card-table table-vcenter">
-                    <thead>
-                        <tr>
-                            <th>Catégorie</th>
-                            <th>Articles achetés</th>
-                            <th>Cout</th>
-                            <th colspan="2">Pourcentage</th>
-                        </tr>
-                    </thead>
-                    <tbody class="purchasesPerCategory">
 
                     </tbody>
                 </table>
@@ -318,6 +185,7 @@
             </div>
         </div>
     </div>
+
     <div class="col-sm-12 col-lg-5" style="max-height: 240px;">
         <div class="card">
             <div class="card-header">
@@ -338,6 +206,31 @@
             </div>
         </div>
     </div>
+
+    <div class="col-sm-12 col-lg-7" style="max-height: 340px;">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Achat par catégorie</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter">
+                    <thead>
+                        <tr>
+                            <th>Catégorie</th>
+                            <th>Articles achetés</th>
+                            <th>Cout</th>
+                            <th colspan="2">Pourcentage</th>
+                        </tr>
+                    </thead>
+                    <tbody class="purchasesPerCategory">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
 
 </div>
 

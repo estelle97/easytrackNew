@@ -46,8 +46,8 @@
         <div class="table-responsive">
             <table class="table card-table table-vcenter">
               <tbody>
-                <tr>
-                    <td class="w-1">
+                <tr class="notification-line">
+                    <td class="w-1 notification-line-icon">
                       <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
                               class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                               stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -65,8 +65,8 @@
                     </td>
                     <td class="text-nowrap text-muted">il y a 5min</td>
                 </tr>
-                <tr>
-                    <td class="w-1">
+                <tr class="notification-line">
+                    <td class="w-1 notification-line-icon">
                       <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
                               class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                               stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -84,8 +84,8 @@
                     </td>
                     <td class="text-nowrap text-muted">il y a 5min</td>
                 </tr>
-                <tr>
-                    <td class="w-1">
+                <tr class="notification-line">
+                    <td class="w-1 notification-line-icon">
                       <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
                               class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                               stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -103,8 +103,8 @@
                     </td>
                     <td class="text-nowrap text-muted">il y a 5min</td>
                 </tr>
-                <tr>
-                    <td class="w-1">
+                <tr class="notification-line">
+                    <td class="w-1 notification-line-icon">
                       <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
                               class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                               stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -122,8 +122,8 @@
                     </td>
                     <td class="text-nowrap text-muted">il y a 5min</td>
                 </tr>
-                <tr>
-                    <td class="w-1">
+                <tr class="notification-line">
+                    <td class="w-1 notification-line-icon">
                       <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
                               class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                               stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -141,8 +141,8 @@
                     </td>
                     <td class="text-nowrap text-muted">il y a 5min</td>
                 </tr>
-                <tr>
-                    <td class="w-1">
+                <tr class="notification-line">
+                    <td class="w-1 notification-line-icon">
                       <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
                               class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                               stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

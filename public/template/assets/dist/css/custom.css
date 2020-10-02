@@ -78,6 +78,20 @@
 }
 
 
+/* NOTIFICATIONS */
+.notification-line {
+    border-bottom: 1px solid rgba(0,0,0, 0.05) !important;
+}
+
+.card-table tbody tr.notification-line {
+    padding: 1rem 1rem 1rem 0rem !important;
+}
+
+.card-table tr td.notification-line-icon {
+    padding: 1rem 1rem 1rem 0rem !important;
+}
+
+
 /* FORM */
 .auth-page .auth-card {
     -webkit-box-shadow: 0px 2px 20px -5px rgba(0,0,0,0.1);
