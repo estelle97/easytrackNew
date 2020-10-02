@@ -72,32 +72,37 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    @if(Auth::user()->role->slug != 'server')
-                        <li>
-                            <a class="dropdown-item" href={{route('employee.purchases')}}>
-                                Commande fournisseur
-                            </a>
-                        </li>
-                    @endif
-                    <li class="active">
+                    @if(Auth::user()->role->slug == 'server')
+                    <li>
                         <a class="dropdown-item" href={{route('employee.sales.pos')}}>
                             Enregistrer commande client
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a class="dropdown-item" href={{route('employee.sales.all')}}>
-                            Afficher commandes clients
+                           Toutes les commandes clients
                         </a>
                     </li>
+                    @endif
+
+                    @if(Auth::user()->role->slug != 'server')
+                        <li>
+                            <a class="dropdown-item" href={{route('employee.purchases')}}>
+                                Bons de commandes
+                            </a>
+                        </li>
+                    @endif
 
                     @if(Auth::user()->role->slug == 'cashier' || Auth::user()->role->slug == 'manager')
-                        <li class="active">
+                        <li>
                             <a class="dropdown-item" href={{route('employee.sales.kanban')}}>
-                                Kanban Board
+                                Commandes clients
                             </a>
                         </li>
                     @endif
                 </ul>
+            </li>
+
 
             @if(Auth::user()->role->slug == 'manager')
                 <li class="nav-item">
