@@ -24,6 +24,7 @@ Route::get('/', function () {
 * Authentification
 */
 
+
 Route::get('login', [
     'as' => 'login',
     'uses' => 'Auth\LoginController@login'
@@ -67,8 +68,10 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileEdit' , 'as' => 'admin.profile.edit']);
     Route::post('admin/profile/edit', ['uses' => 'Admin\DashboardController@profileUpdate' , 'as' => 'admin.profile.update']);
     Route::get('admin/profile/settings', ['uses' => 'Admin\DashboardController@profileSettings' , 'as' => 'admin.profile.settings']);
-    Route::get('admin/settings', 'Admin\SettingController@index')->name('admin.settings');
 
+    Route::post('admin/companies/update/{field}', 'Admin\SettingController@update');
+    Route::get('admin/settings/view/{page}', 'Admin\SettingController@showView');
+    Route::get('admin/settings', 'Admin\SettingController@index')->name('admin.settings');
 
     Route::get('admin/reports', 'Admin\ReportController@index')->name('admin.reports');
     Route::get('admin/reports/{site}/{period}', 'Admin\ReportController@showReports');
@@ -168,7 +171,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
     Route::post('admin/products/{product}', 'Admin\ProductController@update');
     Route::post('admin/products', 'Admin\ProductController@store');
-    Route::get('admin/products/init', 'Admin\ProductController@getAllProducts');
+    Route::get('admin/products/init/{site}', 'Admin\ProductController@getAllProducts');
     Route::get('admin/products/add', 'Admin\ProductController@create')->name('admin.products.create');
     Route::post('admin/products/store/many', 'Admin\ProductController@storeManyProducts');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
@@ -228,7 +231,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/{site}/users', 'Employee\SiteController@users')->name('employee.site.employees');
     Route::get('employee/sites', 'Employee\SiteController@index')->name('employee.sites');
     Route::post('employee/products/{product}', 'Employee\ProductController@update');
-    Route::get('employee/products/init', 'Employee\ProductController@getAllProducts');
+    Route::get('employee/products/init/{site}', 'Employee\ProductController@getAllProducts');
     Route::get('employee/products/add', 'Employee\ProductController@create')->name('employee.products.create');
     Route::post('employee/products/store/many', 'Employee\ProductController@storeManyProducts');
     Route::post('employee/products', 'Employee\ProductController@store');
@@ -248,4 +251,19 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/profile/settings', ['uses' => 'Employee\DashboardController@profileSettings' , 'as' => 'employee.profile.settings']);
     Route::get('employee/dashboard', 'Employee\DashboardController@index')->name('employee.dashboard');
     Route::get('purchases', 'Employee\PurchaseController@index');
+    Route::get('employee/teams', 'Employee\AgendaController@teams')->name('employee.team');
+
+
+    Route::get('chat', 'ChatController@index')->name('chat');
+
+
+    Route::post('admin/notifications/last', 'Admin\NotificationController@getNotifications');
+
+
+    Route::get('admin/teams', 'Admin\AgendaController@teams')->name('admin.team');
+    Route::post('admin/agenda/add', 'Admin\AgendaController@addTeam');
+    Route::post('admin/agenda/attachUserToTeam/{team}', 'Admin\AgendaController@attachUserToTeam');
+    Route::post('admin/agenda/detachUserToTeam/{team}', 'Admin\AgendaController@detachUserToTeam');
+    Route::post("/admin/agenda/team/{team}/destroy", 'Admin\AgendaController@destroyTeam');
+    Route::get('notifications', 'NotificationController@index')->name('notifications');
 });

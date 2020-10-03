@@ -45,19 +45,19 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        if (Auth::check() && Auth::user()->is_admin == 3)
-        {
-            $this->redirectTo = route('easytrack.dashboard');
-        } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        {
-            $this->redirectTo = route('admin.dashboard');
-        } else{
-            $this->redirectTo = route('employee.dashboard');
-        }
         $this->middleware('guest');
     }
 
     public function index(Request $request){
+        if (Auth::user() && Auth::user()->is_admin == 3){
+            return redirect()->route('easytrack.dashboard');
+        } elseif (Auth::user() && Auth::user()->is_admin == 2){
+            return redirect()->route('admin.dashboard');
+        }
+        elseif (Auth::user() && Auth::user()->is_admin == 1){
+            return redirect()->route('employee.dashboard');
+        }
+
         $types = \App\Type::all();
         return view('register', compact('types'));
     }
@@ -123,6 +123,7 @@ class RegisterController extends Controller
                 "message" => "Operation success!",
             ], 200);
         }
+        
         DB::transaction(function () use($user, $company, $site){
             $user->save();
                 $company->user_id = $user->id;

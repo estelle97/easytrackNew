@@ -7,14 +7,14 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    <a href="./salesorders-kanban-board.html" class="mr-2">
+                    <a href="/easytrack/products" class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path
                                 d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z"
                                 fill="rgba(255,255,255,1)" /></svg>
                     </a>
-                    Ajouter des produits
+                    Liste des produits
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -95,7 +95,7 @@
         const productId = products.length + 1;
         var categories = '{!! $categories !!}';
         var units = '{!! $units !!}';
-        $('.order-list').append(
+        $('.order-list').prepend(
             '<tr id="product'+productId+'">' +
             '    <td>' +
             '    <input type="file" name="img[]" id="file'+productId+'" accept="image/*" hidden>' +
@@ -106,14 +106,14 @@
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="Nom du produit" id="name'+productId+'" data-name="Nom du produit">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Nom du produit" id="name'+productId+'" data-name="Nom du produit">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="1" min="0" id="brand'+productId+'" data-brand="1">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Marque du produit" min="0" id="brand'+productId+'" data-brand="1">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +
@@ -138,7 +138,7 @@
             '    <td style="vertical-align: middle;">' +
             '        <div class="product-input">' +
             '            <div class="product-input">' +
-            '                <input type="text" class="form-control p-0 text-left border-0" value="1" id="description'+productId+'" data-description="1">' +
+            '                <input type="text" class="form-control p-0 text-left border-0" placeholder="Description du produit" id="description'+productId+'" data-description="1">' +
             '            </div>' +
             '        </div>' +
             '    </td>' +

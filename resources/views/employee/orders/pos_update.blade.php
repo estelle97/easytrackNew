@@ -86,7 +86,7 @@
                                         <tr id="product-{{$prod->id}}">
                                                 <td>
                                                     <div class="product-image mt-3 mb-3"
-                                                        style="background-image: url({{asset('template/assets/static/products/beer-2.jpg')}})">
+                                                        style="background-image: url('{{asset($prod->photo)}}')">
                                                     </div>
                                                 </td>
                                                 <td style="vertical-align: middle;">
@@ -208,7 +208,7 @@
                     </div>
                     <div class="col-md-12 mb-4">
                         <label class="form-label"> Etat </label>
-                        <select name="role" id="status" class="form-select">
+                        <select name="role" id="status" {{(Auth::user()->role->slug == 'server') ? 'disabled' : ''}} class="form-select">
                             <option {{($sale->status == 0) ? 'selected' : ''}} value="0"> Commandé </option>
                             <option {{($sale->status == 1) ? 'selected' : ''}} value="1">   Servi   </option>
                             <option {{($sale->status == 2) ? 'selected' : ''}} value="2">   Payé   </option>
@@ -340,7 +340,7 @@
         if(products.includes(el.data('id'))){
             updateQty(el.data('id'));
         } else{
-            $('.order-list').append(
+            $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +

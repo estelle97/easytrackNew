@@ -38,7 +38,7 @@
             <div class="d-flex align-items-center mt-auto">
                 <div class="ml-2">
                     <a href="#" class="text-body"> {{Auth::user()->name}} </a>
-                    <small class="d-block text-muted">Online</small>
+                    <small class="d-block text-muted">En ligne</small>
                 </div>
             </div>
         </div>
@@ -97,14 +97,18 @@
                         @foreach (Auth::user()->actions->reverse() as $action)
                             <tr>
                                 <td class="w-1">
-                                <span class="avatar"> <img src="{{asset(Auth::user()->photo)}}" alt=""> </span>
+                                    @if ($action->initiator->photo)
+                                        <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
+                                    @else
+                                        <span class="avatar"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$action->initiator->name}}')"> </span>
+                                    @endif
                                 </td>
                                 <td class="td-truncate">
                                     <div class="text-truncate">
                                         {{$action->action}}
                                     </div>
                                 </td>
-                                <td class="text-nowrap text-muted"> {{$action->createdt_a}} </td>
+                                <td class="text-nowrap text-muted"> {{date('j-m-y à H:i', strtotime($action->created_at))}} </td>
                             </tr>
                         @endforeach
                     </tbody>

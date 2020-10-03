@@ -112,7 +112,13 @@
             </div>
 
             {{-- Footer --}}
-                @include("partials.admin.navigation")
+                @if (Auth::user()->is_admin == 1)
+                    @include("partials.employee.footer")
+                @elseif(Auth::user()->is_admin == 2)
+                    @include("partials.admin.footer")
+                @else
+                    @include("partials.superAdmin.footer")
+                @endif
             {{-- End Footer--}}
 
         </div>
@@ -154,6 +160,39 @@
             }
         });
     </script>
+    @if (Auth::user()->is_admin == 2)
+        <script src={{asset('template/assets/dist/libs/jquery/dist/jquery.countdown.min.js')}}></script>
+        <script> 
+            
+            $('#clock').countdown('{{Auth::user()->companies->first()->types->last()->pivot->end_date}}', function(event) {
+                $(this).html(event.strftime('%D Jour(s)'));
+            });
+
+            $('#clock-full').countdown('{{Auth::user()->companies->first()->types->last()->pivot->end_date}}', function(event) {
+                $(this).html(event.strftime('%D Jour(s) %H:%M:%S Restantes'));
+            });
+
+
+            function showNotifications(){
+
+                var token = '{{@csrf_token()}}';
+                $.ajax({
+                    url: '/admin/notifications/last',
+                    method: 'post',
+                    data: {
+                        _token: token,
+                    },
+                    success: function(data){
+                        $('#notifications').html(data);
+                    }
+                });
+
+                setTimeout(showNotifications,300000);
+            }
+
+            showNotifications();
+        </script>
+    @endif
     @yield('scripts')
 
 </body>

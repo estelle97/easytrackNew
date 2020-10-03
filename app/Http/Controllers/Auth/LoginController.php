@@ -40,16 +40,7 @@ class LoginController extends Controller
      * @return void
      */
     public function __construct()
-    {
-        if (Auth::check() && Auth::user()->is_admin == 3)
-        {
-            $this->redirectTo = route('easytrack.dashboard');
-        } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        {
-            $this->redirectTo = route('admin.dashboard');
-        } else{
-            $this->redirectTo = route('employee.dashboard');
-        }
+    { 
         $this->middleware('guest')->except('logout');
     }
 
@@ -90,6 +81,14 @@ class LoginController extends Controller
     }
 
     public function login(){
+        if (Auth::user() && Auth::user()->is_admin == 3){
+            return redirect()->route('easytrack.dashboard');
+        } elseif (Auth::user() && Auth::user()->is_admin == 2){
+            return redirect()->route('admin.dashboard');
+        }
+        elseif (Auth::user() && Auth::user()->is_admin == 1){
+            return redirect()->route('employee.dashboard');
+        }
 
         return view('login');
     }
@@ -113,13 +112,33 @@ class LoginController extends Controller
             return redirect()->back();
         }
 
-        if (Auth::check() && Auth::user()->is_admin == 3)
-        {
+
+        if (Auth::check() && Auth::user()->is_admin == 3){
             return redirect()->route('easytrack.dashboard');
-        } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        {
+        } elseif (Auth::check() && Auth::user()->is_admin == 2){
+            $remainingDays = Auth::user()->companies->first()->subscription()->remainingDays;
+            if($remainingDays <= 0){
+                Auth::user()->companies->first()->types->last()->pivot->is_active = 0;
+                Auth::user()->companies->first()->types->last()->pivot->timestamps = null;
+                Auth::user()->companies->first()->types->last()->pivot->save();
+                Auth::logout();
+                flashy()->error("Votre abonnement est terminé! Veuillez contacter l'administrateur");
+
+                return redirect()->route('login');
+            }
+
             return redirect()->route('admin.dashboard');
         } else{
+            $remainingDays = Auth::user()->employee->site->company->subscription()->remainingDays;
+            if($remainingDays <= 0){
+                Auth::user()->employee->site->company->types->last()->pivot->is_active = 0;
+                Auth::user()->employee->site->company->types->last()->pivot->timestamps = null;
+                Auth::user()->employee->site->company->types->last()->pivot->save();
+                Auth::logout();
+                flashy()->error('Votre entreprise a été désactivée! Veuillez contacter l\'administrateur');
+
+                return redirect()->route('login');
+            }
             return redirect()->route('employee.dashboard');
         }
     }

@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
 <!-- Page title -->
 <div class="page-header text-white">
     <div class="row align-items-center">
@@ -98,7 +98,7 @@
 
 <script>
     // INITIALIZATION
-    init();
+    init('{{Auth::user()->companies->first()->sites->first()->id}}');
     // AUTOCOMPLETE
     var categoriesSelect = $("#categories").selectize({});
 
@@ -112,7 +112,7 @@
     function injectCardList(itemList) {
         $.each(itemList, function (key, item) {
             $('.card-deck').append(
-                '<div class="col-md-3 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-qty-alert="'+item.qty_alert+'" data-price="'+item.price+'" data-cost="'+item.cost+'" value="'+item.id+'">' +
+                '<div class="col-md-1 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-qty-alert="'+item.qty_alert+'" data-price="'+item.price+'" data-cost="'+item.cost+'" value="'+item.id+'">' +
                 '    <img class="w-50" src="'+item.photo+'" alt="Card image cap">' +
                 '    <div class="card-body text-center">' +
                 '    <h5 class="card-title">'+item.name+'</h5>' +
@@ -169,7 +169,7 @@
     function addElement(el) {
         if (!products.includes(el.data('id'))) {
             console.log(el.data());
-            $('.order-list').append(
+            $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +
@@ -251,10 +251,10 @@
         })
     }
 
-    function init(){
+    function init(site){
 
         $.ajax({
-            url: '/admin/products/init',
+            url: '/admin/products/init/'+site,
             method: 'get',
             success: function(data){
                 $("#customers").html(data.customers);
@@ -273,5 +273,5 @@
 
 
 @section('styles')
-    
+
 @endsection

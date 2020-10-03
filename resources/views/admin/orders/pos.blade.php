@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
 <div class="container-xl">
     <!-- Page title -->
     <div class="page-header text-white">
@@ -24,11 +24,7 @@
         <div class="col-lg-8" style="max-height: 700px;">
             <div class="card">
                 <div class="order-box">
-                    <div class="order-details-box">
-                        <div class="order-main-info"><span>Commande #</span><strong>KHD8374</strong></div>
-                        <div class="order-sub-info"><span>Créer le</span><strong class="order-sub-info-date">January 14th, 2019</strong>
-                        </div>
-                    </div>
+
                     <div class="order-controls mb-4">
                         <form class="form-inline">
                             <div class="form-group mb-3">
@@ -43,7 +39,7 @@
                             <div class="form-group mb-3">
                                 <label for=""> Client </label>
                                 <select id="customers" class="form-select">
-                                   
+
                                 </select>
                             </div>
                         </form>
@@ -102,9 +98,9 @@
                                     <label class="form-label">Moyen de paiement</label>
                                     <div
                                         class="form-selectgroup form-selectgroup-boxes d-flex flex-row">
+
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="cash"
-                                                class="form-selectgroup-input" checked>
+                                            <input type="radio" name="paying_method" value="cash" class="paying_method form-selectgroup-input" checked>
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
                                                 <div class="mr-3">
@@ -117,9 +113,9 @@
                                                 </div>
                                             </div>
                                         </label>
+
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="om"
-                                                class="form-selectgroup-input">
+                                            <input type="radio" name="paying_method" value="om" class="paying_method form-selectgroup-input">
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
                                                 <div class="mr-3">
@@ -132,9 +128,10 @@
                                                 </div>
                                             </div>
                                         </label>
+
                                         <label class="form-selectgroup-item flex-fill">
-                                            <input type="radio" class="paying_method" name="paying_method" value="momo"
-                                                class="form-selectgroup-input">
+                                            <input type="radio" name="paying_method" value="momo"
+                                                class="paying_method form-selectgroup-input">
                                             <div
                                                 class="form-selectgroup-label d-flex align-items-center p-3">
                                                 <div class="mr-3">
@@ -228,7 +225,7 @@
     function injectCardList(itemList) {
         $.each(itemList, function (key, item) {
             $('.card-deck').append(
-                '<div class="col-md-3 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
+                '<div class="col-md-1 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
                 '    <img class="w-50" src="'+item.photo+'" alt="Card image cap">' +
                 '    <div class="card-body text-center">' +
                 '    <h5 class="card-title">'+item.name+'</h5>' +
@@ -299,7 +296,7 @@
         if(products.includes(el.data('id'))){
             updateQty(el.data('id'));
         } else{
-            $('.order-list').append(
+            $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +
@@ -368,7 +365,7 @@
             addElement(element);
         });
     }
-   
+
 
     function order() {
         var token = '{{@csrf_token()}}';
@@ -414,7 +411,7 @@
             data: {
                 _token: token,
                 site_id: site
-                
+
             },
             success: function(data){
                 $("#customers").html(data.customers);

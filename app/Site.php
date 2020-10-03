@@ -26,6 +26,10 @@ class Site extends Model
         return $this->belongsTo('App\Company');
     }
 
+    public function actions(){
+        return $this->hasMany('App\Action');
+    }
+
     public function employees(){
         return $this->hasMany('App\Employee');
     }
@@ -81,7 +85,7 @@ class Site extends Model
     public function totalSales($days = null, $category_id = null){
         $total = 0;
         if($days){
-            foreach($this->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
+            foreach($this->sales->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
                 $total += $sale->total($category_id);
             }
         } else {
@@ -96,7 +100,7 @@ class Site extends Model
     public function totalPurchases($days = null, $category_id = null){
         $total = 0;
         if($days){
-            foreach($this->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $purchase){
+            foreach($this->purchases->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $purchase){
                 $total += $purchase->total($category_id);
             }    
         } else {

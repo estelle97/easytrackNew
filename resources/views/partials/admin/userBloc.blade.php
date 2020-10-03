@@ -1,13 +1,14 @@
 <div class="navbar-nav flex-row order-md-last">
     <div class="nav-item dropdown d-none d-md-flex mr-3">
         <a href="#" class="nav-link px-0" data-toggle="dropdown" tabindex="-1" aria-expanded="false">
-            180 Jour(s)
+            <span id="clock"></span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="ml-3">
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path
                     d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm3.536-12.95l1.414 1.414-4.95 4.95L10.586 12l4.95-4.95z"
                     fill="rgba(255,255,255,1)" /></svg>
         </a>
+
         <div class="dropdown-menu notification-menu dropdown-menu-right dropdown-menu-card">
             <div class="card">
                 <div class="progress card-progress">
@@ -17,27 +18,23 @@
                   </div>
                 <div class="card-body">
                     <div class="float-right">
-                        <a href="#">Voir les details</a>
+                        <a href="{{route('admin.settings')}}">Voir les details</a>
                     </div>
                     <div class="text-gray font-weight-normal mt-0">Abonement</div>
-                    <h3 class="h2 mt-2 mb-3">180 Jour(s) restant</h3>
+                    <h3 class="h2 mt-2 mb-3" id="clock-full"> </h3>
                     <p class="mb-0 text-muted">
                         <span class="text-yellow d-inline-flex align-items-center lh-1">
-                            45% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z"></path>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
+                            {{Auth::user()->companies->first()->subscription()->percentage}}%
                         </span>
-                        <span class="text-nowrap text-gray">18-05-2020</span>
+                        <span class="text-nowrap text-gray ml-6"> {{date('d-m-Y', strtotime(Auth::user()->companies->first()->types->last()->pivot->created_at))}} / {{date('d-m-Y', strtotime(Auth::user()->companies->first()->types->last()->pivot->end_date))}}</span>
                     </p>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="nav-item d-none d-md-flex mr-2">
-        <a href="#" class="nav-link px-0">
+        <a href="{{route('chat')}}" class="nav-link px-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path
@@ -63,27 +60,11 @@
                         <h3 class="card-title">Notifications</h3>
                     </div>
                     <div class="col-auto ml-auto">
-                        <a href="#">Voir plus</a>
+                        <a href="{{route('notifications')}}">Voir plus</a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="notification-card d-flex align-items-center">
-                        <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
-                                class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z"></path>
-                                <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path>
-                                <line x1="8" y1="9" x2="16" y2="9"></line>
-                                <line x1="8" y1="13" x2="14" y2="13"></line>
-                            </svg>
-                        </span>
-                        <div class="mr-3 lh-sm">
-                            <div class="strong">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                            </div>
-                            <div class="text-gray">il y a 5min</div>
-                        </div>
-                    </div>
+                <div id="notifications">
+
                 </div>
             </div>
         </div>
@@ -109,7 +90,11 @@
                     <path
                         d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
                 </svg>
-                Mon compte
+                Mon Profile
+            </a>
+            <a class="dropdown-item" href="{{route('admin.team')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm3 8H4v8h16v-8zm-5-6H9v2H7V5H4v4h16V5h-3v2h-2V5zm-9 8h2v2H6v-2zm5 0h2v2h-2v-2zm5 0h2v2h-2v-2z"/></svg>
+                Agenda
             </a>
             <a class="dropdown-item" href="{{route('admin.settings')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 1l9.5 5.5v11L12 23l-9.5-5.5v-11L12 1zm0 2.311L4.5 7.653v8.694l7.5 4.342 7.5-4.342V7.653L12 3.311zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>

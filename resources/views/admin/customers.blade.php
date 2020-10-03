@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Les Clients
+                    Les clients
                 </h2>
             </div>
             <!-- Page title actions -->

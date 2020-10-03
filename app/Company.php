@@ -36,7 +36,7 @@ class Company extends Model
         $total = 0;
         if($days){
             foreach ($this->sites as $site) {
-               foreach($site->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $pur){
+               foreach($site->purchases->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $pur){
                 $total += $pur->total($category_id);
                }
             }
@@ -56,7 +56,7 @@ class Company extends Model
 
         if($days){
             foreach ($this->sites as $site) {
-                foreach($site->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
+                foreach($site->sales->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
                  $total += $sale->total($category_id);
                 }
              }
@@ -110,10 +110,21 @@ class Company extends Model
     public function subscription(){
         $subDuration = $this->types->last()->duration;
         $subRemainingDays = Carbon::now()->diffInDays($this->types->last()->pivot->end_date, false);
-        $subUsedPercentage = round(($subDuration - $subRemainingDays) * 100/$subDuration, 1);
+        $totalDuration = 0;
+        $totalUsage = 0;
+        foreach ($this->types as $key => $pack) {
+            $totalDuration += $pack->duration;
+            if($key === $this->types->count() -1){
+                $totalUsage += ($subDuration - $subRemainingDays);
+            } else {
+                $totalUsage += $pack->duration;
+            }
+        }
+        
+        $subUsedPercentage = round($totalUsage * 100/$totalDuration, 1);
         return (object)[
             'duration' => $subDuration,
-            'remainingDays' => $subRemainingDays,
+            'remainingDays' => $totalDuration - $totalUsage,
             'percentage' => $subUsedPercentage
         ];
     }

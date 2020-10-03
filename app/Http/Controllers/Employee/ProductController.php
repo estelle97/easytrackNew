@@ -80,17 +80,19 @@ class ProductController extends Controller
     }
 
 
-    public function getAllProducts(){
+    public function getAllProducts(Site $site){
         
         $products = [];
 
         foreach (Auth::user()->employee->site->company->activity->products as $prod) {
-            $products[] = [
-                'id' => $prod->id,
-                'name' => $prod->name,
-                'photo' =>  asset($prod->photo),
-                'category_id' => $prod->category_id,
-            ];
+            if(!$site->products->contains($prod->id)){
+                $products[] = [
+                    'id' => $prod->id,
+                    'name' => $prod->name,
+                    'photo' =>  asset($prod->photo),
+                    'category_id' => $prod->category_id,
+                ];
+            }
         }
 
         return response()->json([

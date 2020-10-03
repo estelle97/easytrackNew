@@ -28,25 +28,25 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item active" onclick="getCompanies('all', 'derniers mois')"> Global </a>
-                                <a class="dropdown-item active" onclick="getCompanies(1, 'Ce mois ci')">Ce mois ci</a>
+                                <a class="dropdown-item" onclick="getCompanies(1, 'Ce mois ci')">Ce mois ci</a>
                                 <a class="dropdown-item" onclick="getCompanies(2, '2 derniers mois')">2 deriers mois</a>
                                 <a class="dropdown-item" onclick="getCompanies(3, '3 derniers mois')">3 derniers mois</a>
-                                <a class="dropdown-item active" onclick="getCompanies(6, '6 derniers mois')">6 derniers mois</a>
+                                <a class="dropdown-item" onclick="getCompanies(6, '6 derniers mois')">6 derniers mois</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex align-items-baseline">
-                    <div class="h1 mb-0 mr-2 companies"> 500 </div>
+                    <div class="h1 mb-0 mr-2 companies"> 0 </div>
                     <div class="mr-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
+                        {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                             8% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <polyline points="3 17 9 11 13 15 21 7" />
                                 <polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
             </div>
@@ -66,25 +66,25 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item active" onclick="getProfits('all', 'derniers mois')"> Global </a>
-                                <a class="dropdown-item active" onclick="getProfits(1, 'Ce mois ci')">Ce mois ci</a>
+                                <a class="dropdown-item" onclick="getProfits(1, 'Ce mois ci')">Ce mois ci</a>
                                 <a class="dropdown-item" onclick="getProfits(2, '2 derniers mois')">2 deriers mois</a>
                                 <a class="dropdown-item" onclick="getProfits(3, '3 derniers mois')">3 derniers mois</a>
-                                <a class="dropdown-item active" onclick="getProfits(6, '6 derniers mois')">6 derniers mois</a>
+                                <a class="dropdown-item" onclick="getProfits(6, '6 derniers mois')">6 derniers mois</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex align-items-baseline">
-                    <div class="h1 mb-0 mr-2 profits"> 500 </div>
+                    <div class="h1 mb-0 mr-2 profits"> 0 </div>
                     <div class="mr-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
+                        {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                             8% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <polyline points="3 17 9 11 13 15 21 7" />
                                 <polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
             </div>
@@ -104,90 +104,39 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item active" onclick="getUsers('all', 'derniers mois')"> Global </a>
-                                <a class="dropdown-item active" onclick="getUsers(1, 'Ce mois ci')">Ce mois ci</a>
+                                <a class="dropdown-item" onclick="getUsers(1, 'Ce mois ci')">Ce mois ci</a>
                                 <a class="dropdown-item" onclick="getUsers(2, '2 derniers mois')">2 deriers mois</a>
                                 <a class="dropdown-item" onclick="getUsers(3, '3 derniers mois')">3 derniers mois</a>
-                                <a class="dropdown-item active" onclick="getUsers(6, '6 derniers mois')">6 derniers mois</a>
+                                <a class="dropdown-item" onclick="getUsers(6, '6 derniers mois')">6 derniers mois</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex align-items-baseline">
-                    <div class="h1 mb-3 mr-2 users">15</div>
+                    <div class="h1 mb-3 mr-2 users"> 0 </div>
                     <div class="mr-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
+                        {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                             4% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <polyline points="3 17 9 11 13 15 21 7" />
                                 <polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
                 <div id="chart-users" class="chart-sm"></div>
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-4">
+    <div class="col-sm-12 col-lg-5">
         <div class="card">
-            <div id="chart-development-activity" class="mt-4"></div>
-            <div class="table-responsive">
-                <table class="table card-table table-vcenter">
-                    <thead>
-                        <tr>
-                            <th>Utilisateur</th>
-                            <th>Action</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="w-1">
-                                <span class="avatar">PR</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-muted">17 Juin 2020</td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span class="avatar">DW</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-muted">17 Juin 2020</td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span class="avatar">IU</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-muted">17 Juin 2020</td>
-                        </tr>
-                        <tr>
-                            <td class="w-1">
-                                <span class="avatar">LA</span>
-                            </td>
-                            <td class="td-truncate">
-                                <div class="text-truncate">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-muted">17 Juin 2020</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card-body">
+                <div class="d-flex mb-2">
+                    <div class="subheader">Abonements par ville<br>sur la plateforme</div>
+                </div>
+
+                <div id="chart-subscriptions-peer-city" class="p-4"></div>
             </div>
         </div>
     </div>
@@ -230,7 +179,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-6">
+            {{-- <div class="col-lg-6">
                 <div class="card card-sm">
                     <div class="card-body d-flex align-items-center">
                         <div class="mr-3">
@@ -289,24 +238,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
-    <div class="col-sm-12 col-lg-3">
-        <div>
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="subheader">Abonements par ville (il faut adapter le design)</div>
-                        </div>
 
-                        <div id="chart-subscriptions-peer-city"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>
 {{-- end Content Body--}}
@@ -329,7 +264,7 @@
                         chart: {
                             type: "donut",
                             fontFamily: 'inherit',
-                            height: 240,
+                            height: 330,
                             sparkline: {
                                 enabled: true
                             },
@@ -378,9 +313,8 @@
                 $(".companies").fadeOut().html(data.total).fadeIn();
                 $('.selected-companies').html(text);
 
-                console.log(data);
-                // dates = data.dates;
-                // sales = data.sales;
+                dates = data.dates;
+                companies = data.companies;
 
                 $('#chart-companies').html('');
 
@@ -409,10 +343,8 @@
                         curve: "smooth",
                     },
                     series: [{
-                        name: "Profits",
-                        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                            93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67
-                        ]
+                        name: "Companies",
+                        data: companies
                     }],
                     grid: {
                         strokeDashArray: 4,
@@ -438,14 +370,7 @@
                             padding: 4
                         },
                     },
-                    labels: [
-                        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                        '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                        '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                        '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                        '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                        '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                    ],
+                    labels: dates,
                     colors: ["#206bc4"],
                     legend: {
                         show: false,
@@ -464,7 +389,7 @@
                 $(".profits").fadeOut().html(data.total).fadeIn();
                 $('.selected-profits').html(text);
                 dates = data.dates;
-                sales = data.sales;
+                profits = data.profits;
 
                 $('#chart-profits').html('');
 
@@ -494,9 +419,7 @@
                     },
                     series: [{
                         name: "Profits",
-                        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                            93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67
-                        ]
+                        data: profits
                     }],
                     grid: {
                         strokeDashArray: 4,
@@ -522,14 +445,7 @@
                             padding: 4
                         },
                     },
-                    labels: [
-                        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                        '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                        '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                        '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                        '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                        '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                    ],
+                    labels: dates,
                     colors: ["#206bc4"],
                     legend: {
                         show: false,
@@ -548,7 +464,7 @@
                 $(".users").fadeOut().html(data.total).fadeIn();
                 $('.selected-users').html(text);
                 dates = data.dates;
-                sales = data.sales;
+                users = data.users;
 
                 $('#chart-users').html('');
 
@@ -577,10 +493,8 @@
                         curve: "smooth",
                     },
                     series: [{
-                        name: "Profits",
-                        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                            93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67
-                        ]
+                        name: "Utilisateurs",
+                        data: users
                     }],
                     grid: {
                         strokeDashArray: 4,
@@ -606,14 +520,7 @@
                             padding: 4
                         },
                     },
-                    labels: [
-                        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                        '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                        '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                        '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                        '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                        '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                    ],
+                    labels: dates,
                     colors: ["#206bc4"],
                     legend: {
                         show: false,

@@ -95,7 +95,7 @@
 
 <script>
     // INITIALIZATION
-    init();
+    init('{{Auth::user()->employee->site->id}}');
     // AUTOCOMPLETE
     var categoriesSelect = $("#categories").selectize({});
 
@@ -166,7 +166,7 @@
     function addElement(el) {
         if (!products.includes(el.data('id'))) {
             console.log(el.data());
-            $('.order-list').append(
+            $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +
@@ -248,10 +248,10 @@
         })
     }
 
-    function init(){
+    function init(site){
 
         $.ajax({
-            url: '/employee/products/init',
+            url: '/employee/products/init/'+site,
             method: 'get',
             success: function(data){
                 $("#customers").html(data.customers);

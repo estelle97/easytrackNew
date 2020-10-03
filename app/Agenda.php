@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Agenda extends Model
-{
-    use SoftDeletes;
-    
-    protected $guraded = ['id'];
+{   
+    protected $guarded = ['id'];
     public $timestamps = null;
     protected $dates = ['created_at'];
 

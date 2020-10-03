@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
@@ -39,5 +40,9 @@ class Product extends Model
 
     public function unit(){
         return $this->belongsTo('App\Unit');
+    }
+
+    public function getTotalSales($site){
+       return $this->sales->where('site_id', $site)->count();
     }
 }

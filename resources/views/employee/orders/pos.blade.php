@@ -23,12 +23,8 @@
     <div class="row">
         <div class="col-lg-8" style="max-height: 700px;">
             <div class="card">
-                <div class="order-box">
-                    <div class="order-details-box">
-                        <div class="order-main-info"><span>Commande #</span><strong>KHD8374</strong></div>
-                        <div class="order-sub-info"><span>Créer le</span><strong class="order-sub-info-date">January 14th, 2019</strong>
-                        </div>
-                    </div>
+                <div class="order-box"> 
+                    
                     <div class="order-controls mb-4">
                         <form class="form-inline">
                             <div class="form-group mb-3">
@@ -299,7 +295,7 @@
         if(products.includes(el.data('id'))){
             updateQty(el.data('id'));
         } else{
-            $('.order-list').append(
+            $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +
