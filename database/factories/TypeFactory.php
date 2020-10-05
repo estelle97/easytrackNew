@@ -6,17 +6,17 @@ use App\Type;
 use Faker\Generator as Faker;
 
 $factory->define(Type::class, function (Faker $faker) {
-    $title = $faker->unique()->randomElement(['simple','silver','bronze','gold']);
+    $title = $faker->unique()->randomElement(['essaie','Basic','Premium','Premium Confort']);
 
-    if($title == 'simple') $duration = 1;
-    if($title == 'silver') $duration = 3;
-    if($title == 'bronze') $duration = 6;
-    if($title == 'gold') $duration = 12;
+    if($title == 'essaie') $duration = 15;
+    if($title == 'Basic') $duration = 30;
+    if($title == 'Premium') $duration = 30;
+    if($title == 'Premium Confort') $duration = 30;
 
-    if($title == 'simple') $price = 10000;
-    if($title == 'silver') $price = 25000;
-    if($title == 'bronze') $price = 50000;
-    if($title == 'gold') $price = 100000;
+    if($title == 'essaie') $price = 0;
+    if($title == 'Basic') $price = 40000;
+    if($title == 'Premium') $price = 50000;
+    if($title == 'Premium Confort') $price = 70000;
     
     return [
         'title' => $title,

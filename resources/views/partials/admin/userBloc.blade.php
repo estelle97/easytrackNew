@@ -63,6 +63,11 @@
                         <a href="{{route('notifications')}}">Voir plus</a>
                     </div>
                 </div>
+<<<<<<< HEAD
+                <div id="notifications">
+                    
+                </div>
+=======
 
                 @foreach (App\Notification::where('company_id', Auth::user()->companies->first()->id)->where('type', 'packageAlert')->take(5)->get()->reverse() as $not)
                     <div class="card-body">
@@ -85,6 +90,7 @@
                         </div>
                     </div>
                 @endforeach
+>>>>>>> origin/develop
             </div>
         </div>
     </div>
