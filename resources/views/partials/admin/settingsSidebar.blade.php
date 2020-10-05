@@ -2,7 +2,7 @@
     <div class="d-flex flex-row align-items-center mb-3">
         <div>
             <input type="file" name="img[]" class="file" accept="image/*" hidden>
-            <a id="profile" class="avatar avatar-upload rounded thumbnail" style="max-width: 60px;"> 
+            <a id="profile" class="avatar avatar-upload rounded thumbnail" style="max-width: 60px;">
                 <img src="{{(Auth::user()->companies->first()->logo != null) ? asset(Auth::user()->companies->first()->logo) : "https://picsum.photos/id/700/400"}}" alt="Profile picture">
             </a>
         </div>
@@ -13,25 +13,31 @@
     </div>
     <ul>
         <li>
-            <a id="companies" class="settings active px-3 py-2 rounded-lg">
+            <a id="companies" class="settings active px-3 py-2 rounded-lg button-click-action">
                 <i class="ri-building-2-line ri-xl mr-3"></i>
                 <span class="libelle align-middle">Compagnie</span>
             </a>
         </li>
         <li>
-            <a id="notifications" class="settings px-3 py-2 rounded-lg">
+            <a id="notifications" class="settings px-3 py-2 rounded-lg button-click-action">
                 <i class="ri-notification-4-line ri-xl mr-3"></i>
                 <div class="libelle">Notifications</div>
             </a>
         </li>
         <li>
-            <a id="activities" class="settings px-3 py-2 rounded-lg">
+            <a id="activities" class="settings px-3 py-2 rounded-lg button-click-action">
                 <i class="ri-history-line ri-xl mr-3"></i>
                 <div class="libelle">Activités</div>
             </a>
         </li>
         <li>
-            <a id="about" class="settings px-3 py-2 rounded-lg">
+            <a id="budget" class="settings px-3 py-2 rounded-lg button-click-action">
+                <i class="ri-wallet-line ri-xl mr-3"></i>
+                <div class="libelle">Mon budget</div>
+            </a>
+        </li>
+        <li>
+            <a id="about" class="settings px-3 py-2 rounded-lg button-click-action">
                 <i class="ri-information-line ri-xl mr-3"></i>
                 <div class="libelle">A Propos</div>
             </a>
