@@ -43,10 +43,10 @@
 
 <div class="row">
     <div class="card col-lg-3"
-        style="height: 380px;">
+        style="height: 430px;">
         @include("partials.admin.settingsSidebar")
     </div>
-    <div class="view card col-lg-5 ml-4 p-4">
+    <div class="view card col-lg-5 ml-4 p-3">
         <div class="row">
             <div class="ml-3">
                 <h3 class="text-gray">Email</h3>
@@ -78,7 +78,7 @@
                     <path
                         d="M11 2l7.298 2.28a1 1 0 0 1 .702.955V7h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1l-3.22.001c-.387.51-.857.96-1.4 1.33L11 22l-5.38-3.668A6 6 0 0 1 3 13.374V5.235a1 1 0 0 1 .702-.954L11 2zm0 2.094L5 5.97v7.404a4 4 0 0 0 1.558 3.169l.189.136L11 19.58 14.782 17H10a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h7V5.97l-6-1.876zM11 12v3h9v-3h-9zm0-2h9V9h-9v1z"
                         fill="rgba(38,127,201,1)" /></svg>
-                <h3 class="ml-2"> {{Auth::user()->companies->first()->types->last()->title}} </h3 class="ml-2">
+                <h3 class="ml-2"> {{Auth::user()->companies->first()->types->last()->title}} </h3>
             </span>
             <a href="#" data-toggle="modal" data-target="#modal-unsubscribe-licence">Se désabonner</a>
         </div>
@@ -107,7 +107,7 @@
             </thead>
             <tbody>
                 @foreach (Auth::user()->companies->first()->types as $type)
-                    
+
                 @endforeach
                 <tr>
                     <td> {{$type->title}} </td>
@@ -186,7 +186,7 @@
     <script>
 
         function updateCompany(value, field){
-            
+
             var form_data = new FormData();
             form_data.append(field, value);
             form_data.append('value', value),
