@@ -162,8 +162,8 @@
     </script>
     @if (Auth::user()->is_admin == 2)
         <script src={{asset('template/assets/dist/libs/jquery/dist/jquery.countdown.min.js')}}></script>
-        <script> 
-            
+        <script>
+
             $('#clock').countdown('{{Auth::user()->companies->first()->types->last()->pivot->end_date}}', function(event) {
                 $(this).html(event.strftime('%D Jour(s)'));
             });
@@ -176,8 +176,22 @@
             function showNotifications(){
 
                 var token = '{{@csrf_token()}}';
+                var url='';
+
+                if('{{Auth::user()->is_admin}}' == 1){
+                    url = '/employee/notifications/last'
+                }
+
+                if('{{Auth::user()->is_admin}}' == 2){
+                    url = '/admin/notifications/last'
+                }
+
+                if('{{Auth::user()->is_admin}}' == 3){
+                    url = '/easytrack/notifications/last'
+                }
+
                 $.ajax({
-                    url: '/admin/notifications/last',
+                    url: url,
                     method: 'post',
                     data: {
                         _token: token,

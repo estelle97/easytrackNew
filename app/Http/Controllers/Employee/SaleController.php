@@ -41,7 +41,7 @@ class SaleController extends Controller
         $customers = '';
         $products = [];
 
-    
+
         foreach (Site::find($request->site_id)->products as $prod) {
             $products[] = [
                 'id' => $prod->id,
@@ -72,7 +72,7 @@ class SaleController extends Controller
         $products = [];
         $saleProducts = [];
 
-    
+
         foreach ($sale->site->products as $prod) {
             $products[] = [
                 'id' => $prod->id,
@@ -148,7 +148,7 @@ class SaleController extends Controller
             'Initiation de la commande client SO-'.$sale->code
         );
         Notification::commandAlert($sale->site, $sale);
-        
+
         return "success";
     }
 
@@ -270,11 +270,13 @@ class SaleController extends Controller
             }
             $sale->status = 2;
             $sale->save();
-    
+
             Action::store('Sale', $sale->id, 'validate',
                 'Validation de la commande client SO-'.$sale->code
             );
-            
+
+            Notification::validationAlert($sale->site, $sale);
+
             return response()->json([
                 'message' => 'sale validated susscessfully',
                 'validator' => $sale->validator->username,
@@ -300,13 +302,13 @@ class SaleController extends Controller
                 }
                 $sale->status = 1;
                 $sale->save();
-    
+
                 Action::store('Sale', $sale->id, 'invalidate',
                     'Invalidation de la commande client SO-'.$sale->code
                 );
                 return response()->json([
                     'message' => 'sale unvalidated susscessfully',
-    
+
                 ],200);
             }
         }
@@ -320,7 +322,7 @@ class SaleController extends Controller
         if($sale->validator == null){
             $sale->status = $request->status;
             $sale->save();
-            
+
             return response()->json([
                 'message' => 'Le statut de la commande a bien été mise à jour',
                 'status' => $sale->status,
@@ -340,7 +342,7 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        
+
 
         Action::store('Sale', $sale->id, 'destroy',
             'Suppression de la commande client SO-'.$sale->code

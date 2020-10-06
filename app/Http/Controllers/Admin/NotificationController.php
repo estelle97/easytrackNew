@@ -10,12 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    
+
     public function getNotifications(){
-        
+
         Carbon::setLocale('fr');
         $notifications = Notification::where('company_id', Auth::user()->companies->first()->id)->where('type', 'packageAlert')->take(5)->get()->reverse();
 
         return view('ajax.admin.notifications.notifications', compact('notifications'));
+    }
+
+    public function notifications(){
+
+        $notifications = Notification::where('company_id', Auth::user()->companies->first()->id)->where('type', 'packageAlert')->get()->reverse();
+
+        return view('admin.notifications', compact('notifications'));
     }
 }
