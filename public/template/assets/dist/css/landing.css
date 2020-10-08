@@ -21619,7 +21619,7 @@
   font-size: 16px;
   font-weight: 600;
   height: 50px;
-  border-radius: 3px;
+  border-radius: 10px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -21639,6 +21639,11 @@
   color: #fff;
   background: #267fc9;
 }
+
+.btn--primary:hover {
+    color:#267fc9 !important;
+    background: #2680c92f;
+  }
 
 .btn-primary--opacity {
   -webkit-transition: .5s ease-in;
@@ -22220,6 +22225,9 @@ p {
           justify-content: center;
   position: relative;
   margin-top: 80px;
+}
+.dashboard-img img {
+    border-radius: 12px;
 }
 
 @media (min-width: 576px) {

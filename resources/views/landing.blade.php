@@ -26,8 +26,9 @@
     <link rel="stylesheet" href={{asset("template/assets/dist/fonts/fontawesome-5/css/all.min.css")}}>
     <link rel="stylesheet" href={{asset("template/assets/dist/fonts/typography-font/typo-fonts.css")}}>
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href={{asset("template/assets/dist/css/landing-settings.css")}}>
     <link rel="stylesheet" href={{asset("template/assets/dist/css/landing.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/css/landing-settings.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/css/landing-custom.css")}}>
     <link rel="stylesheet" href="https://startbootstrap.github.io/startbootstrap-new-age/device-mockups/device-mockups.min.css">
 </head>
 
@@ -49,7 +50,7 @@
         <!-- Header Starts -->
         <header class="site-header d-none d-lg-block">
             <div class="container-fluid pl-lg--35 pr-lg--35">
-                <div class="row justify-content-between align-items-center position-relative">
+                <div class="row justify-content-between align-items-top position-relative">
                     <div class="col">
                         <!-- Brand Logo -->
                         <div class="brand-logo">
@@ -74,18 +75,97 @@
                         <div class="header-btns">
                             @if (Auth::check())
                                 @if (Auth::user()->is_admin == 1)
-                                    <a href="{{route('employee.profile')}}" class="btn btn--transparent "> Profile </a>
-                                    <a href="{{route('employee.dashboard')}}" class="btn btn--transparent"> Tableau de bord </a>
+                                    <div class="profile-menu d-none d-flex flex-column text-reset">
+                                        <div class="profile-info d-flex align-items-center">
+                                            <span class="mr-3" style="color: #000;">
+                                               {{Auth::user()->name}}
+                                            </span>
+                                            <img src="https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=E4E4E4&color=7D7D7D&font-size=0.30" alt="" style="height: 45px; width: 45px; border-radius: 100px;">
+                                        </div>
+
+                                        <div class="profile-sub-menu d-flex flex-column">
+                                            <a class="sub-menu-link" href="{{route('employee.dashboard')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.49a1 1 0 0 1 .386-.79l8-6.222a1 1 0 0 1 1.228 0l8 6.222a1 1 0 0 1 .386.79V20zm-2-1V9.978l-7-5.444-7 5.444V19h14z"/></svg>
+                                                Tableau de bord
+                                            </a>
+                                            <a class="sub-menu-link" href="{{route('employee.profile')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                                    <path fill="none" d="M0 0h24v24H0z" />
+                                                    <path
+                                                        d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
+                                                </svg>
+                                                Profle
+                                            </a>
+                                            <a class="sub-menu-link" href="{{route('logout')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 22a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3h-2V4H6v16h12v-2h2v3a1 1 0 0 1-1 1H5zm13-6v-3h-7v-2h7V8l5 4-5 4z"/></svg>
+                                                Se déconnecter
+                                            </a>
+                                        </div>
+                                    </div>
                                 @endif
 
                                 @if (Auth::user()->is_admin == 2)
-                                    <a href="{{route('admin.profile')}}" class="btn btn--transparent "> Profile </a>
-                                    <a href="{{route('admin.dashboard')}}" class="btn btn--transparent"> Tableau de bord </a>
+                                    <div class="profile-menu d-none d-flex flex-column text-reset">
+                                        <div class="profile-info d-flex align-items-center">
+                                            <span class="mr-3" style="color: #000;">
+                                            {{Auth::user()->name}}
+                                            </span>
+                                            <img src="https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=E4E4E4&color=7D7D7D&font-size=0.30" alt="" style="height: 45px; width: 45px; border-radius: 100px;">
+                                        </div>
+
+                                        <div class="profile-sub-menu d-flex flex-column">
+                                            <a class="sub-menu-link" href="{{route('admin.dashboard')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.49a1 1 0 0 1 .386-.79l8-6.222a1 1 0 0 1 1.228 0l8 6.222a1 1 0 0 1 .386.79V20zm-2-1V9.978l-7-5.444-7 5.444V19h14z"/></svg>
+                                                Tableau de bord
+                                            </a>
+                                            <a class="sub-menu-link" href="{{route('admin.profile')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                                    <path fill="none" d="M0 0h24v24H0z" />
+                                                    <path
+                                                        d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
+                                                </svg>
+                                                Profle
+                                            </a>
+                                            <a class="sub-menu-link" href="{{route('admin.settings')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 1l9.5 5.5v11L12 23l-9.5-5.5v-11L12 1zm0 2.311L4.5 7.653v8.694l7.5 4.342 7.5-4.342V7.653L12 3.311zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+                                                Paramètres
+                                            </a>
+                                            <a class="sub-menu-link" href="{{route('logout')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 22a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3h-2V4H6v16h12v-2h2v3a1 1 0 0 1-1 1H5zm13-6v-3h-7v-2h7V8l5 4-5 4z"/></svg>
+                                                Se déconnecter
+                                            </a>
+                                        </div>
+                                    </div>
                                 @endif
 
                                 @if (Auth::user()->is_admin == 3)
-                                    <a href="{{route('easytrack.profile')}}" class="btn btn--transparent "> Profile </a>
-                                    <a href="{{route('easytrack.dashboard')}}" class="btn btn--transparent"> Tableau de bord </a>
+                                    <div class="profile-menu d-none d-flex flex-column text-reset">
+                                        <div class="profile-info d-flex align-items-center">
+                                            <span class="mr-3" style="color: #000;">
+                                               {{Auth::user()->name}}
+                                            </span>
+                                            <img src="https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=E4E4E4&color=7D7D7D&font-size=0.30" alt="" style="height: 45px; width: 45px; border-radius: 100px;">
+                                        </div>
+
+                                        <div class="profile-sub-menu d-flex flex-column">
+                                            <a class="sub-menu-link" href="{{route('easytrack.dashboard')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.49a1 1 0 0 1 .386-.79l8-6.222a1 1 0 0 1 1.228 0l8 6.222a1 1 0 0 1 .386.79V20zm-2-1V9.978l-7-5.444-7 5.444V19h14z"/></svg>
+                                                Tableau de bord
+                                            </a>
+                                            <a class="sub-menu-link" href="{{route('easytrack.profile')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                                    <path fill="none" d="M0 0h24v24H0z" />
+                                                    <path
+                                                        d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
+                                                </svg>
+                                                Profle
+                                            </a>
+                                            <a class="sub-menu-link" href="{{route('logout')}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 22a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3h-2V4H6v16h12v-2h2v3a1 1 0 0 1-1 1H5zm13-6v-3h-7v-2h7V8l5 4-5 4z"/></svg>
+                                                Se déconnecter
+                                            </a>
+                                        </div>
+                                    </div>
                                 @endif
                             @else
                                 <a href="{{route('login')}}" class="btn btn--transparent "> Connexion </a>
@@ -143,7 +223,7 @@
                 <!-- Header buttons start -->
                 <div class="header-btns offcanvas">
                     <div class="header-btns">
-                        <a href="{{route('login')}}" class="btn btn-primary--opacity hvr-bounce-to-right">Mon compte</a>
+                        <a href="{{route('login')}}" class="btn btn-primary--opacity hvr-bounce-to-right">Profle</a>
                         <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
                     </div>
                 </div>
