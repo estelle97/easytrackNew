@@ -1,4 +1,4 @@
-@foreach ($notifications as $notif)
+@foreach (Auth::user()->notifications->where('is_active','1') as $notif)
     <div class="card-body">
         <div class="notification-card d-flex align-items-center">
             <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"

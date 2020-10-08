@@ -46,7 +46,7 @@
         <div class="table-responsive">
             <table class="table card-table table-vcenter">
               <tbody>
-                  @foreach ($notifications as $notif)
+                  @foreach (Auth::user()->notifications as $notif)
                     <tr class="notification-line">
                         <td class="w-1 notification-line-icon">
                             <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"

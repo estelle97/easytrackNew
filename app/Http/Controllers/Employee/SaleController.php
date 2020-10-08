@@ -147,7 +147,10 @@ class SaleController extends Controller
         Action::store('Sale', $sale->id, 'create',
             'Initiation de la commande client SO-'.$sale->code
         );
-        Notification::commandAlert($sale->site, $sale);
+
+        foreach ($sale->site->employees()->whereHas('user.role', function($query){$query->where('roles.slug','cashier');})->get()->load('user') as $key => $emp) {
+            Notification::commandAlert($emp->user->id, $sale->site, $sale);
+        }
 
         return "success";
     }
@@ -260,11 +263,16 @@ class SaleController extends Controller
                     'qty' => $qty
                 ]);
 
+                
                 if($qty <= $sale->site->products()->findOrFail($prod->id)->pivot->qty_alert){
                     if($qty == 0){
-                        Notification::ProductAlert($sale->site, $prod, 'empty');
+                        foreach ($sale->site->employees()->whereHas('user.role', function($query){$query->where('roles.slug','cashier')->orWhere('roles.slug','storekeeper')->orWhere('roles.slug','manager');})->get()->load('user') as $key => $emp) {
+                            Notification::ProductAlert($emp->user->id, $sale->site, $prod, 'empty');
+                        }
                     } else {
-                        Notification::ProductAlert($sale->site, $prod);
+                        foreach ($sale->site->employees()->whereHas('user.role', function($query){$query->where('roles.slug','cashier')->orWhere('roles.slug','storekeeper')->orWhere('roles.slug','manager');})->get()->load('user') as $key => $emp) {
+                            Notification::ProductAlert($emp->user->id, $sale->site, $prod);
+                        }
                     }
                 }
             }
@@ -342,8 +350,6 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-
-
         Action::store('Sale', $sale->id, 'destroy',
             'Suppression de la commande client SO-'.$sale->code
         );

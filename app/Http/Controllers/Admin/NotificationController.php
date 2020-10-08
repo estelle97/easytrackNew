@@ -13,16 +13,12 @@ class NotificationController extends Controller
 
     public function getNotifications(){
 
-        Carbon::setLocale('fr');
-        $notifications = Notification::where('company_id', Auth::user()->companies->first()->id)->where('type', 'packageAlert')->take(5)->get()->reverse();
-
-        return view('ajax.admin.notifications.notifications', compact('notifications'));
+        return view('ajax.admin.notifications.notifications');
     }
 
     public function notifications(){
 
-        $notifications = Notification::where('company_id', Auth::user()->companies->first()->id)->where('type', 'packageAlert')->get()->reverse();
-
-        return view('admin.notifications', compact('notifications'));
+        Notification::where('user_id', Auth::user()->id)->update(['is_active' => 0]);
+        return view('admin.notifications');
     }
 }

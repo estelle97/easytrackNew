@@ -16,9 +16,7 @@ class Notification extends Model
     public $timestamps = null;
     protected $dates = ['created_at'];
 
-    public static function ProductAlert(Site $site, Product $product, $type=null){
-
-        (Auth::user()->is_admin == 2) ? $action =  'admin.purchases' : $action = 'employee.purchases';
+    public static function ProductAlert($user_id, Site $site, Product $product, $type=null){
 
         ($type == null) ?
                 $text = "Le produit $product->name est en rupture de stock dans le site $site->name" :
@@ -27,39 +25,42 @@ class Notification extends Model
         return static::create([
             'company_id' => $site->company->id,
             'site_id' => $site->id,
+            'user_id' => $user_id,
             'type' => 'productAlert',
             'text' => $text,
             'action' => 'purchases'
         ]);
     }
 
-    public static function PackageAlert(Company $company, $jours){
+    public static function PackageAlert($user_id, Company $company, $jours){
 
         return static::create([
             'company_id' => $company->id,
+            'user_id' => $user_id,
             'type' => 'packageAlert',
             'text' => "Votre abonnement se termine dans $jours jours Veuillez le renouveler",
             'action' => 'admin.settings',
         ]);
     }
 
-    public static function easyteckPackageAlert(Company $company, $days){
+    public static function easyteckPackageAlert($user_id, Company $company, $days){
 
         return static::create([
             'company_id' => $company->id,
-            'type' => 'packageAlert',
+            'user_id' => $user_id,
+            'type' => 'companyAlert',
             'text' => "L'abonnement de l'entreprise $company->name se termine dans $days jours",
             'action' => 'easytrack.companies',
         ]);
     }
 
-    public static function commandAlert(Site $site, Sale $sale){
+    public static function commandAlert($user_id, Site $site, Sale $sale){
 
-        (Auth::user()->is_admin == 2) ? $action =  'admin.kanban' : $action = 'employee.kanban';
         $user = Auth::user();
         return static::create([
             'company_id' => $site->company->id,
             'site_id' => $site->id,
+            'user_id' => $user_id,
             'type' => 'commandAlert',
             'text' => "$user->name a pris la commande SO-$sale->code du client ".$sale->customer->name,
             'action' => 'kanban'

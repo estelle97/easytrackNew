@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
     public function getNotifications(){
 
-        Carbon::setLocale('fr');
-        $notifications = Notification::where('company_id', Auth::user()->companies->first()->id)->where('type', 'packageAlert')->take(5)->get()->reverse();
-
-        return view('ajax.employee.notifications.notifications', compact('notifications'));
+        return view('ajax.employee.notifications.notifications');
     }
 
     public function notifications(){
 
-        $notifications = Notification::where('company_id', Auth::user()->companies->first()->id)->where('type', 'packageAlert')->get()->reverse();
-
-        return view('employee.notifications', compact('notifications'));
+        Notification::where('user_id', Auth::user()->id)->update(['is_active' => 0]);
+        return view('employee.notifications');
     }
 }
