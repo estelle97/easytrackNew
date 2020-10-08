@@ -21648,13 +21648,13 @@
 .btn-primary--opacity {
   -webkit-transition: .5s ease-in;
   transition: .5s ease-in;
-  background-color: rgba(80, 227, 194, 0.14);
-  color: #000 !important;
+  color:#267fc9 !important;
+    background-color: #2680c92f;
 }
 
 .btn-primary--opacity.hvr-bounce-to-right:before {
-    color: #fff !important;
-  background: #267fc9 !important;
+    color:#267fc9 !important;
+    background: #2680c92f;
 }
 
 .btn--transparent {
@@ -21664,6 +21664,11 @@
 
 .btn--transparent:hover {
   color: #267fc9;
+}
+
+.btn--black {
+    background-color: #000;
+    color: #fff;
 }
 
 .hvr-shine {
