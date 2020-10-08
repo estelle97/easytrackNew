@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Agenda;
 use App\Http\Controllers\Controller;
+use App\Notification;
+use App\Site;
 use App\Team;
+use App\User;
 use Illuminate\Http\Request;
 
 class AgendaController extends Controller
@@ -15,7 +18,7 @@ class AgendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function teams()
     {
 
         return view('admin.agenda');
@@ -34,6 +37,8 @@ class AgendaController extends Controller
            foreach ($request->employees as $key => $user_id) {
                 if(!$team->users->contains($user_id)){
                     $team->users()->attach($user_id);
+
+                    Notification::addUserToTeamAlert($team->site, User::find($user_id));
                 }
            }
 
@@ -49,6 +54,8 @@ class AgendaController extends Controller
         if(!$team->users->contains($request->user_id)){
             $team->users()->attach($request->user_id);
 
+            Notification::addUserToTeamAlert($team->site, User::find($request->user_id));
+
             return 'success';
         }
 
@@ -61,6 +68,8 @@ class AgendaController extends Controller
         if($team->users->contains($request->user_id)){
             $team->users()->detach($request->user_id);
 
+            Notification::addUserToTeamAlert($team->site, User::find($request->user_id));
+            
             return 'success';
         }
 

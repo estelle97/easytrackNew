@@ -25,21 +25,14 @@
                         <h3 class="card-title">Notifications</h3>
                     </div>
                     <div class="col-auto ml-auto">
-                        <a href="#">Voir plus</a>
+                        <a href="{{route('employee.notifications')}}">Voir plus</a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="notification-card d-flex align-items-center">
-                        <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="14" y2="13"></line></svg>
-                        </span>
-                        <div class="mr-3 lh-sm">
-                          <div class="strong">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                          </div>
-                          <div class="text-gray">il y a 5min</div>
-                        </div>
-                      </div>
+
+                <div id="notifications">
+
                 </div>
+
             </div>
         </div>
     </div>
@@ -66,10 +59,10 @@
                 </svg>
                 Mon compte
             </a>
-            <a class="dropdown-item" href="{{route('employee.team')}}">
+            {{-- <a class="dropdown-item" href="{{route('employee.team')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm3 8H4v8h16v-8zm-5-6H9v2H7V5H4v4h16V5h-3v2h-2V5zm-9 8h2v2H6v-2zm5 0h2v2h-2v-2zm5 0h2v2h-2v-2z"/></svg>
                 Equipes
-            </a>
+            </a> --}}
             <a class="dropdown-item" href="./help.html">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                     class="icon dropdown-item-icon">
