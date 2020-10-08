@@ -57,20 +57,20 @@
                             <a href=""><img src={{asset("template/assets/static/logo.svg")}} alt="" /></a>
                         </div>
                     </div>
+
                     <!-- Menu Block -->
                     <div class="col">
                         <div class="main-navigation ">
                             <ul class="main-menu">
                                 <li class="menu-item"><a href="#">Accueil</a></li>
                                 <li class="menu-item"><a href="#">Mobile</a></li>
-                                <li class="menu-item"><a href="#">Abonnement</a></li>
                                 <li class="menu-item"><a href="#">Contact</a></li>
                             </ul>
                         </div>
                         <div class="mobile-menu"></div>
                     </div>
 
-                    <!-- Button Block -->
+                    <!-- Profile menu -->
                     <div class="col">
                         <div class="header-btns">
                             @if (Auth::check())
