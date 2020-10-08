@@ -4,6 +4,9 @@
   }
 
 /* NAVBAR */
+.navbar {
+    padding-top: 0.8rem !important;
+}
 .navbar-bg-gradient {
     background: rgb(38,127,201) !important;
     background: -moz-linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
@@ -34,6 +37,21 @@
     display: none !important;
 }
 
+/* MODALS */
+.modal-content {
+    border-radius: 10px !important;
+}
+
+.modal-header {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.modal-footer {
+    padding-bottom: 1rem !important;
+}
+
+
 /* BUTTONS */
 .btn {
     border-radius: 10px !important;
@@ -45,6 +63,10 @@
 
 .btn-no-border {
     border: none !important;
+}
+
+.button-click-action {
+    cursor: pointer;
 }
 
 /* INPUT */
@@ -157,10 +179,15 @@
     display: none !important;
 }
 
+
+/* NOTIFICATIONS */
 .notification-menu {
     min-width: 20rem !important;
 }
 
+
+
+/* CARD TABLE */
 .fixed-table-container {
     border: none !important;
 }
@@ -245,8 +272,6 @@
     background-color: rgba(0, 0, 0, 0.04);
 }
 
-
-
 .card-table thead th {
     border-left: none !important
 }
@@ -266,9 +291,8 @@
     padding: 0.5rem 0.5rem !important;
 }
 
-.button-click-action {
-    cursor: pointer;
-}
+
+/* SETTINGS SIDEBAR */
 
 .settings-sidebar ul {
     list-style: none;
