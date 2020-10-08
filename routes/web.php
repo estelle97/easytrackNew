@@ -260,7 +260,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/notifications/last', 'Admin\NotificationController@getNotifications');
 
 
-    Route::get('admin/teams', 'Admin\AgendaController@teams')->name('admin.team');
+    Route::get('admin/agenda', 'Admin\AgendaController@teams')->name('admin.agenda');
     Route::post('admin/agenda/add', 'Admin\AgendaController@addTeam');
     Route::post('admin/agenda/attachUserToTeam/{team}', 'Admin\AgendaController@attachUserToTeam');
     Route::post('admin/agenda/detachUserToTeam/{team}', 'Admin\AgendaController@detachUserToTeam');
