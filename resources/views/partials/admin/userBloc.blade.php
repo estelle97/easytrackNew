@@ -60,7 +60,7 @@
                         <h3 class="card-title">Notifications</h3>
                     </div>
                     <div class="col-auto ml-auto">
-                        <a href="{{route('notifications')}}">Voir plus</a>
+                        <a href="{{route('admin.notifications')}}">Voir plus</a>
                     </div>
                 </div>
                 <div id="notifications">

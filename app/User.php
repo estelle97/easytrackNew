@@ -16,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+
     use HasApiTokens,HasPermissionsTrait, SoftDeletes;
     use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
@@ -82,7 +82,7 @@ class User extends Authenticatable
     public function actions(){
         return $this->hasMany('App\Action','initiator_id');
     }
-    
+
     public function sales(){
         return $this->hasMany('App\Sale', 'initiator_id');
     }
@@ -93,6 +93,10 @@ class User extends Authenticatable
 
     public function teams(){
         return $this->belongsToMany('App\Team');
+    }
+
+    public function notifications(){
+        return $this->hasMany('App\Notification');
     }
 
     public function totalSales($days = null){
@@ -115,7 +119,7 @@ class User extends Authenticatable
         if($days){
             foreach($this->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $purchase){
                 $total += $purchase->total();
-            }    
+            }
         } else {
             foreach($this->purchases->where('validator_id','!=', null) as $purchase){
                 $total += $purchase->total();
