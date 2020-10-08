@@ -62,9 +62,9 @@
                     <div class="col">
                         <div class="main-navigation ">
                             <ul class="main-menu">
-                                <li class="menu-item"><a href="#">Accueil</a></li>
-                                <li class="menu-item"><a href="#">Mobile</a></li>
-                                <li class="menu-item"><a href="#">Contact</a></li>
+                                <li class="menu-item"><a href="#home">Accueil</a></li>
+                                <li class="menu-item"><a href="#mobile">Mobile</a></li>
+                                <li class="menu-item"><a href="">Contact</a></li>
                             </ul>
                         </div>
                         <div class="mobile-menu"></div>
@@ -187,9 +187,9 @@
                     <div class="header-btns">
                         <div class="profile-sub-menu pt-2 d-flex flex-column">
                             <span class="user-infos"><span class="greeting">Hi,</span> {{Auth::user()->name}}</span>
-                            <a class="sub-menu-link" href="#">Accueil</a>
-                            <a class="sub-menu-link" href="#">Mobile</a>
-                            <a class="sub-menu-link" href="#">Contact</a>
+                            <a class="sub-menu-link" href="#home">Accueil</a>
+                            <a class="sub-menu-link" href="#mobile">Mobile</a>
+                            <a class="sub-menu-link" href="">Contact</a>
                             @if (Auth::check())
                                 @if (Auth::user()->is_admin == 1)
                                     <a class="sub-menu-link" href="{{route('employee.dashboard')}}">
@@ -263,7 +263,7 @@
         <!--Off Canvas Navigation End-->
 
         <!-- Banner Section -->
-        <section class="hero-area">
+        <section id="home" class="hero-area">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-8 col-md-10">
@@ -390,7 +390,7 @@
             </div>
         </div>
 
-        <div class="content-section section-padding">
+        <div id="mobile" class="content-section section-padding">
             <div class="container">
                 <div class="section-heading text-center">
                     <h2>Easytrack sur votre petit écran</h2>
@@ -532,6 +532,17 @@
 
     <!-- Custom JS -->
     <script src={{asset("template/assets/dist/js/active.js")}}></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
