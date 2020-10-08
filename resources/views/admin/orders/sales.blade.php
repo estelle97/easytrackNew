@@ -86,7 +86,7 @@
     </div>
     <div class="row">
         <div class="col-lg-9">
-            <div class="card pl-2 pr-2">
+            <div class="card p-2">
                 <div class="table-responsive">
                     <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
                         <thead>
@@ -207,32 +207,10 @@
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>
                 </div>
-                <div class="col-md-12 text-center mt-4">
+                <div class="col-md-12 text-center mb-4">
                     <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez vendu</h5>
                     <h1 style="font-size: 2.5rem;"> {{Auth::user()->companies->first()->totalSales()}} FCFA</h1>
                     <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
-                </div>
-                <div class="col-md-12 mt-3">
-                    <div class="row justify-content-between">
-                        <div class="col-md-12 pl-2 pr-2 mb-3">
-                            <div class="stat-content bg-blue-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
-                                <h1>300</h1>
-                                <h4>Articles vendus</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-6 pl-2">
-                            <div class="stat-content bg-orange-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
-                                <h1>1.45m</h1>
-                                <h4>Coûts</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-6 pl-1 pr-2">
-                            <div class="stat-content bg-purple-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
-                                <h1>10</h1>
-                                <h4>Catégories</h4>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

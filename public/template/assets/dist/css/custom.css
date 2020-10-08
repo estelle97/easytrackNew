@@ -24,6 +24,9 @@
 }
 
 /* CARDS */
+.card {
+    border-radius:10px !important;
+}
 .card-actions .dropdown-toggle:after  {
     display: none !important;
 }
@@ -32,6 +35,9 @@
 }
 
 /* BUTTONS */
+.btn {
+    border-radius: 10px !important;
+}
 .btn-gradient:hover {
     color: #fff;
     opacity: 0.7;
@@ -215,8 +221,10 @@
 }
 
 .fixed-table-toolbar .search input {
-    border-radius: 7px !important;
-    background-color: rgba(0,0,0,0.04);
+    border-radius: 8px !important;
+    border: none !important;
+    margin-left: 0.5rem;
+    background-color: rgba(0,0,0,0.05);
 }
 
 .fixed-table-toolbar .dropdown-menu li {
