@@ -7,7 +7,9 @@
         <div class="card card-md auth-card pt-3 pb-5 px-3">
             <div class="card-body mb-3">
                 <div class="text-center mb-5">
-                    <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
+                    <a href="/">
+                        <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
+                    </a>
                 </div>
 
                 <h2 class="auth-title mb-2 text-center text-black">Inscription</h2>
