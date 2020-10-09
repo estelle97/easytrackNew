@@ -74,7 +74,13 @@
         font-weight: 600;
     }
 
+    .profile-sub-menu .sub-menu-link.not-connected svg {
+        display: inline-block !important;
+    }
+
     .profile-sub-menu .sub-menu-link svg {
         display: none !important;
     }
+
+
 }

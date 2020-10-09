@@ -186,11 +186,11 @@
                 <div class="header-btns offcanvas">
                     <div class="header-btns">
                         <div class="profile-sub-menu pt-2 d-flex flex-column">
-                            <span class="user-infos"><span class="greeting">Hi,</span> {{Auth::user()->name}}</span>
-                            <a class="sub-menu-link" href="#home">Accueil</a>
-                            <a class="sub-menu-link" href="#mobile">Mobile</a>
-                            <a class="sub-menu-link" href="">Contact</a>
                             @if (Auth::check())
+                                <span class="user-infos"><span class="greeting">Hi,</span> {{Auth::user()->name}}</span>
+                                <a class="sub-menu-link" href="#home">Accueil</a>
+                                <a class="sub-menu-link" href="#mobile">Mobile</a>
+                                <a class="sub-menu-link" href="">Contact</a>
                                 @if (Auth::user()->is_admin == 1)
                                     <a class="sub-menu-link" href="{{route('employee.dashboard')}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.49a1 1 0 0 1 .386-.79l8-6.222a1 1 0 0 1 1.228 0l8 6.222a1 1 0 0 1 .386.79V20zm-2-1V9.978l-7-5.444-7 5.444V19h14z"/></svg>
@@ -251,8 +251,17 @@
                                     Se déconnecter
                                 </a>
                             @else
-                                <a href="{{route('login')}}" class="btn btn-transparent hvr-bounce-to-right">Mon compte</a>
-                                <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
+                                <a class="sub-menu-link" href="#home">Accueil</a>
+                                <a class="sub-menu-link" href="#mobile">Mobile</a>
+                                <a class="sub-menu-link mb-4" href="">Contact</a>
+                                <a class="sub-menu-link not-connected" href="{{route('login')}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6 8V7a6 6 0 1 1 12 0v1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2zm13 2H5v10h14V10zm-8 5.732a2 2 0 1 1 2 0V18h-2v-2.268zM8 8h8V7a4 4 0 1 0-8 0v1z"/></svg>
+                                    Se connecter
+                                </a>
+                                <a class="sub-menu-link not-connected" href="{{route('register')}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 14.252v2.09A6 6 0 0 0 6 22l-2-.001a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm6.586 6l-1.829-1.828 1.415-1.415L22.414 18l-4.242 4.243-1.415-1.415L18.586 19H15v-2h3.586z"/></svg>
+                                    S'enregister
+                                </a>
                             @endif
                         </div>
                     </div>
