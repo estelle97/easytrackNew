@@ -21,9 +21,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8" style="max-height: 700px;">
-            <div class="card">
-                <div class="order-box">
+        <div class="col-lg-4">
+            <div class="card" style="height: 710px; max-height: 710px;">
+                <div class="order-box p-3">
                     <div class="order-details-box">
                         <div class="order-main-info"><span>Commande </span><strong>SO-{{$sale->code}}</strong></div>
                         <div class="order-sub-info"><span>Créer le</span><strong class="order-sub-info-date">{{ date('M d, Y', strtotime($sale->created_at))}}</strong>
@@ -68,6 +68,12 @@
                         <div class="card-deck row d-flex flex-row">
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card" style="height: 710px; max-height: 710px;">
+                <div class="order-box p-3">
                     <div class="order-items-table">
                         <div class="table-responsive">
                             <table class="table table-lightborder">
@@ -126,10 +132,8 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
         <div class="col-lg-4">
             <div class="card p-3 order-foot">
@@ -269,7 +273,7 @@
     function injectCardList(itemList) {
         $.each(itemList, function (key, item) {
             $('.card-deck').append(
-                '<div class="col-md-1 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
+                '<div class="col-md-4 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
                 '    <img class="w-50" src="'+item.photo+'" alt="Card image cap">' +
                 '    <div class="card-body text-center">' +
                 '    <h5 class="card-title">'+item.name+'</h5>' +
