@@ -47,7 +47,7 @@
                             <span class="h2 align-middle">Ajouter</span>
                         </a>
                     </div>
-                    <span class="dropdown ml-4">
+                    <span class="dropdown button-click-action ml-4">
                         <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                 height="24">
