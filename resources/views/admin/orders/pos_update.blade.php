@@ -79,10 +79,9 @@
                             <table class="table table-lightborder">
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th>Nom</th>
                                         <th>Quantité</th>
-                                        <th>Prix unitaire</th>
+                                        <th>PU</th>
                                         <th>sous total</th>
                                         <th></th>
                                     </tr>
@@ -343,8 +342,8 @@
     function addElement(el) {
         if(products.includes(el.data('id'))){
             updateQty(el.data('id'));
-        } else{
-            $('.order-list').prepend(
+        } else {
+            /* $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +
@@ -353,9 +352,6 @@
                 '    </td>' +
                 '    <td style="vertical-align: middle;">' +
                 '        <div class="product-name" id="name-'+el.data("id")+'" data-name="'+el.text()+'">'+el.text()+'</div>' +
-                '    </td>' +
-                '    <td style="vertical-align: middle;">' +
-                '        <div class="product-price" id="price-'+el.data("id")+'"  data-price="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
                 '    </td>' +
                 '    <td style="vertical-align: middle;">' +
                 '        <div class="quantity-selector">' +
@@ -375,6 +371,32 @@
                 '                </div>' +
                 '            </div>' +
                 '        </div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="product-price" id="price-'+el.data("id")+'"  data-price="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="product-price" id="subtotal-'+el.data("id")+'" data-subtotal="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <a class="btn btn-light p-1 delete" data-product="'+el.data("id")+'" onclick="removeElement('+el.data("id")+')" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgb(255, 62, 62)"/></svg></a>' +
+                '    </td>' +
+                '</tr>'
+            ); */
+            $('.order-list').prepend(
+                '<tr id="product-'+el.data("id")+'">' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="product-name" id="name-'+el.data("id")+'" data-name="'+el.text()+'">'+el.text()+'</div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="quantity-selector">' +
+                '            <div class="quantity-input">' +
+                '                <input type="text" class="form-control p-0 text-center border-0" value="1" id="qty-'+el.data("id")+'" data-total="'+el.data("qty")+'" data-qty="1" required oninput="updateQty('+el.data("id")+', '+this.value+')">' +
+                '            </div>' +
+                '        </div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="product-price" id="price-'+el.data("id")+'"  data-price="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
                 '    </td>' +
                 '    <td style="vertical-align: middle;">' +
                 '        <div class="product-price" id="subtotal-'+el.data("id")+'" data-subtotal="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
@@ -488,8 +510,23 @@
         display: none;
     }
     .order-box {
-        padding: 30px
+        width: 100%;
+        padding: 30px;
+        position: relative;
+        height: 78%;
     }
+
+    .order-products (
+        height: 100%;
+        position: relative;
+    )
+
+    .card-deck (
+        overflow-y: auto;
+        height: 88%;
+        position: relative;
+        overflow-x: hidden;
+    )
 
     .order-box .order-details-box {
         display: -webkit-box;
@@ -536,8 +573,8 @@
     }
 
     .order-box .order-items-table .product-image {
-        width: 70px;
-        height: 70px;
+        width: 30px;
+        height: 30px;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center center
@@ -545,8 +582,13 @@
 
     .order-box .order-items-table .product-name {
         font-weight: 500;
-        font-size: 1.25rem;
-        line-height: 1.3
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+
+    .order-box .order-items-table .product-price {
+        font-weight: 500;
+        font-size: 0.8rem;
     }
 
     .order-box .order-items-table .product-remove-btn {
@@ -569,11 +611,6 @@
         display: inline-block;
         margin-left: 5px;
         margin-right: 10px
-    }
-
-    .order-box .order-items-table .product-price {
-        font-weight: 500;
-        font-size: 1.25rem
     }
 
     .order-box .order-items-table .quantity-input .input-group-text {
