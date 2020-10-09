@@ -73,7 +73,6 @@
         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
             <span class="avatar"
                 style="background-image: url('https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=FFFFFF&color=267FC9&font-size=0.30');">
-                {{-- <span class="badge bg-green"></span> --}}
             </span>
             <div class="d-none d-xl-block pl-2">
                 <div> {{Auth::user()->name}} </div>
