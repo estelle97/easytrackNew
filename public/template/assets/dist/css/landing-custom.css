@@ -58,6 +58,18 @@
     opacity: 0.4;
 }
 
+.menu-link {
+    padding: 0.8rem 0;
+    transition: all 0.5s;
+}
+
+.menu-link:hover {
+    color: #267fc9 !important;
+}
+.menu-link:hover svg {
+    fill: #267fc9;
+}
+
 
 @media (max-width: 992px) {
     .profile-sub-menu {

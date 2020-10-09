@@ -145,8 +145,15 @@
                                     </div>
                                 </div>
                             @else
-                                <a href="{{route('login')}}" class="btn btn--transparent "> Connexion </a>
-                                <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
+                                {{-- <a href="{{route('login')}}" class="btn btn--transparent "> Connexion </a>
+                                <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a> --}}
+                                <a class="menu-link" style="color: #000;" href="{{route('register')}}">
+                                    S'inscrire
+                                </a>
+                                <a class="menu-link ml-5" style="color: #000;" href="{{route('login')}}">
+                                    Mon compte
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="ml-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 14.252v2.09A6 6 0 0 0 6 22l-2-.001a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm7.418 6h3.586v2h-3.586l1.829 1.828-1.414 1.415L15.59 18l4.243-4.243 1.414 1.415L19.418 17z"/></svg>
+                                </a>
                             @endif
                         </div>
                     </div>
@@ -254,11 +261,11 @@
                                 <a class="sub-menu-link" href="#home">Accueil</a>
                                 <a class="sub-menu-link" href="#mobile">Mobile</a>
                                 <a class="sub-menu-link mb-4" href="">Contact</a>
-                                <a class="sub-menu-link not-connected" href="{{route('login')}}">
+                                <a class="sub-menu-link" href="{{route('login')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6 8V7a6 6 0 1 1 12 0v1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2zm13 2H5v10h14V10zm-8 5.732a2 2 0 1 1 2 0V18h-2v-2.268zM8 8h8V7a4 4 0 1 0-8 0v1z"/></svg>
                                     Se connecter
                                 </a>
-                                <a class="sub-menu-link not-connected" href="{{route('register')}}">
+                                <a class="sub-menu-link" href="{{route('register')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 14.252v2.09A6 6 0 0 0 6 22l-2-.001a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm6.586 6l-1.829-1.828 1.415-1.415L22.414 18l-4.242 4.243-1.415-1.415L18.586 19H15v-2h3.586z"/></svg>
                                     S'enregister
                                 </a>
