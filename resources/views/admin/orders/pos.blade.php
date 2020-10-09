@@ -61,12 +61,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="card-deck row d-flex flex-row" style="
-                            height: 88%;
-                            position: relative;
-                            overflow-x: hidden;
-                            overflow-y: auto;
-                        ">
+                        <div class="card-deck row d-flex flex-row">
                         </div>
                     </div>
                 </div>
@@ -474,12 +469,6 @@
         height: 78%;
     }
 
-    .order-products (
-        height: 100%;
-        width: 100%;
-        position: relative;
-    )
-
     .order-box .order-details-box {
         display: -webkit-box;
         display: flex;
@@ -517,6 +506,19 @@
 
     .order-box .order-controls {
         margin-bottom: 20px
+    }
+
+    .order-box .order-products {
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+    .order-box .order-products .card-deck {
+        height: 88%;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .order-box .order-items-table {
