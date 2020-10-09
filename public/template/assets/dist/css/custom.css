@@ -320,9 +320,11 @@
     font-size: 16px;
     text-align: left;
     color: #bdbdbd;
+    border-radius: 10px;
     transition: all 0.3s;
 }
 .settings-sidebar li a:hover {
+    border-radius: 10px;
     color: #206bc4 !important;
 }
 
@@ -341,10 +343,18 @@
 .settings-sidebar li .active {
     color: #206bc4 !important;
     background-color: rgba(32, 106, 196, 0.10);
-
+    border-radius: 10px;
 }
 .settings-sidebar .active .icone-menu {
     color: #206bc4 !important;
+}
+
+.settings-sidebar .avatar-upload {
+    border-radius: 10px !important;
+}
+
+.settings-sidebar .avatar-upload img {
+    border-radius: 10px !important;
 }
 
 
