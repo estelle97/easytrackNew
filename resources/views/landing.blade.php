@@ -282,6 +282,11 @@
         <section id="home" class="hero-area">
             <div class="container">
                 <div class="row justify-content-center">
+                    <div class="col-12 d-lg-none" style="margin-top: -13rem; margin-bottom: 18rem;">
+                        <div class="dashboard-img" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true">
+                            <img src={{asset("template/assets/static/landing/dashboard.png")}} alt="">
+                        </div>
+                    </div>
                     <div class="col-xl-8 col-lg-8 col-md-10">
                         <div class="hero-content">
                             <h1 class="title h2">Améliorez votre Business</h1>
@@ -291,7 +296,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 d-none d-lg-block">
                         <div class="dashboard-img" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true">
                             <img src={{asset("template/assets/static/landing/dashboard.png")}} alt="">
                         </div>
@@ -300,7 +305,7 @@
             </div>
             <!-- <div class="hero-shape"><img src="image/hero-shape.png" alt=""></div> -->
             <div class="custom-background">
-                <div class="area" >
+                <div class="area">
                     <ul class="circles">
                             <li></li>
                             <li></li>

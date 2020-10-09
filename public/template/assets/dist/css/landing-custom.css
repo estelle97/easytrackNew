@@ -78,7 +78,17 @@ profile-menu:focus .greeting {
 }
 
 
+.mobile-header {
+    position: relative;
+    z-index: 10;
+}
+
+
 /* ANIMATED BACKGROUND */
+.hero-area {
+    position: relative;
+    z-index: 0;
+}
 .hero-area .container {
     position: relative;
     z-index: 10 !important;
@@ -238,4 +248,37 @@ profile-menu:focus .greeting {
     .profile-sub-menu .sub-menu-link svg {
         display: none !important;
     }
+
+    .hero-area {
+        padding: 145px 0 0px 0 !important;
+    }
+
+    .hero-area {
+        padding: 145px 0 40px 0 !important;
+    }
+
+    .custom-background {
+        display: none !important;
+    }
+
+    .feature-section {
+        margin-top: 30px !important;
+        padding: 0 0 10px 0 !important;
+    }
+
+    #download {
+        margin-bottom: 1.5rem;
+    }
+
+    #download .section-heading {
+        font-size: 40px !important;
+    }
+
+    #download .badge-link img {
+        height: 50px !important;
+    }
+    #download .badge-link:first-child {
+        margin-right: 1rem;
+    }
+
 }
