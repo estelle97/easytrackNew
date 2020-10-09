@@ -346,3 +346,24 @@
 .settings-sidebar .active .icone-menu {
     color: #206bc4 !important;
 }
+
+
+/* AGENDA */
+.agenda-segment {
+    color: #fff !important;
+    opacity: 0.5;
+    transition: all 0.4s;
+}
+
+.agenda-segment:hover {
+    opacity: 0.8;
+}
+
+.agenda-segment:focus {
+    opacity: 0.5;
+    outline: none !important;
+}
+
+.agenda-segment.active {
+    opacity: 1;
+}

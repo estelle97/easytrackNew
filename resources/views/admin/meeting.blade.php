@@ -5,11 +5,11 @@
 <div class="page-header text-white">
     <div class="row align-items-center">
         <div class="col-auto d-flex align-items-center">
-            <h2 class="page-title" style="opacity: 0.5">
+            <h2 class="page-title">
                 <a class="agenda-segment" href="{{route('admin.teams')}}">Agenda</a>
             </h2>
             <h2 class="page-title ml-3">
-                <a class="agenda-segment" href="{{route('admin.meeting')}}">Reunion</a>
+                <a class="agenda-segment active" href="{{route('admin.meeting')}}">Reunion</a>
             </h2>
         </div>
         <!-- Page title actions -->
