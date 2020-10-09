@@ -4,6 +4,7 @@
     border-radius: 7px;
     transition: all 0.5s;
     cursor: pointer;
+    background-color: #fff;
 }
 
 .profile-menu span {
