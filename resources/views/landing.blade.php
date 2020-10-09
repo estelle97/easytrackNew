@@ -299,7 +299,24 @@
                 </div>
             </div>
             <!-- <div class="hero-shape"><img src="image/hero-shape.png" alt=""></div> -->
+            <div class="custom-background">
+                <div class="area" >
+                    <ul class="circles">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                    </ul>
+                </div >
+            </div>
         </section>
+
 
         <!-- Feature Section -->
         <div class="feature-section">
@@ -545,6 +562,7 @@
     <!-- Plugins JS -->
     <script src={{asset("template/assets/dist/libs/fancybox-master/jquery.fancybox.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/aos-animation/aos.js")}}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 
     <!-- Custom JS -->
     <script src={{asset("template/assets/dist/js/active.js")}}></script>
@@ -559,6 +577,16 @@
             });
         });
     </script>
+    {{-- <script>
+        window.onload = function () {
+            Particles.init({
+                selector: '.parctcle-background',
+                maxParticles: 50,
+                connectParticles: true,
+            });
+        };
+    </script> --}}
+
 </body>
 
 </html>
