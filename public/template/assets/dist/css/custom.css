@@ -15,6 +15,10 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#267fc9",endColorstr="#26b1c3",GradientType=1);
 }
 
+.navbar .dropdown-menu {
+    margin-top: 0.5rem !important;
+}
+
 /* HEADER */
 .nav-item.dropdown.active .dropdown-menu .active .dropdown-item {
     color: #267fc9 !important;
@@ -35,6 +39,12 @@
 }
 .agenda-card .dropdown-toggle:after  {
     display: none !important;
+}
+
+
+/* DROPDOWN */
+.dropdown-menu {
+    border-radius: 10px !important;
 }
 
 /* MODALS */
