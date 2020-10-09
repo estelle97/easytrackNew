@@ -66,6 +66,12 @@
     margin-bottom: 1px
 }
 
+.inbox .message_list .list-group-item.active-chat {
+    color: #000 !important;
+    border-radius: 8px !important;
+    background: rgba(0,0,0,0.05) !important;
+}
+
 .inbox .message_list .list-group-item:hover {
     border-radius: 8px;
     background: rgba(0,0,0,0.05);
