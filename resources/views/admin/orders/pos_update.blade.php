@@ -65,7 +65,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="card-deck row d-flex flex-row">
+                        <div class="card-deck row d-flex flex-row" style="
+                            height: 88%;
+                            position: relative;
+                            overflow-x: hidden;
+                            overflow-y: auto;
+                        ">
                         </div>
                     </div>
                 </div>
@@ -73,7 +78,7 @@
         </div>
         <div class="col-lg-4">
             <div class="card" style="height: 710px; max-height: 710px;">
-                <div class="order-box p-3">
+                <div class="order-box p-3" style="overflow-y: auto;">
                     <div class="order-items-table">
                         <div class="table-responsive">
                             <table class="table table-lightborder">
@@ -518,14 +523,8 @@
 
     .order-products (
         height: 100%;
+        width: 100%;
         position: relative;
-    )
-
-    .card-deck (
-        overflow-y: auto;
-        height: 88%;
-        position: relative;
-        overflow-x: hidden;
     )
 
     .order-box .order-details-box {
