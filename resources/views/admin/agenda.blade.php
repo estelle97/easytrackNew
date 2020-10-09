@@ -4,11 +4,13 @@
 <!-- Page title -->
 <div class="page-header text-white">
     <div class="row align-items-center">
-        <div class="col-auto">
+        <div class="col-auto d-flex align-items-center">
             <h2 class="page-title">
-                Mon Agenda
+                <a class="agenda-segment" href="{{route('admin.teams')}}">Agenda</a>
             </h2>
-            <span class="order-global-date text-white h4 mt-2 text-capitalize"></span>
+            <h2 class="page-title ml-3" style="opacity: 0.5">
+                <a class="agenda-segment" href="{{route('admin.meeting')}}">Reunion</a>
+            </h2>
         </div>
         <!-- Page title actions -->
         <div class="col-auto ml-auto d-print-none">
@@ -40,7 +42,7 @@
 </div>
 <div class="row row-deck row-cards">
     <div class="col-lg-12">
-        <div class="card p-4" style="height: 550px; max-height: 700px; overflow-x: hidden;">
+        <div class="card p-4" style="height: 700px; max-height: 700px; overflow-x: hidden;">
 
             @foreach (Auth::user()->companies->first()->sites as $site)
                 <div class="row">
