@@ -618,6 +618,10 @@
         padding-right: 5px !important
     }
 
+    .order-box .order-items-table .quantity-input {
+        height: 2.6rem !important;
+    }
+
     .order-box .order-items-table .quantity-input .form-control {
         -webkit-box-flex: 0;
         flex: 0 0 45px;
