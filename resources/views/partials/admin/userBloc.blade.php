@@ -11,11 +11,6 @@
 
         <div class="dropdown-menu notification-menu dropdown-menu-right dropdown-menu-card">
             <div class="card">
-                <div class="progress card-progress">
-                    <div class="progress-bar bg-gray" style="width: 45%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                      <span class="sr-only">45% Complete</span>
-                    </div>
-                  </div>
                 <div class="card-body">
                     <div class="float-right">
                         <a href="{{route('admin.settings')}}">Voir les details</a>
