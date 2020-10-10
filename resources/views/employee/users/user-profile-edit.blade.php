@@ -40,7 +40,7 @@
                             style="max-height: 200px; border:none; box-shadow: none; background-color: transparent;">
                             <input type="file" name="photo" class="file" accept="image/*" hidden>
                             <a href="#" id="profile">
-                                <img class="card-img-top" src="{{($user->photo != null) ? asset($user->photo) : "https://picsum.photos/id/700/400"}}" alt="Profile picture">
+                                <img class="card-img-top" src="{{($user->photo != null) ? asset($user->photo) : asset("template/assets/static/avatar.png")}}" alt="Profile picture">
                             </a>
                             <div class="card-body d-flex flex-column">
                                 <div class="d-flex align-items-center mt-auto">
@@ -81,7 +81,7 @@
                                         <div class="tab-pane active show" id="tabs-home-ex6">
 
                                             <div class="row">
-                                            @csrf 
+                                            @csrf
                                                 <div class="col-sm-12 col-md-5">
                                                     <div class="mb-2">
                                                         <label class="form-label">Company</label>

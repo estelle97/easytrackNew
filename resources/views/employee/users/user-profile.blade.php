@@ -36,12 +36,12 @@
         <div class="card col-lg-3 px-3 py-0"
             style="max-height: 200px; border:none; box-shadow: none; background-color: transparent;">
             <a>
-                <img class="card-img-top" style="border-radius: 10px;" src="{{($user->photo != null) ? asset($user->photo) : "https://picsum.photos/id/700/400"}}" alt="Profile picture">
+                <img class="card-img-top" style="border-radius: 10px;" src="{{($user->photo != null) ? asset($user->photo) : asset("template/assets/static/avatar.png")}}" alt="Profile picture">
             </a>
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mt-auto">
                     <div class="ml-2">
-                        <a href="#" class="text-body">{{ $user->name }}</a>
+                        <a href="#" class="h2 text-body">{{ $user->name }}</a>
                         <small class="d-block text-muted"> {{$user->role->name}} </small>
                     </div>
                 </div>

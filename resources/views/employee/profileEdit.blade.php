@@ -2,7 +2,7 @@
 
 
 @section('content')
-    
+
     <!-- Page title -->
     <div class="page-header text-white">
         <div class="row align-items-center">
@@ -58,13 +58,13 @@
         <div class="card col-lg-3 px-3 py-0"
             style="max-height: 200px; border:none; box-shadow: none; background-color: transparent;">
             <a>
-                <img class="card-img-top" src={{(Auth::user()->photo != null) ? Auth::user()->photo : "https://picsum.photos/id/700/400"}} alt="Profile picture">
+                <img class="card-img-top" src={{(Auth::user()->photo != null) ? Auth::user()->photo : asset("template/assets/static/avatar.png")}} alt="Profile picture">
             </a>
 
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mt-auto">
                     <div class="ml-2">
-                        <a class="text-body">{{Auth::user()->name}}</a>
+                        <a class="h2 text-body">{{Auth::user()->name}}</a>
                         <small class="d-block text-muted">Online</small>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
             <form method="post">
             <div class="card p-4">
                 <div class="row">
-                    @csrf 
+                    @csrf
                     <div class="col-md-5">
                         <div class="mb-2">
                             <label class="form-label">Company</label>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="mb-2">
-                            <label class="form-label">Nom complet</label>  
+                            <label class="form-label">Nom complet</label>
                             <input type="text" name="name" class="form-control" placeholder="Saisissez votre nom" value="{{Auth::user()->name}}" required>
                             {!! $errors->first('name','<span class="text-danger"> :message </span>') !!}
                         </div>
@@ -131,5 +131,5 @@
         </form>
         </div>
     </div>
-            
+
 @endsection
