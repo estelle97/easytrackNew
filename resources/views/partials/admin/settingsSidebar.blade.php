@@ -18,16 +18,22 @@
                 <span class="libelle align-middle">Compagnie</span>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a id="notifications" class="settings px-3 py-2 rounded-lg button-click-action">
                 <i class="ri-notification-4-line ri-xl mr-3"></i>
                 <div class="libelle">Notifications</div>
             </a>
-        </li>
+        </li> --}}
         <li>
             <a id="activities" class="settings px-3 py-2 rounded-lg button-click-action">
                 <i class="ri-history-line ri-xl mr-3"></i>
                 <div class="libelle">Activités</div>
+            </a>
+        </li>
+        <li>
+            <a id="subscription-history" class="settings px-3 py-2 rounded-lg button-click-action">
+                <i class="ri-refund-2-line ri-xl mr-3"></i>
+                <div class="libelle">Abonement</div>
             </a>
         </li>
         <li>
