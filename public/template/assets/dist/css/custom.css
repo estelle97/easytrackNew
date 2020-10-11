@@ -40,11 +40,27 @@
 .agenda-card .dropdown-toggle:after  {
     display: none !important;
 }
+.card-max-height {
+    max-height: 700px;
+}
+.card-max-size {
+    max-height: 700px;
+}
 
 
 /* DROPDOWN */
 .dropdown-menu {
     border-radius: 10px !important;
+}
+
+.category-list .dropdown-toggle:after {
+    display: none !important;
+}
+
+
+/* LIST */
+.category-list .list-bordered .list-item, .list-row .list-item {
+    border: none !important;
 }
 
 /* MODALS */

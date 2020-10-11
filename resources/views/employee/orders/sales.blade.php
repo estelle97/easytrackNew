@@ -10,7 +10,7 @@
                     Commandes clients
                 </h2>
             </div>
-            
+
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
@@ -147,7 +147,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-lg-3 p-3" style="max-height: 700px;">
+        <div class="card card-max-height col-lg-3 p-3">
             <div class="row">
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>

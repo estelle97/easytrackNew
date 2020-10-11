@@ -42,7 +42,7 @@
 </div>
 <div class="row row-deck row-cards">
     <div class="col-lg-12">
-        <div class="card p-4" style="height: 700px; max-height: 700px; overflow-x: hidden;">
+        <div class="card card-max-size p-4" style="overflow-x: hidden;">
 
             @foreach (Auth::user()->companies->first()->sites as $site)
                 <div class="row">

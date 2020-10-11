@@ -207,13 +207,13 @@
                                         <span class="avatar-upload-text">Photo </span>
                                 </a>
                             </div>
-                            <div class="col-lg-9 mb-4">
+                            <div class="col-lg-9">
                                 <label class="form-label">Nom complet</label>
                                 <input type="text" id="user-name-add" class="form-control"
                                     placeholder="Saisissez le nom complet..." required>
                                     <span class="text-danger" id="name-error"></span>
                             </div>
-                            <div class="col-lg-12 mb-4">
+                            <div class="col-lg-12 mt-4 mb-4">
                                 <label class="form-label">Adresse email</label>
                                 <input type="email" id="user-email-add" class="form-control"
                                     placeholder="Saisissez l'adresse email d'utilisateur..." required>

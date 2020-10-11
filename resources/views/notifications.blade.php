@@ -42,7 +42,7 @@
 </div>
 
 <div class="row justify-content-center">
-    <div class="view card col-lg-12 ml-4 p-3" style="height: 700px; max-height: 700px;">
+    <div class="view card card-max-size col-lg-12 ml-4 p-3">
         <div class="table-responsive">
             <table class="table card-table table-vcenter">
               <tbody>

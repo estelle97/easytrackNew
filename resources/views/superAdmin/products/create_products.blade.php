@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12" style="max-height: 700px;">
+        <div class="col-lg-12 card-max-height">
             <div class="card">
                 <div class="order-box">
                     <div class="order-items-table">

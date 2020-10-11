@@ -64,7 +64,7 @@
                         @foreach (\App\Company::all() as $com)
                             <tr>
                                 <td id="logo{{$com->id}}">
-                                    <span class="avatar avatar-md" style="background-image: url(https://ui-avatars.com/api/?name={{$com->name}})"></span>
+                                    <span class="avatar avatar-md" style="background-image: url('https://ui-avatars.com/api/?name={{$com->name}}&background=E0F1FF&color=267FC9')"></span>
                                 </td>
                                 <td>
                                     <a href="./user-profile.html" class="text-reset" tabindex="-1"> {{$com->owner->name}} </a>
@@ -495,12 +495,12 @@
                                         <img src="{{asset($com->logo)}}" class="img img-responsive"/>
                                     </a>
                                 </div>
-                                <div class="col-lg-9 mb-4">
+                                <div class="col-lg-9">
                                     <label class="form-label"> Companie </label>
                                     <input type="text" id="name-update{{$com->id}}" class="form-control" value="{{$com->name}}" placeholder="Saisissez le nom complet..." required>
                                     <span class="text-danger" id="name-error{{$com->id}}"></span>
                                 </div>
-                                <div class="col-lg-12 mb-4">
+                                <div class="col-lg-12 mt-4 mb-4">
                                     <label class="form-label">Adresse email</label>
                                     <input type="email" id="email-update{{$com->id}}" class="form-control"
                                     value="{{$com->email}}" placeholder="Saisissez l'adresse email d'utilisateur..." required>
@@ -552,7 +552,7 @@
 
         @foreach (\App\Company::all() as $com)
             <div class="modal modal-blur fade" id="modal-edit-licence{{$com->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Modifier la licence</h5>

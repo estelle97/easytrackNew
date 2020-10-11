@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="col-lg-9">
-            <div class="card mt-5" style="height: 700px; max-height: 700px">
+            <div class="card card-max-size mt-5">
                 <div class="card-header">
                     <h3 class="card-title">Activités générales</h3>
                 </div>

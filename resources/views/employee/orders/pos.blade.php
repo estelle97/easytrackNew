@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
 <div class="container-xl">
     <!-- Page title -->
     <div class="page-header text-white">
@@ -21,10 +21,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8" style="max-height: 700px;">
+        <div class="col-lg-8 card-max-height">
             <div class="card">
-                <div class="order-box"> 
-                    
+                <div class="order-box">
+
                     <div class="order-controls mb-4">
                         <form class="form-inline">
                             <div class="form-group mb-3">
@@ -37,7 +37,7 @@
                             <div class="form-group mb-3">
                                 <label for=""> Client </label>
                                 <select id="customers" class="form-select">
-                                   
+
                                 </select>
                             </div>
                         </form>
@@ -364,7 +364,7 @@
             addElement(element);
         });
     }
-   
+
 
     function order() {
         var token = '{{@csrf_token()}}';
@@ -410,7 +410,7 @@
             data: {
                 _token: token,
                 site_id: site
-                
+
             },
             success: function(data){
                 $("#customers").html(data.customers);

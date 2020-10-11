@@ -26,7 +26,7 @@
                             <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)" /></svg>
                         <span class="h2 align-middle">Nouveau</span>
                     </a>
-                     
+
                 </div>
             </div>
         </div>
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-lg-3 p-3" style="max-height: 700px;">
+        <div class="card card-max-height col-lg-3 p-3">
             <div class="row">
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>

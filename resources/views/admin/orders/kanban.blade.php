@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-9" style="max-height: 700px;">
+        <div class="col-lg-9 card-max-height">
             <div class="easy-kanban-board card pt-2">
                 <div class="row p-3 pb-4">
                     <div class="easy-kanban-column col-lg-4 p-0">
@@ -296,7 +296,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-lg-3 p-3" style="max-height: 700px;">
+        <div class="card card-max-height col-lg-3 p-3">
             <div class="row">
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>
