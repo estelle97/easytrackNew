@@ -3,7 +3,7 @@
         <div>
             <input type="file" name="img[]" class="file" accept="image/*" hidden>
             <a id="profile" class="avatar avatar-upload rounded thumbnail" style="max-width: 60px;">
-                <img src="{{(Auth::user()->companies->first()->logo != null) ? asset(Auth::user()->companies->first()->logo) : "https://picsum.photos/id/700/400"}}" alt="Profile picture">
+                <img src="{{(Auth::user()->companies->first()->logo != null) ? asset(Auth::user()->companies->first()->logo) : "https://ui-avatars.com/api/?background=E4E4E4&color=9B9B9B&name=".Auth::user()->companies->first()->name}}" alt="Profile picture">
             </a>
         </div>
         <div class="ml-3">

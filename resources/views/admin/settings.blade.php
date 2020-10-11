@@ -46,7 +46,7 @@
         style="height: 430px;">
         @include("partials.admin.settingsSidebar")
     </div>
-    <div class="view card card-max-height col-lg-5 ml-4 p-3" style="overflow-y: auto">
+    <div class="view card card-max-size col-lg-5 ml-4 p-3" style="overflow-y: auto; overflow-x: hidden;">
         <div class="row">
             <div class="ml-3">
                 <h3 class="text-gray">Email</h3>
