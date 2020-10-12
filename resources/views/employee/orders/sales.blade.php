@@ -147,7 +147,7 @@
                 </div>
             </div>
         </div>
-        <div class="card card-max-height col-lg-3 p-3">
+        <div class="card col-lg-3 p-3" style="max-height: 480px;">
             <div class="row">
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>
