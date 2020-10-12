@@ -90,7 +90,7 @@
      @foreach (Auth::user()->companies->first()->sites as $site)
         @for ($i = 1; $i <= 7; $i++)
             <div class="modal modal-blur fade" id="modal-show-agenda{{$site->id}}-{{$i}}" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title"> {{$site->name}} - {{Carbon\Carbon::now()->startOfWeek()->addDays($i-1)->locale('fr_FR')->isoFormat('dddd')}} </h5>
@@ -104,7 +104,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="modal-body bg-white">
+                        <div class="modal-body bg-white py-2 px-3" style="max-height: 400px; overflow-y: auto;">
                             <div class="row align-items-end">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
@@ -112,8 +112,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Employées</th>
-                                                    <th>Heure d'arrivé</th>
-                                                    <th>Heure de départ</th>
+                                                    <th>Arrivé</th>
+                                                    <th>Départ</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -138,23 +138,23 @@
                                                             </div>
                                                         </td>
                                                         <td class="text-right">
-                                                            <a href="#" class="mr-4" data-toggle="modal" data-target="#modal-show-team{{$team->id}}">Afficher l'équipe</a>
-                                                            <a href="#" data-toggle="modal" data-target="#modal-edit-team">Modifier l'équipe</a>
-                                                            <a href="#" class="text-red ml-4" onclick="destroyTeam({{$team->id}})">Supprimer</a>
+                                                            <a href="#" class="btn btn-outline btn-pill py-2 px-1 mr-2" data-toggle="modal" data-target="#modal-show-team{{$team->id}}"><i class="ri-eye-line ri-xl"></i></a>
+                                                            <a href="#" class="btn btn-outline btn-pill py-2 px-1 mr-2" data-toggle="modal" data-target="#modal-edit-team"><i class="ri-pencil-line ri-xl"></i></a>
+                                                            <a href="#" class="btn btn-outline btn-pill py-2 px-1 text-red" onclick="destroyTeam({{$team->id}})"><i class="ri-close-line ri-xl"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
-                                    <button type="button" class="btn btn-white" style="width: 100%;" data-toggle="modal" data-target="#modal-create-team{{$site->id}}-{{$i}}">
+                                    <button type="button" class="btn btn-white btn-block mt-2" data-toggle="modal" data-target="#modal-create-team{{$site->id}}-{{$i}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></svg>
                                         Ajouter une nouvelle équipe
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer mt-2">
                             <button type="button" class="btn btn-link link-secondary mr-auto"
                                 data-dismiss="modal">Annuler</button>
                             <button type="button" class="btn btn-primary" style="width: 60%;" data-dismiss="modal">Sauvegarder</button>
@@ -203,7 +203,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-3">
-                                    <button type="button" class="btn btn-whhite btn-block"  onclick="addUserToTeam({{$site->id}},{{$i}})">
+                                    <button type="button" class="btn btn-white btn-block"  onclick="addUserToTeam({{$site->id}},{{$i}})">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></svg>
                                         Ajouter
                                     </button>
@@ -310,7 +310,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-right">
-                                                        <a class="mt-1 text-blue" onclick="detachUserToTeam({{$team->id}},{{$user->id}})">
+                                                        <a class="mt-1 text-red button-click-action" onclick="detachUserToTeam({{$team->id}},{{$user->id}})">
                                                             Supprimer
                                                         </a>
                                                     </td>
@@ -528,4 +528,9 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dmuy/MDTimePicker@1.0.2/mdtimepicker.css">
+    <style>
+        th {
+            background-color: #fff !important;
+        }
+    </style>
 @endsection

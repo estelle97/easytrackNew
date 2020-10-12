@@ -13,7 +13,7 @@
                                 d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z"
                                 fill="rgba(255,255,255,1)" /></svg>
                     </a>
-                    Gestion des utilisateurs
+                    Compte de l'utilisateur
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -43,7 +43,7 @@
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mt-auto">
                     <div class="ml-2">
-                        <a href="#" class="text-body">{{ $user->name }}</a>
+                        <a class="h2 text-body">{{ $user->name }}</a>
                         <small class="d-block text-muted">Online</small>
                     </div>
                 </div>

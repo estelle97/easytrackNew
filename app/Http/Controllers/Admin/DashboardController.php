@@ -87,6 +87,16 @@ class DashboardController extends Controller
         $user->address = $request->address;
         $user->phone = $request->phone;
         $user->bio = $request->bio;
+
+        $photo = $request->file('photo');
+        if($photo){
+            $path = 'template/assets/static/users/'.Auth::user()->companies->first()->name.'/admin/';
+            $fileName = $request->username.'.'.$photo->extension();
+            $name = $path.$fileName;
+            $photo->move($path,$name);
+            $user->photo = $name;
+        }
+
         $user->save();
 
         flashy()->info("Profil mis à jour avec succès!");
