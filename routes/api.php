@@ -102,4 +102,11 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('attachPermissionsToUser/{user}', 'API\UserController@attachPermissionsToUser');
     Route::post('detachPermissionsToUser/{user}', 'API\UserController@detachPermissionsToUser');
 
+    Route::get('notifications', 'API\NotificationController@index');
+    Route::post('notifications/{id}', 'API\NotificationController@changeState');
+
+    Route::get('userSites', 'API\AgendaController@sites');
+    Route::get('teams/{id}', 'API\AgendaController@index');
+    Route::get('details/{id}/sites/{siteId}', 'API\AgendaController@details');
+
 });
