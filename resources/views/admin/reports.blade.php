@@ -86,7 +86,7 @@
         <div class="card" data-color="red">
             <div class="card-body">
                 <div class="text-muted font-weight-normal mt-0">Revenue</div>
-                <h3 class="h2 mt-2 mb-3 profits">0 Fcfa</h3>
+                <h3 class="h1 mt-2 mb-3 profits">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
                     {{-- <span class="text-red d-inline-flex align-items-center lh-1">
                         -3.1% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
@@ -106,7 +106,7 @@
         <div class="card" data-color="red">
             <div class="card-body">
                 <div class="text-muted font-weight-normal mt-0">Ventes</div>
-                <h3 class="h2 mt-2 mb-3 sales">0 Fcfa</h3>
+                <h3 class="h1 mt-2 mb-3 sales">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
                     {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                         5.2% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
@@ -126,7 +126,7 @@
         <div class="card" data-color="red">
             <div class="card-body">
                 <div class="text-muted font-weight-normal mt-0">Achats</div>
-                <h3 class="h2 mt-2 mb-3 purchases">0 Fcfa</h3>
+                <h3 class="h1 mt-2 mb-3 purchases">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
                     {{-- <span class="text-red d-inline-flex align-items-center lh-1">
                         -3.1% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
