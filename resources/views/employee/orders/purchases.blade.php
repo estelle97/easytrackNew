@@ -11,11 +11,6 @@
                     Bon de commandes
                 </h2>
             </div>
-            <div class="col-auto">
-                <div class="text-white text-h5 mt-2">
-                    1-10 of 30
-                </div>
-            </div>
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
@@ -165,23 +160,6 @@
                     <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez dépensé </h5>
                     <h1 style="font-size: 2.5rem;"> {{Auth::user()->employee->site->allPurchases()}} FCFA</h1>
                     <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
-                </div>
-                <div class="col-md-12 mt-3">
-                    <div class="row justify-content-between">
-                        <div class="col-md-12 pl-2 pr-2 mb-3">
-                            <div class="stat-content bg-blue-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
-                                <h1>300</h1>
-                                <h4>Articles achetés</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12 pl-2 pr-2 mb-3">
-                            <div class="stat-content bg-orange-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
-                                <h1>10</h1>
-                                <h4>Catégorie</h4>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

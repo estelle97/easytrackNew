@@ -139,7 +139,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card">
+            <div class="card" style="max-height: 445px;">
                 <div id="chart-development-activity" class="mt-4"></div>
                 <div class="table-responsive">
                     <table class="table card-table table-vcenter">
@@ -190,7 +190,7 @@
                                     </tr>
                                 @endforeach
                             @endif
-                                
+
                         </tbody>
                     </table>
                 </div>

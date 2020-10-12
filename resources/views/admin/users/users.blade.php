@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <div class="col-auto card-actions">
-                            <span class="dropdown">
+                            <span class="dropdown button-click-action">
                                 <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
                                             height="20">
