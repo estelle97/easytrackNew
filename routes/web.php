@@ -249,6 +249,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/profile/edit', ['uses' => 'Employee\DashboardController@profileEdit' , 'as' => 'employee.profile.edit']);
     Route::post('employee/profile/edit', ['uses' => 'Employee\DashboardController@profileUpdate' , 'as' => 'employee.profile.update']);
     Route::get('employee/profile/settings', ['uses' => 'Employee\DashboardController@profileSettings' , 'as' => 'employee.profile.settings']);
+    Route::get('employee/settings', 'Employee\SettingController@index')->name('employee.settings');
     Route::get('employee/dashboard', 'Employee\DashboardController@index')->name('employee.dashboard');
     Route::get('purchases', 'Employee\PurchaseController@index');
     Route::get('employee/teams', 'Employee\AgendaController@teams')->name('employee.team');

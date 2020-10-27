@@ -111,11 +111,7 @@
                                                 Notifications
                                             </a>
                                             <a class="sub-menu-link" href="{{route('admin.profile')}}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
-                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
                                                 Profle
                                             </a>
                                         @endif
@@ -125,11 +121,7 @@
                                                 Tableau de bord
                                             </a>
                                             <a class="sub-menu-link" href="{{route('easytrack.profile')}}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
-                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
                                                 Profle
                                             </a>
                                             <a class="sub-menu-link" href="#">
@@ -145,8 +137,15 @@
                                     </div>
                                 </div>
                             @else
-                                <a href="{{route('login')}}" class="btn btn--transparent "> Connexion </a>
-                                <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
+                                {{-- <a href="{{route('login')}}" class="btn btn--transparent "> Connexion </a>
+                                <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a> --}}
+                                <a class="menu-link" style="color: #000;" href="{{route('register')}}">
+                                    S'inscrire
+                                </a>
+                                <a class="menu-link ml-5" style="color: #000;" href="{{route('login')}}">
+                                    Mon compte
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="ml-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 14.252v2.09A6 6 0 0 0 6 22l-2-.001a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm7.418 6h3.586v2h-3.586l1.829 1.828-1.414 1.415L15.59 18l4.243-4.243 1.414 1.415L19.418 17z"/></svg>
+                                </a>
                             @endif
                         </div>
                     </div>
@@ -201,11 +200,7 @@
                                         Notifications
                                     </a>
                                     <a class="sub-menu-link" href="{{route('employee.profile')}}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
                                         Profle
                                     </a>
                                 @endif
@@ -219,11 +214,7 @@
                                         Notifications
                                     </a>
                                     <a class="sub-menu-link" href="{{route('admin.profile')}}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
                                         Profle
                                     </a>
                                 @endif
@@ -233,11 +224,7 @@
                                         Tableau de bord
                                     </a>
                                     <a class="sub-menu-link" href="{{route('easytrack.profile')}}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
                                         Profle
                                     </a>
                                     <a class="sub-menu-link" href="#">
@@ -253,10 +240,15 @@
                             @else
                                 <a class="sub-menu-link" href="#home">Accueil</a>
                                 <a class="sub-menu-link" href="#mobile">Mobile</a>
-                                <a class="sub-menu-link" href="">Contact</a>
-
-                                <a href="{{route('login')}}" class="btn btn-transparent hvr-bounce-to-right"> Se Connecter </a>
-                                <a href="{{route('register')}}" class="btn btn--primary hvr-shine">S'enregister</a>
+                                <a class="sub-menu-link mb-4" href="">Contact</a>
+                                <a class="sub-menu-link" href="{{route('login')}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6 8V7a6 6 0 1 1 12 0v1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2zm13 2H5v10h14V10zm-8 5.732a2 2 0 1 1 2 0V18h-2v-2.268zM8 8h8V7a4 4 0 1 0-8 0v1z"/></svg>
+                                    Se connecter
+                                </a>
+                                <a class="sub-menu-link" href="{{route('register')}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 14.252v2.09A6 6 0 0 0 6 22l-2-.001a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm6.586 6l-1.829-1.828 1.415-1.415L22.414 18l-4.242 4.243-1.415-1.415L18.586 19H15v-2h3.586z"/></svg>
+                                    S'enregister
+                                </a>
                             @endif
                         </div>
                     </div>
@@ -270,6 +262,11 @@
         <section id="home" class="hero-area">
             <div class="container">
                 <div class="row justify-content-center">
+                    <div class="col-12 d-lg-none" style="margin-top: -13rem; margin-bottom: 18rem;">
+                        <div class="dashboard-img" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true">
+                            <img src={{asset("template/assets/static/landing/dashboard.png")}} alt="">
+                        </div>
+                    </div>
                     <div class="col-xl-8 col-lg-8 col-md-10">
                         <div class="hero-content">
                             <h1 class="title h2">Améliorez votre Business</h1>
@@ -279,7 +276,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 d-none d-lg-block">
                         <div class="dashboard-img" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true">
                             <img src={{asset("template/assets/static/landing/dashboard.png")}} alt="">
                         </div>
@@ -287,7 +284,24 @@
                 </div>
             </div>
             <!-- <div class="hero-shape"><img src="image/hero-shape.png" alt=""></div> -->
+            <div class="custom-background">
+                <div class="area">
+                    <ul class="circles">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                    </ul>
+                </div >
+            </div>
         </section>
+
 
         <!-- Feature Section -->
         <div class="feature-section">
@@ -533,6 +547,7 @@
     <!-- Plugins JS -->
     <script src={{asset("template/assets/dist/libs/fancybox-master/jquery.fancybox.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/aos-animation/aos.js")}}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 
     <!-- Custom JS -->
     <script src={{asset("template/assets/dist/js/active.js")}}></script>
@@ -547,6 +562,16 @@
             });
         });
     </script>
+    {{-- <script>
+        window.onload = function () {
+            Particles.init({
+                selector: '.parctcle-background',
+                maxParticles: 50,
+                connectParticles: true,
+            });
+        };
+    </script> --}}
+
 </body>
 
 </html>

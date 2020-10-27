@@ -47,7 +47,7 @@
                             <span class="h2 align-middle">Ajouter</span>
                         </a>
                     </div>
-                    <span class="dropdown ml-4">
+                    <span class="dropdown button-click-action ml-4">
                         <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                 height="24">
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <div class="col-auto card-actions">
-                            <span class="dropdown">
+                            <span class="dropdown button-click-action">
                                 <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
                                             height="20">
@@ -207,13 +207,13 @@
                                         <span class="avatar-upload-text">Photo </span>
                                 </a>
                             </div>
-                            <div class="col-lg-9 mb-4">
+                            <div class="col-lg-9">
                                 <label class="form-label">Nom complet</label>
                                 <input type="text" id="user-name-add" class="form-control"
                                     placeholder="Saisissez le nom complet..." required>
                                     <span class="text-danger" id="name-error"></span>
                             </div>
-                            <div class="col-lg-12 mb-4">
+                            <div class="col-lg-12 mt-4 mb-4">
                                 <label class="form-label">Adresse email</label>
                                 <input type="email" id="user-email-add" class="form-control"
                                     placeholder="Saisissez l'adresse email d'utilisateur..." required>

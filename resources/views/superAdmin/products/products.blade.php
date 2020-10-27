@@ -35,7 +35,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="card col-lg-3 p-3">
+    <div class="card col-lg-3 p-3" style="height: 430px; overflow-y: auto;">
         <div class="row">
             <div class="col-lg-6">
                 <h2 class="">
@@ -59,8 +59,7 @@
             <div class="category-list list list-row">
                 @foreach (App\Category::all() as $cat)
                     <div class="list-item" id="category{{$cat->id}}">
-                        <div><input type="checkbox" class="form-check-input"></div>
-                        <a href="#">
+                        <a class="pl-0 pr-1">
                             <span class="avatar rounded"
                                 style="background-image: url('https://ui-avatars.com/api/?name={{$cat->name}};"></span>
                         </a>
@@ -69,22 +68,31 @@
                             <small class="d-block text-muted text-truncate mt-n1"> {{$cat->products->count()}} </small>
                         </div>
 
-                        <a href="#" class="btn-e-icon text-black" data-toggle="modal" data-target="#modal-edit-category{{$cat->id}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                height="20">
-                                <path fill="none" d="M0 0h24v24H0z" />
-                                <path
-                                    d="M15.728 9.686l-1.414-1.414L5 17.586V19h1.414l9.314-9.314zm1.414-1.414l1.414-1.414-1.414-1.414-1.414 1.414 1.414 1.414zM7.242 21H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 21z" />
-                            </svg>
-                        </a>
-                        <a  class="btn-e-icon text-black" onclick="deleteCategory({{$cat->id}})">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                width="20" height="20">
-                                <path fill="none" d="M0 0h24v24H0z" />
-                                <path
-                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                            </svg>
-                        </a>
+                        <div class="item-actions pl-1 pr-0 ml-auto mb-3">
+                            <span class="dropdown button-click-action">
+                                <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                            height="20">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path
+                                                d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                        </svg>
+                                </div>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <span class="dropdown-header">Actions</span>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-edit-category{{$cat->id}}">
+                                        Modifier
+                                    </a>
+                                    {{-- <div class="dropdown-divider"></div> --}}
+                                    <a class="dropdown-item button-click-action"  onclick="deleteCategory({{$cat->id}})">
+                                        Supprimer
+                                    </a>
+                                </div>
+                            </span>
+                        </div>
+
+
                     </div>
                 @endforeach
             </div>
@@ -114,7 +122,7 @@
                                     </a>
                                 </td>
                                 <td><span class="text-muted"> {{$product->code}} </span></td>
-                                <td id="product-name{{$product->id}}">  
+                                <td id="product-name{{$product->id}}">
                                     {{$product->name}}
                                 </td>
                                 <td id="product-category{{$product->id}}">
@@ -167,7 +175,7 @@
 
     {{-- Modal Add Category--}}
     <div class="modal modal-blur fade" id="modal-create-category" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Ajouter une categorie</h5>
@@ -270,7 +278,7 @@
     {{-- Modal Update Category--}}
     @foreach (App\Category::all() as $cat)
         <div class="modal modal-blur fade" id="modal-edit-category{{$cat->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title"> Modifier une catégorie </h5>

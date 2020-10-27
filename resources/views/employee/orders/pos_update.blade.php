@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    
+
 <div class="container-xl">
     <!-- Page title -->
     <div class="page-header text-white">
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8" style="max-height: 700px;">
+        <div class="col-lg-8 card-max-height">
             <div class="card">
                 <div class="order-box">
                     <div class="order-details-box">
@@ -409,7 +409,7 @@
             addElement(element);
         });
     }
-   
+
 
     function order() {
         var token = '{{@csrf_token()}}';
@@ -454,7 +454,7 @@
             method: 'get',
             data: {
                 site_id: site
-                
+
             },
             success: function(data){
                 $("#customers").html(data.customers);

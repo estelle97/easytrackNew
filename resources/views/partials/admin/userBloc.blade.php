@@ -11,11 +11,6 @@
 
         <div class="dropdown-menu notification-menu dropdown-menu-right dropdown-menu-card">
             <div class="card">
-                <div class="progress card-progress">
-                    <div class="progress-bar bg-gray" style="width: 45%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                      <span class="sr-only">45% Complete</span>
-                    </div>
-                  </div>
                 <div class="card-body">
                     <div class="float-right">
                         <a href="{{route('admin.settings')}}">Voir les details</a>
@@ -83,13 +78,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href={{route('admin.profile')}}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                    class="icon dropdown-item-icon">
-                    <path fill="none" d="M0 0h24v24H0z" />
-                    <path
-                        d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
-                </svg>
-                Mon Profile
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                Mon compte
             </a>
             <a class="dropdown-item" href="{{route('admin.teams')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm3 8H4v8h16v-8zm-5-6H9v2H7V5H4v4h16V5h-3v2h-2V5zm-9 8h2v2H6v-2zm5 0h2v2h-2v-2zm5 0h2v2h-2v-2z"/></svg>

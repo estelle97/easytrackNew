@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-9" style="max-height: 700px;">
+        <div class="col-lg-9 card-max-height">
             <div class="easy-kanban-board card pt-2">
                 <div class="row p-3 pb-4">
                     <div class="easy-kanban-column col-lg-4 p-0">
@@ -37,7 +37,7 @@
                             </div>
                             <div class="column-body col-lg-12 mt-4">
 
-                                
+
                                     @foreach (Auth::user()->employee->site->sales->where('status',0)->reverse() as $sale)
                                     <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
@@ -50,7 +50,7 @@
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
-        
+
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href={{route('employee.sales.show', $sale->id)}}>
                                                                     Voir la facture
@@ -110,7 +110,7 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                
+
 
                                 <a href={{route('employee.sales.pos')}} class="btn btn-light btn-pill btn-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -126,7 +126,7 @@
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Servi</h3>
                             </div>
                             <div class="column-body col-lg-12 mt-4">
-                                
+
                                     @foreach (Auth::user()->employee->site->sales->where('status',1)->reverse() as $sale)
                                         <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
@@ -139,7 +139,7 @@
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
-        
+
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href={{route('employee.sales.show', $sale->id)}}>
                                                                     Voir la facture
@@ -199,7 +199,7 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                
+
                             </div>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Payé</h3>
                             </div>
                             <div class="column-body col-lg-12 mt-4">
-                                
+
                                     @foreach (Auth::user()->employee->site->sales->where('status',2)->reverse()->take(10) as $sale)
                                         <div class="easy-kanban-card card">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
@@ -223,7 +223,7 @@
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
-        
+
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href={{route('employee.sales.show', $sale->id)}}>
                                                                     Voir la facture
@@ -289,14 +289,14 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card col-lg-3 p-3" style="max-height: 700px;">
+        <div class="card card-max-height col-lg-3 p-3">
             <div class="row">
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>
@@ -331,7 +331,7 @@
             </div>
         </div>
     </div>
-            
+
 @endsection
 
 

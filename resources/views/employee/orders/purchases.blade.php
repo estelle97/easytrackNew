@@ -11,29 +11,24 @@
                     Bon de commandes
                 </h2>
             </div>
-            <div class="col-auto">
-                <div class="text-white text-h5 mt-2">
-                    1-10 of 30
-                </div>
-            </div>
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a class="text-white mr-3 mb-0" onclick="createPurchase()">
+                    <a class="text-white mb-0" onclick="createPurchase()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
                             class="mr-2">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)" /></svg>
                         <span class="h2 align-middle">Nouveau</span>
                     </a>
-                     
+
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-9">
-            <div class="card">
+            <div class="card card-max-size" style="overflow-y: auto;">
                 <div class="table-responsive">
                     <table id="purchases" class="table table-vcenter card-table">
                             <thead>
@@ -156,7 +151,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-lg-3 p-3" style="max-height: 700px;">
+        <div class="card col-lg-3 p-3" style="max-height: 480px;">
             <div class="row">
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>
@@ -165,23 +160,6 @@
                     <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez dépensé </h5>
                     <h1 style="font-size: 2.5rem;"> {{Auth::user()->employee->site->allPurchases()}} FCFA</h1>
                     <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
-                </div>
-                <div class="col-md-12 mt-3">
-                    <div class="row justify-content-between">
-                        <div class="col-md-12 pl-2 pr-2 mb-3">
-                            <div class="stat-content bg-blue-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
-                                <h1>300</h1>
-                                <h4>Articles achetés</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12 pl-2 pr-2 mb-3">
-                            <div class="stat-content bg-orange-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
-                                <h1>10</h1>
-                                <h4>Catégorie</h4>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="row row-deck row-cards">
-        <div class="card">
+        <div class="card card-max-size">
             <div class="table-responsive">
                 <table id="sites" class="table card-table table-vcenter text-nowrap datatable">
                     <thead>

@@ -34,7 +34,7 @@
                         <path
                             d="M19.938 8H21a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1.062A8.001 8.001 0 0 1 12 23v-2a6 6 0 0 0 6-6V9A6 6 0 1 0 6 9v7H3a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1.062a8.001 8.001 0 0 1 15.876 0zM3 10v4h1v-4H3zm17 0v4h1v-4h-1zM7.76 15.785l1.06-1.696A5.972 5.972 0 0 0 12 15a5.972 5.972 0 0 0 3.18-.911l1.06 1.696A7.963 7.963 0 0 1 12 17a7.963 7.963 0 0 1-4.24-1.215z"
                             fill="rgba(255,255,255,1)" /></svg>
-                    Suupport
+                    Support
                 </a>
             </div>
         </div>
@@ -46,7 +46,7 @@
         style="height: 430px;">
         @include("partials.admin.settingsSidebar")
     </div>
-    <div class="view card col-lg-5 ml-4 p-3">
+    <div class="view card card-max-size col-lg-5 ml-4 p-3" style="overflow-y: auto; overflow-x: hidden;">
         <div class="row">
             <div class="ml-3">
                 <h3 class="text-gray">Email</h3>
@@ -247,4 +247,6 @@
 
 @section('styles')
 <link href={{asset("template/assets/dist/css/easytrak-payments.min.css")}} rel="stylesheet" />
+<style>
+</style>
 @endsection

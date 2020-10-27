@@ -13,7 +13,7 @@
         <!-- Page title actions -->
         <div class="col-auto ml-auto d-print-none mb-3">
             <div class="d-flex align-items-center">
-                <span class="dropdown">
+                <span class="dropdown button-click-action">
                     <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                             <path fill="none" d="M0 0h24v24H0z" />
@@ -32,12 +32,12 @@
                         @endforeach
                     </div>
                 </span>
-                <span class="dropdown ml-5">
+                <span class="dropdown button-click-action ml-5">
                     <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-2">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-8h4v2h-6V7h2v5z" fill="rgba(255,255,255,1)" /></svg>
-                        <span class="selected-period align-middle" data-period="all"> Global </span>
+                        <span class="h2 selected-period align-middle" data-period="all"> Global </span>
                     </div>
 
                     <div class="dropdown-menu dropdown-menu-right mt-3">
@@ -86,7 +86,7 @@
         <div class="card" data-color="red">
             <div class="card-body">
                 <div class="text-muted font-weight-normal mt-0">Revenue</div>
-                <h3 class="h2 mt-2 mb-3 profits">0 Fcfa</h3>
+                <h3 class="h1 mt-2 mb-3 profits">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
                     {{-- <span class="text-red d-inline-flex align-items-center lh-1">
                         -3.1% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
@@ -106,7 +106,7 @@
         <div class="card" data-color="red">
             <div class="card-body">
                 <div class="text-muted font-weight-normal mt-0">Ventes</div>
-                <h3 class="h2 mt-2 mb-3 sales">0 Fcfa</h3>
+                <h3 class="h1 mt-2 mb-3 sales">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
                     {{-- <span class="text-green d-inline-flex align-items-center lh-1">
                         5.2% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"
@@ -126,7 +126,7 @@
         <div class="card" data-color="red">
             <div class="card-body">
                 <div class="text-muted font-weight-normal mt-0">Achats</div>
-                <h3 class="h2 mt-2 mb-3 purchases">0 Fcfa</h3>
+                <h3 class="h1 mt-2 mb-3 purchases">0 Fcfa</h3>
                 <p class="mb-0 text-muted">
                     {{-- <span class="text-red d-inline-flex align-items-center lh-1">
                         -3.1% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24"

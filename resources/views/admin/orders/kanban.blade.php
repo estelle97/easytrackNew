@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-9" style="max-height: 700px;">
+        <div class="col-lg-9 card-max-height">
             <div class="easy-kanban-board card pt-2">
                 <div class="row p-3 pb-4">
                     <div class="easy-kanban-column col-lg-4 p-0">
@@ -46,7 +46,7 @@
                                                         <h2 class="m-0">S0-{{$sale->code}} </h2>
                                                     </div>
                                                     <div class="col-auto pr-1 ml-auto">
-                                                        <span class="dropdown">
+                                                        <span class="dropdown button-click-action">
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
@@ -135,7 +135,7 @@
                                                         <h2 class="m-0">S0-{{$sale->code}} </h2>
                                                     </div>
                                                     <div class="col-auto pr-1 ml-auto">
-                                                        <span class="dropdown">
+                                                        <span class="dropdown button-click-action">
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
@@ -219,7 +219,7 @@
                                                         <h2 class="m-0">S0-{{$sale->code}} </h2>
                                                     </div>
                                                     <div class="col-auto pr-1 ml-auto">
-                                                        <span class="dropdown">
+                                                        <span class="dropdown button-click-action">
                                                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(120,120,120,1)"/></svg>
                                                             </div>
@@ -296,7 +296,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-lg-3 p-3" style="max-height: 700px;">
+        <div class="card card-max-height col-lg-3 p-3">
             <div class="row">
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>

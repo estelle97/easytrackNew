@@ -42,14 +42,14 @@
 </div>
 
 <div class="row justify-content-center">
-    <div class="view card col-lg-12 ml-4 p-3" style="height: 700px; max-height: 700px;">
+    <div class="view card card-max-size col-lg-12 ml-4 p-3">
         <div class="table-responsive">
             <table class="table card-table table-vcenter">
               <tbody>
                   @foreach (Auth::user()->notifications as $notif)
                     <tr class="notification-line">
                         <td class="w-1 notification-line-icon">
-                            <span class="bg-yellow-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
+                            <span class="bg-blue-lt text-white stamp mr-3"><svg xmlns="http://www.w3.org/2000/svg"
                                     class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z"></path>

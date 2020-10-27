@@ -40,11 +40,28 @@
 .agenda-card .dropdown-toggle:after  {
     display: none !important;
 }
+.card-max-height {
+    max-height: 700px;
+}
+.card-max-size {
+    height: 700px;
+    max-height: 700px;
+}
 
 
 /* DROPDOWN */
 .dropdown-menu {
     border-radius: 10px !important;
+}
+
+.category-list .dropdown-toggle:after {
+    display: none !important;
+}
+
+
+/* LIST */
+.category-list .list-bordered .list-item, .list-row .list-item {
+    border: none !important;
 }
 
 /* MODALS */
@@ -320,9 +337,11 @@
     font-size: 16px;
     text-align: left;
     color: #bdbdbd;
+    border-radius: 10px;
     transition: all 0.3s;
 }
 .settings-sidebar li a:hover {
+    border-radius: 10px;
     color: #206bc4 !important;
 }
 
@@ -341,10 +360,18 @@
 .settings-sidebar li .active {
     color: #206bc4 !important;
     background-color: rgba(32, 106, 196, 0.10);
-
+    border-radius: 10px;
 }
 .settings-sidebar .active .icone-menu {
     color: #206bc4 !important;
+}
+
+.settings-sidebar .avatar-upload {
+    border-radius: 10px !important;
+}
+
+.settings-sidebar .avatar-upload img {
+    border-radius: 10px !important;
 }
 
 

@@ -14,7 +14,7 @@
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a class="text-white mr-3 mb-0" onclick="createPurchase()">
+                    <a class="text-white button-click-action mr-3 mb-0" onclick="createPurchase()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
                             class="mr-2">
                             <path fill="none" d="M0 0h24v24H0z" />
@@ -28,7 +28,7 @@
     </div>
     <div class="row">
         <div class="col-lg-9">
-            <div class="card p-2">
+            <div class="card card-max-size p-2" style="overflow-y: auto;">
                 <div class="table-responsive">
                     <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
                             <thead>
@@ -145,7 +145,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-lg-3 p-3" style="max-height: 700px;">
+        <div class="card col-lg-3 p-3" style="max-height: 480px;">
             <div class="row">
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>

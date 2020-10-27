@@ -59,7 +59,7 @@
 </div>
 <div class="row row-deck row-cards">
     <div class="col-lg-12">
-        <div class="card" style="max-height: 700px">
+        <div class="card card-max-height">
             <section class="inbox">
                 <div class="container-fluid">
                     <div class="row">

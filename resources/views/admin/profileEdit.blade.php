@@ -8,14 +8,14 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    <a href={{route('admin.dashboard')}} class="mr-2">
+                    <a href={{route('admin.profile')}} class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path
                                 d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z"
                                 fill="rgba(255,255,255,1)" /></svg>
                     </a>
-                    Gestion de l'utilisateur
+                    Edition du compte
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -36,15 +36,16 @@
     <div class="row">
         <div class="card col-lg-3 px-3 py-0"
             style="max-height: 200px; border:none; box-shadow: none; background-color: transparent;">
-            <a>
-                <img class="card-img-top" src={{(Auth::user()->photo != null) ? Auth::user()->photo : "https://picsum.photos/id/700/400"}} alt="Profile picture">
+            <input type="file" name="photo" class="file" accept="image/*" hidden>
+            <a id="profile" class="button-click-action">
+                <img class="card-img-top" style="border-radius: 10px;" src={{(Auth::user()->photo != null) ? Auth::user()->photo : asset("template/assets/static/avatar.png")}} alt="Profile picture">
             </a>
 
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mt-auto">
                     <div class="ml-2">
-                        <a class="text-body">{{Auth::user()->name}}</a>
-                        <small class="d-block text-muted">Online</small>
+                        <a class="h2 text-body">{{Auth::user()->name}}</a>
+                        <small class="d-block text-muted">En ligne</small>
                     </div>
                 </div>
             </div>
@@ -209,7 +210,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
+                        <button type="button" class="savepwd btn btn-primary" style="width: 100%;">
                             Sauvegarder
                         </button>
                     </div>
@@ -218,4 +219,30 @@
         </div>
     </div>
 
+@endsection
+@section('scripts')
+    <script>
+        $(".savepwd").click(function(){
+            $('#modal-edit-password').modal('hide');
+            $('.modal-backdrop').remove();
+        });
+        $("#profile").click(function(){
+            $(".file").click();
+
+            $('input[type="file"]').change(function(e) {
+                var fileName = e.target.files[0].name;
+                // $("#file").val(fileName);
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    // get loaded data and render thumbnail.
+                    pic = "<img style='border-radius: 10px;' src='"+e.target.result+"' class='card-img-top' />";
+                    $("#profile").html(pic);
+                    // document.getElementById("preview").src = e.target.result;
+                };
+                // read the image file as a data URL.
+                reader.readAsDataURL(this.files[0]);
+            });
+        })
+    </script>
 @endsection

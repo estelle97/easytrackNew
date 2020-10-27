@@ -21,9 +21,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8" style="max-height: 700px;">
-            <div class="card">
-                <div class="order-box">
+        <div class="col-lg-4">
+            <div class="card" style="height: 710px; max-height: 710px;">
+                <div class="order-box p-3">
                     <div class="order-details-box">
                         <div class="order-main-info"><span>Commande </span><strong>SO-{{$sale->code}}</strong></div>
                         <div class="order-sub-info"><span>Créer le</span><strong class="order-sub-info-date">{{ date('M d, Y', strtotime($sale->created_at))}}</strong>
@@ -65,18 +65,28 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="card-deck row d-flex flex-row">
+                        <div class="card-deck row d-flex flex-row" style="
+                            height: 88%;
+                            position: relative;
+                            overflow-x: hidden;
+                            overflow-y: auto;
+                        ">
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card" style="height: 710px; max-height: 710px;">
+                <div class="order-box p-3" style="overflow-y: auto;">
                     <div class="order-items-table">
                         <div class="table-responsive">
                             <table class="table table-lightborder">
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th>Nom</th>
                                         <th>Quantité</th>
-                                        <th>Prix unitaire</th>
+                                        <th>PU</th>
                                         <th>sous total</th>
                                         <th></th>
                                     </tr>
@@ -126,10 +136,8 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
         <div class="col-lg-4">
             <div class="card p-3 order-foot">
@@ -269,7 +277,7 @@
     function injectCardList(itemList) {
         $.each(itemList, function (key, item) {
             $('.card-deck').append(
-                '<div class="col-md-1 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
+                '<div class="col-md-4 product-card d-flex flex-column align-items-center card border-0 pt-3 mb-0" data-imgsrc="'+item.photo+'" data-id="'+item.id+'"  data-qty="'+item.qty+'" data-price="'+item.price+'" value="'+item.id+'">' +
                 '    <img class="w-50" src="'+item.photo+'" alt="Card image cap">' +
                 '    <div class="card-body text-center">' +
                 '    <h5 class="card-title">'+item.name+'</h5>' +
@@ -339,8 +347,8 @@
     function addElement(el) {
         if(products.includes(el.data('id'))){
             updateQty(el.data('id'));
-        } else{
-            $('.order-list').prepend(
+        } else {
+            /* $('.order-list').prepend(
                 '<tr id="product-'+el.data("id")+'">' +
                 '    <td>' +
                 '        <div class="product-image mt-3 mb-3"' +
@@ -349,9 +357,6 @@
                 '    </td>' +
                 '    <td style="vertical-align: middle;">' +
                 '        <div class="product-name" id="name-'+el.data("id")+'" data-name="'+el.text()+'">'+el.text()+'</div>' +
-                '    </td>' +
-                '    <td style="vertical-align: middle;">' +
-                '        <div class="product-price" id="price-'+el.data("id")+'"  data-price="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
                 '    </td>' +
                 '    <td style="vertical-align: middle;">' +
                 '        <div class="quantity-selector">' +
@@ -371,6 +376,32 @@
                 '                </div>' +
                 '            </div>' +
                 '        </div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="product-price" id="price-'+el.data("id")+'"  data-price="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="product-price" id="subtotal-'+el.data("id")+'" data-subtotal="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <a class="btn btn-light p-1 delete" data-product="'+el.data("id")+'" onclick="removeElement('+el.data("id")+')" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgb(255, 62, 62)"/></svg></a>' +
+                '    </td>' +
+                '</tr>'
+            ); */
+            $('.order-list').prepend(
+                '<tr id="product-'+el.data("id")+'">' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="product-name" id="name-'+el.data("id")+'" data-name="'+el.text()+'">'+el.text()+'</div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="quantity-selector">' +
+                '            <div class="quantity-input">' +
+                '                <input type="text" class="form-control p-0 text-center border-0" value="1" id="qty-'+el.data("id")+'" data-total="'+el.data("qty")+'" data-qty="1" required oninput="updateQty('+el.data("id")+', '+this.value+')">' +
+                '            </div>' +
+                '        </div>' +
+                '    </td>' +
+                '    <td style="vertical-align: middle;">' +
+                '        <div class="product-price" id="price-'+el.data("id")+'"  data-price="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
                 '    </td>' +
                 '    <td style="vertical-align: middle;">' +
                 '        <div class="product-price" id="subtotal-'+el.data("id")+'" data-subtotal="'+el.data("price")+'">'+el.data("price")+' FCFA</div>' +
@@ -484,8 +515,17 @@
         display: none;
     }
     .order-box {
-        padding: 30px
+        width: 100%;
+        padding: 30px;
+        position: relative;
+        height: 78%;
     }
+
+    .order-products (
+        height: 100%;
+        width: 100%;
+        position: relative;
+    )
 
     .order-box .order-details-box {
         display: -webkit-box;
@@ -532,8 +572,8 @@
     }
 
     .order-box .order-items-table .product-image {
-        width: 70px;
-        height: 70px;
+        width: 30px;
+        height: 30px;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center center
@@ -541,8 +581,13 @@
 
     .order-box .order-items-table .product-name {
         font-weight: 500;
-        font-size: 1.25rem;
-        line-height: 1.3
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+
+    .order-box .order-items-table .product-price {
+        font-weight: 500;
+        font-size: 0.8rem;
     }
 
     .order-box .order-items-table .product-remove-btn {
@@ -567,14 +612,13 @@
         margin-right: 10px
     }
 
-    .order-box .order-items-table .product-price {
-        font-weight: 500;
-        font-size: 1.25rem
-    }
-
     .order-box .order-items-table .quantity-input .input-group-text {
         padding-left: 5px !important;
         padding-right: 5px !important
+    }
+
+    .order-box .order-items-table .quantity-input {
+        height: 2.6rem !important;
     }
 
     .order-box .order-items-table .quantity-input .form-control {
