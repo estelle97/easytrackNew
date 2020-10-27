@@ -6,7 +6,9 @@
             <form class="card card-md auth-card pt-6 pb-5 px-3" action="" method="post">
                 <div class="card-body">
                     <div class="text-center mb-5">
-                        <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
+                        <a href="/">
+                            <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
+                        </a>
                     </div>
                     <h2 class="mb-2 text-center text-black">Connexion</h2>
                     <h4 class="mb-5 text-center text-muted">

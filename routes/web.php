@@ -264,10 +264,13 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/notifications', 'Admin\NotificationController@notifications')->name('admin.notifications');
 
 
-    Route::get('admin/teams', 'Admin\AgendaController@teams')->name('admin.teams');
+    Route::get('admin/agenda', 'Admin\AgendaController@teams')->name('admin.teams');
     Route::post('admin/agenda/add', 'Admin\AgendaController@addTeam');
     Route::post('admin/agenda/attachUserToTeam/{team}', 'Admin\AgendaController@attachUserToTeam');
     Route::post('admin/agenda/detachUserToTeam/{team}', 'Admin\AgendaController@detachUserToTeam');
     Route::post("/admin/agenda/team/{team}/destroy", 'Admin\AgendaController@destroyTeam');
+
+    Route::get('admin/agenda/meeting', 'Admin\MeetingController@index')->name('admin.meeting');
+
     Route::get('notifications', 'NotificationController@index')->name('notifications');
 });

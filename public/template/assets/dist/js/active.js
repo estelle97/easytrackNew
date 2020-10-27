@@ -35,6 +35,10 @@ AOS.init();
 
 		$(".btn-close-off-canvas").on('click', function () {
 			$(".off-canvas-wrapper").removeClass('open');
+        });
+
+        $(".sub-menu-link").on('click', function () {
+			$(".off-canvas-wrapper").removeClass('open');
 		});
 
 
@@ -42,21 +46,21 @@ $('document').ready(function(){
 
   //Toggle button fuctionality
 
-  $("[class*='btn--toggle']").on('change',function(e){   
-      var getTarget = $(this).attr('data-tab-target'); 
+  $("[class*='btn--toggle']").on('change',function(e){
+      var getTarget = $(this).attr('data-tab-target');
       var inpSelect = $(this).children().children('input[type="checkbox"]');
 
       if($(inpSelect).is(':checked')){
           if($(getTarget).hasClass('monthly')){
               $(getTarget).removeClass('monthly');
-              $(getTarget).addClass('yearly');          
+              $(getTarget).addClass('yearly');
           }
       }else{
           if($(getTarget).hasClass('yearly')){
               $(getTarget).removeClass('yearly');
-              $(getTarget).addClass('monthly');         
+              $(getTarget).addClass('monthly');
           }
-      }    
+      }
   })
 })
 

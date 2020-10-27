@@ -4,12 +4,19 @@
   }
 
 /* NAVBAR */
+.navbar {
+    padding-top: 0.8rem !important;
+}
 .navbar-bg-gradient {
     background: rgb(38,127,201) !important;
     background: -moz-linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
     background: -webkit-linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
     background: linear-gradient(90deg, rgba(38,127,201,1) 0%, rgba(38,177,195,1) 100%) !important;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#267fc9",endColorstr="#26b1c3",GradientType=1);
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0.5rem !important;
 }
 
 /* HEADER */
@@ -24,6 +31,9 @@
 }
 
 /* CARDS */
+.card {
+    border-radius:10px !important;
+}
 .card-actions .dropdown-toggle:after  {
     display: none !important;
 }
@@ -31,7 +41,31 @@
     display: none !important;
 }
 
+
+/* DROPDOWN */
+.dropdown-menu {
+    border-radius: 10px !important;
+}
+
+/* MODALS */
+.modal-content {
+    border-radius: 10px !important;
+}
+
+.modal-header {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.modal-footer {
+    padding-bottom: 1rem !important;
+}
+
+
 /* BUTTONS */
+.btn {
+    border-radius: 10px !important;
+}
 .btn-gradient:hover {
     color: #fff;
     opacity: 0.7;
@@ -39,6 +73,10 @@
 
 .btn-no-border {
     border: none !important;
+}
+
+.button-click-action {
+    cursor: pointer;
 }
 
 /* INPUT */
@@ -151,10 +189,15 @@
     display: none !important;
 }
 
+
+/* NOTIFICATIONS */
 .notification-menu {
     min-width: 20rem !important;
 }
 
+
+
+/* CARD TABLE */
 .fixed-table-container {
     border: none !important;
 }
@@ -215,8 +258,10 @@
 }
 
 .fixed-table-toolbar .search input {
-    border-radius: 7px !important;
-    background-color: rgba(0,0,0,0.04);
+    border-radius: 8px !important;
+    border: none !important;
+    margin-left: 0.5rem;
+    background-color: rgba(0,0,0,0.05);
 }
 
 .fixed-table-toolbar .dropdown-menu li {
@@ -237,8 +282,6 @@
     background-color: rgba(0, 0, 0, 0.04);
 }
 
-
-
 .card-table thead th {
     border-left: none !important
 }
@@ -258,9 +301,8 @@
     padding: 0.5rem 0.5rem !important;
 }
 
-.button-click-action {
-    cursor: pointer;
-}
+
+/* SETTINGS SIDEBAR */
 
 .settings-sidebar ul {
     list-style: none;
@@ -303,4 +345,25 @@
 }
 .settings-sidebar .active .icone-menu {
     color: #206bc4 !important;
+}
+
+
+/* AGENDA */
+.agenda-segment {
+    color: #fff !important;
+    opacity: 0.5;
+    transition: all 0.4s;
+}
+
+.agenda-segment:hover {
+    opacity: 0.8;
+}
+
+.agenda-segment:focus {
+    opacity: 0.5;
+    outline: none !important;
+}
+
+.agenda-segment.active {
+    opacity: 1;
 }

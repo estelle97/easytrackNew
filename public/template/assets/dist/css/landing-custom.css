@@ -1,0 +1,80 @@
+.profile-menu {
+    min-width: 286px !important;
+    padding: 0rem 1.5rem !important;
+    border-radius: 7px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.profile-menu span {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
+
+.profile-info {
+    width: 100%;
+}
+
+.profile-menu:hover, profile-menu:active, profile-menu:focus {
+    padding: 1rem 1.5rem !important;
+    border-radius: 7px;
+    -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.15);
+}
+
+.profile-menu .greeting {
+    font-weight: 600 !important;
+    transition: all 0.5s;
+}
+
+.profile-sub-menu {
+    display: none !important;
+    transition: all 0.5s;
+}
+
+.profile-menu:hover .profile-sub-menu, profile-menu:active .profile-sub-menu, profile-menu:focus .profile-sub-menu {
+    display: flex !important;
+}
+
+.profile-menu:hover .greeting, profile-menu:active .greeting, profile-menu:focus .greeting {
+    opacity: 0 !important;
+    transform: translate(8px);
+}
+
+.profile-sub-menu .sub-menu-link {
+    width: 100%;
+    padding: 0.8rem 0;
+    color: #000;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.profile-sub-menu .sub-menu-link svg {
+    margin-right: 0.8rem;
+}
+
+.profile-sub-menu .sub-menu-link:hover {
+    opacity: 0.4;
+}
+
+
+@media (max-width: 992px) {
+    .profile-sub-menu {
+        display: flex !important;
+    }
+
+    .profile-sub-menu .user-infos {
+        font-size: 18px;
+        margin-bottom: 1rem;
+    }
+
+    .profile-sub-menu .greeting {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .profile-sub-menu .sub-menu-link svg {
+        display: none !important;
+    }
+}

@@ -21,14 +21,14 @@
                             <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)" /></svg>
                         <span class="h2 align-middle">Nouveau</span>
                     </a>
-                     
+
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-9">
-            <div class="card pl-2 pr-2">
+            <div class="card p-2">
                 <div class="table-responsive">
                     <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
                             <thead>
@@ -150,12 +150,12 @@
                 <div class="col-md-12">
                     <div id="calendar-inline"></div>
                 </div>
-                <div class="col-md-12 text-center mt-4">
+                <div class="col-md-12 text-center mb-4">
                     <h5 class="font-weight-light" style="font-size: 1rem;">Vous avez dépensé </h5>
                     <h1 style="font-size: 2.5rem;"> {{Auth::user()->companies->first()->totalPurchases()}} FCFA</h1>
                     <h5 class="order-global-date-2 font-weight-light text-capitalize" style="font-size: 1rem;"></h5>
                 </div>
-                <div class="col-md-12 mt-3">
+                {{-- <div class="col-md-12 mt-3">
                     <div class="row justify-content-between">
                         <div class="col-md-12 pl-2 pr-2 mb-3">
                             <div class="stat-content bg-blue-lt pt-3 pb-2 pl-3 pr-3" style="border-radius: 12px;">
@@ -171,7 +171,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
