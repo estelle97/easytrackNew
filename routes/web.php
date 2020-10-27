@@ -100,7 +100,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('easytrack/stats/users/{months}', 'SuperAdmin\StatController@users');
 
 
-    Route::get('easytrack/dashboard', ['as'=> 'easytrack.dashboard','uses' => 'SuperAdmin\DashboardController@index']);
+    Route::get('easytrack/dashboard', ['as'=> 'dashboard','uses' => 'SuperAdmin\DashboardController@index']);
     Route::get('easytrack/profil',[ 'uses' => 'SuperAdmin\DashboardController@profile','as' => 'easytrack.profile']);
     Route::get('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileEdit' , 'as' => 'easytrack.profile.edit']);
     Route::post('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileUpdate' , 'as' => 'easytrack.profile.update']);
@@ -133,6 +133,10 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('easytrack/types/{type}/destroy', 'SuperAdmin\PackageController@destroy');
     Route::post('easytrack/types/{type}', 'SuperAdmin\PackageController@update');
     Route::get('easytrack/users', 'SuperAdmin\UserController@index')->name('easytrack.users');
+
+    Route::post('easytrack/notifications/last', 'SuperAdmin\NotificationController@getNotifications');
+    Route::get('easytrack/notifications', 'SuperAdmin\NotificationController@notifications')->name('easytrack.notifications');
+
 
 
 
@@ -252,7 +256,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/settings', 'Employee\SettingController@index')->name('employee.settings');
     Route::get('employee/dashboard', 'Employee\DashboardController@index')->name('employee.dashboard');
     Route::get('purchases', 'Employee\PurchaseController@index');
-    Route::get('employee/teams', 'Employee\AgendaController@teams')->name('employee.team');
+    Route::get('employee/teams', 'Employee\AgendaController@teams')->name('employee.teams');
 
     Route::post('employee/notifications/last', 'Employee\NotificationController@getNotifications');
     Route::get('employee/notifications', 'Employee\NotificationController@notifications')->name('employee.notifications');
@@ -274,4 +278,5 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/agenda/meeting', 'Admin\MeetingController@index')->name('admin.meeting');
 
     Route::get('notifications', 'NotificationController@index')->name('notifications');
+    Route::post('resetPassword/{user}', 'Auth\ResetPasswordController@resetPassword');
 });

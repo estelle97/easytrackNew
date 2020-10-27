@@ -39,7 +39,7 @@ class Notification extends Model
             'user_id' => $user_id,
             'type' => 'packageAlert',
             'text' => "Votre abonnement se termine dans $jours jours Veuillez le renouveler",
-            'action' => 'admin.settings',
+            'action' => 'settings',
         ]);
     }
 
@@ -50,7 +50,7 @@ class Notification extends Model
             'user_id' => $user_id,
             'type' => 'companyAlert',
             'text' => "L'abonnement de l'entreprise $company->name se termine dans $days jours",
-            'action' => 'easytrack.companies',
+            'action' => 'companies',
         ]);
     }
 
@@ -63,7 +63,7 @@ class Notification extends Model
             'user_id' => $user_id,
             'type' => 'commandAlert',
             'text' => "$user->name a pris la commande SO-$sale->code du client ".$sale->customer->name,
-            'action' => 'kanban'
+            'action' => 'sales.kanban'
         ]);
     }
 
@@ -75,7 +75,7 @@ class Notification extends Model
             'user_id' => $sale->initiator_id,
             'type' => 'validationAlert',
             'text' => "Votre commande SO-$sale->code a été validée",
-            'action' => 'kanban'
+            'action' => 'sales.all'
         ]);
     }
 
@@ -86,7 +86,7 @@ class Notification extends Model
             'user_id' => $user->id,
             'type' => 'addedToTeam',
             'text' => "Vous avez été ajouté(e) à une équipe de travail",
-            'action' => 'employee.teams'
+            'action' => 'teams'
         ]);
     }
 }

@@ -78,7 +78,7 @@
                                         <th>Nom</th>
                                         <th>Quantité</th>
                                         <th>PU</th>
-                                        <th>Subtotal</th>
+                                        <th>Total</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -154,7 +154,7 @@
                     <div class="col-md-12 mb-4">
                         <h5 class="order-section-heading">Récapitulatif</h5>
                         <div class="order-summary-row">
-                            <div class="order-summary-label"><span>Subtotal</span></div>
+                            <div class="order-summary-label"><span>Total</span></div>
                             <div class="order-summary-value subtotal">0</div>
                         </div>
                         <div class="order-summary-row">
@@ -164,6 +164,16 @@
                         <div class="order-summary-row as-total">
                             <div class="order-summary-label"><span>Total</span></div>
                             <div class="order-summary-value grand-total">0</div>
+                        </div>
+                        <div class="order-summary-row">
+                            <div class="order-summary-label"><span>Montant perçu</span></div>
+                            <div class="order-summary-value">
+                                <input type="number" id="cash">
+                            </div>
+                        </div>
+                        <div class="order-summary-row as-total">
+                            <div class="order-summary-label"><span> Relicat </span></div>
+                            <div class="order-summary-value remaining-money">0</div>
                         </div>
                     </div>
                     <div class="col-md-12 mb-4">
@@ -283,6 +293,8 @@
         $(".subtotal").html(total);
 
         $(".grand-total").html(total);
+
+        $("#cash").val(total);
     }
 
     function removeElement(el) {
@@ -390,6 +402,10 @@
             addElement(element);
         });
     }
+
+    $("#cash").keyup(function(){
+        $(".remaining-money").html($(this).val() - $('.grand-total').html()) ;
+    })
 
 
     function order() {

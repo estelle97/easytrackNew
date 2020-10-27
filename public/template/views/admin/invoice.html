@@ -140,7 +140,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="2">Subtotal</th>
+                            <th colspan="2">Total</th>
                             <th style="text-align:right">1800</th>
                         </tr>
                         <tr>

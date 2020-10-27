@@ -11,9 +11,11 @@
                 </svg>
             </span>
             <div class="mr-3 lh-sm">
-                <div class="strong">
-                    {{$notif->text}}
-                </div>
+                <a href={{route('admin.'.$notif->action)}}>
+                    <div class="strong">
+                        {{$notif->text}}
+                    </div>
+                </a>
                 <div class="text-gray"> {{$notif->created_at->diffForHumans()}} </div>
             </div>
         </div>
