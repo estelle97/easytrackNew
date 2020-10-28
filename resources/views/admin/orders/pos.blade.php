@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <div class="order-summary-row as-total">
-                            <div class="order-summary-label"><span> Relicat </span></div>
+                            <div class="order-summary-label"><span> reliquat </span></div>
                             <div class="order-summary-value remaining-money">0</div>
                         </div>
                     </div>
