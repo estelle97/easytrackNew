@@ -67,7 +67,7 @@
                                     <span class="avatar avatar-md" style="background-image: url('https://ui-avatars.com/api/?name={{$com->name}}&background=E0F1FF&color=267FC9')"></span>
                                 </td>
                                 <td>
-                                    <a href="./user-profile.html" class="text-reset" tabindex="-1"> {{$com->owner->name}} </a>
+                                    <a href="#" class="text-reset" tabindex="-1"> {{$com->owner->name}} </a>
                                 </td>
                                 <td id="email{{$com->id}}">
                                    {{$com->email}}

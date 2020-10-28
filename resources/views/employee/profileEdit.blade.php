@@ -141,8 +141,8 @@
                                                 d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
                                         </svg>
                                     </span>
-                                    <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
-                                        placeholder="Mot de passe (au moins 8 caractères)" required autocomplete="off" minlength="8"/>
+                                    <input type="password" name="password" id="password" class="auth-input form-control py-2 px-5"
+                                        required autocomplete="off" minlength="8"/>
                                     <span class="input-icon-addon mr-2">
                                         <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
                                                 xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -156,6 +156,7 @@
                                         </a>
                                     </span>
                                 </div>
+                                <span class="text-danger" id="password-error"></span>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Nouveau mot de passe</label>
@@ -167,8 +168,9 @@
                                                 d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
                                         </svg>
                                     </span>
-                                    <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
-                                        placeholder="Mot de passe (au moins 8 caractères)" required autocomplete="off" minlength="8"/>
+                                    <input type="hidden" id="user_id" value={{Auth::user()->id}}>
+                                    <input type="password" name="newPassword" id="newPassword" class="auth-input form-control py-2 px-5"
+                                        required autocomplete="off" minlength="8"/>
                                     <span class="input-icon-addon mr-2">
                                         <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
                                                 xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -182,6 +184,7 @@
                                         </a>
                                     </span>
                                 </div>
+                                <span class="text-danger" id="newPassword-error"></span>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-icon">
@@ -192,7 +195,7 @@
                                                 d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
                                         </svg>
                                     </span>
-                                    <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
+                                    <input type="password" name="newPasswordConfirm" id="newPasswordConfirm" class="auth-input form-control py-2 px-5"
                                         placeholder="Ressaisisez le mot de passe" required autocomplete="off" minlength="8"/>
                                     <span class="input-icon-addon mr-2">
                                         <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
@@ -207,11 +210,12 @@
                                         </a>
                                     </span>
                                 </div>
+                                <span class="text-danger" id="newPasswordConfirm-error"></span>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
+                        <button type="button" class="savepwd btn btn-primary" style="width: 100%;">
                             Sauvegarder
                         </button>
                     </div>
@@ -224,6 +228,53 @@
 
 @section('scripts')
     <script>
+
+        $(".savepwd").click(function(){
+            var token = '{{csrf_token()}}';
+            var password = $("#password").val();
+            var newPassword = $("#newPassword").val();
+            var newPasswordConfirm = $("#newPasswordConfirm").val();
+            var user_id = $("#user_id").val();
+            $.ajax({
+                url: '/resetPassword/'+user_id,
+                method: 'post',
+                data: {
+                    _token : token,
+                    password : password,
+                    newPassword : newPassword,
+                    newPasswordConfirm : newPasswordConfirm
+                },
+                success: function(data){
+                    if(data == 'error'){
+                        $(".text-danger").fadeOut().html('');
+                        $('#password-error').html('Mot de passe incorrect').fadeIn();
+                    } else {
+                        $('#modal-edit-password').modal('hide');
+                        $('.modal-backdrop').remove();
+
+                        alert('Mot de passe modifié avec succès!');
+                    }
+                },
+                error: function (err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                            // console.log(err.responseJSON);
+
+                        // you can loop through the errors object and show it to the user
+                            //console.warn(err.responseJSON.errors);
+                        // display errors on each form field
+
+                        $(".text-danger").fadeOut().html('');
+
+                        $.each(err.responseJSON.errors, function (i, error) {
+                            var el = $('#'+i+'-error');
+                            el.html(error[0]).fadeIn();
+                        });
+                    }
+                }
+            });
+        });
+
+
         $("#profile").click(function(){
             $(".file").click();
 

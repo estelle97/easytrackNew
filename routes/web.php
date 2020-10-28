@@ -100,7 +100,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('easytrack/stats/users/{months}', 'SuperAdmin\StatController@users');
 
 
-    Route::get('easytrack/dashboard', ['as'=> 'dashboard','uses' => 'SuperAdmin\DashboardController@index']);
+    Route::get('easytrack/dashboard', ['as'=> 'easytrack.dashboard','uses' => 'SuperAdmin\DashboardController@index']);
     Route::get('easytrack/profil',[ 'uses' => 'SuperAdmin\DashboardController@profile','as' => 'easytrack.profile']);
     Route::get('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileEdit' , 'as' => 'easytrack.profile.edit']);
     Route::post('easytrack/profile/edit', ['uses' => 'SuperAdmin\DashboardController@profileUpdate' , 'as' => 'easytrack.profile.update']);

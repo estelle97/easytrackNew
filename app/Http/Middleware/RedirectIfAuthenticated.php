@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check() && Auth::user()->is_admin == 3) {
-            return redirect()->route('superadmin.dashboard');
+            return redirect()->route('easytrack.dashboard');
         } elseif (Auth::guard($guard)->check() && Auth::user()->is_admin == 2)
         {
             return redirect()->route('admin.dashboard');
