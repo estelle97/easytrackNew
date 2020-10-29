@@ -125,7 +125,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
     Route::get("/easytrack/companies/update/{company}/state", 'SuperAdmin\CompanyController@updateState');
     Route::post("/easytrack/companies/update/{company}", 'SuperAdmin\CompanyController@update');
-    Route::get("/easytrack/companies/subscription/update/{company}", 'SuperAdmin\CompanyController@subscriptionUpdate');
+    Route::post("/easytrack/companies/subscription/update/{company}", 'SuperAdmin\CompanyController@subscriptionUpdate');
     Route::post('easytrack/companies/store', 'SuperAdmin\CompanyController@store');
     Route::get('easytrack/companies', 'SuperAdmin\CompanyController@index')->name('easytrack.companies');
     Route::get('easytrack/types', 'SuperAdmin\PackageController@index')->name('easytrack.types');
