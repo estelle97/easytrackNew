@@ -626,12 +626,14 @@
 
     function updateSubscription(company){
 
+        var token = '{{@csrf_token()}}'
         $.ajax({
             url: '/easytrack/companies/subscription/update/'+company,
-            method: 'get',
+            method: 'post',
             data: {
                 type: $('#type-update'+company).val(),
-                duration: $('#type-update-days'+company).val()
+                duration: $('#type-update-days'+company).val(),
+                _token: token
             },
             success: function(){
                 location.reload();

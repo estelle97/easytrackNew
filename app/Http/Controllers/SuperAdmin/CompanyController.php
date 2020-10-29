@@ -120,7 +120,9 @@ class CompanyController extends Controller
         //     'verif' => $verif,
         // ];
         flashy()->success("L'abonnement a été mis à jour avec succès!");
-        return 'success';
+        return response()->json([
+            $company->subscription()->remainingDays
+        ]);
     }
 
     public function update(Request $request, Company $company){
