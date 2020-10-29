@@ -384,7 +384,8 @@
                 success: function(data){
                     if(data == 'success'){
                         $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-supplier"+id).modal().hide();
+                        $("#modal-edit-supplier"+id).modal().hide();
+                        $('.modal-backdrop').remove();
 
                         $("#supplier-name"+id).fadeOut().html(name).fadeIn();
                         $("#supplier-company_name"+id).fadeOut().html(company_name).fadeIn();

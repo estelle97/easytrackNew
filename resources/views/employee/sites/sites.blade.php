@@ -314,7 +314,8 @@
                 success: function(data){
                     if(data == 'success'){
                         $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-site"+id).modal().hide();
+                        $("#modal-edit-site"+id).modal().hide();
+                        $('.modal-backdrop').remove();
 
                         $("#site-name"+id).fadeOut().html(name).fadeIn();
                         $("#site-email"+id).fadeOut().html(email).fadeIn();

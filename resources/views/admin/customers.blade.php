@@ -342,7 +342,8 @@
                 success: function(data){
                     if(data == 'success'){
                         $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-customer"+id).modal().hide();
+                        $("#modal-edit-customer"+id).modal().hide();
+                        $('.modal-backdrop').remove();
 
                         $("#customer-name"+id).fadeOut().html(name).fadeIn();
                         $("#customer-company_name"+id).fadeOut().html(company_name).fadeIn();
