@@ -97,20 +97,27 @@ class CompanyController extends Controller
 
         // $verif = null;
         $type = Type::find($request->type);
+
         $remainingDays = $company->subscription()->remainingDays;
 
         if($remainingDays > 0){
-            $company->types()->attach($type->id, [
-                'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
+            $duration = Carbon::now()->addDays($remainingDays + $type->duration);
+            DB::table('subscriptions')->insert([
+                'company_id' => $company->id,
+                'type_id' => $type->id,
+                'end_date' => $duration
             ]);
 
-            // $verif = $company->types->last();
+            // $verif = $company->subscription()->remainingDays;
         } else {
-            $company->types()->attach($type->id, [
-                'end_date' => Carbon::now()->addDays($type->duration)
+            $duration = Carbon::now()->addDays($type->duration);
+            DB::table('subscriptions')->insert([
+                'company_id' => $company->id,
+                'type_id' => $type->id,
+                'end_date' => $duration
             ]);
 
-            // $verif = $company->types->last();
+            // $verif = $company->subscription()->remainingDays;
         }
 
         // $test = [
@@ -118,10 +125,14 @@ class CompanyController extends Controller
         //     'remainingDays' => $remainingDays,
         //     'company' =>  $company->name,
         //     'verif' => $verif,
+        //     'last' => $company->types->last()
         // ];
-        flashy()->success("L'abonnement a été mis à jour avec succès!");
+        // dd($test);
+        // flashy()->success("L'abonnement a été mis à jour avec succès!");
+
         return response()->json([
-            $company->subscription()->remainingDays
+            'remainingDays' => $company->subscription()->remainingDays,
+            'percentage' => $company->subscription()->percentage
         ]);
     }
 

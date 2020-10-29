@@ -328,7 +328,9 @@
                 success : function(){
                         location.reload();
                         $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-site"+id).modal().hide();
+                        $("#modal-edit-site"+id).modal().hide();
+                        $('.modal-backdrop').remove();
+                        
                         $("#product-cost"+site+product).fadeOut().html(cost).fadeIn();
                         $("#product-price"+site+product).fadeOut().html(price).fadeIn();
                         $("#product-site"+site+product).fadeOut().html(site).fadeIn();

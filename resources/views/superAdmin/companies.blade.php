@@ -100,16 +100,16 @@
                                     <div>
                                         <div class="d-flex mb-1 align-items-center lh-1">
                                             <div class="text-h5 font-weight-bolder m-0">
-                                                <span class="ml-auto text-h6 strong"> {{$com->subscription()->remainingDays}} jrs </span>
+                                                <span class="ml-auto text-h6 strong" id="remainingDays{{$com->id}}"> {{$com->subscription()->remainingDays}} jrs </span>
                                             </div>
                                         </div>
                                         <div class="progress progress-sm">
-                                            <div class="progress-bar bg-blue" style="width: {{$com->subscription()->percentage}}%;" role="progressbar"
+                                            <div class="progress-bar bg-blue" id="progress-bar{{$com->id}}" style="width: {{$com->subscription()->percentage}}%;" role="progressbar"
                                                 aria-valuenow="{{$com->subscription()->percentage}}" aria-valuemin="0" aria-valuemax="100">
                                                 <span class="sr-only">{{$com->subscription()->percentage}}% d'utilisation</span>
                                             </div>
                                         </div>
-                                        <span class="ml-auto text-h6 strong">{{$com->subscription()->percentage}}%</span>
+                                        <span class="ml-auto text-h6 strong" id="percentage{{$com->id}}">{{$com->subscription()->percentage}}%</span>
                                     </div>
                                 </td>
                                 <td class="text-right">
@@ -635,8 +635,15 @@
                 duration: $('#type-update-days'+company).val(),
                 _token: token
             },
-            success: function(){
+            success: function(data){
+
                 location.reload();
+                // $("#modal-edit-licence"+company).hide();
+                // $('.modal-backdrop').remove();
+
+                // $("#remainingDays"+company).fadeOut().html(data.remainingDays+ ' jrs').fadeIn();
+                // $("#percentage"+company).fadeOut().html(data.percentage+ '%').fadeIn();
+                // $("#progress-bar"+company).fadeOut().removeAttr('style').attr('style', 'width: '+data.percentage+'%').fadeIn()
             }
         });
     }
