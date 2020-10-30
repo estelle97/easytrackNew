@@ -637,13 +637,13 @@
             },
             success: function(data){
 
-                location.reload();
-                // $("#modal-edit-licence"+company).hide();
-                // $('.modal-backdrop').remove();
+                //location.reload();
+                $("#modal-edit-licence"+company).hide();
+                $('.modal-backdrop').remove();
 
-                // $("#remainingDays"+company).fadeOut().html(data.remainingDays+ ' jrs').fadeIn();
-                // $("#percentage"+company).fadeOut().html(data.percentage+ '%').fadeIn();
-                // $("#progress-bar"+company).fadeOut().removeAttr('style').attr('style', 'width: '+data.percentage+'%').fadeIn()
+                $("#remainingDays"+company).fadeOut().html(data.remainingDays+ ' jrs').fadeIn();
+                $("#percentage"+company).fadeOut().html(data.percentage+ '%').fadeIn();
+                $("#progress-bar"+company).fadeOut().removeAttr('style').attr('style', 'width: '+data.percentage+'%').fadeIn();
             }
         });
     }
