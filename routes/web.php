@@ -87,7 +87,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/sites', 'Admin\SiteController@index')->name('admin.sites');
     Route::post('admin/sites/add', 'Admin\SiteController@store');
     Route::post('admin/sites/update', 'Admin\SiteController@update');
-    Route::post('admin/sites/destroy', 'Admin\SiteController@destroy');
+    Route::post('admin/sites/{site}/destroy', 'Admin\SiteController@destroy');
 
     Route::get('admin/users', 'Admin\UserController@index')->name('admin.company.users');
     Route::post('admin/users', 'Admin\UserController@search')->name('admin.company.users.search');
@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/users/{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit');
     Route::post('admin/users/{user}/edit', 'Admin\UserController@update');
     Route::post('admin/users/store', 'Admin\UserController@store');
+    Route::post('admin/users/{user}/destroy', 'Admin\UserController@destroy');
 
     Route::post('admin/roles/detachPermissionToUser', 'Admin\RoleController@detachPermissionToUser');
     Route::post('admin/roles/attachPermissionToUser', 'Admin\RoleController@attachPermissionToUser');

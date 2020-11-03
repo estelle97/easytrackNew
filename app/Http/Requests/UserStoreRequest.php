@@ -24,7 +24,7 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required,alpha',
+            'name' => 'required',
             'username' => 'required|string|unique:users|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'email' => 'nullable|email|unique:users',
             'address' => 'required',
@@ -45,8 +45,8 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'required' => 'Ce champ est obligatoire',
-            'phone.unique' => "Ce numé",
-            'phone.*' => "Numéro de téléphone déja utilisé",
+            'phone.unique' => "Numéro de téléphone déja utilisé",
+            'phone.*' => "Format de numéro de téléphone incorrect",
             'email' => 'Adresse email invalide',
             'password.min' => "Le mot de passe doit avoir au moins 8 caracètres",
             'photo.*' => "Format de photo incorrect",

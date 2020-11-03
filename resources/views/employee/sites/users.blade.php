@@ -203,7 +203,7 @@
                             </div>
                             <div class="col-lg-9 mb-4">
                                 <label class="form-label">Nom complet</label>
-                                <input type="text" id="user-name-add" class="form-control"
+                                <input type="text"   maxlength="100" id="user-name-add" class="form-control"
                                     placeholder="Saisissez le nom complet..." required>
                                     <span class="text-danger" id="name-error"></span>
                             </div>

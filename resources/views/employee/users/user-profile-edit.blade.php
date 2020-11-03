@@ -92,7 +92,7 @@
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="mb-2">
                                                         <label class="form-label">Nom complet</label>
-                                                        <input type="text" name="name" value="{{$user->name}}" class="form-control form-control-rounded"
+                                                        <input type="text"   maxlength="100" name="name" value="{{$user->name}}" class="form-control form-control-rounded"
                                                             placeholder="Saisissez votre nom" required>
                                                         @if($errors->has('name'))
                                                             <span>

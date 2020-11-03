@@ -71,7 +71,8 @@ class UserController extends Controller
         Action::store('Employee', $employee->id, 'create',
             "Création du ".$user->role->name." ".$user->name
         );
-        return 'success';
+
+        return (string)view('ajax.admin.newUser', ['emp' => $employee]);
     }
 
     /**
@@ -140,11 +141,12 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        $user->employee->delete();
+        $user->delete();
 
-        flashy()->info("L'utilisateur a été supprimé avec succès");
         Action::store('Employee', $user->employee->id, 'destroy',
             "Suppression du ".$user->role->name." ".$user->name
         );
-        return redirect()->back();
+        return 'success';
     }
 }
