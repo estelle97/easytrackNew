@@ -106,7 +106,7 @@
 
     {{-- Content Body--}}
     <div class="row row-deck row-cards" id="employees">
-       
+
         @foreach (Auth::user()->employee->site->employees()->get()->reverse() as $emp)
             <div class="col-md-6 col-lg-3">
             <div class="card">
@@ -116,7 +116,7 @@
                              @if ($emp->user->photo)
                                 <span class="avatar avatar-md"  style="background-image: url('{{asset($emp->user->photo)}}')"> </span>
                             @else
-                                <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?name={{$emp->user->name}}')"> </span> 
+                                <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?name={{$emp->user->name}}')"> </span>
                             @endif
                         </div>
                         <div class="col">
@@ -195,7 +195,7 @@
                     <div class="modal-body">
                         <div class="row mb-3 align-items-end">
                             <div class="col-lg-3">
-                                <input type="file" name="img[]" class="file" accept="image/*" hidden>  
+                                <input type="file" name="img[]" class="file" accept="image/*" hidden>
                                 <a id="profile" class="avatar avatar-upload rounded thumbnail">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"

@@ -10,7 +10,7 @@
                 </div>
                 <h2 class="mb-2 text-center text-black">Mot de passe oublié</h2>
                 <h4 class="mb-5 text-center text-muted">
-                    Saisissez votre adresse email, votre nom d'utilisateur ou votre numéro de téléphone et un nous vous enverrons un lien pour le rénitialiser.
+                    Saisissez votre adresse email, nom d'utilisateur ou numéro de téléphone et nous vous enverrons un lien pour rénitialiser votre mot de passe.
                 </h4>
                 <div class="mb-3">
                     <div class="input-icon">

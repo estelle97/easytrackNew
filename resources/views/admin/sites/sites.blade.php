@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Mes sites
+                    Mes
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -91,7 +91,7 @@
                                                  Afficher
                                             </a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-site">
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-site{{$site->id}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                     width="18" height="18" class="mr-2">
                                                     <path fill="none" d="M0 0h24v24H0z" />
@@ -208,7 +208,7 @@
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Téléphone N°2</label>
                                     <input type="tel" id="site-phone2-update{{$site->id}}" value="{{$site->phone2}}" class="form-control"
-                                        placeholder="Saisissez le numéro de téléphone...">
+                                        placeholder="Saisissez le numéro de téléphone..." pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
                                         <span class="text-danger" id="phone2-error{{$site->id}}"></span>
                                 </div>
                                 <div class="col-lg-6">
@@ -233,22 +233,23 @@
             </div>
         @endforeach
 
-
-        <div class="modal modal-blur fade" id="modal-delete-site" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sûre de cette action ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto"
-                            data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+        @foreach (Auth::user()->companies->first()->sites()->get() as $site)
+            <div class="modal modal-blur fade" id="modal-delete-site{{$site->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modal-title">Êtes vous sûre de cette action ?</div>
+                            <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link link-secondary mr-auto"
+                                data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteSite({{$site->id}})">Oui, supprimer</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 
@@ -267,7 +268,7 @@
             var street = $("#site-street-add").val();
 
             $.ajax({
-                url: '/admin/sites/add',
+                url: '/admin//add',
                 method: 'post',
                 data: {
                     _token : token,
@@ -311,7 +312,7 @@
             var street = $("#site-street-update"+id).val();
 
             $.ajax({
-                url: '/admin/sites/update',
+                url: '/admin//update',
                 method: 'post',
                 data: {
                     _token : token,
@@ -352,6 +353,23 @@
                             el.html(error[0]).fadeIn();
                         });
                     }
+                }
+            });
+        }
+
+        function deleteSite(id){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/admin/sites/'+id+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-site"+id).hide();
+                    $('.modal-backdrop').remove();
+                    $("#site"+id).fadeOut();
                 }
             });
         }

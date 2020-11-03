@@ -27,6 +27,7 @@ class SiteStoreRequest extends FormRequest
             'name' => 'required|unique:sites',
             'email' => 'email|required',
             'phone1' => 'required|min:200000000|max:999999999|numeric|unique:sites',
+            'phone2' => 'required|min:200000000|max:999999999|numeric|unique:sites',
             'town' => 'required',
             'street' => 'required'
         ];
@@ -42,6 +43,7 @@ class SiteStoreRequest extends FormRequest
         return [
             'required' => 'Ce champ est obligatoire',
             'phone1.*' => "Format de téléphone incorrect",
+            'phone2.*' => "Format de téléphone incorrect",
             'email' => "Adresse email invalide",
             'name.unique' => 'Ce site existe déja',
         ];
