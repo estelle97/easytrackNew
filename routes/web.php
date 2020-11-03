@@ -11,6 +11,13 @@
 |
 */
 
+Route::get('test', [
+    'as' => 'test',
+    'uses' => 'Auth\RegisterController@testMail',
+]);
+
+
+
 Route::get('/', function () {
     return view('landing');
 });
@@ -187,6 +194,12 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/suppliers/{supplier}/destroy', 'Admin\SupplierController@destroy');
     Route::post('admin/suppliers/{supplier}', 'Admin\SupplierController@update');
     Route::resource('admin/suppliers', 'Admin\SupplierController');
+
+    Route::resource('admin/payrools', 'Admin\PayroolController');
+
+
+    Route::resource('admin/expenses', 'Admin\ExpenseController');
+
 
 
 

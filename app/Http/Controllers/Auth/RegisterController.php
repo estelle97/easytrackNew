@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterStoreRequest;
+use App\Mail\register;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -60,6 +62,12 @@ class RegisterController extends Controller
 
         $types = \App\Type::all();
         return view('register', compact('types'));
+    }
+
+    public function testMail(){
+        Mail::to('steve.wiltek25@gmail.com')->send(new register());
+
+        return redirect()->back();
     }
 
       /**
@@ -123,7 +131,7 @@ class RegisterController extends Controller
                 "message" => "Operation success!",
             ], 200);
         }
-        
+
         DB::transaction(function () use($user, $company, $site){
             $user->save();
                 $company->user_id = $user->id;

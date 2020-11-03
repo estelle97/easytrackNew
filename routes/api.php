@@ -109,4 +109,12 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('teams/{id}', 'API\AgendaController@index');
     Route::get('details/{id}/sites/{siteId}', 'API\AgendaController@details');
 
+    Route::get('teams', 'API\AgendaController@teams');
+    Route::get('teams/{id}', 'API\AgendaController@teams');
+    Route::post('teams', 'API\AgendaController@addTeam');
+    Route::post('teams/attachUserToTeam/{team}', 'API\AgendaController@attachUserToTeam');
+    Route::post('teams/detachUserToTeam/{team}', 'API\AgendaController@detachUserToTeam');
+    Route::post("teams/team/{team}/destroy", 'API\AgendaController@destroyTeam');
+
+
 });

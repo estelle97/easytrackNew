@@ -80,7 +80,7 @@ class ProductController extends Controller
     }
 
     public function getAllProducts(Site $site){
-        
+
         $products = [];
 
         foreach (Auth::user()->companies->first()->activity->products as $prod) {
@@ -106,7 +106,7 @@ class ProductController extends Controller
             $prod = explode(';', $prods);
 
             $product = Product::find($prod[0]);
-            
+
             if($request->site_id == 'all'){
                 foreach(Auth::user()->companies->first()->sites as $site){
                     if(!$product->sites->contains($site->id)){

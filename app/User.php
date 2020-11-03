@@ -99,6 +99,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Notification');
     }
 
+    public function payrools(){
+        return $this->hasMany('App\Payrool');
+    }
+
     public function totalSales($days = null){
         $total = 0;
         if($days){

@@ -14,7 +14,7 @@ class Expense extends Model
         return $this->belongsTo('App\Expense_category');
     }
 
-    public function sites(){
-        return $this->hasMany('App\Site');
+    public function site(){
+        return $this->belongsTo('App\Site');
     }
 }
