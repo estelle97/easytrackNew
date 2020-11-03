@@ -53,8 +53,8 @@ class AgendaController extends Controller
         return response()->json($response, 200);
    }
 
-   public function details($id, Site $site) {
-       $data = $site->teams->load('users');
+   public function details($id, $site) {
+       $data = Site::find($site)->teams->load('users');
 
        return response()->json([
            'data' => $data
