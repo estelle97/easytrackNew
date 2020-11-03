@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 class AgendaController extends Controller
 {
 
+
+    public function showSiteTeams(Site $site){
+
+        return (string)view('ajax.admin.sitesTeams', compact('site'));
+    }
+
      /**
      * Display a listing of the resource.
      *
@@ -69,7 +75,7 @@ class AgendaController extends Controller
             $team->users()->detach($request->user_id);
 
             Notification::addUserToTeamAlert($team->site, User::find($request->user_id));
-            
+
             return 'success';
         }
 

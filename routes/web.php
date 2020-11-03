@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/sites/update', 'Admin\SiteController@update');
     Route::post('admin/sites/{site}/destroy', 'Admin\SiteController@destroy');
 
+
     Route::get('admin/users', 'Admin\UserController@index')->name('admin.company.users');
     Route::post('admin/users', 'Admin\UserController@search')->name('admin.company.users.search');
     Route::get('admin/users/{user}/show', 'Admin\UserController@show')->name('admin.user.show');
@@ -283,6 +284,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/notifications', 'Admin\NotificationController@notifications')->name('admin.notifications');
 
 
+    Route::get('admin/agenda/sites/{site}', 'Admin\AgendaController@showSiteTeams');
     Route::get('admin/agenda', 'Admin\AgendaController@teams')->name('admin.teams');
     Route::post('admin/agenda/add', 'Admin\AgendaController@addTeam');
     Route::post('admin/agenda/attachUserToTeam/{team}', 'Admin\AgendaController@attachUserToTeam');
