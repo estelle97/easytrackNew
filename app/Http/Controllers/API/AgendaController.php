@@ -53,27 +53,12 @@ class AgendaController extends Controller
         return response()->json($response, 200);
    }
 
-   public function details($id, $siteId) {
-       $teams = Team::where('day', $id)->where("site_id", $siteId)->orderBy('day', 'ASC')->get();
-       $result = [];
-       foreach ($teams as $team) {
-            $users = [];
-            foreach($team->users() as $id) {
-                $user = User::find($id);
-                array_push($users, $user);
-            }
-            $team->users = $team->users();
-       }
-        foreach ($teams as $team) {
-            array_push($result, $team);
-        }
-        $response = [
-            'success' => true,
-            'data' => $result,
-            'message' => 'Equipe ' . $id
-        ];
+   public function details($id, Site $site) {
+       $data = $site->teams->load('users');
 
-        return response()->json($response, 200);
+       return response()->json([
+           'data' => $data
+       ]);
    }
 
    public function store(Request $request) {
@@ -84,34 +69,8 @@ class AgendaController extends Controller
 
    }
 
-   public function destroy($id) {
-       $team = Team::find($id);
-       $team->status = 0;
-       $team->save();
-
-        $response = [
-            'success' => true,
-            'data' => $team,
-            'message' => 'Equipe bloquee'
-        ];
-
-        return response()->json($response, 200);
-   }
-
-
-
    // Wiltek Agenda's methods
 
-   /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function teams()
-    {
-
-        return view('admin.agenda');
-    }
 
     /**
      * Store a new team in a resource storage
@@ -119,6 +78,7 @@ class AgendaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param Integer site
      * @param Integer day
+     * @param employees array:integer
      * @param String start [Format - hh:mm]
      * @param String end [Format - hh:mm]
      *
