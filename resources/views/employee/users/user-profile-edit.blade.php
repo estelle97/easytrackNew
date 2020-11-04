@@ -45,7 +45,7 @@
                             <div class="card-body d-flex flex-column">
                                 <div class="d-flex align-items-center mt-auto">
                                     <div class="ml-2">
-                                        <small class="d-block text-muted">Online</small>
+                                        <small class="d-block text-muted"> {{Auth::user()->role->name}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="mb-2">
                                                         <label class="form-label">Nom complet</label>
-                                                        <input type="text"   maxlength="100" name="name" value="{{$user->name}}" class="form-control form-control-rounded"
+                                                        <input type="text"   maxlength="100" pattern="^[A-Z a-z]+[0-9]{0,3}" name="name" value="{{$user->name}}" class="form-control form-control-rounded"
                                                             placeholder="Saisissez votre nom" required>
                                                         @if($errors->has('name'))
                                                             <span>

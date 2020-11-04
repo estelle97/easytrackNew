@@ -268,7 +268,7 @@
             var street = $("#site-street-add").val();
 
             $.ajax({
-                url: '/admin//add',
+                url: '/admin/sites/add',
                 method: 'post',
                 data: {
                     _token : token,
@@ -312,7 +312,7 @@
             var street = $("#site-street-update"+id).val();
 
             $.ajax({
-                url: '/admin//update',
+                url: '/admin/sites/update',
                 method: 'post',
                 data: {
                     _token : token,

@@ -208,7 +208,7 @@
                             </div>
                             <div class="col-lg-9">
                                 <label class="form-label">Nom complet</label>
-                                <input type="text"   maxlength="100"   maxlength="100" id="user-name-add" class="form-control"
+                                <input type="text"   maxlength="100" pattern="^[A-Z a-z]+[0-9]{0,3}"  maxlength="100" id="user-name-add" class="form-control"
                                     placeholder="Saisissez le nom complet..." required>
                                     <span class="text-danger" id="name-error"></span>
                             </div>
@@ -333,10 +333,10 @@
                 method : 'post',
                 data : form_data,
                 success : function(data){
-
                     $('#modal-create-user')
                     $('.modal-backdrop').remove();
                     $("#employees").prepend(data);
+                    $('.form-control').val() = '';
                 },
                 error: function (err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue

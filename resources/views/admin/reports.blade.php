@@ -229,9 +229,6 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 
 @endsection
@@ -264,9 +261,9 @@
                 method: 'get',
                 success: function(data){
                     console.log(data);
-                    $(".sales").fadeOut().html(data.sales).fadeIn();
-                    $(".purchases").fadeOut().html(data.purchases).fadeIn();
-                    $(".profits").fadeOut().html(data.profits).fadeIn();
+                    $(".sales").fadeOut().html(data.sales+ 'Fcfa').fadeIn();
+                    $(".purchases").fadeOut().html(data.purchases + 'Fcfa').fadeIn();
+                    $(".profits").fadeOut().html(data.profits + 'Fcfa').fadeIn();
                     $(".salesPerEmployee").fadeOut().html(data.salesPerEmployee).fadeIn();
                     $(".salesPerCategory").fadeOut().html(data.salesPerCategory).fadeIn();
                     $(".purchasesPerCategory").fadeOut().html(data.purchasesPerCategory).fadeIn();

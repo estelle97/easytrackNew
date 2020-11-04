@@ -66,7 +66,7 @@
                     <div class="d-flex align-items-center mt-auto">
                         <div class="ml-2">
                             <a class="text-body">{{Auth::user()->name}}</a>
-                            <small class="d-block text-muted">Online</small>
+                            <small class="d-block text-muted"> {{Auth::user()->role->name}} </small>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                         <div class="col-sm-6 col-md-12">
                             <div class="mb-2">
                                 <label class="form-label">Nom complet</label>
-                                <input type="text"   maxlength="100" name="name" class="form-control" placeholder="Saisissez votre nom" value="{{Auth::user()->name}}" required>
+                                <input type="text"   maxlength="100" pattern="^[A-Z a-z]+[0-9]{0,3}" name="name" class="form-control" placeholder="Saisissez votre nom" value="{{Auth::user()->name}}" required>
                                 {!! $errors->first('name','<span class="text-danger"> :message </span>') !!}
                             </div>
                         </div>
