@@ -168,7 +168,7 @@
                             @foreach (App\Action::all()->where('company_id', Auth::user()->companies->first()->id)->reverse() as $action)
                                 <tr>
                                     <td class="w-1">
-                                        <a href={{(Auth::user()->id == $action->initiator->id) ? route('admin.profile') : route('admin.user.show', $action->initiator->id)}}>
+                                        <a href={{(Auth::user()->id == $action->initiator->id) ? route('admin.profile') : route('admin.user.show', $action->initiator->username)}}>
                                             @if ($action->initiator->photo)
                                                 <span class="avatar"> <img src="{{asset($action->initiator->photo)}}" alt=""> </span>
                                             @else

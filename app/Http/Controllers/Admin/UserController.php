@@ -83,13 +83,13 @@ class UserController extends Controller
      */
     public function show($user)
     {
-        $user = User::whereUsername($user)->first();
+        $user = User::whereUsername($user)->withTrashed()->first();
         return view('admin.users.user-profile', compact('user'));
     }
 
     public function edit($user)
     {
-        $user = User::whereUsername($user)->first();
+        $user = User::whereUsername($user)->withTrashed()->first();
         return view('admin.users.user-profile-edit', compact('user'));
     }
 

@@ -39,7 +39,7 @@ class Action extends Model
     }
 
     public function initiator(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User')->withTrashed();
     }
 
     public function site(){
