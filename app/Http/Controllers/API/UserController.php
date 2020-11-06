@@ -93,7 +93,11 @@ class UserController extends Controller
         $type = Type::findOrFail($request->type);
         $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addDays($type->duration),
+            'licence_number' => 'L122L1KZ',
+            'is_active' => 0,
         ]);
+
+        $this->sendMail($user->email, $company);
 
         return response()->json([
             "message" => "Operation success!",
@@ -493,11 +497,11 @@ class UserController extends Controller
                     })->orWhere(function ($query) use($add) {
                         $query->where('receiver', Auth::user()->id)->where('sender', $add->id);
                     })->orderBy('created_at', 'desc')->first();
-                    
+
                     if(!in_array($user, $contacts) && $user != $add){
                         array_push($contacts, $add);
                     }
-                    
+
                 }
             }
         } else {

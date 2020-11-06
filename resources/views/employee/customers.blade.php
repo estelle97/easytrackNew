@@ -24,7 +24,7 @@
     <div class="row row-deck row-cards">
         <div class="card">
             <div class="table-responsive">
-                <table id="customers" class="table card-table table-vcenter text-nowrap datatable">
+                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
                     <thead>
                         <tr>
                             <th class="w-1">
@@ -81,15 +81,17 @@
                                                  Afficher
                                             </a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-site">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    width="18" height="18" class="mr-2">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                </svg>
-                                                Supprimer
-                                            </a>
+                                            @if(Auth::user()->role->slug == 'manager')
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-customer{{$cus->id}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        width="18" height="18" class="mr-2">
+                                                        <path fill="none" d="M0 0h24v24H0z" />
+                                                        <path
+                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                    </svg>
+                                                    Supprimer
+                                                </a>
+                                            @endif
                                         </div>
                                     </span>
                                 </td>
@@ -236,21 +238,23 @@
         @endforeach
 
 
-        <div class="modal modal-blur fade" id="modal-delete-site" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sûre de cette action ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto"
-                            data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+        @foreach (Auth::user()->employee->site->customers()->get() as $cus)
+            <div class="modal modal-blur fade" id="modal-delete-customer{{$cus->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modal-title">Êtes vous sûre de cette action ?</div>
+                            <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link link-secondary mr-auto"
+                                data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteCustomer({{$cus->id}})">Oui, supprimer</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 
@@ -360,6 +364,23 @@
                             el.html(error[0]).fadeIn();
                         });
                     }
+                }
+            });
+        }
+
+        function deleteCustomer(customer){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/employee/customers/'+customer+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-customer"+customer).hide();
+                    $('.modal-backdrop').remove();
+                    $("#customer"+customer).fadeOut(1500);
                 }
             });
         }

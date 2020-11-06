@@ -25,7 +25,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Gestion des utilisateurs
+                    Gestion des employés
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -153,7 +153,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <span class="dropdown-header">Actions</span>
                                             <a class="dropdown-item" href="{{route('admin.user.show', $emp->user->username)}}">
-                                                Gérer l'utilisateur
+                                                Gérer l'employé
                                             </a>
                                             <a class="dropdown-item" href="#">
                                                 Envoyer un message
@@ -182,7 +182,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Ajouter un nouvel utilisateur</h5>
+                        <h5 class="modal-title">Ajouter un nouvel employé</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -292,7 +292,7 @@
                         <div class="modal-content">
                             <div class="modal-body">
                                 <div class="modal-title">Êtes vous sure ?</div>
-                                <div>Si vous continuez, vous perdrez toutes les données de cette utilisateurs.</div>
+                                <div>Si vous continuez, vous perdrez toutes les données de cet employé.</div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-link link-secondary mr-auto"
@@ -333,10 +333,10 @@
                 method : 'post',
                 data : form_data,
                 success : function(data){
-                    $('#modal-create-user')
+                    $('#modal-create-user').hide();
                     $('.modal-backdrop').remove();
-                    $("#employees").prepend(data);
-                    $('.form-control').val() = '';
+                    $("#employees").prepend(data).fadeOut();
+                    $('.form-control').reset();
                 },
                 error: function (err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
@@ -404,9 +404,9 @@
                     _token: token,
                 },
                 success: function(data){
-                    $("#employee"+id).fadeOut();
                     $("#modal-delete-user"+id).hide();
                     $('.modal-backdrop').remove();
+                    $("#employee"+id).fadeOut(1500);
                 }
             });
         }

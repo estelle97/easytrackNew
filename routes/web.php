@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('test', [
+Route::get('test/', [
     'as' => 'test',
     'uses' => 'Auth\RegisterController@testMail',
+]);
+
+Route::get('test/roles', [
+    'as' => 'test',
+    'uses' => 'Admin\RoleController@init',
 ]);
 
 
@@ -167,6 +172,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/sales', 'Admin\SaleController@index')->name('admin.sales.all');
     Route::get('admin/sales/site', 'Admin\SaleController@getElementBySite');
     Route::get('admin/pos', 'Admin\SaleController@create')->name('admin.sales.pos');
+    Route::post('admin/sales/{sale}/destroy', 'Admin\SaleController@destroy');
 
 
 
@@ -180,6 +186,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/purchases/site', 'Admin\PurchaseController@getElementBySite');
     Route::post('admin/purchases', 'Admin\PurchaseController@store');
     Route::get('admin/purchases', 'Admin\PurchaseController@index')->name('admin.purchases');
+    Route::post('admin/purchases/{purchase}/destroy', 'Admin\PurchaseController@destroy');
 
 
     Route::post('admin/products/{product}', 'Admin\ProductController@update');
@@ -188,6 +195,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/products/add', 'Admin\ProductController@create')->name('admin.products.create');
     Route::post('admin/products/store/many', 'Admin\ProductController@storeManyProducts');
     Route::get('admin/products','Admin\ProductController@index')->name('admin.products');
+    Route::post('admin/products/{site}/{product}/destroy', 'Admin\ProductController@destroy');
 
     Route::post('admin/customers/{customer}/destroy', 'Admin\CustomerController@destroy');
     Route::post('admin/customers/{customer}', 'Admin\CustomerController@update');
@@ -221,6 +229,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/sales', 'Employee\SaleController@index')->name('employee.sales.all');
     Route::get('employee/sales/site', 'Employee\SaleController@getElementBySite');
     Route::get('employee/pos', 'Employee\SaleController@create')->name('employee.sales.pos');
+    Route::get('employee/sales/{sale}/destroy', 'Employee\SaleController@destroy');
 
 
 
@@ -234,6 +243,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/purchases/site', 'Employee\PurchaseController@getElementBySite');
     Route::post('employee/purchases', 'Employee\PurchaseController@store');
     Route::get('employee/purchases', 'Employee\PurchaseController@index')->name('employee.purchases');
+    Route::get('employee/purchases/{purchase}/destroy', 'Employee\PurchaseController@destroy');
 
     Route::post('employee/roles/detachPermissionToUser', 'Employee\RoleController@detachPermissionToUser');
     Route::post('employee/roles/attachPermissionToUser', 'Employee\RoleController@attachPermissionToUser');
@@ -244,17 +254,20 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/users/{user}/edit', 'Employee\UserController@edit')->name('employee.user.edit');
     Route::post('employee/users/{user}/edit', 'Employee\UserController@update');
     Route::post('employee/users/store', 'Employee\UserController@store');
+    Route::post('employee/users/{user}/destroy', 'Employee\UserController@destroy');
 
 
     Route::post('employee/sites/update', 'Employee\SiteController@update');
     Route::get('employee/{site}/users', 'Employee\SiteController@users')->name('employee.site.employees');
     Route::get('employee/sites', 'Employee\SiteController@index')->name('employee.sites');
+
     Route::post('employee/products/{product}', 'Employee\ProductController@update');
     Route::get('employee/products/init/{site}', 'Employee\ProductController@getAllProducts');
     Route::get('employee/products/add', 'Employee\ProductController@create')->name('employee.products.create');
     Route::post('employee/products/store/many', 'Employee\ProductController@storeManyProducts');
     Route::post('employee/products', 'Employee\ProductController@store');
     Route::get('employee/products','Employee\ProductController@index')->name('employee.products');
+    Route::post('employee/products/{site}/{product}/destroy', 'Employee\ProductController@destroy');
 
     Route::post('employee/customers/{customer}/destroy', 'Employee\CustomerController@destroy');
     Route::post('employee/customers/{customer}', 'Employee\CustomerController@update');

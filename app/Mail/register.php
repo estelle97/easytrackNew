@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Company;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,14 +12,15 @@ class register extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $company;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Company $company)
     {
-        //
+        $this->company = $company;
     }
 
     /**
@@ -28,7 +30,8 @@ class register extends Mailable
      */
     public function build()
     {
-        return $this->from('easytechconsulting@gmail.com')
-            ->view('email.test');
+        return $this->from('Easytech Consulting')
+            ->view('email.register')
+            ->subject('Bienvenue sur Easytech Consulting');
     }
 }

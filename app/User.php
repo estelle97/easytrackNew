@@ -51,6 +51,7 @@ class User extends Authenticatable
     public function agendas(){
         return $this->belongsToMany('App\Site','agendas')->withPivot('status','start','end');
     }
+
     public function isActive()
     {
         return $this->active;
@@ -58,11 +59,6 @@ class User extends Authenticatable
 
     public function companies(){
         return $this->hasMany('App\Company');
-    }
-
-    //Check if user is online
-    public function isOnline(){
-        return Cache::has('user-is-online-'. $this->id);
     }
 
     public function employee(){

@@ -97,7 +97,7 @@
                                                      Afficher
                                                 </a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-site">
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-supplier{{$supl->id}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                         width="18" height="18" class="mr-2">
                                                         <path fill="none" d="M0 0h24v24H0z" />
@@ -281,22 +281,25 @@
             @endforeach
         @endforeach
 
-
-        <div class="modal modal-blur fade" id="modal-delete-site" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sûre de cette action ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto"
-                            data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+        @foreach (Auth::user()->companies->first()->sites()->get() as $site)
+            @foreach ($site->suppliers()->get() as $supl)
+                <div class="modal modal-blur fade" id="modal-delete-supplier{{$supl->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="modal-title">Êtes vous sûre de cette action ?</div>
+                                <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link link-secondary mr-auto"
+                                    data-dismiss="modal">Annuler</button>
+                                <button type="button" class="btn btn-danger" onclick="deleteSupplier({{$supl->id}})">Oui, supprimer</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            @endforeach
+        @endforeach
     </div>
 @endsection
 
@@ -416,6 +419,23 @@
                             el.html(error[0]).fadeIn();
                         });
                     }
+                }
+            });
+        }
+
+        function deleteSupplier(supplier){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/admin/suppliers/'+supplier+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-supplier"+supplier).hide();
+                    $('.modal-backdrop').remove();
+                    $("#supplier"+supplier).fadeOut(1500);
                 }
             });
         }

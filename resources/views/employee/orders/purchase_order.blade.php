@@ -166,7 +166,7 @@
                         </tr>
                     </tbody>
                 </table>
-               
+
             </div>
 
             <div class="hidden-print">
@@ -174,9 +174,14 @@
                     <tbody>
                         <tr>
                             <td><a href={{str_replace(url('/'), '', url()->previous())}} class="btn btn-info"><i class="fa fa-arrow-left"></i>
-                                    Retour</a> </td>
-                            <td><button onclick="window.print();" class="btn btn-primary"><i class="dripicons-print"></i>
-                                    imprimer</button></td>
+                                Retour</a>
+                            </td>
+
+                            @if(Auth::user()->may('print_purchase_orders'))
+                                <td><button onclick="window.print();" class="btn btn-primary"><i class="dripicons-print"></i>
+                                    imprimer</button>
+                                </td>
+                            @endif
                         </tr>
                     </tbody>
                 </table>

@@ -11,7 +11,6 @@ trait HasPermissionsTrait {
    public function givePermissionsTo(... $permissions) {
 
     $permissions = $this->getAllPermissions($permissions);
-    dd($permissions);
     if($permissions === null) {
       return $this;
     }
@@ -31,11 +30,6 @@ trait HasPermissionsTrait {
 
     $this->permissions()->detach();
     return $this->givePermissionsTo($permissions);
-  }
-
-  public function hasPermissionTo($permission) {
-
-    return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
   }
 
   public function hasPermissionThroughRole($permission) {
@@ -73,6 +67,20 @@ trait HasPermissionsTrait {
 
   public function getPermissions(){
       return $this->permissions->merge($this->role->permissions);
+  }
+
+  public function hasPermissionTo(... $permissions){
+      foreach($permissions as $perm){
+        if($this->may($perm)) return true;
+      }
+      return false;
+  }
+
+  public function may($permission){
+    foreach($this->getPermissions() as $perm){
+      if($perm->slug == $permission) return true;
+    }
+    return false;
   }
 
 }

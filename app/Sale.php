@@ -14,29 +14,29 @@ class Sale extends Model
     protected $dates = ['created_at'];
 
     public function products(){
-        return $this->belongsToMany('App\Product')->withPivot('qty','price');
+        return $this->belongsToMany('App\Product')->withPivot('qty','price')->withTrashed();
     }
 
     public function initiator(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User')->withTrashed();
     }
 
     public function validator(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User')->withTrashed();
     }
 
-    
+
     public function site(){
-        return $this->belongsTo('App\Site');
+        return $this->belongsTo('App\Site')->withTrashed();
     }
 
     public function customer(){
-        return $this->belongsTo('App\Customer');
+        return $this->belongsTo('App\Customer')->withTrashed();
     }
 
     public function total($category_id = null){
         $total = 0;
-        
+
         if(!$category_id){
             foreach($this->products as $prod){
                 $total += $prod->pivot->price * $prod->pivot->qty;
@@ -53,6 +53,6 @@ class Sale extends Model
         return $total;
     }
 
-    
+
 
 }

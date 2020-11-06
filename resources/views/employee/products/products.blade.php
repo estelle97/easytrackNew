@@ -13,24 +13,24 @@
         <!-- Page title actions -->
         <div class="col-auto ml-auto d-print-none">
             <div class="d-flex align-items-center">
-                <span class="dropdown button-click-action mr-2">
-                    <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)"/></svg>
-                        <span class="h2 align-middle">Ajouter</span>
-                    </div>
+                @if(Auth::user()->may('update_products'))
+                    <span class="dropdown button-click-action mr-2">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)"/></svg>
+                            <span class="h2 align-middle">Ajouter</span>
+                        </div>
 
-                    <div class="dropdown-menu dropdown-menu-right mt-3">
-                        <span class="dropdown-header">Menu</span>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#modal-create-product">
-                            Ajouter un produit
-                        </a>
-                        <a class="dropdown-item" href="{{route('employee.products.create')}}">
-                            Ajouter plusieurs produits
-                        </a>
-                    </div>
-                </span>
-
-
+                        <div class="dropdown-menu dropdown-menu-right mt-3">
+                            <span class="dropdown-header">Menu</span>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#modal-create-product">
+                                Ajouter un produit
+                            </a>
+                            <a class="dropdown-item" href="{{route('employee.products.create')}}">
+                                Ajouter plusieurs produits
+                            </a>
+                        </div>
+                    </span>
+                @endif
             </div>
         </div>
     </div>
@@ -80,9 +80,11 @@
                                     {{$product->getTotalSales(Auth::user()->employee->site->id)}}
                                  </td>
                                 <td class="text-right">
-                                    <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{Auth::user()->employee->site->id}}{{$product->id}}">
-                                        Modifier
-                                    </a>
+                                    @if(Auth::user()->may('update_products'))
+                                        <a href="#" class="btn btn-white btn-sm mt-1" data-toggle="modal" data-target="#modal-edit-product{{Auth::user()->employee->site->id}}{{$product->id}}">
+                                            Modifier
+                                        </a>
+                                    @endif
                                     <span class="dropdown">
                                         <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                             data-boundary="viewport" data-toggle="dropdown">Actions</button>
@@ -94,15 +96,18 @@
                                                 marquer comme inactif
                                             </a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    width="18" height="18" class="mr-2">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                </svg>
-                                                Supprimer
-                                            </a>
+                                            @if(Auth::user()->role->slug == 'manager' || Auth::user()->may('delete_products'))
+                                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                                    data-target="#modal-delete-product{{Auth::user()->employee->site->id}}{{$product->id}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        width="18" height="18" class="mr-2">
+                                                        <path fill="none" d="M0 0h24v24H0z" />
+                                                        <path
+                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                    </svg>
+                                                    Supprimer
+                                                </a>
+                                            @endif
                                         </div>
                                     </span>
                                 </td>
@@ -236,22 +241,23 @@
         </div>
     @endforeach
 
-
-    <div class="modal modal-blur fade" id="modal-delete-site" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-title">Êtes vous sûre de cette action ?</div>
-                    <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link link-secondary mr-auto"
-                        data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+    @foreach (Auth::user()->employee->site->products as $product)
+        <div class="modal modal-blur fade" id="modal-delete-product{{Auth::user()->employee->site->id}}{{$product->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="modal-title">Êtes vous sure ?</div>
+                        <div>Si vous continuez, vous perdrez toutes les données de cet employé.</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link link-secondary mr-auto"
+                            data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteProduct({{Auth::user()->employee->site->id}} , {{$product->id}})">Oui, supprimer</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
 </div>
 @endsection
 
@@ -330,7 +336,7 @@
                         $(".text-danger").fadeOut().html('');
                         $("#modal-edit-site"+id).modal().hide();
                         $('.modal-backdrop').remove();
-                        
+
                         $("#product-cost"+site+product).fadeOut().html(cost).fadeIn();
                         $("#product-price"+site+product).fadeOut().html(price).fadeIn();
                         $("#product-site"+site+product).fadeOut().html(site).fadeIn();
@@ -354,6 +360,23 @@
                     }
                 }
 
+            });
+        }
+
+        function deleteProduct(site, product){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/employee/products/'+site+'/'+product+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-product"+site+product).hide();
+                    $('.modal-backdrop').remove();
+                    $("#product"+site+product).fadeOut(1500);
+                }
             });
         }
     </script>

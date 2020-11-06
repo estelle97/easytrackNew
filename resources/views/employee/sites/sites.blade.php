@@ -66,7 +66,11 @@
                                 @if ($site->employees()->count() == 0)
                                     Aucun employé
                                 @else
-                            <a href={{route('employee.site.employees',$site->slug)}}> {{$site->employees()->count()}} Employé(s)</a>
+                                    @if(Auth::user()->may('show_employee'))
+                                        <a href={{route('employee.site.employees',$site->slug)}}> {{$site->employees()->count()}} Employé(s)</a>
+                                    @else
+                                        <span> {{$site->employees()->count()}} Employé(s) </span>
+                                    @endif
                                 @endif
                             </td>
                             <td class="text-right">
@@ -82,15 +86,6 @@
                                              Afficher
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-site">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                width="18" height="18" class="mr-2">
-                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                <path
-                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                            </svg>
-                                            Supprimer
-                                        </a>
                                     </div>
                                 </span>
                             </td>
@@ -137,7 +132,7 @@
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Téléphone N°2</label>
-                                <input type="tel" id="site-phone2-add" class="form-control" placeholder="Saisissez le numéro de téléphone...">
+                                <input type="tel" id="site-phone2-add" class="form-control" placeholder="Saisissez le numéro de téléphone..." pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
                                 <span class="text-danger" id="phone2-error"></span>
                             </div>
                             <div class="col-lg-6">
@@ -160,79 +155,62 @@
         </div>
 
         {{-- Modal Update site--}}
-            <div class="modal modal-blur fade" id="modal-edit-site{{$site->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"> Modifier le site </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <line x1="18" y1="6" x2="6" y2="18" />
-                                    <line x1="6" y1="6" x2="18" y2="18" /></svg>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row mb-3 align-items-end">
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Nom</label>
-                                    <input type="text" id="site-name-update{{$site->id}}" value="{{$site->name}}" class="form-control"
-                                        placeholder="Saisissez le nom complet..." required>
-                                        <span class="text-danger" id="name-error{{$site->id}}"></span>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" id="site-email-update{{$site->id}}" value="{{$site->email}}" class="form-control"
-                                        placeholder="Saisissez l'adresse..." required>
-                                        <span class="text-danger" id="email-error{{$site->id}}"></span>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Téléphone N°1</label>
-                                    <input type="tel" id="site-phone1-update{{$site->id}}" value="{{$site->phone1}}" class="form-control"
-                                        placeholder="Saisissez le numéro de téléphone..."  pattern="[0-9]{3}[0-9]{3}[0-9]{3}" required>
-                                        <span class="text-danger" id="phone1-error{{$site->id}}"></span>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label">Téléphone N°2</label>
-                                    <input type="tel" id="site-phone2-update{{$site->id}}" value="{{$site->phone2}}" class="form-control"
-                                        placeholder="Saisissez le numéro de téléphone...">
-                                        <span class="text-danger" id="phone2-error{{$site->id}}"></span>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-label">Ville</label>
-                                    <input type="text" id="site-town-update{{$site->id}}" value="{{$site->town}}" class="form-control"
-                                        placeholder="Saisissez la ville..." required>
-                                        <span class="text-danger" id="town-error{{$site->id}}"></span>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-label">Quartier</label>
-                                    <input type="text" id="site-street-update{{$site->id}}" value="{{$site->street}}" class="form-control"
-                                        placeholder="Saisissez le quartier..." required>
-                                        <span class="text-danger" id="street-error{{$site->id}}"></span>
-                                </div>
+        <div class="modal modal-blur fade" id="modal-edit-site{{$site->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Modifier le site </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Nom</label>
+                                <input type="text" id="site-name-update{{$site->id}}" value="{{$site->name}}" class="form-control"
+                                    placeholder="Saisissez le nom complet..." required>
+                                    <span class="text-danger" id="name-error{{$site->id}}"></span>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Email</label>
+                                <input type="email" id="site-email-update{{$site->id}}" value="{{$site->email}}" class="form-control"
+                                    placeholder="Saisissez l'adresse..." required>
+                                    <span class="text-danger" id="email-error{{$site->id}}"></span>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Téléphone N°1</label>
+                                <input type="tel" id="site-phone1-update{{$site->id}}" value="{{$site->phone1}}" class="form-control"
+                                    placeholder="Saisissez le numéro de téléphone..."  pattern="[0-9]{3}[0-9]{3}[0-9]{3}" required>
+                                    <span class="text-danger" id="phone1-error{{$site->id}}"></span>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label">Téléphone N°2</label>
+                                <input type="tel" id="site-phone2-update{{$site->id}}" value="{{$site->phone2}}" class="form-control"
+                                    placeholder="Saisissez le numéro de téléphone..." pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
+                                    <span class="text-danger" id="phone2-error{{$site->id}}"></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="form-label">Ville</label>
+                                <input type="text" id="site-town-update{{$site->id}}" value="{{$site->town}}" class="form-control"
+                                    placeholder="Saisissez la ville..." required>
+                                    <span class="text-danger" id="town-error{{$site->id}}"></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="form-label">Quartier</label>
+                                <input type="text" id="site-street-update{{$site->id}}" value="{{$site->street}}" class="form-control"
+                                    placeholder="Saisissez le quartier..." required>
+                                    <span class="text-danger" id="street-error{{$site->id}}"></span>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button onclick="updateSite({{$site->id}})" type="button" class="btn btn-primary" style="width: 100%;"> Mettre à jour </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        <div class="modal modal-blur fade" id="modal-delete-site" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sûre de cette action ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto"
-                            data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+                        <button onclick="updateSite({{$site->id}})" type="button" class="btn btn-primary" style="width: 100%;"> Mettre à jour </button>
                     </div>
                 </div>
             </div>

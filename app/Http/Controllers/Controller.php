@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
+use App\Mail\register;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Mail;
 use Twilio\Rest\Client;
 
 class Controller extends BaseController
@@ -29,9 +32,9 @@ class Controller extends BaseController
         $twilio_number = "+12055840409";
 
         $client = new Client($account_sid, $auth_token);
-        $client->messages->create('+237'.$recipients, 
-                ['from' => $twilio_number, 
-                'body' => $message] 
+        $client->messages->create('+237'.$recipients,
+                ['from' => $twilio_number,
+                'body' => $message]
         );
     }
 
@@ -71,5 +74,11 @@ class Controller extends BaseController
         }
 
         return $total;
+    }
+
+    public function sendMail($to, Company $company){
+        Mail::to($to)->send(new register($company));
+        flashy()->success('tout est bon pour le mail');
+
     }
 }

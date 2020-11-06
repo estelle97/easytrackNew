@@ -110,11 +110,13 @@
                                                         Modifier
                                                     </a>
                                                 @endif
-                                                @if(Auth::user()->role->slug == 'manager' || Auth::user()->role->slug == 'cashier')
+                                                @if(Auth::user()->role->slug == 'manager' || Auth::user()->role->slug == 'cashier' || Auth::user()->may('validate_sale_orders'))
                                                     @if ($sale->validator_id == null)
-                                                        <a class="dropdown-item" onclick="validateSale({{$sale->id}})">
-                                                            Valider
-                                                        </a>
+                                                        @if(Auth::user()->may('validate_sale_orders'))
+                                                            <a class="dropdown-item" onclick="validateSale({{$sale->id}})">
+                                                                Valider
+                                                            </a>
+                                                        @endif
                                                     @else
                                                         @if ($sale->validator_id == Auth::user()->id)
                                                             <a class="dropdown-item" onclick="invalidateSale({{$sale->id}})">
@@ -128,15 +130,17 @@
                                                     @endif
                                                 @endif
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                        width="18" height="18" class="mr-2">
-                                                        <path fill="none" d="M0 0h24v24H0z" />
-                                                        <path
-                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                    </svg>
-                                                    Supprimer
-                                                </a>
+                                                @if(Auth::user()->may('delete_sale_orders'))
+                                                    <a class="dropdown-item" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            width="18" height="18" class="mr-2">
+                                                            <path fill="none" d="M0 0h24v24H0z" />
+                                                            <path
+                                                                d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                        </svg>
+                                                        Supprimer
+                                                    </a>
+                                                @endif
                                             </div>
                                         </span>
                                     </td>

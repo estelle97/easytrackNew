@@ -152,8 +152,8 @@ class PurchaseController extends Controller
         $purchase->shipping_cost = $request->shipping_cost;
         $purchase->paying_method = $request->paying_method;
         $purchase->status = $request->status;
-        
-       
+
+
         DB::transaction(function () use($request,$purchase){
             $products = explode('|', rtrim($request->order,'|'));
             $purchase->save();
@@ -189,7 +189,7 @@ class PurchaseController extends Controller
             }
             $purchase->status = 1;
             $purchase->save();
-    
+
             Action::store('Purchase', $purchase->id, 'validate',
                 'Validation de la commande fournisseur PO-'.$purchase->code
             );
@@ -202,7 +202,7 @@ class PurchaseController extends Controller
 
         return response()->json([
             'message' => 'unauthorized',
-        ],403);        
+        ],403);
     }
 
     public function invalidatePurchase(Request $request, Purchase $purchase){
@@ -217,7 +217,7 @@ class PurchaseController extends Controller
                     ]);
                 }
                 $purchase->save();
-    
+
                 Action::store('Purchase', $purchase->id, 'invalidate',
                     'Invalidation de la commande fournisseur PO-'.$purchase->code
                 );
@@ -258,9 +258,10 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        
-        Action::store('Purchase', $purchase->id, 'destroy',
-            'Suppression de la commande fournisseur PO-'.$purchase->code
-        );
+        if($purchase->delete()){
+            Action::store('Purchase', $purchase->id, 'destroy',
+                'Suppression de la commande fournisseur PO-'.$purchase->code
+            );
+        }
     }
 }

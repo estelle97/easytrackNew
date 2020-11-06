@@ -27,6 +27,7 @@ class SiteUpdateRequest extends FormRequest
             'name' => 'required',
             'email' => 'email|required',
             'phone1' => 'required|min:200000000|max:999999999|numeric',
+            'phone2' => 'sometimes|min:200000000|max:999999999|numeric',
             'town' => 'required',
             'street' => 'required'
         ];
@@ -42,6 +43,7 @@ class SiteUpdateRequest extends FormRequest
         return [
             'required' => 'Ce champ est obligatoire',
             'phone1.*' => "Format de téléphone incorrect",
+            'phone2.*' => "Format de téléphone incorrect",
             'email' => "Adresse email invalide",
             'name.unique' => 'Ce site existe déja',
         ];

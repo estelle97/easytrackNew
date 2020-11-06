@@ -131,7 +131,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="subheader">Utilisateurs actifs </div>
+                                    <div class="subheader">employés actifs </div>
                                     <div class="ml-auto lh-1">
                                         <div class="dropdown">
                                             <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown"
@@ -263,6 +263,6 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 @endsection

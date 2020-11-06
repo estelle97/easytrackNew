@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Liste des utilisateurs
+                    Liste des employés
                 </h2>
             </div>
         </div>
@@ -41,7 +41,7 @@
                                         <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$user->name}}')"> </span>
                                     @endif
                                 </td>
-                                <td> 
+                                <td>
                                     @if ($user->is_admin == 1)
                                         {{$user->employee->site->company->name}}
                                     @else

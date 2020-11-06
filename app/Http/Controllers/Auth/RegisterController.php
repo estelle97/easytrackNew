@@ -64,12 +64,6 @@ class RegisterController extends Controller
         return view('register', compact('types'));
     }
 
-    public function testMail(){
-        Mail::to('steve.wiltek25@gmail.com')->send(new register());
-
-        return redirect()->back();
-    }
-
       /**
      * Validate the user login request.
      *
@@ -152,7 +146,11 @@ class RegisterController extends Controller
         $type = \App\Type::findOrFail($request->type);
         $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addDays($type->duration),
+            'licence_number' => 'L122L1KZ',
+            'is_active' => 0,
         ]);
+
+        $this->sendMail($user->email, $company);
 
         return response()->json([
             "message" => "Operation success!",

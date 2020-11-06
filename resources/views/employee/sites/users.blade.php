@@ -25,7 +25,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Gestion des utilisateurs
+                    Gestion des employés
                 </h2>
             </div>
             <div class="col-auto">
@@ -282,7 +282,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="modal-title">Êtes vous sure ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de cette utilisateurs.</div>
+                        <div>Si vous continuez, vous perdrez toutes les données de cet employé.</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link link-secondary mr-auto"

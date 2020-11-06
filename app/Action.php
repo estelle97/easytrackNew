@@ -43,11 +43,11 @@ class Action extends Model
     }
 
     public function site(){
-        return $this->belongsTo('App\Site');
+        return $this->belongsTo('App\Site')->withTrashed();
     }
 
     public function company(){
-        return $this->belongsTo('App\Company');
+        return $this->belongsTo('App\Company')->withTrashed();
     }
 
 }

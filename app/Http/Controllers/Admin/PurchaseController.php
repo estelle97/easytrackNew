@@ -260,9 +260,10 @@ class PurchaseController extends Controller
     public function destroy(Purchase $purchase)
     {
 
-
-        Action::store('Purchase', $purchase->id, 'destroy',
-            "Suppression de la commande fournisseur PO-".$purchase->code
-        );
+        if($purchase->delete()){
+            Action::store('Purchase', $purchase->id, 'destroy',
+                "Suppression de la commande fournisseur PO-".$purchase->code
+            );
+        }
     }
 }

@@ -100,7 +100,7 @@
                         </svg>
                     </span>
                     <span class="nav-link-title">
-                        Utilisateurs
+                        employés
                     </span>
                 </a>
             </li>

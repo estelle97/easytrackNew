@@ -82,6 +82,13 @@ class SiteController extends Controller
             $employee->user->delete();
             $employee->delete();
         }
+        foreach ($site->suppliers as $supplier) {
+            $supplier->delete();
+        }
+        foreach ($site->customers as $customer) {
+            $customer->delete();
+        }
+        
         $site->delete();
 
         return 'success';

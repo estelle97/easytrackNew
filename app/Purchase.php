@@ -18,19 +18,19 @@ class Purchase extends Model
     }
 
     public function initiator(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User')->withTrashed();
     }
 
     public function validator(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User')->withTrashed();
     }
 
     public function site(){
-        return $this->belongsTo('App\Site');
+        return $this->belongsTo('App\Site')->withTrashed();
     }
 
     public function supplier(){
-        return $this->belongsTo('App\Supplier');
+        return $this->belongsTo('App\Supplier')->withTrashed();
     }
 
     public function getTotalOrder(){
@@ -39,7 +39,7 @@ class Purchase extends Model
 
     public function total($category_id = null){
         $total = 0;
-        
+
         if(!$category_id){
             foreach($this->products as $prod){
                 $total += $prod->pivot->cost * $prod->pivot->qty;

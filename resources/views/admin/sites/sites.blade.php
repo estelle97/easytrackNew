@@ -147,7 +147,7 @@
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Téléphone N°2</label>
-                                <input type="tel" id="site-phone2-add" class="form-control" placeholder="Saisissez le numéro de téléphone...">
+                                <input type="tel" id="site-phone2-add" class="form-control" placeholder="Saisissez le numéro de téléphone..." pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
                                 <span class="text-danger" id="phone2-error"></span>
                             </div>
                             <div class="col-lg-6">
