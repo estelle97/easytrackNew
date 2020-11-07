@@ -281,7 +281,7 @@
             var username = $("#username").val();
             var password = $("#password").val();
             $.ajax({
-                url: '/switchaccount/',
+                url: '/switchaccount',
                 method: 'post',
                 data: {
                     _token : token,
