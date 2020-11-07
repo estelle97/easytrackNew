@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Mail\register;
+use App\User;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 use Twilio\Rest\Client;
 
 class Controller extends BaseController
@@ -79,6 +83,22 @@ class Controller extends BaseController
     public function sendMail($to, Company $company){
         Mail::to($to)->send(new register($company));
         flashy()->success('tout est bon pour le mail');
+
+    }
+
+    public function switchAccount(Request $request){
+
+        $user = User::whereUsername($request->username)->first();
+
+
+        if(Hash::check($request->password, $user->password)) {
+            Auth::login($user);
+            return response()->json([
+                'is_admin' => $user->is_admin
+            ]);
+        } else {
+            return 'error';
+        }
 
     }
 }

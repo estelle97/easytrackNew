@@ -17,7 +17,7 @@ class RoleTableSedder extends Seeder
             ['name' => 'Serveur', 'slug' => 'server'],
             ['name' => 'Magasinier', 'slug' => 'storekeeper'],
             ['name' => 'Gérant', 'slug' => 'manager'],
-            ['name' => 'Directeur', 'slug' => 'boss'],
+            ['name' => 'Directeur Général', 'slug' => 'boss'],
         ];
 
         DB::table('roles')->insert($roles);

@@ -43,9 +43,9 @@
                                 </td>
                                 <td>
                                     @if ($user->is_admin == 1)
-                                        {{$user->employee->site->company->name}}
+                                    {{$user->employee->site->company->name}}
                                     @else
-                                        {{$user->companies->first()->name ?? ''}}
+                                    {{$user->companies->first()->name ?? ''}}
                                     @endif
                                 </td>
                                 <td>

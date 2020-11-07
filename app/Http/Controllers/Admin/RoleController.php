@@ -48,6 +48,8 @@ class RoleController extends Controller
 
     public function init(){
 
+        DB::table('roles')->insert(['name' => 'Directeur', 'slug' => 'boss']);
+
         foreach (Employee::all() as $emp) {
 
             if($emp->user->role->slug == 'cashier'){
@@ -62,8 +64,8 @@ class RoleController extends Controller
             } elseif($emp->user->role->slug == 'manager'){
                 $emp->user->role_id = 4;
                 $emp->user->save();
-            }else{
-                $emp->user->role_id = 2;
+            }elseif($emp->user->role->slug == 'boss'){
+                $emp->user->role_id = 5;
                 $emp->user->save();
             }
         }
@@ -129,6 +131,7 @@ class RoleController extends Controller
             ['name' => 'Serveur', 'slug' => 'server'],
             ['name' => 'Magasinier', 'slug' => 'storekeeper'],
             ['name' => 'Gérant', 'slug' => 'manager'],
+            ['name' => 'Directeur', 'slug' => 'boss'],
         ];
 
         DB::table('roles')->insert($roles);
@@ -137,6 +140,7 @@ class RoleController extends Controller
         Role::whereSlug('cashier')->first()->permissions()->attach([6, 7, 8, 9, 11, 12, 13, 14, 17, 18, 20, 21, 22, 23, 24, 25, 26]);
         Role::whereSlug('storekeeper')->first()->permissions()->attach([6, 7, 8, 9, 17, 18, 20, 21, 22, 26]);
         Role::whereSlug('manager')->first()->permissions()->attach([1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28]);
+        Role::whereSlug('boss')->first()->permissions()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
 
         flashy()->success("Tout s'est bien passé! ");
         return redirect()->route('login');

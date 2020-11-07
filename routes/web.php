@@ -308,4 +308,6 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
     Route::get('notifications', 'NotificationController@index')->name('notifications');
     Route::post('resetPassword/{user}', 'Auth\ResetPasswordController@resetPassword');
+    Route::post('switchaccount', 'Controller@switchAccount');
+
 });

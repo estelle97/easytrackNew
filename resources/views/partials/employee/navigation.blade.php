@@ -117,7 +117,7 @@
             </li>
 
 
-            @if(Auth::user()->role->slug == 'manager' || Auth::uer()->may('show_employee'))
+            @if(Auth::user()->role->slug == 'manager' || Auth::user()->may('show_employee'))
                 <li class="nav-item">
                     <a class="nav-link" href={{route('employee.company.users')}}>
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
