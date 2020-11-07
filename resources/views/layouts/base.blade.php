@@ -200,7 +200,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="switchAccount btn btn-primary" style="width: 100%;">
-                            Sauvegarder
+                            Connexion
                         </button>
                     </div>
                 </div>

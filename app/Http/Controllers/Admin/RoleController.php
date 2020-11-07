@@ -48,8 +48,6 @@ class RoleController extends Controller
 
     public function init(){
 
-        DB::table('roles')->insert(['name' => 'Directeur', 'slug' => 'boss']);
-
         foreach (Employee::all() as $emp) {
 
             if($emp->user->role->slug == 'cashier'){

@@ -93,6 +93,7 @@ class Controller extends BaseController
 
         if(Hash::check($request->password, $user->password)) {
             Auth::login($user);
+            flashy()->info("Connexion réussie!");
             return response()->json([
                 'is_admin' => $user->is_admin
             ]);
