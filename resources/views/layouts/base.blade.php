@@ -162,7 +162,7 @@
                                                 <option value={{$emp->user->username}}> {{$emp->user->name}} | {{$emp->user->email}} </option>
                                             @endforeach
                                         @endforeach
-                                        @else
+                                        @elseif(Auth::user()->is_admin == 1)
                                             @foreach(Auth::user()->employee->site->employees as $emp)
                                                 <option value={{$emp->user->username}}> {{$emp->user->name}} | {{$emp->user->email}} </option>
                                             @endforeach
