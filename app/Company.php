@@ -35,10 +35,18 @@ class Company extends Model
     public function totalPurchases($days = null, $category_id= null){
         $total = 0;
         if($days){
-            foreach ($this->sites as $site) {
-               foreach($site->purchases->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $pur){
-                $total += $pur->total($category_id);
-               }
+            if(strlen($days) < 4){
+                foreach ($this->sites as $site) {
+                   foreach($site->purchases->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $pur){
+                    $total += $pur->total($category_id);
+                   }
+                }
+            } else {
+                foreach ($this->sites as $site) {
+                    foreach($site->purchases->where('created_at','>=', $days.' 00:00:00')->where('created_at','<=', $days.' 23:59:59')->where('validator_id','!=', null) as $pur){
+                     $total += $pur->total($category_id);
+                    }
+                 }
             }
         }else {
             foreach ($this->sites as $site) {
@@ -55,11 +63,19 @@ class Company extends Model
         $total = 0;
 
         if($days){
-            foreach ($this->sites as $site) {
-                foreach($site->sales->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
-                 $total += $sale->total($category_id);
-                }
-             }
+            if(strlen($days) < 4){
+                foreach ($this->sites as $site) {
+                    foreach($site->sales->where('created_at','>=', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
+                     $total += $sale->total($category_id);
+                    }
+                 }
+            } else {
+                foreach ($this->sites as $site) {
+                    foreach($site->sales->where('created_at','>=', $days.' 00:00:00')->where('created_at','<=', $days.' 23:59:59')->where('validator_id','!=', null) as $sale){
+                     $total += $sale->total($category_id);
+                    }
+                 }
+            }
         } else {
             foreach ($this->sites as $site) {
                foreach($site->sales->where('validator_id','!=', null) as $sale){
@@ -120,7 +136,7 @@ class Company extends Model
                 $totalUsage += $pack->duration;
             }
         }
-        
+
         $subUsedPercentage = round($totalUsage * 100/$totalDuration, 1);
         return (object)[
             'duration' => $subDuration,

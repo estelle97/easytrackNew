@@ -110,11 +110,21 @@ class ReportController extends Controller
                     }
                 }
             } else {
-                foreach (Auth::user()->companies->first()->sites as $site) {
-                    foreach ($site->sales->where('created_at','>', Carbon::today()->subDays($period))->where('validator_id','!=', null) as $sale) {
-                        if($sale->paying_method == 'om') $om += $sale->total();
-                        if($sale->paying_method == 'cash') $cash += $sale->total();
-                        if($sale->paying_method == 'momo') $momo += $sale->total();
+                if(strlen($period) < 4){
+                    foreach (Auth::user()->companies->first()->sites as $site) {
+                        foreach ($site->sales->where('created_at','>', Carbon::today()->subDays($period))->where('validator_id','!=', null) as $sale) {
+                            if($sale->paying_method == 'om') $om += $sale->total();
+                            if($sale->paying_method == 'cash') $cash += $sale->total();
+                            if($sale->paying_method == 'momo') $momo += $sale->total();
+                        }
+                    }
+                } else {
+                    foreach (Auth::user()->companies->first()->sites as $site) {
+                        foreach ($site->sales->where('created_at','>=', $period.' 00:00:00')->where('created_at','<=', $period.' 23:59:59')->where('validator_id','!=', null) as $sale) {
+                            if($sale->paying_method == 'om') $om += $sale->total();
+                            if($sale->paying_method == 'cash') $cash += $sale->total();
+                            if($sale->paying_method == 'momo') $momo += $sale->total();
+                        }
                     }
                 }
             }
@@ -126,10 +136,18 @@ class ReportController extends Controller
                     if($sale->paying_method == 'momo') $momo += $sale->total();
                 }
             } else {
-                foreach (Site::find($site)->sales->where('created_at','>', Carbon::today()->subDays($period))->where('validator_id','!=', null) as $sale) {
-                    if($sale->paying_method == 'om') $om += $sale->total();
-                    if($sale->paying_method == 'cash') $cash += $sale->total();
-                    if($sale->paying_method == 'momo') $momo += $sale->total();
+                if(strlen($period) < 4){
+                    foreach (Site::find($site)->sales->where('created_at','>', Carbon::today()->subDays($period))->where('validator_id','!=', null) as $sale) {
+                        if($sale->paying_method == 'om') $om += $sale->total();
+                        if($sale->paying_method == 'cash') $cash += $sale->total();
+                        if($sale->paying_method == 'momo') $momo += $sale->total();
+                    }
+                } else {
+                    foreach (Site::find($site)->sales->where('created_at','>=', $period.' 00:00:00')->where('created_at','<=', $period.' 23:59:59')->where('validator_id','!=', null) as $sale) {
+                        if($sale->paying_method == 'om') $om += $sale->total();
+                        if($sale->paying_method == 'cash') $cash += $sale->total();
+                        if($sale->paying_method == 'momo') $momo += $sale->total();
+                    }
                 }
             }
         }
