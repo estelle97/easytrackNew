@@ -227,6 +227,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {{-- easytrak Core --}}
     <script src={{asset("template/assets/dist/js/easytrak.min.js")}}></script>
+
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+
+    <!-- Firebase CONFIG -->
+    <script src={{asset("template/assets/dist/js/app/configs/firebase.js")}}></script>
     {{-- c'chart-revenue-bg --}}
 
     @include('flashy::message')
