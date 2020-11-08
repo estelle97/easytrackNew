@@ -4,18 +4,52 @@
             <h3>Mon budget</h3>
         </div>
         <p>Définnissez vos charges pour établir un listing et faire des simulations à fin d'obtenir une estimation.</p>
-        <div class="col-sm-12 col-md-7 col-lg-7 mb-3">
-            <a href="#" class="btn btn-primary btn-block text-left">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon mr-3"><path fill="none" d="M0 0h24v24H0z"/><path d="M4.406 14.523l3.402-3.402 2.828 2.829 3.157-3.157L12 9h5v5l-1.793-1.793-4.571 4.571-2.828-2.828-2.475 2.474a8 8 0 1 0-.927-1.9zm-1.538 1.558l-.01-.01.004-.004A9.965 9.965 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10c-4.07 0-7.57-2.43-9.132-5.919z" fill="rgba(255,255,255,1)"/></svg>
-                Faire une simulation
-            </a>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
-            <a href="#" class="btn btn-light btn-block text-left">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon mr-3"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 2a8 8 0 0 1 3.292 15.293A8 8 0 1 1 6.706 6.707 8.003 8.003 0 0 1 14 2zm-3 7H9v1a2.5 2.5 0 0 0-.164 4.995L9 15h2l.09.008a.5.5 0 0 1 0 .984L11 16H7v2h2v1h2v-1a2.5 2.5 0 0 0 .164-4.995L11 13H9l-.09-.008a.5.5 0 0 1 0-.984L9 12h4v-2h-2V9zm3-5a5.985 5.985 0 0 0-4.484 2.013 8 8 0 0 1 8.47 8.471A6 6 0 0 0 14 4z"/></svg>
-                Voir le Bénéfice
-            </a>
-        </div>
+        <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="subheader">Bénéfice</div>
+              </div>
+              <div class="h1 mb-3">250.000 Fcfa</div>
+              <div class="mb-0 text-muted d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="text-nowrap selected-period">
+                        <span class="dropdown button-click-action">
+                            <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="rgba(0,0,0,1)" /></svg>
+                                <span class="selected-site align-middle ml-2" data-site="all"> Tous les sites </span>
+                            </div>
+
+                            <div class="dropdown-menu dropdown-menu-right mt-3">
+                                <a class="dropdown-item site" data-site="all">
+                                   Tous les sites
+                                </a>
+                                @foreach (Auth::user()->companies->first()->sites as $site)
+                                    <a class="dropdown-item site" data-site={{$site->id}}>
+                                        {{$site->name}}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </span>
+                    </span>
+                </div>
+                <div class="ml-auto">
+                    <div class="dropdown">
+                      <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Global
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" style="">
+                          <a class="dropdown-item active" href="#">Global</a>
+                        <a class="dropdown-item" href="#">7 Derniers jours</a>
+                        <a class="dropdown-item" href="#">30 Derniers jours</a>
+                        <a class="dropdown-item" href="#">3 Derniers mois</a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+          </div>
     </section>
     <section class="mb-4">
         <div class="d-flex align-item-center justify-content-between mb-2">
@@ -36,6 +70,33 @@
                   </div>
                   <div class="text-muted"><span contenteditable="true">120000</span> FCFA</div>
                 </div>
+                <div class="col-auto card-actions">
+                    <span class="dropdown button-click-action">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                    height="20">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                </svg>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <span class="dropdown-header">Actions</span>
+                            <a class="dropdown-item">
+                                Editer
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                Desactiver
+                            </a>
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#modal-delete-charge">
+                                Supprimer la charge
+                            </a>
+                        </div>
+                    </span>
+                </div>
               </div>
             </div>
         </div>
@@ -50,6 +111,33 @@
                   </div>
                   <div class="text-muted"><span contenteditable="true">300000</span> FCFA</div>
                 </div>
+                <div class="col-auto card-actions">
+                    <span class="dropdown button-click-action">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                    height="20">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                </svg>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <span class="dropdown-header">Actions</span>
+                            <a class="dropdown-item">
+                                Editer
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                Desactiver
+                            </a>
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#modal-delete-charge">
+                                Supprimer la charge
+                            </a>
+                        </div>
+                    </span>
+                </div>
               </div>
             </div>
         </div>
@@ -63,6 +151,33 @@
                     Loyer
                   </div>
                   <div class="text-muted"><span contenteditable="true">300000</span> FCFA</div>
+                </div>
+                <div class="col-auto card-actions">
+                    <span class="dropdown button-click-action">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                    height="20">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                </svg>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <span class="dropdown-header">Actions</span>
+                            <a class="dropdown-item">
+                                Editer
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                Desactiver
+                            </a>
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#modal-delete-charge">
+                                Supprimer la charge
+                            </a>
+                        </div>
+                    </span>
                 </div>
               </div>
             </div>
@@ -87,6 +202,33 @@
                   </div>
                   <div class="text-muted"><span contenteditable="true">120000</span> FCFA</div>
                 </div>
+                <div class="col-auto card-actions">
+                    <span class="dropdown button-click-action">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                    height="20">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                </svg>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <span class="dropdown-header">Actions</span>
+                            <a class="dropdown-item">
+                                Editer
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                Desactiver
+                            </a>
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#modal-delete-charge">
+                                Supprimer la charge
+                            </a>
+                        </div>
+                    </span>
+                </div>
               </div>
             </div>
         </div>
@@ -100,6 +242,33 @@
                     Courant électrique
                   </div>
                   <div class="text-muted"><span contenteditable="true">300000</span> FCFA</div>
+                </div>
+                <div class="col-auto card-actions">
+                    <span class="dropdown button-click-action">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                    height="20">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                </svg>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <span class="dropdown-header">Actions</span>
+                            <a class="dropdown-item">
+                                Editer
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                Desactiver
+                            </a>
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#modal-delete-charge">
+                                Supprimer la charge
+                            </a>
+                        </div>
+                    </span>
                 </div>
               </div>
             </div>
@@ -115,6 +284,33 @@
                   </div>
                   <div class="text-muted"><span contenteditable="true">300000</span> FCFA</div>
                 </div>
+                <div class="col-auto card-actions">
+                    <span class="dropdown button-click-action">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                    height="20">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                </svg>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <span class="dropdown-header">Actions</span>
+                            <a class="dropdown-item">
+                                Editer
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                Desactiver
+                            </a>
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#modal-delete-charge">
+                                Supprimer la charge
+                            </a>
+                        </div>
+                    </span>
+                </div>
               </div>
             </div>
         </div>
@@ -128,6 +324,33 @@
                     Arrêt maladie
                   </div>
                   <div class="text-muted"><span contenteditable="true">300000</span> FCFA</div>
+                </div>
+                <div class="col-auto card-actions">
+                    <span class="dropdown button-click-action">
+                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                    height="20">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                </svg>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <span class="dropdown-header">Actions</span>
+                            <a class="dropdown-item">
+                                Editer
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                Desactiver
+                            </a>
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#modal-delete-charge">
+                                Supprimer la charge
+                            </a>
+                        </div>
+                    </span>
                 </div>
               </div>
             </div>
