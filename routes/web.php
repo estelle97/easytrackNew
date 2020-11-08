@@ -211,8 +211,6 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::resource('admin/expenses', 'Admin\ExpenseController');
 
 
-
-
     Route::get('employee/stats/sales/{days}', 'Employee\StatController@sales');
     Route::get('employee/stats/purchases/{days}', 'Employee\StatController@purchases');
     Route::get('employee/stats/profits/{days}', 'Employee\StatController@profits');
@@ -297,12 +295,12 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/notifications', 'Admin\NotificationController@notifications')->name('admin.notifications');
 
 
-    Route::get('admin/agenda/sites/{site}', 'Admin\AgendaController@showSiteTeams');
-    Route::get('admin/agenda', 'Admin\AgendaController@teams')->name('admin.teams');
-    Route::post('admin/agenda/add', 'Admin\AgendaController@addTeam');
-    Route::post('admin/agenda/attachUserToTeam/{team}', 'Admin\AgendaController@attachUserToTeam');
-    Route::post('admin/agenda/detachUserToTeam/{team}', 'Admin\AgendaController@detachUserToTeam');
-    Route::post("/admin/agenda/team/{team}/destroy", 'Admin\AgendaController@destroyTeam');
+    Route::get('admin/teams/sites/{site}', 'Admin\TeamController@showSiteTeams');
+    Route::get('admin/teams', 'Admin\TeamController@teams')->name('admin.teams');
+    Route::post('admin/teams/add', 'Admin\TeamController@addTeam');
+    Route::post('admin/teams/attachUserToTeam/{team}', 'Admin\TeamController@attachUserToTeam');
+    Route::post('admin/teams/detachUserToTeam/{team}', 'Admin\TeamController@detachUserToTeam');
+    Route::post("/admin/teams/team/{team}/destroy", 'Admin\TeamController@destroyTeam');
 
     Route::get('admin/agenda/meeting', 'Admin\MeetingController@index')->name('admin.meeting');
 

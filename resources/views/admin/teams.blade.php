@@ -6,7 +6,7 @@
     <div class="row align-items-center">
         <div class="col-auto d-flex align-items-center">
             <h2 class="page-title">
-                <a class="agenda-segment active">Agenda</a>
+                <a class="agenda-segment active">Equipes de travail</a>
             </h2>
         </div>
         <!-- Page title actions -->
@@ -59,7 +59,7 @@
                                         </div>
                                         <div class="dropdown-menu dropdown-menu-right mt-3">
                                             <span class="dropdown-header">Menu</span>
-                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-show-agenda{{Auth::user()->companies->first()->sites->first()->id}}-{{$i}}">
+                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-show-team{{Auth::user()->companies->first()->sites->first()->id}}-{{$i}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon dropdown-item-icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c5.392 0 9.878 3.88 10.819 9-.94 5.12-5.427 9-10.819 9-5.392 0-9.878-3.88-10.819-9C2.121 6.88 6.608 3 12 3zm0 16a9.005 9.005 0 0 0 8.777-7 9.005 9.005 0 0 0-17.554 0A9.005 9.005 0 0 0 12 19zm0-2.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0-2a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
                                                 Ouvrir
                                             </a>
@@ -76,11 +76,10 @@
 </div>
 
 <div class="modal-section">
-
      {{-- Affichage de des équipes de la journée--}}
      @foreach (Auth::user()->companies->first()->sites as $site)
         @for ($i = 1; $i <= 7; $i++)
-            <div class="modal modal-blur fade" id="modal-show-agenda{{$site->id}}-{{$i}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal modal-blur fade" id="modal-show-team{{$site->id}}-{{$i}}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -130,7 +129,7 @@
                                                         </td>
                                                         <td class="text-right">
                                                             <a href="#" class="btn btn-outline btn-pill py-2 px-1 mr-2" data-toggle="modal" data-target="#modal-show-team{{$team->id}}"><i class="ri-eye-line ri-xl"></i></a>
-                                                            <a href="#" class="btn btn-outline btn-pill py-2 px-1 mr-2" data-toggle="modal" data-target="#modal-edit-team"><i class="ri-pencil-line ri-xl"></i></a>
+                                                            <a href="#" class="btn btn-outline btn-pill py-2 px-1 mr-2" data-toggle="modal" data-target="#modal-edit-team{{$team->id}}"><i class="ri-pencil-line ri-xl"></i></a>
                                                             <a href="#" class="btn btn-outline btn-pill py-2 px-1 text-red" onclick="destroyTeam({{$team->id}})"><i class="ri-close-line ri-xl"></i></a>
                                                         </td>
                                                     </tr>
@@ -231,7 +230,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="modal-title">Êtes vous sure ?</div>
-                    <div>Si vous continuez, vous perdrez toutes les données de cette agenda.</div>
+                    <div>Si vous continuez, vous perdrez toutes les données de cette équipe.</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link link-secondary mr-auto"
@@ -243,8 +242,8 @@
     </div>
 
     {{-- Modification de l'équipe --}}
-    @foreach (App\Team::all() as $team)
-        <div class="modal modal-blur fade" id="modal-edit-team" tabindex="-1" role="dialog" aria-hidden="true">
+    @foreach (Auth::user()->companies->first()->sites->first()->teams as $team)
+        <div class="modal modal-blur fade" id="modal-edit-team{{$team->id}}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -273,7 +272,7 @@
                                 <label class="form-label">Employées</label>
                                 <select class="form-select" id="select-team-update-user{{$team->id}}">
                                     @foreach ($team->site->employees as $emp)
-                                        <option id="selected-team-update-user{{$team->id}}" value={{$emp->user->id}} {{$team->users->contains($emp->user->id) ? 'disabled' : ''}}> {{$emp->user->name}} </option>
+                                        <option id="selected-team-update-user{{$team->id}}" value="{{$emp->user->id}}" {{$team->users->contains($emp->user->id) ? 'disabled' : ''}}> {{$emp->user->name}} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -435,7 +434,7 @@
             var end = $('#end'+site+'-'+day).val();
 
             $.ajax({
-                url: '/admin/agenda/add',
+                url: '/admin/teams/add',
                 data: {
                     _token : token,
                     site : site,
@@ -454,11 +453,12 @@
         function showTeams(site, name){
 
             $.ajax({
-                url: '/admin/agenda/sites/'+site,
+                url: '/admin/teams/sites/'+site,
                 method : 'get',
                 data: {},
                 success:function (data) {
-                    $('.teams').fadeOut().html(data).fadeIn();
+                    $('.teams').fadeOut().html(data.teams).fadeIn();
+                    $('.modal-section').html(date.modals);
                     $('.currentSite').html(name);
                 }
             });
@@ -470,7 +470,7 @@
             var user = $('#select-team-update-user'+team_id+' :selected').text();
 
             $.ajax({
-                url: '/admin/agenda/attachUserToTeam/'+team_id,
+                url: '/admin/teams/attachUserToTeam/'+team_id,
                 data: {
                     _token : token,
                     user_id : user_id,
@@ -497,7 +497,7 @@
             var token = '{{csrf_token()}}';
 
             $.ajax({
-                url: '/admin/agenda/detachUserToTeam/'+team_id,
+                url: '/admin/teams/detachUserToTeam/'+team_id,
                 data: {
                     _token : token,
                     user_id : user_id,
@@ -516,7 +516,7 @@
             var token = '{{csrf_token()}}';
             if(confirm('Voulez vous vraiment supprimer cette équipe?')){
                 $.ajax({
-                    url: '/admin/agenda/team/'+team_id+'/destroy',
+                    url: '/admin/teams/team/'+team_id+'/destroy',
                     method: 'post',
                     data: {
                         _token: token
