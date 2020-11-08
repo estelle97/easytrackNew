@@ -289,6 +289,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
 
     Route::get('chat', 'ChatController@index')->name('chat');
+    Route::post('chat/contacts', 'ChatController@getContacts');
 
 
     Route::post('admin/notifications/last', 'Admin\NotificationController@getNotifications');

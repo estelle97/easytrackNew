@@ -165,12 +165,35 @@
     </script>
 
     <script>
+
+        /*
+        *   Initialization
+        */
+
+        getContacts();
+
         /*
          * PHP VARIABLES
          */
         const authId = "{{ Auth::id() }}";
-        const contacts = "";
-        console.log('contacts: ', contacts);
+        let contacts = "";
+
+
+        function getContacts(){
+            token = '{{@csrf_token()}}';
+
+            $.ajax({
+                url: 'chat/contacts',
+                method: 'post',
+                data : {
+                    _token: token
+                },
+                success: function(data){
+                    contacts = data.contacts;
+                    // console.log('contacts', contacts[0].role.name);
+                },
+            });
+        }
 
         /*
          * INDEX
