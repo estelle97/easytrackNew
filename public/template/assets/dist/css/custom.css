@@ -47,6 +47,14 @@
     height: 700px;
     max-height: 700px;
 }
+.chat-max-size {
+    height: 700px;
+    max-height: 700px;
+}
+.chat-room-max-size {
+    height: 700px;
+    max-height: 700px;
+}
 
 
 /* DROPDOWN */
@@ -83,24 +91,6 @@
 .btn {
     border-radius: 10px !important;
 }
-.btn-gradient:hover {
-    color: #fff;
-    opacity: 0.7;
-}
-
-.btn-no-border {
-    border: none !important;
-}
-
-.button-click-action {
-    cursor: pointer;
-}
-
-/* INPUT */
-.quantity-input {
-    height: 1.6rem !important;
-    min-height: 1.6rem !important;
-}
 
 .btn-gradient {
     color: #fff;
@@ -112,11 +102,34 @@
     transition: all 0.3s;
 }
 
+.btn-gradient:hover {
+    color: #fff;
+    opacity: 0.7;
+}
+
 .btn-e-icon {
     transition: all 0.3s;
 }
+
 .btn-e-icon:hover {
     opacity: 0.5;
+}
+
+.btn-no-border {
+    border: none !important;
+}
+
+.button-click-action {
+    cursor: pointer;
+}
+
+/* INPUT */
+.form-control, .form-select {
+    border-radius: 10px !important;
+}
+.quantity-input {
+    height: 1.6rem !important;
+    min-height: 1.6rem !important;
 }
 
 
@@ -393,4 +406,14 @@
 
 .agenda-segment.active {
     opacity: 1;
+}
+
+.section-loader {
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    z-index: 10;
 }
