@@ -23,7 +23,7 @@ class CustomerController extends Controller
         } else {
             $customers = Auth::user()->employee->site->customers;
         }
-        
+
         return response()->json([
             'customers' => $customers
         ], 200);
@@ -96,6 +96,10 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        return response()->json([
+            'message' => 'deleted successfully!'
+        ], 204);
     }
 }

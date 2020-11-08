@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::post('purchases/{purchase}/validate', 'API\PurchaseController@validatePurchase');
     Route::post('purchases/{purchase}/invalidate', 'API\PurchaseController@invalidatePurchase');
+    Route::post('purchases/{purchase}/destroy', 'API\PurchaseController@destroy}');
     Route::apiResource('purchases', 'API\PurchaseController');
 
 
