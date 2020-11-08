@@ -43,6 +43,12 @@
             </a>
         </li>
         <li>
+            <a id="Salaire" class="settings px-3 py-2 rounded-lg button-click-action">
+                <i class="ri-refund-2-line ri-xl mr-3"></i>
+                <div class="libelle">Salaire des employés</div>
+            </a>
+        </li>
+        <li>
             <a id="about" class="settings px-3 py-2 rounded-lg button-click-action">
                 <i class="ri-information-line ri-xl mr-3"></i>
                 <div class="libelle">A Propos</div>

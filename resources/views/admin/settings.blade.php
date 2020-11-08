@@ -43,7 +43,7 @@
 
 <div class="row">
     <div class="card col-lg-3"
-        style="height: 430px;">
+        style="height: 500px;">
         @include("partials.admin.settingsSidebar")
     </div>
     <div class="view card card-max-size col-lg-5 ml-4 p-3" style="overflow-y: auto; overflow-x: hidden;">

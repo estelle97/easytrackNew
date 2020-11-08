@@ -288,22 +288,21 @@
                 chatsCollection.where('users', 'array-contains',  parseInt(idTo)).get().then((existingChats) => {
                 console.log("existingChats", existingChats)
                     if (existingChats.empty == true) {
-                        var chatId = chatInstance.data.generateChatId(authId, idTo);
                         var now = new Date();
                         var data = {
                             users:[parseInt(authId), parseInt(idTo)],
                             colors: this.getColors(),
                             date: now.toString()
                         }
-                        chatsCollection.doc(chatId).set(data).then(chatRoomData => {
-                            var newChat = chatsCollection.doc(chatId);
-                            newChat.collection(chatId);
+                        chatsCollection.add(data).then(chatRoomData => {
+                            var newChat = chatsCollection.doc(chatRoomData.id);
+                            newChat.collection(chatRoomData.id);
                             $('#modal-create-chat').hide();
                             $('.modal-backdrop').remove();
 
                             // Load inbox
-                            chatInstance.views.navigation.update(chatId, {
-                                id: chatId,
+                            chatInstance.views.navigation.update(chatRoomData.id, {
+                                id: chatRoomData.id,
                                 users: data.users,
                                 colors: data.colors,
                                 lastMessage: {
@@ -320,9 +319,11 @@
             },
             getTitle: (users) => {
                 if (authId == users[0]) {
-                    return chatInstance.data.user.get(users[0]);
+                    var userData = chatInstance.data.user.get(users[1]);
+                    return userData.name;
                 } else {
-                    return chatInstance.data.get(users[1]);
+                    var userData = chatInstance.data.user.get(users[0]);
+                    return userData.name;
                 }
             },
             getColors: () => {
@@ -408,9 +409,9 @@
         }
 
         chatInstance.data.user = {
-            get: (id) => {
-                userInfos = "Username";
-                return userInfos;
+            get: (userId) => {
+                userInfos = contacts.filter(user => user.id == userId);
+                return userInfos[0];
             }
         };
 
@@ -487,9 +488,9 @@
                         chatInstance.events.ui.sendMessage();
                         chatInstance.events.firebase.inbox.listen(chatId);
 
-                        $('.messages-content').scrollTop(
+                        /* $('.messages-content').scrollTop(
                             $(".room-message").last().offset().top - $('.messages-content').offset().top
-                        );
+                        ); */
                     });
                 });
             },
