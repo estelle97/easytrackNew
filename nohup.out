@@ -20041,3 +20041,140 @@ IPCClient ~ WindowHandler: New event is received { type: 'window-opened' }
 1592982882250 main info "UpdateHandler~app-update-events - Received event",{"name":"electronAppUpdateDownloaded","namespace":"appUpdate","data":{"name":"Postman","notes":"","date":"","URL":"https://dl.pstmn.io/download/version/7.27.0/linux_64","downloadVersion":"7.27.0"}}
 Ready.
 
+Gtk-Message: Failed to load module "canberra-gtk-module"
+Ready.
+
+** Message: mforms::WizardLabelAlignment not handled. /build/mysql-workbench-y2M6l0/mysql-workbench-6.3.6+dfsg/library/forms/gtk/src/lf_label.cpp:196
+** Message: mforms::WizardLabelAlignment not handled. /build/mysql-workbench-y2M6l0/mysql-workbench-6.3.6+dfsg/library/forms/gtk/src/lf_label.cpp:196
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: gtk_tree_view_unref_tree_helper: assertion 'node != NULL' failed
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+
+
+(mysql-workbench-bin:11834): Gtk-CRITICAL **: /build/gtk+2.0-jJZIsQ/gtk+2.0-2.24.30/gtk/gtktreeview.c:5030 (gtk_tree_view_bin_expose): assertion `has_next' failed.
+There is a disparity between the internal view of the GtkTreeView,
+and the GtkTreeModel.  This generally means that the model has changed
+without letting the view know.  Any display from now on is likely to
+be incorrect.
+

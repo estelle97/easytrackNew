@@ -270,6 +270,13 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        //
+        $purchase->delete();
+        Action::store('purchase', $purchase->id, 'destroy',
+            "Suppression de la commande client SO-".$purchase->code
+        );
+
+        return response()->json([
+            'message' => 'deleted successfully!',
+        ], 204);
     }
 }

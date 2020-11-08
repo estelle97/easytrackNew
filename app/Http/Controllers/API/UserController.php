@@ -335,16 +335,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if($user->is_admin == '2'){     // Check if it's a manager
-            $otherManager = User::where('is_admin','2')->where('id','!=',$user->id)->where('site_id',$user->site_id)->first();   // retreive the others managers
-            if(!$otherManager){     // if there are not another manager
-               $site = \App\Site::find($user->site_id);
-               $site->active = '0';
-               $site->save();
-            }
-        }
-        $user->active = '0';
-        $user->save();
+        $user->employee->delete();
+        $user->delete();
 
         return response()->json([
             'message' => 'deleted successfully'
