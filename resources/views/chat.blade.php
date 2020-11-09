@@ -326,7 +326,6 @@
             getTitle: (users) => {
                 if (authId == users[0]) {
                     var userData = chatInstance.data.user.get(users[1]);
-                    console.log('userData: ', userData);
                     return userData.name;
                 } else {
                     var userData = chatInstance.data.user.get(users[0]);
@@ -685,7 +684,6 @@
 
                     // Clean id string
                     var chatId = ID.split("room-").pop()
-                    console.log("Selected chat ID", chatId);
 
                     // Load inbox
                     chatInstance.views.navigation.select(chatId);
@@ -697,7 +695,6 @@
                     var peerId = $(this).attr('id');
 
                     // Clean id string
-                    console.log("Selected peer ID", peerId);
 
                     // Load chat rom
                     chatInstance.data.chatRoom.create(peerId);
