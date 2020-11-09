@@ -725,13 +725,6 @@
             chatInstance.init();
         };
     </script>
-
-
-    {{-- <script src={{asset("template/assets/dist/js/app/chat/index.js")}}></script>
-    <script src={{asset("template/assets/dist/js/app/chat/data.js")}}></script>
-    <script src={{asset("template/assets/dist/js/app/chat/views.js")}}></script>
-    <script src={{asset("template/assets/dist/js/app/chat/events/firebase.js")}}></script>
-    <script src={{asset("template/assets/dist/js/app/chat/events/ui.js")}}></script> --}}
 @endsection
 
 @section('styles')
