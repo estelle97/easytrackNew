@@ -229,7 +229,7 @@
                 chatInstance.views.navigation.init().then(() => {
                     chatInstance.events.firebase.chatRoom.listen();
                     chatInstance.events.ui.init();
-
+                    console.log("contacts", contacts);
                     // Remove loader
                     $(".section-loader").hide();
                 });
@@ -251,13 +251,10 @@
          */
         // Actions
         chatInstance.data.generateChatId = (peerId) => {
-            const hashCode = chatInstance.utilities.hashCode;
-            var hashedAuthId = hashCode(authId.toString());
-            var hashedPeerId = hashCode(peerId.toString());
-            if ( hashedAuthId <= hashedPeerId) {
-                return `${hashedAuthId}-${hashedPeerId}`;
+            if ( parseInt(authId) <=  parseInt(peerId)) {
+                return `${authId}-${peerId}`;
             } else {
-                return `${hashedPeerId}-${hashedAuthId}`;
+                return `${peerId}-${authId}`;
             }
         };
 
@@ -286,23 +283,25 @@
             },
             create: function(idTo) {
                 chatsCollection.where('users', 'array-contains',  parseInt(idTo)).get().then((existingChats) => {
-                console.log("existingChats", existingChats)
                     if (existingChats.empty == true) {
-                        var now = new Date();
+                        var chatId = chatInstance.data.generateChatId(idTo);
+                        var now = Date.now();
                         var data = {
                             users:[parseInt(authId), parseInt(idTo)],
                             colors: this.getColors(),
-                            date: now.toString()
+                            date: now
                         }
-                        chatsCollection.add(data).then(chatRoomData => {
-                            var newChat = chatsCollection.doc(chatRoomData.id);
-                            newChat.collection(chatRoomData.id);
+                        chatsCollection.doc(chatId).set(data).then(chatRoomData => {
+                            var newChat = chatsCollection.doc(chatId);
+                            newChat.collection(chatId);
                             $('#modal-create-chat').hide();
+                            $('.antialiased').removeClass("modal-open");
                             $('.modal-backdrop').remove();
 
+
                             // Load inbox
-                            chatInstance.views.navigation.update(chatRoomData.id, {
-                                id: chatRoomData.id,
+                            chatInstance.views.navigation.update(chatId, {
+                                id: chatId.toString(),
                                 users: data.users,
                                 colors: data.colors,
                                 lastMessage: {
@@ -380,10 +379,10 @@
             },
             sendMessage: (message) => {
                 return new Promise((resolve, reject) => {
-                    var now = new Date();
+                    var now = Date.now();
                     var idTo = inbox.users.filter(user => user != authId)
                     var msgData = {
-                        date: now.toString(),
+                        date: now,
                         content: message,
                         idFrom: parseInt(authId),
                         idTo: idTo[0]
@@ -514,7 +513,6 @@
                 var messageData = chatData.lastMessage;
 
                 if(Object.keys(chatData.lastMessage).length === 0) {
-                    console.log("messageData.date", chatData.date)
                     messageData = {
                         date: new Date(chatData.date),
                         content: "Ecrivez un message à votre collègue"
@@ -669,6 +667,22 @@
         };
 
         // UI Events
+        $(".chat-room-component").click(function() {
+            // Activate selected chatroom
+            $(".chat-room-component.active-chat").removeClass("active-chat");
+            $(this).addClass("active-chat");
+
+            // Get chat id
+            var ID = $(this).attr('id');
+
+            // Clean id string
+            var chatId = ID.split("room-").pop()
+            console.log("Selected chat ID", chatId);
+
+            // Load inbox
+            chatInstance.views.navigation.select(chatId);
+        });
+
         chatInstance.events.ui = {
             init: () => {
                 chatInstance.events.ui.chatRoom();
