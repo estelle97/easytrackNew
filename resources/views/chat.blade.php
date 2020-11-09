@@ -207,6 +207,7 @@
             data: {
                 inbox: {
                     room: {},
+                    unsubscribe: {},
                     users: [],
                 }
             },
@@ -284,24 +285,24 @@
             create: function(idTo) {
                 chatsCollection.where('users', 'array-contains',  parseInt(idTo)).get().then((existingChats) => {
                     if (existingChats.empty == true) {
-                        var chatId = chatInstance.data.generateChatId(idTo);
+                        // var chatId = chatInstance.data.generateChatId(idTo);
                         var now = Date.now();
                         var data = {
                             users:[parseInt(authId), parseInt(idTo)],
                             colors: this.getColors(),
                             date: now
                         }
-                        chatsCollection.doc(chatId).set(data).then(chatRoomData => {
-                            var newChat = chatsCollection.doc(chatId);
-                            newChat.collection(chatId);
+                        chatsCollection.add(data).then(chatRoomData => {
+                            var newChat = chatsCollection.doc(chatRoomData.id);
+                            newChat.collection(chatRoomData.id);
                             $('#modal-create-chat').hide();
                             $('.antialiased').removeClass("modal-open");
                             $('.modal-backdrop').remove();
 
 
                             // Load inbox
-                            chatInstance.views.navigation.update(chatId, {
-                                id: chatId.toString(),
+                            chatInstance.views.navigation.update(chatRoomData.id, {
+                                id: chatRoomData.id.toString(),
                                 users: data.users,
                                 colors: data.colors,
                                 lastMessage: {
@@ -397,7 +398,7 @@
             },
             lastMessage: (chatId) => {
                 var roomData = chatsCollection.doc(chatId).collection(chatId);
-                return roomData.orderBy('date', 'asc').limitToLast(1).get().then((querySnapshot) => {
+                return roomData.orderBy('date', 'desc').limitToLast(1).get().then((querySnapshot) => {
                     var message = {};
                     querySnapshot.forEach(chatData => {
                         message = chatData.data();
@@ -435,6 +436,10 @@
                 });
             },
             select: (chatId) => {
+                // Delete event
+                if(Object.keys(inbox.room).length !== 0) {
+                    chatInstance.events.firebase.inbox.unsubscribe();
+                }
                 // Set room
                 chatInstance.data.inbox.set(chatId).then(() => {
                     // Disable and clear inbox view
@@ -451,6 +456,7 @@
 
                         // Activating writing possibilites
                         chatInstance.views.inbox.enable.form();
+                        chatInstance.events.ui.disableSendMessage();
                         chatInstance.events.ui.sendMessage();
                         chatInstance.events.firebase.inbox.listen(chatId);
                     });
@@ -467,7 +473,7 @@
 
                 // Select chatroom
                 $(".chat-room-component.active-chat").removeClass("active-chat");
-                $(`#chat-room-${chatRoomData.id}`).addClass("active-chat");
+                $(`#chat-room-${chatId}`).addClass("active-chat");
 
                 // Set room
                 chatInstance.data.inbox.set(chatId).then(() => {
@@ -484,8 +490,8 @@
                         console.log("Start chat.");
                         // Activating writing possibilites
                         chatInstance.views.inbox.enable.form();
+                        chatInstance.events.ui.disableSendMessage();
                         chatInstance.events.ui.sendMessage();
-                        chatInstance.events.firebase.inbox.listen(chatId);
 
                         /* $('.messages-content').scrollTop(
                             $(".room-message").last().offset().top - $('.messages-content').offset().top
@@ -500,7 +506,7 @@
                     $(".chat-room-empty").addClass("d-flex");
                     $(".chatroom-not-selected").removeClass("d-flex");
                     chatInstance.views.inbox.disable.view();
-                } else if (Object.keys(chatInstance.data.inbox.room).length === 0) {
+                } else if (chatInstance.data.inbox.room === undefined) {
                     $(".chatroom-not-selected").addClass("d-flex");
                 } else {
                     $(".chatroom-not-selected").removeClass("d-flex");
@@ -640,7 +646,7 @@
             // ON MESSAGES SUBCOLLECTION CHANGE
             inbox: {
                 listen: (chatId) => {
-                    inbox.room.onSnapshot((snapshot)  => {
+                    inbox.unsubscribe = inbox.room.onSnapshot((snapshot)  => {
                         // Watch change on messages subcollection
                         snapshot.docChanges().forEach((change) => {
                             if (change.type === "added") {
@@ -657,33 +663,15 @@
                         console.error("Chat error: ", error);
                     })
                 },
-                subscribe: () => {
-                    chatInstance.data.inbox.room.onSnapshot().subscribe();
-                },
                 unsubscribe: () => {
-                    chatInstance.data.inbox.room.onSnapshot().unsubscribe();
+                    console.log('chatInstance.data.inbox.unsubscribe: ', chatInstance.data.inbox.unsubscribe);
+                    // chatInstance.data.inbox.unsubscribe();
                 }
             }
         };
 
         // UI Events
-        $(".chat-room-component").click(function() {
-            // Activate selected chatroom
-            $(".chat-room-component.active-chat").removeClass("active-chat");
-            $(this).addClass("active-chat");
-
-            // Get chat id
-            var ID = $(this).attr('id');
-
-            // Clean id string
-            var chatId = ID.split("room-").pop()
-            console.log("Selected chat ID", chatId);
-
-            // Load inbox
-            chatInstance.views.navigation.select(chatId);
-        });
-
-        chatInstance.events.ui = {
+       chatInstance.events.ui = {
             init: () => {
                 chatInstance.events.ui.chatRoom();
                 chatInstance.events.ui.selectTeamMember();
@@ -727,6 +715,9 @@
                         });
                     }
                 });
+            },
+            disableSendMessage: () => {
+                $( ".room-send-button").unbind( "click" );
             }
         };
 
