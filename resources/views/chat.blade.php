@@ -289,7 +289,8 @@
                             lastmessage: "",
                             users:[parseInt(authId), parseInt(idTo)],
                             colors: this.getColors(),
-                            date: now
+                            created: now,
+                            updated: 0,
                         }
                         chatsCollection.add(data).then(chatRoomData => {
                             var newChat = chatsCollection.doc(chatRoomData.id);
@@ -304,7 +305,9 @@
                                 id: chatRoomData.id.toString(),
                                 users: data.users,
                                 colors: data.colors,
-                                lastmessage: ""
+                                lastmessage: "",
+                                created: now,
+                                updated: 0,
                             });
                         });
                     } else {
@@ -521,10 +524,10 @@
             add: (chatData) => {
                 console.log('chatData: ', chatData);
                 if(chatData.lastmessage == "" || chatData.lastmessage == undefined) {
-                    chatData.date = new Date(chatData.date);
+                    chatData.date = new Date(chatData.created);
                     chatData.lastmessage = "Ecrivez un message à votre collègue"
                 } else {
-                    chatData.date = new Date(chatData.date);
+                    chatData.date = new Date(chatData.updated);
                 }
                 $( ".chat-room" ).append(/*html*/`
                     <li id="chat-room-${chatData.id}" class="chat-room-component list-group-item">
@@ -537,7 +540,7 @@
                                     <div class="media-heading">
                                     <a class="m-r-10">${chatInstance.data.chatRoom.getTitle(chatData.users)}</a>
                                         <small class="float-right text-muted">
-                                        <time class="hidden-sm-down">${chatInstance.utilities.getTime(chatData.date)}</time>
+                                        <time class="hidden-sm-down">${chatInstance.utilities.getTime(chatData.created)}</time>
                                         </small>
                                     </div>
                                     <p class="msg">
