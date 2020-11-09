@@ -167,12 +167,6 @@
     <script>
 
         /*
-        *   Initialization
-        */
-
-        getContacts();
-
-        /*
          * PHP VARIABLES
          */
         const authId = "{{ Auth::id() }}";
@@ -230,7 +224,6 @@
                 chatInstance.views.navigation.init().then(() => {
                     chatInstance.events.firebase.chatRoom.listen();
                     chatInstance.events.ui.init();
-                    console.log("contacts", contacts);
                     // Remove loader
                     $(".section-loader").hide();
                 });
@@ -272,6 +265,8 @@
                                     users: doc.data().users,
                                     colors: doc.data().colors,
                                     date: doc.data().date,
+                                    created: doc.data().created,
+                                    updated: doc.data().updated,
                                     lastmessage: doc.data().lastmessage
                                 });
                             });
@@ -283,31 +278,32 @@
             create: function(idTo) {
                 chatsCollection.where('users', 'array-contains',  parseInt(idTo)).get().then((existingChats) => {
                     if (existingChats.empty == true) {
-                        // var chatId = chatInstance.data.generateChatId(idTo);
+                        chatId = chatInstance.data.generateChatId(idTo);
                         var now = Date.now();
                         var data = {
                             lastmessage: "",
                             users:[parseInt(authId), parseInt(idTo)],
                             colors: this.getColors(),
-                            created: now,
-                            updated: 0,
+                            date: now.toString(),
+                            created: now.toString(),
+                            updated: "",
                         }
-                        chatsCollection.add(data).then(chatRoomData => {
-                            var newChat = chatsCollection.doc(chatRoomData.id);
-                            newChat.collection(chatRoomData.id);
+                        chatsCollection.doc(chatId).set(data).then(chatRoomData => {
+                            var newChat = chatsCollection.doc(chatId);
+                            newChat.collection(chatId);
                             $('#modal-create-chat').hide();
                             $('.antialiased').removeClass("modal-open");
                             $('.modal-backdrop').remove();
 
 
                             // Load inbox
-                            chatInstance.views.navigation.update(chatRoomData.id, {
-                                id: chatRoomData.id.toString(),
+                            chatInstance.views.navigation.update(chatId, {
+                                id: chatId.toString(),
                                 users: data.users,
                                 colors: data.colors,
                                 lastmessage: "",
-                                created: now,
-                                updated: 0,
+                                created: now.toString(),
+                                updated: "",
                             });
                         });
                     } else {
@@ -319,6 +315,7 @@
             getTitle: (users) => {
                 if (authId == users[0]) {
                     var userData = chatInstance.data.user.get(users[1]);
+                    console.log('userData: ', userData);
                     return userData.name;
                 } else {
                     var userData = chatInstance.data.user.get(users[0]);
@@ -392,7 +389,7 @@
                     inbox.room.add(msgData).then(messageDoc => {
                         var selectedChatRoom = chatsCollection.doc(inbox.room.id);
                         selectedChatRoom.update({
-                            date: now,
+                            updated: now,
                             lastmessage: message
                         })
                         .then(() => {
@@ -442,10 +439,6 @@
                 });
             },
             select: (chatId) => {
-                // Delete event
-                if(Object.keys(inbox.room).length !== 0) {
-                    chatInstance.events.firebase.inbox.unsubscribe();
-                }
                 // Set room
                 chatInstance.data.inbox.set(chatId).then(() => {
                     // Disable and clear inbox view
@@ -498,10 +491,7 @@
                         chatInstance.views.inbox.enable.form();
                         chatInstance.events.ui.disableSendMessage();
                         chatInstance.events.ui.sendMessage();
-
-                        /* $('.messages-content').scrollTop(
-                            $(".room-message").last().offset().top - $('.messages-content').offset().top
-                        ); */
+                        chatInstance.events.firebase.inbox.listen(chatId);
                     });
                 });
             },
@@ -522,12 +512,15 @@
 
         chatInstance.views.panel = {
             add: (chatData) => {
-                console.log('chatData: ', chatData);
-                if(chatData.lastmessage == "" || chatData.lastmessage == undefined) {
-                    chatData.date = new Date(chatData.created);
+                var chatDate = "";
+                if ((chatData.lastmessage == "" ) || (chatData.lastmessage == undefined)) {
+                    chatDate = new Date(chatData.created != "" ? parseInt(chatData.created) : parseInt(chatData.date));
                     chatData.lastmessage = "Ecrivez un message à votre collègue"
                 } else {
-                    chatData.date = new Date(chatData.updated);
+                    chatDate = new Date(chatData.updated != "" ? parseInt(chatData.updated) : parseInt(chatData.date));
+                }
+                if (chatData.colors == undefined) {
+                    chatData.colors = chatInstance.data.chatRoom.getColors();
                 }
                 $( ".chat-room" ).append(/*html*/`
                     <li id="chat-room-${chatData.id}" class="chat-room-component list-group-item">
@@ -540,7 +533,7 @@
                                     <div class="media-heading">
                                     <a class="m-r-10">${chatInstance.data.chatRoom.getTitle(chatData.users)}</a>
                                         <small class="float-right text-muted">
-                                        <time class="hidden-sm-down">${chatInstance.utilities.getTime(chatData.created)}</time>
+                                        <time class="hidden-sm-down">${chatInstance.utilities.getTime(chatDate)}</time>
                                         </small>
                                     </div>
                                     <p class="msg">
@@ -554,7 +547,8 @@
             },
             update: (chatId, lastmessage, messageDate) => {
                 $( `#chat-room-${chatId} .msg` ).html(lastmessage);
-                $( `#chat-room-${chatId} time` ).html(chatInstance.utilities.getTime(new Date(messageDate)));
+                var dateConverted = new Date(messageDate);
+                $( `#chat-room-${chatId} time` ).html(chatInstance.utilities.getTime(dateConverted));
             },
             delete: (chatId) => {
                 $(`#chat-room-${chatId}`).remove();
@@ -641,9 +635,6 @@
                     }, (error) => {
                         console.error("ChatRooms error: ", error);
                     });
-                },
-                unsubscribe: () => {
-                    chatsCollection.onSnapshot().subscribe();
                 }
             },
             // ON MESSAGES SUBCOLLECTION CHANGE
@@ -662,10 +653,6 @@
                     }, (error) => {
                         console.error("Chat error: ", error);
                     })
-                },
-                unsubscribe: () => {
-                    console.log('chatInstance.data.inbox.unsubscribe: ', chatInstance.data.inbox.unsubscribe);
-                    // chatInstance.data.inbox.unsubscribe();
                 }
             }
         };
@@ -725,6 +712,7 @@
 
         // Set chat instance
         window.onload = () => {
+            getContacts();
             chatInstance.init();
         };
     </script>
