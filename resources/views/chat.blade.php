@@ -267,14 +267,12 @@
                     chatsCollection.where('users', 'array-contains',  parseInt(authId)).get().then((querySnapshot) => {
                         if (querySnapshot.empty == false) {
                             querySnapshot.forEach(doc => {
-                                chatInstance.data.inbox.lastMessage(doc.id).then(message => {
-                                    chatInstance.views.panel.add({
-                                        id: doc.id,
-                                        users: doc.data().users,
-                                        colors: doc.data().colors,
-                                        date: doc.data().date,
-                                        lastMessage: message
-                                    });
+                                chatInstance.views.panel.add({
+                                    id: doc.id,
+                                    users: doc.data().users,
+                                    colors: doc.data().colors,
+                                    date: doc.data().date,
+                                    lastmessage: doc.data().lastmessage
                                 });
                             });
                         }
@@ -288,6 +286,7 @@
                         // var chatId = chatInstance.data.generateChatId(idTo);
                         var now = Date.now();
                         var data = {
+                            lastmessage: "",
                             users:[parseInt(authId), parseInt(idTo)],
                             colors: this.getColors(),
                             date: now
@@ -305,10 +304,7 @@
                                 id: chatRoomData.id.toString(),
                                 users: data.users,
                                 colors: data.colors,
-                                lastMessage: {
-                                    date: data.date,
-                                    content: "Ecrivez un message à votre collègue"
-                                }
+                                lastmessage: ""
                             });
                         });
                     } else {
@@ -391,12 +387,19 @@
 
                     // Send message
                     inbox.room.add(msgData).then(messageDoc => {
-                        chatInstance.views.inbox.addMessage(messageDoc.id, msgData.idFrom, msgData.idTo, msgData.content);
-                        resolve("done");
+                        var selectedChatRoom = chatsCollection.doc(inbox.room.id);
+                        selectedChatRoom.update({
+                            date: now,
+                            lastmessage: message
+                        })
+                        .then(() => {
+                            chatInstance.views.inbox.addMessage(messageDoc.id, msgData.idFrom, msgData.idTo, msgData.content);
+                            resolve("done");
+                        });
                     });
                 });
-            },
-            lastMessage: (chatId) => {
+            }
+            /* lastMessage: (chatId) => {
                 var roomData = chatsCollection.doc(chatId).collection(chatId);
                 return roomData.orderBy('date', 'desc').limitToLast(1).get().then((querySnapshot) => {
                     var message = {};
@@ -405,7 +408,7 @@
                     });
                     return message;
                 });
-            }
+            } */
         }
 
         chatInstance.data.user = {
@@ -516,15 +519,12 @@
 
         chatInstance.views.panel = {
             add: (chatData) => {
-                var messageData = chatData.lastMessage;
-
-                if(Object.keys(chatData.lastMessage).length === 0) {
-                    messageData = {
-                        date: new Date(chatData.date),
-                        content: "Ecrivez un message à votre collègue"
-                    };
+                console.log('chatData: ', chatData);
+                if(chatData.lastmessage == "" || chatData.lastmessage == undefined) {
+                    chatData.date = new Date(chatData.date);
+                    chatData.lastmessage = "Ecrivez un message à votre collègue"
                 } else {
-                    messageData.date = new Date(chatData.lastMessage.date);
+                    chatData.date = new Date(chatData.date);
                 }
                 $( ".chat-room" ).append(/*html*/`
                     <li id="chat-room-${chatData.id}" class="chat-room-component list-group-item">
@@ -537,11 +537,11 @@
                                     <div class="media-heading">
                                     <a class="m-r-10">${chatInstance.data.chatRoom.getTitle(chatData.users)}</a>
                                         <small class="float-right text-muted">
-                                        <time class="hidden-sm-down">${chatInstance.utilities.getTime(messageData.date)}</time>
+                                        <time class="hidden-sm-down">${chatInstance.utilities.getTime(chatData.date)}</time>
                                         </small>
                                     </div>
                                     <p class="msg">
-                                    ${messageData.content}
+                                    ${chatData.lastmessage}
                                     </p>
                                 </div>
                             </div>
@@ -549,9 +549,9 @@
                     </li>
                 `);
             },
-            update: (chatId, lastMessage) => {
-                $( `#chat-room-${chatId} .msg` ).html(lastMessage.content);
-                $( `#chat-room-${chatId} time` ).html(chatInstance.utilities.getTime(lastMessage.date));
+            update: (chatId, lastmessage, messageDate) => {
+                $( `#chat-room-${chatId} .msg` ).html(lastmessage);
+                $( `#chat-room-${chatId} time` ).html(chatInstance.utilities.getTime(new Date(messageDate)));
             },
             delete: (chatId) => {
                 $(`#chat-room-${chatId}`).remove();
@@ -651,10 +651,7 @@
                         snapshot.docChanges().forEach((change) => {
                             if (change.type === "added") {
                                 var doc = change.doc;
-                                chatInstance.views.panel.update(chatId, {
-                                    date: doc.data().date,
-                                    content: doc.data().content
-                                });
+                                chatInstance.views.panel.update(chatId, doc.data().content, doc.data().date);
                             }
                             if (change.type === "modified") {}
                             if (change.type === "removed") {}
