@@ -176,6 +176,9 @@ class SiteController extends Controller
      */
     public function destroy(Site $site)
     {
-        //
+        foreach ($site->employees as $emp) {
+            $emp->user->delete();
+            $emp->delete();
+        }
     }
 }

@@ -265,9 +265,13 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-
+        $sale->delete();
         Action::store('Sale', $sale->id, 'destroy',
             "Suppression de la commande client SO-".$sale->code
         );
+
+        return response()->json([
+            'message' => 'deleted successfully!',
+        ], 204);
     }
 }

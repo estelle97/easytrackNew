@@ -122,7 +122,7 @@ class ProductController extends Controller
      * @param String brand
      * @param String description [Optional]
      * @param Integer category_id
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -158,6 +158,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        
     }
 }
