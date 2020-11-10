@@ -212,7 +212,7 @@
             data: {
                 inbox: {
                     room: {},
-                    unsubscribe: {},
+                    lastmessage: null,
                     users: [],
                 }
             },
@@ -291,10 +291,11 @@
                     if (existingChats.empty == true) {
                         chatId = chatInstance.data.generateChatId(idTo);
                         var now = Date.now();
+                        var colors = this.getColors();
                         var data = {
                             lastmessage: "",
                             users:[parseInt(authId), parseInt(idTo)],
-                            colors: this.getColors(),
+                            colors: [colors.bg, colors.text],
                             date: now.toString(),
                             created: now.toString(),
                             updated: "",
@@ -392,7 +393,7 @@
                         date: now,
                         content: message,
                         idFrom: parseInt(authId),
-                        idTo: idTo[0]
+                        idTo: parseInt(idTo[0])
                     };
 
                     // Send message
@@ -530,14 +531,15 @@
                     chatDate = new Date(chatData.updated != "" ? parseInt(chatData.updated) : parseInt(chatData.date));
                 }
                 if (chatData.colors == undefined) {
-                    chatData.colors = chatInstance.data.chatRoom.getColors();
+                    var colors = chatInstance.data.chatRoom.getColors();
+                    chatData.colors = [colors.bg, colors.text];
                 }
                 $( ".chat-room" ).append(/*html*/`
                     <li id="chat-room-${chatData.id}" class="chat-room-component list-group-item">
                         <div class="media">
                             <div class="media-body d-flex align-items-center">
                                 <div class="user mr-4">
-                                    <span class="avatar" style="background-image: url('https://ui-avatars.com/api/?name=${chatInstance.data.chatRoom.getTitle(chatData.users)}&background=${chatData.colors.bg}&color=${chatData.colors.text}&font-size=0.30');"></span>
+                                    <span class="avatar" style="background-image: url('https://ui-avatars.com/api/?name=${chatInstance.data.chatRoom.getTitle(chatData.users)}&background=${chatData.colors[0]}&color=${chatData.colors[1]}&font-size=0.30');"></span>
                                 </div>
                                 <div class="message content">
                                     <div class="media-heading">
@@ -656,6 +658,11 @@
                             if (change.type === "added") {
                                 var doc = change.doc;
                                 chatInstance.views.panel.update(chatId, doc.data().content, doc.data().date);
+                                if ($( ".chat-room-component" ).hasClass( "active-chat" )) {
+                                    if (doc.data().idTo == parseInt(authId)) {
+                                        chatInstance.views.inbox.addMessage(doc.id, doc.data().idFrom, doc.data().idTo, doc.data().content);
+                                    }
+                                }
                             }
                             if (change.type === "modified") {}
                             if (change.type === "removed") {}
