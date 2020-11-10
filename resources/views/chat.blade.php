@@ -55,7 +55,7 @@
                         <div class="cols-sm-0 col-md-7 col-lg-7 col-xl-7 p-0 message_inbox chat-room-max-size">
                             <!-- Chat room actions -->
                             <div class="col-sm-12 pt-4 pb-3 px-3 d-print-none messages-header">
-                                <div class="d-flex justify-content-end align-items-center">
+                                {{-- <div class="d-flex justify-content-end align-items-center">
                                     <span class="more-button dropdown button-click-action mr-2">
                                         <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-.825 0-1.5.675-1.5 1.5S11.175 6 12 6s1.5-.675 1.5-1.5S12.825 3 12 3zm0 15c-.825 0-1.5.675-1.5 1.5S11.175 21 12 21s1.5-.675 1.5-1.5S12.825 18 12 18zm0-7.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5 1.5-.675 1.5-1.5-.675-1.5-1.5-1.5z" fill="rgba(0,0,0,1)"/></svg>
@@ -72,7 +72,7 @@
                                             </a>
                                         </div>
                                     </span>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- End Chat room actions -->
                             <!-- Chat room content -->
