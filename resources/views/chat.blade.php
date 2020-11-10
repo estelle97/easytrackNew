@@ -205,6 +205,7 @@
          */
         var inbox = {
             room: {},
+            roomsEvents: [],
             users: [],
         }
         // Define chat instance
@@ -212,7 +213,6 @@
             data: {
                 inbox: {
                     room: {},
-                    lastmessage: null,
                     users: [],
                 }
             },
@@ -276,10 +276,13 @@
                                     users: doc.data().users,
                                     colors: doc.data().colors,
                                     date: doc.data().date,
-                                    created: doc.data().created,
-                                    updated: doc.data().updated,
+                                    createdAt: doc.data().created,
+                                    updatedAt: doc.data().updated,
                                     lastmessage: doc.data().lastmessage
                                 });
+                                setTimeout(() => {
+                                    chatInstance.events.firebase.inbox.listen(doc.id);
+                                }, 2000);
                             });
                         }
                         resolve(querySnapshot);
@@ -296,9 +299,9 @@
                             lastmessage: "",
                             users:[parseInt(authId), parseInt(idTo)],
                             colors: [colors.bg, colors.text],
-                            date: now.toString(),
-                            created: now.toString(),
-                            updated: "",
+                            date: now,
+                            createdAt: now,
+                            updatedAt: 0,
                         }
                         chatsCollection.doc(chatId).set(data).then(chatRoomData => {
                             var newChat = chatsCollection.doc(chatId);
@@ -314,8 +317,8 @@
                                 users: data.users,
                                 colors: data.colors,
                                 lastmessage: "",
-                                created: now.toString(),
-                                updated: "",
+                                createdAt: data.created,
+                                updatedAt: 0,
                             });
                         });
                     } else {
@@ -400,7 +403,7 @@
                     inbox.room.add(msgData).then(messageDoc => {
                         var selectedChatRoom = chatsCollection.doc(inbox.room.id);
                         selectedChatRoom.update({
-                            updated: now,
+                            updatedAt: now,
                             lastmessage: message
                         })
                         .then(() => {
@@ -468,7 +471,6 @@
                         chatInstance.views.inbox.enable.form();
                         chatInstance.events.ui.disableSendMessage();
                         chatInstance.events.ui.sendMessage();
-                        chatInstance.events.firebase.inbox.listen(chatId);
                     });
                 });
             },
@@ -523,12 +525,13 @@
 
         chatInstance.views.panel = {
             add: (chatData) => {
+                console.log('chatData: ', chatData);
                 var chatDate = "";
                 if ((chatData.lastmessage == "" ) || (chatData.lastmessage == undefined)) {
-                    chatDate = new Date(chatData.created != "" ? parseInt(chatData.created) : parseInt(chatData.date));
+                    chatDate = new Date(chatData.createdAt != null ? chatData.createdAt : chatData.date);
                     chatData.lastmessage = "Ecrivez un message à votre collègue"
                 } else {
-                    chatDate = new Date(chatData.updated != "" ? parseInt(chatData.updated) : parseInt(chatData.date));
+                    chatDate = new Date(chatData.updatedAt != null ? chatData.updatedAt : chatData.date);
                 }
                 if (chatData.colors == undefined) {
                     var colors = chatInstance.data.chatRoom.getColors();
@@ -638,7 +641,9 @@
                         // Watch change on messages collection
                         snapshot.docChanges().forEach((change) => {
                             if (change.type === "added") {}
-                            if (change.type === "modified") {}
+                            if (change.type === "modified") {
+
+                            }
                             if (change.type === "removed") {
                                 chatInstance.views.panel.delete(change.doc.id);
                                 chatInstance.views.navigation.delete();
@@ -652,24 +657,61 @@
             // ON MESSAGES SUBCOLLECTION CHANGE
             inbox: {
                 listen: (chatId) => {
-                    inbox.unsubscribe = inbox.room.onSnapshot((snapshot)  => {
-                        // Watch change on messages subcollection
-                        snapshot.docChanges().forEach((change) => {
-                            if (change.type === "added") {
+                    console.log('listen chatId: ', chatId);
+                    inbox.roomsEvents.push({
+                        chatId: chatId,
+                        snapshotEvent: chatsCollection.doc(chatId).collection(chatId).onSnapshot((snapshot)  => {
+                            var activeChatId = chatId;
+                            var lastMessageId = "";
+                            // Watch change on messages subcollection
+                            snapshot.docChanges().forEach((change) => {
+                                console.log('change: ', change);
+                                console.log('inbox > listen > activeChatId: ', activeChatId);
+                                console.log('inbox > listen > selectedChatId: ', selectedChatId);
                                 var doc = change.doc;
-                                chatInstance.views.panel.update(chatId, doc.data().content, doc.data().date);
                                 if ($( ".chat-room-component" ).hasClass( "active-chat" )) {
-                                    if (doc.data().idTo == parseInt(authId)) {
-                                        chatInstance.views.inbox.addMessage(doc.id, doc.data().idFrom, doc.data().idTo, doc.data().content);
+                                    var selectedChatId = $(".chat-room-component.active-chat").attr('id').split("room-").pop();
+                                    if (activeChatId == selectedChatId) {
+                                        if (change.type === "added") {
+                                            chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                            if (doc.data().idTo == parseInt(authId) && lastMessageId != doc.id) {
+                                                lastMessageId = doc.id;
+                                                chatInstance.views.inbox.addMessage(doc.id, doc.data().idFrom, doc.data().idTo, doc.data().content);
+                                            }
+                                        }
+                                        if (change.type === "modified") {
+                                            chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                        }
+                                        if (change.type === "removed") {}
+                                    } else {
+                                        if (change.type === "added") {
+                                            chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                        }
+                                        if (change.type === "modified") {
+                                            chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                        }
+                                        if (change.type === "removed") {}
                                     }
+                                } else {
+                                    if (change.type === "added") {
+                                        chatsCollection.doc(activeChatId).get().then((chatRoomData) => {
+                                            inbox.users = chatRoomData.data().users;
+                                            if (chatRoomData.data().lastmessage == doc.data().content) {
+                                                chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                            }
+                                        });
+                                    }
+                                    if (change.type === "modified") {
+                                        chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                    }
+                                    if (change.type === "removed") {}
                                 }
-                            }
-                            if (change.type === "modified") {}
-                            if (change.type === "removed") {}
-                        });
-                    }, (error) => {
-                        console.error("Chat error: ", error);
-                    })
+
+                            });
+                        }, (error) => {
+                            console.error("Chat error: ", error);
+                        })
+                    });
                 }
             }
         };
@@ -715,6 +757,17 @@
                         }).catch(()=> {
                             $( ".room-input" ).val("");
                         });
+                    }
+                });
+                $(".messages-input").keypress(function(e) {
+                    if(e.which == 13) {
+                        if ($(".room-input").val() != "" ) {
+                            chatInstance.data.inbox.sendMessage($(".room-input").val()).then(() => {
+                                $( ".room-input" ).val("");
+                            }).catch(()=> {
+                                $( ".room-input" ).val("");
+                            });
+                        }
                     }
                 });
             },

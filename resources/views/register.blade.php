@@ -100,7 +100,7 @@
                         <span class="text-danger" id="userpassword-error"> </span>
                     </div>
                     <div class="form-footer mb-3">
-                        <button type="text" class="btn btn-gradient btn-block btn-pill btn-submit-step-1 btn-no-border">
+                        <button type="text" class="btn btn-gradient btn-block btn-submit-step-1 btn-no-border">
                             Continuer
                         </button>
                         <div class="text-center mt-3">Vous avez un compte ? <a href={{route('login')}} class="text-muted" tabindex="-1">Connexion</a></div>
@@ -173,10 +173,10 @@
                         <span class="text-danger" id="companyphone2-error"> </span>
                     </div>
                     <div class="form-footer mb-3">
-                        <button type="text" class="btn btn-gradient btn-block btn-pill btn-submit-step-2 btn-no-border">
+                        <button type="text" class="btn btn-gradient btn-block btn-submit-step-2 btn-no-border">
                             Continuer
                         </button>
-                        <button type="text" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-1 mt-3">
+                        <button type="text" class="btn btn-outline-dark btn-block btn-outline btn-back-step-1 mt-3">
                             Retour
                         </button>
                     </div>
@@ -248,10 +248,10 @@
                         <span class="text-danger" id="sitephone2-error"> </span>
                     </div>
                     <div class="form-footer mb-3">
-                        <button type="text" class="btn btn-gradient btn-block btn-pill btn-submit-step-3 btn-no-border">
+                        <button type="text" class="btn btn-gradient btn-block btn-submit-step-3 btn-no-border">
                             Continuer
                         </button>
-                        <button type="text" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-2 mt-3">
+                        <button type="text" class="btn btn-outline-dark btn-block btn-outline btn-back-step-2 mt-3">
                             Retour
                         </button>
                     </div>
@@ -275,10 +275,10 @@
                         </div>
                     </div>
                     <div class="form-footer mb-3">
-                        <button type="text" class="btn btn-gradient btn-block btn-pill btn-submit-step-4 btn-no-border">
+                        <button type="text" class="btn btn-gradient btn-block btn-submit-step-4 btn-no-border">
                             Continuer
                         </button>
-                        <button type="text" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-3 mt-3">
+                        <button type="text" class="btn btn-outline-dark btn-block btn-outline btn-back-step-3 mt-3">
                             Retour
                         </button>
                     </div>
@@ -306,10 +306,10 @@
                         <h2 id="company-recap-type"></h2>
                     </div>
                     <div class="form-footer mb-3">
-                        <button type="submit" onclick="register()" class="btn btn-gradient btn-block btn-pill btn-submit-step-5 btn-no-border">
+                        <button type="submit" onclick="register()" class="btn btn-gradient btn-block btn-submit-step-5 btn-no-border">
                             Terminer
                         </button>
-                        <button type="text" class="btn btn-outline-dark btn-block btn-pill btn-outline btn-back-step-4 mt-3">
+                        <button type="text" class="btn btn-outline-dark btn-block btn-outline btn-back-step-4 mt-3">
                             Retour
                         </button>
                     </div>
@@ -320,7 +320,7 @@
                     </div>
                     <h1 class="text-center mb-3">Inscription réussie </h1>
                     <div class="form-footer mb-3 px-4">
-                        <a href={{route('login')}} type="text" class="btn btn-gradient btn-block btn-pill btn-submit btn-no-border">
+                        <a href={{route('login')}} type="text" class="btn btn-gradient btn-block btn-submit btn-no-border">
                             Se connecter
                         </a>
                     </div>
