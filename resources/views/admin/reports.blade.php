@@ -74,6 +74,10 @@
                             </svg>
                             <span class="period" data-period="90"> 3 Derniers mois</span>
                         </a>
+                        <a class="dropdown-item">
+                            <input type="date" data-period="" class="form-control date">
+                            <button type="submit" class="btn-primary btn-xs validate-date"> Valider </button>
+                        </a>
                     </div>
                 </span>
             </div>
@@ -229,9 +233,6 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 
 @endsection
@@ -254,6 +255,14 @@
             showReports(site, $(this));
         })
 
+        $(".validate-date").click(function(){
+            var site = $(".selected-site");
+            $(".selected-period").html($('.date').val());
+            $(".selected-period").data('period', $('.date').val());
+            $('.date').data('period', $('.date').val());
+            showReports(site, $('.date'));
+        })
+
         var site = $(".selected-site");
         var period = $(".selected-period");
         showReports(site, period);
@@ -263,10 +272,10 @@
                 url: '/admin/reports/'+site.data("site")+'/'+period.data("period"),
                 method: 'get',
                 success: function(data){
-                    console.log(data);
-                    $(".sales").fadeOut().html(data.sales).fadeIn();
-                    $(".purchases").fadeOut().html(data.purchases).fadeIn();
-                    $(".profits").fadeOut().html(data.profits).fadeIn();
+                    // console.log(data);
+                    $(".sales").fadeOut().html(data.sales+ 'Fcfa').fadeIn();
+                    $(".purchases").fadeOut().html(data.purchases + 'Fcfa').fadeIn();
+                    $(".profits").fadeOut().html(data.profits + 'Fcfa').fadeIn();
                     $(".salesPerEmployee").fadeOut().html(data.salesPerEmployee).fadeIn();
                     $(".salesPerCategory").fadeOut().html(data.salesPerCategory).fadeIn();
                     $(".purchasesPerCategory").fadeOut().html(data.purchasesPerCategory).fadeIn();

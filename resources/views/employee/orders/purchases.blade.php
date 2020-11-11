@@ -112,13 +112,17 @@
                                                         <a class="dropdown-item" href={{route('employee.purchases.show', $pur->id)}}>
                                                             Afficher bon de commande
                                                         </a>
-                                                        <a class="dropdown-item" onclick="updatePurchase({{$pur->id}})">
-                                                            Modifier
-                                                        </a>
-                                                        @if ($pur->validator == null)
-                                                            <a class="dropdown-item" onclick="validatePurchase({{$pur->id}})">
-                                                                Valider
+                                                        @if($pur->validator != null && ($pur->initiator_id == Auth::user()->id || Auth::user()->may('update_purchase_orders')))
+                                                            <a class="dropdown-item" onclick="updatePurchase({{$pur->id}})">
+                                                                Modifier
                                                             </a>
+                                                        @endif
+                                                        @if ($pur->validator == null)
+                                                            @if(Auth::user()->may('validate_purchase_orders'))
+                                                                <a class="dropdown-item" onclick="validatePurchase({{$pur->id}})">
+                                                                    Valider
+                                                                </a>
+                                                            @endif
                                                         @else
                                                             @if ($pur->validator_id == Auth::user()->id)
                                                                 <a class="dropdown-item" onclick="invalidatePurchase({{$pur->id}})">
@@ -132,15 +136,20 @@
                                                         @endif
 
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                width="18" height="18" class="mr-2">
-                                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                                <path
-                                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                            </svg>
-                                                            Supprimer
-                                                        </a>
+                                                        @if($pur->validator_id == null)
+                                                            @if(Auth::user()->may('delete_purchase_orders') || $pur->initiator_id == Auth::user()->id)
+                                                                <a class="dropdown-item" href="#" href="#" data-toggle="modal"
+                                                                    data-target="#modal-delete-purchase{{$pur->id}}">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                        width="18" height="18" class="mr-2">
+                                                                        <path fill="none" d="M0 0h24v24H0z" />
+                                                                        <path
+                                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                                    </svg>
+                                                                    Supprimer
+                                                                </a>
+                                                            @endif
+                                                        @endif
                                                     </div>
                                                 </span>
                                             </td>
@@ -172,28 +181,23 @@
 
         </div>
 
-        <div class="modal modal-blur fade" id="modal-delete-purchaseorder" tabindex="-1" role="dialog"
-            aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sure ?</div>
-                        <div>
-                            Si vous continuez, vous perdrez toutes les
-                            données de cette commande.
+        @foreach (Auth::user()->employee->site->purchases->reverse() as $pur)
+            <div class="modal modal-blur fade" id="modal-delete-purchase{{$pur->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modal-title">Êtes vous sure ?</div>
+                            <div>Si vous continuez, vous perdrez toutes les données de cette vente.</div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto" data-dismiss="modal">
-                            Annuler
-                        </button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">
-                            Oui, supprimer
-                        </button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link link-secondary mr-auto"
+                                data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" onclick="deletepurchase({{$pur->id}})">Oui, supprimer</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 
 @endsection
@@ -470,6 +474,23 @@
                 success: function(data){
                     // console.log(data);
                     location.reload();
+                }
+            });
+        }
+
+        function deletePurchase(purchase){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/employee/purchases/'+purchase+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-purchase"+purchase).hide();
+                    $('.modal-backdrop').remove();
+                    $("#purchase"+purchase).fadeOut(1500);
                 }
             });
         }

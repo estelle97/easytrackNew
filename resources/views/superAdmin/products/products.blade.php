@@ -534,13 +534,14 @@
                 data : form_data,
                 success : function(){
                     $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-site"+id).modal().hide();
+                    $("#modal-edit-site"+id).modal().hide();
+                    $('.modal-backdrop').remove();
 
 
-                        $("#product-name"+id).fadeOut().html( $("#product-name-update"+id).val()).fadeIn();
-                        $("#product-brand"+id).fadeOut().html($("#product-brand-update"+id).val()).fadeIn();
-                        $("#product-category"+id).fadeOut().html(category).fadeIn();
-                        $("#product-unit"+id).fadeOut().html(unit).fadeIn();
+                    $("#product-name"+id).fadeOut().html( $("#product-name-update"+id).val()).fadeIn();
+                    $("#product-brand"+id).fadeOut().html($("#product-brand-update"+id).val()).fadeIn();
+                    $("#product-category"+id).fadeOut().html(category).fadeIn();
+                    $("#product-unit"+id).fadeOut().html(unit).fadeIn();
                 },
                 error: function (err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue

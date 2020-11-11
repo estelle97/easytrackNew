@@ -25,7 +25,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Gestion des utilisateurs
+                    Gestion des employés
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -109,68 +109,67 @@
     <div class="row row-deck row-cards" id="employees">
         @foreach (Auth::user()->companies()->first()->sites()->get() as $site)
             @foreach ($site->employees()->get()->reverse() as $emp)
-                <div class="col-md-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row row-sm align-items-center">
-                        <div class="col-auto">
-                                @if ($emp->user->photo)
-                                    <span class="avatar avatar-md"  style="background-image: url('{{asset($emp->user->photo)}}')"> </span>
-                                @else
-                                    <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$emp->user->name}}')"> </span>
-                                @endif
-                        </div>
-                        <div class="col-auto">
-
-                        </div>
-                        <div class="col">
-                            <h3 class="mb-0">
-                                <a href={{route('admin.user.show', $emp->user->username)}}> {{$emp->user->name}} </a>
-                            </h3>
-                            <div class="text-muted text-h4">
-                               {{$emp->user->role->name}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row align-items-center  mt-4">
-                        <div class="col">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon mr-2 text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="11" r="3"></circle><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"></path></svg>
-                                {{$emp->site->name}}
-                            </div>
-                        </div>
-                        <div class="col-auto card-actions">
-                            <span class="dropdown button-click-action">
-                                <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                            height="20">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-                                        </svg>
+                <div id="employee{{$emp->user->id}}" class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row row-sm align-items-center">
+                                <div class="col-auto">
+                                        @if ($emp->user->photo)
+                                            <span class="avatar avatar-md"  style="background-image: url('{{asset($emp->user->photo)}}')"> </span>
+                                        @else
+                                            <span class="avatar avatar-md"  style="background-image: url('https://ui-avatars.com/api/?background=E0F1FF&color=267FC9&name={{$emp->user->name}}')"> </span>
+                                        @endif
                                 </div>
+                                <div class="col-auto">
 
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <span class="dropdown-header">Actions</span>
-                                    <a class="dropdown-item" href="{{route('admin.user.show', $emp->user->username)}}">
-                                        Gérer l'utilisateur
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        Envoyer un message
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#modal-delete-user">
-
-                                        Supprimer
-                                    </a>
                                 </div>
-                            </span>
+                                <div class="col">
+                                    <h3 class="mb-0">
+                                        <a href={{route('admin.user.show', $emp->user->username)}}> {{$emp->user->name}} </a>
+                                    </h3>
+                                    <div class="text-muted text-h4">
+                                    {{$emp->user->role->name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center  mt-4">
+                                <div class="col">
+                                    <div class="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mr-2 text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="11" r="3"></circle><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"></path></svg>
+                                        {{$emp->site->name}}
+                                    </div>
+                                </div>
+                                <div class="col-auto card-actions">
+                                    <span class="dropdown button-click-action">
+                                        <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                                    height="20">
+                                                    <path fill="none" d="M0 0h24v24H0z" />
+                                                    <path
+                                                        d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                                </svg>
+                                        </div>
+
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <span class="dropdown-header">Actions</span>
+                                            <a class="dropdown-item" href="{{route('admin.user.show', $emp->user->username)}}">
+                                                Gérer l'employé
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                Envoyer un message
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                data-target="#modal-delete-user{{$emp->user->id}}">
+                                                Supprimer
+                                            </a>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
             @endforeach
         @endforeach
     </div>
@@ -183,7 +182,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Ajouter un nouvel utilisateur</h5>
+                        <h5 class="modal-title">Ajouter un nouvel employé</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -209,7 +208,7 @@
                             </div>
                             <div class="col-lg-9">
                                 <label class="form-label">Nom complet</label>
-                                <input type="text" id="user-name-add" class="form-control"
+                                <input type="text"   maxlength="100" pattern="^[A-Z a-z]+[0-9]{0,3}"  maxlength="100" id="user-name-add" class="form-control"
                                     placeholder="Saisissez le nom complet..." required>
                                     <span class="text-danger" id="name-error"></span>
                             </div>
@@ -285,21 +284,26 @@
                 </div>
             </div>
         </div>
-        <div class="modal modal-blur fade" id="modal-delete-user" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sure ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de cette utilisateurs.</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto"
-                            data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+
+        @foreach (Auth::user()->companies()->first()->sites()->get() as $site)
+            @foreach ($site->employees()->get()->reverse() as $emp)
+                <div class="modal modal-blur fade" id="modal-delete-user{{$emp->user->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="modal-title">Êtes vous sure ?</div>
+                                <div>Si vous continuez, vous perdrez toutes les données de cet employé.</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link link-secondary mr-auto"
+                                    data-dismiss="modal">Annuler</button>
+                                <button type="button" class="btn btn-danger" onclick="deleteUser({{$emp->user->id}})">Oui, supprimer</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            @endforeach
+        @endforeach
     </div>
 @endsection
 
@@ -328,8 +332,11 @@
                 processData: false,
                 method : 'post',
                 data : form_data,
-                success : function(){
-                    location.reload();
+                success : function(data){
+                    $('#modal-create-user').hide();
+                    $('.modal-backdrop').remove();
+                    $("#employees").prepend(data).fadeIN();
+                    $('.form-control').reset();
                 },
                 error: function (err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
@@ -383,6 +390,23 @@
                 },
                 success: function(data){
                     $("#employees").html(data);
+                }
+            });
+        }
+
+        function deleteUser(id){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/admin/users/'+id+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-user"+id).hide();
+                    $('.modal-backdrop').remove();
+                    $("#employee"+id).fadeOut(1500);
                 }
             });
         }

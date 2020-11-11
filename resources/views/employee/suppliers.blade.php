@@ -102,15 +102,17 @@
                                                  Afficher
                                             </a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-site">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    width="18" height="18" class="mr-2">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                </svg>
-                                                Supprimer
-                                            </a>
+                                            @if(Auth::user()->role->slug == 'manager')
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-supplier{{$supl->id}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        width="18" height="18" class="mr-2">
+                                                        <path fill="none" d="M0 0h24v24H0z" />
+                                                        <path
+                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                    </svg>
+                                                    Supprimer
+                                                </a>
+                                            @endif
                                         </div>
                                     </span>
                                 </td>
@@ -163,7 +165,7 @@
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label">Téléphone N°2</label>
-                                <input type="tel" id="supplier-phone2-add" class="form-control" placeholder="Saisissez le numéro de téléphone...">
+                                <input type="tel" id="supplier-phone2-add" class="form-control" placeholder="Saisissez le numéro de téléphone..." pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
                                 <span class="text-danger" id="phone2-error"></span>
                             </div>
                             <div class="col-lg-6">
@@ -241,7 +243,7 @@
                                 <div class="col-lg-12 mb-4">
                                     <label class="form-label">Téléphone N°2</label>
                                     <input type="tel" id="supplier-phone2-update{{$supl->id}}" value="{{$supl->phone2}}" class="form-control"
-                                        placeholder="Saisissez le numéro de téléphone...">
+                                        placeholder="Saisissez le numéro de téléphone..." pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
                                         <span class="text-danger" id="phone2-error{{$supl->id}}"></span>
                                 </div>
                                 <div class="col-lg-6">
@@ -278,22 +280,24 @@
             </div>
         @endforeach
 
-
-        <div class="modal modal-blur fade" id="modal-delete-site" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-title">Êtes vous sûre de cette action ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link link-secondary mr-auto"
-                            data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+        @foreach (Auth::user()->employee->site->suppliers()->get() as $supl)
+            <div class="modal modal-blur fade" id="modal-delete-supplier{{$supl->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modal-title">Êtes vous sûre de cette action ?</div>
+                            <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link link-secondary mr-auto"
+                                data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteSupplier({{$supl->id}})">Oui, supprimer</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
+
     </div>
 @endsection
 
@@ -384,7 +388,8 @@
                 success: function(data){
                     if(data == 'success'){
                         $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-supplier"+id).modal().hide();
+                        $("#modal-edit-supplier"+id).modal().hide();
+                        $('.modal-backdrop').remove();
 
                         $("#supplier-name"+id).fadeOut().html(name).fadeIn();
                         $("#supplier-company_name"+id).fadeOut().html(company_name).fadeIn();
@@ -412,6 +417,23 @@
                             el.html(error[0]).fadeIn();
                         });
                     }
+                }
+            });
+        }
+
+        function deleteSupplier(supplier){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/employee/suppliers/'+supplier+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-supplier"+supplier).hide();
+                    $('.modal-backdrop').remove();
+                    $("#supplier"+supplier).fadeOut(1500);
                 }
             });
         }

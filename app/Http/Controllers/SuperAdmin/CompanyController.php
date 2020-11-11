@@ -95,22 +95,38 @@ class CompanyController extends Controller
 
     public function subscriptionUpdate(Request $request, Company $company){
 
+
         // $verif = null;
         $type = Type::find($request->type);
+
         $remainingDays = $company->subscription()->remainingDays;
 
         if($remainingDays > 0){
-            $company->types()->attach($type->id, [
-                'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
-            ]);
+            // $duration = Carbon::now()->addDays($remainingDays + $type->duration);
+            // DB::table('subscriptions')->insert([
+                //     'company_id' => $company->id,
+                //     'type_id' => $type->id,
+                //     'end_date' => $duration
+                // ]);
 
-            // $verif = $company->types->last();
+                // $company->types()->attach($type->id, [
+                //     'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
+                // ]);
+
+                $company->types()->sync([$type->id => ['end_date' => Carbon::now()->addDays($remainingDays + $type->duration)]]);
+
+            // $verif = $company->subscription()->remainingDays;
         } else {
+            // $duration = Carbon::now()->addDays($type->duration);
+            // DB::table('subscriptions')->insert([
+            //     'company_id' => $company->id,
+            //     'type_id' => $type->id,
+            //     'end_date' => $duration
+            // ]);
             $company->types()->attach($type->id, [
                 'end_date' => Carbon::now()->addDays($type->duration)
             ]);
-
-            // $verif = $company->types->last();
+            // $verif = $company->subscription()->remainingDays;
         }
 
         // $test = [
@@ -118,9 +134,17 @@ class CompanyController extends Controller
         //     'remainingDays' => $remainingDays,
         //     'company' =>  $company->name,
         //     'verif' => $verif,
+        //     'last' => $company->types->last()
         // ];
-        flashy()->success("L'abonnement a été mis à jour avec succès!");
-        return 'success';
+        // dd($test);
+        // flashy()->success("L'abonnement a été mis à jour avec succès!");
+
+        $newCompany = Company::whereId($company->id)->first();
+        // dd($test->subscription()->remainingDays);
+        return response()->json([
+            'remainingDays' => $newCompany->subscription()->remainingDays,
+            'percentage' => $newCompany->subscription()->percentage
+        ]);
     }
 
     public function update(Request $request, Company $company){

@@ -48,7 +48,7 @@
             <div class="d-flex align-items-center mt-auto">
                 <div class="ml-2">
                     <a class="text-body"> {{Auth::user()->name}} </a>
-                    <small class="d-block text-muted">Online</small>
+                    <small class="d-block text-muted"> {{Auth::user()->role->name}} </small>
                 </div>
             </div>
         </div>

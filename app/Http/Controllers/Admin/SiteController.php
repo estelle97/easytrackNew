@@ -76,11 +76,21 @@ class SiteController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Site $site)
     {
-        $lims_site_data = Site::find($id);
-        $lims_site_data->delete();
-        notify()->success('Site supprimé avec succès', 'Suppression de site');
-        return redirect()->back();
+        foreach ($site->employees as $key => $employee) {
+            $employee->user->delete();
+            $employee->delete();
+        }
+        foreach ($site->suppliers as $supplier) {
+            $supplier->delete();
+        }
+        foreach ($site->customers as $customer) {
+            $customer->delete();
+        }
+        
+        $site->delete();
+
+        return 'success';
     }
 }

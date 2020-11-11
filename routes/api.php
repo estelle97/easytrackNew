@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::post('purchases/{purchase}/validate', 'API\PurchaseController@validatePurchase');
     Route::post('purchases/{purchase}/invalidate', 'API\PurchaseController@invalidatePurchase');
+    Route::post('purchases/{purchase}/destroy', 'API\PurchaseController@destroy}');
     Route::apiResource('purchases', 'API\PurchaseController');
 
 
@@ -107,6 +108,12 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::get('userSites', 'API\AgendaController@sites');
     Route::get('teams/{id}', 'API\AgendaController@index');
-    Route::get('details/{id}/sites/{siteId}', 'API\AgendaController@details');
+    Route::get('details/{day}/sites/{site}', 'API\AgendaController@details');
+
+    Route::post('teams', 'API\AgendaController@addTeam');
+    Route::post('teams/attachUserToTeam/{team}', 'API\AgendaController@attachUserToTeam');
+    Route::post('teams/detachUserToTeam/{team}', 'API\AgendaController@detachUserToTeam');
+    Route::post("teams/team/{team}/destroy", 'API\AgendaController@destroyTeam');
+
 
 });

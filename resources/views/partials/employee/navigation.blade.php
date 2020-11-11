@@ -16,41 +16,48 @@
                     </span>
                 </a>
             </li>
-            @if(Auth::user()->role->slug != 'server')
+            @if(Auth::user()->role->slug != 'server' || Auth::user()->hasPermissionTo('manage_site','show_products','show_suppliers','show_customers'))
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
-                        role="button" aria-expanded="false">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 19V5.7a1 1 0 0 1 .658-.94l9.671-3.516a.5.5 0 0 1 .671.47v4.953l6.316 2.105a1 1 0 0 1 .684.949V19h2v2H1v-2h2zm2 0h7V3.855L5 6.401V19zm14 0v-8.558l-5-1.667V19h5z" fill="rgba(255,255,255, 0.8)"/></svg>
-                        </span>
-                        <span class="nav-link-title">
-                            Site
-                        </span>
-                    </a>
+                    @if(Auth::user()->may('manage_site'))
+                        <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
+                            role="button" aria-expanded="false">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 19V5.7a1 1 0 0 1 .658-.94l9.671-3.516a.5.5 0 0 1 .671.47v4.953l6.316 2.105a1 1 0 0 1 .684.949V19h2v2H1v-2h2zm2 0h7V3.855L5 6.401V19zm14 0v-8.558l-5-1.667V19h5z" fill="rgba(255,255,255, 0.8)"/></svg>
+                            </span>
+                            <span class="nav-link-title">
+                                Site
+                            </span>
+                        </a>
+                    @endif
                     <ul class="dropdown-menu">
-                        <li class="active">
-                            <a class="dropdown-item" href={{route('employee.products')}}>
-                                Produits
-                            </a>
-                        </li>
-                        @if(Auth::user()->role->slug != 'cashier')
+                        @if(Auth::user()->may('manage_products'))
+                            <li class="active">
+                                <a class="dropdown-item" href={{route('employee.products')}}>
+                                    Produits
+                                </a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->may('show_suppliers'))
                             <li>
                                 <a class="dropdown-item" href="/employee/suppliers">
                                     Fournisseurs
                                 </a>
                             </li>
-
+                        @endif
+                        @if(Auth::user()->may('manage_site'))
                             <li>
                                 <a class="dropdown-item" href={{route('employee.sites')}}>
                                     Gérer Site
                                 </a>
                             </li>
                         @endif
-                        <li>
-                            <a class="dropdown-item" href="/employee/customers">
-                                Clients
-                            </a>
-                        </li>
+                        @if(Auth::user()->may('manage_customers'))
+                            <li>
+                                <a class="dropdown-item" href="/employee/customers">
+                                    Clients
+                                </a>
+                            </li>
+                        @endif
 
                     </ul>
                 </li>
@@ -72,39 +79,45 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    @if(Auth::user()->role->slug == 'server')
-                    <li>
-                        <a class="dropdown-item" href={{route('employee.sales.pos')}}>
-                            Enregistrer commande client
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href={{route('employee.sales.all')}}>
-                           Toutes les commandes clients
-                        </a>
-                    </li>
+                    @if(Auth::user()->role->slug == 'server' || Auth::user()->hasPermissionTo('show_sale_orders', 'create_sale_orders'))
+                        @if(Auth::user()->may('create_sale_orders'))
+                            <li>
+                                <a class="dropdown-item" href={{route('employee.sales.pos')}}>
+                                    Enregistrer commande client
+                                </a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->may('show_sale_orders'))
+                            <li>
+                                <a class="dropdown-item" href={{route('employee.sales.all')}}>
+                                Toutes les commandes clients
+                                </a>
+                            </li>
+                        @endif
                     @endif
 
-                    @if(Auth::user()->role->slug != 'server')
-                        <li>
-                            <a class="dropdown-item" href={{route('employee.purchases')}}>
-                                Bons de commandes
-                            </a>
-                        </li>
-                    @endif
+                    @if(Auth::user()->role->slug != 'server' || Auth::user()->hasPermissionTo('show_purchase_orders','create_purchase_orders'))
+                        @if(Auth::user()->may('show_purchase_orders'))
+                            <li>
+                                <a class="dropdown-item" href={{route('employee.purchases')}}>
+                                    Bons de commandes
+                                </a>
+                            </li>
+                        @endif
 
-                    @if(Auth::user()->role->slug == 'cashier' || Auth::user()->role->slug == 'manager')
-                        <li>
-                            <a class="dropdown-item" href={{route('employee.sales.kanban')}}>
-                                Commandes clients
-                            </a>
-                        </li>
+                        @if(Auth::user()->role->slug == 'cashier' || Auth::user()->role->slug == 'manager' || Auth::user()->may('validate_sale_orders'))
+                            <li>
+                                <a class="dropdown-item" href={{route('employee.sales.kanban')}}>
+                                    Commandes clients
+                                </a>
+                            </li>
+                        @endif
                     @endif
                 </ul>
             </li>
 
 
-            @if(Auth::user()->role->slug == 'manager')
+            @if(Auth::user()->role->slug == 'manager' || Auth::user()->may('show_employee'))
                 <li class="nav-item">
                     <a class="nav-link" href={{route('employee.company.users')}}>
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -117,7 +130,7 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Utilisateurs
+                            employés
                         </span>
                     </a>
                 </li>

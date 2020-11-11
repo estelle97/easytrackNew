@@ -95,7 +95,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center">
-                    <div class="subheader"> Utilisateurs </div>
+                    <div class="subheader"> employés </div>
                     <div class="ml-auto lh-1">
                         <div class="dropdown">
                             <a class="dropdown-toggle text-muted selected-users" href="#" data-toggle="dropdown" aria-haspopup="true"
@@ -189,7 +189,7 @@
                             <div class="strong">
                                 Gold (Annulé)
                             </div>
-                            <div class="text-muted">10 Utilisateurs</div>
+                            <div class="text-muted">10 employés</div>
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                             <div class="strong">
                                 Premium (Annulé)
                             </div>
-                            <div class="text-muted">20 Utilisateurs</div>
+                            <div class="text-muted">20 employés</div>
                         </div>
                     </div>
                 </div>
@@ -219,7 +219,7 @@
                             <div class="strong">
                                 Profesionnel (Annulé)
                             </div>
-                            <div class="text-muted">5 Utilisateurs</div>
+                            <div class="text-muted">5 employés</div>
                         </div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                             <div class="strong">
                                 Classic (Annulé)
                             </div>
-                            <div class="text-muted">0 Utilisateurs</div>
+                            <div class="text-muted">0 employés</div>
                         </div>
                     </div>
                 </div>
@@ -493,7 +493,7 @@
                         curve: "smooth",
                     },
                     series: [{
-                        name: "Utilisateurs",
+                        name: "employés",
                         data: users
                     }],
                     grid: {

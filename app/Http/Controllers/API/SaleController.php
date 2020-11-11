@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Action;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SaleResource;
+use App\Notification;
 use App\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +25,7 @@ class SaleController extends Controller
         } else {
             $sales = Auth::user()->employee->site->sales->load('customer','initiator','validator','products');
         }
-        
+
         return response()->json([
             'sales' => $sales,
         ], 200);
@@ -82,6 +84,13 @@ class SaleController extends Controller
             }
         });
 
+        Action::store('Sale', $sale->id, 'create',
+            "Initiation de la commande client SO-".$sale->code
+        );
+
+        foreach ($sale->site->employees()->whereHas('user.role', function($query){$query->where('roles.slug','cashier');})->get()->load('user') as $key => $emp) {
+            Notification::commandAlert($emp->user->id, $sale->site, $sale);
+        }
 
         return response()->json([
             'message' => 'sale created susscessfully',
@@ -156,6 +165,9 @@ class SaleController extends Controller
                 }
             });
 
+            Action::store('Sale', $sale->id, 'update',
+                "Mise à jour de la commande client SO-".$sale->code
+            );
 
             return response()->json([
                 'message' => 'sale updated susscessfully',
@@ -171,7 +183,7 @@ class SaleController extends Controller
 
     public function validateSale(Request $request, Sale $sale){
 
-        
+
         if($sale->validator_id == null){
             $sale->validator_id = Auth::user()->id;
             foreach ($sale->products as $prod) {
@@ -182,13 +194,19 @@ class SaleController extends Controller
             }
             $sale->status = 2;
             $sale->save();
-    
+
+            Action::store('Sale', $sale->id, 'validate',
+                "Validation de la commande client SO-".$sale->code
+            );
+
+            Notification::validationAlert($sale->site, $sale);
+
             return response()->json([
                 'message' => 'sale validated susscessfully',
                 'sale' => new SaleResource($sale->load('validator')),
             ],200);
         }
-        
+
 
         return response()->json([
             'message' => 'unauthorized',
@@ -213,6 +231,10 @@ class SaleController extends Controller
             }
         }
 
+        Action::store('Sale', $sale->id, 'invalidate',
+            "Invalidation de la commande client SO-".$sale->code
+        );
+
         return response()->json([
             'message' => 'unauthorized',
             'sale' => new SaleResource($sale->load('validator')),
@@ -223,7 +245,7 @@ class SaleController extends Controller
         if($sale->validator_id == null){
             $sale->status = $request->status;
             $sale->save();
-            
+
             return response()->json([
                 'message' => 'Le statut de la commande a bien été mise à jour',
                 'sale' => new SaleResource($sale->load('validator')),
@@ -243,6 +265,13 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+        $sale->delete();
+        Action::store('Sale', $sale->id, 'destroy',
+            "Suppression de la commande client SO-".$sale->code
+        );
+
+        return response()->json([
+            'message' => 'deleted successfully!',
+        ], 204);
     }
 }

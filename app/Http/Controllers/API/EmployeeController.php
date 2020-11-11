@@ -24,7 +24,7 @@ class EmployeeController extends Controller
         } else {
             $employees = Auth::user()->employee->site->employees->load('user');
         }
-        
+
         return response()->json([
             'employees' => $employees
         ], 200);
@@ -57,8 +57,8 @@ class EmployeeController extends Controller
             'password' => 'required|min:8',
             'role_id' => 'required',
             'site_id' => 'required',
-        ]);   
-       
+        ]);
+
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
@@ -128,8 +128,8 @@ class EmployeeController extends Controller
             'phone' => 'required|min:200000000|max:999999999|numeric',
             'role_id' => 'required',
 
-        ]);   
-       
+        ]);
+
         $employee->contact_name = $request->contact_name;
         $employee->contact_phone = $request->contact_phone;
         $employee->cni_number = $request->cni_number;
@@ -139,11 +139,11 @@ class EmployeeController extends Controller
         $employee->user->email = $request->name;
         $employee->user->address = $request->address;
         $employee->user->phone = $request->phone;
-        
+
         DB::transaction(function () use($employee) {
             $employee->save();
             $employee->user->save();
-           
+
         });
 
         return response()->json([
@@ -160,6 +160,12 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->user->delete();
+        $employee->delete();
+
+        return response()->json([
+            'message' => 'deleted successfully'
+        ],
+        204);
     }
 }

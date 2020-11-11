@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Action;
 use App\Purchase;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PurchaseResource;
@@ -23,7 +24,7 @@ class PurchaseController extends Controller
         } else {
             $purchases = Auth::user()->employee->site->purchases->load('supplier','initiator','validator');
         }
-        
+
         return response()->json([
             'purchases' => $purchases,
         ], 200);
@@ -82,6 +83,9 @@ class PurchaseController extends Controller
                 }
             });
 
+            Action::store('Purchase', $purchase->id, 'create',
+                "Initiation de la commande fournisseur PO-".$purchase->code
+            );
 
             return response()->json([
                 'message' => 'purchase created susscessfully',
@@ -157,6 +161,9 @@ class PurchaseController extends Controller
                 }
             });
 
+            Action::store('Purchase', $purchase->id, 'update',
+                "Mise à jour de la commande fournisseur PO-".$purchase->code
+            );
 
             return response()->json([
                 'message' => 'purchase updated susscessfully',
@@ -183,6 +190,10 @@ class PurchaseController extends Controller
             $purchase->status = 1;
             $purchase->save();
 
+            Action::store('Purchase', $purchase->id, 'validate',
+                "validation de la commande fournisseur PO-".$purchase->code
+            );
+
             return response()->json([
                 'message' => 'purchase validated susscessfully',
                 'purchase' => new PurchaseResource($purchase->load('validator')),
@@ -191,7 +202,7 @@ class PurchaseController extends Controller
 
         return response()->json([
             'message' => 'unauthorized',
-        ],403); 
+        ],403);
 
     }
 
@@ -207,7 +218,11 @@ class PurchaseController extends Controller
                     ]);
                 }
                 $purchase->save();
-    
+
+                Action::store('Purchase', $purchase->id, 'invalidate',
+                    "Invalidation de la commande fournisseur PO-".$purchase->code
+                );
+
                 return response()->json([
                     'message' => 'purchase validated susscessfully',
                     'purchase' => new PurchaseResource($purchase->load('validator')),
@@ -225,7 +240,7 @@ class PurchaseController extends Controller
         if($purchase->status == 0){
             $purchase->status = 1;
             $purchase->save();
-            
+
             return response()->json([
                 'message' => 'purchase status updated susscessfully',
                 'purchase' => new PurchaseResource($purchase->load('validator')),
@@ -234,7 +249,7 @@ class PurchaseController extends Controller
             if($purchase->validator == null){
                 $purchase->status = 0;
                 $purchase->save();
-                
+
                 return response()->json([
                     'message' => 'purchase status updated susscessfully',
                     'purchase' => new PurchaseResource($purchase->load('validator')),
@@ -255,6 +270,13 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        //
+        $purchase->delete();
+        Action::store('purchase', $purchase->id, 'destroy',
+            "Suppression de la commande client SO-".$purchase->code
+        );
+
+        return response()->json([
+            'message' => 'deleted successfully!',
+        ], 204);
     }
 }

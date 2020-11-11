@@ -91,7 +91,8 @@
                                             marquer comme inactif
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="#" data-toggle="modal"
+                                            data-target="#modal-delete-product{{$site->id}}{{$product->id}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                 width="18" height="18" class="mr-2">
                                                 <path fill="none" d="M0 0h24v24H0z" />
@@ -241,22 +242,25 @@
         @endforeach
     @endforeach
 
-
-    <div class="modal modal-blur fade" id="modal-delete-site" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-title">Êtes vous sûre de cette action ?</div>
-                    <div>Si vous continuez, vous perdrez toutes les données de ce site.</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link link-secondary mr-auto"
-                        data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+    @foreach (Auth::user()->companies->first()->sites as $site)
+        @foreach ($site->products as $product)
+            <div class="modal modal-blur fade" id="modal-delete-product{{$site->id}}{{$product->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modal-title">Êtes vous sure ?</div>
+                            <div>Si vous continuez, vous perdrez toutes les données de cet employé.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link link-secondary mr-auto"
+                                data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteProduct({{$site->id}} , {{$product->id}})">Oui, supprimer</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        @endforeach
+    @endforeach
 </div>
 @endsection
 
@@ -333,7 +337,9 @@
                 success : function(){
                         location.reload();
                         $(".text-danger").fadeOut().html('');
-                        // $("#modal-edit-site"+id).modal().hide();
+                        $("#modal-edit-site"+id).modal().hide();
+                        $('.modal-backdrop').remove();
+
                         $("#product-cost"+site+product).fadeOut().html(cost).fadeIn();
                         $("#product-price"+site+product).fadeOut().html(price).fadeIn();
                         $("#product-site"+site+product).fadeOut().html(site).fadeIn();
@@ -357,6 +363,23 @@
                     }
                 }
 
+            });
+        }
+
+        function deleteProduct(site, product){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/admin/products/'+site+'/'+product+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-product"+site+product).hide();
+                    $('.modal-backdrop').remove();
+                    $("#product"+site+product).fadeOut(1500);
+                }
             });
         }
     </script>

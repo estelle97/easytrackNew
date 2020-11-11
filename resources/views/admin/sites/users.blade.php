@@ -25,7 +25,7 @@
         <div class="row align-items-center">
             <div class="col-auto">
                 <h2 class="page-title">
-                    Gestion des utilisateurs
+                    Gestion des employés
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -147,7 +147,7 @@
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <span class="dropdown-header">Actions</span>
                                         <a class="dropdown-item" href="{{route('admin.user.show', $emp->user->username)}}">
-                                            Gérer l'utilisateur
+                                            Gérer l'employé
                                         </a>
                                         <a class="dropdown-item" href="#">
                                             Envoyer un message
@@ -200,7 +200,7 @@
                             </div>
                             <div class="col-lg-9 mb-4">
                                 <label class="form-label">Nom complet</label>
-                                <input type="text" id="user-name-add" class="form-control"
+                                <input type="text"   maxlength="100" pattern="^[A-Z a-z]+[0-9]{0,3}" id="user-name-add" class="form-control"
                                     placeholder="Saisissez le nom complet..." required>
                                     <span class="text-danger" id="name-error"></span>
                             </div>
@@ -281,7 +281,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="modal-title">Êtes vous sure ?</div>
-                        <div>Si vous continuez, vous perdrez toutes les données de cette utilisateurs.</div>
+                        <div>Si vous continuez, vous perdrez toutes les données de cet employé.</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link link-secondary mr-auto"

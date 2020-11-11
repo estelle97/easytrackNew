@@ -263,7 +263,7 @@ class SaleController extends Controller
                     'qty' => $qty
                 ]);
 
-                
+
                 if($qty <= $sale->site->products()->findOrFail($prod->id)->pivot->qty_alert){
                     if($qty == 0){
                         foreach ($sale->site->employees()->whereHas('user.role', function($query){$query->where('roles.slug','cashier')->orWhere('roles.slug','storekeeper')->orWhere('roles.slug','manager');})->get()->load('user') as $key => $emp) {
@@ -350,8 +350,10 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        Action::store('Sale', $sale->id, 'destroy',
-            'Suppression de la commande client SO-'.$sale->code
-        );
+        if($sale->delete()){
+            Action::store('Sale', $sale->id, 'destroy',
+                "Suppression de la commande client SO-".$sale->code
+            );
+        }
     }
 }

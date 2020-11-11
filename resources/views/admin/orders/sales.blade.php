@@ -86,13 +86,11 @@
     </div>
     <div class="row">
         <div class="col-lg-9">
-            <div class="card card-max-size p-2" style="overflow-y: auto;">
+            <div class="card">
                 <div class="table-responsive">
                     <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table card-table table-vcenter text-nowrap datatable">
                         <thead>
                             <tr>
-                                <th class="w-1"><input class="form-check-input m-0 align-middle"
-                                        type="checkbox"></th>
                                 <th class="w-1">N°</th>
                                 <th class="exportable">Date</th>
                                 <th class="exportable">Site</th>
@@ -109,7 +107,6 @@
                                 @foreach ($site->sales->reverse() as $sale)
 
                                     <tr id="sale{{$sale->id}}">
-                                        <td><input class="form-check-input m-0 align-middle" type="checkbox"></td>
                                         <td><span class="text-muted">{{$sale->code}}</span></td>
                                         <td> {{$sale->created_at}} </td>
                                         <td>
@@ -159,12 +156,14 @@
                                                 <button class="btn btn-white btn-sm dropdown-toggle align-text-top"
                                                     data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
-                                                            Afficher
-                                                        </a>
-                                                    <a class="dropdown-item" href={{route('admin.sales.edit', $sale->id)}}>
-                                                        Modifier
+                                                    <a class="dropdown-item" href={{route('admin.sales.show', $sale->id)}}>
+                                                        Afficher
                                                     </a>
+                                                    @if ($sale->validator_id == null && Auth::user()->id == $sale->initiator_id)
+                                                        <a class="dropdown-item" href={{route('admin.sales.edit', $sale->id)}}>
+                                                            Modifier
+                                                        </a>
+                                                    @endif
                                                     @if ($sale->validator_id == null)
                                                         <a class="dropdown-item" onclick="validateSale({{$sale->id}})">
                                                             Valider
@@ -182,15 +181,18 @@
                                                     @endif
 
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                            width="18" height="18" class="mr-2">
-                                                            <path fill="none" d="M0 0h24v24H0z" />
-                                                            <path
-                                                                d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                        </svg>
-                                                        Supprimer
-                                                    </a>
+                                                    @if($sale->validator_id == null)
+                                                        <a class="dropdown-item" href="#" href="#" data-toggle="modal"
+                                                        data-target="#modal-delete-sale{{$sale->id}}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                width="18" height="18" class="mr-2">
+                                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                                <path
+                                                                    d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                            </svg>
+                                                            Supprimer
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </span>
                                         </td>
@@ -217,6 +219,25 @@
     </div>
 
     <div class="modal modal-blur fade" id="modal-sale-show" tabindex="-1" role="dialog" aria-hidden="true"> </div>
+    @foreach (Auth::user()->companies->first()->sites as $site)
+        @foreach ($site->sales->reverse() as $sale)
+            <div class="modal modal-blur fade" id="modal-delete-sale{{$sale->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modal-title">Êtes vous sure ?</div>
+                            <div>Si vous continuez, vous perdrez toutes les données de cette vente.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link link-secondary mr-auto"
+                                data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteSale({{$sale->id}})">Oui, supprimer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endforeach
 
 @endsection
 
@@ -305,6 +326,23 @@
                 success: function(data){
                     // console.log(data);
                     location.reload();
+                }
+            });
+        }
+
+        function deleteSale(sale){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/admin/sales/'+sale+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-sale"+sale).hide();
+                    $('.modal-backdrop').remove();
+                    $("#sale"+sale).fadeOut(1500);
                 }
             });
         }

@@ -93,7 +93,11 @@ class UserController extends Controller
         $type = Type::findOrFail($request->type);
         $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addDays($type->duration),
+            'licence_number' => 'L122L1KZ',
+            'is_active' => 0,
         ]);
+
+        $this->sendMail($user->email, $company);
 
         return response()->json([
             "message" => "Operation success!",
@@ -331,16 +335,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if($user->is_admin == '2'){     // Check if it's a manager
-            $otherManager = User::where('is_admin','2')->where('id','!=',$user->id)->where('site_id',$user->site_id)->first();   // retreive the others managers
-            if(!$otherManager){     // if there are not another manager
-               $site = \App\Site::find($user->site_id);
-               $site->active = '0';
-               $site->save();
-            }
-        }
-        $user->active = '0';
-        $user->save();
+        $user->employee->delete();
+        $user->delete();
 
         return response()->json([
             'message' => 'deleted successfully'
@@ -493,11 +489,11 @@ class UserController extends Controller
                     })->orWhere(function ($query) use($add) {
                         $query->where('receiver', Auth::user()->id)->where('sender', $add->id);
                     })->orderBy('created_at', 'desc')->first();
-                    
+
                     if(!in_array($user, $contacts) && $user != $add){
                         array_push($contacts, $add);
                     }
-                    
+
                 }
             }
         } else {

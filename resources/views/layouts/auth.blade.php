@@ -35,9 +35,6 @@
             display: none;
             background: #fff !important;
         }
-        .btn {
-            border-radius: 100px !important;
-        }
         .welcome-message {
             font-size: 3.5rem !important;
             font-weight: 300 !important;

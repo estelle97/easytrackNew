@@ -51,6 +51,7 @@ class User extends Authenticatable
     public function agendas(){
         return $this->belongsToMany('App\Site','agendas')->withPivot('status','start','end');
     }
+
     public function isActive()
     {
         return $this->active;
@@ -58,11 +59,6 @@ class User extends Authenticatable
 
     public function companies(){
         return $this->hasMany('App\Company');
-    }
-
-    //Check if user is online
-    public function isOnline(){
-        return Cache::has('user-is-online-'. $this->id);
     }
 
     public function employee(){
@@ -99,11 +95,21 @@ class User extends Authenticatable
         return $this->hasMany('App\Notification');
     }
 
+    public function payrools(){
+        return $this->hasMany('App\Payrool');
+    }
+
     public function totalSales($days = null){
         $total = 0;
         if($days){
-            foreach($this->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
-                $total += $sale->total();
+            if(strlen($days) < 4){
+                foreach($this->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
+                    $total += $sale->total();
+                }
+            } else {
+                foreach($this->sales->where('created_at','>=', $days.' 00:00:00')->where('created_at','<=', $days.' 23:59:59')->where('validator_id','!=', null) as $sale){
+                    $total += $sale->total();
+                }
             }
         } else {
             foreach($this->sales->where('validator_id','!=', null) as $sale){
@@ -117,8 +123,14 @@ class User extends Authenticatable
     public function totalPurchases($days = null){
         $total = 0;
         if($days){
-            foreach($this->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $purchase){
-                $total += $purchase->total();
+            if(strlen($days) < 4){
+                foreach($this->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $purchase){
+                    $total += $purchase->total();
+                }
+            } else {
+                foreach($this->purchases->where('created_at','>=', $days.' 00:00:00')->where('created_at','<=', $days.' 23:59:59')->where('validator_id','!=', null) as $purchase){
+                    $total += $purchase->total();
+                }
             }
         } else {
             foreach($this->purchases->where('validator_id','!=', null) as $purchase){

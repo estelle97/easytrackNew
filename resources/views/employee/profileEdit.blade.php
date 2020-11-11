@@ -79,7 +79,7 @@
                         <div class="col-sm-6 col-md-6">
                             <div class="mb-2">
                                 <label class="form-label">Nom complet</label>
-                                <input type="text" name="name" class="form-control" placeholder="Saisissez votre nom" value="{{Auth::user()->name}}" required>
+                                <input type="text"   maxlength="100" pattern="^[A-Z a-z]+[0-9]{0,3}" name="name" class="form-control" placeholder="Saisissez votre nom" value="{{Auth::user()->name}}" required>
                                 {!! $errors->first('name','<span class="text-danger"> :message </span>') !!}
                             </div>
                         </div>

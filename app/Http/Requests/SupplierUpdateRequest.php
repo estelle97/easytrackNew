@@ -16,7 +16,7 @@ class SupplierUpdateRequest extends FormRequest
         return true;
     }
 
-    
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,7 +26,8 @@ class SupplierUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric'
+            'phone1' => 'required|min:200000000|max:999999999|numeric',
+            'phone2' => 'sometimes|min:200000000|max:999999999|numeric',
         ];
     }
 
@@ -39,7 +40,8 @@ class SupplierUpdateRequest extends FormRequest
     {
         return [
             'required' => 'Ce champ est obligatoire',
-            'phone1.*' => "Format de téléphone incorrect"
+            'phone1.*' => "Format de téléphone incorrect",
+            'phone2.*' => "Format de téléphone incorrect"
         ];
     }
 }

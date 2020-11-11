@@ -39,7 +39,7 @@
 
                                 @foreach (Auth::user()->companies->first()->sites->reverse() as $site)
                                     @foreach ($site->sales->where('status',0)->reverse() as $sale)
-                                    <div class="easy-kanban-card card">
+                                    <div class="easy-kanban-card card" id="sale{{$sale->id}}">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">
                                                     <div class="col-auto pl-2">
@@ -65,15 +65,18 @@
                                                                     Marquer comme payé
                                                                 </a>
                                                                 <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item" href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                        width="18" height="18" class="mr-2">
-                                                                        <path fill="none" d="M0 0h24v24H0z" />
-                                                                        <path
-                                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                                    </svg>
-                                                                    Supprimer
-                                                                </a>
+                                                                @if($sale->validator_id == null)
+                                                                    <a class="dropdown-item" href="#" href="#" data-toggle="modal"
+                                                                    data-target="#modal-delete-sale{{$sale->id}}">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                            width="18" height="18" class="mr-2">
+                                                                            <path fill="none" d="M0 0h24v24H0z" />
+                                                                            <path
+                                                                                d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                                        </svg>
+                                                                        Supprimer
+                                                                    </a>
+                                                                @endif
                                                             </div>
                                                         </span>
                                                     </div>
@@ -128,7 +131,7 @@
                             <div class="column-body col-lg-12 mt-4">
                                 @foreach (Auth::user()->companies->first()->sites->reverse() as $site)
                                     @foreach ($site->sales->where('status',1)->reverse() as $sale)
-                                        <div class="easy-kanban-card card">
+                                        <div class="easy-kanban-card card" id="sale{{$sale->id}}">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">
                                                     <div class="col-auto pl-2">
@@ -154,15 +157,18 @@
                                                                     Marquer comme payé
                                                                 </a>
                                                                 <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item" href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                        width="18" height="18" class="mr-2">
-                                                                        <path fill="none" d="M0 0h24v24H0z" />
-                                                                        <path
-                                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                                    </svg>
-                                                                    Supprimer
-                                                                </a>
+                                                                @if($sale->validator_id == null)
+                                                                    <a class="dropdown-item" href="#" href="#" data-toggle="modal"
+                                                                    data-target="#modal-delete-sale{{$sale->id}}">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                            width="18" height="18" class="mr-2">
+                                                                            <path fill="none" d="M0 0h24v24H0z" />
+                                                                            <path
+                                                                                d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                                        </svg>
+                                                                        Supprimer
+                                                                    </a>
+                                                                @endif
                                                             </div>
                                                         </span>
                                                     </div>
@@ -212,7 +218,7 @@
                             <div class="column-body col-lg-12 mt-4">
                                 @foreach (Auth::user()->companies->first()->sites->reverse() as $site)
                                     @foreach ($site->sales->where('status',2)->reverse() as $sale)
-                                        <div class="easy-kanban-card card">
+                                        <div class="easy-kanban-card card" id="sale{{$sale->id}}">
                                             <div class="card-header border-bottom-0 pr-0 pb-0">
                                                 <div class="w-100 row align-items-center">
                                                     <div class="col-auto pl-2">
@@ -244,15 +250,18 @@
                                                                     @endif
                                                                 @endif
                                                                 <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item" href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                        width="18" height="18" class="mr-2">
-                                                                        <path fill="none" d="M0 0h24v24H0z" />
-                                                                        <path
-                                                                            d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
-                                                                    </svg>
-                                                                    Supprimer
-                                                                </a>
+                                                                @if($sale->validator_id == null)
+                                                                    <a class="dropdown-item" href="#" href="#" data-toggle="modal"
+                                                                    data-target="#modal-delete-sale{{$sale->id}}">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                            width="18" height="18" class="mr-2">
+                                                                            <path fill="none" d="M0 0h24v24H0z" />
+                                                                            <path
+                                                                                d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z" />
+                                                                        </svg>
+                                                                        Supprimer
+                                                                    </a>
+                                                                @endif
                                                             </div>
                                                         </span>
                                                     </div>
@@ -334,6 +343,26 @@
         </div>
     </div>
 
+    @foreach (Auth::user()->companies->first()->sites as $site)
+        @foreach ($site->sales->reverse() as $sale)
+            <div class="modal modal-blur fade" id="modal-delete-sale{{$sale->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modal-title">Êtes vous sure ?</div>
+                            <div>Si vous continuez, vous perdrez toutes les données de cette vente.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link link-secondary mr-auto"
+                                data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteSale({{$sale->id}})">Oui, supprimer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endforeach
+
 @endsection
 
 
@@ -406,6 +435,23 @@
                 success: function(data){
                     // console.log(data);
                     location.reload();
+                }
+            });
+        }
+
+        function deleteSale(sale){
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                url : '/admin/sales/'+sale+'/destroy',
+                method : 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $("#modal-delete-sale"+sale).hide();
+                    $('.modal-backdrop').remove();
+                    $("#sale"+sale).fadeOut(1500);
                 }
             });
         }

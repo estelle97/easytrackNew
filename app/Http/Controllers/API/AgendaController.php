@@ -10,6 +10,7 @@ use App\Employee;
 use App\Site;
 use App\Team;
 use App\Company;
+use App\Notification;
 use App\User;
 
 class AgendaController extends Controller
@@ -23,7 +24,7 @@ class AgendaController extends Controller
                 'data' => $sites,
                 'message' => 'site l\'utilisateur ' . Auth::user()->name
             ];
-    
+
             return response()->json($response, 200);
         } else {
             $employee = Employee::where('user_id', Auth::user()->id)->first();
@@ -33,7 +34,7 @@ class AgendaController extends Controller
                 'data' => $site,
                 'message' => 'site l\'utilisateur ' . Auth::user()->name
             ];
-    
+
             return response()->json($response, 200);
         }
     }
@@ -52,27 +53,12 @@ class AgendaController extends Controller
         return response()->json($response, 200);
    }
 
-   public function details($id, $siteId) {
-       $teams = Team::where('day', $id)->where("site_id", $siteId)->orderBy('day', 'ASC')->get();
-       $result = [];
-       foreach ($teams as $team) {
-            $users = [];
-            foreach($team->users() as $id) {
-                $user = User::find($id);
-                array_push($users, $user);
-            }
-            $team->users = $team->users();  
-       }
-        foreach ($teams as $team) {
-            array_push($result, $team);
-        }
-        $response = [
-            'success' => true,
-            'data' => $result,
-            'message' => 'Equipe ' . $id
-        ];
+   public function details($day, $site) {
+       $data = Site::find($site)->teams->where('day', $day)->load('users');
 
-        return response()->json($response, 200);
+       return response()->json([
+           'data' => $data
+       ]);
    }
 
    public function store(Request $request) {
@@ -83,17 +69,116 @@ class AgendaController extends Controller
 
    }
 
-   public function destroy($id) {
-       $team = Team::find($id);
-       $team->status = 0;
-       $team->save();
+   // Wiltek Agenda's methods
 
-        $response = [
-            'success' => true,
-            'data' => $team,
-            'message' => 'Equipe bloquee'
-        ];
 
-        return response()->json($response, 200);
-   }
+    /**
+     * Store a new team in a resource storage
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Integer site
+     * @param Integer day
+     * @param employees array:integer
+     * @param String start [Format - hh:mm]
+     * @param String end [Format - hh:mm]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addTeam(Request $request){
+
+        if(!Team::where('site_id', $request->site)->where('day', $request->day)->where('start', $request->start)->where('end', $request->end)->first()){
+            $team = Team::create([
+                'site_id' => $request->site,
+                'day' => $request->day,
+                'start' => $request->start,
+                'end' => $request->end
+           ]);
+
+           foreach ($request->employees as $key => $user_id) {
+                if(!$team->users->contains($user_id)){
+                    $team->users()->attach($user_id);
+
+                    Notification::addUserToTeamAlert($team->site, User::find($user_id));
+                }
+           }
+
+            return response()->json([
+                'message' => 'success'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Cette équipe existe déja'
+        ], 403);
+    }
+
+    /**
+     * Add new user to an existing team
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Integer user_id
+     * @param \App\Team team
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function attachUserToTeam(Request $request, Team $team){
+
+        if(!$team->users->contains($request->user_id)){
+            $team->users()->attach($request->user_id);
+
+            Notification::addUserToTeamAlert($team->site, User::find($request->user_id));
+
+            return response()->json([
+                'message' => 'success'
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'cet utilisateur appartient déja à cette équipe',
+        ], 403);
+    }
+
+
+    /**
+     * Remove user to an existing team
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Integer user_id
+     * @param \App\Team team
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detachUserToTeam(Request $request, Team $team){
+
+        if($team->users->contains($request->user_id)){
+            $team->users()->detach($request->user_id);
+
+            Notification::addUserToTeamAlert($team->site, User::find($request->user_id));
+
+            return response()->json([
+                'message' => 'success'
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Cet utilisateur n\'appartient pas à cette équipe',
+        ], 403);
+    }
+
+    /**
+     * Delete an existing team
+     *
+     * @param \App\Team team
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyTeam(Team $team){
+
+        $team->users()->detach();
+        $team->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ], 200);
+    }
 }
