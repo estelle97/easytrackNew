@@ -20178,3 +20178,38 @@ and the GtkTreeModel.  This generally means that the model has changed
 without letting the view know.  Any display from now on is likely to
 be incorrect.
 
+Gtk-Message: Failed to load module "canberra-gtk-module"
+Ready.
+
+** Message: mforms::WizardLabelAlignment not handled. /build/mysql-workbench-y2M6l0/mysql-workbench-6.3.6+dfsg/library/forms/gtk/src/lf_label.cpp:196
+** Message: mforms::WizardLabelAlignment not handled. /build/mysql-workbench-y2M6l0/mysql-workbench-6.3.6+dfsg/library/forms/gtk/src/lf_label.cpp:196
+
+(mysql-workbench-bin:660): GLib-CRITICAL **: g_utf8_collate: assertion 'str2 != NULL' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: gtk_tree_view_unref_tree_helper: assertion 'node != NULL' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: gtk_tree_view_unref_tree_helper: assertion 'node != NULL' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
+
+(mysql-workbench-bin:660): Gtk-CRITICAL **: IA__gtk_radio_button_set_group: assertion '!g_slist_find (group, radio_button)' failed
