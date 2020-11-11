@@ -23,11 +23,11 @@
                                     </div>
                                     <div class="col-auto ml-auto d-print-none">
                                         <div class="d-flex align-items-center">
-                                            <a href="#" class="text-white button-click-action mb-0 mr-4">
+                                            <a class="text-white button-click-action mb-0 mr-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z" fill="rgba(0,0,0,1)"/></svg>
                                                 <!--  <span class="h2 align-middle button-click-action mb-0">Nouveau</span> -->
                                             </a>
-                                            <a href="#" class="text-white button-click-action mb-0 mr-2" data-toggle="modal" data-target="#modal-create-chat">
+                                            <a class="text-white button-click-action mb-0 mr-2" data-toggle="modal" data-target="#modal-create-chat">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                                     <path fill="none" d="M0 0h24v24H0z" />
                                                     <path
@@ -55,28 +55,24 @@
                         <div class="cols-sm-0 col-md-7 col-lg-7 col-xl-7 p-0 message_inbox chat-room-max-size">
                             <!-- Chat room actions -->
                             <div class="col-sm-12 pt-4 pb-3 px-3 d-print-none messages-header">
-                                <div class="d-flex justify-content-end align-items-center">
+                                {{-- <div class="d-flex justify-content-end align-items-center">
                                     <span class="more-button dropdown button-click-action mr-2">
                                         <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-.825 0-1.5.675-1.5 1.5S11.175 6 12 6s1.5-.675 1.5-1.5S12.825 3 12 3zm0 15c-.825 0-1.5.675-1.5 1.5S11.175 21 12 21s1.5-.675 1.5-1.5S12.825 18 12 18zm0-7.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5 1.5-.675 1.5-1.5-.675-1.5-1.5-1.5z" fill="rgba(0,0,0,1)"/></svg>
                                         </div>
 
                                         <div class="dropdown-menu dropdown-menu-right mt-3">
-                                            <a class="dropdown-item mb-2" href="#">
+                                            <a class="dropdown-item mb-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-3"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.455 19L2 22.5V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455zM4 18.385L5.763 17H20V5H4v13.385zM13.414 11l2.475 2.475-1.414 1.414L12 12.414 9.525 14.89l-1.414-1.414L10.586 11 8.11 8.525l1.414-1.414L12 9.586l2.475-2.475 1.414 1.414L13.414 11z"/></svg>
                                                 Effacer les messages
                                             </a>
-                                            <a class="dropdown-item mb-2" href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-3"><path fill="none" d="M0 0h24v24H0z"/><path d="M2.808 1.393l19.799 19.8-1.415 1.414-3.608-3.608L6.455 19 2 22.5V4c0-.17.042-.329.116-.469l-.723-.723 1.415-1.415zm1.191 4.02L4 18.385 5.763 17h9.821L4 5.412zM21 3a1 1 0 0 1 1 1v13.785l-2-2V5L9.213 4.999 7.214 3H21z"/></svg>
-                                                Bloquer les notifications
-                                            </a>
-                                            <a class="dropdown-item mb-2" href="#">
+                                            <a class="dropdown-item mb-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-3"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-9 3h2v6H9v-6zm4 0h2v6h-2v-6zM9 4v2h6V4H9z" fill="rgba(231,76,60,1)"/></svg>
                                                 Supprimer
                                             </a>
                                         </div>
                                     </span>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- End Chat room actions -->
                             <!-- Chat room content -->
@@ -156,6 +152,21 @@
             </div>
         </div>
     </div>
+    <div class="modal modal-blur fade" id="modal-delete-company" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-title">Êtes vous sure ?</div>
+                    <div>Si vous continuez, vous perdrez toutes les données de cette companie.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link link-secondary mr-auto"
+                        data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -165,12 +176,6 @@
     </script>
 
     <script>
-
-        /*
-        *   Initialization
-        */
-
-        getContacts();
 
         /*
          * PHP VARIABLES
@@ -200,6 +205,7 @@
          */
         var inbox = {
             room: {},
+            roomsEvents: [],
             users: [],
         }
         // Define chat instance
@@ -229,7 +235,6 @@
                 chatInstance.views.navigation.init().then(() => {
                     chatInstance.events.firebase.chatRoom.listen();
                     chatInstance.events.ui.init();
-
                     // Remove loader
                     $(".section-loader").hide();
                 });
@@ -251,13 +256,10 @@
          */
         // Actions
         chatInstance.data.generateChatId = (peerId) => {
-            const hashCode = chatInstance.utilities.hashCode;
-            var hashedAuthId = hashCode(authId.toString());
-            var hashedPeerId = hashCode(peerId.toString());
-            if ( hashedAuthId <= hashedPeerId) {
-                return `${hashedAuthId}-${hashedPeerId}`;
+            if ( parseInt(authId) <=  parseInt(peerId)) {
+                return `${authId}-${peerId}`;
             } else {
-                return `${hashedPeerId}-${hashedAuthId}`;
+                return `${peerId}-${authId}`;
             }
         };
 
@@ -269,15 +271,18 @@
                     chatsCollection.where('users', 'array-contains',  parseInt(authId)).get().then((querySnapshot) => {
                         if (querySnapshot.empty == false) {
                             querySnapshot.forEach(doc => {
-                                chatInstance.data.inbox.lastMessage(doc.id).then(message => {
-                                    chatInstance.views.panel.add({
-                                        id: doc.id,
-                                        users: doc.data().users,
-                                        colors: doc.data().colors,
-                                        date: doc.data().date,
-                                        lastMessage: message
-                                    });
+                                chatInstance.views.panel.add({
+                                    id: doc.id,
+                                    users: doc.data().users,
+                                    colors: doc.data().colors,
+                                    date: doc.data().date,
+                                    createdAt: doc.data().created,
+                                    updatedAt: doc.data().updated,
+                                    lastmessage: doc.data().lastmessage
                                 });
+                                setTimeout(() => {
+                                    chatInstance.events.firebase.inbox.listen(doc.id);
+                                }, 2000);
                             });
                         }
                         resolve(querySnapshot);
@@ -286,29 +291,34 @@
             },
             create: function(idTo) {
                 chatsCollection.where('users', 'array-contains',  parseInt(idTo)).get().then((existingChats) => {
-                console.log("existingChats", existingChats)
                     if (existingChats.empty == true) {
-                        var now = new Date();
+                        chatId = chatInstance.data.generateChatId(idTo);
+                        var now = Date.now();
+                        var colors = this.getColors();
                         var data = {
+                            lastmessage: "",
                             users:[parseInt(authId), parseInt(idTo)],
-                            colors: this.getColors(),
-                            date: now.toString()
+                            colors: [colors.bg, colors.text],
+                            date: now,
+                            createdAt: now,
+                            updatedAt: 0,
                         }
-                        chatsCollection.add(data).then(chatRoomData => {
-                            var newChat = chatsCollection.doc(chatRoomData.id);
-                            newChat.collection(chatRoomData.id);
+                        chatsCollection.doc(chatId).set(data).then(chatRoomData => {
+                            var newChat = chatsCollection.doc(chatId);
+                            newChat.collection(chatId);
                             $('#modal-create-chat').hide();
+                            $('.antialiased').removeClass("modal-open");
                             $('.modal-backdrop').remove();
 
+
                             // Load inbox
-                            chatInstance.views.navigation.update(chatRoomData.id, {
-                                id: chatRoomData.id,
+                            chatInstance.views.navigation.update(chatId, {
+                                id: chatId.toString(),
                                 users: data.users,
                                 colors: data.colors,
-                                lastMessage: {
-                                    date: data.date,
-                                    content: "Ecrivez un message à votre collègue"
-                                }
+                                lastmessage: "",
+                                createdAt: data.created,
+                                updatedAt: 0,
                             });
                         });
                     } else {
@@ -380,32 +390,39 @@
             },
             sendMessage: (message) => {
                 return new Promise((resolve, reject) => {
-                    var now = new Date();
+                    var now = Date.now();
                     var idTo = inbox.users.filter(user => user != authId)
                     var msgData = {
-                        date: now.toString(),
+                        date: now,
                         content: message,
                         idFrom: parseInt(authId),
-                        idTo: idTo[0]
+                        idTo: parseInt(idTo[0])
                     };
 
                     // Send message
                     inbox.room.add(msgData).then(messageDoc => {
-                        chatInstance.views.inbox.addMessage(messageDoc.id, msgData.idFrom, msgData.idTo, msgData.content);
-                        resolve("done");
+                        var selectedChatRoom = chatsCollection.doc(inbox.room.id);
+                        selectedChatRoom.update({
+                            updatedAt: now,
+                            lastmessage: message
+                        })
+                        .then(() => {
+                            chatInstance.views.inbox.addMessage(messageDoc.id, msgData.idFrom, msgData.idTo, msgData.content);
+                            resolve("done");
+                        });
                     });
                 });
-            },
-            lastMessage: (chatId) => {
+            }
+            /* lastMessage: (chatId) => {
                 var roomData = chatsCollection.doc(chatId).collection(chatId);
-                return roomData.orderBy('date', 'asc').limitToLast(1).get().then((querySnapshot) => {
+                return roomData.orderBy('date', 'desc').limitToLast(1).get().then((querySnapshot) => {
                     var message = {};
                     querySnapshot.forEach(chatData => {
                         message = chatData.data();
                     });
                     return message;
                 });
-            }
+            } */
         }
 
         chatInstance.data.user = {
@@ -452,8 +469,8 @@
 
                         // Activating writing possibilites
                         chatInstance.views.inbox.enable.form();
+                        chatInstance.events.ui.disableSendMessage();
                         chatInstance.events.ui.sendMessage();
-                        chatInstance.events.firebase.inbox.listen(chatId);
                     });
                 });
             },
@@ -468,7 +485,7 @@
 
                 // Select chatroom
                 $(".chat-room-component.active-chat").removeClass("active-chat");
-                $(`#chat-room-${chatRoomData.id}`).addClass("active-chat");
+                $(`#chat-room-${chatId}`).addClass("active-chat");
 
                 // Set room
                 chatInstance.data.inbox.set(chatId).then(() => {
@@ -485,12 +502,9 @@
                         console.log("Start chat.");
                         // Activating writing possibilites
                         chatInstance.views.inbox.enable.form();
+                        chatInstance.events.ui.disableSendMessage();
                         chatInstance.events.ui.sendMessage();
                         chatInstance.events.firebase.inbox.listen(chatId);
-
-                        /* $('.messages-content').scrollTop(
-                            $(".room-message").last().offset().top - $('.messages-content').offset().top
-                        ); */
                     });
                 });
             },
@@ -501,7 +515,7 @@
                     $(".chat-room-empty").addClass("d-flex");
                     $(".chatroom-not-selected").removeClass("d-flex");
                     chatInstance.views.inbox.disable.view();
-                } else if (Object.keys(chatInstance.data.inbox.room).length === 0) {
+                } else if (chatInstance.data.inbox.room === undefined) {
                     $(".chatroom-not-selected").addClass("d-flex");
                 } else {
                     $(".chatroom-not-selected").removeClass("d-flex");
@@ -511,33 +525,34 @@
 
         chatInstance.views.panel = {
             add: (chatData) => {
-                var messageData = chatData.lastMessage;
-
-                if(Object.keys(chatData.lastMessage).length === 0) {
-                    console.log("messageData.date", chatData.date)
-                    messageData = {
-                        date: new Date(chatData.date),
-                        content: "Ecrivez un message à votre collègue"
-                    };
+                console.log('chatData: ', chatData);
+                var chatDate = "";
+                if ((chatData.lastmessage == "" ) || (chatData.lastmessage == undefined)) {
+                    chatDate = new Date(chatData.createdAt != null ? chatData.createdAt : chatData.date);
+                    chatData.lastmessage = "Ecrivez un message à votre collègue"
                 } else {
-                    messageData.date = new Date(chatData.lastMessage.date);
+                    chatDate = new Date(chatData.updatedAt != null ? chatData.updatedAt : chatData.date);
+                }
+                if (chatData.colors == undefined) {
+                    var colors = chatInstance.data.chatRoom.getColors();
+                    chatData.colors = [colors.bg, colors.text];
                 }
                 $( ".chat-room" ).append(/*html*/`
                     <li id="chat-room-${chatData.id}" class="chat-room-component list-group-item">
                         <div class="media">
                             <div class="media-body d-flex align-items-center">
                                 <div class="user mr-4">
-                                    <span class="avatar" style="background-image: url('https://ui-avatars.com/api/?name=${chatInstance.data.chatRoom.getTitle(chatData.users)}&background=${chatData.colors.bg}&color=${chatData.colors.text}&font-size=0.30');"></span>
+                                    <span class="avatar" style="background-image: url('https://ui-avatars.com/api/?name=${chatInstance.data.chatRoom.getTitle(chatData.users)}&background=${chatData.colors[0]}&color=${chatData.colors[1]}&font-size=0.30');"></span>
                                 </div>
                                 <div class="message content">
                                     <div class="media-heading">
                                     <a class="m-r-10">${chatInstance.data.chatRoom.getTitle(chatData.users)}</a>
                                         <small class="float-right text-muted">
-                                        <time class="hidden-sm-down">${chatInstance.utilities.getTime(messageData.date)}</time>
+                                        <time class="hidden-sm-down">${chatInstance.utilities.getTime(chatDate)}</time>
                                         </small>
                                     </div>
                                     <p class="msg">
-                                    ${messageData.content}
+                                    ${chatData.lastmessage}
                                     </p>
                                 </div>
                             </div>
@@ -545,9 +560,10 @@
                     </li>
                 `);
             },
-            update: (chatId, lastMessage) => {
-                $( `#chat-room-${chatId} .msg` ).html(lastMessage.content);
-                $( `#chat-room-${chatId} time` ).html(chatInstance.utilities.getTime(lastMessage.date));
+            update: (chatId, lastmessage, messageDate) => {
+                $( `#chat-room-${chatId} .msg` ).html(lastmessage);
+                var dateConverted = new Date(messageDate);
+                $( `#chat-room-${chatId} time` ).html(chatInstance.utilities.getTime(dateConverted));
             },
             delete: (chatId) => {
                 $(`#chat-room-${chatId}`).remove();
@@ -625,7 +641,9 @@
                         // Watch change on messages collection
                         snapshot.docChanges().forEach((change) => {
                             if (change.type === "added") {}
-                            if (change.type === "modified") {}
+                            if (change.type === "modified") {
+
+                            }
                             if (change.type === "removed") {
                                 chatInstance.views.panel.delete(change.doc.id);
                                 chatInstance.views.navigation.delete();
@@ -634,42 +652,72 @@
                     }, (error) => {
                         console.error("ChatRooms error: ", error);
                     });
-                },
-                unsubscribe: () => {
-                    chatsCollection.onSnapshot().subscribe();
                 }
             },
             // ON MESSAGES SUBCOLLECTION CHANGE
             inbox: {
                 listen: (chatId) => {
-                    inbox.room.onSnapshot((snapshot)  => {
-                        // Watch change on messages subcollection
-                        snapshot.docChanges().forEach((change) => {
-                            if (change.type === "added") {
+                    console.log('listen chatId: ', chatId);
+                    inbox.roomsEvents.push({
+                        chatId: chatId,
+                        snapshotEvent: chatsCollection.doc(chatId).collection(chatId).onSnapshot((snapshot)  => {
+                            var activeChatId = chatId;
+                            var lastMessageId = "";
+                            // Watch change on messages subcollection
+                            snapshot.docChanges().forEach((change) => {
+                                console.log('change: ', change);
+                                console.log('inbox > listen > activeChatId: ', activeChatId);
+                                console.log('inbox > listen > selectedChatId: ', selectedChatId);
                                 var doc = change.doc;
-                                chatInstance.views.panel.update(chatId, {
-                                    date: doc.data().date,
-                                    content: doc.data().content
-                                });
-                            }
-                            if (change.type === "modified") {}
-                            if (change.type === "removed") {}
-                        });
-                    }, (error) => {
-                        console.error("Chat error: ", error);
-                    })
-                },
-                subscribe: () => {
-                    chatInstance.data.inbox.room.onSnapshot().subscribe();
-                },
-                unsubscribe: () => {
-                    chatInstance.data.inbox.room.onSnapshot().unsubscribe();
+                                if ($( ".chat-room-component" ).hasClass( "active-chat" )) {
+                                    var selectedChatId = $(".chat-room-component.active-chat").attr('id').split("room-").pop();
+                                    if (activeChatId == selectedChatId) {
+                                        if (change.type === "added") {
+                                            chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                            if (doc.data().idTo == parseInt(authId) && lastMessageId != doc.id) {
+                                                lastMessageId = doc.id;
+                                                chatInstance.views.inbox.addMessage(doc.id, doc.data().idFrom, doc.data().idTo, doc.data().content);
+                                            }
+                                        }
+                                        if (change.type === "modified") {
+                                            chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                        }
+                                        if (change.type === "removed") {}
+                                    } else {
+                                        if (change.type === "added") {
+                                            chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                        }
+                                        if (change.type === "modified") {
+                                            chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                        }
+                                        if (change.type === "removed") {}
+                                    }
+                                } else {
+                                    if (change.type === "added") {
+                                        chatsCollection.doc(activeChatId).get().then((chatRoomData) => {
+                                            inbox.users = chatRoomData.data().users;
+                                            if (chatRoomData.data().lastmessage == doc.data().content) {
+                                                chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                            }
+                                        });
+                                    }
+                                    if (change.type === "modified") {
+                                        chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
+                                    }
+                                    if (change.type === "removed") {}
+                                }
+
+                            });
+                        }, (error) => {
+                            console.error("Chat error: ", error);
+                        })
+                    });
                 }
             }
         };
 
         // UI Events
-        chatInstance.events.ui = {
+       chatInstance.events.ui = {
             init: () => {
                 chatInstance.events.ui.chatRoom();
                 chatInstance.events.ui.selectTeamMember();
@@ -685,7 +733,6 @@
 
                     // Clean id string
                     var chatId = ID.split("room-").pop()
-                    console.log("Selected chat ID", chatId);
 
                     // Load inbox
                     chatInstance.views.navigation.select(chatId);
@@ -697,7 +744,6 @@
                     var peerId = $(this).attr('id');
 
                     // Clean id string
-                    console.log("Selected peer ID", peerId);
 
                     // Load chat rom
                     chatInstance.data.chatRoom.create(peerId);
@@ -713,6 +759,20 @@
                         });
                     }
                 });
+                $(".messages-input").keypress(function(e) {
+                    if(e.which == 13) {
+                        if ($(".room-input").val() != "" ) {
+                            chatInstance.data.inbox.sendMessage($(".room-input").val()).then(() => {
+                                $( ".room-input" ).val("");
+                            }).catch(()=> {
+                                $( ".room-input" ).val("");
+                            });
+                        }
+                    }
+                });
+            },
+            disableSendMessage: () => {
+                $( ".room-send-button").unbind( "click" );
             }
         };
 
@@ -720,16 +780,10 @@
 
         // Set chat instance
         window.onload = () => {
+            getContacts();
             chatInstance.init();
         };
     </script>
-
-
-    {{-- <script src={{asset("template/assets/dist/js/app/chat/index.js")}}></script>
-    <script src={{asset("template/assets/dist/js/app/chat/data.js")}}></script>
-    <script src={{asset("template/assets/dist/js/app/chat/views.js")}}></script>
-    <script src={{asset("template/assets/dist/js/app/chat/events/firebase.js")}}></script>
-    <script src={{asset("template/assets/dist/js/app/chat/events/ui.js")}}></script> --}}
 @endsection
 
 @section('styles')

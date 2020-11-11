@@ -55,13 +55,13 @@
                         </div>
                     </div>
                     <div class="form-footer mb-3">
-                        <button type="submit" class="btn btn-gradient btn-block btn-pill btn-no-border">
+                        <button type="submit" class="btn btn-gradient btn-block btn-no-border">
                             Se connecter
                         </button>
                         <div class="row justify-content-center align-items-center px-3 mt-3">
                             <div class="col text-center p-0"><h4>ou</h4></div>
                         </div>
-                        <a href={{route('register')}} tabindex="-1" class="btn btn-dark btn-block btn-pill btn-no-border mt-3">
+                        <a href={{route('register')}} tabindex="-1" class="btn btn-dark btn-block btn-no-border mt-3">
                             Inscription
                         </a>
                     </div>
