@@ -24,7 +24,7 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:^[A-Z a-z]+[0-9]{0,3}',
+            'name' => 'required|regex:#^[A-Z a-z]+[0-9]{0,3}#',
             'phone' => 'required|min:200000000|max:999999999|numeric',
             'email' => 'email|nullable',
             'username' => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',

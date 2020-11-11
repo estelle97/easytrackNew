@@ -83,6 +83,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
 
     Route::post('admin/companies/update/{field}', 'Admin\SettingController@update');
     Route::get('admin/settings/view/{page}', 'Admin\SettingController@showView');
+    Route::get('admin/settings/view/budget/{page}', 'Admin\SettingController@showBudgetView');
+    Route::get('admin/settings/view/budget/{page}', 'Admin\SettingController@showBudgetView');
     Route::get('admin/settings', 'Admin\SettingController@index')->name('admin.settings');
 
     Route::get('admin/reports', 'Admin\ReportController@index')->name('admin.reports');
@@ -95,6 +97,10 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/sites/{site}/destroy', 'Admin\SiteController@destroy');
 
 
+    Route::post('/admin/fexpenses/add', 'Admin\ExpenseController@addFixExpense');
+    Route::post('/admin/vexpenses/add', 'Admin\ExpenseController@addVariableExpense');
+
+
     Route::get('admin/users', 'Admin\UserController@index')->name('admin.company.users');
     Route::post('admin/users', 'Admin\UserController@search')->name('admin.company.users.search');
     Route::get('admin/users/{user}/show', 'Admin\UserController@show')->name('admin.user.show');
@@ -102,6 +108,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/users/{user}/edit', 'Admin\UserController@update');
     Route::post('admin/users/store', 'Admin\UserController@store');
     Route::post('admin/users/{user}/destroy', 'Admin\UserController@destroy');
+    Route::post('admin/users/{user}/salary', 'Admin\UserController@updateSalary');
 
     Route::post('admin/roles/detachPermissionToUser', 'Admin\RoleController@detachPermissionToUser');
     Route::post('admin/roles/attachPermissionToUser', 'Admin\RoleController@attachPermissionToUser');
