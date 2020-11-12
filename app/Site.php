@@ -58,6 +58,15 @@ class Site extends Model
         return $this->hasMany('App\Team');
     }
 
+    public function fexpenses(){
+        return $this->hasMany('App\Fexpense');
+    }
+
+    public function vexpenses()
+    {
+        return $this->hasMany('App\Vexpense');
+    }
+
     public function allSales($day = null){
 
         $total = 0;

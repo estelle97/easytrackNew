@@ -44,4 +44,8 @@ class SettingController extends Controller
 
         return view('ajax.admin.settings.'.$view);
     }
+
+    public function showBudgetView($view){
+        return view('ajax.admin.settings.'.$view);
+    }
 }

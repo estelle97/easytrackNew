@@ -32,6 +32,15 @@ class Company extends Model
         return $this->belongsTo('App\Activity');
     }
 
+    public function totalSalary(){
+        $total= 0;
+        foreach ($this->sites as $site) {
+            $total += $site->employees->where('is_active', 1)->sum('salary');
+        }
+
+        return $total;
+    }
+
     public function totalPurchases($days = null, $category_id= null){
         $total = 0;
         if($days){

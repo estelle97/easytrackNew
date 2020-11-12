@@ -3,12 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Employee extends Model
+class Fexpense extends Model
 {
-    use SoftDeletes;
-
     protected $guarded = ['id'];
     public $timestamps = null;
     protected $dates = ['created_at'];
@@ -17,12 +14,8 @@ class Employee extends Model
         return $this->belongsTo('App\Site');
     }
 
-    public function user(){
-        return $this->belongsTo('App\User');
-    }
-
-    public function payments(){
-        return $this->hasMany('App\Payment');
+    public function expenses(){
+        return $this->hasMany('expenses');
     }
 
 }

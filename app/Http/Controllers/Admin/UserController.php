@@ -7,12 +7,14 @@ use App\Employee;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Payment;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\Permission;
 use App\Site;
 use Auth;
+use Carbon\Carbon;
 use Hash;
 use Keygen;
 use DB;
@@ -53,23 +55,26 @@ class UserController extends Controller
         ]);
 
         $photo = $request->file('photo');
-        if($photo){
-            $path = 'template/assets/static/users/'.Auth::user()->companies->first()->name.'/'.\App\Site::find($request->site_id)->name.'/';
-            $fileName = $request->username.'.'.$photo->extension();
-            $name = $path.$fileName;
-            $photo->move($path,$name);
+        if ($photo) {
+            $path = 'template/assets/static/users/' . Auth::user()->companies->first()->name . '/' . \App\Site::find($request->site_id)->name . '/';
+            $fileName = $request->username . '.' . $photo->extension();
+            $name = $path . $fileName;
+            $photo->move($path, $name);
             $user->photo = $name;
         }
 
-        DB::transaction(function () use($user, $employee) {
+        DB::transaction(function () use ($user, $employee) {
             $user->save();
-                $employee->user_id = $user->id;
-                $employee->save();
+            $employee->user_id = $user->id;
+            $employee->save();
         });
 
         flashy()->success("l'employé $user->name a été ajouté avec succès");
-        Action::store('Employee', $employee->id, 'create',
-            "Création du ".$user->role->name." ".$user->name
+        Action::store(
+            'Employee',
+            $employee->id,
+            'create',
+            "Création du " . $user->role->name . " " . $user->name
         );
 
         return (string)view('ajax.admin.newUser', ['emp' => $employee]);
@@ -112,11 +117,11 @@ class UserController extends Controller
 
 
         $photo = $request->file('photo');
-        if($photo){
-            $path = 'template/assets/static/users/'.Auth::user()->companies->first()->name.'/'.\App\Site::find($request->site_id)->name.'/';
-            $fileName = $request->username.'.'.$photo->extension();
-            $name = $path.$fileName;
-            $photo->move($path,$name);
+        if ($photo) {
+            $path = 'template/assets/static/users/' . Auth::user()->companies->first()->name . '/' . \App\Site::find($request->site_id)->name . '/';
+            $fileName = $request->username . '.' . $photo->extension();
+            $name = $path . $fileName;
+            $photo->move($path, $name);
             $user->photo = $name;
         }
 
@@ -124,17 +129,21 @@ class UserController extends Controller
         $user->employee->save();
 
         notify()->success('Mise à jour de l\'utilisateur effectuée avec succès', 'Mise à jour utilisateur');
-        Action::store('Employee', $user->employee->id, 'update',
-            "Mise à jour du ".$user->role->name." ".$user->name
+        Action::store(
+            'Employee',
+            $user->employee->id,
+            'update',
+            "Mise à jour du " . $user->role->name . " " . $user->name
         );
         return redirect()->back();
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $text = $request->text;
-        if(!is_null($request->site_id)){
+        if (!is_null($request->site_id)) {
             $site = Site::find($request->site_id);
-            return view('ajax.admin.employees_search', compact('text','site'));
+            return view('ajax.admin.employees_search', compact('text', 'site'));
         }
         return view('ajax.admin.employees_search', compact('text'));
     }
@@ -144,9 +153,40 @@ class UserController extends Controller
         $user->employee->delete();
         $user->delete();
 
-        Action::store('Employee', $user->employee->id, 'destroy',
-            "Suppression du ".$user->role->name." ".$user->name
+        Action::store(
+            'Employee',
+            $user->employee->id,
+            'destroy',
+            "Suppression du " . $user->role->name . " " . $user->name
         );
         return 'success';
+    }
+
+    public function updateSalary(Request $request, User $user)
+    {
+
+        $user->employee->update($request->only('salary','paying_method','start_payment'));
+
+        if($user->employee->payments->where('date_payment', '>', now())->first()){
+            foreach ($user->employee->payments->where('date_payment', '>', now()) as $pay) {
+                $pay->update([
+                    'amount' => $request->salary,
+                    'paying_method' => $request->paying_method
+                ]);
+            }
+        } else {
+            for ($month=0; $month < 36; $month++) {
+                Payment::create([
+                    'employee_id' => $user->employee->id,
+                    'amount' => $user->employee->salary,
+                    'paying_method' => $user->employee->paying_method,
+                    'date_payment' => Carbon::parse($request->start_payment)->addMonths($month)
+                ]);
+            }
+        }
+
+        return response()->json([
+            'salary' => $user->employee->salary,
+        ]);
     }
 }

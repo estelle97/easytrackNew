@@ -335,7 +335,7 @@
                 success : function(data){
                     $('#modal-create-user').hide();
                     $('.modal-backdrop').remove();
-                    $("#employees").prepend(data).fadeOut();
+                    $("#employees").prepend(data).fadeIN();
                     $('.form-control').reset();
                 },
                 error: function (err) {

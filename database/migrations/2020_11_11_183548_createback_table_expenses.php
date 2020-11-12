@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExpensesTable extends Migration
+class CreatebackTableExpenses extends Migration
 {
     /**
      * Run the migrations.
@@ -15,14 +15,11 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('site_id')->nullable();
-            $table->integer('expense_category_id')->nullable();
+            $table->integer('fexpense_id')->nullable();
             $table->string('name');
             $table->double('amount');
-            $table->text('description')->nullable();
-            $table->dateTime('created_at')->useCurrent();
+            $table->date('date_payment');
             $table->softDeletes();
-
         });
     }
 
