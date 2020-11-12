@@ -15,7 +15,6 @@ class Fexpense extends Model
     }
 
     public function expenses(){
-        return $this->hasMany('expenses');
+        return $this->hasMany('App\Expense');
     }
-
 }

@@ -28,6 +28,43 @@ class ExpenseController extends Controller
         }
     }
 
+    public function updateFixExpense(Request $request, Fexpense $fexpense){
+        $request->validate([
+            'amount' => 'required|numeric|min:0',
+            'name' => 'required'
+        ]);
+
+        $fexpense->update($request->only('site_id', 'amount', 'name', 'date_payment', 'description'));
+
+        foreach ($fexpense->expenses->where('date_payment', '>', now()) as $exp) {
+            $exp->update([
+                'amount' => $request->amount,
+                'name' => $request->name
+            ]);
+        }
+    }
+
+    public function updateState(Request $request, Fexpense $fexpense){
+        $fexpense->is_active = $request->is_active;
+        $fexpense->save();
+
+        foreach ($fexpense->expenses->where('date_payment', '>', now()) as $exp) {
+            $exp->update([
+                'is_active' => $request->is_active
+            ]);
+        }
+
+    }
+
+    public function destroyFixExpense(Fexpense $fexpense)
+    {
+        if ($fexpense->delete()) {
+            foreach ($fexpense->expenses->where('date_payment', '>', now()) as $exp) {
+                $exp->delete();
+            }
+        }
+    }
+
     public function addVariableExpense(Request $request)
     {
         $request->validate([
@@ -37,6 +74,24 @@ class ExpenseController extends Controller
 
         $vexpense = Vexpense::create($request->only('site_id', 'amount', 'name', 'description'));
 
+    }
+
+    public function updateVariableExpense(Request $request, Vexpense $vexpense){
+
+        $request->validate([
+            'amount' => 'required|numeric|min:0',
+            'name' => 'required'
+        ]);
+
+        $vexpense->update($request->only('amount', 'name', 'description'));
+    }
+
+    public function destroyVariableExpense(Vexpense $vexpense){
+
+        if($vexpense->delete()){
+            return 'success';
+        }
+        return 'error';
     }
 
 

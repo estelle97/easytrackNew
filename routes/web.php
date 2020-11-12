@@ -97,8 +97,14 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/sites/{site}/destroy', 'Admin\SiteController@destroy');
 
 
-    Route::post('/admin/fexpenses/add', 'Admin\ExpenseController@addFixExpense');
-    Route::post('/admin/vexpenses/add', 'Admin\ExpenseController@addVariableExpense');
+    Route::post('/admin/fexpenses', 'Admin\ExpenseController@addFixExpense');
+    Route::post('/admin/fexpenses/{fexpense}', 'Admin\ExpenseController@updateFixExpense');
+    Route::post('/admin/fexpenses/{fexpense}/state', 'Admin\ExpenseController@updateState');
+    Route::get('/admin/fexpenses/{fexpense}/destroy', 'Admin\ExpenseController@destroyFixExpense');
+
+    Route::post('/admin/vexpenses', 'Admin\ExpenseController@addVariableExpense');
+    Route::post('/admin/vexpenses/{vexpense}', 'Admin\ExpenseController@updateVariableExpense');
+    Route::get('/admin/vexpenses/{vexpense}/destroy', 'Admin\ExpenseController@destroyVariableExpense');
 
 
     Route::get('admin/users', 'Admin\UserController@index')->name('admin.company.users');
