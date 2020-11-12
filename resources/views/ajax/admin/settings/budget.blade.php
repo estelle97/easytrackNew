@@ -7,23 +7,23 @@
         <div class="card">
             <div class="card-body">
               <div class="d-flex align-items-center">
-                <div class="subheader">Bénéfice</div>
+                <div class="subheader">Bénéfice net</div>
               </div>
-              <div class="h1 mb-3">250.000 Fcfa</div>
+              <div class="h1 mb-3"> <span id="profits">  </span> Fcfa</div>
               <div class="mb-0 text-muted d-flex justify-content-between align-items-center">
                 <div>
-                    <span class="text-nowrap selected-period">
+                    <span class="text-nowrap">
                         <span class="dropdown button-click-action">
                             <div class="dropdown-toggle" data-boundary="viewport" data-toggle="dropdown">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                                     <path fill="none" d="M0 0h24v24H0z" />
                                     <path d="M12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zm4.95-7.778a7 7 0 1 0-9.9 0L12 20.9l4.95-4.95zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="rgba(0,0,0,1)" /></svg>
-                                <span class="selected-site align-middle ml-2" data-site="all"> Tous les sites </span>
+                                <span class="selected-site align-middle ml-2 selected-site" data-site="all"> Tous les sites </span>
                             </div>
 
                             <div class="dropdown-menu dropdown-menu-right mt-3">
                                 <a class="dropdown-item site" data-site="all">
-                                   Tous les sites
+                                    Tous les sites
                                 </a>
                                 @foreach (Auth::user()->companies->first()->sites as $site)
                                     <a class="dropdown-item site" data-site={{$site->id}}>
@@ -36,14 +36,14 @@
                 </div>
                 <div class="ml-auto">
                     <div class="dropdown">
-                      <a class="dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="dropdown-toggle text-muted selected-period" href="#" data-period="all" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Global
                       </a>
-                      <div class="dropdown-menu dropdown-menu-right" style="">
-                          <a class="dropdown-item active" href="#">Global</a>
-                        <a class="dropdown-item" href="#">7 Derniers jours</a>
-                        <a class="dropdown-item" href="#">30 Derniers jours</a>
-                        <a class="dropdown-item" href="#">3 Derniers mois</a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                          <a class="dropdown-item period active" data-period="all">Global</a>
+                        <a class="dropdown-item period" data-period="7">7 Derniers jours</a>
+                        <a class="dropdown-item period" data-period="30">30 Derniers jours</a>
+                        <a class="dropdown-item period" data-period="90">3 Derniers mois</a>
                       </div>
                     </div>
                 </div>
@@ -67,8 +67,11 @@
                         <div class="strong">
                             Salaire employé
                         </div>
-                        <div class="text-muted"><span contenteditable="true">
-                                {{auth()->user()->companies->first()->totalSalary()}} </span> FCFA</div>
+                        <div class="text-muted">
+                            <span id="salaries">
+                                {{auth()->user()->companies->first()->totalSalaries()}}
+                            </span> FCFA
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,7 +79,7 @@
     </section>
     <div class="mb-4">
         <button class="btn btn-primary active expenses" id='fexpenses'> chages fixes </button>
-        <button class="btn btn-primary expenses" id='vexpenses'> chages variables </button>
+    <button class="btn btn-primary expenses" id='vexpenses'> chages variables </button>
     </div>
     <section class="mb-4" id="expenses">
 
@@ -87,22 +90,50 @@
 
 <div class="modal-section">
 
-    
+
 </div>
 
 <script>
 
-    $(".expenses").click(function(){
-            $(".expenses").removeClass('active');
-            $(this).addClass('active');
-            page = $(this).attr('id');
+    showBudget('all','all');
 
-            $.ajax({
-                url: '/admin/settings/view/budget/'+page,
-                method: 'get',
-                success: function(data){
-                    $("#expenses").html(data).fadeIn();
-                }
-            });
-        })
+    $(".site").click(function(){
+        var period = $(".selected-period");
+        $(".selected-site").html(this.text);
+        $(".selected-site").data('site', $(this).data('site'));
+        showBudget($(this).data('site'), period.data('period'));
+    });
+
+    $(".period").click(function(){
+        var site = $(".selected-site");
+        $(".selected-period").html($(this).text());
+        $(".selected-period").data('period', $(this).data('period'));
+        showBudget(site.data('site'), $(this).data('period'));
+    })
+
+    function showBudget(site, period){
+        $.ajax({
+            url: '/admin/expenses/'+site+'/'+period,
+            method: 'get',
+            success: function(data){
+                $("#profits").html(data.profits).fadeIn();
+                $("#salaries").html(data.salaries).fadeIn();
+                $("#fexpenses").click();
+            }
+        });
+    }
+
+    $(".expenses").click(function(){
+        $(".expenses").removeClass('active');
+        $(this).addClass('active');
+        page = $(this).attr('id');
+
+        $.ajax({
+            url: '/admin/settings/view/budget/'+page,
+            method: 'get',
+            success: function(data){
+                $("#expenses").html(data).fadeIn();
+            }
+        });
+    })
 </script>

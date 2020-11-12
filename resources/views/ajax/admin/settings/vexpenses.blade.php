@@ -10,7 +10,7 @@
 
 <div>
     @foreach (Auth::user()->companies->first()->sites as $site)
-        @foreach ($site->vexpenses as $vexp)
+        @foreach ($site->vexpenses->reverse() as $vexp)
             <div class="col-md-6 col-xl-12" id="vexpense{{$site->id}}-{{$vexp->id}}">
                 <div class="card card-sm">
                     <div class="card-body d-flex align-items-center">
