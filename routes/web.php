@@ -102,6 +102,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('/admin/fexpenses/{fexpense}/state', 'Admin\ExpenseController@updateState');
     Route::get('/admin/fexpenses/{fexpense}/destroy', 'Admin\ExpenseController@destroyFixExpense');
 
+    Route::get('/admin/expenses/{site}/{period}', 'Admin\ExpenseController@getNetProfit');
+
     Route::post('/admin/vexpenses', 'Admin\ExpenseController@addVariableExpense');
     Route::post('/admin/vexpenses/{vexpense}', 'Admin\ExpenseController@updateVariableExpense');
     Route::get('/admin/vexpenses/{vexpense}/destroy', 'Admin\ExpenseController@destroyVariableExpense');
