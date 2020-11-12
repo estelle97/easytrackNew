@@ -181,23 +181,29 @@
          * PHP VARIABLES
          */
         const authId = "{{ Auth::id() }}";
-        let contacts = "";
+        let contacts = null;
 
 
-        function getContacts(){
-            token = '{{@csrf_token()}}';
+        function getContacts() {
+            return new Promise((resolve, reject) => {
+                token = '{{@csrf_token()}}';
 
-            $.ajax({
-                url: 'chat/contacts',
-                method: 'post',
-                data : {
-                    _token: token
-                },
-                success: function(data){
-                    contacts = data.contacts;
-                    // console.log('contacts', contacts[0].role.name);
-                },
+                console.log("Loading contacts...");
+
+                $.ajax({
+                    url: 'chat/contacts',
+                    method: 'post',
+                    data : {
+                        _token: token
+                    },
+                    success: (data) => {
+                        contacts = data.contacts;
+                        // console.log('contacts', contacts[0].role.name);
+                        resolve("done");
+                    }
+                });
             });
+
         }
 
         /*
@@ -780,8 +786,9 @@
 
         // Set chat instance
         window.onload = () => {
-            getContacts();
-            chatInstance.init();
+            getContacts().then(() => {
+                chatInstance.init();
+            });
         };
     </script>
 @endsection
