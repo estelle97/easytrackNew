@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Extension\HeadingPermalink\Slug\DefaultSlugGenerator;
@@ -156,8 +157,12 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Site $site ,Product $product)
     {
-        
+        $site->products()->detach($product->id);
+
+        return response()->json([
+            'message' => 'product removed to site',
+        ]);
     }
 }

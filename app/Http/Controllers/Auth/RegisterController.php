@@ -148,7 +148,7 @@ class RegisterController extends Controller
             'end_date' => Carbon::now()->addDays($type->duration),
             'licence_number' => 'L122L1KZ',
             'is_active' => 0,
-        ]);
+        ]); 
 
         $this->sendMail($user->email, $company);
 
