@@ -62,17 +62,21 @@
                                                 {{$pur->supplier->name}}
                                             </td>
                                             <td>
-                                                @if (Auth::user()->id == $pur->initiator->id)
+                                                @if(Auth::user()->id == $pur->initiator_id)
                                                     <a href={{route('employee.profile')}}>
                                                         {{$pur->initiator->name}}
                                                     </a>
                                                 @else
-                                                    @if(Auth::user()->role->slug == 'manager')
-                                                        <a href={{route('employee.user.show', $pur->initiator->username)}}>
+                                                    @if (Auth::user()->role->slug == 'manager' || Auth::user()->hasPermissionTo('user_show','user_update'))
+                                                        @if ($pur->initiator->is_admin == 2)
                                                             {{$pur->initiator->name}}
-                                                        </a>
+                                                        @else
+                                                            <a href={{route('employee.user.show', $pur->initiator->username)}}>
+                                                                {{$pur->initiator->name}}
+                                                            </a>
+                                                        @endif
                                                     @else
-                                                            {{$pur->initiator->name}}
+                                                        {{$pur->initiator->name}}
                                                     @endif
                                                 @endif
                                             </td>
@@ -86,17 +90,21 @@
                                                 @if($pur->validator == null)
                                                     <span class="text-warning"> Non validée </span>
                                                 @else
-                                                    @if (Auth::user()->id == $pur->validator->id)
+                                                    @if(Auth::user()->id == $pur->validator_id)
                                                         <a href={{route('employee.profile')}}>
                                                             {{$pur->validator->name}}
                                                         </a>
                                                     @else
-                                                        @if(Auth::user()->role->slug == 'manager')
-                                                            <a href={{route('employee.user.show', $pur->validator->username)}}>
+                                                        @if (Auth::user()->role->slug == 'manager' || Auth::user()->hasPermissionTo('user_show','user_update'))
+                                                            @if ($pur->validator->is_admin == 2)
                                                                 {{$pur->validator->name}}
-                                                            </a>
+                                                            @else
+                                                                <a href={{route('employee.user.show', $pur->validator->username)}}>
+                                                                    {{$pur->validator->name}}
+                                                                </a>
+                                                            @endif
                                                         @else
-                                                                {{$pur->validator->name}}
+                                                            {{$pur->validator->name}}
                                                         @endif
                                                     @endif
                                                 @endif
@@ -192,7 +200,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-link link-secondary mr-auto"
                                 data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-danger" onclick="deletepurchase({{$pur->id}})">Oui, supprimer</button>
+                            <button type="button" class="btn btn-danger" onclick="deletePurchase({{$pur->id}})">Oui, supprimer</button>
                         </div>
                     </div>
                 </div>

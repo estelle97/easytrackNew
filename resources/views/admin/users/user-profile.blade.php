@@ -56,7 +56,7 @@
                   </div>
                   <div class="lh-sm">
                     <div class="strong">{{ $user->name }}</div>
-                    <div class="text-muted">{{Auth::user()->role->name}}</div>
+                    <div class="text-muted">{{$user->role->name}}</div>
                   </div>
                 </div>
               </a>
@@ -160,7 +160,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal-section">
         <div class="modal modal-blur fade" id="modal-edit-salary" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">

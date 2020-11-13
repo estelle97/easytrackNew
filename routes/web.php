@@ -242,7 +242,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/sales', 'Employee\SaleController@index')->name('employee.sales.all');
     Route::get('employee/sales/site', 'Employee\SaleController@getElementBySite');
     Route::get('employee/pos', 'Employee\SaleController@create')->name('employee.sales.pos');
-    Route::get('employee/sales/{sale}/destroy', 'Employee\SaleController@destroy');
+    Route::post('employee/sales/{sale}/destroy', 'Employee\SaleController@destroy');
 
 
 
@@ -256,7 +256,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/purchases/site', 'Employee\PurchaseController@getElementBySite');
     Route::post('employee/purchases', 'Employee\PurchaseController@store');
     Route::get('employee/purchases', 'Employee\PurchaseController@index')->name('employee.purchases');
-    Route::get('employee/purchases/{purchase}/destroy', 'Employee\PurchaseController@destroy');
+    Route::post('employee/purchases/{purchase}/destroy', 'Employee\PurchaseController@destroy');
 
     Route::post('employee/roles/detachPermissionToUser', 'Employee\RoleController@detachPermissionToUser');
     Route::post('employee/roles/attachPermissionToUser', 'Employee\RoleController@attachPermissionToUser');

@@ -62,14 +62,22 @@
                                         {{$sale->customer->name}}
                                     </td>
                                     <td>
-                                        @if (Auth::user()->is_admin == 2)
+                                        @if(Auth::user()->id == $sale->initiator_id)
                                             <a href={{route('employee.profile')}}>
                                                 {{$sale->initiator->name}}
                                             </a>
                                         @else
-                                            <a href={{route('employee.user.show', $sale->initiator->username)}}>
+                                            @if (Auth::user()->role->slug == 'manager' || Auth::user()->hasPermissionTo('user_show','user_update'))
+                                                @if ($sale->initiator->is_admin == 2)
+                                                    {{$sale->initiator->name}}
+                                                @else
+                                                    <a href={{route('employee.user.show', $sale->initiator->username)}}>
+                                                        {{$sale->initiator->name}}
+                                                    </a>
+                                                @endif
+                                            @else
                                                 {{$sale->initiator->name}}
-                                            </a>
+                                            @endif
                                         @endif
                                     </td>
                                     <td>
@@ -83,14 +91,22 @@
                                         @if($sale->validator == null)
                                             <span class="text-warning"> Non validée </span>
                                         @else
-                                            @if (Auth::user()->is_admin == 2)
+                                            @if(Auth::user()->id == $sale->validator_id)
                                                 <a href={{route('employee.profile')}}>
                                                     {{$sale->validator->name}}
                                                 </a>
                                             @else
-                                                <a href={{route('employee.user.show', $sale->validator->username)}}>
+                                                @if (Auth::user()->role->slug == 'manager' || Auth::user()->hasPermissionTo('user_show','user_update'))
+                                                    @if ($sale->validator->is_admin == 2)
+                                                        {{$sale->validator->name}}
+                                                    @else
+                                                        <a href={{route('employee.user.show', $sale->validator->username)}}>
+                                                            {{$sale->validator->name}}
+                                                        </a>
+                                                    @endif
+                                                @else
                                                     {{$sale->validator->name}}
-                                                </a>
+                                                @endif
                                             @endif
                                         @endif
                                     </td>

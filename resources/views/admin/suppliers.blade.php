@@ -93,9 +93,9 @@
                                                 data-boundary="viewport" data-toggle="dropdown">Actions</button>
                                             <div class="dropdown-menu dropdown-menu-right">
 
-                                                <a class="dropdown-item" href="#">
+                                                {{-- <a class="dropdown-item" href="#">
                                                      Afficher
-                                                </a>
+                                                </a> --}}
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-supplier{{$supl->id}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
