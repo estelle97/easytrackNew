@@ -59,7 +59,7 @@
                                                 {{$pur->supplier->name}}
                                             </td>
                                             <td>
-                                                @if (Auth::user()->is_admin == 2)
+                                                @if ($pur->initiator->is_admin == 2)
                                                     <a href={{route('admin.profile')}}>
                                                         {{$pur->initiator->name}}
                                                     </a>
@@ -79,7 +79,7 @@
                                                 @if($pur->validator == null)
                                                     <span class="text-warning"> Non validée </span>
                                                 @else
-                                                    @if (Auth::user()->is_admin == 2)
+                                                    @if ($pur->validator->is_admin == 2)
                                                         <a href={{route('admin.profile')}}>
                                                             {{$pur->validator->name}}
                                                         </a>

@@ -30,7 +30,7 @@
                         </a>
                     @endif
                     <ul class="dropdown-menu">
-                        @if(Auth::user()->may('manage_products'))
+                        @if(Auth::user()->may('show_products'))
                             <li class="active">
                                 <a class="dropdown-item" href={{route('employee.products')}}>
                                     Produits
@@ -51,7 +51,7 @@
                                 </a>
                             </li>
                         @endif
-                        @if(Auth::user()->may('manage_customers'))
+                        @if(Auth::user()->may('show_customers'))
                             <li>
                                 <a class="dropdown-item" href="/employee/customers">
                                     Clients

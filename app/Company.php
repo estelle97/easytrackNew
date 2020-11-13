@@ -32,13 +32,63 @@ class Company extends Model
         return $this->belongsTo('App\Activity');
     }
 
-    public function totalSalary(){
+    public function totalPaidSalaries($days = null){
+        $total = 0;
+        if($days){
+            foreach ($this->sites as $site) {
+                foreach ($site->employees->where('is_active', 1) as $emp) {
+                    $total += $emp->expenses->where('is_active', 1)
+                                            ->where('date_payment', '<=', Carbon::now())
+                                            ->where('date_payment', '>=', Carbon::today()->subDays($days))
+                                            ->sum('amount');
+                }
+            }
+        } else {
+            foreach ($this->sites as $site) {
+                foreach($site->employees->where('is_active', 1) as $emp){
+                    $total += $emp->expenses->where('is_active',1)->where('date_payment', '<', Carbon::now())->sum('amount');
+                }
+            }
+        }
+
+        return $total;
+    }
+
+    public function totalSalaries(){
         $total= 0;
+
         foreach ($this->sites as $site) {
             $total += $site->employees->where('is_active', 1)->sum('salary');
         }
 
         return $total;
+    }
+
+    public function totalExpenses($days = null){
+        $total = 0;
+
+        if($days){
+            foreach ($this->sites as $site) {
+                $total += $site->vexpenses->where('is_active', 1)
+                                        ->where('created_at', '>=', Carbon::today()->subDays($days))
+                                        ->sum('amount');
+                foreach ($site->fexpenses->where('is_active', 1) as $fexp) {
+                    $total += $fexp->expenses->where('is_active', 1)
+                                            ->where('date_payment', '<=', Carbon::now())
+                                            ->where('date_payment', '>=', Carbon::today()->subDays($days))
+                                            ->sum('amount');
+                }
+            }
+        }else {
+            foreach ($this->sites as $site) {
+                $total += $site->vexpenses->where('is_active',1)->sum('amount');
+                foreach ($site->fexpenses->where('is_active',1) as $fexp) {
+                    $total += $fexp->expenses->where('is_active',1)
+                                            ->where('date_payment', '<=', Carbon::now())
+                                            ->sum('amount');
+                }
+            }
+        }
     }
 
     public function totalPurchases($days = null, $category_id= null){

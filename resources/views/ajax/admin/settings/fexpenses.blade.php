@@ -40,14 +40,20 @@
 
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <span class="dropdown-header">Actions</span>
-                                    <a class="dropdown-item" data-toggle="modal" data-target="#modal-edit-charge">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#modal-edit-fcharge{{$site->id}}-{{$fexp->id}}">
                                         Editer
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">
-                                        Desactiver
-                                    </a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-charge">
+                                    @if ($fexp->is_active == 0)
+                                        <a class="dropdown-item" onclick="updateState({{$fexp->id}}, 1)">
+                                            Activer
+                                        </a>
+                                    @else
+                                        <a class="dropdown-item" onclick="updateState({{$fexp->id}}, 0)">
+                                            Desactiver
+                                        </a>
+                                    @endif
+                                    <a class="dropdown-item" onclick="deleteCharge({{$fexp->id}})" data-toggle="modal" data-target="#modal-delete-charge">
                                         Supprimer la charge
                                     </a>
                                 </div>
@@ -114,6 +120,71 @@
             </div>
         </div>
     </div>
+
+    @foreach (Auth::user()->companies->first()->sites as $site)
+        @foreach ($site->fexpenses as $fexp)
+            <div class="modal modal-blur fade" id="modal-edit-fcharge{{$site->id}}-{{$fexp->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">modifier la charge: {{$fexp->name}} </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-lg-12 mb-3">
+                                <label class="form-label"> Site </label>
+                                <select disabled name="role" id="site_id{{$site->id}}-{{$fexp->id}}" class="form-select">
+                                    @foreach (auth()->user()->companies->first()->sites as $site)
+                                        <option {{($fexp->site_id == $site->id) ? 'selected' : ''}} value={{$site->id}}> {{$site->name}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-icon mb-3">
+                                <span class="input-icon-addon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M18 7h3a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h15v4zM4 9v10h16V9H4zm0-4v2h12V5H4zm11 8h3v2h-3v-2z" />
+                                        </svg>
+                                </span>
+                                <input type="text" value="{{$fexp->name}}" class="form-control" id="name{{$site->id}}-{{$fexp->id}}" placeholder="Nom de la charge">
+                            </div>
+                            <div class="input-icon">
+                                <span class="input-icon-addon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-3.5-6H14a.5.5 0 1 0 0-1h-4a2.5 2.5 0 1 1 0-5h1V6h2v2h2.5v2H10a.5.5 0 1 0 0 1h4a2.5 2.5 0 1 1 0 5h-1v2h-2v-2H8.5v-2z" />
+                                        </svg>
+                                </span>
+                                <input type="text" class="form-control" value="{{$fexp->amount}}" id="amount{{$site->id}}-{{$fexp->id}}" placeholder="Montant">
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label"> debut de paiement </label>
+                                <input type="date" min="1" max="28" value="{{$fexp->date_payment}}" id="date_payment{{$site->id}}-{{$fexp->id}}" min="0" class="form-control">
+                                <span class="text-danger" id="date_payment-error"></span>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label"> Description </label>
+                                <textarea placeholder="Description..."  class="form-control" value="{{$fexp->description}}" id="description{{$site->id}}-{{$fexp->id}}"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" style="width: 100%"
+                                onclick="updateExpense({{$site->id}} , {{$fexp->id}})">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endforeach
 </div>
 
 <script>
@@ -129,7 +200,7 @@
         form_data.append("_token", '{{csrf_token()}}');
 
         $.ajax({
-            url : '/admin/fexpenses/add',
+            url : '/admin/fexpenses',
             cache: false,
             contentType: false,
             processData: false,
@@ -142,4 +213,58 @@
             }
         });
     }
+
+    function updateExpense(site, fexpense){
+        var form_data = new FormData(); // Creating object of FormData class
+
+        form_data.append("name", $("#name"+site+'-'+fexpense).val());
+        form_data.append("amount", $("#amount"+site+'-'+fexpense).val());
+        form_data.append("date_payment", $("#date_payment"+site+'-'+fexpense).val());
+        form_data.append("description", $("#description"+site+'-'+fexpense).val());
+        form_data.append("_token", '{{csrf_token()}}');
+
+        $.ajax({
+            url : '/admin/fexpenses/'+fexpense,
+            cache: false,
+            contentType: false,
+            processData: false,
+            method : 'post',
+            data: form_data,
+            success: function(data){
+                $('#modal-edit-fcharge'+site+'-'+fexpense).hide();
+                $('.modal-backdrop').remove();
+                $("#fexpenses").click();
+            }
+        });
+    }
+
+    function updateState(fexpense, is_active) {
+        var form_data = new FormData(); // Creating object of FormData class
+
+        form_data.append("is_active", is_active);
+        form_data.append("_token", '{{csrf_token()}}');
+
+        $.ajax({
+            url : '/admin/fexpenses/'+fexpense+'/state',
+            cache: false,
+            contentType: false,
+            processData: false,
+            method : 'post',
+            data: form_data,
+            success: function(data){
+                $("#fexpenses").click();
+            }
+        });
+    }
+
+    function deleteCharge(fexpense) {
+        $.ajax({
+            url : '/admin/fexpenses/'+fexpense+'/destroy',
+            method : 'get',
+            success: function(data){
+                $("#fexpenses").click();
+            }
+        });
+    }
+
 </script>

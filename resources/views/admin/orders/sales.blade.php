@@ -116,7 +116,7 @@
                                             {{$sale->customer->name}}
                                         </td>
                                         <td>
-                                            @if (Auth::user()->is_admin == 2)
+                                            @if ($sale->initiator->is_admin == 2)
                                                 <a href={{route('admin.profile')}}>
                                                     {{$sale->initiator->name}}
                                                 </a>
@@ -137,7 +137,7 @@
                                             @if($sale->validator == null)
                                                 <span class="text-warning"> Non validée </span>
                                             @else
-                                                @if (Auth::user()->is_admin == 2)
+                                                @if ($sale->validator->is_admin == 2)
                                                     <a href={{route('admin.profile')}}>
                                                         {{$sale->validator->name}}
                                                     </a>

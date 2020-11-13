@@ -67,6 +67,57 @@ class Site extends Model
         return $this->hasMany('App\Vexpense');
     }
 
+    public function totalPaidSalaries($days = null)
+    {
+        $total = 0;
+        if ($days) {
+            foreach ($this->employees->where('is_active', 1) as $emp) {
+                $total += $emp->expenses->where('is_active', 1)
+                                        ->where('date_payment', '<=', Carbon::now())
+                                        ->where('date_payment', '>=', Carbon::today()->subDays($days))
+                                        ->sum('amount');
+            }
+        } else {
+            foreach ($this->employees->where('is_active', 1) as $emp) {
+                $total += $emp->expenses->where('is_active', 1)
+                                        ->where('date_payment', '<', Carbon::now())
+                                        ->sum('amount');
+            }
+        }
+
+        return $total;
+    }
+
+    public function totalSalaries()
+    {
+        return $this->employees->where('is_active', 1)->sum('salary');;
+    }
+
+    public function totalExpenses($days)
+    {
+        $total = 0;
+
+        if ($days) {
+            $total += $this->vexpenses->where('is_active', 1)
+                                    ->where('created_at', '>=', Carbon::today()->subDays($days))
+                                    ->sum('amount');
+            foreach ($this->fexpenses->where('is_active', 1) as $fexp) {
+                $total += $fexp->expenses->where('is_active', 1)
+                                        ->where('date_payment', '<=', Carbon::now())
+                                        ->where('date_payment', '>=', Carbon::today()->subDays($days))
+                                        ->sum('amount');
+            }
+        } else {
+            $total += $this->vexpenses->where('is_active', 1)
+                                    ->sum('amount');
+            foreach ($this->fexpenses->where('is_active', 1) as $fexp) {
+                $total += $fexp->expenses->where('is_active', 1)
+                                        ->where('date_payment', '<=', Carbon::now())
+                                        ->sum('amount');
+            }
+        }
+    }
+
     public function allSales($day = null){
 
         $total = 0;
