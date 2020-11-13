@@ -191,6 +191,18 @@ class SaleController extends Controller
                 $sale->site->products()->updateExistingPivot($prod->id, [
                     'qty' => $qty
                 ]);
+
+                if($qty <= $sale->site->products()->findOrFail($prod->id)->pivot->qty_alert){
+                    if($qty == 0){
+                        foreach ($sale->site->employees()->whereHas('user.role', function($query){$query->where('roles.slug','cashier')->orWhere('roles.slug','storekeeper')->orWhere('roles.slug','manager');})->get()->load('user') as $key => $emp) {
+                            Notification::ProductAlert($emp->user->id, $sale->site, $prod, 'empty');
+                        }
+                    } else {
+                        foreach ($sale->site->employees()->whereHas('user.role', function($query){$query->where('roles.slug','cashier')->orWhere('roles.slug','storekeeper')->orWhere('roles.slug','manager');})->get()->load('user') as $key => $emp) {
+                            Notification::ProductAlert($emp->user->id, $sale->site, $prod);
+                        }
+                    }
+                }
             }
             $sale->status = 2;
             $sale->save();
@@ -272,6 +284,6 @@ class SaleController extends Controller
 
         return response()->json([
             'message' => 'deleted successfully!',
-        ], 204);
+        ], 200);
     }
 }

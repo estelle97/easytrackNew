@@ -21,7 +21,9 @@ class ProductController extends Controller
     public function index()
     {
         if(Auth::user()->is_admin == 2){
-            $products = Auth::user()->companies->first()->sites->load('products.category');
+            $products = Auth::user()->companies->first()->sites->load(['products' => function($query){
+                $query->wherePivot('qty','>',0)->with('category');
+            }]);
         } else {
             $products = Auth::user()->employee->site->products->load('category');
         }

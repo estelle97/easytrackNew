@@ -303,7 +303,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/notifications', 'Employee\NotificationController@notifications')->name('employee.notifications');
 
 
-    Route::get('chat', 'ChatController@index')->name('chat');
+    Route::get('chat/{user?}', 'ChatController@index')->name('chat');
     Route::post('chat/contacts', 'ChatController@getContacts');
 
 

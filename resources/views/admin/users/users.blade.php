@@ -155,7 +155,7 @@
                                             <a class="dropdown-item" href="{{route('admin.user.show', $emp->user->username)}}">
                                                 Gérer l'employé
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{route('chat',$emp->user->id)}}">
                                                 Envoyer un message
                                             </a>
                                             <div class="dropdown-divider"></div>

@@ -11,7 +11,7 @@
                 </svg>
             </span>
             <div class="mr-3 lh-sm">
-                <a href={{route('easytrack.'.$notif->action)}}>
+                <a href={{route('employee.'.$notif->action)}}>
                     <div class="strong">
                         {{$notif->text}}
                     </div>
