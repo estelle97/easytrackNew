@@ -138,6 +138,6 @@ class SupplierController extends Controller
 
         return response()->json([
             'message' => 'deleted successfully!'
-        ], 204);
+        ], 200);
     }
 }

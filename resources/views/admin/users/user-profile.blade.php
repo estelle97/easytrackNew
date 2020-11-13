@@ -13,13 +13,13 @@
                                 d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z"
                                 fill="rgba(255,255,255,1)" /></svg>
                     </a>
-                    Compte de l'utilisateur
+                    Compte de l'employé
                 </h2>
             </div>
             <!-- Page title actions -->
             <div class="col-auto ml-auto d-print-none">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="d-flex align-items-center text-white mr-5">
+                    <a href="{{route('chat',$user->id)}}" class="d-flex align-items-center text-white mr-5">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 3v2H4v13.385L5.763 17H20v-7h2v8a1 1 0 0 1-1 1H6.455L2 22.5V4a1 1 0 0 1 1-1h11zm5 0V0h2v3h3v2h-3v3h-2V5h-3V3h3z" fill="rgba(255,255,255,1)"/></svg>
                         Envoyer un message
                     </a>
