@@ -54,7 +54,7 @@ class AgendaController extends Controller
    }
 
    public function details($day, $site) {
-       $data = Site::find($site)->teams->where('day', $day)->load('users');
+       $data = Site::find($site)->teams()->where('day', $day)->with('users')->load();
 
        return response()->json([
            'data' => $data
