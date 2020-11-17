@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Customer;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CustomerResource;
-use App\Site;
+use App\Team;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CustomerController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,19 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->is_admin == 2){
-            $customers = Auth::user()->companies->first()->sites->load('customers');
-        } else {
-            $customers = Auth::user()->employee->site->customers;
-        }
-
-        return response()->json([
-            'customers' => $customers
-        ], 200);
-    }
-
-    public function customersSite(Site $site){
-        return CustomerResource::collection($site->customers);
+        //
     }
 
     /**
@@ -57,21 +42,21 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Customer  $customer
+     * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Team $team)
     {
-        return new CustomerResource($customer->load('site'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Customer  $customer
+     * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Team $team)
     {
         //
     }
@@ -80,10 +65,10 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Customer  $customer
+     * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Team $team)
     {
         //
     }
@@ -91,12 +76,13 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Customer  $customer
+     * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Team $team)
     {
-        $customer->delete();
+        $team->users()->detach();
+        $team->delete();
 
         return response()->json([
             'message' => 'deleted successfully!'

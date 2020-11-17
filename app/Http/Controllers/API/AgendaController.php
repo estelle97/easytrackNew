@@ -38,12 +38,17 @@ class AgendaController extends Controller
             return response()->json($response, 200);
         }
     }
+
    public function index($id) {
-       $teams = Team::where('site_id', $id)->orderBy('day', 'ASC')->get()->groupBy('day');
-       $result = [];
-       foreach ($teams as $team) {
-        array_push($result, sizeof($team));
-       }
+        $teams = Team::where('site_id', $id)->orderBy('day', 'ASC')->get()->groupBy('day');
+        $result = [];
+        for ($i=1; $i <= 7 ; $i++) {
+            if(!empty($teams[$i])){
+                $result[] = sizeof($teams[$i]);
+            } else {
+                $result[] = 0;
+            }
+        }
        $response = [
             'success' => true,
             'data' => $result,

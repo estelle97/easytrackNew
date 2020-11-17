@@ -141,7 +141,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('easytrack/roles/detachPermissionToRole', 'SuperAdmin\RoleController@detachPermissionToRole');
     Route::post('easytrack/roles/attachPermissionToRole', 'SuperAdmin\RoleController@attachPermissionToRole');
 
-    Route::post('easytrack/products/{product}/destroy', 'SuperAdmin\ProductController@destroy');
+    Route::post('easytrack/products/{site}/{product}/destroy', 'SuperAdmin\ProductController@destroy');
     Route::post('easytrack/products/{product}', 'SuperAdmin\ProductController@update');
     Route::get('easytrack/products/add', 'SuperAdmin\ProductController@create')->name('easytrack.products.create');
     Route::post('easytrack/products/store/many', 'SuperAdmin\ProductController@storeManyProducts');
@@ -303,7 +303,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/notifications', 'Employee\NotificationController@notifications')->name('employee.notifications');
 
 
-    Route::get('chat', 'ChatController@index')->name('chat');
+    Route::get('chat/{user?}', 'ChatController@index')->name('chat');
     Route::post('chat/contacts', 'ChatController@getContacts');
 
 

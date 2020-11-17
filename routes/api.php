@@ -115,5 +115,4 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('teams/detachUserToTeam/{team}', 'API\AgendaController@detachUserToTeam');
     Route::post("teams/team/{team}/destroy", 'API\AgendaController@destroyTeam');
 
-
 });

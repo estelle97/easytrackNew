@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Extension\HeadingPermalink\Slug\DefaultSlugGenerator;
@@ -20,7 +21,9 @@ class ProductController extends Controller
     public function index()
     {
         if(Auth::user()->is_admin == 2){
-            $products = Auth::user()->companies->first()->sites->load('products.category');
+            $products = Auth::user()->companies->first()->sites->load(['products' => function($query){
+                $query->wherePivot('qty','>',0)->with('category');
+            }]);
         } else {
             $products = Auth::user()->employee->site->products->load('category');
         }
@@ -156,8 +159,12 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Site $site ,Product $product)
     {
-        
+        $site->products()->detach($product->id);
+
+        return response()->json([
+            'message' => 'product removed to site',
+        ]);
     }
 }

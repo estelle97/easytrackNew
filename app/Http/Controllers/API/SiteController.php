@@ -180,5 +180,11 @@ class SiteController extends Controller
             $emp->user->delete();
             $emp->delete();
         }
+
+        $site->delete();
+
+        return response()->json([
+            'message' => 'Site deleted successfully!',
+        ]);
     }
 }

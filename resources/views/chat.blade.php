@@ -413,7 +413,6 @@
                             lastmessage: message
                         })
                         .then(() => {
-                            chatInstance.views.inbox.addMessage(messageDoc.id, msgData.idFrom, msgData.idTo, msgData.content);
                             resolve("done");
                         });
                     });
@@ -672,18 +671,15 @@
                             // Watch change on messages subcollection
                             snapshot.docChanges().forEach((change) => {
                                 console.log('change: ', change);
-                                console.log('inbox > listen > activeChatId: ', activeChatId);
-                                console.log('inbox > listen > selectedChatId: ', selectedChatId);
                                 var doc = change.doc;
                                 if ($( ".chat-room-component" ).hasClass( "active-chat" )) {
                                     var selectedChatId = $(".chat-room-component.active-chat").attr('id').split("room-").pop();
+                                    console.log('inbox > listen > activeChatId: ', activeChatId);
+                                    console.log('inbox > listen > selectedChatId: ', selectedChatId);
                                     if (activeChatId == selectedChatId) {
                                         if (change.type === "added") {
                                             chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
-                                            if (doc.data().idTo == parseInt(authId) && lastMessageId != doc.id) {
-                                                lastMessageId = doc.id;
-                                                chatInstance.views.inbox.addMessage(doc.id, doc.data().idFrom, doc.data().idTo, doc.data().content);
-                                            }
+                                            chatInstance.views.inbox.addMessage(doc.id, doc.data().idFrom, doc.data().idTo, doc.data().content);
                                         }
                                         if (change.type === "modified") {
                                             chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
@@ -718,6 +714,7 @@
                             console.error("Chat error: ", error);
                         })
                     });
+                    console.log('inbox.roomsEvents: ', inbox.roomsEvents);
                 }
             }
         };
@@ -765,7 +762,7 @@
                         });
                     }
                 });
-                $(".messages-input").keypress(function(e) {
+                /* $(".messages-input").keypress(function(e) {
                     if(e.which == 13) {
                         if ($(".room-input").val() != "" ) {
                             chatInstance.data.inbox.sendMessage($(".room-input").val()).then(() => {
@@ -775,7 +772,7 @@
                             });
                         }
                     }
-                });
+                }); */
             },
             disableSendMessage: () => {
                 $( ".room-send-button").unbind( "click" );

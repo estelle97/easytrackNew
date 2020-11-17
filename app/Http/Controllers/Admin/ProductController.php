@@ -202,7 +202,7 @@ class ProductController extends Controller
     public function destroy(Site $site, Product $product)
     {
         $site->products()->detach($product->id);
-        $product->delete();
+        
         return 'success';
     }
 }

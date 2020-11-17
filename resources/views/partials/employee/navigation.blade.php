@@ -16,9 +16,9 @@
                     </span>
                 </a>
             </li>
-            @if(Auth::user()->role->slug != 'server' || Auth::user()->hasPermissionTo('manage_site','show_products','show_suppliers','show_customers'))
+            @if(Auth::user()->role->slug != 'server' || Auth::user()->hasPermissionTo('site_create','site_update','site_delete','show_products','update_products','delete_products','show_suppliers','update_suppliers','delete_suppliers','show_customers','update_customers','delete_customers'))
                 <li class="nav-item dropdown">
-                    @if(Auth::user()->may('manage_site'))
+                    @if(Auth::user()->hasPermissionTo('site_create','site_update','site_delete'))
                         <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
                             role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -30,28 +30,28 @@
                         </a>
                     @endif
                     <ul class="dropdown-menu">
-                        @if(Auth::user()->may('show_products'))
+                        @if(Auth::user()->hasPermissionTo('show_products','update_products','delete_products'))
                             <li class="active">
                                 <a class="dropdown-item" href={{route('employee.products')}}>
                                     Produits
                                 </a>
                             </li>
                         @endif
-                        @if(Auth::user()->may('show_suppliers'))
+                        @if(Auth::user()->hasPermissionTo('show_suppliers','update_suppliers','delete_suppliers'))
                             <li>
                                 <a class="dropdown-item" href="/employee/suppliers">
                                     Fournisseurs
                                 </a>
                             </li>
                         @endif
-                        @if(Auth::user()->may('manage_site'))
+                        @if(Auth::user()->hasPermissionTo('site_create','site_update','site_delete'))
                             <li>
                                 <a class="dropdown-item" href={{route('employee.sites')}}>
                                     Gérer Site
                                 </a>
                             </li>
                         @endif
-                        @if(Auth::user()->may('show_customers'))
+                        @if(Auth::user()->may('show_customers','update_customers','delete_customers'))
                             <li>
                                 <a class="dropdown-item" href="/employee/customers">
                                     Clients
@@ -79,7 +79,7 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    @if(Auth::user()->role->slug == 'server' || Auth::user()->hasPermissionTo('show_sale_orders', 'create_sale_orders'))
+                    @if(Auth::user()->role->slug == 'server' || Auth::user()->hasPermissionTo('show_sale_orders', 'create_sale_orders','validate_sale_orders','delete_sale_orders'))
                         @if(Auth::user()->may('create_sale_orders'))
                             <li>
                                 <a class="dropdown-item" href={{route('employee.sales.pos')}}>

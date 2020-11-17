@@ -18,7 +18,9 @@ class NotificationController extends Controller
         ];
 
         return response()->json($response, 200);
-    } 
+    }
+
+    
     public function changeState($id) {
         $notification = Notification::find($id);
         if($notification) {
@@ -29,9 +31,9 @@ class NotificationController extends Controller
                 'data' => $notification,
                 'message' => 'Statut de la notificaion mis a jour'
             ];
-    
+
             return response()->json($response, 200);
         }
-        
+
     }
 }
