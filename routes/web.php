@@ -117,6 +117,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/users/store', 'Admin\UserController@store');
     Route::post('admin/users/{user}/destroy', 'Admin\UserController@destroy');
     Route::post('admin/users/{user}/salary', 'Admin\UserController@updateSalary');
+    Route::post('admin/users/{user}/salary/suspend', 'Admin\UserController@stopSalary');
+    Route::post('admin/users/{user}/salary/activate', 'Admin\UserController@activateSalary');
 
     Route::post('admin/roles/detachPermissionToUser', 'Admin\RoleController@detachPermissionToUser');
     Route::post('admin/roles/attachPermissionToUser', 'Admin\RoleController@attachPermissionToUser');

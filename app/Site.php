@@ -71,15 +71,15 @@ class Site extends Model
     {
         $total = 0;
         if ($days) {
-            foreach ($this->employees->where('is_active', 1) as $emp) {
-                $total += $emp->expenses->where('is_active', 1)
+            foreach ($this->employees->where('status', 'actif') as $emp) {
+                $total += $emp->payments->where('is_active', 1)
                                         ->where('date_payment', '<=', Carbon::now())
                                         ->where('date_payment', '>=', Carbon::today()->subDays($days))
                                         ->sum('amount');
             }
         } else {
-            foreach ($this->employees->where('is_active', 1) as $emp) {
-                $total += $emp->expenses->where('is_active', 1)
+            foreach ($this->employees->where('status', 'actif') as $emp) {
+                $total += $emp->payments->where('is_active', 1)
                                         ->where('date_payment', '<', Carbon::now())
                                         ->sum('amount');
             }
@@ -90,10 +90,10 @@ class Site extends Model
 
     public function totalSalaries()
     {
-        return $this->employees->where('is_active', 1)->sum('salary');;
+        return $this->employees->where('status', 'actif')->sum('salary');;
     }
 
-    public function totalExpenses($days)
+    public function totalExpenses($days = null)
     {
         $total = 0;
 

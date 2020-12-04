@@ -113,12 +113,20 @@
                             <a class="button-click-action" data-toggle="modal" data-target="#modal-edit-salary">
                                 <svg xmlns="http://www.w3.org/2000/svg" data-toggle="tooltip" data-placement="bottom" title="Modifier" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M15.728 9.686l-1.414-1.414L5 17.586V19h1.414l9.314-9.314zm1.414-1.414l1.414-1.414-1.414-1.414-1.414 1.414 1.414 1.414zM7.242 21H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 21z" fill="rgba(0,0,0,1)"/></svg>
                             </a>
-                            <a class="button-click-action ml-3" data-toggle="modal" data-target="#modal-stop-payment">
-                                <svg xmlns="http://www.w3.org/2000/svg" data-toggle="tooltip" data-placement="bottom" title="Arrêter de payer" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h9v2h-4v3l-5-5zm5-4V6l5 5H8V9h4z"/></svg>
-                            </a>
+                            @if ($user->employee->salary != 0)
+                                @if ($user->employee->status == 'actif')
+                                    <a class="button-click-action ml-3" data-toggle="modal" data-target="#modal-stop-payment">
+                                        <svg xmlns="http://www.w3.org/2000/svg" data-toggle="tooltip" data-placement="bottom" title="Suspendre le salaire" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h9v2h-4v3l-5-5zm5-4V6l5 5H8V9h4z"/></svg>
+                                    </a>
+                                @else
+                                    <a class="button-click-action ml-3" data-toggle="modal" data-target="#modal-activate-payment">
+                                        <svg xmlns="http://www.w3.org/2000/svg" data-toggle="tooltip" data-placement="bottom" title="Activer le salaire" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h9v2h-4v3l-5-5zm5-4V6l5 5H8V9h4z"/></svg>
+                                    </a>
+                                @endif
+                            @endif
                         </div>
                     </div>
-                    <h3 class="h2 mt-2" id="salary-show"> {{($user->employee->salary != 0) ? $user->employee->salary. ' Fcfa' : 'Non défini'}} </h3>
+                    <h3 class="h2 mt-2 {{($user->employee->status == 'suspendu') ? 'text-danger' : '' }}" id="salary-show"> {{($user->employee->salary != 0) ? $user->employee->salary. ' Fcfa' : 'Non défini'}} </h3>
                 </div>
               </div>
         </div>
@@ -209,12 +217,28 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="modal-title">Êtes vous sure ?</div>
-                        <div>Si vous continuez, vous cette utilisateur ne recevera plus de Salaire.</div>
+                        <div>Si vous continuez, le salaire de cet enmployé sera suspendu.</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link link-secondary mr-auto"
                             data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Oui, arrêter le paiment</button>
+                        <button type="button" class="btn btn-danger" onclick="stopSalary({{$user->id}})" data-dismiss="modal">Oui, suspendre le salaire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal modal-blur fade" id="modal-activate-payment" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="modal-title">Êtes vous sure ?</div>
+                        <div>Si vous continuez, le salaire de cet employé sera réactivé.</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link link-secondary mr-auto"
+                            data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-success" onclick="activateSalary({{$user->id}})" data-dismiss="modal">Oui, activer le salaire</button>
                     </div>
                 </div>
             </div>
@@ -240,9 +264,46 @@
                 method : 'post',
                 data: form_data,
                 success: function(data){
-                    $("#salary-show").fadeOut().html(data.salary+ ' Fcfa').fadeIn();
-                    $('#modal-edit-salary').hide();
-                    $('.modal-backdrop').remove();
+                    // $("#salary-show").fadeOut().html(data.salary+ ' Fcfa').fadeIn();
+                    // $('#modal-edit-salary').hide();
+                    // $('.modal-backdrop').remove();
+                    location.reload();
+                }
+            });
+        }
+
+        function stopSalary(user){
+           var form_data = new FormData(); // Creating object of FormData class
+
+            form_data.append("_token", '{{csrf_token()}}');
+
+            $.ajax({
+                url : '/admin/users/'+user+'/salary/suspend',
+                cache: false,
+                contentType: false,
+                processData: false,
+                method : 'post',
+                data: form_data,
+                success: function(data){
+                    location.reload();
+                }
+            });
+        }
+
+        function activateSalary(user){
+           var form_data = new FormData(); // Creating object of FormData class
+
+            form_data.append("_token", '{{csrf_token()}}');
+
+            $.ajax({
+                url : '/admin/users/'+user+'/salary/activate',
+                cache: false,
+                contentType: false,
+                processData: false,
+                method : 'post',
+                data: form_data,
+                success: function(data){
+                    location.reload();
                 }
             });
         }
