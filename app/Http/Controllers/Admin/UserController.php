@@ -10,27 +10,16 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Payment;
 use Illuminate\Http\Request;
 use App\User;
-use App\Role;
-use App\Permission;
 use App\Site;
 use Auth;
 use Carbon\Carbon;
-use Hash;
-use Keygen;
 use DB;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
     public function index()
     {
         return view('admin.users.users');
-    }
-
-    public function generatePassword()
-    {
-        $id = Keygen::numeric(6)->generate();
-        return $id;
     }
 
     public function store(UserStoreRequest $request)
@@ -188,5 +177,29 @@ class UserController extends Controller
         return response()->json([
             'salary' => $user->employee->salary,
         ]);
+    }
+
+    public function stopSalary(User $user){
+        $user->employee->status = 'suspendu';
+        $user->employee->save();
+
+        foreach ($user->employee->payments->where('date_payment', '>', now()) as $pay) {
+            $pay->is_active = 0;
+            $pay->save();
+        }
+
+        return 'success';
+    }
+
+    public function activateSalary(User $user){
+        $user->employee->status = 'actif';
+        $user->employee->save();
+
+        foreach ($user->employee->payments->where('date_payment', '>', now()) as $pay) {
+            $pay->is_active = 1;
+            $pay->save();
+        }
+
+        return 'success';
     }
 }
