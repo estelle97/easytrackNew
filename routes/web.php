@@ -16,6 +16,11 @@ Route::get('test/', [
     'uses' => 'Auth\RegisterController@testMail',
 ]);
 
+Route::get('test/activate', [
+    'as' => 'test',
+    'uses' => 'Auth\RegisterController@activateCompanies',
+]);
+
 Route::get('test/roles', [
     'as' => 'test',
     'uses' => 'Admin\RoleController@init',
@@ -95,6 +100,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/sites/add', 'Admin\SiteController@store');
     Route::post('admin/sites/update', 'Admin\SiteController@update');
     Route::post('admin/sites/{site}/destroy', 'Admin\SiteController@destroy');
+
 
 
     Route::post('/admin/fexpenses', 'Admin\ExpenseController@addFixExpense');

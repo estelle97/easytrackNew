@@ -94,7 +94,7 @@ class UserController extends Controller
         $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addDays($type->duration),
             'licence_number' => 'L122L1KZ',
-            'is_active' => 0,
+            'is_active' => 1,
         ]);
 
         $this->sendMail($user->email, $company);
