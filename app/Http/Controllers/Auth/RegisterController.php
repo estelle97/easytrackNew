@@ -164,7 +164,7 @@ class RegisterController extends Controller
             ]);
         }
 
-        flashy()->success('Les companies on été activées!');
+        flashy()->success('Les companies on été activéess!');
         return redirect()->route('login');
     }
 
