@@ -159,12 +159,11 @@ class RegisterController extends Controller
 
     public function activateCompanies(){
         foreach (Company::all() as $company) {
-            $company->update([
-                'is_active' => 1
-            ]);
+            $company->is_active = 1;
+            $company->save();
         }
 
-        flashy()->success('Les companies on été activéess!');
+        flashy()->success('Les companies on été activées!');
         return redirect()->route('login');
     }
 
