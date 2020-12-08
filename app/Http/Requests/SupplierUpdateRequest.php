@@ -26,8 +26,8 @@ class SupplierUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric',
-            'phone2' => 'sometimes|min:200000000|max:999999999|numeric',
+            'phone1' => 'nullable|min:200000000|max:999999999|numeric',
+            'phone2' => 'nullable|min:200000000|max:999999999|numeric',
         ];
     }
 

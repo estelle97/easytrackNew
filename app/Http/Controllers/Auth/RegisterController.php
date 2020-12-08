@@ -147,14 +147,24 @@ class RegisterController extends Controller
         $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addDays($type->duration),
             'licence_number' => 'L122L1KZ',
-            'is_active' => 0,
-        ]); 
+            'is_active' => 1,
+        ]);
 
         $this->sendMail($user->email, $company);
 
         return response()->json([
             "message" => "Operation success!",
         ], 201);
+    }
+
+    public function activateCompanies(){
+        foreach (Company::all() as $company) {
+            $company->is_active = 1;
+            $company->save();
+        }
+
+        flashy()->success('Les companies on été activées!');
+        return redirect()->route('login');
     }
 
     /**

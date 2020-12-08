@@ -27,7 +27,7 @@ class SiteStoreRequest extends FormRequest
             'name' => 'required|unique:sites',
             'email' => 'email|required',
             'phone1' => 'required|min:200000000|max:999999999|numeric|unique:sites',
-            'phone2' => 'required|min:200000000|max:999999999|numeric|unique:sites',
+            'phone2' => 'nullable|min:200000000|max:999999999|numeric|unique:sites',
             'town' => 'required',
             'street' => 'required'
         ];

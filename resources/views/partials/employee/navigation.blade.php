@@ -87,7 +87,7 @@
                                 </a>
                             </li>
                         @endif
-                        @if(Auth::user()->may('show_sale_orders'))
+                        @if(Auth::user()->role->slug == 'server' || Auth::user()->hasPermissionTo('show_sale_orders','show_sale_orders'))
                             <li>
                                 <a class="dropdown-item" href={{route('employee.sales.all')}}>
                                 Toutes les commandes clients

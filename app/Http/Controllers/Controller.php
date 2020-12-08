@@ -102,4 +102,15 @@ class Controller extends BaseController
         }
 
     }
+
+    public function adminResetPassword(Request $request,User $user){
+        $request->validate([
+            'password' => 'required|min:8',
+        ]);
+
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return 'success';
+    }
 }

@@ -16,6 +16,11 @@ Route::get('test/', [
     'uses' => 'Auth\RegisterController@testMail',
 ]);
 
+Route::get('test/activate', [
+    'as' => 'test',
+    'uses' => 'Auth\RegisterController@activateCompanies',
+]);
+
 Route::get('test/roles', [
     'as' => 'test',
     'uses' => 'Admin\RoleController@init',
@@ -97,6 +102,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/sites/{site}/destroy', 'Admin\SiteController@destroy');
 
 
+
     Route::post('/admin/fexpenses', 'Admin\ExpenseController@addFixExpense');
     Route::post('/admin/fexpenses/{fexpense}', 'Admin\ExpenseController@updateFixExpense');
     Route::post('/admin/fexpenses/{fexpense}/state', 'Admin\ExpenseController@updateState');
@@ -117,6 +123,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/users/store', 'Admin\UserController@store');
     Route::post('admin/users/{user}/destroy', 'Admin\UserController@destroy');
     Route::post('admin/users/{user}/salary', 'Admin\UserController@updateSalary');
+    Route::post('admin/users/{user}/salary/suspend', 'Admin\UserController@stopSalary');
+    Route::post('admin/users/{user}/salary/activate', 'Admin\UserController@activateSalary');
 
     Route::post('admin/roles/detachPermissionToUser', 'Admin\RoleController@detachPermissionToUser');
     Route::post('admin/roles/attachPermissionToUser', 'Admin\RoleController@attachPermissionToUser');
@@ -317,6 +325,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/teams/attachUserToTeam/{team}', 'Admin\TeamController@attachUserToTeam');
     Route::post('admin/teams/detachUserToTeam/{team}', 'Admin\TeamController@detachUserToTeam');
     Route::post("/admin/teams/team/{team}/destroy", 'Admin\TeamController@destroyTeam');
+
+    Route::post('admin/resetPassword/{user}', 'Controller@adminResetPassword');
 
     Route::get('admin/agenda/meeting', 'Admin\MeetingController@index')->name('admin.meeting');
 

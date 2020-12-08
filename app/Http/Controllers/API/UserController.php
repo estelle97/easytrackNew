@@ -94,7 +94,7 @@ class UserController extends Controller
         $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addDays($type->duration),
             'licence_number' => 'L122L1KZ',
-            'is_active' => 0,
+            'is_active' => 1,
         ]);
 
         $this->sendMail($user->email, $company);
@@ -140,6 +140,13 @@ class UserController extends Controller
                 'message' => 'User was deleted',
             ],
             403);
+        }
+
+        if($user->is_admin == 3){
+            return response()->json([
+                'message' => 'Superadmin accounts are not allowed to use mobile version',
+            ],
+            404);
         }
 
         $tokenResult = $user->createToken('Personal_Access_Token');
