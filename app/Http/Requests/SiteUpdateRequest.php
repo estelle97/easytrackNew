@@ -27,7 +27,7 @@ class SiteUpdateRequest extends FormRequest
             'name' => 'required',
             'email' => 'email|required',
             'phone1' => 'required|min:200000000|max:999999999|numeric',
-            'phone2' => 'sometimes|min:200000000|max:999999999|numeric',
+            'phone2' => 'nullable|min:200000000|max:999999999|numeric',
             'town' => 'required',
             'street' => 'required'
         ];

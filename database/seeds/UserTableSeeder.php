@@ -86,14 +86,14 @@ class UserTableSeeder extends Seeder
             [
                 'company_id' => Company::whereSlug('slug1')->first()->id,
                 'type_id' => 1,
-                'end_date' => Carbon::now()->addMonths(2),
+                'end_date' => Carbon::now()->addMonths(12),
                 'status' => 0,
                 'is_active' => 1,
             ],
             [
                 'company_id' => Company::whereSlug('slug2')->first()->id,
                 'type_id' => 1,
-                'end_date' => Carbon::now()->addMonths(2),
+                'end_date' => Carbon::now()->addMonths(12),
                 'status' => 0,
                 'is_active' => 1,
             ]
@@ -155,30 +155,30 @@ class UserTableSeeder extends Seeder
 
 
 
-        for($i=0; $i<40; $i++){
-            $user = new User([
-                'name' => 'employee '.$i,
-                'username' => 'employee'.$i,
-                'email' => 'employee'.$i.'@gmail.com',
-                'phone' => random_int(777777777,999999999),
-                'address' => 'adresse employee'.$i,
-                'password' => bcrypt('password'),
-                'is_admin' => 1,
-                'role_id' => random_int(1,5)
-            ]);
+        // for($i=0; $i<40; $i++){
+        //     $user = new User([
+        //         'name' => 'employee '.$i,
+        //         'username' => 'employee'.$i,
+        //         'email' => 'employee'.$i.'@gmail.com',
+        //         'phone' => random_int(777777777,999999999),
+        //         'address' => 'adresse employee'.$i,
+        //         'password' => bcrypt('password'),
+        //         'is_admin' => 1,
+        //         'role_id' => random_int(1,5)
+        //     ]);
 
-            $employee = new Employee();
-            $employee->cni_number = '002274514';
-            $employee->contact_name= 'Resposable employee '.$i;
-            $employee->contact_phone = random_int(777777777, 999999999);
-            $employee->site_id = random_int(31,35);
+        //     $employee = new Employee();
+        //     $employee->cni_number = '002274514';
+        //     $employee->contact_name= 'Resposable employee '.$i;
+        //     $employee->contact_phone = random_int(777777777, 999999999);
+        //     $employee->site_id = random_int(31,35);
 
-            DB::transaction(function () use($user, $employee){
-                $user->save();
-                    $employee->user_id = $user->id;
-                    $employee->save();
-            });
-        }
+        //     DB::transaction(function () use($user, $employee){
+        //         $user->save();
+        //             $employee->user_id = $user->id;
+        //             $employee->save();
+        //     });
+        // }
     }
 
 }

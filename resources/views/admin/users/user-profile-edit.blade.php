@@ -213,6 +213,7 @@
                 </div>
         </div>
     </form>
+
     <div class="modal-section">
         <div class="modal modal-blur fade" id="modal-edit-password" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -232,7 +233,7 @@
                     <div class="modal-body bg-white">
                         <div class="row mb-3 align-items-end">
                             <div class="col-lg-12 mb-4">
-                                <label class="form-label">Mot de passe actuel</label>
+                                <label class="form-label"> Redéfinir le mot de passe </label>
                                 <div class="input-icon">
                                     <span class="input-icon-addon ml-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
@@ -241,7 +242,8 @@
                                                 d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
                                         </svg>
                                     </span>
-                                    <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
+                                    <input type="hidden" id="user_id" value={{$user->id}}>
+                                    <input type="password" name="password" id="password" class="auth-input form-control py-2 px-5"
                                         placeholder="Mot de passe (au moins 8 caractères)" required autocomplete="off" minlength="8"/>
                                     <span class="input-icon-addon mr-2">
                                         <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
@@ -256,62 +258,12 @@
                                         </a>
                                     </span>
                                 </div>
-                            </div>
-                            <div class="col-lg-12 mb-4">
-                                <label class="form-label">Nouveau mot de passe</label>
-                                <div class="input-icon">
-                                    <span class="input-icon-addon ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
-                                        </svg>
-                                    </span>
-                                    <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
-                                        placeholder="Mot de passe (au moins 8 caractères)" required autocomplete="off" minlength="8"/>
-                                    <span class="input-icon-addon mr-2">
-                                        <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
-                                                xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <circle cx="12" cy="12" r="2" />
-                                                <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
-                                                <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="input-icon">
-                                    <span class="input-icon-addon ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path
-                                                d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
-                                        </svg>
-                                    </span>
-                                    <input type="password" name="userpassword" id="password" class="auth-input form-control py-2 px-5"
-                                        placeholder="Ressaisisez le mot de passe" required autocomplete="off" minlength="8"/>
-                                    <span class="input-icon-addon mr-2">
-                                        <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
-                                                xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <circle cx="12" cy="12" r="2" />
-                                                <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
-                                                <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
+                                <span class="text-danger" id="password-error"></span>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" style="width: 100%;" data-dismiss="modal">
+                        <button type="button" class="savepwd btn btn-primary" style="width: 100%;">
                             Sauvegarder
                         </button>
                     </div>
@@ -509,6 +461,47 @@
                 reader.readAsDataURL(this.files[0]);
             });
         })
+
+        $(".savepwd").click(function(){
+            var token = '{{csrf_token()}}';
+            var password = $("#password").val();
+            var user_id = $("#user_id").val();
+            $.ajax({
+                url: '/admin/resetPassword/'+user_id,
+                method: 'post',
+                data: {
+                    _token : token,
+                    password : password,
+                },
+                success: function(data){
+                    if(data == 'error'){
+                        $(".text-danger").fadeOut().html('');
+                        $('#password-error').html('Mot de passe incorrect').fadeIn();
+                    } else {
+                        $('#modal-edit-password').modal('hide');
+                        $('.modal-backdrop').remove();
+
+                        alert('Mot de passe modifié avec succès!');
+                    }
+                },
+                error: function (err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                            // console.log(err.responseJSON);
+
+                        // you can loop through the errors object and show it to the user
+                            //console.warn(err.responseJSON.errors);
+                        // display errors on each form field
+
+                        $(".text-danger").fadeOut().html('');
+
+                        $.each(err.responseJSON.errors, function (i, error) {
+                            var el = $('#'+i+'-error');
+                            el.html(error[0]).fadeIn();
+                        });
+                    }
+                }
+            });
+        });
 
     </script>
 @endsection

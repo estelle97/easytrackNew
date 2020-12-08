@@ -142,6 +142,13 @@ class UserController extends Controller
             403);
         }
 
+        if($user->is_admin == 3){
+            return response()->json([
+                'message' => 'Superadmin accounts are not allowed to use mobile version',
+            ],
+            404);
+        }
+
         $tokenResult = $user->createToken('Personal_Access_Token');
         $token = $tokenResult->token;
 

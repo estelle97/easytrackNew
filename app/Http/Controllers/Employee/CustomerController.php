@@ -53,7 +53,6 @@ class CustomerController extends Controller
                     'phone' => $request->phone,
                     'town' => $request->town,
                     'street' => $request->street,
-                    'postal_code' => $request->postal_code,
                     'site_id' => $site->id,
                 ]);
             }

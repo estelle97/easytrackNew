@@ -326,6 +326,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::post('admin/teams/detachUserToTeam/{team}', 'Admin\TeamController@detachUserToTeam');
     Route::post("/admin/teams/team/{team}/destroy", 'Admin\TeamController@destroyTeam');
 
+    Route::post('admin/resetPassword/{user}', 'Controller@adminResetPassword');
+
     Route::get('admin/agenda/meeting', 'Admin\MeetingController@index')->name('admin.meeting');
 
     Route::get('notifications', 'NotificationController@index')->name('notifications');
