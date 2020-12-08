@@ -238,6 +238,22 @@
 
     @include('flashy::message')
 
+    {{-- Loader --}}
+    <script>
+        const loader = {
+            add: (element) => {
+                $(element).prepend(/*html*/`
+                    <div class="loader-wrap w-100 h-100 d-flex justify-content-center align-items-center">
+                        <div class="spinner-border text-azure" role="status"></div>
+                    </div>
+                `);
+            },
+            remove: () => {
+                $('.loader-wrap').remove();
+            };
+        }
+    </script>
+
     <script>
         document.body.style.display = "block"
 
