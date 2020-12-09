@@ -269,6 +269,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 
     <script>
+        loader.add('#modal-create-product .modal-content');
         function addProduct(){
             var token = '{{csrf_token()}}';
             var product_id = $("#product-product-add").val();
