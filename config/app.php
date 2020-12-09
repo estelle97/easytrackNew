@@ -235,4 +235,7 @@ return [
         'Flashy' => MercurySeries\Flashy\Flashy::class,
     ],
 
+    
+    'clientId' => 'zSqpmPkyksgs6sPZRq3CGm4822x4URTA',
+    'clientSecret' => '4AsDbtARzp6joOij',
 ];

@@ -44,13 +44,6 @@ class ForgotPasswordController extends Controller
         return view('forgotPassword');
     }
 
-
-    public function generatePassword()
-    {
-        $id = Keygen::numeric(6)->generate();
-         return $id;
-    }
-
     /**
      * Detach Roles to a User
      * @param String login
@@ -58,20 +51,20 @@ class ForgotPasswordController extends Controller
     public function passwordRequest(Request $request){
         $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('tel', $request->login)->first();
         if($user){
-            $password = "newPassword";
-            $this->sendMessage(
+            $password = $this->generatePassword(8);
+            $this->sendSMS(
+                $user->tel,
                 "Votre nouveau mot de passe est le suivant: $password",
-                $user->tel
             );
 
             $user->password = bcrypt($password);
             $user->save();
 
-            Notify::success("Votre nouveau mot de passe vous a été par SMS");
+            flashy()->success("Votre nouveau mot de passe vous a été par SMS");
             return redirect()->route('login');
         }
-        
-        Notify::error("Aucun utilisateur ne corresond à ces informations");
+
+        flashy()->error("Aucun utilisateur ne corresond à ces informations");
         return redirect()->back();
     }
 
@@ -87,7 +80,7 @@ class ForgotPasswordController extends Controller
         $client = new Client( $sid, $token );
         $code = Keygen::alphanum(10)->generate();
         $input = bcrypt($code);
-        
+
         $message = "Bonjour vous avez demandé une réinitialisation de mot de passe de votre compte EASYTRACK. Votre code de vérification est : ".$code;
         if ($user != null) {
             $data = $user->id;

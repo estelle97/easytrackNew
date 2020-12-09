@@ -30,7 +30,7 @@ class register extends Mailable
      */
     public function build()
     {
-        return $this->from('Easytech Consulting')
+        return $this->from('easytechconsulting20@gmail.com')
             ->view('email.register')
             ->subject('Bienvenue sur Easytech Consulting');
     }

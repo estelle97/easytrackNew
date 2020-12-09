@@ -14,33 +14,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Twilio\Rest\Client;
+use App\Helpers\Sms;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-
-        /**
-     * Sends sms to user using Twilio's programmable sms client
-     * @param String $message Body of sms
-     * @param Number $recipients string or array of phone number of recepient
-     */
-    public function sendMessage($message, $recipients)
-    {
-        $account_sid = getenv("TWILIO_SID");
-        $auth_token = getenv("TWILIO_AUTH_TOKEN");
-        $twilio_number = getenv("TWILIO_NUMBER");
-
-        $account_sid = "AC10531d636e939b0ee4c01cb7b4c0ec2a";
-        $auth_token = "18336d99571f306bcc0ff1d8c791e987";
-        $twilio_number = "+12055840409";
-
-        $client = new Client($account_sid, $auth_token);
-        $client->messages->create('+237'.$recipients,
-                ['from' => $twilio_number,
-                'body' => $message]
-        );
-    }
 
     public function makeSlug($text){
         // Replace non letter or digits by -
@@ -82,8 +60,6 @@ class Controller extends BaseController
 
     public function sendMail($to, Company $company){
         Mail::to($to)->send(new register($company));
-        flashy()->success('tout est bon pour le mail');
-
     }
 
     public function switchAccount(Request $request){
@@ -113,4 +89,50 @@ class Controller extends BaseController
 
         return 'success';
     }
+
+    public function sendSMS($phone = "698154430", $message = "test message")
+    {
+        $config = array(
+            'clientId' => config('app.clientId'),
+            'clientSecret' =>  config('app.clientSecret'),
+        );
+
+        $osms = new Sms($config);
+
+        $data = $osms->getTokenFromConsumerKey();
+        $token = array(
+            'token' => $data['access_token']
+        );
+
+
+        $response = $osms->sendSms(
+            // sender
+            'tel:+2370000',
+            // receiver
+            'tel:+237' . $phone,
+            // message
+            $message,
+            'Devscom'
+        );
+    }
+
+    /***********************************/
+    /*     Génère un mot de passe      */
+    /***********************************/
+
+    // $size : longueur du mot passe voulue
+function generatePassword($size)
+{
+    $password = '';
+
+    // Initialisation des caractères utilisables
+    $characters = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+
+    for($i=0;$i<$size;$i++)
+    {
+        $password .= ($i%2) ? strtoupper($characters[array_rand($characters)]) : $characters[array_rand($characters)];
+    }
+
+    return $password;
+}
 }

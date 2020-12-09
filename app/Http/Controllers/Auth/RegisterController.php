@@ -147,7 +147,7 @@ class RegisterController extends Controller
         $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addDays($type->duration),
             'licence_number' => 'L122L1KZ',
-            'is_active' => 1,
+            'is_active' => 0,
         ]);
 
         $this->sendMail($user->email, $company);
@@ -167,33 +167,11 @@ class RegisterController extends Controller
         return redirect()->route('login');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    /*protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }*/
+    public function testmail(){
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    /*protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }*/
+        $company = Company::find(1);
+        $this->sendMail('steve.wiltek25@gmail.com', $company);
+
+        return redirect()->route('login');
+    }
 }

@@ -94,7 +94,7 @@ class UserController extends Controller
         $company->types()->attach($type->id,[
             'end_date' => Carbon::now()->addDays($type->duration),
             'licence_number' => 'L122L1KZ',
-            'is_active' => 1,
+            'is_active' => 0,
         ]);
 
         $this->sendMail($user->email, $company);
@@ -410,10 +410,10 @@ class UserController extends Controller
     public function passwordRequest(Request $request){
         $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('tel', $request->login)->first();
         if($user){
-            $password = "newPassword";
-            $this->sendMessage(
+            $password = $this->generatePassword(8);
+            $this->sendSMS(
+                $user->tel,
                 "Votre nouveau mot de passe est le suivant: $password",
-                $user->tel
             );
 
             $user->password = bcrypt($password);
@@ -426,7 +426,7 @@ class UserController extends Controller
         }
         return response()->json([
             'message' => 'User not foud'
-        ], 401);
+        ], 404);
 
     }
 
