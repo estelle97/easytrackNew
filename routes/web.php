@@ -196,6 +196,7 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('admin/sales/site', 'Admin\SaleController@getElementBySite');
     Route::get('admin/pos', 'Admin\SaleController@create')->name('admin.sales.pos');
     Route::post('admin/sales/{sale}/destroy', 'Admin\SaleController@destroy');
+    Route::get('admin/sales/refresh', 'Admin\SaleController@refresh');
 
 
 
@@ -251,6 +252,8 @@ Route::group(['middleware' => ['auth','verifyLicence']], function() {
     Route::get('employee/sales/site', 'Employee\SaleController@getElementBySite');
     Route::get('employee/pos', 'Employee\SaleController@create')->name('employee.sales.pos');
     Route::post('employee/sales/{sale}/destroy', 'Employee\SaleController@destroy');
+    Route::get('employee/sales/refresh', 'Employee\SaleController@refresh');
+
 
 
 

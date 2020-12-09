@@ -342,6 +342,17 @@ class SaleController extends Controller
         ], 403);
     }
 
+    public function refresh(){
+
+        $ordered = (string)view('ajax.employee.sales.ordered');
+        $served = (string)view('ajax.employee.sales.served');
+
+        return response()->json([
+            'ordered' => $ordered,
+            'served' => $served
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
