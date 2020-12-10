@@ -408,12 +408,12 @@ class UserController extends Controller
      * @param String login
      */
     public function passwordRequest(Request $request){
-        $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('tel', $request->login)->first();
+        $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('phone', $request->login)->first();
         if($user){
             $password = $this->generatePassword(8);
             $this->sendSMS(
-                $user->tel,
-                "Votre nouveau mot de passe est le suivant: $password",
+                $user->phone,
+                "Votre nouveau mot de passe est le suivant". $password,
             );
 
             $user->password = bcrypt($password);
