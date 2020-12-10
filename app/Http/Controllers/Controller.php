@@ -90,7 +90,7 @@ class Controller extends BaseController
         return 'success';
     }
 
-    public function sendSMS($phone = "698154430", $message = "test message")
+    public function sendSMS($phone, $message)
     {
         $config = array(
             'clientId' => config('app.clientId'),
