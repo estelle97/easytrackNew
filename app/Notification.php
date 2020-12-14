@@ -62,7 +62,7 @@ class Notification extends Model
             'site_id' => $site->id,
             'user_id' => $user_id,
             'type' => 'commandAlert',
-            'text' => "$user->name a pris la commande SO-$sale->code du client ".$sale->customer->name,
+            'text' => "$user->name a pris la commande SO-$sale->code",
             'action' => 'sales.kanban'
         ]);
     }

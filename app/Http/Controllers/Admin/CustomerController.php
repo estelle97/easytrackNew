@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerStoreRequest;
 use App\Http\Requests\CustomerUpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -53,7 +54,6 @@ class CustomerController extends Controller
                     'phone' => $request->phone,
                     'town' => $request->town,
                     'street' => $request->street,
-                    'postal_code' => $request->postal_code,
                     'site_id' => $site->id,
                 ]);
             }

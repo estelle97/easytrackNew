@@ -78,8 +78,8 @@
         </div>
     </section>
     <div class="mb-4">
-        <button class="btn btn-primary active expenses" id='fexpenses'> chages fixes </button>
-    <button class="btn btn-primary expenses" id='vexpenses'> chages variables </button>
+        <button class="btn btn-primary active expenses" id='fexpenses'> charges fixes </button>
+    <button class="btn btn-primary expenses" id='vexpenses'> charges variables </button>
     </div>
     <section class="mb-4" id="expenses">
 

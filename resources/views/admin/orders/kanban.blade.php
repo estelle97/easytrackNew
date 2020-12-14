@@ -35,7 +35,7 @@
                                 <div class="status-dot rounded-circle bg-blue"></div>
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Commandé</h3>
                             </div>
-                            <div class="column-body col-lg-12 mt-4">
+                            <div class="ordered column-body col-lg-12 mt-4">
 
                                 @foreach (Auth::user()->companies->first()->sites->reverse() as $site)
                                     @foreach ($site->sales->where('status',0)->reverse() as $sale)
@@ -128,7 +128,7 @@
                                 <div class="status-dot rounded-circle bg-yellow"></div>
                                 <h3 class="status-type font-weight-normal m-0 ml-3">Servi</h3>
                             </div>
-                            <div class="column-body col-lg-12 mt-4">
+                            <div class="served column-body col-lg-12 mt-4">
                                 @foreach (Auth::user()->companies->first()->sites->reverse() as $site)
                                     @foreach ($site->sales->where('status',1)->reverse() as $sale)
                                         <div class="easy-kanban-card card" id="sale{{$sale->id}}">
@@ -455,6 +455,20 @@
                 }
             });
         }
+
+        function refreshSales(){
+
+            $.ajax({
+                url : '/admin/sales/refresh',
+                method : 'get',
+                success: function(data){
+                    $(".ordered").html(data.ordered);
+                    $(".served").html(data.served);
+                }
+            });
+            setTimeout(refreshSales,30000);
+        }
+        refreshSales();
     </script>
 @endsection
 

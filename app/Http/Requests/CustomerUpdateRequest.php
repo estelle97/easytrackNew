@@ -25,7 +25,7 @@ class CustomerUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone' => 'required|min:200000000|max:999999999|numeric'
+            'phone' => 'sometimes|min:200000000|max:999999999|numeric'
         ];
     }
 

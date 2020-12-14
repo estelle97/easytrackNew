@@ -150,6 +150,7 @@ class RegisterController extends Controller
             'site_id' => $site->id
         ]);
 
+
         $this->sendMail($user->email, $company);
 
         return response()->json([
@@ -157,33 +158,21 @@ class RegisterController extends Controller
         ], 201);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    /*protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }*/
+    public function activateCompanies(){
+        foreach (Company::all() as $company) {
+            $company->is_active = 1;
+            $company->save();
+        }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    /*protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }*/
+        flashy()->success('Les companies on été activées!');
+        return redirect()->route('login');
+    }
+
+    public function testmail(){
+
+        $company = Company::find(1);
+        $this->sendMail('steve.wiltek25@gmail.com', $company);
+
+        return redirect()->route('login');
+    }
 }

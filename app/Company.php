@@ -41,17 +41,19 @@ class Company extends Model
         $total = 0;
         if ($days) {
             foreach ($this->sites as $site) {
-                foreach ($site->employees->where('is_active', 1) as $emp) {
-                    $total += $emp->expenses->where('is_active', 1)
-                        ->where('date_payment', '<=', Carbon::now())
-                        ->where('date_payment', '>=', Carbon::today()->subDays($days))
-                        ->sum('amount');
+                foreach ($site->employees->where('status', 'actif') as $emp) {
+                    $total += $emp->payments->where('is_active', 1)
+                                            ->where('date_payment', '<=', Carbon::now())
+                                            ->where('date_payment', '>=', Carbon::today()->subDays($days))
+                                            ->sum('amount');
                 }
             }
         } else {
             foreach ($this->sites as $site) {
-                foreach ($site->employees->where('is_active', 1) as $emp) {
-                    $total += $emp->expenses->where('is_active', 1)->where('date_payment', '<', Carbon::now())->sum('amount');
+                foreach($site->employees->where('status', 'actif') as $emp){
+                    $total += $emp->payments->where('is_active',1)
+                                            ->where('date_payment', '<', Carbon::now())
+                                            ->sum('amount');
                 }
             }
         }
@@ -64,7 +66,7 @@ class Company extends Model
         $total = 0;
 
         foreach ($this->sites as $site) {
-            $total += $site->employees->where('is_active', 1)->sum('salary');
+            $total += $site->employees->where('status', 'actif')->sum('salary');
         }
 
         return $total;

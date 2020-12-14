@@ -143,6 +143,13 @@ class UserController extends Controller
             403);
         }
 
+        if($user->is_admin == 3){
+            return response()->json([
+                'message' => 'Superadmin accounts are not allowed to use mobile version',
+            ],
+            404);
+        }
+
         $tokenResult = $user->createToken('Personal_Access_Token');
         $token = $tokenResult->token;
 
@@ -402,12 +409,12 @@ class UserController extends Controller
      * @param String login
      */
     public function passwordRequest(Request $request){
-        $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('tel', $request->login)->first();
+        $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('phone', $request->login)->first();
         if($user){
-            $password = "newPassword";
-            $this->sendMessage(
-                "Votre nouveau mot de passe est le suivant: $password",
-                $user->tel
+            $password = $this->generatePassword(8);
+            $this->sendSMS(
+                $user->phone,
+                "Votre nouveau mot de passe est le suivant". $password,
             );
 
             $user->password = bcrypt($password);
@@ -420,7 +427,7 @@ class UserController extends Controller
         }
         return response()->json([
             'message' => 'User not foud'
-        ], 401);
+        ], 404);
 
     }
 
