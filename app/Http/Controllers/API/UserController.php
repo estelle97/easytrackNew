@@ -373,7 +373,7 @@ class UserController extends Controller
             $password = $this->generatePassword(8);
             $this->sendSMS(
                 $user->phone,
-                "Votre nouveau mot de passe est le suivant" . $password,
+                "Votre nouveau mot de passe est le suivant: " . $password
             );
 
             $user->password = bcrypt($password);
