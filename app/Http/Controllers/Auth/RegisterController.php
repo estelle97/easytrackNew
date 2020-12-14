@@ -126,13 +126,21 @@ class RegisterController extends Controller
             ], 200);
         }
 
-        DB::transaction(function () use($user, $company, $site){
+        DB::transaction(function () use($user, $company, $site, $request){
             $user->save();
                 $company->user_id = $user->id;
+                $company->is_active = 0;
                 $company->save();
                     $site->company_id = $company->id;
                     $site->save();
 
+
+            // Attach snack with his type of subscription
+            $type = \App\Type::findOrFail($request->type);
+            $company->types()->attach($type->id, [
+                'end_date' => Carbon::now()->addDays($type->duration),
+                'licence_number' => 'L122L1KZ',
+            ]);
         });
 
         $customers = Customer::create([
@@ -141,14 +149,6 @@ class RegisterController extends Controller
             'town' => $site->town,
             'site_id' => $site->id
         ]);
-
-        // Attach snack with his type of subscription
-        $type = \App\Type::findOrFail($request->type);
-        $company->types()->attach($type->id,[
-            'end_date' => Carbon::now()->addDays($type->duration),
-            'licence_number' => 'L122L1KZ',
-            'is_active' => 0,
-        ]); 
 
         $this->sendMail($user->email, $company);
 

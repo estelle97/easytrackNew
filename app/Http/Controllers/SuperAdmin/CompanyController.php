@@ -26,7 +26,8 @@ class CompanyController extends Controller
     }
 
 
-    public function store(RegisterStoreRequest $request){
+    public function store(RegisterStoreRequest $request)
+    {
 
         // Remove password_confirmation field to user array
 
@@ -48,7 +49,7 @@ class CompanyController extends Controller
             'phone1' => $request->companyphone1,
             'phone2' => $request->companyphone2,
             'town' => $request->companytown,
-            'street' =>$request->companystreet,
+            'street' => $request->companystreet,
         ]);
 
 
@@ -59,20 +60,19 @@ class CompanyController extends Controller
             'phone1' => $request->sitephone1,
             'phone2' => $request->sitephone2,
             'town' => $request->sitetown,
-            'street' =>$request->sitestreet,
+            'street' => $request->sitestreet,
         ]);
-        if($request->step != 'last'){
+        if ($request->step != 'last') {
             return response()->json([
                 "message" => "Operation success!",
             ], 200);
         }
-        DB::transaction(function () use($user, $company, $site){
+        DB::transaction(function () use ($user, $company, $site) {
             $user->save();
-                $company->user_id = $user->id;
-                $company->save();
-                    $site->company_id = $company->id;
-                    $site->save();
-
+            $company->user_id = $user->id;
+            $company->save();
+            $site->company_id = $company->id;
+            $site->save();
         });
 
         $customers = Customer::create([
@@ -84,7 +84,7 @@ class CompanyController extends Controller
 
         // Attach snack with his type of subscription
         $type = \App\Type::findOrFail($request->type);
-        $company->types()->attach($type->id,[
+        $company->types()->attach($type->id, [
             'end_date' => Carbon::now()->addDays($type->duration),
         ]);
 
@@ -93,7 +93,8 @@ class CompanyController extends Controller
         ], 201);
     }
 
-    public function subscriptionUpdate(Request $request, Company $company){
+    public function subscriptionUpdate(Request $request, Company $company)
+    {
 
 
         // $verif = null;
@@ -101,19 +102,19 @@ class CompanyController extends Controller
 
         $remainingDays = $company->subscription()->remainingDays;
 
-        if($remainingDays > 0){
+        if ($remainingDays > 0) {
             // $duration = Carbon::now()->addDays($remainingDays + $type->duration);
             // DB::table('subscriptions')->insert([
-                //     'company_id' => $company->id,
-                //     'type_id' => $type->id,
-                //     'end_date' => $duration
-                // ]);
+            //     'company_id' => $company->id,
+            //     'type_id' => $type->id,
+            //     'end_date' => $duration
+            // ]);
 
-                // $company->types()->attach($type->id, [
-                //     'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
-                // ]);
+            // $company->types()->attach($type->id, [
+            //     'end_date' => Carbon::now()->addDays($remainingDays + $type->duration)
+            // ]);
 
-                $company->types()->sync([$type->id => ['end_date' => Carbon::now()->addDays($remainingDays + $type->duration)]]);
+            $company->types()->sync([$type->id => ['end_date' => Carbon::now()->addDays($remainingDays + $type->duration)]]);
 
             // $verif = $company->subscription()->remainingDays;
         } else {
@@ -147,15 +148,16 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function update(Request $request, Company $company){
+    public function update(Request $request, Company $company)
+    {
 
-        $company->update($request->only('name','email','phone1','phone2','street','town'));
+        $company->update($request->only('name', 'email', 'phone1', 'phone2', 'street', 'town'));
         $logo = $request->file('logo');
-        if($logo){
-            $path = 'template/assets/static/companies/'.$company->activity->name.'/';
-            $fileName = $company->slug.'.'.$logo->extension();
-            $name = $path.$fileName;
-            $logo->move($path,$name);
+        if ($logo) {
+            $path = 'template/assets/static/companies/' . $company->activity->name . '/';
+            $fileName = $company->slug . '.' . $logo->extension();
+            $name = $path . $fileName;
+            $logo->move($path, $name);
             $company->logo = $name;
             $company->save();
         }
@@ -163,8 +165,9 @@ class CompanyController extends Controller
         return 'success';
     }
 
-    public function updateState(Company $company){
-        if ($company->is_active == 0){
+    public function updateState(Company $company)
+    {
+        if ($company->is_active == 0) {
             $company->is_active = 1;
         } else {
             $company->is_active = 0;
