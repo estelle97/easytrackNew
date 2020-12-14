@@ -105,7 +105,6 @@ class SaleController extends Controller
     {
         $request->validate([
             'site_id' => 'required',
-            'customer_id' => 'required',
             'order' => 'required',
         ]);
 
@@ -216,7 +215,6 @@ class SaleController extends Controller
     {
         $request->validate([
             'site_id' => 'required',
-            'customer_id' => 'required',
             'order' => 'required',
         ]);
 
