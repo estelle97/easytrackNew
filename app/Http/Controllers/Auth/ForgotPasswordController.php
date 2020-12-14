@@ -48,13 +48,14 @@ class ForgotPasswordController extends Controller
      * Detach Roles to a User
      * @param String login
      */
-    public function passwordRequest(Request $request){
+    public function passwordRequest(Request $request)
+    {
         $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('phone', $request->login)->first();
-        if($user){
+        if ($user) {
             $password = $this->generatePassword(8);
             $this->sendSMS(
                 $user->phone,
-                "Votre nouveau mot de passe est le suivant: ".$password
+                "Votre nouveau mot de passe est le suivant: " . $password
             );
 
             $user->password = bcrypt($password);

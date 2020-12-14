@@ -23,6 +23,5 @@ class TypeSeeder extends Seeder
         ];
 
         DB::table('types')->insert($types);
-
     }
 }
