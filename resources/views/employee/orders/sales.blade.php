@@ -59,7 +59,7 @@
                                     {{$sale->site->name}}
                                     </td>
                                     <td>
-                                        {{$sale->customer->name}}
+                                        {{$sale->customer->name ?? ''}}
                                     </td>
                                     <td>
                                         @if(Auth::user()->id == $sale->initiator_id)
