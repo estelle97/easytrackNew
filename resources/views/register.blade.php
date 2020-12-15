@@ -338,7 +338,7 @@
                     <div class="text-center mt-5 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="120" height="120"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-.997-4L6.76 11.757l1.414-1.414 2.829 2.829 5.656-5.657 1.415 1.414L11.003 16z" fill="rgba(47,204,113,1)"/></svg>
                     </div>
-                    <h1 class="text-center mb-3">Inscription réussie </h1>
+                    <h1 class="text-center mb-3"> Inscription réussie! Veuillez consulter vos mails </h1>
                     <div class="form-footer mb-3 px-4">
                         <a href={{route('login')}} type="text" class="btn btn-gradient btn-block btn-submit btn-no-border">
                             Se connecter
