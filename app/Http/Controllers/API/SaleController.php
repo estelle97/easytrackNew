@@ -23,7 +23,7 @@ class SaleController extends Controller
         if(Auth::user()->is_admin == 2){
             $sales = Auth::user()->companies->first()->sites->load('sales.customer','sales.initiator','sales.validator','sales.products');
         } else {
-            $sales = Auth::user()->employee->site->sales->load('customer','initiator','validator','products');
+            $sales = Auth::user()->sales->load('customer','initiator','validator','products');
         }
 
         return response()->json([
@@ -51,7 +51,6 @@ class SaleController extends Controller
     {
         $request->validate([
             'site_id' => 'required',
-            'customer_id' => 'required',
             'order' => 'required',
         ]);
 
@@ -131,7 +130,6 @@ class SaleController extends Controller
     {
         $request->validate([
             'site_id' => 'required',
-            'customer_id' => 'required',
             'order' => 'required',
         ]);
 
@@ -171,7 +169,7 @@ class SaleController extends Controller
 
             return response()->json([
                 'message' => 'sale updated susscessfully',
-                'sale' => new SaleResource($sale->load('validator')),
+                'sale' => new SaleResource(Sale::find($sale->id)->load('validator')),
             ],200);
         }
 
