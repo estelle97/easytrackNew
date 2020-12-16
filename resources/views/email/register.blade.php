@@ -4,6 +4,7 @@
   </head>
   <body>
     <h2>Easytech Consulting</h2>
+
     <p> Bonjour Monsieur/Madame {{$company->owner->name}}, <br>
         Bienvenue  sur la plateforme EASYTRACK et Merci de nous avoir fait confiance ! <br>
         Vous trouverez  ci-joint, les informations nécessaires et relatives à votre abonnement telles que: <br>

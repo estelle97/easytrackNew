@@ -171,9 +171,7 @@
 @endsection
 
 @section('scripts')
-    <script>
-
-    </script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 
     <script>
 
@@ -249,9 +247,9 @@
 
         chatInstance.utilities = {
             hashCode : s => s.split('').reduce((a,b)=>{a=((a<<10)-a)+b.charCodeAt(0);return a&a},0),
-            getTime: (date) => {
-                var datetime = new Date(date);
-                return datetime.toLocaleString('en-US', { hour: 'numeric', minute:'numeric', hour12: true });
+            getTime: (timestamp) => {
+                var datetime = dayjs.unix(timestamp).format("HH:mm");
+                return datetime;
             }
         };
 
@@ -299,7 +297,7 @@
                 chatsCollection.where('users', 'array-contains',  parseInt(idTo)).get().then((existingChats) => {
                     if (existingChats.empty == true) {
                         chatId = chatInstance.data.generateChatId(idTo);
-                        var now = Date.now();
+                        var now = dayjs().unix();
                         var colors = this.getColors();
                         var data = {
                             lastmessage: "",
@@ -323,7 +321,7 @@
                                 users: data.users,
                                 colors: data.colors,
                                 lastmessage: "",
-                                createdAt: data.created,
+                                createdAt: now,
                                 updatedAt: 0,
                             });
                         });
@@ -396,7 +394,7 @@
             },
             sendMessage: (message) => {
                 return new Promise((resolve, reject) => {
-                    var now = Date.now();
+                    var now = dayjs().unix();
                     var idTo = inbox.users.filter(user => user != authId)
                     var msgData = {
                         date: now,
@@ -530,13 +528,12 @@
 
         chatInstance.views.panel = {
             add: (chatData) => {
-                console.log('chatData: ', chatData);
                 var chatDate = "";
                 if ((chatData.lastmessage == "" ) || (chatData.lastmessage == undefined)) {
-                    chatDate = new Date(chatData.createdAt != null ? chatData.createdAt : chatData.date);
+                    chatDate = chatData.createdAt != null ? chatData.createdAt : chatData.date;
                     chatData.lastmessage = "Ecrivez un message à votre collègue"
                 } else {
-                    chatDate = new Date(chatData.updatedAt != null ? chatData.updatedAt : chatData.date);
+                    chatDate = chatData.createdAt != null ? chatData.createdAt : chatData.date;
                 }
                 if (chatData.colors == undefined) {
                     var colors = chatInstance.data.chatRoom.getColors();
@@ -662,7 +659,6 @@
             // ON MESSAGES SUBCOLLECTION CHANGE
             inbox: {
                 listen: (chatId) => {
-                    console.log('listen chatId: ', chatId);
                     inbox.roomsEvents.push({
                         chatId: chatId,
                         snapshotEvent: chatsCollection.doc(chatId).collection(chatId).onSnapshot((snapshot)  => {
@@ -670,12 +666,9 @@
                             var lastMessageId = "";
                             // Watch change on messages subcollection
                             snapshot.docChanges().forEach((change) => {
-                                console.log('change: ', change);
                                 var doc = change.doc;
                                 if ($( ".chat-room-component" ).hasClass( "active-chat" )) {
                                     var selectedChatId = $(".chat-room-component.active-chat").attr('id').split("room-").pop();
-                                    console.log('inbox > listen > activeChatId: ', activeChatId);
-                                    console.log('inbox > listen > selectedChatId: ', selectedChatId);
                                     if (activeChatId == selectedChatId) {
                                         if (change.type === "added") {
                                             chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
@@ -714,7 +707,6 @@
                             console.error("Chat error: ", error);
                         })
                     });
-                    console.log('inbox.roomsEvents: ', inbox.roomsEvents);
                 }
             }
         };
