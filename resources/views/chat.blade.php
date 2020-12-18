@@ -532,6 +532,8 @@
 
         chatInstance.views.panel = {
             add: (chatData) => {
+                console.log("🚀 chatInstance.views.panel", chatData)
+
                 var chatDate = "";
                 if ((chatData.lastmessage == "" ) || (chatData.lastmessage == undefined)) {
                     chatDate = chatData.createdAt != null ? chatData.createdAt : chatData.date;
