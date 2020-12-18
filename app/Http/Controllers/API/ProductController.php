@@ -25,7 +25,7 @@ class ProductController extends Controller
                 $query->wherePivot('qty','>',0)->with('category');
             }]);
         } else {
-            $products = Auth::user()->employee->site->products->load('category');
+            $products = Auth::user()->employee->site->products->where('pivot.qty', '>', 0)->load('category');
         }
 
         return response()->json([

@@ -23,7 +23,8 @@ class SiteController extends Controller
         if(Auth::user()->is_admin == 2){
             $sites = Auth::user()->companies->first()->sites;
         } else {
-            $sites = Auth::user()->employee->site;
+            $site = Auth::user()->employee->site;
+            return new SiteResource($site->loadMissing('employees.user.role','customers','suppliers'));
         }
         return SiteResource::collection($sites->load('employees.user.role','customers','suppliers'));
     }

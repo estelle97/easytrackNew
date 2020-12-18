@@ -22,7 +22,7 @@ class PurchaseController extends Controller
         if(Auth::user()->is_admin == 2){
             $purchases = Auth::user()->companies->first()->sites->load('purchases.supplier','purchases.initiator','purchases.validator');
         } else {
-            $purchases = Auth::user()->employee->site->purchases->load('supplier','initiator','validator');
+            $purchases = Auth::user()->purchases->load('supplier','initiator','validator');
         }
 
         return response()->json([
