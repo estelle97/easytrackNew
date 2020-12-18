@@ -646,7 +646,8 @@
                             var doc = change.doc;
                             if (change.type === "added") {
                                 console.log('doc.data().users: ', doc.data().users);
-                                if ((doc.data().users[0] == authId) || (doc.data().users[1] == authId)) {
+                                if ($(`#chat-room-${chatId}`).length  > 0) {
+                                    if ((doc.data().users[0] == authId) || (doc.data().users[1] == authId)) {
                                     chatInstance.views.panel.add({
                                         id: doc.id,
                                         users: doc.data().users,
@@ -657,17 +658,18 @@
                                         lastmessage: doc.data().lastmessage
                                     });
                                     setTimeout(() => {
-                                        chatInstance.events.firebase.inbox.listen(doc.id);
-                                    }, 2000);
+                                            chatInstance.events.firebase.inbox.listen(doc.id);
+                                        }, 2000);
+                                    }
                                 }
                             }
                             if (change.type === "modified") {
 
                             }
                             if (change.type === "removed") {
-                                chatInstance.views.panel.delete(change.doc.id);
+                                chatInstance.views.panel.delete(doc.id);
                                 chatInstance.views.navigation.delete();
-                                chatInstance.events.firebase.inbox.delete(change.doc.id);
+                                chatInstance.events.firebase.inbox.delete(doc.id);
                             }
                         });
                     }, (error) => {
@@ -728,8 +730,8 @@
                     });
                 },
                 delete: (id) => {
-                    _.remove(inbox.roomsEvents, function(n) {
-                        return chatId == id;
+                    _.remove(inbox.roomsEvents, function(room) {
+                        return room.chatId == id;
                     });
                 }
             }
