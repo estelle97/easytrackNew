@@ -727,7 +727,7 @@
                     });
                 },
                 delete: (id) => {
-                    _.remove(nbox.roomsEvents, function(n) {
+                    _.remove(inbox.roomsEvents, function(n) {
                         return chatId == id;
                     });
                 }
