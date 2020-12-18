@@ -670,6 +670,9 @@
                                         lastmessage: doc.data().lastmessage
                                     });
                                     setTimeout(() => {
+                                        chatInstance.views.navigation.init();
+                                    }, 500);
+                                    setTimeout(() => {
                                         chatInstance.events.firebase.inbox.listen(doc.id);
                                     }, 2000);
                                 }
