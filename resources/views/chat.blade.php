@@ -319,14 +319,14 @@
                             $('.modal-backdrop').remove();
 
 
-                            chatInstance.views.panel.add({
+                            /* chatInstance.views.panel.add({
                                 id: chatId.toString(),
                                 users: data.users,
                                 colors: data.colors,
                                 lastmessage: "",
                                 createdAt: now,
                                 updatedAt: 0,
-                            });
+                            }); */
 
                             // Load inbox
                             /* chatInstance.views.navigation.update(chatId, {
@@ -659,7 +659,7 @@
                         snapshot.docChanges().forEach((change) => {
                             var doc = change.doc;
                             if (change.type === "added") {
-                                /* if ((doc.data().users[0] == authId) || (doc.data().users[1] == authId)) {
+                                if ((doc.data().users[0] == authId) || (doc.data().users[1] == authId)) {
                                     chatInstance.views.panel.add({
                                         id: doc.id,
                                         users: doc.data().users,
@@ -672,7 +672,7 @@
                                     setTimeout(() => {
                                         chatInstance.events.firebase.inbox.listen(doc.id);
                                     }, 2000);
-                                } */
+                                }
                             }
                             if (change.type === "modified") {
 
