@@ -298,7 +298,7 @@
                 chatsCollection.where('users', 'array-contains',  parseInt(idTo)).get().then((existingChats) => {
                     if (existingChats.empty == true) {
                         chatId = chatInstance.data.generateChatId(idTo);
-                        var now = dayjs().unix();
+                        var now = dayjs().valueOf();
                         var colors = this.getColors();
                         var data = {
                             lastmessage: "",
@@ -395,7 +395,7 @@
             },
             sendMessage: (message) => {
                 return new Promise((resolve, reject) => {
-                    var now = dayjs().unix();
+                    var now = dayjs().valueOf()
                     var idTo = inbox.users.filter(user => user != authId)
                     var msgData = {
                         date: now,
@@ -643,7 +643,18 @@
                     chatsCollection.onSnapshot((snapshot)  => {
                         // Watch change on messages collection
                         snapshot.docChanges().forEach((change) => {
-                            if (change.type === "added") {}
+                            var doc = change.doc;
+                            if (change.type === "added") {
+                                chatInstance.views.panel.add({
+                                    id: doc.id,
+                                    users: doc.data().users,
+                                    colors: doc.data().colors,
+                                    date: doc.data().date,
+                                    createdAt: doc.data().created,
+                                    updatedAt: doc.data().updated,
+                                    lastmessage: doc.data().lastmessage
+                                });
+                            }
                             if (change.type === "modified") {
 
                             }
