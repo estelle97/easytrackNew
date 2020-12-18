@@ -317,14 +317,14 @@
 
 
                             // Load inbox
-                            chatInstance.views.navigation.update(chatId, {
+                            /* chatInstance.views.navigation.update(chatId, {
                                 id: chatId.toString(),
                                 users: data.users,
                                 colors: data.colors,
                                 lastmessage: "",
                                 createdAt: now,
                                 updatedAt: 0,
-                            });
+                            }); */
                         });
                     } else {
                         alert("Conversation existante !!!");
