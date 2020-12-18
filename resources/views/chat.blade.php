@@ -249,7 +249,7 @@
         chatInstance.utilities = {
             hashCode : s => s.split('').reduce((a,b)=>{a=((a<<10)-a)+b.charCodeAt(0);return a&a},0),
             getTime: (timestamp) => {
-                var datetime = dayjs.unix(timestamp).format("HH:mm");
+                var datetime = dayjs(timestamp).format("HH:mm");
                 return datetime;
             }
         };
