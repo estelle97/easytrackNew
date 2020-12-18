@@ -645,6 +645,7 @@
                         snapshot.docChanges().forEach((change) => {
                             var doc = change.doc;
                             if (change.type === "added") {
+                                console.log('doc.data().users: ', doc.data().users);
                                 if ((doc.data().users[0] == authId) || (doc.data().users[1] == authId)) {
                                     chatInstance.views.panel.add({
                                         id: doc.id,
