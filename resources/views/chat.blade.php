@@ -645,18 +645,20 @@
                         snapshot.docChanges().forEach((change) => {
                             var doc = change.doc;
                             if (change.type === "added") {
-                                chatInstance.views.panel.add({
-                                    id: doc.id,
-                                    users: doc.data().users,
-                                    colors: doc.data().colors,
-                                    date: doc.data().date,
-                                    createdAt: doc.data().created,
-                                    updatedAt: doc.data().updated,
-                                    lastmessage: doc.data().lastmessage
-                                });
-                                setTimeout(() => {
-                                    chatInstance.events.firebase.inbox.listen(doc.id);
-                                }, 2000);
+                                if ((doc.data().users[0] == authId) || (doc.data().users[1] == authId)) {
+                                    chatInstance.views.panel.add({
+                                        id: doc.id,
+                                        users: doc.data().users,
+                                        colors: doc.data().colors,
+                                        date: doc.data().date,
+                                        createdAt: doc.data().created,
+                                        updatedAt: doc.data().updated,
+                                        lastmessage: doc.data().lastmessage
+                                    });
+                                    setTimeout(() => {
+                                        chatInstance.events.firebase.inbox.listen(doc.id);
+                                    }, 2000);
+                                }
                             }
                             if (change.type === "modified") {
 
