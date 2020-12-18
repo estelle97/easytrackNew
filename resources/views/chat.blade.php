@@ -277,7 +277,7 @@
                 return new Promise((resolve, reject) => {
                     console.log("Search chatrooms...");
                     chatsCollection.where('users', 'array-contains',  parseInt(authId)).get().then((querySnapshot) => {
-                        if (querySnapshot.empty == false) {
+                        /* if (querySnapshot.empty == false) {
                             querySnapshot.forEach(doc => {
                                 chatInstance.views.panel.add({
                                     id: doc.id,
@@ -292,7 +292,7 @@
                                     chatInstance.events.firebase.inbox.listen(doc.id);
                                 }, 2000);
                             });
-                        }
+                        } */
                         resolve(querySnapshot);
                     });
                 });
