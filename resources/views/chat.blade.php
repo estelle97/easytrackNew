@@ -172,6 +172,7 @@
 
 @section('scripts')
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
 
     <script>
 
@@ -649,6 +650,7 @@
                             if (change.type === "removed") {
                                 chatInstance.views.panel.delete(change.doc.id);
                                 chatInstance.views.navigation.delete();
+                                chatInstance.events.firebase.inbox.delete(change.doc.id);
                             }
                         });
                     }, (error) => {
@@ -706,6 +708,11 @@
                         }, (error) => {
                             console.error("Chat error: ", error);
                         })
+                    });
+                },
+                delete: (id) => {
+                    _.remove(nbox.roomsEvents, function(n) {
+                        return chatId == id;
                     });
                 }
             }
