@@ -197,6 +197,7 @@
                     },
                     success: (data) => {
                         contacts = data.contacts;
+                        console.log("Contacts loaded...");
                         resolve("done");
                     }
                 });
