@@ -186,8 +186,8 @@
         function getContacts() {
             return new Promise((resolve, reject) => {
                 token = '{{@csrf_token()}}';
-
                 console.log("Loading contacts...");
+                chatInstance.views.inbox.disable.view();
 
                 $.ajax({
                     url: 'chat/contacts',
@@ -197,7 +197,6 @@
                     },
                     success: (data) => {
                         contacts = data.contacts;
-                        chatInstance.views.inbox.disable.view();
                         resolve("done");
                     }
                 });
@@ -234,18 +233,20 @@
         // Chat properties
         chatInstance.init = () => {
             console.log("init...");
-            chatInstance.data.chatRoom.list().then(() => {
-                console.log("Search completed.");
-                setTimeout(() => {
-                    chatInstance.views.navigation.init().then(() => {
-                        chatInstance.events.firebase.chatRoom.listen();
-                        chatInstance.events.ui.init();
-                        console.log("Events Loaded.");
-                        // Remove loader
-                        $(".section-loader").hide();
-                    });
-                }, 500);
-            });
+            setTimeout(() => {
+                chatInstance.data.chatRoom.list().then(() => {
+                    console.log("Search completed.");
+                    setTimeout(() => {
+                        chatInstance.views.navigation.init().then(() => {
+                            chatInstance.events.firebase.chatRoom.listen();
+                            chatInstance.events.ui.init();
+                            console.log("Events Loaded.");
+                            // Remove loader
+                            $(".section-loader").hide();
+                        });
+                    }, 500);
+                });
+            }, 1500);
         };
 
         chatInstance.utilities = {
@@ -829,9 +830,7 @@
         // Set chat instance
         window.onload = () => {
             getContacts().then(() => {
-                setTimeout(() => {
-                    chatInstance.init();
-                }, 2000);
+                chatInstance.init();
             });
         };
     </script>
