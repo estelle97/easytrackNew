@@ -468,6 +468,20 @@
                     }, 500);
                 });
             },
+            refresh: () => {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        var chatRooms = $('.chat-room-component');
+                        if (chatRooms.get() == 0) {
+                            $(".chat-room").hide();
+                            $(".chat-room-empty").addClass("d-flex");
+                        } else {
+                            $(".chat-room-empty").hide();
+                        }
+                        resolve("done");
+                    }, 500);
+                });
+            },
             select: (chatId) => {
                 // Set room
                 chatInstance.data.inbox.set(chatId).then(() => {
@@ -670,8 +684,8 @@
                                         lastmessage: doc.data().lastmessage
                                     });
                                     setTimeout(() => {
-                                        chatInstance.views.navigation.init();
-                                    }, 500);
+                                        chatInstance.views.navigation.refresh();
+                                    }, 100);
                                     setTimeout(() => {
                                         chatInstance.events.firebase.inbox.listen(doc.id);
                                     }, 2000);
