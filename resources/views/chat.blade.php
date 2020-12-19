@@ -197,7 +197,7 @@
                     },
                     success: (data) => {
                         contacts = data.contacts;
-                        // console.log('contacts', contacts[0].role.name);
+                        console.log("🚀 ~ file: chat.blade.php ~ line 200 ~ returnnewPromise ~ contacts", contacts);
                         resolve("done");
                     }
                 });
@@ -557,8 +557,6 @@
 
         chatInstance.views.panel = {
             add: (chatData) => {
-                console.log("🚀 chatInstance.views.panel", chatData)
-
                 var chatDate = "";
                 if ((chatData.lastmessage == "" ) || (chatData.lastmessage == undefined)) {
                     chatDate = chatData.createdAt != null ? chatData.createdAt : chatData.date;
