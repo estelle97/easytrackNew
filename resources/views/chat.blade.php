@@ -238,10 +238,10 @@
             chatInstance.data.chatRoom.list().then(() => {
                 console.log("Search completed.");
                 chatInstance.events.firebase.chatRoom.listen();
-                chatInstance.events.ui.init();
-                console.log("Events Loaded.");
                 setTimeout(() => {
                     chatInstance.views.navigation.init().then(() => {
+                        chatInstance.events.ui.init();
+                        console.log("Events Loaded.");
                         // Remove loader
                         $(".section-loader").hide();
                     });
