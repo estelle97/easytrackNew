@@ -347,9 +347,11 @@
             getTitle: (users) => {
                 if (authId == users[0]) {
                     var userData = chatInstance.data.user.get(users[1]);
+                    console.log("🚀 ~ file: chat.blade.php ~ line 350 ~ userData", userData);
                     return userData.name;
                 } else {
                     var userData = chatInstance.data.user.get(users[0]);
+                    console.log("🚀 ~ file: chat.blade.php ~ line 353 ~ userData", userData);
                     return userData.name;
                 }
             },
