@@ -237,9 +237,9 @@
             chatInstance.views.inbox.disable.view();
             chatInstance.data.chatRoom.list().then(() => {
                 console.log("Search completed.");
-                chatInstance.events.firebase.chatRoom.listen();
                 setTimeout(() => {
                     chatInstance.views.navigation.init().then(() => {
+                        chatInstance.events.firebase.chatRoom.listen();
                         chatInstance.events.ui.init();
                         console.log("Events Loaded.");
                         // Remove loader
@@ -277,7 +277,7 @@
                 return new Promise((resolve, reject) => {
                     console.log("Search chatrooms...");
                     chatsCollection.where('users', 'array-contains',  parseInt(authId)).get().then((querySnapshot) => {
-                        /* if (querySnapshot.empty == false) {
+                        if (querySnapshot.empty == false) {
                             querySnapshot.forEach(doc => {
                                 chatInstance.views.panel.add({
                                     id: doc.id,
@@ -292,7 +292,7 @@
                                     chatInstance.events.firebase.inbox.listen(doc.id);
                                 }, 2000);
                             });
-                        } */
+                        }
                         resolve(querySnapshot);
                     });
                 });
@@ -674,21 +674,23 @@
                             var doc = change.doc;
                             if (change.type === "added") {
                                 if ((doc.data().users[0] == authId) || (doc.data().users[1] == authId)) {
-                                    chatInstance.views.panel.add({
-                                        id: doc.id,
-                                        users: doc.data().users,
-                                        colors: doc.data().colors,
-                                        date: doc.data().date,
-                                        createdAt: doc.data().created,
-                                        updatedAt: doc.data().updated,
-                                        lastmessage: doc.data().lastmessage
-                                    });
-                                    setTimeout(() => {
-                                        chatInstance.views.navigation.refresh();
-                                    }, 100);
-                                    setTimeout(() => {
-                                        chatInstance.events.firebase.inbox.listen(doc.id);
-                                    }, 2000);
+                                    if ($(`#chat-room-${doc.id}`).length < 0) {
+                                        chatInstance.views.panel.add({
+                                            id: doc.id,
+                                            users: doc.data().users,
+                                            colors: doc.data().colors,
+                                            date: doc.data().date,
+                                            createdAt: doc.data().created,
+                                            updatedAt: doc.data().updated,
+                                            lastmessage: doc.data().lastmessage
+                                        });
+                                        setTimeout(() => {
+                                            chatInstance.views.navigation.refresh();
+                                        }, 100);
+                                        setTimeout(() => {
+                                            chatInstance.events.firebase.inbox.listen(doc.id);
+                                        }, 2000);
+                                    }
                                 }
                             }
                             if (change.type === "modified") {
