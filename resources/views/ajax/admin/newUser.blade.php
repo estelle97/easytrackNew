@@ -44,9 +44,9 @@
                             <a class="dropdown-item" href="{{route('admin.user.show', $emp->user->username)}}">
                                 Gérer l'employé
                             </a>
-                            <a class="dropdown-item" href="#">
+                            {{-- <a class="dropdown-item" href="#">
                                 Envoyer un message
-                            </a>
+                            </a> --}}
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal"
                                 data-target="#modal-delete-user{{$emp->user->id}}">

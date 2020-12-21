@@ -145,9 +145,9 @@
                                         <a class="dropdown-item" href="{{route('admin.user.show', $emp->user->username)}}">
                                             Gérer l'employé
                                         </a>
-                                        <a class="dropdown-item" href="{{route('chat',$emp->user->id)}}">
+                                        {{-- <a class="dropdown-item" href="{{route('chat',$emp->user->id)}}">
                                             Envoyer un message
-                                        </a>
+                                        </a> --}}
                                         <div class="dropdown-divider"></div>
                                         @if(Auth::user()->role->slug == 'manager' || Auth::user()->may('delete_employee'))
                                             <a class="dropdown-item" href="#" data-toggle="modal"
