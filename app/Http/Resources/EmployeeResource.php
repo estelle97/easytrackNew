@@ -16,9 +16,9 @@ class EmployeeResource extends JsonResource
     {
         return [
             'employee_id' => $this->id,
+            'cni_number' => $this->cni_number,
             'contact_name' => $this->contact_name,
             'contact_phone' => $this->contact_phone,
-            'cni_number' => $this->cni_number,
             'user' => new UserResource($this->whenLoaded('user')),
             'site' => new SiteResource($this->whenLoaded('site')),
         ];

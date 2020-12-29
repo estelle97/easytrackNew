@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-   
+
 
     /**
      * Show the application dashboard.
@@ -29,10 +29,36 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.dashboard');
+
+    $sales = [];
+    $purchases = [];
+    $dates = [];
+    for ($i=30; $i >= 0; $i--) {
+        $totalSales = 0;
+        $totalPurchases = 0;
+        foreach(Auth::user()->companies->first()->sites as $site){
+            foreach($site->sales->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $sale){
+                $totalSales += $sale->total();
+            }
+        }
+
+        foreach(Auth::user()->companies->first()->sites as $site){
+            foreach($site->purchases->where('created_at', '>' , \Carbon\Carbon::today()->subDay($i)->startOfDay())->where('created_at', '<' , \Carbon\Carbon::today()->subDay($i)->endOfDay()) as $purchase){
+                $totalPurchases += $purchase->total();
+            }
+        }
+
+        $sales[] = $totalSales;
+        $purchases[] = $totalPurchases;
+        $dates[]= \Carbon\Carbon::today()->subDays($i)->toDateString();
     }
 
-    
+    // dump($purchases); dump($sales);  dump($dates);
+
+        return view('admin.dashboard', compact('purchases','sales','dates'));
+    }
+
+
 
     public function profile()
     {
@@ -52,7 +78,7 @@ class DashboardController extends Controller
             'address' => 'required',
             'phone' => 'required|min:200000000|max:999999999|numeric'
         ]);
-        
+
         $user = Auth::user();
 
         $user->name = $request->name;
@@ -61,9 +87,19 @@ class DashboardController extends Controller
         $user->address = $request->address;
         $user->phone = $request->phone;
         $user->bio = $request->bio;
+
+        $photo = $request->file('photo');
+        if($photo){
+            $path = 'template/assets/static/users/'.Auth::user()->companies->first()->name.'/admin/';
+            $fileName = $request->username.'.'.$photo->extension();
+            $name = $path.$fileName;
+            $photo->move($path,$name);
+            $user->photo = $name;
+        }
+
         $user->save();
-        
-        Notify::info("Profil mis à jour avec succès!");
+
+        flashy()->info("Profil mis à jour avec succès!");
         return redirect()->back();
     }
 
@@ -71,13 +107,13 @@ class DashboardController extends Controller
         return view('admin.profileSetting');
     }
 
-    
+
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
-        Notify::info("Nous espérons vous revoir bientôt!", 'Au revoir');
+        flashy()->info("Nous espérons vous revoir bientôt!", 'Au revoir');
         return redirect('/login');
-        
+
       }
 
 

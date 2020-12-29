@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use App\Site;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Extension\HeadingPermalink\Slug\DefaultSlugGenerator;
 use League\CommonMark\Normalizer\SlugNormalizer;
 
@@ -18,7 +20,34 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection(Product::where('active','1')->get()->load('category','sites'));
+        if(Auth::user()->is_admin == 2){
+            $products = Auth::user()->companies->first()->sites->load(['products' => function($query){
+                $query->wherePivot('qty','>',0)->with('category');
+            }]);
+        } else {
+            $products = Auth::user()->employee->site->products->where('pivot.qty', '>', 0)->load('category');
+        }
+
+        return response()->json([
+            'products' => $products
+        ]);
+    }
+
+    public function getProductsByCategory($category_id){
+        if(Auth::user()->is_admin == 2){
+            $products = Auth::user()->companies->first()->sites->load(['products' => function($query){
+                $query->where('products.category_id', 1)->get();
+            }]);
+        } else{
+            $products = Auth::user()->employee->sites->load(['products' => function($query){
+                $query->where('products.category_id', 1)->get();
+            }]);
+
+        }
+
+        return response()->json([
+            'products' => $products
+        ], 200);
     }
 
     /**
@@ -96,7 +125,7 @@ class ProductController extends Controller
      * @param String brand
      * @param String description [Optional]
      * @param Integer category_id
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -130,8 +159,12 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Site $site ,Product $product)
     {
-        //
+        $site->products()->detach($product->id);
+
+        return response()->json([
+            'message' => 'product removed to site',
+        ]);
     }
 }

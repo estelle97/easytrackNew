@@ -16,7 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return CompanyResource::collection(Company::where('is_active', '1')->get()->load('sites','types'));
+        return CompanyResource::collection(Company::all()->load('owner','sites.employees.user.role','types','activity'));
     }
 
     /**
@@ -80,8 +80,9 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        return new CompanyResource($company->loadMissing('user','sites.users','sites.suppliers','types'));
+        return new CompanyResource($company->loadMissing('owner','sites.employees.user.role','types','activity'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

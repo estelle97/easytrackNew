@@ -14,7 +14,6 @@ class CreateProductPurchaseTable extends Migration
     public function up()
     {
         Schema::create('product_purchase', function (Blueprint $table) {
-            $table->integer('supplier_id')->nullable();
             $table->integer('product_id')->nullable();
             $table->integer('purchase_id')->nullable();
             $table->integer('site_id')->nullable();
@@ -26,7 +25,7 @@ class CreateProductPurchaseTable extends Migration
             $table->softDeletes();
         });
     }
-  
+
     /**
      * Reverse the migrations.
      *

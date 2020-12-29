@@ -8,6 +8,7 @@ use App\Role;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Permissions\HasPermissionsTrait;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+
     use HasApiTokens,HasPermissionsTrait, SoftDeletes;
     use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
@@ -60,22 +61,95 @@ class User extends Authenticatable
         return $this->hasMany('App\Company');
     }
 
-    //Check if user is online
-    public function isOnline(){
-        return Cache::has('user-is-online-'. $this->id);
-    }
-
     public function employee(){
         return $this->hasOne('App\Employee');
     }
 
-    public function permissions() {
-  
-      return $this->belongsToMany(Permission::class);
-  
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
     }
-    
-    public function role() {
-        return $this->belongsTo(Role::class);
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class,'permission_user');
     }
+
+    public function actions(){
+        return $this->hasMany('App\Action','initiator_id');
+    }
+
+    public function sales(){
+        return $this->hasMany('App\Sale', 'initiator_id');
+    }
+
+    public function purchases(){
+        return $this->hasMany('App\Purchase', 'initiator_id');
+    }
+
+    public function teams(){
+        return $this->belongsToMany('App\Team');
+    }
+
+    public function notifications(){
+        return $this->hasMany('App\Notification');
+    }
+
+    public function payrools(){
+        return $this->hasMany('App\Payrool');
+    }
+
+    public function totalSales($days = null){
+        $total = 0;
+        if($days){
+            if(strlen($days) < 4){
+                foreach($this->sales->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $sale){
+                    $total += $sale->total();
+                }
+            } else {
+                foreach($this->sales->where('created_at','>=', $days.' 00:00:00')->where('created_at','<=', $days.' 23:59:59')->where('validator_id','!=', null) as $sale){
+                    $total += $sale->total();
+                }
+            }
+        } else {
+            foreach($this->sales->where('validator_id','!=', null) as $sale){
+                $total += $sale->total();
+            }
+        }
+
+        return $total;
+    }
+
+    public function totalPurchases($days = null){
+        $total = 0;
+        if($days){
+            if(strlen($days) < 4){
+                foreach($this->purchases->where('created_at','>', Carbon::today()->subDays($days))->where('validator_id','!=', null) as $purchase){
+                    $total += $purchase->total();
+                }
+            } else {
+                foreach($this->purchases->where('created_at','>=', $days.' 00:00:00')->where('created_at','<=', $days.' 23:59:59')->where('validator_id','!=', null) as $purchase){
+                    $total += $purchase->total();
+                }
+            }
+        } else {
+            foreach($this->purchases->where('validator_id','!=', null) as $purchase){
+                $total += $purchase->total();
+            }
+        }
+
+        return $total;
+    }
+
+    public function salesPercentage(){
+        if($this->employee->site->totalSales() == 0) return 0;
+        return ($this->totalSales() / $this->employee->site->totalSales())*100;
+    }
+
+
+    public function purchasesPercentage(){
+        if($this->employee->site->totalPurchases() == 0) return 0;
+        return ($this->totalPurchases() / $this->site->totalPurchases())*100;
+    }
+
 }

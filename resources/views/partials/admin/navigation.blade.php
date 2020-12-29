@@ -2,7 +2,7 @@
     <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href={{route('admin.dashboard')}}>
+                <a class="nav-link" href="{{route('admin.dashboard')}}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                             height="24" class="icon">
@@ -20,32 +20,31 @@
                 <a class="nav-link dropdown-toggle" href="#navbar-layout" data-toggle="dropdown"
                     role="button" aria-expanded="false">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                            height="24" class="icon">
-                            <path fill="none" d="M0 0h24v24H0z" />
-                            <path
-                                d="M6.5 2h11a1 1 0 0 1 .8.4L21 6v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6l2.7-3.6a1 1 0 0 1 .8-.4zM19 8H5v12h14V8zm-.5-2L17 4H7L5.5 6h13zM9 10v2a3 3 0 0 0 6 0v-2h2v2a5 5 0 0 1-10 0v-2h2z"
-                                fill="rgba(255,255,255,0.8)" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 19V5.7a1 1 0 0 1 .658-.94l9.671-3.516a.5.5 0 0 1 .671.47v4.953l6.316 2.105a1 1 0 0 1 .684.949V19h2v2H1v-2h2zm2 0h7V3.855L5 6.401V19zm14 0v-8.558l-5-1.667V19h5z" fill="rgba(255,255,255, 0.8)"/></svg>
                     </span>
                     <span class="nav-link-title">
                         Sites
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="active">
-                        <a class="dropdown-item" href="./products.html">
+                    <li>
+                        <a class="dropdown-item" href="{{route('admin.products')}}">
                             Produits
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="./vendors.html">
+                        <a class="dropdown-item" href="/admin/customers">
+                            Clients
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/admin/suppliers">
                             Fournisseurs
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href={{route('admin.sites')}}>
-                            Gérer Sites
+                        <a class="dropdown-item" href="{{route('admin.sites')}}">
+                            Gérer les sites
                         </a>
                     </li>
                 </ul>
@@ -58,7 +57,7 @@
                             height="24" class="icon">
                             <path fill="none" d="M0 0h24v24H0z" />
                             <path
-                                d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1zm2 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+                                d="M6.5 2h11a1 1 0 0 1 .8.4L21 6v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6l2.7-3.6a1 1 0 0 1 .8-.4zM19 8H5v12h14V8zm-.5-2L17 4H7L5.5 6h13zM9 10v2a3 3 0 0 0 6 0v-2h2v2a5 5 0 0 1-10 0v-2h2z"
                                 fill="rgba(255,255,255,0.8)" />
                         </svg>
                     </span>
@@ -68,35 +67,29 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="active">
-                        <a class="dropdown-item" href="./salesorders.html">
+                        <a class="dropdown-item" href="{{route('admin.sales.kanban')}}">
                             Commandes clients
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="./purchaseorders.html">
+                        <a class="dropdown-item" href="{{route('admin.purchases')}}">
                             Bons de commandes
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./invoices.html">
+                <a class="nav-link" href="{{route('admin.reports')}}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                            height="24" class="icon">
-                            <path fill="none" d="M0 0h24v24H0z" />
-                            <path
-                                d="M21 8v12.993A1 1 0 0 1 20.007 22H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8zm-2 1h-5V4H5v16h14V9z"
-                                fill="rgba(255,255,255,0.8)" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 12h2v9H3v-9zm16-4h2v13h-2V8zm-8-6h2v19h-2V2z" fill="rgba(255,255,255, 0.8)"/></svg>
                     </span>
                     <span class="nav-link-title">
-                        Facturations
+                        Rapports
                     </span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href={{route('admin.company.users')}}>
+                <a class="nav-link" href="{{route('admin.company.users')}}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                             height="24" class="icon">
@@ -107,12 +100,28 @@
                         </svg>
                     </span>
                     <span class="nav-link-title">
-                        Utilisateurs
+                        employés
                     </span>
                 </a>
             </li>
         </ul>
-        
-        @yield('search-form')
+        {{-- <div
+            class="ml-md-auto pl-md-4 py-2 py-md-0 mr-md-4 order-first order-md-last flex-grow-1 flex-md-grow-0">
+            <form action="." method="get">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <circle cx="10" cy="10" r="7" />
+                            <line x1="21" y1="21" x2="15" y2="15" />
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control form-control-rounded form-control-dark"
+                        placeholder="Search…" />
+                </div>
+            </form>
+        </div> --}}
     </div>
 </div>

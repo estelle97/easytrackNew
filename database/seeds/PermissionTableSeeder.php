@@ -13,39 +13,50 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            ['name' => 'Créer un utilisateur', 'slug' => 'user_create'],
-            ['name' => 'Modifier un utilisateur', 'slug' => 'user_update'],
-            ['name' => 'Afficher les utilisateurs', 'slug' => 'user_show'],
+            ['name' => 'Consulter les employés', 'slug' => 'show_employee'],
+            ['name' => 'Gérer les employés', 'slug' => 'manage_employee'],
             ['name' => 'Supprimer un utilisateur', 'slug' => 'user_delete'],
-            ['name' => 'Creer un rôle/permission', 'slug' => 'permission_create'],
-            ['name' => 'Modifier un rôle/permission', 'slug' => 'permission_update'],
-            ['name' => 'Afficher les rôles/permission', 'slug' => 'permission_show'],
-            ['name' => 'Supprimer un rôle/permission', 'slug' => 'permission_delete'],
-            ['name' => 'Gérer les abonnements', 'slug' => 'subscription_manage'],
-            ['name' => 'Etablir un bon de commande', 'slug' => 'bill_create'],
-            ['name' => 'Modifier un bon de commande', 'slug' => 'bill_update'],
-            ['name' => 'Supprimer un bon de commande', 'slug' => 'bill_delete'],
-            ['name' => 'Afficher un bon de commande', 'slug' => 'bill_show'],
-            ['name' => 'Annuler un bon de commande', 'slug' => 'bill_cancel'],
-            ['name' => 'Imprimer un bon de commande', 'slug' => 'bill_print'],
-            ['name' => 'Etablir une facture', 'slug' => 'invoice_create'],
-            ['name' => 'Modifier une facture', 'slug' => 'invoice_update'],
-            ['name' => 'Afficher une facture', 'slug' => 'invoice_create'],
-            ['name' => 'Supprimer une facture', 'slug' => 'invoice_delete'],
-            ['name' => 'Valider une facture', 'slug' => 'invoice_validate'],
-            ['name' => 'Annuler une facture', 'slug' => 'invoice_cancel'],
-            ['name' => 'Imprimer une facture', 'slug' => 'invoice_print'],
-            ['name' => 'Gérer les categories', 'slug' => 'category_manage'],
-            ['name' => 'Consulter les statistiques', 'slug' => 'reports'],
-            ['name' => 'Gérer les charges', 'slug' => 'budget_manage'],
+
+            ['name' => 'Consulter les permissions', 'slug' => 'show_permissions'],
+            ['name' => 'Gérer le rôle et les Permisisons', 'slug' => 'manage_role_and_permissions'],
+
+            ['name' => 'Consulter les bons de commandes', 'slug' => 'show_purchase_orders'],
+            ['name' => 'Imprimer les bons de commande', 'slug' => 'print_purchase_orders'],
+            ['name' => 'Etablir les bons de commande', 'slug' => 'create_purchase_orders'],
+            ['name' => 'Valider les bons de commande', 'slug' => 'validate_purchase_orders'],
+            ['name' => 'Supprimer les bons de commande', 'slug' => 'delete_purchase_orders'],
+
+            ['name' => 'Consulter les commandes clientes', 'slug' => 'show_sale_orders'],
+            ['name' => 'Imprimer les commandes clientes', 'slug' => 'print_sale_orders'],
+            ['name' => 'Etablir les commandes clientes', 'slug' => 'create_sale_orders'],
+            ['name' => 'Valider les commandes clientes', 'slug' => 'validate_sale_orders'],
+            ['name' => 'Supprimer les commandes clientes', 'slug' => 'delete_sale_orders'],
+
+            ['name' => 'Gérer le site', 'slug' => 'manage_site'],
+
+
+            ['name' => 'Consulter la liste de produits', 'slug' => 'show_products'],
+            ['name' => 'Modifier les produits', 'slug' => 'update_products'],
+            ['name' => 'Supprimer les produits', 'slug' => 'delete_products'],
+
+
+            ['name' => 'Consulter la liste des fournisseurs', 'slug' => 'show_suppliers'],
+            ['name' => 'Modifier les fournisseurs', 'slug' => 'update_suppliers'],
+            ['name' => 'Supprimer les fournisseurs', 'slug' => 'delete_suppliers'],
+
+            ['name' => 'Consulter la liste des clients', 'slug' => 'show_customers'],
+            ['name' => 'Modifier les clients', 'slug' => 'update_customers'],
+            ['name' => 'Supprimer les clients', 'slug' => 'delete_customers'],
+
             ['name' => 'Créer un site', 'slug' => 'site_create'],
-            ['name' => 'Afficher les sites', 'slug' => 'site_show'],
             ['name' => 'Modifier un site', 'slug' => 'site_update'],
             ['name' => 'Supprimer un site', 'slug' => 'site_delete'],
-            ['name' => 'Créer un établissement', 'slug' => 'snack_create'],
-            ['name' => 'Afficher les établissements', 'slug' => 'snack_show'],
-            ['name' => 'supprimer un établissement', 'slug' => 'snack_delete'],
-            ['name' => 'Modifier un établissement', 'slug' => 'snack_update'],
+
+            ['name' => 'Consulter les équipes de travail', 'slug' => 'show_teams'],
+            ['name' => 'Gérer les équipes de travail', 'slug' => 'manage_teams'],
+            ['name' => 'Supprimer une équipe de travail', 'slug' => 'delete_team'],
+
+            ['name' => 'Gérer les charges', 'slug' => 'manage_expenses'],
         ];
 
         DB::table('permissions')->insert($permissions);

@@ -13,7 +13,7 @@ class CategoryStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class CategoryStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|unique:categories'
+        ];
+    }
+
+
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required' => 'Ce champ est obligatoire',
+            'name.unique' => "Cette catégorie existe déja",
         ];
     }
 }

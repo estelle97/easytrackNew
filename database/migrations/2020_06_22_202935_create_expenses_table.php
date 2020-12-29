@@ -22,7 +22,7 @@ class CreateExpensesTable extends Migration
             $table->text('description')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->softDeletes();
-            
+
         });
     }
 

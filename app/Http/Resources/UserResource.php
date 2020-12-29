@@ -17,16 +17,17 @@ class UserResource extends JsonResource
         return [
             'user_id' => $this->id,
             'name' => $this->name,
+            'phone' => $this->phone,
             'email' => $this->email,
             'username' => $this->username,
             'address' => $this->address,
             'phone' => $this->phone,
             'is_admin' => $this->is_admin,
-            'employee' => new EmployeeResource($this->whenLoaded('employee')),
-            'companies' => CompanyResource::collection($this->whenLoaded('companies')),
+            'companies' => $this->when($this->is_admin == 2, $this->companies),
+            'employee' => $this->when($this->employee != null, new EmployeeResource($this->whenLoaded('employee'))),
             'agendas' => SiteResource::collection($this->whenLoaded('agendas')),
             'role' => new RoleResource($this->whenLoaded('role')),
-            'permissions' => $this->permissions->merge($this->role->permissions)
+            'permissions' => $this->getPermissions(),
         ];
     }
 }

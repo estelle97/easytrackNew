@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,14 +161,13 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        /*
+        * Package Service Providers...
+        */
 
         /*
-         * Package Service Providers...
-         */
-
-        /*
-         * Application Service Providers...
-         */
+        * Application Service Providers...
+        */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -180,6 +179,7 @@ return [
 
         // Notify Service Provicer
         Helmesvs\Notify\NotifyServiceProvider::class,
+        MercurySeries\Flashy\FlashyServiceProvider::class,
     ],
 
     /*
@@ -232,7 +232,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Keygen' => Keygen\Keygen::class,
         'Notify' => Helmesvs\Notify\Facades\Notify::class,
-
+        'Flashy' => MercurySeries\Flashy\Flashy::class,
     ],
 
+    
+    'clientId' => 'zSqpmPkyksgs6sPZRq3CGm4822x4URTA',
+    'clientSecret' => '4AsDbtARzp6joOij',
 ];

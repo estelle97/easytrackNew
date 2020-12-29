@@ -30,6 +30,17 @@
     <link href={{asset("template/assets/dist/css/easytrak.min.css")}} rel="stylesheet" />
     <link href={{asset("template/assets/dist/css/demo.min.css")}} rel="stylesheet" />
     <link href={{asset("template/assets/dist/css/custom.css")}} rel="stylesheet" />
+
+    {{-- Icons CSS --}}
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    {{-- Editor CSS --}}
+    <link rel="stylesheet" href={{asset("template/assets/dist/css/editor/select2.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/css/editor/datetimepicker.css")}}>
+    <link rel="stylesheet" href={{asset("template/assets/dist/css/editor/x-editor-style.css")}}>
+
+    {{-- Data-table CSS --}}
+    <link rel="stylesheet" href={{asset("template/assets/dist/css/data-table/bootstrap-table.css")}}>
     <style>
         body {
             display: none;
@@ -38,7 +49,7 @@
     </style>
     @yield('styles')
 </head>
-{{-- End Head Section --}} 
+{{-- End Head Section --}}
 
 <body class="antialiased">
 
@@ -46,12 +57,14 @@
     <div class="page">
         {{-- Header --}}
         <header class="navbar navbar-expand-md navbar-dark navbar-bg-gradient navbar-overlap">
-            <div class="container-xl">
+            <div class="container-xl mt-2">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 @if (Auth::user()->is_admin == 1)
-                    
+                    <a href={{route('employee.dashboard')}} class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
+                        <img src={{asset("template/assets/static/logo-white.svg")}} alt="easytrak" class="navbar-brand-image" />
+                    </a>
                 @elseif(Auth::user()->is_admin == 2)
                     <a href={{route('admin.dashboard')}} class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
                         <img src={{asset("template/assets/static/logo-white.svg")}} alt="easytrak" class="navbar-brand-image" />
@@ -61,11 +74,11 @@
                         <img src={{asset("template/assets/static/logo-white.svg")}} alt="easytrak" class="navbar-brand-image" />
                     </a>
                 @endif
-                
-        
-                {{-- User Bloc--}} 
+
+
+                {{-- User Bloc--}}
                     @if (Auth::user()->is_admin == 1)
-                        
+                        @include("partials.employee.userBloc")
                     @elseif(Auth::user()->is_admin == 2)
                         @include("partials.admin.userBloc")
                     @else
@@ -73,19 +86,19 @@
                     @endif
 
                 {{-- End User Bloc--}}
-        
-        
+
+
                 {{-- Menu de navigation--}}
                     @if (Auth::user()->is_admin == 1)
-                        
+                        @include("partials.employee.navigation")
                     @elseif(Auth::user()->is_admin == 2)
                         @include("partials.admin.navigation")
                     @else
-                    @include("partials.superAdmin.navigation")
+                        @include("partials.superAdmin.navigation")
                     @endif
-                    
+
                 {{-- End Menu de navigation--}}
-        
+
             </div>
         </header>
         {{-- End Header--}}
@@ -99,13 +112,102 @@
             </div>
 
             {{-- Footer --}}
-                @include("partials.admin.navigation")
+                @if (Auth::user()->is_admin == 1)
+                    @include("partials.employee.footer")
+                @elseif(Auth::user()->is_admin == 2)
+                    @include("partials.admin.footer")
+                @else
+                    @include("partials.superAdmin.footer")
+                @endif
             {{-- End Footer--}}
-            
+
         </div>
         {{-- End Page Content--}}
     </div>
     {{-- End Page Body--}}
+
+    {{-- Modals --}}
+
+        <div class="modal modal-blur fade" id="modal-switch-account" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Changer de compte</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label"> Choisir l'utilisateur </label>
+                                <div class="input-icon">
+                                    <span class="input-icon-addon ml-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path
+                                                d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z" />
+                                        </svg>
+                                    </span>
+                                    <select name="" id="username" class="auth-input form-control py-2 px-5">
+                                        @if(Auth::user()->is_admin == 2)
+                                        @foreach(Auth::user()->companies->first()->sites as $site)
+                                            @foreach($site->employees as $emp)
+                                                <option value={{$emp->user->username}}> {{$emp->user->name}} | {{$emp->user->email}} </option>
+                                            @endforeach
+                                        @endforeach
+                                        @elseif(Auth::user()->is_admin == 1)
+                                            @foreach(Auth::user()->employee->site->employees as $emp)
+                                                <option value={{$emp->user->username}}> {{$emp->user->name}} | {{$emp->user->email}} </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon ml-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path
+                                                d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z" />
+                                        </svg>
+                                    </span>
+                                    <input type="password" id="password" class="auth-input form-control py-2 px-5"
+                                        placeholder="Mot de passe" required autocomplete="off" minlength="8"/>
+                                    <span class="input-icon-addon mr-2">
+                                        <a class="link-secondary" id="show-password" title="Show password" data-toggle="tooltip"><svg
+                                                xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <circle cx="12" cy="12" r="2" />
+                                                <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
+                                                <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                                <span class="text-danger" id="password-error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="switchAccount btn btn-primary" style="width: 100%;">
+                            Connexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {{-- End Modals--}}
 
     {{-- Libs JS --}}
     <script src={{asset("template/assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js")}}></script>
@@ -114,414 +216,132 @@
     <script src={{asset("template/assets/dist/libs/jqvmap/dist/maps/jquery.vmap.world.js")}}></script>
     <script src={{asset("template/assets/dist/libs/peity/jquery.peity.min.js")}}></script>
     <script src={{asset("template/assets/dist/libs/apexcharts/dist/apexcharts.min.js")}}></script>
+
+    <script src={{asset("template/assets/dist/libs/data-table/bootstrap-table.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/data-table/tableExport.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/data-table/data-table-active.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/data-table/bootstrap-table-resizable.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/data-table/colResizable-1.5.source.js")}}></script>
+    <script src={{asset("template/assets/dist/libs/data-table/bootstrap-table-export.js")}}></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {{-- easytrak Core --}}
     <script src={{asset("template/assets/dist/js/easytrak.min.js")}}></script>
+
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+
+    <!-- Firebase CONFIG -->
+    <script src={{asset("template/assets/dist/js/app/configs/firebase.js")}}></script>
     {{-- c'chart-revenue-bg --}}
-    <script>
-        // @formatter:off
-        document.addEventListener("DOMContentLoaded", function () {
-            window.ApexCharts && (new ApexCharts(document.getElementById('chart-revenue-bg'), {
-                chart: {
-                    type: "area",
-                    fontFamily: 'inherit',
-                    height: 40.0,
-                    sparkline: {
-                        enabled: true
-                    },
-                    animations: {
-                        enabled: false
-                    },
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                fill: {
-                    opacity: .16,
-                    type: 'solid'
-                },
-                stroke: {
-                    width: 2,
-                    lineCap: "round",
-                    curve: "smooth",
-                },
-                series: [{
-                    name: "Profits",
-                    data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                        93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67
-                    ]
-                }],
-                grid: {
-                    strokeDashArray: 4,
-                },
-                xaxis: {
-                    labels: {
-                        padding: 0
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                    type: 'datetime',
-                },
-                yaxis: {
-                    labels: {
-                        padding: 4
-                    },
-                },
-                labels: [
-                    '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                    '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                    '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                    '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                    '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                    '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                ],
-                colors: ["#206bc4"],
-                legend: {
-                    show: false,
-                },
-            })).render();
-        });
-        // @formatter:on
 
-    </script>
-    {{-- chart-new-clients --}}
-    <script>
-        // @formatter:off
-        document.addEventListener("DOMContentLoaded", function () {
-            window.ApexCharts && (new ApexCharts(document.getElementById('chart-new-clients'), {
-                chart: {
-                    type: "line",
-                    fontFamily: 'inherit',
-                    height: 40.0,
-                    sparkline: {
-                        enabled: true
-                    },
-                    animations: {
-                        enabled: false
-                    },
-                },
-                fill: {
-                    opacity: 1,
-                },
-                stroke: {
-                    width: [2, 1],
-                    dashArray: [0, 3],
-                    lineCap: "round",
-                    curve: "smooth",
-                },
-                series: [{
-                    name: "May",
-                    data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                        93, 53, 61, 27, 54, 43, 4, 46, 39, 62, 51, 35, 41, 67
-                    ]
-                }, {
-                    name: "April",
-                    data: [93, 54, 51, 24, 35, 35, 31, 67, 19, 43, 28, 36, 62, 61, 27, 39,
-                        35, 41, 27, 35, 51, 46, 62, 37, 44, 53, 41, 65, 39, 37
-                    ]
-                }],
-                grid: {
-                    strokeDashArray: 4,
-                },
-                xaxis: {
-                    labels: {
-                        padding: 0
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    type: 'datetime',
-                },
-                yaxis: {
-                    labels: {
-                        padding: 4
-                    },
-                },
-                labels: [
-                    '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                    '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                    '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                    '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                    '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                    '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                ],
-                colors: ["#206bc4", "#a8aeb7"],
-                legend: {
-                    show: false,
-                },
-            })).render();
-        });
-        // @formatter:on
+    @include('flashy::message')
 
-    </script>
-    {{-- chart-active-users --}}
+    {{-- Loader --}}
     <script>
-        // @formatter:off
-        document.addEventListener("DOMContentLoaded", function () {
-            window.ApexCharts && (new ApexCharts(document.getElementById('chart-active-users'), {
-                chart: {
-                    type: "bar",
-                    fontFamily: 'inherit',
-                    height: 40.0,
-                    sparkline: {
-                        enabled: true
-                    },
-                    animations: {
-                        enabled: false
-                    },
-                },
-                plotOptions: {
-                    bar: {
-                        columnWidth: '50%',
-                    }
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                fill: {
-                    opacity: 1,
-                },
-                series: [{
-                    name: "Profits",
-                    data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27,
-                        93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67
-                    ]
-                }],
-                grid: {
-                    strokeDashArray: 4,
-                },
-                xaxis: {
-                    labels: {
-                        padding: 0
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                    type: 'datetime',
-                },
-                yaxis: {
-                    labels: {
-                        padding: 4
-                    },
-                },
-                labels: [
-                    '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                    '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                    '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                    '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                    '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                    '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                ],
-                colors: ["#206bc4"],
-                legend: {
-                    show: false,
-                },
-            })).render();
-        });
-        // @formatter:on
-
+        const loader = {
+            add: (element) => {
+                $(element).prepend(/*html*/`
+                    <div class="loader-wrap w-100 h-100 d-flex justify-content-center align-items-center">
+                        <div class="spinner-border text-azure" role="status"></div>
+                    </div>
+                `);
+            },
+            remove: () => {
+                $('.loader-wrap').remove();
+            }
+        }
     </script>
-    {{-- chart-development-activity --}}
-    <script>
-        // @formatter:off
-        document.addEventListener("DOMContentLoaded", function () {
-            window.ApexCharts && (new ApexCharts(document.getElementById('chart-development-activity'), {
-                chart: {
-                    type: "area",
-                    fontFamily: 'inherit',
-                    height: 160,
-                    sparkline: {
-                        enabled: true
-                    },
-                    animations: {
-                        enabled: false
-                    },
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                fill: {
-                    opacity: .16,
-                    type: 'solid'
-                },
-                title: {
-                    text: "Activités",
-                    margin: 0,
-                    floating: true,
-                    offsetX: 10,
-                    style: {
-                        fontSize: '18px',
-                    },
-                },
-                stroke: {
-                    width: 2,
-                    lineCap: "round",
-                    curve: "smooth",
-                },
-                series: [{
-                    name: "Purchases",
-                    data: [3, 5, 4, 6, 7, 5, 6, 8, 24, 7, 12, 5, 6, 3, 8, 4, 14, 30, 17, 19,
-                        15, 14, 25, 32, 40, 55, 60, 48, 52, 70
-                    ]
-                }],
-                grid: {
-                    strokeDashArray: 4,
-                },
-                xaxis: {
-                    labels: {
-                        padding: 0
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                    type: 'datetime',
-                },
-                yaxis: {
-                    labels: {
-                        padding: 4
-                    },
-                },
-                labels: [
-                    '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                    '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                    '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                    '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                    '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                    '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-                ],
-                colors: ["#206bc4"],
-                legend: {
-                    show: false,
-                },
-                point: {
-                    show: false
-                },
-            })).render();
-        });
-        // @formatter:on
 
-    </script>
-    {{-- chart-mentions --}}
-    <script>
-        // @formatter:off
-        document.addEventListener("DOMContentLoaded", function () {
-            window.ApexCharts && (new ApexCharts(document.getElementById('chart-mentions'), {
-                chart: {
-                    type: "bar",
-                    fontFamily: 'inherit',
-                    height: 240,
-                    parentHeightOffset: 0,
-                    toolbar: {
-                        show: false,
-                    },
-                    animations: {
-                        enabled: false
-                    },
-                    stacked: true,
-                },
-                plotOptions: {
-                    bar: {
-                        columnWidth: '50%',
-                    }
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                fill: {
-                    opacity: 1,
-                },
-                series: [{
-                    name: "Commandes",
-                    data: [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 12, 5, 8, 22, 6, 8, 6, 4, 1, 8,
-                        24, 29, 51, 40, 47, 23, 26, 50, 26, 41, 22, 46, 47, 81, 46, 6
-                    ]
-                }, {
-                    name: "Produits",
-                    data: [2, 5, 4, 3, 3, 1, 4, 7, 5, 1, 2, 5, 3, 2, 6, 7, 7, 1, 5, 5, 2,
-                        12, 4, 6, 18, 3, 5, 2, 13, 15, 20, 47, 18, 15, 11, 10, 0
-                    ]
-                }, {
-                    name: "services",
-                    data: [2, 9, 1, 7, 8, 3, 6, 5, 5, 4, 6, 4, 1, 9, 3, 6, 7, 5, 2, 8, 4, 9,
-                        1, 2, 6, 7, 5, 1, 8, 3, 2, 3, 4, 9, 7, 1, 6
-                    ]
-                }],
-                grid: {
-                    padding: {
-                        top: -20,
-                        right: 0,
-                        left: -4,
-                        bottom: -4
-                    },
-                    strokeDashArray: 4,
-                    xaxis: {
-                        lines: {
-                            show: true
-                        }
-                    },
-                },
-                xaxis: {
-                    labels: {
-                        padding: 0
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                    type: 'datetime',
-                },
-                yaxis: {
-                    labels: {
-                        padding: 4
-                    },
-                },
-                labels: [
-                    '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24',
-                    '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29',
-                    '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04',
-                    '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09',
-                    '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14',
-                    '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19',
-                    '2020-07-20', '2020-07-21', '2020-07-22', '2020-07-23', '2020-07-24',
-                    '2020-07-25', '2020-07-26'
-                ],
-                colors: ["#206bc4", "#79a6dc", "#bfe399"],
-                legend: {
-                    show: true,
-                    position: 'bottom',
-                    height: 32,
-                    offsetY: 8,
-                    markers: {
-                        width: 8,
-                        height: 8,
-                        radius: 100,
-                    },
-                    itemMargin: {
-                        horizontal: 8,
-                    },
-                },
-            })).render();
-        });
-        // @formatter:on
-
-    </script>
     <script>
         document.body.style.display = "block"
 
+        $("#show-password").click(function(){
+            let input = document.getElementById('password');
+            if (input.type == "password") {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
+        });
+
+        function showNotifications(){
+
+            var token = '{{@csrf_token()}}';
+            var url='';
+
+            if('{{Auth::user()->is_admin}}' == 1){
+                url = '/employee/notifications/last'
+            }
+
+            if('{{Auth::user()->is_admin}}' == 2){
+                url = '/admin/notifications/last'
+            }
+
+            if('{{Auth::user()->is_admin}}' == 3){
+                url = '/easytrack/notifications/last'
+            }
+
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: {
+                    _token: token,
+                },
+                success: function(data){
+                    $('#notifications').html(data);
+                }
+            });
+
+            setTimeout(showNotifications,60000);
+        }
+
+        showNotifications();
+
+        $(".switchAccount").click(function(){
+            var token = '{{csrf_token()}}';
+            var username = $("#username").val();
+            var password = $("#password").val();
+            $.ajax({
+                url: '/switchaccount',
+                method: 'post',
+                data: {
+                    _token : token,
+                    username : username,
+                    password : password,
+                },
+                success: function(data){
+                    if(data == 'error'){
+                        $(".text-danger").fadeOut().html('');
+                        $('#password-error').html('Mot de passe incorrect').fadeIn();
+                    } else {
+                        if(data.is_admin == 2){
+                            window.location.replace("/admin/dashboard");
+                        }else{
+                            window.location.replace("/employee/dashboard");
+                        }
+                    }
+                },
+            });
+        });
     </script>
+
+    @if (Auth::user()->is_admin == 2)
+        <script src={{asset('template/assets/dist/libs/jquery/dist/jquery.countdown.min.js')}}></script>
+        <script>
+
+            $('#clock').countdown('{{Auth::user()->companies->first()->types->last()->pivot->end_date}}', function(event) {
+                $(this).html(event.strftime('%D Jour(s)'));
+            });
+
+            $('#clock-full').countdown('{{Auth::user()->companies->first()->types->last()->pivot->end_date}}', function(event) {
+                $(this).html(event.strftime('%D Jour(s) %H:%M:%S Restantes'));
+            });
+        </script>
+    @endif
     @yield('scripts')
-    
+
 </body>
 
 </html>

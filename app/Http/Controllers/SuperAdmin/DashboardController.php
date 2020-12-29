@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateRequest;
 use Helmesvs\Notify\Facades\Notify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class DashboardController extends Controller
         return view('superAdmin.dashboard');
     }
 
-    
+
 
     public function profile()
     {
@@ -42,14 +43,14 @@ class DashboardController extends Controller
 
     public function profileUpdate(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'username' => 'required',
+            'phone' => 'required|min:9|max:9',
+            'email' => 'email|nullable',
+            'username' => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'address' => 'required',
-            'phone' => 'required|min:9|max:9'
+            'photo' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
-        
         $user = Auth::user();
 
         $user->name = $request->name;
@@ -58,9 +59,19 @@ class DashboardController extends Controller
         $user->address = $request->address;
         $user->phone = $request->phone;
         $user->bio = $request->bio;
+
+        $photo = $request->file('photo');
+        if($photo){
+            $path = 'template/assets/static/users/easytrack/';
+            $fileName = $user->username.'.'.$photo->extension();
+            $name = $path.$fileName;
+            $photo->move($path,$name);
+            $user->photo = $name;
+        }
+
         $user->save();
-        
-        Notify::info("Profil mis à jour avec succès!");
+
+        flashy()->info("Profil mis à jour avec succès!");
         return redirect()->back();
     }
 
@@ -68,12 +79,12 @@ class DashboardController extends Controller
         return view('superAdmin.profileSetting');
     }
 
-    
+
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
-        Notify::info("Nous espérons vous revoir bientôt!", 'Au revoir');
+        flashy()->info("Nous espérons vous revoir bientôt!", 'Au revoir');
         return redirect('/login');
-        
+
       }
 }

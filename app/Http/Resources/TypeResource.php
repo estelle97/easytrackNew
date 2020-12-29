@@ -19,7 +19,7 @@ class TypeResource extends JsonResource
             'title' => $this->title,
             'duration' => $this->duration,
             'price' => $this->price,
-            'snacks' => SnackResource::collection($this->whenLoaded('snacks'))
+            'companies' => CompanyResource::collection($this->whenLoaded('companies'))
         ];
     }
 }

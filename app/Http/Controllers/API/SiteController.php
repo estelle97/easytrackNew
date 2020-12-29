@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CustomerResource;
 use App\Http\Resources\SiteResource;
+use App\Http\Resources\SupplierResource;
 use App\Site;
+use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
@@ -16,7 +20,21 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return SiteResource::collection(Site::all()->load('employees','company','products','suppliers'));
+        if(Auth::user()->is_admin == 2){
+            $sites = Auth::user()->companies->first()->sites;
+        } else {
+            $site = Auth::user()->employee->site;
+            return new SiteResource($site->loadMissing('employees.user.role','customers','suppliers'));
+        }
+        return SiteResource::collection($sites->load('employees.user.role','customers','suppliers'));
+    }
+
+    public function sitesSuppliers(Site $site){
+        return SupplierResource::collection($site->suppliers);
+    }
+
+    public function sitesCustomers(Site $site){
+        return CustomerResource::collection($site->customers);
     }
 
     /**
@@ -38,7 +56,7 @@ class SiteController extends Controller
      * @param String phone2 [optional]
      * @param String town
      * @param String street
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,6 +83,13 @@ class SiteController extends Controller
 
         $site->save();
 
+        $customers = Customer::create([
+            'name' => 'Passager',
+            'street' => $site->street,
+            'town' => $site->town,
+            'site_id' => $site->id
+        ]);
+
         return response()->json([
             'message' => 'Site created successfully!',
             'site' => new SiteResource($site->loadMissing('company')),
@@ -79,7 +104,20 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        return new SiteResource($site->loadMissing('employees','company','products','suppliers'));
+        return new SiteResource($site->loadMissing('employees.user.role','customers','suppliers'));
+    }
+
+
+    public function stats(Site $site){
+
+        return response()->json([
+            'allSales' => $site->allSales(),
+            'allPurchases' => $site->allPurchases(),
+            'dailySales' => $site->allSales(true),
+            'dailyPurchases' => $site->allPurchases(true),
+            'allIncomes' => $site->allSales() - $site->allPurchases(),
+            'dailyIncome' => $site->allSales(true) - $site->allPurchases(true),
+        ], 200);
     }
 
     /**
@@ -103,7 +141,7 @@ class SiteController extends Controller
      * @param String phone2 [optional]
      * @param String town
      * @param String street
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Site $site)
@@ -139,6 +177,15 @@ class SiteController extends Controller
      */
     public function destroy(Site $site)
     {
-        //
+        foreach ($site->employees as $emp) {
+            $emp->user->delete();
+            $emp->delete();
+        }
+
+        $site->delete();
+
+        return response()->json([
+            'message' => 'Site deleted successfully!',
+        ]);
     }
 }

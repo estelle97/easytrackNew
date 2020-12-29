@@ -13,10 +13,10 @@ class CustomerStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
+     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,7 +24,23 @@ class CustomerStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'phone' => 'sometimes|min:200000000|max:999999999|numeric'
+        ];
+    }
+
+
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required' => 'Ce champ est obligatoire',
+            'phone.*' => "Format de téléphone incorrect"
         ];
     }
 }

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\SiteStoreRequest;
+use App\Http\Requests\SiteUpdateRequest;
 use App\Site;
+use App\Customer;
 use Auth;
 use App\Snack;
 use App\User;
@@ -14,18 +17,11 @@ class SiteController extends Controller
 {
     public function index()
     {
-        return view('admin.sites');
+        return view('admin.sites.sites');
     }
 
-    public function store(Request $request)
+    public function store(SiteStoreRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:sites',
-            'email' => 'email|required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric|unique:sites',
-            'town' => 'required',
-            'street' => 'required'
-        ]);
 
         $site = new Site();
         $site->company_id = Auth::user()->companies()->first()->id;
@@ -38,25 +34,34 @@ class SiteController extends Controller
         $site->street = $request->street;
 
         if($site->save()){
+
+            $customers = Customer::create([
+                'name' => 'Passager',
+                'street' => $site->street,
+                'town' => $site->town,
+                'site_id' => $site->id
+            ]);
+
+            flashy()->success('Le site a été ajouté avec succès');
             return 'success';
         } else {
+            flashy()->success("Une erreur s'est produite lors de l'ajout du site ");
             return 'error';
         }
     }
 
+    public function users($site_slug){
 
-    public function update(Request $request)
+        $site = Site::whereSlug($site_slug)->first();
+        return view('admin.sites.users', compact('site'));
+    }
+
+
+    public function update(SiteUpdateRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'email|required',
-            'phone1' => 'required|min:200000000|max:999999999|numeric',
-            'town' => 'required',
-            'street' => 'required'
-        ]);
 
         $site = Site::find($request->site_id);
-        
+
         $site->name = $request->name;
         $site->email = $request->email;
         $site->phone1 = $request->phone1;
@@ -71,18 +76,21 @@ class SiteController extends Controller
         }
     }
 
-
-    public function edit($id)
+    public function destroy(Site $site)
     {
-        $lims_site_data = Site::find($id);
-        return $lims_site_data;
-    }
+        foreach ($site->employees as $key => $employee) {
+            $employee->user->delete();
+            $employee->delete();
+        }
+        foreach ($site->suppliers as $supplier) {
+            $supplier->delete();
+        }
+        foreach ($site->customers as $customer) {
+            $customer->delete();
+        }
+        
+        $site->delete();
 
-    public function destroy($id)
-    {
-        $lims_site_data = Site::find($id);
-        $lims_site_data->delete();
-        notify()->success('Site supprimé avec succès', 'Suppression de site');
-        return redirect()->back();
+        return 'success';
     }
 }

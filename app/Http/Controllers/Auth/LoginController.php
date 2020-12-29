@@ -40,16 +40,7 @@ class LoginController extends Controller
      * @return void
      */
     public function __construct()
-    {
-        if (Auth::check() && Auth::user()->is_admin == 3)
-        {
-            $this->redirectTo = route('easytrack.dashboard');
-        } elseif (Auth::check() && Auth::user()->is_admin == 2)
-        {
-            $this->redirectTo = route('admin.dashboard');
-        } else{
-            $this->redirectTo = route('user.dashboard');
-        }
+    { 
         $this->middleware('guest')->except('logout');
     }
 
@@ -90,17 +81,25 @@ class LoginController extends Controller
     }
 
     public function login(){
-        
+        if (Auth::user() && Auth::user()->is_admin == 3){
+            return redirect()->route('easytrack.dashboard');
+        } elseif (Auth::user() && Auth::user()->is_admin == 2){
+            return redirect()->route('admin.dashboard');
+        }
+        elseif (Auth::user() && Auth::user()->is_admin == 1){
+            return redirect()->route('employee.dashboard');
+        }
+
         return view('login');
     }
 
     public function loginPost(Request $request) {
         $this->validateLogin($request);
 
-        
+
         $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))){
-            Notify::warning('Login et/ou mot de passe incorrect', 'Informations incorrects');
+            flashy()->warning('Login et/ou mot de passe incorrect', 'Informations incorrects');
             return redirect()->back();
         }
 
@@ -108,19 +107,46 @@ class LoginController extends Controller
 
         if($user->active == '0'){
             Auth::logout();
-            
-            Notify::warning("Ce copte a été suprimé, Veuillez contacter l'administrateur", "Compte Supprimé");
+
+            flashy()->warning("Ce compte a été suprimé, Veuillez contacter l'administrateur", "Compte Supprimé");
             return redirect()->back();
         }
-        return redirect()->route('admin.dashboard');
+
+
+        if (Auth::check() && Auth::user()->is_admin == 3){
+            return redirect()->route('easytrack.dashboard');
+        } elseif (Auth::check() && Auth::user()->is_admin == 2){
+            $remainingDays = Auth::user()->companies->first()->subscription()->remainingDays;
+            if($remainingDays <= 0){
+                Auth::user()->companies->first()->types->last()->pivot->is_active = 0;
+                Auth::user()->companies->first()->types->last()->pivot->timestamps = null;
+                Auth::user()->companies->first()->types->last()->pivot->save();
+                Auth::logout();
+                flashy()->error("Votre abonnement est terminé! Veuillez contacter l'administrateur");
+
+                return redirect()->route('login');
+            }
+
+            return redirect()->route('admin.dashboard');
+        } else{
+            $remainingDays = Auth::user()->employee->site->company->subscription()->remainingDays;
+            if($remainingDays <= 0){
+                Auth::user()->employee->site->company->types->last()->pivot->is_active = 0;
+                Auth::user()->employee->site->company->types->last()->pivot->timestamps = null;
+                Auth::user()->employee->site->company->types->last()->pivot->save();
+                Auth::logout();
+                flashy()->error('Votre entreprise a été désactivée! Veuillez contacter l\'administrateur');
+
+                return redirect()->route('login');
+            }
+            return redirect()->route('employee.dashboard');
+        }
     }
 
     protected function logout(Request $request)
     {
         $this->guard()->logout();
-
         $request->session()->flush();
-
         $request->session()->regenerate();
 
         return redirect('/login');

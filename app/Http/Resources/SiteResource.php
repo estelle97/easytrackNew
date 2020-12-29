@@ -23,10 +23,10 @@ class SiteResource extends JsonResource
             'phone2' => $this->phone2,
             'town' => $this->town,
             'street' => $this->street,
-            'employees' => EmployeeResource::collection($this->whenLoaded('employees')),
             'company' => new CompanyResource($this->whenLoaded('company')),
+            'employees' => EmployeeResource::collection($this->whenLoaded('employees')),
             'suppliers' => SupplierResource::collection($this->whenLoaded('suppliers')),
-            'produits' => ProductResource::collection($this->whenLoaded('products')),
+            'customers' => CustomerResource::collection($this->whenLoaded('customers')),
         ];
     }
 }

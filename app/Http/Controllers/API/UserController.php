@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Site;
 use App\Company;
+use App\Customer;
+use App\Http\Requests\RegisterStoreRequest;
 use App\Type;
 use App\User;
+use App\Employee;
 use Carbon\Carbon;
+use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,30 +33,12 @@ class UserController extends Controller
      * @param String password_confirmation
      * @param Integer company_id [optional]
      * @param Char is_admin (1, 2, 3) default 1
-     * 
+     *
      * @return String message
      */
-    public function register(Request $request){
-        
-        // Validate and create admin
-        $request->validate([
-            'username' => 'required',
-            'useraddress' => 'required',
-            'userphone' => 'required|min:9|max:9|unique:users,phone',
-            'useremail' => 'required|email|unique:users,email',
-            'userusername' => 'required|unique:users,username',
-            'userpassword' => 'required|min:8',
+    public function register(RegisterStoreRequest $request)
+    {
 
-            'companyname' => 'required|unique:companies,name',
-            'companyphone1' => 'required|min:9|max:9|unique:companies,phone1',
-            'companyemail' => 'required|email|unique:companies,email',
-
-            'sitename' => 'required|unique:sites,name',
-            'sitephone1' => 'required|min:9|max:9|unique:sites,phone1',
-            'siteemail' => 'required|email|unique:sites,email',
-            'sitestreet' => 'required',
-            'sitetown' => 'required'
-        ]);
 
         // Remove password_confirmation field to user array
 
@@ -64,18 +50,19 @@ class UserController extends Controller
             'phone' => $request->userphone,
             'password' => bcrypt($request->userpassword),
             'is_admin' => 2,
-            'role_id' => 5,
+            'role_id' => 5
         ]);
 
-        $company = new Company([
+        $company = new company([
             'name' => $request->companyname,
             'slug' => $this->makeSlug($request->companyname),
             'email' => $request->companyemail,
             'phone1' => $request->companyphone1,
             'phone2' => $request->companyphone2,
             'town' => $request->companytown,
-            'street' =>$request->companystreet,
+            'street' => $request->companystreet,
         ]);
+
 
         $site = new Site([
             'name' => $request->sitename,
@@ -84,29 +71,38 @@ class UserController extends Controller
             'phone1' => $request->sitephone1,
             'phone2' => $request->sitephone2,
             'town' => $request->sitetown,
-            'street' =>$request->sitestreet,
+            'street' => $request->sitestreet,
         ]);
-        
-        DB::transaction(function () use($user, $company, $site) {
-            $user->save();
 
+        DB::transaction(function () use ($user, $company, $site, $request) {
+            $user->save();
             $company->user_id = $user->id;
+            $company->is_active = 0;
             $company->save();
-            
             $site->company_id = $company->id;
             $site->save();
+
+            // Attach company with his type of subscription
+            $type = Type::findOrFail($request->type);
+            $company->types()->attach($type->id, [
+                'end_date' => Carbon::now()->addDays($type->duration),
+                'licence_number' => 'L122L1KZ',
+            ]);
         });
 
-        // Attach company with his type of subscription
-        $type = Type::findOrFail($request->type);
-        $company->types()->attach($type->id,[
-            'end_date' => Carbon::now()->addMonth($type->duration),
+        $customers = Customer::create([
+            'name' => 'Passager',
+            'street' => $site->street,
+            'town' => $site->town,
+            'site_id' => $site->id
         ]);
+
+
+        $this->sendMail($user->email, $company);
 
         return response()->json([
             "message" => "Operation success!",
-        ], 201); 
-
+        ], 201);
     }
 
     /**
@@ -114,12 +110,13 @@ class UserController extends Controller
      * @param String login
      * @param String password
      * @param [boolean] remember_me
-     * 
+     *
      * @return String access_token
      * @return String token_type
      * @return String expires_at
      */
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $request->validate([
             'login' => 'required',
             'password' => 'required',
@@ -127,7 +124,7 @@ class UserController extends Controller
         ]);
 
         $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if(!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))){
+        if (!auth()->attempt(array($fieldType => $request->login, 'password' => $request->password))) {
             return response()->json([
                 'message' => 'Username/Email or Password incorrect'
             ], 404);
@@ -135,21 +132,32 @@ class UserController extends Controller
 
         // $credentials = request(['email', 'password']);
 
-        // if(!Auth::attempt($credentials)) 
+        // if(!Auth::attempt($credentials))
         //     return response()->json(['message' => 'username/password incorrect'], 401);
-        
+
         $user = $request->user();
-        if($user->active == '0'){
-            return response()->json([
-                'message' => 'User was deleted',
-            ],
-            403);
+        if ($user->active == '0') {
+            return response()->json(
+                [
+                    'message' => 'User was deleted',
+                ],
+                403
+            );
+        }
+
+        if ($user->is_admin == 3) {
+            return response()->json(
+                [
+                    'message' => 'Superadmin accounts are not allowed to use mobile version',
+                ],
+                404
+            );
         }
 
         $tokenResult = $user->createToken('Personal_Access_Token');
         $token = $tokenResult->token;
 
-        if($request->remember_me){
+        if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeek(1);
         }
         $token->save();
@@ -166,10 +174,11 @@ class UserController extends Controller
 
     /**
      * Logout user (Revoke the token)
-     * 
+     *
      * @return String message
      */
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         $request->user()->token()->revoke();
 
         return response()->json([
@@ -185,7 +194,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->load('employee','companies','role');
+        $users = User::all()->load('employee.site.company', 'role', 'permissions');
         return UserResource::collection($users);
     }
 
@@ -227,14 +236,13 @@ class UserController extends Controller
             'contact_phone' => $request->contact_phone,
             'is_admin' => $request->is_admin,
             'password' => bcrypt($request->password),
-            'site_id' => 1
         ]);
         $user->save();
 
         return response()->json([
             'message' => 'User Created successfully!',
             'user' => new UserResource($user)
-        ],201);
+        ], 201);
     }
 
     /**
@@ -245,7 +253,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('employee','companies','role');
+        $user->loadMissing('employee.site.company', 'role', 'permissions');
         return new UserResource($user);
     }
 
@@ -269,7 +277,7 @@ class UserController extends Controller
      * @param String address
      * @param String password_confirmation
      * @param Char is_admin (1, 2, 3) default 1
-     * 
+     *
      * @return String message
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
@@ -293,14 +301,14 @@ class UserController extends Controller
         $user->is_admin = $request->is_admin;
         $user->cni_number = $request->cni_number;
         $user->contact_name = $request->contact_name;
-        $user->contact_phone = $request->contact_phone;
-        
+        $user->contact_tel = $request->contact_tel;
+
         $user->save();
 
         return response()->json([
             'message' => 'success',
-            'user' => new UserResource($user->loadMissing('site','roles.permissions'))
-        ],200);
+            'user' => new UserResource($user->loadMissing('site', 'roles.permissions'))
+        ], 200);
     }
 
     /**
@@ -308,13 +316,14 @@ class UserController extends Controller
      * @param \App\User $user
      * @return \Illuminate\http\Response
      */
-    public function activateUser(User $user){
+    public function activateUser(User $user)
+    {
         $user->active = '1';
         $user->save();
 
         return response()->json([
             'message' => 'user activated successfully',
-        ],200);
+        ], 200);
     }
 
     /**
@@ -322,7 +331,8 @@ class UserController extends Controller
      * @param \App\User $user
      * @return \Illuminate\http\Response
      */
-    public function changeAdminLevel(Request $request, User $user){
+    public function changeAdminLevel(Request $request, User $user)
+    {
         $request->validate([
             'is_admin' => 'required|in:1,2,3'
         ]);
@@ -342,61 +352,30 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if($user->is_admin == '2'){     // Check if it's a manager
-            $otherManager = User::where('is_admin','2')->where('id','!=',$user->id)->where('site_id',$user->site_id)->first();   // retreive the others managers
-            if(!$otherManager){     // if there are not another manager
-               $site = \App\Site::find($user->site_id);
-               $site->active = '0';
-               $site->save();
-            }
-        }
-        $user->active = '0';
-        $user->save();
+        $user->employee->delete();
+        $user->delete();
 
-        return response()->json([
-            'message' => 'deleted successfully'
-        ],
-        204);
+        return response()->json(
+            [
+                'message' => 'deleted successfully'
+            ],
+            200
+        );
     }
 
-
-    /**
-     * Attach Roles to a User
-     * @param Integer[] roles 
-     */
-    public function attachPermissionsToUser(Request $request, User $user){
-        foreach($request->permissions as $perm){
-            if(!$user->permissions->contains($perm)){
-               $user->permissions()->attach($perm);
-            }
-        }
-        return $this->show($user);
-    }
-
-    /**
-     * Detach Roles to a User
-     * @param Integer[] roles 
-     */
-    public function detachPermissionsToUser(Request $request, User $user){
-        foreach($request->permissions as $perm){
-            if($user->permissions->contains($perm)){
-               $user->permissions()->detach($perm);
-            }
-        }
-        return $this->show($user);
-    }
 
     /**
      * Detach Roles to a User
      * @param String login
      */
-    public function passwordRequest(Request $request){
+    public function passwordRequest(Request $request)
+    {
         $user = User::whereEmail($request->login)->orWhere('username', $request->login)->orWhere('phone', $request->login)->first();
-        if($user){
-            $password = "newPassword";
-            $this->sendMessage(
-                "Votre nouveau mot de passe est le suivant: $password",
-                $user->phone
+        if ($user) {
+            $password = $this->generatePassword(8);
+            $this->sendSMS(
+                $user->phone,
+                "Votre nouveau mot de passe est le suivant: " . $password
             );
 
             $user->password = bcrypt($password);
@@ -409,18 +388,18 @@ class UserController extends Controller
         }
         return response()->json([
             'message' => 'User not foud'
-        ], 401);
-
+        ], 404);
     }
 
-    public function getUniqueElements(){
+    public function getUniqueElements()
+    {
         $data = [
             User::all('username'),
             User::all('email'),
-            User::all('phone'),
+            User::all('tel'),
             company::all('name'),
             company::all('email'),
-            company::all('phone1'),
+            company::all('tel1'),
             Site::all('name'),
             Site::all('email'),
             Site::all('phone1')
@@ -429,6 +408,77 @@ class UserController extends Controller
         return response()->json([
             'data' => $data
         ], 200);
-        
+    }
+
+    public function contacts()
+    {
+        $user = Auth::user();
+
+        if ($user->is_admin == 1) {
+            $employee = Employee::where('user_id', '=', $user->id)->first();
+            $site = Site::where('id', $employee->site_id)->first();
+            $company = Company::where('id', $site->company_id)->first();
+            $employees = Employee::where('site_id', $employee->site_id)->where('user_id', '!=', $employee->user_id)->get();
+            /* array_push($employees, User::findOrFail($company->user_id)); */
+            $contacts = [];
+            foreach ($employees as $emp) {
+                $add = User::findOrFail($emp->user_id);
+                $add->last_message = Message::where(function ($query) use ($add) {
+                    $query->where('sender', Auth::user()->id)->where('receiver', $add->id);
+                })->orWhere(function ($query) use ($add) {
+                    $query->where('receiver', Auth::user()->id)->where('sender', $add->id);
+                })->orderBy('created_at', 'desc')->first();
+
+                if (!in_array($user, $contacts)) {
+                    array_push($contacts, $add);
+                }
+            }
+
+            $add = User::findOrFail($company->user_id);
+            $add->last_message = Message::where(function ($query) use ($add) {
+                $query->where('sender', Auth::user()->id)->where('receiver', $add->id);
+            })->orWhere(function ($query) use ($add) {
+                $query->where('receiver', Auth::user()->id)->where('sender', $add->id);
+            })->orderBy('created_at', 'desc')->first();
+
+            if (!in_array($user, $contacts)) {
+                array_push($contacts, $add);
+            }
+        } else if ($user->is_admin == 2) {
+            $company = Company::where('user_id', $user->id)->first();
+            $sites = Site::where('company_id', $company->id)->get();
+            $contacts = [];
+            foreach ($sites as $site) {
+                $employees = Employee::where('site_id', $site->id)->get();
+                foreach ($employees as $employee) {
+                    $add = User::findOrFail($employee->user_id);
+                    $add->last_message = $message = Message::where(function ($query) use ($add) {
+                        $query->where('sender', Auth::user()->id)->where('receiver', $add->id);
+                    })->orWhere(function ($query) use ($add) {
+                        $query->where('receiver', Auth::user()->id)->where('sender', $add->id);
+                    })->orderBy('created_at', 'desc')->first();
+
+                    if (!in_array($user, $contacts) && $user != $add) {
+                        array_push($contacts, $add);
+                    }
+                }
+            }
+        } else {
+            $contacts = User::where('is_admin', 2)->where('id', '!=', $user->id)->get();
+            foreach ($contacts as $contact) {
+                $contact->last_message = Message::where(function ($query) use ($contact) {
+                    $query->where('sender', Auth::user()->id)->where('receiver', $contact->id);
+                })->orWhere(function ($query) use ($contact) {
+                    $query->where('receiver', Auth::user()->id)->where('sender', $contact->id);
+                })->orderBy('created_at', 'desc')->first();
+            }
+        }
+
+        $response = [
+            'data' => $contacts,
+            'message' => 'Contact de l\'utilisateur ' . $user->name
+        ];
+
+        return response()->json($response, 200);
     }
 }

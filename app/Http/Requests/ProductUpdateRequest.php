@@ -13,7 +13,7 @@ class ProductUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,26 @@ class ProductUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'photo' => 'sometimes|image|mimes:png|max:1024'
+        ];
+    }
+
+
+     /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Ce champ est obligatoire',
+            'name.unique' => "Ce produit existe déja",
+            'photo.required' => 'Ajoutez une photo à votre produit',
+            'photo.image' => "Votre photo est sur un format incorrect",
+            'photo.max' => 'La photo du produit doit peser moins de 1Mo',
+            'photo.mime' => 'Le format de photo accepté est le PNG',
         ];
     }
 }

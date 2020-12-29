@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return RoleResource::collection(Role::all()->load('permissions','users'));
+        return RoleResource::collection(Role::all()->load('users'));
     }
 
     /**
@@ -66,7 +66,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        return new RoleResource($role->loadMissing('permissions','users'));
+        return new RoleResource($role->loadMissing('users'));
     }
 
     /**
@@ -121,7 +121,7 @@ class RoleController extends Controller
 
         return response()->json([
             'message' => 'Role deleted successfully!'
-        ],204);
+        ],200);
     }
 
     /**

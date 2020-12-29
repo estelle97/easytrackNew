@@ -13,12 +13,12 @@ class RoleController extends Controller
     public function index()
     {
         return view('superAdmin.roles');
-        
+
     }
 
     public function create()
     {
-        
+
     }
 
     public function store(Request $request)
@@ -54,7 +54,7 @@ class RoleController extends Controller
 
     /**
      * Attach permissions to a role
-     * @param Integer[] permissions 
+     * @param Integer[] permissions
      */
     public function attachPermissionsToRole(Role $role, $permissions){
         foreach($permissions as $perm){
@@ -69,16 +69,16 @@ class RoleController extends Controller
         $role = Role::find($request->role_id);
         if(!$role->permissions->contains($request->permission_id)){
             $role->permissions()->attach($request->permission_id);
-            
+
             return 'success';
-        }   
+        }
 
         return 'error';
     }
 
      /**
      * Detach permissions to a role
-     * @param Integer[] permissions 
+     * @param Integer[] permissions
      */
     public function detachPermissionToRole(Request $request){
         $role = Role::find($request->role_id);

@@ -10,11 +10,7 @@ class Expense extends Model
     public $timestamps = null;
     protected $dates = ['created_at'];
 
-    public function expense_category(){
-        return $this->belongsTo('App\Expense_category');
-    }
-
-    public function sites(){
-        return $this->hasMany('App\Site');
+    public function fexpense(){
+        return $this->belongsTo('App\Fexpense');
     }
 }

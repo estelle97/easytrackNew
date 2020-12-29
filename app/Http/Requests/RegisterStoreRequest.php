@@ -24,14 +24,24 @@ class RegisterStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|max:255',
-            'tel' => 'required',
-            'email' => 'bail|email|required',
-            'password' => 'bail|required',
-            'name_snack' => 'bail|required',
-            'town_snack' => 'bail|required',
-            'town_site' => 'bail|required',
-            'license' => 'bail|required',
+            'username' => 'sometimes|required',
+            'useraddress' => 'sometimes|required',
+            'userphone' => 'sometimes|required|min:200000000|max:999999999|numeric|unique:users,phone',
+            'useremail' => 'sometimes|required|email|unique:users,email',
+            'userusername' => 'sometimes|required|unique:users,username|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+            'userpassword' => 'sometimes|required|min:8',
+
+            'companyname' => 'sometimes|required|unique:companies,name',
+            'companyphone1' => 'sometimes|required|min:200000000|max:999999999|numeric|unique:companies,phone1',
+            'companyphone2' => 'sometimes|nullable|min:200000000|max:999999999|numeric|unique:companies,phone2',
+            'companyemail' => 'sometimes|required|email|unique:companies,email',
+
+            'sitename' => 'sometimes|required|unique:sites,name',
+            'sitephone1' => 'sometimes|required|min:200000000|max:999999999|numeric|unique:sites,phone1',
+            'sitephone2' => 'sometimes|nullable|min:200000000|max:999999999|numeric|unique:sites,phone2',
+            'siteemail' => 'sometimes|required|email|unique:sites,email',
+            'sitestreet' => 'sometimes|required',
+            'sitetown' => 'sometimes|required'
         ];
     }
 
@@ -43,17 +53,27 @@ class RegisterStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'un nom est requis',
-            'name.max' => 'Ce nom est très long',
-            'address.required' => 'Une adresse est requise',
-            'address.max' => 'Cette adresse est très longue',
-            'tel.required' => 'Un numéro de téléphone est requis',
-            'email.required' => 'Une adresse mail est requise',
-            'password.required' => 'Un mot de passe est requis',
-            'name_snack.required' => 'Un nom de snack est requis',
-            'town_snack.required' => 'Une ville de snack est requise',
-            'town_site.required' => 'Une ville de site est requise',
-            'license.required' => 'Le choix d\'un forfait est requis',
+            'required' => 'Ce champ est obligatoire',
+            'email' => 'Adresse email invalide',
+            'userphone.unique' => 'Numéro de téléphone déja utilisé',
+            'userphone.*' => "Format de téléphone incorrect",
+            'userusername.unique' => "Nom d'utilisateur déja utilisé",
+            'userusername.*' => "Nom d'utilisateur incorrect",
+            'useremail' => "Adresse email déja utilisée",
+            'userpassword.min' => "Mot de passe trop court (Au moins 8 caractères)",
+
+            'companyname.unique' => "Nom de companie déja utilisé",
+            'companyphone1.unique' => "Numéro de téléphone déja utilisé",
+            'companyphone2.unique' => "Numéro de téléphone déja utilisé",
+            'companyphone1.*' => "Format de téléphone incorrect",
+            'companyphone2.*' => "Format de téléphone incorrect",
+            'companyemail.unique' => "Adresse email déja utilisée", 
+
+            'sitename.unique' => "Nom de companie déja utilisé",
+            'sitephone1.unique' => "Numéro de téléphone déja utilisé",
+            'sitephone2.unique' => "Numéro de téléphone déja utilisé",
+            'sitephone1.*' => "Format de téléphone incorrect",
+            'sitephone2.*' => "Format de téléphone incorrect", 
         ];
     }
 }

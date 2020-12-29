@@ -1,12 +1,14 @@
 @extends('layouts.auth')
 
 @section('content')
-    <div class="col-12 col-sm-12 col-md-4 col-lg-4 d-flex flex-row align-items-center">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 d-flex flex-row align-items-center">
         <div class="container-tight">
             <form class="card card-md auth-card pt-6 pb-5 px-3" action="" method="post">
                 <div class="card-body">
                     <div class="text-center mb-5">
-                        <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
+                        <a href="/">
+                            <img src={{asset("template/assets/static/logo.svg")}} height="56" alt="" />
+                        </a>
                     </div>
                     <h2 class="mb-2 text-center text-black">Connexion</h2>
                     <h4 class="mb-5 text-center text-muted">
@@ -53,14 +55,14 @@
                         </div>
                     </div>
                     <div class="form-footer mb-3">
-                        <button type="submit" class="btn btn-gradient btn-block btn-pill btn-no-border">
+                        <button type="submit" class="btn btn-gradient btn-block btn-no-border">
                             Se connecter
                         </button>
                         <div class="row justify-content-center align-items-center px-3 mt-3">
                             <div class="col text-center p-0"><h4>ou</h4></div>
                         </div>
-                        <a href={{route('register')}} tabindex="-1" class="btn btn-dark btn-block btn-pill btn-no-border mt-3">
-                            Créer votre snack
+                        <a href={{route('register')}} tabindex="-1" class="btn btn-dark btn-block btn-no-border mt-3">
+                            Inscription
                         </a>
                     </div>
                     <div class="text-center text-muted mb-3">

@@ -11,7 +11,6 @@ trait HasPermissionsTrait {
    public function givePermissionsTo(... $permissions) {
 
     $permissions = $this->getAllPermissions($permissions);
-    dd($permissions);
     if($permissions === null) {
       return $this;
     }
@@ -33,11 +32,6 @@ trait HasPermissionsTrait {
     return $this->givePermissionsTo($permissions);
   }
 
-  public function hasPermissionTo($permission) {
-
-    return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
-  }
-
   public function hasPermissionThroughRole($permission) {
 
     foreach ($permission->roles as $role){
@@ -48,40 +42,45 @@ trait HasPermissionsTrait {
     return false;
   }
 
-  public function hasRole( ... $roles ) {
+  public function hasRole($role) {
 
-    foreach ($roles as $role) {
-      if ($this->roles->contains('slug', $role)) {
-        return true;
-      }
-    }
+    if ($this->role->name == $role || $this->role->slug == $role) return true;
     return false;
   }
 
-  public function hasRoles($roles) {
-
-    foreach ($roles as $role) {
-      if ($this->roles->contains('slug', $role)) {
-        return true;
-      }
-    }
-    return false;
+  public function role() {
+      return $this->belongsTo(Role::class);
   }
 
-  
-  protected function hasPermission($permission) {
 
-    return (bool) $this->permissions->where('slug', $permission->slug)->count();
+  public function permissions() {
+    return $this->belongsToMany(Permission::class);
+  }
+
+  public function hasPermission($permission) {
+    return (bool) $this->getPermissions()->where('slug', $permission)->count();
   }
 
   protected function getAllRoles(array $roles){
     return Role::whereIn('slug', $roles)->get();
   }
 
-  protected function getAllPermissions(array $permissions) {
+  public function getPermissions(){
+      return $this->permissions->merge($this->role->permissions);
+  }
 
-    return Permission::whereIn('slug',$permissions)->get();
-    
+  public function hasPermissionTo(... $permissions){
+      foreach($permissions as $perm){
+        if($this->may($perm)) return true;
+      }
+      return false;
+  }
+
+  public function may($permission){
+    foreach($this->getPermissions() as $perm){
+      if($perm->slug == $permission) return true;
+    }
+    return false;
   }
 
 }
