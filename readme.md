@@ -7,7 +7,7 @@ Thank you for considering contributing to the Easytrack Application
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Easytrack, please send an e-mail to Estelle Belinga via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Easytrack, please send an e-mail to Estelle Belinga via [estellecto@easytecconsulting.com](mailto:estellecto@easytecconsulting.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
