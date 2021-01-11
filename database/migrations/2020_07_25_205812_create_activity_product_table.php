@@ -17,18 +17,18 @@ class CreateActivityProductTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->integer('activity_id')->unsigned();
 
-            //FOREIGN KEY CONSTRAINTS
-            $table->foreign('product_id')
-                ->references('id')
-                ->on('products')
-                ->onDelete('cascade');
-            $table->foreign('activity_id')
-                ->references('id')
-                ->on('activities')
-                ->onDelete('cascade');
+            // //FOREIGN KEY CONSTRAINTS
+            // $table->foreign('product_id')
+            //     ->references('id')
+            //     ->on('products')
+            //     ->onDelete('cascade');
+            // $table->foreign('activity_id')
+            //     ->references('id')
+            //     ->on('activities')
+            //     ->onDelete('cascade');
 
-            //SETTING THE PRIMARY KEYS
-            $table->primary('product_id','activity_id');
+            // //SETTING THE PRIMARY KEYS
+            // $table->primary('product_id','activity_id');
         });
     }
 
