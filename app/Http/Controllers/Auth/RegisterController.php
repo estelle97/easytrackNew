@@ -110,7 +110,6 @@ class RegisterController extends Controller
             'street' =>$request->companystreet,
         ]);
 
-
         $site = new Site([
             'name' => $request->sitename,
             'slug' => $this->makeSlug($request->sitename),

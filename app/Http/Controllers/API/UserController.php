@@ -28,7 +28,7 @@ class UserController extends Controller
      * @param String name
      * @param String username
      * @param String email
-     * @param String tel
+     * @param String phone
      * @param String address
      * @param String password_confirmation
      * @param Integer company_id [optional]
@@ -181,7 +181,9 @@ class UserController extends Controller
     {
         $request->user()->token()->revoke();
 
-        return response()->json(['message' => 'logout successfully'], 200);
+        return response()->json([
+            'message' => 'logout successfully'
+        ], 200);
     }
 
 
@@ -292,7 +294,7 @@ class UserController extends Controller
         ]);
 
         $user->name = $request->name;
-        $user->tel = $request->tel;
+        $user->phone = $request->phone;
         $user->email = $request->email;
         $user->address = $request->address;
         $user->username = $request->username;
@@ -400,7 +402,7 @@ class UserController extends Controller
             company::all('tel1'),
             Site::all('name'),
             Site::all('email'),
-            Site::all('tel1')
+            Site::all('phone1')
         ];
 
         return response()->json([

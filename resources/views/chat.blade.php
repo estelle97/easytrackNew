@@ -171,9 +171,8 @@
 @endsection
 
 @section('scripts')
-    <script>
-
-    </script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
 
     <script>
 
@@ -187,8 +186,8 @@
         function getContacts() {
             return new Promise((resolve, reject) => {
                 token = '{{@csrf_token()}}';
-
                 console.log("Loading contacts...");
+                chatInstance.views.inbox.disable.view();
 
                 $.ajax({
                     url: 'chat/contacts',
@@ -198,7 +197,7 @@
                     },
                     success: (data) => {
                         contacts = data.contacts;
-                        // console.log('contacts', contacts[0].role.name);
+                        console.log("Contacts loaded...");
                         resolve("done");
                     }
                 });
@@ -235,23 +234,27 @@
         // Chat properties
         chatInstance.init = () => {
             console.log("init...");
-            chatInstance.views.inbox.disable.view();
-            chatInstance.data.chatRoom.list().then(() => {
-                console.log("Search completed.");
-                chatInstance.views.navigation.init().then(() => {
-                    chatInstance.events.firebase.chatRoom.listen();
-                    chatInstance.events.ui.init();
-                    // Remove loader
-                    $(".section-loader").hide();
+            setTimeout(() => {
+                chatInstance.data.chatRoom.list().then(() => {
+                    console.log("Search completed.");
+                    setTimeout(() => {
+                        chatInstance.views.navigation.init().then(() => {
+                            chatInstance.events.firebase.chatRoom.listen();
+                            chatInstance.events.ui.init();
+                            console.log("Events Loaded.");
+                            // Remove loader
+                            $(".section-loader").hide();
+                        });
+                    }, 500);
                 });
-            });
+            }, 1500);
         };
 
         chatInstance.utilities = {
             hashCode : s => s.split('').reduce((a,b)=>{a=((a<<10)-a)+b.charCodeAt(0);return a&a},0),
-            getTime: (date) => {
-                var datetime = new Date(date);
-                return datetime.toLocaleString('en-US', { hour: 'numeric', minute:'numeric', hour12: true });
+            getTime: (timestamp) => {
+                var datetime = dayjs(timestamp).format("HH:mm");
+                return datetime;
             }
         };
 
@@ -299,7 +302,7 @@
                 chatsCollection.where('users', 'array-contains',  parseInt(idTo)).get().then((existingChats) => {
                     if (existingChats.empty == true) {
                         chatId = chatInstance.data.generateChatId(idTo);
-                        var now = Date.now();
+                        var now = dayjs().valueOf();
                         var colors = this.getColors();
                         var data = {
                             lastmessage: "",
@@ -317,15 +320,24 @@
                             $('.modal-backdrop').remove();
 
 
-                            // Load inbox
-                            chatInstance.views.navigation.update(chatId, {
+                            /* chatInstance.views.panel.add({
                                 id: chatId.toString(),
                                 users: data.users,
                                 colors: data.colors,
                                 lastmessage: "",
-                                createdAt: data.created,
+                                createdAt: now,
                                 updatedAt: 0,
-                            });
+                            }); */
+
+                            // Load inbox
+                            /* chatInstance.views.navigation.update(chatId, {
+                                id: chatId.toString(),
+                                users: data.users,
+                                colors: data.colors,
+                                lastmessage: "",
+                                createdAt: now,
+                                updatedAt: 0,
+                            }); */
                         });
                     } else {
                         alert("Conversation existante !!!");
@@ -396,7 +408,7 @@
             },
             sendMessage: (message) => {
                 return new Promise((resolve, reject) => {
-                    var now = Date.now();
+                    var now = dayjs().valueOf()
                     var idTo = inbox.users.filter(user => user != authId)
                     var msgData = {
                         date: now,
@@ -452,6 +464,20 @@
                             $(".chat-room-empty").addClass("d-flex");
                         } else {
                             $(".chatroom-not-selected").addClass("d-flex");
+                        }
+                        resolve("done");
+                    }, 500);
+                });
+            },
+            refresh: () => {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        var chatRooms = $('.chat-room-component');
+                        if (chatRooms.get() == 0) {
+                            $(".chat-room").hide();
+                            $(".chat-room-empty").addClass("d-flex");
+                        } else {
+                            $(".chat-room-empty").hide();
                         }
                         resolve("done");
                     }, 500);
@@ -530,13 +556,12 @@
 
         chatInstance.views.panel = {
             add: (chatData) => {
-                console.log('chatData: ', chatData);
                 var chatDate = "";
                 if ((chatData.lastmessage == "" ) || (chatData.lastmessage == undefined)) {
-                    chatDate = new Date(chatData.createdAt != null ? chatData.createdAt : chatData.date);
+                    chatDate = chatData.createdAt != null ? chatData.createdAt : chatData.date;
                     chatData.lastmessage = "Ecrivez un message à votre collègue"
                 } else {
-                    chatDate = new Date(chatData.updatedAt != null ? chatData.updatedAt : chatData.date);
+                    chatDate = chatData.createdAt != null ? chatData.createdAt : chatData.date;
                 }
                 if (chatData.colors == undefined) {
                     var colors = chatInstance.data.chatRoom.getColors();
@@ -645,13 +670,35 @@
                     chatsCollection.onSnapshot((snapshot)  => {
                         // Watch change on messages collection
                         snapshot.docChanges().forEach((change) => {
-                            if (change.type === "added") {}
+                            var doc = change.doc;
+                            if (change.type === "added") {
+                                if ((doc.data().users[0] == authId) || (doc.data().users[1] == authId)) {
+                                    if ($(`#chat-room-${doc.id}`).length < 0) {
+                                        chatInstance.views.panel.add({
+                                            id: doc.id,
+                                            users: doc.data().users,
+                                            colors: doc.data().colors,
+                                            date: doc.data().date,
+                                            createdAt: doc.data().created,
+                                            updatedAt: doc.data().updated,
+                                            lastmessage: doc.data().lastmessage
+                                        });
+                                        setTimeout(() => {
+                                            chatInstance.views.navigation.refresh();
+                                        }, 100);
+                                        setTimeout(() => {
+                                            chatInstance.events.firebase.inbox.listen(doc.id);
+                                        }, 2000);
+                                    }
+                                }
+                            }
                             if (change.type === "modified") {
 
                             }
                             if (change.type === "removed") {
-                                chatInstance.views.panel.delete(change.doc.id);
+                                chatInstance.views.panel.delete(doc.id);
                                 chatInstance.views.navigation.delete();
+                                chatInstance.events.firebase.inbox.delete(doc.id);
                             }
                         });
                     }, (error) => {
@@ -662,7 +709,6 @@
             // ON MESSAGES SUBCOLLECTION CHANGE
             inbox: {
                 listen: (chatId) => {
-                    console.log('listen chatId: ', chatId);
                     inbox.roomsEvents.push({
                         chatId: chatId,
                         snapshotEvent: chatsCollection.doc(chatId).collection(chatId).onSnapshot((snapshot)  => {
@@ -670,12 +716,9 @@
                             var lastMessageId = "";
                             // Watch change on messages subcollection
                             snapshot.docChanges().forEach((change) => {
-                                console.log('change: ', change);
                                 var doc = change.doc;
                                 if ($( ".chat-room-component" ).hasClass( "active-chat" )) {
                                     var selectedChatId = $(".chat-room-component.active-chat").attr('id').split("room-").pop();
-                                    console.log('inbox > listen > activeChatId: ', activeChatId);
-                                    console.log('inbox > listen > selectedChatId: ', selectedChatId);
                                     if (activeChatId == selectedChatId) {
                                         if (change.type === "added") {
                                             chatInstance.views.panel.update(activeChatId, doc.data().content, doc.data().date);
@@ -714,7 +757,11 @@
                             console.error("Chat error: ", error);
                         })
                     });
-                    console.log('inbox.roomsEvents: ', inbox.roomsEvents);
+                },
+                delete: (id) => {
+                    _.remove(inbox.roomsEvents, function(room) {
+                        return room.chatId == id;
+                    });
                 }
             }
         };

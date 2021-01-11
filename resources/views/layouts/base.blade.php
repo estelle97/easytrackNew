@@ -250,7 +250,7 @@
             },
             remove: () => {
                 $('.loader-wrap').remove();
-            };
+            }
         }
     </script>
 
